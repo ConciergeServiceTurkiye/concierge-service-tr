@@ -1,10 +1,44 @@
-let slides = document.querySelectorAll(".slide");
-let index = 0;
+// SLIDER FUNCTION
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
 
-function changeSlide() {
-    slides[index].classList.remove("active");
-    index = (index + 1) % slides.length;
-    slides[index].classList.add("active");
+function showSlide(index) {
+    slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === index) slide.classList.add("active");
+    });
 }
 
-setInterval(changeSlide, 5000);
+setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}, 5000);
+
+
+// FORM → GOOGLE SHEETS
+document.getElementById("reservation-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = {
+        name: form.name.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        message: form.message.value
+    };
+
+    await fetch(
+        "https://script.google.com/macros/s/AKfycbyha3zzABJWwFy45f4VWkUPj3Ao9NIK3_snPrptS3seVONoyhi5IZ5aLAzdyTcSjYEhxQ/exec",
+        {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }
+    );
+
+    alert("Your request has been sent! Thank you.");
+    form.reset();
+});
