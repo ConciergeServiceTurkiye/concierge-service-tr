@@ -8,25 +8,83 @@
 </head>
 <body>
 
-    <!-- Dark Overlay -->
+<!-- HERO SECTION (SLIDER) -->
+<header class="hero">
+    <div class="slider">
+        <div class="slide active" style="background-image: url('assets/slider-1.jpg');"></div>
+        <div class="slide" style="background-image: url('assets/slider-2.jpg');"></div>
+        <div class="slide" style="background-image: url('assets/slider-3.jpg');"></div>
+    </div>
+
     <div class="overlay"></div>
 
-    <!-- Header -->
-    <header>
+    <div class="hero-content">
         <h1>Concierge Service Türkiye</h1>
-        <p>Your Trusted Personal Assistance in Istanbul</p>
-    </header>
+        <p>Premium personalized services for your stay in Istanbul.</p>
+        <a href="#services" class="btn">Explore Services</a>
+    </div>
+</header>
 
-    <!-- Services Section -->
-    <section class="services">
-        <h2>Our Services</h2>
+<!-- ABOUT -->
+<section id="about" class="section about">
+    <h2>About Us</h2>
+    <p>
+        We provide professional concierge services for guests visiting İstanbul.  
+        From airport transfers to guided tours, reservations, VIP assistance, and more —
+        our mission is to make your experience unforgettable.
+    </p>
+</section>
 
-        <div class="service-grid">
+<!-- SERVICES -->
+<section id="services" class="section services">
+    <h2>Our Services</h2>
 
-            <div class="service-card">
-                <h3>Airport Transfers</h3>
-                <p>Professional transportation to and from Istanbul airports with private drivers.</p>
-            </div>
+    <div class="service-list">
+        <div class="service-card">
+            <h3>Airport Transfer</h3>
+            <p>Private luxury transportation to and from Istanbul airports.</p>
+        </div>
 
-            <div class="service-card">
-                <h3>VI
+        <div class="service-card">
+            <h3>City Tours</h3>
+            <p>Professional guides taking you through Istanbul’s most iconic landmarks.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Restaurant Reservations</h3>
+            <p>Exclusive bookings at the finest restaurants in the city.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>VIP Assistance</h3>
+            <p>Fast-track services, shopping support, and personal assistance.</p>
+        </div>
+
+        <div class="service-card">
+            <h3>Event Organization</h3>
+            <p>Private events, business meetings, and special arrangements.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section id="contact" class="section contact">
+    <h2>Make a Reservation</h2>
+
+    <form action="#" class="contact-form">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <textarea placeholder="Your Request" required></textarea>
+        <button type="submit" class="btn">Send</button>
+    </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2025 Concierge Service Türkiye — All Rights Reserved</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
