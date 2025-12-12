@@ -71,12 +71,22 @@
 <section id="contact" class="section contact">
     <h2>Make a Reservation</h2>
 
-    <form action="#" class="contact-form">
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email Address" required>
-        <input type="tel" placeholder="Phone Number" required>
-        <textarea placeholder="Your Request" required></textarea>
+    <form id="reservation-form" class="contact-form">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <textarea name="message" placeholder="Your Request" required></textarea>
+
         <button type="submit" class="btn">Send</button>
+
+        <!-- WhatsApp Contact Button -->
+        <a 
+            href="https://wa.me/905344888624?text=Hello%2C%20I%20would%20like%20to%20make%20a%20reservation."
+            target="_blank"
+            class="whatsapp-button"
+        >
+            Contact via WhatsApp
+        </a>
     </form>
 </section>
 
@@ -86,5 +96,6 @@
 </footer>
 
 <script src="script.js"></script>
+
 </body>
 </html>
