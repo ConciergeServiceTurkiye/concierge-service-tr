@@ -158,3 +158,29 @@ footer {
     padding: 20px;
     background: #111;
 }
+
+/* FOOTER SOCIAL ICONS */
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: #111;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px; /* ikonlar arası boşluk */
+}
+
+.social-icons img {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
