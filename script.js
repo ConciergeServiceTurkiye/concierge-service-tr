@@ -34,7 +34,7 @@ form.addEventListener("submit", function (e) {
         message: form.message.value
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbyfdKI3RyVGlPEnihkVrbEQi6lNZRQbSI7e5Sk-nwelpTFDnJi7hTve76Toz7nH0ofJeA/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbyApakKHjdAuS4vNikAkmwbMGjeO-9M9hCY6cjUN2u9wMa0ZML2v_DLHpjLmsVhtsUi6g/exec", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
