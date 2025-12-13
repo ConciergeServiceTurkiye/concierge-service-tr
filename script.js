@@ -42,7 +42,7 @@ form.addEventListener("submit", function (e) {
     };
 
     fetch(
-        "https://script.google.com/macros/s/AKfycbw9k8086EBS-dcKj1ob5jdrfwUD_rsznvJTnvJvfxrIU7Omu-gsB4TRcg7yYSKdkI3GOA/exec",
+        "https://script.google.com/macros/s/AKfycbyfdKI3RyVGlPEnihkVrbEQi6lNZRQbSI7e5Sk-nwelpTFDnJi7hTve76Toz7nH0ofJeA/exec",
         {
             method: "POST",
             headers: {
