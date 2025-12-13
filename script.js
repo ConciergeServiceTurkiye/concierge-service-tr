@@ -28,7 +28,7 @@ document.getElementById("reservation-form").addEventListener("submit", async fun
     };
 
     await fetch(
-        "https://script.google.com/macros/s/AKfycbyha3zzABJWwFy45f4VWkUPj3Ao9NIK3_snPrptS3seVONoyhi5IZ5aLAzdyTcSjYEhxQ/exec",
+        "https://script.google.com/macros/s/AKfycbwJJfcVym9-JHAUbvvKk27wPPRlDmfHmySa19_9fHdxs7IfV6f01yRYKid0133KFw0ZNg/exec",
         {
             method: "POST",
             mode: "no-cors",
