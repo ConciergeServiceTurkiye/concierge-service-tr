@@ -42,3 +42,27 @@ document.getElementById("reservation-form").addEventListener("submit", async fun
     alert("Your request has been sent! Thank you.");
     form.reset();
 });
+
+const form = document.getElementById("reservation-form");
+const statusText = document.getElementById("form-status");
+
+form.addEventListener("submit", function (e) {
+    e.preventDefault(); // sayfa zıplamasını engeller
+
+    statusText.textContent = "Sending your request...";
+
+    const formData = new FormData(form);
+
+    fetch("https://script.google.com/macros/s/AKfycbyha3zzABJWwFy45f4VWkUPj3Ao9NIK3_snPrptS3seVONoyhi5IZ5aLAzdyTcSjYEhxQ/exec", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        statusText.textContent = "Your request has been sent successfully. We will contact you shortly.";
+        form.reset();
+    })
+    .catch(error => {
+        statusText.textContent = "Something went wrong. Please try again.";
+    });
+});
