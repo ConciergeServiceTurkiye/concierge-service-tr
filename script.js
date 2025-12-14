@@ -38,18 +38,15 @@ form.addEventListener("submit", function (e) {
         "https://script.google.com/macros/s/AKfycbyApakKHjdAuS4vNikAkmwbMGjeO-9M9hCY6cjUN2u9wMa0ZML2v_DLHpjLmsVhtsUi6g/exec",
         {
             method: "POST",
-            mode: "no-cors", // ⭐⭐⭐ EN KRİTİK SATIR
-            headers: {
-                "Content-Type": "application/json"
-            },
+            mode: "no-cors",
             body: JSON.stringify(data)
         }
-    )
-    .then(() => {
-        statusText.textContent =
-            "Your request has been sent successfully. We will contact you shortly.";
-        form.reset();
-    })
+    );
+
+    statusText.textContent =
+        "Your request has been sent successfully. We will contact you shortly.";
+    form.reset();
+});
     .catch(() => {
         statusText.textContent =
             "Connection error. Please try again later.";
