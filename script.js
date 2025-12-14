@@ -35,7 +35,7 @@ form.addEventListener("submit", function (e) {
         referrer: document.referrer || "Direct"
     });
 
-    fetch("https://script.google.com/macros/s/AKfycbzietObcefLB_2HbbQHcYoyOARM-nB5kzQhFmDRbsl0m2kWmx5NmQbM2hFVGBOOvIa9/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbyXuAbmQ1X5N-pQSM1fh669aV_-BQr7hkXsQoi66tqvVgW19YGYFpyrQundu1-EOKuk_g/exec", {
         method: "POST",
         body: data
     })
