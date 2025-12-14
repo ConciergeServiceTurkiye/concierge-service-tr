@@ -17,7 +17,7 @@ setInterval(() => {
 
 
 // =======================
-// FORM → GOOGLE SHEETS
+// FORM → GOOGLE SHEETS (SAFE MODE)
 // =======================
 const form = document.getElementById("reservation-form");
 const statusText = document.getElementById("form-status");
@@ -29,24 +29,20 @@ form.addEventListener("submit", function (e) {
 
     const formData = new FormData(form);
 
-    fetch("https://script.google.com/macros/s/AKfycbyApakKHjdAuS4vNikAkmwbMGjeO-9M9hCY6cjUN2u9wMa0ZML2v_DLHpjLmsVhtsUi6g/exec", {
-        method: "POST",
-        body: formData
-    })
-    .then(res => res.text())
-    .then(text => {
-        if (text === "success") {
-            statusText.textContent =
-              "Your request has been sent successfully. We will contact you shortly.";
-            form.reset();
-        } else {
-            statusText.textContent =
-              "Something went wrong. Please try again.";
+    fetch(
+        "https://script.google.com/macros/s/AKfycbyApakKHjdAuS4vNikAkmwbMGjeO-9M9hCY6cjUN2u9wMa0ZML2v_DLHpjLmsVhtsUi6g/exec",
+        {
+            method: "POST",
+            body: formData
         }
+    )
+    .then(() => {
+        statusText.textContent =
+            "Your request has been sent successfully. We will contact you shortly.";
+        form.reset();
     })
     .catch(() => {
         statusText.textContent =
-          "Connection error. Please try again later.";
+            "Connection error. Please try again later.";
     });
 });
-
