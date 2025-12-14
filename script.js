@@ -46,3 +46,5 @@ form.addEventListener("submit", function (e) {
             "Connection error. Please try again later.";
     });
 });
+
+formData.append("referrer", document.referrer);
