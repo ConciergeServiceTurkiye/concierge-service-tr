@@ -22,33 +22,29 @@ setInterval(() => {
 const form = document.getElementById("reservation-form");
 const statusText = document.getElementById("form-status");
 
-form.addEventListener("submit", function (e) {
-    e.preventDefault();
+form.addEventListener("submit", async function (e) {
+    e.preventDefault(); // ❗ SAYFANIN YUKARI ZIPLAMASINI ENGELLER
 
     statusText.textContent = "Sending your request...";
 
-    const data = {
-        name: form.name.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        message: form.message.value
-    };
+    const formData = new FormData(form);
 
-    fetch(
-        "https://script.google.com/macros/s/AKfycbyApakKHjdAuS4vNikAkmwbMGjeO-9M9hCY6cjUN2u9wMa0ZML2v_DLHpjLmsVhtsUi6g/exec",
-        {
-            method: "POST",
-            mode: "no-cors",
-            body: JSON.stringify(data)
-        }
-    );
+    try {
+        const response = await fetch(
+            "https://script.google.com/macros/s/AKfycbyApakKHjdAuS4vNikAkmwbMGjeO-9M9hCY6cjUN2u9wMa0ZML2v_DLHpjLmsVhtsUi6g/exec",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
 
-    statusText.textContent =
-        "Your request has been sent successfully. We will contact you shortly.";
-    form.reset();
-});
-    .catch(() => {
+        statusText.textContent =
+            "Your request has been sent successfully. We will contact you shortly.";
+
+        form.reset();
+
+    } catch (error) {
         statusText.textContent =
             "Connection error. Please try again later.";
-    });
+    }
 });
