@@ -22,39 +22,30 @@ setInterval(() => {
 const form = document.getElementById("reservation-form");
 const statusText = document.getElementById("form-status");
 
-form.addEventListener("submit", async function (e) {
+form.addEventListener("submit", function (e) {
     e.preventDefault();
 
     statusText.textContent = "Sending your request...";
-
-    // IP almak için ücretsiz servis
-    const ipRes = await fetch("https://api.ipify.org?format=json");
-    const ipData = await ipRes.json();
 
     const data = new URLSearchParams({
         name: form.name.value,
         email: form.email.value,
         phone: form.phone.value,
         message: form.message.value,
-        ip: ipData.ip,
         referrer: document.referrer || "Direct"
     });
 
-    try {
-        const res = await fetch(
-            "https://script.google.com/macros/s/AKfycbyApakKHjdAuS4vNikAkmwbMGjeO-9M9hCY6cjUN2u9wMa0ZML2v_DLHpjLmsVhtsUi6g/exec",
-            {
-                method: "POST",
-                body: data
-            }
-        );
-
+    fetch("https://script.google.com/macros/s/AKfycbyApakKHjdAuS4vNikAkmwbMGjeO-9M9hCY6cjUN2u9wMa0ZML2v_DLHpjLmsVhtsUi6g/exec", {
+        method: "POST",
+        body: data
+    })
+    .then(() => {
         statusText.textContent =
             "Your request has been sent successfully. We will contact you shortly.";
         form.reset();
-
-    } catch {
+    })
+    .catch(() => {
         statusText.textContent =
             "Connection error. Please try again later.";
-    }
+    });
 });
