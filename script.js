@@ -6,8 +6,7 @@ const slides = document.querySelectorAll(".slide");
 
 function showSlide(index) {
     slides.forEach((slide, i) => {
-        slide.classList.remove("active");
-        if (i === index) slide.classList.add("active");
+        slide.classList.toggle("active", i === index);
     });
 }
 
@@ -23,8 +22,8 @@ setInterval(() => {
 const form = document.getElementById("reservation-form");
 const statusText = document.getElementById("form-status");
 
-form.addEventListener("submit", async function (e) {
-    e.preventDefault(); // sayfanın yukarı zıplamasını engeller
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
     statusText.textContent = "Sending your request...";
 
@@ -35,31 +34,24 @@ form.addEventListener("submit", async function (e) {
         message: form.message.value
     };
 
-    try {
-        const response = await fetch(
-            "https://script.google.com/macros/s/AKfycbyApakKHjdAuS4vNikAkmwbMGjeO-9M9hCY6cjUN2u9wMa0ZML2v_DLHpjLmsVhtsUi6g/exec",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            }
-        );
-
-        const result = await response.json();
-
-        if (result.status === "success") {
-            statusText.textContent =
-                "Your request has been sent successfully. We will contact you shortly.";
-            form.reset();
-        } else {
-            statusText.textContent =
-                "Something went wrong. Please try again.";
+    fetch(
+        "https://script.google.com/macros/s/AKfycbyApakKHjdAuS4vNikAkmwbMGjeO-9M9hCY6cjUN2u9wMa0ZML2v_DLHpjLmsVhtsUi6g/exec",
+        {
+            method: "POST",
+            mode: "no-cors", // ⭐⭐⭐ EN KRİTİK SATIR
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
         }
-
-    } catch (error) {
+    )
+    .then(() => {
+        statusText.textContent =
+            "Your request has been sent successfully. We will contact you shortly.";
+        form.reset();
+    })
+    .catch(() => {
         statusText.textContent =
             "Connection error. Please try again later.";
-    }
+    });
 });
