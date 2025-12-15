@@ -7,29 +7,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar">
+<<nav class="navbar">
     <div class="nav-container">
-
         <a href="/" class="logo">
             <img src="assets/logo.png" alt="Concierge Service Türkiye">
         </a>
 
-        <ul class="nav-menu">
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-menu" id="navMenu">
             <li class="dropdown">
-                <a href="#services">Services</a>
+                <a href="#services">Services ▾</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#airport">Airport Transfer</a></li>
-                    <li><a href="#tours">City Tours</a></li>
-                    <li><a href="#restaurants">Restaurant Reservations</a></li>
-                    <li><a href="#vip">VIP Assistance</a></li>
-                    <li><a href="#events">Event Organization</a></li>
+                    <li><a href="#" data-service="airport">✈ Airport Transfer</a></li>
+                    <li><a href="#" data-service="tours">🕌 City Tours</a></li>
+                    <li><a href="#" data-service="restaurants">🍽 Restaurant Reservations</a></li>
+                    <li><a href="#" data-service="vip">⭐ VIP Assistance</a></li>
+                    <li><a href="#" data-service="events">🎉 Event Organization</a></li>
                 </ul>
             </li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-
     </div>
 </nav>
+
 
 
 <!-- HERO SECTION (SLIDER) -->
