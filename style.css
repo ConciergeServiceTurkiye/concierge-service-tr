@@ -475,3 +475,18 @@ body {
 .send-btn.loading::after {
   content: " ⏳";
 }
+
+.send-btn {
+  transition: transform 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.send-btn:hover {
+  transform: scale(1.07);
+  background-color: #e6c75a;
+}
+
+.send-btn.sending {
+  opacity: 0.6;
+  transform: scale(0.98);
+  pointer-events: none;
+}
