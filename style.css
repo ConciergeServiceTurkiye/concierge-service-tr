@@ -357,3 +357,86 @@ body {
     font-size: 22px;
     cursor: pointer;
 }
+/* MOBILE NAV */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #d4af37;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: #000;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s ease;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+}
+
+/* SCROLL NAV */
+.navbar.scrolled {
+    background: rgba(0,0,0,0.95);
+}
+
+/* WHATSAPP */
+.whatsapp-fixed {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    padding: 14px;
+    border-radius: 50%;
+    z-index: 9999;
+}
+
+/* POPUP */
+.service-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.service-popup.active {
+    display: flex;
+}
+
+.popup-content {
+    background: #111;
+    padding: 30px;
+    border: 1px solid #d4af37;
+    max-width: 500px;
+    position: relative;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+}
