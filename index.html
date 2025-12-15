@@ -1,38 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Concierge Service Türkiye | VIP Istanbul Concierge</title>
+<meta charset="UTF-8">
+<title>Concierge Service Türkiye | VIP Istanbul Concierge</title>
 
-    <meta name="description" content="Luxury concierge services in Istanbul. Airport transfer, VIP assistance, city tours, restaurant reservations & private events.">
-    <meta name="keywords" content="Istanbul concierge, VIP concierge Turkey, airport transfer Istanbul, luxury concierge">
-    <meta name="author" content="Concierge Service Türkiye">
-    <meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
 
-    <meta property="og:title" content="Concierge Service Türkiye">
-    <meta property="og:description" content="Premium concierge & VIP services in Istanbul.">
-    <meta property="og:image" content="https://conciergeserviceturkiye.com/assets/og.jpg">
-    <meta property="og:type" content="website">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Google reCAPTCHA v3 -->
-    <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LdvRiwsAAAAAJVIJLJht4KJzHDhyFBclezDs5_J"></script>
 </head>
 
 <body>
-<<nav class="navbar">
+
+<nav class="navbar">
     <div class="nav-container">
         <a href="/" class="logo">
             <img src="assets/logo.png" alt="Concierge Service Türkiye">
         </a>
 
         <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
 
         <ul class="nav-menu" id="navMenu">
@@ -51,140 +38,39 @@
     </div>
 </nav>
 
-
-
-<!-- HERO SECTION (SLIDER) -->
 <header class="hero">
     <div class="slider">
-        <div class="slide active" style="background-image: url('assets/slider-1.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/slider-2.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/slider-3.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/slider-4.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/slider-5.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/slider-6.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/slider-7.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/slider-8.jpg');"></div>
-        <div class="slide" style="background-image: url('assets/slider-9.jpg');"></div>
+        <div class="slide active" style="background-image:url('assets/slider-1.jpg')"></div>
+        <div class="slide" style="background-image:url('assets/slider-2.jpg')"></div>
     </div>
-
     <div class="overlay"></div>
-
-    <div class="hero-content">
-    <h1>Concierge Service Türkiye</h1>
-    <p>Premium personalized services for your stay in Istanbul.</p>
-
-    <div class="hero-buttons">
-        <a href="#contact" class="btn primary">Make a Reservation</a>
-        <a href="#services" class="btn secondary">Our Services</a>
-    </div>
-</div>
-
 </header>
 
-<!-- ABOUT -->
-<section id="about" class="section about">
-    <h2>About Us</h2>
-    <p>
-        We provide professional concierge services for guests visiting İstanbul.  
-        From airport transfers to guided tours, reservations, VIP assistance, and more
-        our mission is to make your experience unforgettable.
-    </p>
+<section id="contact" class="section contact">
+<h2>Make a Reservation</h2>
+
+<form id="reservation-form" class="contact-form">
+<p id="form-status" class="form-status"></p>
+<input type="text" name="name" placeholder="Full Name" required>
+<input type="email" name="email" placeholder="Email Address" required>
+<input type="tel" name="phone" placeholder="Phone Number" required>
+<textarea name="message" placeholder="Your Request" required></textarea>
+<button type="submit" class="btn send-btn">Send</button>
+</form>
 </section>
 
-<!-- SERVICES -->
-<section id="services" class="section services">
-    <h2>Our Services</h2>
-
-    <div class="service-list">
-        <div class="service-card" id="airport">
-    <h3>Airport Transfer</h3>
-    <p>Private luxury transportation to and from Istanbul airports.</p>
+<div class="service-popup" id="servicePopup">
+    <div class="popup-content">
+        <span class="close-popup">&times;</span>
+        <h2 id="popupTitle"></h2>
+        <p id="popupText"></p>
+    </div>
 </div>
 
-
-        <div class="service-card">
-            <h3>City Tours</h3>
-            <p>Professional guides taking you through Istanbul’s most iconic landmarks.</p>
-        </div>
-
-        <div class="service-card">
-            <h3>Restaurant Reservations</h3>
-            <p>Exclusive bookings at the finest restaurants in the city.</p>
-        </div>
-
-        <div class="service-card">
-            <h3>VIP Assistance</h3>
-            <p>Fast-track services, shopping support, and personal assistance.</p>
-        </div>
-
-        <div class="service-card">
-            <h3>Event Organization</h3>
-            <p>Private events, business meetings, and special arrangements.</p>
-        </div>
-    </div>
-</section>
-
-<!-- CONTACT FORM -->
-<section id="contact" class="section contact">
-    <h2>Make a Reservation</h2>
-
-    <form id="reservation-form" class="contact-form">
-        <p id="form-status" class="form-status"></p>
-
-        <input type="text" name="name" placeholder="Full Name" required>
-        <input type="email" name="email" placeholder="Email Address" required>
-        <input type="tel" name="phone" placeholder="Phone Number" required>
-        <textarea name="message" placeholder="Your Request" required></textarea>
-
-        <button type="submit" class="btn send-btn">Send</button>
-
-    </form>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-    <p>© 2025 Concierge Service Türkiye — All Rights Reserved</p>
-
-    <div class="social-icons">
-        <p>Follow us</p>
-        <a href="https://wa.me/905344888624" target="_blank">
-            <img src="assets/whatsapp.png" alt="WhatsApp">
-        </a>
-        <a href="https://www.instagram.com/conciergeserviceturkiye/" target="_blank">
-            <img src="assets/instagram.png" alt="Instagram">
-        </a>
-        <a href="https://www.youtube.com/" target="_blank">
-            <img src="assets/youtube.png" alt="YouTube">
-        </a>
-        <a href="https://x.com/ConSerTurkiye" target="_blank">
-            <img src="assets/x.png" alt="X">
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=61585196308964" target="_blank">
-            <img src="assets/facebook.png" alt="Facebook">
-        </a>
-    </div>
-</footer>
-
+<a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank">
+<img src="assets/whatsapp.png" alt="WhatsApp">
+</a>
 
 <script src="script.js"></script>
-    
-<div class="service-popup" id="servicePopup">
-    <div class="popup-content">
-        <span class="close-popup">&times;</span>
-        <h2 id="popupTitle"></h2>
-        <p id="popupText"></p>
-    </div>
-</div>
-
 </body>
 </html>
-<div class="service-popup" id="servicePopup">
-    <div class="popup-content">
-        <span class="close-popup">&times;</span>
-        <h2 id="popupTitle"></h2>
-        <p id="popupText"></p>
-    </div>
-</div>
-<a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank">
-    <img src="assets/whatsapp.png" alt="WhatsApp">
-</a>
