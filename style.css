@@ -490,6 +490,4 @@ body {
   transform: scale(0.98);
   pointer-events: none;
 }
-.grecaptcha-badge {
-  visibility: hidden;
-}
+
