@@ -2,7 +2,9 @@
     box-sizing: border-box;
 }
 
-/* GLOBAL */
+/* ======================
+   GLOBAL
+====================== */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -17,7 +19,7 @@ body {
 }
 
 /* ======================
-   NAVBAR
+   NAVBAR (EN ÜSTTE)
 ====================== */
 .navbar {
     position: fixed;
@@ -25,8 +27,8 @@ body {
     left: 0;
     width: 100%;
     height: 70px;
-    background: rgba(0,0,0,0.6);
-    z-index: 1000;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
 }
 
 .nav-container {
@@ -41,7 +43,7 @@ body {
 }
 
 .logo img {
-    height: 45px;
+    height: 40px;
     width: auto;
     display: block;
 }
@@ -70,13 +72,14 @@ body {
     top: 100%;
     left: 0;
     background: #111;
-    padding: 15px 0;
+    padding: 10px 0;
     list-style: none;
     min-width: 220px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(10px);
-    transition: 0.3s ease;
+    transition: 0.25s ease;
+    z-index: 9999;
 }
 
 .dropdown-menu li a {
@@ -86,7 +89,7 @@ body {
 }
 
 .dropdown-menu li a:hover {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255,255,255,0.08);
 }
 
 .dropdown:hover .dropdown-menu {
@@ -99,7 +102,8 @@ body {
    HERO SLIDER
 ====================== */
 .hero {
-    height: 100vh;
+    height: calc(100vh - 70px);
+    margin-top: 70px;
     position: relative;
     overflow: hidden;
 }
@@ -110,6 +114,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 1;
 }
 
 .slide {
@@ -133,12 +138,13 @@ body {
     height: 100%;
     width: 100%;
     background: rgba(0,0,0,0.45);
+    z-index: 2;
 }
 
 /* HERO CONTENT */
 .hero-content {
     position: relative;
-    z-index: 10;
+    z-index: 5;
     top: 50%;
     transform: translateY(-50%);
     text-align: center;
