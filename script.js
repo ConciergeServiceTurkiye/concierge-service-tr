@@ -1,6 +1,6 @@
-// =======================
-// SLIDER
-// =======================
+/* =========================
+   SLIDER (AYNI KALIYOR)
+========================= */
 let currentSlide = 0;
 const slides = document.querySelectorAll(".slide");
 
@@ -15,121 +15,65 @@ setInterval(() => {
     showSlide(currentSlide);
 }, 5000);
 
-
-// =======================
-// FORM → GOOGLE SHEETS (SAFE MODE)
-// =======================
+/* =========================
+   FORM + reCAPTCHA v3
+========================= */
 const form = document.getElementById("reservation-form");
 const statusText = document.getElementById("form-status");
+const sendBtn = form.querySelector("button");
 
 form.addEventListener("submit", function (e) {
-    e.preventDefault();
+    e.preventDefault(); // ❗ Zıplamayı kesin engeller
 
-    statusText.textContent = "Sending your request...";
+    // UI feedback
+    statusText.textContent = "İsteğiniz gönderiliyor...";
+    sendBtn.disabled = true;
+    sendBtn.style.opacity = "0.6";
 
-    const data = new URLSearchParams({
-        name: form.name.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        message: form.message.value,
-        referrer: document.referrer || "Direct"
+    grecaptcha.ready(function () {
+        grecaptcha.execute(
+            "6LdvRiwsAAAAAJVIJLJht4KJzHDhyFBclezDs5_J",
+            { action: "submit" }
+        ).then(function (token) {
+
+            const data = new URLSearchParams({
+                name: form.name.value,
+                email: form.email.value,
+                phone: form.phone.value,
+                message: form.message.value,
+                referrer: document.referrer || "Direct",
+                token: token
+            });
+
+            fetch(
+                "https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
+                {
+                    method: "POST",
+                    body: data
+                }
+            )
+            .then(res => res.text())
+            .then(result => {
+
+                if (result.trim() === "success") {
+                    statusText.textContent =
+                        "İsteğiniz başarıyla gönderildi. En kısa sürede sizinle iletişime geçeceğiz.";
+                    form.reset();
+                } else {
+                    statusText.textContent =
+                        "Güvenlik doğrulaması başarısız. Lütfen tekrar deneyin.";
+                }
+
+                sendBtn.disabled = false;
+                sendBtn.style.opacity = "1";
+            })
+            .catch(() => {
+                statusText.textContent =
+                    "Bağlantı hatası. Lütfen daha sonra tekrar deneyin.";
+                sendBtn.disabled = false;
+                sendBtn.style.opacity = "1";
+            });
+
+        });
     });
-
-    fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec", {
-        method: "POST",
-        body: data
-    })
-    .then(() => {
-        statusText.textContent =
-            "Your request has been sent successfully. We will contact you shortly.";
-        form.reset();
-    })
-    .catch(() => {
-        statusText.textContent =
-            "Connection error. Please try again later.";
-    });
-});
-/* HAMBURGER */
-const hamburger = document.getElementById("hamburger");
-const navMenu = document.getElementById("navMenu");
-
-hamburger.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
-});
-
-/* NAVBAR SCROLL */
-window.addEventListener("scroll", () => {
-    document.querySelector(".navbar")
-        .classList.toggle("scrolled", window.scrollY > 50);
-});
-
-/* SERVICE POPUP */
-const popup = document.getElementById("servicePopup");
-const title = document.getElementById("popupTitle");
-const text = document.getElementById("popupText");
-
-const serviceData = {
-    airport: ["Airport Transfer", "Luxury private airport transportation."],
-    tours: ["City Tours", "Guided tours of Istanbul’s landmarks."],
-    restaurants: ["Restaurant Reservations", "Exclusive restaurant bookings."],
-    vip: ["VIP Assistance", "Personalized VIP concierge support."],
-    events: ["Event Organization", "Private & corporate event planning."]
-};
-
-document.querySelectorAll("[data-service]").forEach(item => {
-    item.addEventListener("click", e => {
-        e.preventDefault();
-        const service = item.dataset.service;
-        title.innerText = serviceData[service][0];
-        text.innerText = serviceData[service][1];
-        popup.classList.add("active");
-    });
-});
-
-document.querySelector(".close-popup").onclick = () =>
-    popup.classList.remove("active");
-/* HAMBURGER */
-const hamburger = document.getElementById("hamburger");
-const navMenu = document.getElementById("navMenu");
-
-hamburger.onclick = () => {
-    navMenu.classList.toggle("active");
-};
-
-/* NAV SCROLL */
-window.addEventListener("scroll", () => {
-    document.querySelector(".navbar")
-        .classList.toggle("scrolled", window.scrollY > 50);
-});
-
-/* SERVICES POPUP */
-const popup = document.getElementById("servicePopup");
-const title = document.getElementById("popupTitle");
-const text = document.getElementById("popupText");
-
-const serviceData = {
-    airport: ["Airport Transfer", "Luxury airport transfer with professional drivers."],
-    tours: ["City Tours", "Private guided tours in Istanbul."],
-    restaurants: ["Restaurant Reservations", "Exclusive reservations at top restaurants."],
-    vip: ["VIP Assistance", "Fast-track, shopping & personal concierge services."],
-    events: ["Event Organization", "Private & corporate event planning."]
-};
-
-document.querySelectorAll("[data-service]").forEach(item => {
-    item.onclick = e => {
-        e.preventDefault();
-        const s = item.dataset.service;
-        title.innerText = serviceData[s][0];
-        text.innerText = serviceData[s][1];
-        popup.classList.add("active");
-    };
-});
-
-document.querySelector(".close-popup").onclick = () => {
-    popup.classList.remove("active");
-};
-
-/* reCAPTCHA v3 */
-grecaptcha.ready(function () {
-    grecaptcha.execute('YOUR_SITE_KEY', { action: 'submit' });
 });
