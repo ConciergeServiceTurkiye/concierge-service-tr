@@ -21,11 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
     sendBtn.disabled = true;
     statusText.textContent = "Sending your request...";
 
-    grecaptcha.enterprise.ready(() => {
-      grecaptcha.enterprise.execute(
-        "6LeHUiwsAAAAAERRFl50ORDSAKg3x3OPROSNo9iW",
-        { action: "submit" }
-      ).then((token) => {
+    grecaptcha.ready(() => {
+  grecaptcha.execute(
+    "6LeHUiwsAAAAAERRFl50ORDSAKg3x3OPROSNo9iW",
+    { action: "submit" }
+  ).then((token) => {
+
 
         const data = new URLSearchParams({
           name: form.name.value,
