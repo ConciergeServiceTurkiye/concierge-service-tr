@@ -206,3 +206,14 @@ footer {
     color: #d4af37;
     margin-bottom: 5px;
 }
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.btn.secondary {
+    background: transparent;
+    color: #d4af37;
+    border: 1px solid #d4af37;
+}
