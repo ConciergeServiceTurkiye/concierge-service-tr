@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ======================
-     HERO SLIDER
-  ====================== */
+  /* HERO SLIDER */
   let currentSlide = 0;
   const slides = document.querySelectorAll(".slide");
 
@@ -11,9 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentSlide = (currentSlide + 1) % slides.length;
   }, 5000);
 
-  /* ======================
-     FORM + reCAPTCHA v3
-  ====================== */
+  /* FORM */
   const form = document.getElementById("reservation-form");
   const statusText = document.getElementById("form-status");
   const sendBtn = form.querySelector("button");
@@ -21,14 +17,12 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // BUTTON ANIMATION
     sendBtn.classList.add("sending");
     sendBtn.disabled = true;
-
     statusText.textContent = "Sending your request...";
 
-    grecaptcha.ready(() => {
-      grecaptcha.execute(
+    grecaptcha.enterprise.ready(() => {
+      grecaptcha.enterprise.execute(
         "6LeHUiwsAAAAAERRFl50ORDSAKg3x3OPROSNo9iW",
         { action: "submit" }
       ).then((token) => {
@@ -39,32 +33,30 @@ document.addEventListener("DOMContentLoaded", () => {
           phone: form.phone.value,
           message: form.message.value,
           referrer: document.referrer || "Website",
-          token: token
+          token
         });
 
-        fetch(
-          "https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
-          {
-            method: "POST",
-            body: data
+        fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec", {
+          method: "POST",
+          body: data
+        })
+        .then(r => r.text())
+        .then(res => {
+          if (res.trim() === "success") {
+            statusText.textContent = "Your request has been sent successfully.";
+            form.reset();
+          } else {
+            statusText.textContent = "Security verification failed.";
           }
-        )
-          .then((r) => r.text())
-          .then((res) => {
-            if (res.trim() === "success") {
-              statusText.textContent = "Your request has been sent successfully.";
-              form.reset();
-            } else {
-              statusText.textContent = "Security verification failed.";
-            }
-          })
-          .catch(() => {
-            statusText.textContent = "Connection error. Please try again.";
-          })
-          .finally(() => {
-            sendBtn.classList.remove("sending");
-            sendBtn.disabled = false;
-          });
+        })
+        .catch(() => {
+          statusText.textContent = "Connection error. Please try again.";
+        })
+        .finally(() => {
+          sendBtn.classList.remove("sending");
+          sendBtn.disabled = false;
+        });
+
       });
     });
   });
