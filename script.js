@@ -1,75 +1,71 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =========================
-     SLIDER
-  ========================= */
+  /* ======================
+     HERO SLIDER
+  ====================== */
   let currentSlide = 0;
   const slides = document.querySelectorAll(".slide");
 
   setInterval(() => {
-    slides.forEach((s, i) =>
-      s.classList.toggle("active", i === currentSlide)
-    );
+    slides.forEach((s, i) => s.classList.toggle("active", i === currentSlide));
     currentSlide = (currentSlide + 1) % slides.length;
   }, 5000);
 
-  /* =========================
-     FORM + reCAPTCHA ENTERPRISE
-  ========================= */
+  /* ======================
+     FORM + reCAPTCHA v3
+  ====================== */
   const form = document.getElementById("reservation-form");
   const statusText = document.getElementById("form-status");
   const sendBtn = form.querySelector("button");
 
-  form.addEventListener("submit", e => {
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    statusText.textContent = "Sending your request...";
+    // BUTTON ANIMATION
+    sendBtn.classList.add("sending");
     sendBtn.disabled = true;
-    sendBtn.classList.add("loading");
 
-    grecaptcha.enterprise.ready(async () => {
-      try {
-        const token = await grecaptcha.enterprise.execute(
-          "6LdvRiwsAAAAAJVIJLJht4KJzHDhyFBclezDs5_J",
-          { action: "submit" }
-        );
+    statusText.textContent = "Sending your request...";
+
+    grecaptcha.ready(() => {
+      grecaptcha.execute(
+        "6LeHUiwsAAAAAERRFl50ORDSAKg3x3OPROSNo9iW",
+        { action: "submit" }
+      ).then((token) => {
 
         const data = new URLSearchParams({
           name: form.name.value,
           email: form.email.value,
           phone: form.phone.value,
           message: form.message.value,
-          referrer: document.referrer || "Direct",
+          referrer: document.referrer || "Website",
           token: token
         });
 
-        const res = await fetch(
+        fetch(
           "https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
           {
             method: "POST",
             body: data
           }
-        );
-
-        const text = await res.text();
-
-        if (text.trim() === "success") {
-          statusText.textContent =
-            "Your request has been sent successfully. We will contact you shortly.";
-          form.reset();
-        } else {
-          statusText.textContent =
-            "Security verification failed. Please try again.";
-        }
-
-      } catch (err) {
-        statusText.textContent =
-          "Connection error. Please try again later.";
-      }
-
-      sendBtn.disabled = false;
-      sendBtn.classList.remove("loading");
+        )
+          .then((r) => r.text())
+          .then((res) => {
+            if (res.trim() === "success") {
+              statusText.textContent = "Your request has been sent successfully.";
+              form.reset();
+            } else {
+              statusText.textContent = "Security verification failed.";
+            }
+          })
+          .catch(() => {
+            statusText.textContent = "Connection error. Please try again.";
+          })
+          .finally(() => {
+            sendBtn.classList.remove("sending");
+            sendBtn.disabled = false;
+          });
+      });
     });
   });
-
 });
