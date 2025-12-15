@@ -280,3 +280,12 @@ footer {
     visibility: visible;
     transform: translateY(0);
 }
+.service-card {
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255,255,255,0.08);
+}
