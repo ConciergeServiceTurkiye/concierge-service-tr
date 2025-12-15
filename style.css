@@ -466,3 +466,12 @@ body {
         transform: translateY(-50%) rotate(360deg);
     }
 }
+
+.send-btn.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.send-btn.loading::after {
+  content: " ⏳";
+}
