@@ -88,3 +88,48 @@ document.querySelectorAll("[data-service]").forEach(item => {
 
 document.querySelector(".close-popup").onclick = () =>
     popup.classList.remove("active");
+/* HAMBURGER */
+const hamburger = document.getElementById("hamburger");
+const navMenu = document.getElementById("navMenu");
+
+hamburger.onclick = () => {
+    navMenu.classList.toggle("active");
+};
+
+/* NAV SCROLL */
+window.addEventListener("scroll", () => {
+    document.querySelector(".navbar")
+        .classList.toggle("scrolled", window.scrollY > 50);
+});
+
+/* SERVICES POPUP */
+const popup = document.getElementById("servicePopup");
+const title = document.getElementById("popupTitle");
+const text = document.getElementById("popupText");
+
+const serviceData = {
+    airport: ["Airport Transfer", "Luxury airport transfer with professional drivers."],
+    tours: ["City Tours", "Private guided tours in Istanbul."],
+    restaurants: ["Restaurant Reservations", "Exclusive reservations at top restaurants."],
+    vip: ["VIP Assistance", "Fast-track, shopping & personal concierge services."],
+    events: ["Event Organization", "Private & corporate event planning."]
+};
+
+document.querySelectorAll("[data-service]").forEach(item => {
+    item.onclick = e => {
+        e.preventDefault();
+        const s = item.dataset.service;
+        title.innerText = serviceData[s][0];
+        text.innerText = serviceData[s][1];
+        popup.classList.add("active");
+    };
+});
+
+document.querySelector(".close-popup").onclick = () => {
+    popup.classList.remove("active");
+};
+
+/* reCAPTCHA v3 */
+grecaptcha.ready(function () {
+    grecaptcha.execute('YOUR_SITE_KEY', { action: 'submit' });
+});
