@@ -243,124 +243,6 @@ body {
 /* ======================
    FOOTER
 ====================== */
-.footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background: #111;
-}
-
-.footer p {
-    font-size: 10px;
-    opacity: 0.6;
-}
-
-.social-icons {
-    display: flex;
-    gap: 10px;
-}
-
-.social-icons img {
-    width: 32px;
-    transition: transform 0.2s ease;
-}
-
-.social-icons img:hover {
-    transform: scale(1.1);
-}
-/* HAMBURGER */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background: #d4af37;
-}
-
-/* MOBILE NAV */
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-menu {
-        position: fixed;
-        top: 70px;
-        right: -100%;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background: #000;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 25px;
-        transition: 0.3s ease;
-    }
-
-    .nav-menu.active {
-        right: 0;
-    }
-}
-
-/* SCROLL EFFECT */
-.navbar.scrolled {
-    background: rgba(0,0,0,0.95);
-}
-
-/* WHATSAPP FIXED */
-.whatsapp-fixed {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25D366;
-    padding: 14px;
-    border-radius: 50%;
-    z-index: 9999;
-}
-
-.whatsapp-fixed img {
-    width: 30px;
-}
-
-/* POPUP */
-.service-popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-}
-
-.service-popup.active {
-    display: flex;
-}
-
-.popup-content {
-    background: #111;
-    padding: 30px;
-    max-width: 500px;
-    border: 1px solid #d4af37;
-    position: relative;
-}
-
-.close-popup {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 22px;
-    cursor: pointer;
-}
-
-/* ======================
-   LUXURY FOOTER
-====================== */
 .luxury-footer {
   background: #0b0b0b;
   border-top: 1px solid rgba(212,175,55,0.15);
@@ -370,6 +252,7 @@ body {
 .footer-inner {
   max-width: 1200px;
   margin: auto;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -411,7 +294,7 @@ body {
   color: rgba(212,175,55,0.6);
 }
 
-/* SOCIAL */
+/* SOCIAL ICONS – ALTIN SARISI */
 .footer-social {
   display: flex;
   gap: 14px;
@@ -419,13 +302,14 @@ body {
 
 .footer-social img {
   width: 22px;
-  opacity: 0.7;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  opacity: 0.8;
+  transition: transform 0.25s ease, opacity 0.25s ease, filter 0.25s ease;
+  filter: brightness(0) saturate(100%) invert(86%) sepia(54%) saturate(409%) hue-rotate(1deg) brightness(100%) contrast(95%);
 }
 
-.footer-social img:hover {
-  opacity: 1;
+.footer-social a:hover img {
   transform: scale(1.15);
+  filter: brightness(1.2) saturate(150%) sepia(60%) hue-rotate(0deg) contrast(100%);
 }
 
 /* MOBILE */
@@ -458,6 +342,7 @@ body {
   margin-bottom: 18px;
   font-size: 14px;
 }
+
 .footer-links {
   margin-bottom: 10px;
   font-size: 12px;
@@ -470,13 +355,7 @@ body {
   font-weight: bold;
 }
 
-.footer-links a:hover {
-  text-decoration: underline;
-}
-
-/* ======================
-   MODAL STYLES
-====================== */
+/* MODAL STYLES */
 .modal {
   display: none;
   position: fixed;
@@ -509,18 +388,16 @@ body {
   color: #ddd;
 }
 
-/* CLOSE MODAL BUTTON – ALTIN SARISI */
 .close-modal {
   position: absolute;
   top: 15px;
   right: 20px;
   font-size: 24px;
   cursor: pointer;
-  color: #d4af37; /* Altın sarısı */
+  color: #fff;
   font-weight: bold;
-  transition: color 0.2s ease;
 }
 
 .close-modal:hover {
-  color: #f1d97a; /* Hover’da parlak altın */
+  color: #d4af37;
 }
