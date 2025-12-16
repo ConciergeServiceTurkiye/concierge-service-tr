@@ -9,6 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
     currentSlide = (currentSlide + 1) % slides.length;
   }, 5000);
 
+  /* HAMBURGER MENU */
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("navMenu");
+
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
+  }
+
   /* FORM */
   const form = document.getElementById("reservation-form");
   const statusText = document.getElementById("form-status");
@@ -22,11 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
     statusText.textContent = "Sending your request...";
 
     grecaptcha.ready(() => {
-  grecaptcha.execute(
-    "6LeHUiwsAAAAAERRFl50ORDSAKg3x3OPROSNo9iW",
-    { action: "submit" }
-  ).then((token) => {
-
+      grecaptcha.execute(
+        "6LeHUiwsAAAAAERRFl50ORDSAKg3x3OPROSNo9iW",
+        { action: "submit" }
+      ).then((token) => {
 
         const data = new URLSearchParams({
           name: form.name.value,
