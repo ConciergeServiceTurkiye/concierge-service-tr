@@ -490,4 +490,14 @@ body {
   transform: scale(0.98);
   pointer-events: none;
 }
+.send-btn {
+  border: none;
+  outline: none;
+}
+
+.send-btn:focus,
+.send-btn:active {
+  outline: none;
+  box-shadow: none;
+}
 
