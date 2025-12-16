@@ -578,3 +578,23 @@ body {
     0 0 12px rgba(212, 175, 55, 0.4),
     0 0 18px rgba(212, 175, 55, 0.25);
 }
+/* ======================
+   FOOTER LINK GOLD GLOW
+====================== */
+
+.footer-links a {
+  position: relative;
+  color: rgba(212, 175, 55, 0.75); /* Altın */
+  transition: 
+    color 0.3s ease,
+    text-shadow 0.3s ease;
+}
+
+/* Hover’da parlama */
+.footer-links a:hover {
+  color: #f1d97a; /* Açık altın */
+  text-shadow:
+    0 0 4px rgba(212, 175, 55, 0.7),
+    0 0 8px rgba(212, 175, 55, 0.45),
+    0 0 14px rgba(212, 175, 55, 0.25);
+}
