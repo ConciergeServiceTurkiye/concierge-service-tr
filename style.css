@@ -357,226 +357,10 @@ body {
     font-size: 22px;
     cursor: pointer;
 }
-/* MOBILE NAV */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background: #d4af37;
-}
-
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-menu {
-        position: fixed;
-        top: 70px;
-        right: -100%;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background: #000;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transition: 0.3s ease;
-    }
-
-    .nav-menu.active {
-        right: 0;
-    }
-}
-
-/* SCROLL NAV */
-.navbar.scrolled {
-    background: rgba(0,0,0,0.95);
-}
-
-/* WHATSAPP */
-.whatsapp-fixed {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25D366;
-    padding: 14px;
-    border-radius: 50%;
-    z-index: 9999;
-}
-
-/* POPUP */
-.service-popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-}
-
-.service-popup.active {
-    display: flex;
-}
-
-.popup-content {
-    background: #111;
-    padding: 30px;
-    border: 1px solid #d4af37;
-    max-width: 500px;
-    position: relative;
-}
-
-.close-popup {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 22px;
-    cursor: pointer;
-}
-
-.send-btn.loading {
-    pointer-events: none;
-    background: #999;
-    position: relative;
-}
-
-.send-btn.loading::after {
-    content: "";
-    width: 18px;
-    height: 18px;
-    border: 3px solid #000;
-    border-top-color: transparent;
-    border-radius: 50%;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: translateY(-50%) rotate(360deg);
-    }
-}
-
-.send-btn.loading {
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.send-btn.loading::after {
-  content: " ⏳";
-}
-
-.send-btn {
-  transition: transform 0.2s ease, background-color 0.2s ease, opacity 0.2s ease;
-}
-
-.send-btn:hover {
-  transform: scale(1.07);
-  background-color: #e6c75a;
-}
-
-.send-btn.sending {
-  opacity: 0.6;
-  transform: scale(0.98);
-  pointer-events: none;
-}
-.send-btn {
-  border: none;
-  outline: none;
-}
-
-.send-btn:focus,
-.send-btn:active {
-  outline: none;
-  box-shadow: none;
-}
 
 /* ======================
    LUXURY FOOTER
 ====================== */
-.luxury-footer {
-  background: #0f0f0f;
-  padding: 50px 20px 30px;
-  border-top: 1px solid rgba(201,162,77,0.25);
-}
-
-.footer-inner {
-  max-width: 1200px;
-  margin: auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
-.footer-brand img {
-  height: 55px;
-  margin-bottom: 10px;
-}
-
-.footer-brand p {
-  font-size: 13px;
-  color: #bdbdbd;
-  letter-spacing: 0.5px;
-}
-
-.footer-links {
-  font-size: 12px;
-  letter-spacing: 1px;
-}
-
-.footer-links a {
-  color: #c9a24d;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.footer-links a:hover {
-  color: #ffffff;
-}
-
-.footer-links span {
-  margin: 0 10px;
-  color: #555;
-}
-
-/* SOCIAL ICONS – FIXED COLOR ISSUE */
-.footer-social {
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-}
-
-.footer-social img {
-  width: 26px;
-  filter: brightness(0) invert(1);
-  transition: filter 0.25s ease, transform 0.25s ease;
-}
-
-.footer-social a:hover img {
-  filter: brightness(1) sepia(1) saturate(5) hue-rotate(10deg);
-  transform: translateY(-3px);
-}
-
-.footer-copy {
-  font-size: 11px;
-  color: #777;
-  letter-spacing: 0.5px;
-}
-/* ======================
-   LUXURY FOOTER
-====================== */
-
 .luxury-footer {
   background: #0b0b0b;
   border-top: 1px solid rgba(212,175,55,0.15);
@@ -586,7 +370,6 @@ body {
 .footer-inner {
   max-width: 1200px;
   margin: auto;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -651,8 +434,8 @@ body {
     gap: 14px;
   }
 }
-/* POLICY PAGES */
 
+/* POLICY PAGES */
 .policy-page {
   background: #000;
   color: #ddd;
@@ -691,7 +474,9 @@ body {
   text-decoration: underline;
 }
 
-/* MODAL STYLES */
+/* ======================
+   MODAL STYLES
+====================== */
 .modal {
   display: none;
   position: fixed;
@@ -724,16 +509,18 @@ body {
   color: #ddd;
 }
 
+/* CLOSE MODAL BUTTON – ALTIN SARISI */
 .close-modal {
   position: absolute;
   top: 15px;
   right: 20px;
   font-size: 24px;
   cursor: pointer;
-  color: #fff;
+  color: #d4af37; /* Altın sarısı */
   font-weight: bold;
+  transition: color 0.2s ease;
 }
 
 .close-modal:hover {
-  color: #d4af37;
+  color: #f1d97a; /* Hover’da parlak altın */
 }
