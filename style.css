@@ -557,3 +557,24 @@ body {
 .send-btn:hover::after {
     left: 0;
 }
+/* ======================
+   SOCIAL ICON GOLD EFFECT
+====================== */
+
+.footer-social img {
+  filter: brightness(0) saturate(100%) invert(74%) sepia(39%) saturate(528%) hue-rotate(7deg) brightness(95%) contrast(92%);
+  transition: 
+    transform 0.3s ease,
+    filter 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Hover’da parlak altın + glow */
+.footer-social img:hover {
+  filter: brightness(0) saturate(100%) invert(86%) sepia(52%) saturate(520%) hue-rotate(5deg) brightness(110%) contrast(95%);
+  transform: scale(1.2);
+  box-shadow: 
+    0 0 6px rgba(212, 175, 55, 0.6),
+    0 0 12px rgba(212, 175, 55, 0.4),
+    0 0 18px rgba(212, 175, 55, 0.25);
+}
