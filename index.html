@@ -82,9 +82,9 @@
     </div>
 
     <div class="footer-links">
-      <a href="privacy.html">Privacy Policy</a>
+      <a href="#" id="privacyLink">Privacy Policy</a>
       <span class="divider">•</span>
-      <a href="terms.html">Terms & Conditions</a>
+      <a href="#" id="termsLink">Terms & Conditions</a>
     </div>
 
     <div class="footer-social">
@@ -105,7 +105,6 @@
   </div>
 </footer>
 
-
 <!-- PRIVACY MODAL -->
 <div class="modal" id="privacyModal">
   <div class="modal-content">
@@ -124,8 +123,39 @@
   </div>
 </div>
 
-
-
 <script src="script.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const privacyLink = document.getElementById("privacyLink");
+    const termsLink = document.getElementById("termsLink");
+    const privacyModal = document.getElementById("privacyModal");
+    const termsModal = document.getElementById("termsModal");
+    const closeButtons = document.querySelectorAll(".close-modal");
+
+    privacyLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      privacyModal.style.display = "flex";
+    });
+
+    termsLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      termsModal.style.display = "flex";
+    });
+
+    closeButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        btn.closest(".modal").style.display = "none";
+      });
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        if (privacyModal.style.display === "flex") privacyModal.style.display = "none";
+        if (termsModal.style.display === "flex") termsModal.style.display = "none";
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
