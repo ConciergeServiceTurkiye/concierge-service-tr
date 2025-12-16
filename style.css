@@ -598,3 +598,24 @@ body {
     0 0 8px rgba(212, 175, 55, 0.45),
     0 0 14px rgba(212, 175, 55, 0.25);
 }
+/* ======================
+   FOOTER LINKS – LUXURY GOLD (FINAL)
+====================== */
+
+.footer-links a {
+  color: rgba(212, 175, 55, 0.85); /* VIP yazısı ile aynı altın */
+  font-weight: bold;
+  text-decoration: none; /* Alt çizgi KESİNLİKLE yok */
+  transition:
+    color 0.25s ease,
+    text-shadow 0.25s ease;
+}
+
+.footer-links a:hover {
+  color: #f1d97a; /* Açık premium altın */
+  text-decoration: none; /* Hover’da da çizgi yok */
+  text-shadow:
+    0 0 4px rgba(212, 175, 55, 0.8),
+    0 0 8px rgba(212, 175, 55, 0.5),
+    0 0 14px rgba(212, 175, 55, 0.3);
+}
