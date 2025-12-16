@@ -675,3 +675,65 @@ body {
   margin-bottom: 18px;
   font-size: 14px;
 }
+.footer-links {
+  margin-bottom: 10px;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.footer-links a {
+  color: #d4af37; /* Altın sarısı */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* MODAL STYLES */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 10001;
+}
+
+.modal-content {
+  background: #111;
+  color: #fff;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  border: 1px solid #d4af37;
+  border-radius: 8px;
+  position: relative;
+  text-align: left;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #d4af37;
+}
+
+.modal-content p {
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+}
+
+.close-modal:hover {
+  color: #d4af37;
+}
