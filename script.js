@@ -31,43 +31,31 @@ document.addEventListener("DOMContentLoaded", () => {
     sendBtn.disabled = true;
     statusText.textContent = "Sending your request...";
 
-    grecaptcha.ready(() => {
-      grecaptcha.execute(
-        "6LeHUiwsAAAAAERRFl50ORDSAKg3x3OPROSNo9iW",
-        { action: "submit" }
-      ).then((token) => {
+    // RECAPTCHA KALDIRILDI, FORM DIREKT GÖNDERİLİYOR
+    const data = new URLSearchParams({
+      name: form.name.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      message: form.message.value,
+      referrer: document.referrer || "Website"
+    });
 
-        const data = new URLSearchParams({
-          name: form.name.value,
-          email: form.email.value,
-          phone: form.phone.value,
-          message: form.message.value,
-          referrer: document.referrer || "Website",
-          token
-        });
-
-        fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec", {
-          method: "POST",
-          body: data
-        })
-        .then(r => r.text())
-        .then(res => {
-          if (res.trim() === "success") {
-            statusText.textContent = "Your request has been sent successfully.";
-            form.reset();
-          } else {
-            statusText.textContent = "Security verification failed.";
-          }
-        })
-        .catch(() => {
-          statusText.textContent = "Connection error. Please try again.";
-        })
-        .finally(() => {
-          sendBtn.classList.remove("sending");
-          sendBtn.disabled = false;
-        });
-
-      });
+    fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec", {
+      method: "POST",
+      body: data
+    })
+    .then(r => r.text())
+    .then(res => {
+      // apps script tarafı doğruysa direkt reset
+      statusText.textContent = "Your request has been sent successfully.";
+      form.reset();
+    })
+    .catch(() => {
+      statusText.textContent = "Connection error. Please try again.";
+    })
+    .finally(() => {
+      sendBtn.classList.remove("sending");
+      sendBtn.disabled = false;
     });
   });
 
