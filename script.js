@@ -70,4 +70,39 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
+
+  /* PRIVACY & TERMS MODAL */
+  const privacyLink = document.getElementById("privacyLink");
+  const termsLink = document.getElementById("termsLink");
+
+  const privacyModal = document.getElementById("privacyModal");
+  const termsModal = document.getElementById("termsModal");
+
+  const closeButtons = document.querySelectorAll(".close-modal");
+
+  privacyLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    privacyModal.style.display = "flex";
+  });
+
+  termsLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    termsModal.style.display = "flex";
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      privacyModal.style.display = "none";
+      termsModal.style.display = "none";
+    });
+  });
+
+  // MODAL KAPATMA (ESC TUŞU İLE)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      privacyModal.style.display = "none";
+      termsModal.style.display = "none";
+    }
+  });
+
 });
