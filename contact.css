@@ -73,61 +73,6 @@
 }
 
 /* ======================
-   INPUT TOOLTIP
-====================== */
-.input-wrapper {
-  position: relative;
-}
-
-.input-tooltip {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-  transform: translateY(-8px);
-  background: rgba(0,0,0,0.9);
-  color: #f1d97a;
-  font-size: 12px;
-  padding: 6px 10px;
-  border: 1px solid rgba(212,175,55,0.6);
-  border-radius: 6px;
-  white-space: nowrap;
-  box-shadow: 0 0 10px rgba(212,175,55,0.35);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
-  z-index: 10;
-}
-
-.input-tooltip.visible {
-  opacity: 1;
-}
-
-/* ======================
-   CHARACTER COUNTER
-====================== */
-.textarea-wrapper {
-  position: relative;
-}
-
-.char-count {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 11px;
-  color: rgba(212,175,55,0.75);
-}
-
-/* ======================
-   FORM STATUS
-====================== */
-.form-status {
-  min-height: 18px;
-  font-size: 13px;
-  color: #f1d97a;
-  text-align: center;
-}
-
-/* ======================
    SEND BUTTON
 ====================== */
 .send-btn {
@@ -162,36 +107,36 @@
   left: 0;
 }
 
-/* ======================
-   INTL TEL INPUT – FINAL & REALLY STABLE
-====================== */
+/* =====================================================
+   INTL TEL INPUT – STABLE & SPRITE SAFE (FINAL)
+===================================================== */
 
 .contact-hero .iti {
   width: 100%;
 }
 
-/* INPUT – NO OVERLAP */
+/* INPUT – BAYRAK ÜSTÜNE BİNMESİN */
 .contact-hero .iti input {
   height: 56px !important;
-  padding-left: 72px !important;
+  padding-left: 82px !important;
   padding-right: 14px;
   border-radius: 6px;
 }
 
-/* FLAG CONTAINER */
+/* FLAG CONTAINER – TAM GÖRÜNÜM */
 .contact-hero .iti__flag-container,
 .contact-hero .iti__selected-flag {
-  width: 64px;
+  width: 72px;
   height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* FLAG IMAGE – FULL VIEW (NO CROP) */
+/* ❗ FLAG SPRITE’A DOKUNMA */
 .contact-hero .iti__flag {
-  background-size: contain !important;
-  background-position: center center !important;
+  background-size: auto !important;
+  background-position: inherit !important;
 }
 
 /* DROPDOWN */
@@ -202,27 +147,24 @@
   z-index: 99999;
 }
 
-/* ALL COUNTRIES – DEFAULT BLACK */
-.contact-hero .iti__country,
-.contact-hero .iti__country--preferred,
-.contact-hero .iti__country[aria-selected="true"] {
+/* TÜM SATIRLAR – DEFAULT SİYAH */
+.contact-hero .iti__country {
   background-color: #000 !important;
   color: #d4af37 !important;
 }
 
-/* HOVER – GOLD */
+/* HOVER – ALTIN */
 .contact-hero .iti__country:hover,
-.contact-hero .iti__country:focus,
 .contact-hero .iti__country.iti__highlight {
-  background-color: rgba(212,175,55,0.25) !important;
+  background-color: rgba(212,175,55,0.28) !important;
 }
 
-/* HOVER OUT – BACK TO BLACK (KILL BEJ) */
+/* HOVER ÇIKIŞI – SİYAH (BEJ ÖLÜR) */
 .contact-hero .iti__country:not(:hover):not(.iti__highlight) {
   background-color: #000 !important;
 }
 
-/* TEXT COLORS */
+/* METİNLER */
 .contact-hero .iti__country-name {
   color: #d4af37 !important;
 }
