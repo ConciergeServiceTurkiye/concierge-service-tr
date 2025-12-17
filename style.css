@@ -58,7 +58,7 @@ body {
 }
 
 .nav-menu a {
-    color: #d4af37; /* ALTIN */
+    color: #d4af37;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.2s ease;
@@ -66,47 +66,6 @@ body {
 
 .nav-menu a:hover {
     color: #f1d97a;
-}
-
-/* ======================
-   DROPDOWN
-====================== */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: rgba(0,0,0,0.95);
-    padding: 8px 0;
-    list-style: none;
-    min-width: 220px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: 0.25s ease;
-    border: 1px solid rgba(212,175,55,0.25);
-}
-
-.dropdown-menu li a {
-    display: block;
-    padding: 10px 20px;
-    color: #d4af37; /* ALTIN */
-    font-weight: bold;
-    transition: background 0.2s ease, color 0.2s ease;
-}
-
-.dropdown-menu li a:hover {
-    background: rgba(212,175,55,0.15);
-    color: #f1d97a;
-}
-
-.dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
 }
 
 /* ======================
@@ -119,510 +78,9 @@ body {
     overflow: hidden;
 }
 
-.slider {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-}
-
-.slide {
-    height: 100%;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out;
-}
-
-.slide.active {
-    opacity: 1;
-}
-
-.overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-}
-
-.hero-content {
-    position: relative;
-    z-index: 5;
-    top: 50%;
-    transform: translateY(-50%);
-    text-align: center;
-}
-
-.hero-content h1 {
-    font-size: 46px;
-    margin-bottom: 10px;
-}
-
-.hero-content p {
-    font-size: 18px;
-    margin-bottom: 25px;
-}
-
-.hero-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-/* BUTTONS */
-.btn {
-    background: #d4af37;
-    color: #000;
-    padding: 12px 25px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.btn.secondary {
-    background: transparent;
-    color: #d4af37;
-    border: 1px solid #d4af37;
-}
-
-/* ======================
-   ABOUT
-====================== */
-.about p {
-    color: #ddd;
-    max-width: 700px;
-    margin: auto;
-}
-
-/* ======================
-   SERVICES
-====================== */
-.services .service-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 20px;
-    margin-top: 40px;
-}
-
-.service-card {
-    background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid rgba(212,175,55,0.25);
-    transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.service-card:hover {
-    transform: translateY(-8px);
-    background: rgba(212,175,55,0.1);
-}
-
-/* ======================
-   CONTACT
-====================== */
-.contact-form {
-    max-width: 500px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.contact-form input,
-.contact-form textarea {
-    padding: 12px;
-    border-radius: 5px;
-    border: none;
-}
-
-.send-btn {
-    background: #d4af37;
-    font-weight: bold;
-}
-
-/* ======================
-   FOOTER
-====================== */
-.footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    background: #111;
-}
-
-.footer p {
-    font-size: 10px;
-    opacity: 0.6;
-}
-
-.social-icons {
-    display: flex;
-    gap: 10px;
-}
-
-.social-icons img {
-    width: 32px;
-    transition: transform 0.2s ease;
-}
-
-.social-icons img:hover {
-    transform: scale(1.1);
-}
-/* HAMBURGER */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background: #d4af37;
-}
-
-/* MOBILE NAV */
-@media (max-width: 768px) {
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-menu {
-        position: fixed;
-        top: 70px;
-        right: -100%;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background: #000;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 25px;
-        transition: 0.3s ease;
-    }
-
-    .nav-menu.active {
-        right: 0;
-    }
-}
-
-/* SCROLL EFFECT */
-.navbar.scrolled {
-    background: rgba(0,0,0,0.95);
-}
-
-/* WHATSAPP FIXED */
-.whatsapp-fixed {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25D366;
-    padding: 14px;
-    border-radius: 50%;
-    z-index: 9999;
-}
-
-.whatsapp-fixed img {
-    width: 30px;
-}
-
-/* POPUP */
-.service-popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000;
-}
-
-.service-popup.active {
-    display: flex;
-}
-
-.popup-content {
-    background: #111;
-    padding: 30px;
-    max-width: 500px;
-    border: 1px solid #d4af37;
-    position: relative;
-}
-
-.close-popup {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 22px;
-    cursor: pointer;
-}
-
-/* ======================
-   LUXURY FOOTER
-====================== */
-.luxury-footer {
-  background: #0b0b0b;
-  border-top: 1px solid rgba(212,175,55,0.15);
-  padding: 35px 20px;
-}
-
-.footer-inner {
-  max-width: 1200px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  text-align: center;
-}
-
-/* BRAND */
-.footer-copy {
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  color: rgba(255,255,255,0.65);
-  line-height: 1.6;
-}
-
-.footer-copy span {
-  color: rgba(212,175,55,0.8);
-  font-size: 11px;
-}
-
-/* LINKS */
-.footer-links {
-  font-size: 11px;
-  letter-spacing: 0.6px;
-}
-
-.footer-links a {
-  color: rgba(255,255,255,0.55);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.footer-links a:hover {
-  color: #d4af37;
-}
-
-.footer-links .divider {
-  margin: 0 8px;
-  color: rgba(212,175,55,0.6);
-}
-
-/* SOCIAL */
-.footer-social {
-  display: flex;
-  gap: 14px;
-}
-
-.footer-social img {
-  width: 22px;
-  opacity: 0.7;
-  transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-.footer-social img:hover {
-  opacity: 1;
-  transform: scale(1.15);
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-  .footer-inner {
-    gap: 14px;
-  }
-}
-
-/* POLICY PAGES */
-.policy-page {
-  background: #000;
-  color: #ddd;
-  font-family: Arial, sans-serif;
-}
-
-.policy-container {
-  max-width: 800px;
-  margin: 100px auto;
-  padding: 0 20px;
-}
-
-.policy-container h1 {
-  color: #d4af37;
-  margin-bottom: 25px;
-}
-
-.policy-container p {
-  line-height: 1.8;
-  margin-bottom: 18px;
-  font-size: 14px;
-}
-.footer-links {
-  margin-bottom: 10px;
-  font-size: 12px;
-  opacity: 0.7;
-}
-
-.footer-links a {
-  color: #d4af37; /* Altın sarısı */
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.footer-links a:hover {
-  text-decoration: underline;
-}
-
-/* ======================
-   MODAL STYLES
-====================== */
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  justify-content: center;
-  align-items: center;
-  z-index: 10001;
-}
-
-.modal-content {
-  background: #111;
-  color: #fff;
-  padding: 30px;
-  max-width: 600px;
-  width: 90%;
-  border: 1px solid #d4af37;
-  border-radius: 8px;
-  position: relative;
-  text-align: left;
-}
-
-.modal-content h2 {
-  margin-top: 0;
-  color: #d4af37;
-}
-
-.modal-content p {
-  line-height: 1.6;
-  color: #ddd;
-}
-
-/* CLOSE MODAL BUTTON – ALTIN SARISI */
-.close-modal {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 24px;
-  cursor: pointer;
-  color: #d4af37; /* Altın sarısı */
-  font-weight: bold;
-  transition: color 0.2s ease;
-}
-
-.close-modal:hover {
-  color: #f1d97a; /* Hover’da parlak altın */
-}
-/* SEND BUTTON ANİMASYON */
-.send-btn {
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.send-btn:hover {
-    background: #f1d97a; /* Hover’da parlak altın */
-    color: #000; /* Yazı rengini kontrast için siyah yapıyoruz */
-}
-
-.send-btn.sending {
-    background: #d4af37; /* Gönderirken altın rengi kalır */
-    color: #000;
-    cursor: not-allowed;
-}
-
-/* Ek hafif dalgalı animasyon efekti */
-.send-btn::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    transition: all 0.5s ease;
-}
-
-.send-btn:hover::after {
-    left: 0;
-}
-/* ======================
-   SOCIAL ICON GOLD EFFECT
-====================== */
-
-.footer-social img {
-  filter: brightness(0) saturate(100%) invert(74%) sepia(39%) saturate(528%) hue-rotate(7deg) brightness(95%) contrast(92%);
-  transition: 
-    transform 0.3s ease,
-    filter 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-/* Hover’da parlak altın + glow */
-.footer-social img:hover {
-  filter: brightness(0) saturate(100%) invert(86%) sepia(52%) saturate(520%) hue-rotate(5deg) brightness(110%) contrast(95%);
-  transform: scale(1.2);
-  box-shadow: 
-    0 0 6px rgba(212, 175, 55, 0.6),
-    0 0 12px rgba(212, 175, 55, 0.4),
-    0 0 18px rgba(212, 175, 55, 0.25);
-}
-/* ======================
-   FOOTER LINK GOLD GLOW
-====================== */
-
-.footer-links a {
-  position: relative;
-  color: rgba(212, 175, 55, 0.75); /* Altın */
-  transition: 
-    color 0.3s ease,
-    text-shadow 0.3s ease;
-}
-
-/* Hover’da parlama */
-.footer-links a:hover {
-  color: #f1d97a; /* Açık altın */
-  text-shadow:
-    0 0 4px rgba(212, 175, 55, 0.7),
-    0 0 8px rgba(212, 175, 55, 0.45),
-    0 0 14px rgba(212, 175, 55, 0.25);
-}
-/* ======================
-   FOOTER LINKS – LUXURY GOLD (FINAL)
-====================== */
-
-.footer-links a {
-  color: rgba(212, 175, 55, 0.85); /* VIP yazısı ile aynı altın */
-  font-weight: bold;
-  text-decoration: none; /* Alt çizgi KESİNLİKLE yok */
-  transition:
-    color 0.25s ease,
-    text-shadow 0.25s ease;
-}
-
-.footer-links a:hover {
-  color: #f1d97a; /* Açık premium altın */
-  text-decoration: none; /* Hover’da da çizgi yok */
-  text-shadow:
-    0 0 4px rgba(212, 175, 55, 0.8),
-    0 0 8px rgba(212, 175, 55, 0.5),
-    0 0 14px rgba(212, 175, 55, 0.3);
-}
 /* ======================
    CONTACT PAGE HERO
 ====================== */
-
 .contact-hero {
   min-height: calc(100vh - 70px);
   background:
@@ -632,29 +90,57 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 /* ======================
    GLASS CONTACT FORM
 ====================== */
-
 .contact-hero .contact-form {
+  max-width: 500px;
   background: rgba(15, 15, 15, 0.65);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(212, 175, 55, 0.35);
   border-radius: 14px;
   padding: 35px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   box-shadow:
     0 0 20px rgba(0,0,0,0.6),
     0 0 35px rgba(212,175,55,0.08);
 }
 
-/* INPUT & TEXTAREA LUXURY */
+/* ======================
+   FORM TITLE
+====================== */
+.form-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: #f1d97a;
+  text-shadow:
+    0 0 6px rgba(212,175,55,0.7),
+    0 0 14px rgba(212,175,55,0.35);
+}
+
+/* ======================
+   INPUT & TEXTAREA (FINAL HEIGHT FIX ✅)
+====================== */
 .contact-hero .contact-form input,
 .contact-hero .contact-form textarea {
+  height: 54px;
+  padding: 14px;
+  font-size: 14px;
   background: rgba(0,0,0,0.6);
   color: #fff;
+  border-radius: 6px;
   border: 1px solid rgba(212,175,55,0.35);
   transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-hero .contact-form textarea {
+  height: 140px;
+  resize: none;
 }
 
 .contact-hero .contact-form input:focus,
@@ -663,53 +149,10 @@ body {
   border-color: #f1d97a;
   box-shadow: 0 0 8px rgba(212,175,55,0.45);
 }
-/* ======================
-   ACTIVE NAV LINK
-====================== */
 
-.nav-menu a.active {
-  color: #f1d97a;
-  text-shadow:
-    0 0 6px rgba(212,175,55,0.8),
-    0 0 14px rgba(212,175,55,0.4);
-}
-/* ======================
-   CONTACT FORM TITLE
-====================== */
-
-.form-title {
-  text-align: center;
-  margin-bottom: 25px;
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: 1px;
-
-  color: #f1d97a; /* VIP Istanbul Concierge gold */
-
-  text-shadow:
-    0 0 6px rgba(212,175,55,0.7),
-    0 0 14px rgba(212,175,55,0.35);
-}
-/* ======================
-   FORM VALIDATION
-====================== */
-
-.contact-form input.error,
-.contact-form textarea.error {
-  border-color: #e6b94f;
-  box-shadow: 0 0 6px rgba(212,175,55,0.5);
-}
-
-.form-error {
-  font-size: 13px;
-  color: #f1d97a;
-  margin: -10px 0 12px;
-  opacity: 0.9;
-}
 /* ======================
    TOOLTIP ERROR
 ====================== */
-
 .input-wrapper {
   position: relative;
 }
@@ -737,16 +180,9 @@ body {
   opacity: 1;
 }
 
-.contact-form input.error,
-.contact-form textarea.error {
-  border-color: #f1d97a;
-  box-shadow: 0 0 8px rgba(212,175,55,0.6);
-}
-
 /* ======================
    CHARACTER COUNTER
 ====================== */
-
 .textarea-wrapper {
   position: relative;
 }
@@ -758,4 +194,58 @@ body {
   font-size: 11px;
   color: rgba(212,175,55,0.75);
   pointer-events: none;
+}
+
+/* ======================
+   FORM STATUS (ALTIN SARISI ✅)
+====================== */
+.form-status {
+  min-height: 18px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #f1d97a;
+  text-shadow:
+    0 0 4px rgba(212,175,55,0.6),
+    0 0 8px rgba(212,175,55,0.35);
+}
+
+/* ======================
+   SEND BUTTON (FINAL + 3. MADDE ✅)
+====================== */
+.send-btn {
+    position: relative;
+    overflow: hidden;
+    background: #d4af37;
+    font-weight: bold;
+    color: #000;
+    padding: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.send-btn:hover {
+    background: #f1d97a;
+}
+
+.send-btn.sending {
+    background: #d4af37;
+    cursor: not-allowed;
+    letter-spacing: 1px; /* ⭐ 3. söylediğin eklendi */
+}
+
+/* IŞIK DALGASI */
+.send-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.12);
+    transition: all 0.5s ease;
+}
+
+.send-btn:hover::after {
+    left: 0;
 }
