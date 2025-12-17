@@ -6,11 +6,13 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
+
+<!-- PHONE COUNTRY CODE -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/css/intlTelInput.css">
 </head>
 
 <body>
 
-<!-- NAVBAR (AYNI) -->
 <nav class="navbar">
   <div class="nav-container">
     <a href="index.html" class="logo">
@@ -28,26 +30,27 @@
   </div>
 </nav>
 
-<!-- CONTACT PAGE -->
 <section class="section contact contact-hero" style="margin-top:70px">
 
-  <form id="reservation-form" class="contact-form" novalidate>
+<form id="reservation-form" class="contact-form" novalidate>
 
-  <h2 class="form-title">Request a Bespoke Service</h2>
+<h2 class="form-title">Request a Bespoke Service</h2>
+<p id="form-status" class="form-status"></p>
 
-  <p id="form-status" class="form-status"></p>
-
-  <!-- FULL NAME -->
+<!-- FULL NAME -->
+<div class="input-wrapper">
   <input
     type="text"
     name="name"
     placeholder="Full Name"
     required
     minlength="3"
-    data-error="Please enter your full name."
+    data-error="This field cannot be left empty."
   >
+</div>
 
-  <!-- EMAIL -->
+<!-- EMAIL -->
+<div class="input-wrapper">
   <input
     type="email"
     name="email"
@@ -55,74 +58,50 @@
     required
     data-error="Please enter a valid email address."
   >
+</div>
 
-  <!-- PHONE -->
+<!-- PHONE -->
+<div class="input-wrapper">
   <input
     type="tel"
+    id="phone"
     name="phone"
-    placeholder="Phone Number (with country code, e.g. +90...)"
     required
-    pattern="^\+[1-9]\d{6,14}$"
-    data-error="Please include your country code (e.g. +90 5xx...)."
+    data-error="Please select your country code and enter a valid phone number."
   >
+</div>
 
-  <!-- MESSAGE -->
+<!-- MESSAGE -->
+<div class="input-wrapper textarea-wrapper">
+  <span class="char-count">0 / 2000</span>
   <textarea
     name="message"
     placeholder="Your Request"
-    required
     maxlength="2000"
-    data-error="Please enter your request (max 2000 characters)."
+    required
+    data-error="Please describe your request."
   ></textarea>
+</div>
 
-  <button type="submit" class="btn send-btn">Send</button>
+<button type="submit" class="btn send-btn">Send</button>
 
 </form>
-
-
 </section>
 
-
-<!-- FOOTER AYNI -->
 <footer class="luxury-footer">
   <div class="footer-inner">
-
-    <div class="footer-brand">
-      <p class="footer-copy">
-        © 2025 Concierge Service Türkiye<br>
-        <span>VIP Istanbul Concierge Services</span>
-      </p>
-    </div>
-
-    <div class="footer-links">
-      <a href="#" id="privacyLink">Privacy Policy</a>
-      <span class="divider">•</span>
-      <a href="#" id="termsLink">Terms & Conditions</a>
-    </div>
-
-    <div class="footer-social">
-      <a href="https://www.instagram.com/conciergeserviceturkiye/" target="_blank">
-        <img src="assets/instagram.png">
-      </a>
-      <a href="https://www.youtube.com/" target="_blank">
-        <img src="assets/youtube.png">
-      </a>
-      <a href="https://x.com/ConSerTurkiye" target="_blank">
-        <img src="assets/x.png">
-      </a>
-      <a href="https://www.facebook.com/profile.php?id=61585196308964" target="_blank">
-        <img src="assets/facebook.png">
-      </a>
-    </div>
-
+    <p class="footer-copy">
+      © 2025 Concierge Service Türkiye<br>
+      <span>VIP Istanbul Concierge Services</span>
+    </p>
   </div>
 </footer>
 
 <script src="script.js"></script>
+
+<!-- PHONE SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/intlTelInput.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"></script>
+
 </body>
-
 </html>
-
-
-
-
