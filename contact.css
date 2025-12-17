@@ -216,6 +216,30 @@
 .contact-hero .iti__dial-code {
   color: rgba(255,255,255,0.65);
 }
+/* FORCE FULL DARK COUNTRY LIST */
+.contact-hero .iti__country-list,
+.contact-hero .iti__country-list * {
+  background-color: rgba(0,0,0,0.95) !important;
+}
+
+.contact-hero .iti__country {
+  color: #d4af37 !important;
+}
+
+.contact-hero .iti__country-name {
+  color: #d4af37 !important;
+}
+
+.contact-hero .iti__dial-code {
+  color: rgba(255,255,255,0.7) !important;
+}
+
+/* Hover & active */
+.contact-hero .iti__country:hover,
+.contact-hero .iti__country.iti__highlight {
+  background-color: rgba(212,175,55,0.2) !important;
+}
+
 
 /* ======================
    MOBILE TWEAKS
@@ -229,3 +253,4 @@
     font-size: 24px;
   }
 }
+
