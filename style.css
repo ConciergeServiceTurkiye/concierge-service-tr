@@ -706,3 +706,56 @@ body {
   margin: -10px 0 12px;
   opacity: 0.9;
 }
+/* ======================
+   TOOLTIP ERROR
+====================== */
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  transform: translateY(-8px);
+  background: rgba(0,0,0,0.9);
+  color: #f1d97a;
+  font-size: 12px;
+  padding: 6px 10px;
+  border: 1px solid rgba(212,175,55,0.6);
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 0 10px rgba(212,175,55,0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 5;
+}
+
+.input-tooltip.visible {
+  opacity: 1;
+}
+
+.contact-form input.error,
+.contact-form textarea.error {
+  border-color: #f1d97a;
+  box-shadow: 0 0 8px rgba(212,175,55,0.6);
+}
+
+/* ======================
+   CHARACTER COUNTER
+====================== */
+
+.textarea-wrapper {
+  position: relative;
+}
+
+.char-count {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 11px;
+  color: rgba(212,175,55,0.75);
+  pointer-events: none;
+}
