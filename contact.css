@@ -49,8 +49,6 @@
    SEND BUTTON
 ====================== */
 .send-btn {
-  position: relative;
-  overflow: hidden;
   background: #d4af37;
   font-weight: bold;
   color: #000;
@@ -65,59 +63,67 @@
 }
 
 /* =====================================================
-   INTL TEL INPUT – FINAL / SPRITE SAFE
+   INTL TEL INPUT – FINAL / SPRITE SAFE / BEJ KİLİTLİ
 ===================================================== */
 
 .contact-hero .iti {
   width: 100%;
 }
 
-/* input – bayrak üstüne binmesin */
+/* INPUT – bayrak üstüne binmesin */
 .contact-hero .iti input {
   height: 56px !important;
-  padding-left: 78px !important;
+  padding-left: 92px !important;
   padding-right: 14px;
 }
 
-/* flag alanı – sadece BOYUT */
+/* FLAG ALANI – ÇÖZÜM BURADA */
 .contact-hero .iti__flag-container,
 .contact-hero .iti__selected-flag {
-  width: 70px;
+  width: 92px;                 /* 🔑 yarım bayrak çözümü */
   height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow: visible;
 }
 
-/* ❌ .iti__flag’A DOKUNMA – BİLEREK YOK */
+/* ❌ FLAG SPRITE’A ASLA DOKUNMA */
+/* .iti__flag için HİÇBİR kural YOK */
 
-/* dropdown */
+/* ======================
+   DROPDOWN
+====================== */
 .contact-hero .iti__country-list {
-  background: #000 !important;
+  background-color: #000 !important;
   border: 1px solid rgba(212,175,55,0.45);
   max-height: 260px;
+  z-index: 99999;
 }
 
-/* tüm satırlar – inline style dahil */
+/* TÜM SATIRLAR – DEFAULT SİYAH */
 .contact-hero .iti__country,
-.contact-hero .iti__country[style] {
+.contact-hero .iti__country--preferred,
+.contact-hero .iti__country[aria-selected="true"] {
   background-color: #000 !important;
   color: #d4af37 !important;
 }
 
-/* hover */
+/* HOVER – ALTIN */
 .contact-hero .iti__country:hover,
+.contact-hero .iti__country--preferred:hover,
 .contact-hero .iti__country.iti__highlight {
   background-color: rgba(212,175,55,0.3) !important;
 }
 
-/* hover çıkışı – bej ÖLÜR */
-.contact-hero .iti__country:not(:hover):not(.iti__highlight),
-.contact-hero .iti__country[style]:not(:hover) {
+/* HOVER ÇIKIŞI – SİYAH (BEJ YOK) */
+.contact-hero .iti__country:not(:hover):not(.iti__highlight) {
   background-color: #000 !important;
 }
 
-/* metinler */
+/* METİNLER */
 .contact-hero .iti__country-name {
   color: #d4af37 !important;
 }
@@ -134,41 +140,3 @@
     padding: 28px 22px;
   }
 }
-/* ======================
-   SELECTED FLAG – FULL VIEW FIX
-====================== */
-
-/* sadece form üzerinde görünen bayrak */
-.contact-hero .iti__selected-flag .iti__flag {
-  transform: scale(1.15);
-  transform-origin: center;
-}
-
-/* kırpma olmasın */
-.contact-hero .iti__selected-flag {
-  overflow: hidden;
-}
-/* ======================
-   SELECTED FLAG – NO CROP FIX (SAFE)
-====================== */
-
-/* seçili bayrak alanını genişlet */
-.contact-hero .iti__selected-flag {
-  padding-left: 8px;
-  padding-right: 8px;
-}
-
-/* bayrak sprite'ı kırpılmasın */
-.contact-hero .iti__selected-flag .iti__flag {
-  margin-left: 0;
-}
-/* ======================
-   KILL BEIGE FOREVER
-====================== */
-
-.contact-hero .iti__country[aria-selected="true"],
-.contact-hero .iti__country[aria-selected="true"]:hover {
-  background-color: #000 !important;
-}
-
-
