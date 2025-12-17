@@ -134,3 +134,18 @@
     padding: 28px 22px;
   }
 }
+/* ======================
+   SELECTED FLAG – FULL VIEW FIX
+====================== */
+
+/* sadece form üzerinde görünen bayrak */
+.contact-hero .iti__selected-flag .iti__flag {
+  transform: scale(1.15);
+  transform-origin: center;
+}
+
+/* kırpma olmasın */
+.contact-hero .iti__selected-flag {
+  overflow: hidden;
+}
+
