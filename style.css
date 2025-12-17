@@ -663,3 +663,13 @@ body {
   border-color: #f1d97a;
   box-shadow: 0 0 8px rgba(212,175,55,0.45);
 }
+/* ======================
+   ACTIVE NAV LINK
+====================== */
+
+.nav-menu a.active {
+  color: #f1d97a;
+  text-shadow:
+    0 0 6px rgba(212,175,55,0.8),
+    0 0 14px rgba(212,175,55,0.4);
+}
