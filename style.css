@@ -127,7 +127,7 @@ body {
 }
 
 .slide.active { 
-  transform: scale(1.05); 
+  opacity: 1; 
 }
 
 .overlay { 
