@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="contact.css">  
+<link rel="stylesheet" href="contact.css">
 
 <!-- PHONE COUNTRY CODE -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/css/intlTelInput.css">
@@ -104,6 +104,15 @@
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/intlTelInput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"></script>
 
+<script>
+  const phoneInput = document.querySelector("#phone");
+  window.intlTelInput(phoneInput, {
+    initialCountry: "tr",
+    separateDialCode: false,
+    utilsScript:
+      "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
+  });
+</script>
+
 </body>
 </html>
-
