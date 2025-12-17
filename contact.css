@@ -1,0 +1,173 @@
+/* ======================
+   CONTACT PAGE HERO
+====================== */
+.contact-hero {
+  min-height: calc(100vh - 70px);
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
+    url("assets/contact-bg.jpg") center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ======================
+   GLASS CONTACT FORM
+====================== */
+.contact-form {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(15, 15, 15, 0.65);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 14px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow:
+    0 0 25px rgba(0,0,0,0.6),
+    0 0 40px rgba(212,175,55,0.12);
+}
+
+/* ======================
+   FORM TITLE
+====================== */
+.form-title {
+  text-align: center;
+  margin-bottom: 18px;
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: #f1d97a;
+  text-shadow:
+    0 0 6px rgba(212,175,55,0.7),
+    0 0 14px rgba(212,175,55,0.35);
+}
+
+/* ======================
+   INPUTS & TEXTAREA
+====================== */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  height: 56px;
+  padding: 14px;
+  font-size: 14px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border-radius: 6px;
+  border: 1px solid rgba(212,175,55,0.35);
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-form textarea {
+  height: 150px;
+  resize: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #f1d97a;
+  box-shadow: 0 0 8px rgba(212,175,55,0.45);
+}
+
+/* ======================
+   INPUT WRAPPER & TOOLTIP
+====================== */
+.input-wrapper {
+  position: relative;
+}
+
+.input-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  transform: translateY(-8px);
+  background: rgba(0,0,0,0.9);
+  color: #f1d97a;
+  font-size: 12px;
+  padding: 6px 10px;
+  border: 1px solid rgba(212,175,55,0.6);
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 0 10px rgba(212,175,55,0.35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 10;
+}
+
+.input-tooltip.visible {
+  opacity: 1;
+}
+
+/* ======================
+   CHARACTER COUNTER
+====================== */
+.textarea-wrapper {
+  position: relative;
+}
+
+.char-count {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 11px;
+  color: rgba(212,175,55,0.75);
+  pointer-events: none;
+}
+
+/* ======================
+   FORM STATUS
+====================== */
+.form-status {
+  min-height: 18px;
+  font-size: 13px;
+  color: #f1d97a;
+  text-align: center;
+  text-shadow:
+    0 0 4px rgba(212,175,55,0.6),
+    0 0 8px rgba(212,175,55,0.35);
+}
+
+/* ======================
+   SEND BUTTON
+====================== */
+.send-btn {
+  position: relative;
+  overflow: hidden;
+  background: #d4af37;
+  font-weight: bold;
+  color: #000;
+  padding: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s ease;
+}
+
+.send-btn:hover {
+  background: #f1d97a;
+}
+
+.send-btn.sending {
+  cursor: not-allowed;
+  letter-spacing: 1px;
+}
+
+/* LIGHT SWEEP */
+.send-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.12);
+  transition: all 0.5s ease;
+}
+
+.send-btn:hover::after {
+  left: 0;
+}
