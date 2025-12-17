@@ -690,3 +690,19 @@ body {
     0 0 6px rgba(212,175,55,0.7),
     0 0 14px rgba(212,175,55,0.35);
 }
+/* ======================
+   FORM VALIDATION
+====================== */
+
+.contact-form input.error,
+.contact-form textarea.error {
+  border-color: #e6b94f;
+  box-shadow: 0 0 6px rgba(212,175,55,0.5);
+}
+
+.form-error {
+  font-size: 13px;
+  color: #f1d97a;
+  margin: -10px 0 12px;
+  opacity: 0.9;
+}
