@@ -25,9 +25,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow:
-    0 0 25px rgba(0,0,0,0.6),
-    0 0 40px rgba(212,175,55,0.12);
 }
 
 /* ======================
@@ -36,13 +33,38 @@
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  height: 56px;
-  padding: 14px;
   font-size: 14px;
   background: rgba(0,0,0,0.6);
   color: #fff;
   border-radius: 6px;
   border: 1px solid rgba(212,175,55,0.35);
+}
+
+.contact-form input {
+  height: 56px;
+  padding: 14px;
+}
+
+.contact-form textarea {
+  height: 150px;
+  padding: 16px 14px 32px; /* ⬅ counter için alt boşluk */
+  resize: none;
+}
+
+/* ======================
+   TEXTAREA + COUNTER FIX
+====================== */
+.textarea-wrapper {
+  position: relative;
+}
+
+.char-count {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 11px;
+  color: rgba(212,175,55,0.8);
+  pointer-events: none;
 }
 
 /* ======================
@@ -63,35 +85,32 @@
 }
 
 /* =====================================================
-   INTL TEL INPUT – FINAL / SPRITE SAFE / BEJ KİLİTLİ
+   INTL TEL INPUT – FINAL / BEJ KİLİTLİ
 ===================================================== */
 
 .contact-hero .iti {
   width: 100%;
 }
 
-/* INPUT – bayrak üstüne binmesin */
+/* INPUT */
 .contact-hero .iti input {
   height: 56px !important;
   padding-left: 92px !important;
   padding-right: 14px;
 }
 
-/* FLAG ALANI – ÇÖZÜM BURADA */
+/* FLAG AREA – TAM GÖRÜNÜM */
 .contact-hero .iti__flag-container,
 .contact-hero .iti__selected-flag {
-  width: 92px;                 /* 🔑 yarım bayrak çözümü */
+  width: 92px;
   height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 10px;
-  padding-right: 10px;
-  overflow: visible;
+  padding: 0 10px;
 }
 
-/* ❌ FLAG SPRITE’A ASLA DOKUNMA */
-/* .iti__flag için HİÇBİR kural YOK */
+/* ❌ FLAG SPRITE’A DOKUNMA */
 
 /* ======================
    DROPDOWN
@@ -103,8 +122,9 @@
   z-index: 99999;
 }
 
-/* TÜM SATIRLAR – DEFAULT SİYAH */
+/* TÜM SATIRLAR – MUTLAK SİYAH */
 .contact-hero .iti__country,
+.contact-hero .iti__country[style],
 .contact-hero .iti__country--preferred,
 .contact-hero .iti__country[aria-selected="true"] {
   background-color: #000 !important;
@@ -113,13 +133,14 @@
 
 /* HOVER – ALTIN */
 .contact-hero .iti__country:hover,
-.contact-hero .iti__country--preferred:hover,
-.contact-hero .iti__country.iti__highlight {
+.contact-hero .iti__country.iti__highlight,
+.contact-hero .iti__country--preferred:hover {
   background-color: rgba(212,175,55,0.3) !important;
 }
 
-/* HOVER ÇIKIŞI – SİYAH (BEJ YOK) */
-.contact-hero .iti__country:not(:hover):not(.iti__highlight) {
+/* HOVER ÇIKIŞI – SİYAH (BEJ ÖLÜ) */
+.contact-hero .iti__country:not(:hover):not(.iti__highlight),
+.contact-hero .iti__country[style]:not(:hover) {
   background-color: #000 !important;
 }
 
