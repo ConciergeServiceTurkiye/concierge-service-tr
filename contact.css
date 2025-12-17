@@ -194,52 +194,31 @@
 
 /* Country dropdown */
 .contact-hero .iti__country-list {
-  background: rgba(0,0,0,0.95);
+  background: rgba(0,0,0,0.95) !important;
   border: 1px solid rgba(212,175,55,0.45);
   max-height: 260px;
-  scrollbar-width: thin;
-  scrollbar-color: #d4af37 #000;
   z-index: 99999;
 }
 
-.contact-hero .iti__country {
-  color: #d4af37;
+/* Country text */
+.contact-hero .iti__country,
+.contact-hero .iti__country-name {
+  color: #d4af37 !important;
   font-size: 13px;
-}
-
-.contact-hero .iti__country:hover,
-.contact-hero .iti__country.iti__highlight {
-  background: rgba(212,175,55,0.18);
 }
 
 /* Dial code */
 .contact-hero .iti__dial-code {
-  color: rgba(255,255,255,0.65);
-}
-/* FORCE FULL DARK COUNTRY LIST */
-.contact-hero .iti__country-list,
-.contact-hero .iti__country-list * {
-  background-color: rgba(0,0,0,0.95) !important;
-}
-
-.contact-hero .iti__country {
-  color: #d4af37 !important;
-}
-
-.contact-hero .iti__country-name {
-  color: #d4af37 !important;
-}
-
-.contact-hero .iti__dial-code {
   color: rgba(255,255,255,0.7) !important;
 }
 
-/* Hover & active */
-.contact-hero .iti__country:hover,
-.contact-hero .iti__country.iti__highlight {
-  background-color: rgba(212,175,55,0.2) !important;
+/* UNIFY HOVER COLOR – ALL COUNTRIES */
+.contact-hero .iti__country-list li:hover,
+.contact-hero .iti__country-list li:focus,
+.contact-hero .iti__country-list .iti__country:hover,
+.contact-hero .iti__country-list .iti__country.iti__highlight {
+  background-color: rgba(212,175,55,0.22) !important;
 }
-
 
 /* ======================
    MOBILE TWEAKS
@@ -253,4 +232,3 @@
     font-size: 24px;
   }
 }
-
