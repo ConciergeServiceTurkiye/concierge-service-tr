@@ -31,21 +31,7 @@
 }
 
 /* ======================
-   FORM TITLE
-====================== */
-.form-title {
-  text-align: center;
-  margin-bottom: 18px;
-  font-size: 28px;
-  letter-spacing: 1px;
-  color: #f1d97a;
-  text-shadow:
-    0 0 6px rgba(212,175,55,0.7),
-    0 0 14px rgba(212,175,55,0.35);
-}
-
-/* ======================
-   INPUTS & TEXTAREA
+   INPUTS
 ====================== */
 .contact-form input,
 .contact-form textarea {
@@ -57,19 +43,6 @@
   color: #fff;
   border-radius: 6px;
   border: 1px solid rgba(212,175,55,0.35);
-  transition: border 0.25s ease, box-shadow 0.25s ease;
-}
-
-.contact-form textarea {
-  height: 150px;
-  resize: none;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: none;
-  border-color: #f1d97a;
-  box-shadow: 0 0 8px rgba(212,175,55,0.45);
 }
 
 /* ======================
@@ -85,86 +58,66 @@
   border-radius: 6px;
   cursor: pointer;
   border: none;
-  transition: background 0.3s ease;
 }
 
 .send-btn:hover {
   background: #f1d97a;
 }
 
-.send-btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: rgba(255,255,255,0.12);
-  transition: left 0.5s ease;
-}
-
-.send-btn:hover::after {
-  left: 0;
-}
-
 /* =====================================================
-   INTL TEL INPUT – STABLE & SPRITE SAFE (FINAL)
+   INTL TEL INPUT – FINAL / SPRITE SAFE
 ===================================================== */
 
 .contact-hero .iti {
   width: 100%;
 }
 
-/* INPUT – BAYRAK ÜSTÜNE BİNMESİN */
+/* input – bayrak üstüne binmesin */
 .contact-hero .iti input {
   height: 56px !important;
-  padding-left: 82px !important;
+  padding-left: 78px !important;
   padding-right: 14px;
-  border-radius: 6px;
 }
 
-/* FLAG CONTAINER – TAM GÖRÜNÜM */
+/* flag alanı – sadece BOYUT */
 .contact-hero .iti__flag-container,
 .contact-hero .iti__selected-flag {
-  width: 72px;
+  width: 70px;
   height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* ❗ FLAG SPRITE’A DOKUNMA */
-.contact-hero .iti__flag {
-  background-size: auto !important;
-  background-position: inherit !important;
-}
+/* ❌ .iti__flag’A DOKUNMA – BİLEREK YOK */
 
-/* DROPDOWN */
+/* dropdown */
 .contact-hero .iti__country-list {
-  background-color: #000 !important;
+  background: #000 !important;
   border: 1px solid rgba(212,175,55,0.45);
   max-height: 260px;
-  z-index: 99999;
 }
 
-/* TÜM SATIRLAR – DEFAULT SİYAH */
-.contact-hero .iti__country {
+/* tüm satırlar – inline style dahil */
+.contact-hero .iti__country,
+.contact-hero .iti__country[style] {
   background-color: #000 !important;
   color: #d4af37 !important;
 }
 
-/* HOVER – ALTIN */
+/* hover */
 .contact-hero .iti__country:hover,
 .contact-hero .iti__country.iti__highlight {
-  background-color: rgba(212,175,55,0.28) !important;
+  background-color: rgba(212,175,55,0.3) !important;
 }
 
-/* HOVER ÇIKIŞI – SİYAH (BEJ ÖLÜR) */
-.contact-hero .iti__country:not(:hover):not(.iti__highlight) {
+/* hover çıkışı – bej ÖLÜR */
+.contact-hero .iti__country:not(:hover):not(.iti__highlight),
+.contact-hero .iti__country[style]:not(:hover) {
   background-color: #000 !important;
 }
 
-/* METİNLER */
+/* metinler */
 .contact-hero .iti__country-name {
   color: #d4af37 !important;
 }
@@ -179,9 +132,5 @@
 @media (max-width: 480px) {
   .contact-form {
     padding: 28px 22px;
-  }
-
-  .form-title {
-    font-size: 24px;
   }
 }
