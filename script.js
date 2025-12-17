@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ===================================================== */
   const hamburger = document.getElementById("hamburger");
   const navMenu = document.getElementById("navMenu");
-
   if (hamburger && navMenu) {
     hamburger.addEventListener("click", () => {
       navMenu.classList.toggle("active");
@@ -16,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
      HERO SLIDER – AUTO LOAD 9 IMAGES
   ===================================================== */
   const slider = document.getElementById("heroSlider");
-
   if (slider) {
     const totalSlides = 9;
     let currentSlide = 0;
@@ -43,30 +41,24 @@ document.addEventListener("DOMContentLoaded", () => {
      CONTACT FORM (SADECE CONTACT SAYFASI)
   ===================================================== */
   const form = document.getElementById("reservation-form");
-
   if (form) {
     const statusText = document.getElementById("form-status");
     const sendBtn = form.querySelector(".send-btn");
-
     const phoneInput = document.querySelector("#phone");
+
     const iti = window.intlTelInput(phoneInput, {
       preferredCountries: ["tr", "gb", "de", "fr", "us"],
       separateDialCode: true,
-      utilsScript:
-        "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
+      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
     });
 
     function showTooltip(el) {
       const wrapper = el.closest(".input-wrapper");
       if (!wrapper) return;
-
       hideTooltip(el);
-
       const tooltip = document.createElement("div");
       tooltip.className = "input-tooltip visible";
-      tooltip.textContent =
-        el.dataset.error || "This field is required.";
-
+      tooltip.textContent = el.dataset.error || "This field is required.";
       wrapper.appendChild(tooltip);
       el.classList.add("error");
     }
@@ -74,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function hideTooltip(el) {
       const wrapper = el.closest(".input-wrapper");
       if (!wrapper) return;
-
       const tooltip = wrapper.querySelector(".input-tooltip");
       if (tooltip) tooltip.remove();
       el.classList.remove("error");
@@ -109,28 +100,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-
       let valid = true;
 
-      if (!form.name.value.trim()) {
-        showTooltip(form.name);
-        valid = false;
-      }
-
-      if (!isValidEmail(form.email.value)) {
-        showTooltip(form.email);
-        valid = false;
-      }
-
-      if (!iti.isValidNumber()) {
-        showTooltip(phoneInput);
-        valid = false;
-      }
-
-      if (!textarea.value.trim()) {
-        showTooltip(textarea);
-        valid = false;
-      }
+      if (!form.name.value.trim()) { showTooltip(form.name); valid = false; }
+      if (!isValidEmail(form.email.value)) { showTooltip(form.email); valid = false; }
+      if (!iti.isValidNumber()) { showTooltip(phoneInput); valid = false; }
+      if (!textarea.value.trim()) { showTooltip(textarea); valid = false; }
 
       if (!valid) return;
 
@@ -151,21 +126,19 @@ document.addEventListener("DOMContentLoaded", () => {
         "https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
         { method: "POST", body: data }
       )
-        .then(() => {
-          statusText.textContent =
-            "Your request has been sent successfully.";
-          form.reset();
-          counter.textContent = "0 / 2000";
-        })
-        .catch(() => {
-          statusText.textContent =
-            "Connection error. Please try again.";
-        })
-        .finally(() => {
-          sendBtn.disabled = false;
-          sendBtn.classList.remove("sending");
-          sendBtn.textContent = "Send";
-        });
+      .then(() => {
+        statusText.textContent = "Your request has been sent successfully.";
+        form.reset();
+        counter.textContent = "0 / 2000";
+      })
+      .catch(() => {
+        statusText.textContent = "Connection error. Please try again.";
+      })
+      .finally(() => {
+        sendBtn.disabled = false;
+        sendBtn.classList.remove("sending");
+        sendBtn.textContent = "Send";
+      });
     });
   }
 
