@@ -163,14 +163,14 @@
 }
 
 /* ======================
-   INTL TEL INPUT – FINAL & STABLE
+   INTL TEL INPUT – FINAL & REALLY STABLE
 ====================== */
 
 .contact-hero .iti {
   width: 100%;
 }
 
-/* INPUT */
+/* INPUT – NO OVERLAP */
 .contact-hero .iti input {
   height: 56px !important;
   padding-left: 72px !important;
@@ -178,11 +178,20 @@
   border-radius: 6px;
 }
 
-/* FLAG */
+/* FLAG CONTAINER */
 .contact-hero .iti__flag-container,
 .contact-hero .iti__selected-flag {
   width: 64px;
   height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FLAG IMAGE – FULL VIEW (NO CROP) */
+.contact-hero .iti__flag {
+  background-size: contain !important;
+  background-position: center center !important;
 }
 
 /* DROPDOWN */
@@ -193,26 +202,33 @@
   z-index: 99999;
 }
 
-/* COUNTRY ROW – DEFAULT BLACK */
-.contact-hero .iti__country {
+/* ALL COUNTRIES – DEFAULT BLACK */
+.contact-hero .iti__country,
+.contact-hero .iti__country--preferred,
+.contact-hero .iti__country[aria-selected="true"] {
   background-color: #000 !important;
   color: #d4af37 !important;
 }
 
-/* COUNTRY NAME */
+/* HOVER – GOLD */
+.contact-hero .iti__country:hover,
+.contact-hero .iti__country:focus,
+.contact-hero .iti__country.iti__highlight {
+  background-color: rgba(212,175,55,0.25) !important;
+}
+
+/* HOVER OUT – BACK TO BLACK (KILL BEJ) */
+.contact-hero .iti__country:not(:hover):not(.iti__highlight) {
+  background-color: #000 !important;
+}
+
+/* TEXT COLORS */
 .contact-hero .iti__country-name {
   color: #d4af37 !important;
 }
 
-/* DIAL CODE – SOFT WHITE */
 .contact-hero .iti__dial-code {
   color: rgba(255,255,255,0.75) !important;
-}
-
-/* HOVER – GOLD */
-.contact-hero .iti__country:hover,
-.contact-hero .iti__country.iti__highlight {
-  background-color: rgba(212,175,55,0.25) !important;
 }
 
 /* ======================
