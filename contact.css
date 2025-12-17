@@ -148,4 +148,27 @@
 .contact-hero .iti__selected-flag {
   overflow: hidden;
 }
+/* ======================
+   SELECTED FLAG – NO CROP FIX (SAFE)
+====================== */
+
+/* seçili bayrak alanını genişlet */
+.contact-hero .iti__selected-flag {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+/* bayrak sprite'ı kırpılmasın */
+.contact-hero .iti__selected-flag .iti__flag {
+  margin-left: 0;
+}
+/* ======================
+   KILL BEIGE FOREVER
+====================== */
+
+.contact-hero .iti__country[aria-selected="true"],
+.contact-hero .iti__country[aria-selected="true"]:hover {
+  background-color: #000 !important;
+}
+
 
