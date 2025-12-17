@@ -633,3 +633,17 @@ body {
   align-items: center;
   justify-content: center;
 }
+/* ======================
+   FOOTER LOGO
+====================== */
+.footer-logo img {
+  width: 110px;
+  opacity: 0.85;
+  margin-bottom: 10px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.footer-logo img:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
