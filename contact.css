@@ -163,57 +163,60 @@
 }
 
 /* ======================
-   INTL TEL INPUT – FINAL FIX
+   INTL TEL INPUT – FINAL & CLEAN
 ====================== */
 
-/* Wrapper */
 .contact-hero .iti {
   width: 100%;
 }
 
-/* Input */
+/* INPUT – FIXED OVERLAP */
 .contact-hero .iti input {
   height: 56px !important;
-  padding: 14px 14px 14px 56px !important;
+  padding-left: 72px !important;
+  padding-right: 14px;
   border-radius: 6px;
 }
 
-/* Flag area */
+/* FLAG */
 .contact-hero .iti__flag-container,
 .contact-hero .iti__selected-flag {
+  width: 64px;
   height: 56px;
 }
 
-/* Dropdown container */
+/* DROPDOWN */
 .contact-hero .iti__country-list {
-  background-color: #000 !important;
+  background: #000 !important;
   border: 1px solid rgba(212,175,55,0.45);
   max-height: 260px;
   z-index: 99999;
 }
 
-/* ALL country rows (normal + virtualized) */
+/* ALL ROWS – FORCE BLACK */
 .contact-hero .iti__country-list li,
-.contact-hero .iti__country-list li[role="option"],
-.contact-hero .iti__country-list li[data-country-code],
-.contact-hero .iti__country-list .iti__country {
-  background-color: #000 !important;
+.contact-hero .iti__country-list li * {
+  background: #000 !important;
   color: #d4af37 !important;
 }
 
-/* SINGLE hover color – GOLD for ALL */
+/* 🔥 KILL INLINE BEJ */
+.contact-hero .iti__country-list li[style],
+.contact-hero .iti__country-list li[style]:hover,
+.contact-hero .iti__country-list li[style]:focus,
+.contact-hero .iti__country-list li[style]:active {
+  background: rgba(212,175,55,0.25) !important;
+}
+
+/* GOLD HOVER – EVERYWHERE */
 .contact-hero .iti__country-list li:hover,
 .contact-hero .iti__country-list li:focus,
 .contact-hero .iti__country-list li:active,
-.contact-hero .iti__country-list li.iti__highlight,
-.contact-hero .iti__country-list .iti__country:hover,
-.contact-hero .iti__country-list .iti__country:focus,
-.contact-hero .iti__country-list .iti__country:active,
-.contact-hero .iti__country-list .iti__country.iti__highlight {
-  background-color: rgba(212,175,55,0.25) !important;
+.contact-hero .iti__country-list li.iti__highlight {
+  background: rgba(212,175,55,0.25) !important;
 }
 
-/* Text colors */
+/* TEXT */
 .contact-hero .iti__country-name {
   color: #d4af37 !important;
 }
