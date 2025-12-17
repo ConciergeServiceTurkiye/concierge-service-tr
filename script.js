@@ -4,10 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentSlide = 0;
   const slides = document.querySelectorAll(".slide");
 
-  setInterval(() => {
-    slides.forEach((s, i) => s.classList.toggle("active", i === currentSlide));
-    currentSlide = (currentSlide + 1) % slides.length;
-  }, 5000);
+  if (slides.length) {
+    setInterval(() => {
+      slides.forEach((s, i) => s.classList.toggle("active", i === currentSlide));
+      currentSlide = (currentSlide + 1) % slides.length;
+    }, 5000);
+  }
 
   /* HAMBURGER MENU */
   const hamburger = document.getElementById("hamburger");
@@ -21,17 +23,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* FORM */
   const form = document.getElementById("reservation-form");
+  if (!form) return;
+
   const statusText = document.getElementById("form-status");
   const sendBtn = form.querySelector("button");
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
+    let valid = true;
+
+    /* ÖNCE ESKİ HATALARI TEMİZLE */
+    form.querySelectorAll(".form-error").forEach(el => el.remove());
+    form.querySelectorAll(".error").forEach(el => el.classList.remove("error"));
+
+    /* ALAN KONTROLLERİ */
+    [...form.elements].forEach(el => {
+      if (el.required && !el.checkValidity()) {
+        valid = false;
+        el.classList.add("error");
+
+        const error = document.createElement("div");
+        error.className = "form-error";
+        error.textContent = el.dataset.error || "This field is required.";
+
+        el.insertAdjacentElement("afterend", error);
+      }
+    });
+
+    if (!valid) return;
+
+    /* GÖNDERME */
     sendBtn.classList.add("sending");
     sendBtn.disabled = true;
     statusText.textContent = "Sending your request...";
 
-    // RECAPTCHA KALDIRILDI, FORM DIREKT GÖNDERİLİYOR
     const data = new URLSearchParams({
       name: form.name.value,
       email: form.email.value,
@@ -46,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(r => r.text())
     .then(res => {
-      // apps script tarafı doğruysa direkt reset
       statusText.textContent = "Your request has been sent successfully.";
       form.reset();
     })
@@ -68,28 +93,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const closeButtons = document.querySelectorAll(".close-modal");
 
-  privacyLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    privacyModal.style.display = "flex";
-  });
+  if (privacyLink && privacyModal) {
+    privacyLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      privacyModal.style.display = "flex";
+    });
+  }
 
-  termsLink.addEventListener("click", (e) => {
-    e.preventDefault();
-    termsModal.style.display = "flex";
-  });
+  if (termsLink && termsModal) {
+    termsLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      termsModal.style.display = "flex";
+    });
+  }
 
   closeButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-      privacyModal.style.display = "none";
-      termsModal.style.display = "none";
+      if (privacyModal) privacyModal.style.display = "none";
+      if (termsModal) termsModal.style.display = "none";
     });
   });
 
-  // MODAL KAPATMA (ESC TUŞU İLE)
+  /* ESC İLE MODAL KAPAT */
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
-      privacyModal.style.display = "none";
-      termsModal.style.display = "none";
+      if (privacyModal) privacyModal.style.display = "none";
+      if (termsModal) termsModal.style.display = "none";
     }
   });
 
