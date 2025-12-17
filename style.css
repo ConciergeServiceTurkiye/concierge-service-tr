@@ -24,17 +24,27 @@ body{margin:0;font-family:Arial,sans-serif;color:#fff;background:#000;overflow-x
 
 /* LOGO – OKUNURLUK + HOVER ANİMASYON */
 .logo{
-  display:flex;align-items:center;height:100%;padding:6px 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100%;
 }
+
 .logo img{
-  height:70px;width:auto;display:block;
-  transition:height .25s ease,filter .25s ease,transform .25s ease,box-shadow .25s ease,border .25s ease
+  height:70px;
+  transform-origin:center center;
+  transition:
+    transform .25s ease,
+    filter .25s ease,
+    box-shadow .25s ease;
 }
+
 .logo:hover img{
-  height:100px; /* navbar kadar */
+  transform:scale(1.43); /* 70px → ~100px */
   filter:brightness(1.15);
-  transform:translateY(0);
-  box-shadow:0 0 0 1px var(--gold),0 0 12px rgba(212,175,55,.45)
+  box-shadow:
+    0 0 0 1px #d4af37,
+    0 0 12px rgba(212,175,55,.45);
 }
 
 /* NAV LINKS */
