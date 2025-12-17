@@ -249,3 +249,163 @@ body {
 .send-btn:hover::after {
     left: 0;
 }
+/* ======================
+   HERO SLIDER
+====================== */
+.slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+/* DARK OVERLAY */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1;
+}
+
+/* ======================
+   DROPDOWN MENU
+====================== */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(0,0,0,0.95);
+    list-style: none;
+    padding: 12px 0;
+    min-width: 220px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(212,175,55,0.3);
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 20px;
+    color: #d4af37;
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+    background: rgba(212,175,55,0.12);
+}
+
+/* ======================
+   WHATSAPP FIXED
+====================== */
+.whatsapp-fixed {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 9999;
+}
+
+.whatsapp-fixed img {
+    width: 56px;
+    height: 56px;
+    transition: transform 0.25s ease;
+}
+
+.whatsapp-fixed:hover img {
+    transform: scale(1.08);
+}
+
+/* ======================
+   FOOTER
+====================== */
+.luxury-footer {
+    background: #000;
+    border-top: 1px solid rgba(212,175,55,0.25);
+    padding: 35px 20px;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-copy {
+    font-size: 14px;
+    color: #aaa;
+}
+
+.footer-copy span {
+    color: #d4af37;
+}
+
+.footer-links a {
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-links a:hover {
+    color: #f1d97a;
+}
+
+.footer-social img {
+    width: 22px;
+    margin-left: 14px;
+    filter: brightness(0) saturate(100%) invert(77%) sepia(31%) saturate(422%) hue-rotate(3deg);
+}
+
+/* ======================
+   MODAL
+====================== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.modal-content {
+    max-width: 520px;
+    background: #0c0c0c;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(212,175,55,0.35);
+}
+
+.close-modal {
+    float: right;
+    cursor: pointer;
+    font-size: 22px;
+    color: #d4af37;
+}
