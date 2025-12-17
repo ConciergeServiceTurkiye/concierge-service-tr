@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =====================================================
-     MOBILE NAV (HAMBURGER MENU) – TÜM SAYFALAR
+     MOBILE NAV (HAMBURGER)
   ===================================================== */
   const hamburger = document.getElementById("hamburger");
   const navMenu = document.getElementById("navMenu");
@@ -13,7 +13,34 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =====================================================
-     CONTACT FORM (SADECE CONTACT SAYFASINDA ÇALIŞIR)
+     HERO SLIDER – AUTO LOAD 9 IMAGES
+  ===================================================== */
+  const slider = document.getElementById("heroSlider");
+
+  if (slider) {
+    const totalSlides = 9;
+    let currentSlide = 0;
+    const slides = [];
+
+    for (let i = 1; i <= totalSlides; i++) {
+      const slide = document.createElement("div");
+      slide.className = "slide";
+      slide.style.backgroundImage = `url('assets/slider-${i}.png')`;
+      slider.appendChild(slide);
+      slides.push(slide);
+    }
+
+    slides[0].classList.add("active");
+
+    setInterval(() => {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }, 5000);
+  }
+
+  /* =====================================================
+     CONTACT FORM (SADECE CONTACT SAYFASI)
   ===================================================== */
   const form = document.getElementById("reservation-form");
 
@@ -21,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const statusText = document.getElementById("form-status");
     const sendBtn = form.querySelector(".send-btn");
 
-    /* PHONE INPUT */
     const phoneInput = document.querySelector("#phone");
     const iti = window.intlTelInput(phoneInput, {
       preferredCountries: ["tr", "gb", "de", "fr", "us"],
@@ -30,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
     });
 
-    /* TOOLTIP FUNCTIONS */
     function showTooltip(el) {
       const wrapper = el.closest(".input-wrapper");
       if (!wrapper) return;
@@ -52,16 +77,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const tooltip = wrapper.querySelector(".input-tooltip");
       if (tooltip) tooltip.remove();
-
       el.classList.remove("error");
     }
 
-    /* EMAIL VALIDATION */
     function isValidEmail(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    /* BLUR EVENTS */
     [...form.elements].forEach(el => {
       if (!el.required) return;
 
@@ -78,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
       el.addEventListener("input", () => hideTooltip(el));
     });
 
-    /* CHARACTER COUNTER */
     const textarea = form.querySelector("textarea[name='message']");
     const counter = form.querySelector(".char-count");
 
@@ -86,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
       counter.textContent = `${textarea.value.length} / 2000`;
     });
 
-    /* SUBMIT */
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -129,10 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       fetch(
         "https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
-        {
-          method: "POST",
-          body: data
-        }
+        { method: "POST", body: data }
       )
         .then(() => {
           statusText.textContent =
@@ -153,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =====================================================
-     PRIVACY & TERMS MODALS – TÜM SAYFALAR
+     PRIVACY & TERMS MODALS – GLOBAL
   ===================================================== */
   const privacyLink = document.getElementById("privacyLink");
   const termsLink = document.getElementById("termsLink");
