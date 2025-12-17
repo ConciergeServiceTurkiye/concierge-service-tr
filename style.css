@@ -197,3 +197,65 @@ body{margin:0;font-family:Arial,sans-serif;color:#fff;background:#000;overflow-x
 .modal-content p{line-height:1.6;color:#ddd}
 .close-modal{position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;color:var(--gold);font-weight:bold;transition:color .2s ease}
 .close-modal:hover{color:var(--gold-soft)}
+/* ======================
+   INTL TEL INPUT – LUXURY
+====================== */
+
+.iti {
+  width: 100%;
+}
+
+.iti__flag-container {
+  background: rgba(0,0,0,0.6);
+  border-right: 1px solid rgba(212,175,55,0.4);
+}
+
+.iti__selected-flag {
+  padding: 0 14px;
+  transition: background .2s ease;
+}
+
+.iti__selected-flag:hover {
+  background: rgba(212,175,55,0.08);
+}
+
+.iti__country-list {
+  background: #0b0b0b;
+  border: 1px solid rgba(212,175,55,0.4);
+  box-shadow: 0 20px 40px rgba(0,0,0,.6);
+  color: #d4af37;
+  font-size: 14px;
+}
+
+.iti__country {
+  padding: 10px 14px;
+  transition: background .15s ease;
+}
+
+.iti__country:hover {
+  background: rgba(212,175,55,0.12);
+}
+
+.iti__country.iti__highlight {
+  background: rgba(212,175,55,0.18);
+}
+
+.iti__dial-code {
+  color: #f1d97a;
+}
+
+.iti__country-name {
+  color: #e6c767;
+}
+
+/* Search input */
+.iti__search-input {
+  background: #000;
+  border: none;
+  border-bottom: 1px solid rgba(212,175,55,0.4);
+  color: #d4af37;
+}
+
+.iti__search-input::placeholder {
+  color: rgba(212,175,55,0.6);
+}
