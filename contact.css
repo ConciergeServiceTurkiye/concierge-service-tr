@@ -73,7 +73,7 @@
 }
 
 /* ======================
-   INPUT WRAPPER & TOOLTIP
+   INPUT TOOLTIP
 ====================== */
 .input-wrapper {
   position: relative;
@@ -115,7 +115,6 @@
   right: 12px;
   font-size: 11px;
   color: rgba(212,175,55,0.75);
-  pointer-events: none;
 }
 
 /* ======================
@@ -126,9 +125,6 @@
   font-size: 13px;
   color: #f1d97a;
   text-align: center;
-  text-shadow:
-    0 0 4px rgba(212,175,55,0.6),
-    0 0 8px rgba(212,175,55,0.35);
 }
 
 /* ======================
@@ -151,12 +147,6 @@
   background: #f1d97a;
 }
 
-.send-btn.sending {
-  cursor: not-allowed;
-  letter-spacing: 1px;
-}
-
-/* LIGHT SWEEP */
 .send-btn::after {
   content: "";
   position: absolute;
@@ -165,7 +155,7 @@
   width: 100%;
   height: 100%;
   background: rgba(255,255,255,0.12);
-  transition: all 0.5s ease;
+  transition: left 0.5s ease;
 }
 
 .send-btn:hover::after {
@@ -173,16 +163,18 @@
 }
 
 /* ======================
-   PHONE INPUT – CLEAN FINAL
+   INTL TEL INPUT – FINAL FIX
 ====================== */
+
+/* Wrapper */
 .contact-hero .iti {
   width: 100%;
 }
 
+/* Input */
 .contact-hero .iti input {
   height: 56px !important;
-  padding: 14px 14px 14px 56px;
-  font-size: 14px;
+  padding: 14px 14px 14px 56px !important;
   border-radius: 6px;
 }
 
@@ -192,28 +184,46 @@
   height: 56px;
 }
 
-/* Country dropdown (BASE LOOK ONLY) */
+/* Dropdown container */
 .contact-hero .iti__country-list {
-  background: rgba(0,0,0,0.95) !important;
+  background-color: #000 !important;
   border: 1px solid rgba(212,175,55,0.45);
   max-height: 260px;
   z-index: 99999;
 }
 
-/* Country text */
-.contact-hero .iti__country,
-.contact-hero .iti__country-name {
+/* ALL country rows (normal + virtualized) */
+.contact-hero .iti__country-list li,
+.contact-hero .iti__country-list li[role="option"],
+.contact-hero .iti__country-list li[data-country-code],
+.contact-hero .iti__country-list .iti__country {
+  background-color: #000 !important;
   color: #d4af37 !important;
-  font-size: 13px;
 }
 
-/* Dial code */
+/* SINGLE hover color – GOLD for ALL */
+.contact-hero .iti__country-list li:hover,
+.contact-hero .iti__country-list li:focus,
+.contact-hero .iti__country-list li:active,
+.contact-hero .iti__country-list li.iti__highlight,
+.contact-hero .iti__country-list .iti__country:hover,
+.contact-hero .iti__country-list .iti__country:focus,
+.contact-hero .iti__country-list .iti__country:active,
+.contact-hero .iti__country-list .iti__country.iti__highlight {
+  background-color: rgba(212,175,55,0.25) !important;
+}
+
+/* Text colors */
+.contact-hero .iti__country-name {
+  color: #d4af37 !important;
+}
+
 .contact-hero .iti__dial-code {
   color: rgba(255,255,255,0.7) !important;
 }
 
 /* ======================
-   MOBILE TWEAKS
+   MOBILE
 ====================== */
 @media (max-width: 480px) {
   .contact-form {
