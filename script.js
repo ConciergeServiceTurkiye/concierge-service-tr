@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 1; i <= totalSlides; i++) {
       const slide = document.createElement("div");
       slide.className = "slide";
-      slide.style.backgroundImage = `url('assets/slider-${i}.png')`;
+      slide.style.backgroundImage = `url('assets/slider-${i}.jpg')`;
       slider.appendChild(slide);
       slides.push(slide);
     }
