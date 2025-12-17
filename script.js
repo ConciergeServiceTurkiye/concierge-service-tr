@@ -1,6 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =====================================================
+     MOBILE NAV (HAMBURGER MENU) – TÜM SAYFALAR
+  ===================================================== */
+  const hamburger = document.getElementById("hamburger");
+  const navMenu = document.getElementById("navMenu");
+
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", () => {
+      navMenu.classList.toggle("active");
+    });
+  }
+
+  /* =====================================================
      CONTACT FORM (SADECE CONTACT SAYFASINDA ÇALIŞIR)
   ===================================================== */
   const form = document.getElementById("reservation-form");
@@ -9,9 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const statusText = document.getElementById("form-status");
     const sendBtn = form.querySelector(".send-btn");
 
-    /* ======================
-       PHONE INPUT
-    ====================== */
+    /* PHONE INPUT */
     const phoneInput = document.querySelector("#phone");
     const iti = window.intlTelInput(phoneInput, {
       preferredCountries: ["tr", "gb", "de", "fr", "us"],
@@ -20,9 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
     });
 
-    /* ======================
-       TOOLTIP FUNCTIONS
-    ====================== */
+    /* TOOLTIP FUNCTIONS */
     function showTooltip(el) {
       const wrapper = el.closest(".input-wrapper");
       if (!wrapper) return;
@@ -48,16 +56,12 @@ document.addEventListener("DOMContentLoaded", () => {
       el.classList.remove("error");
     }
 
-    /* ======================
-       EMAIL VALIDATION
-    ====================== */
+    /* EMAIL VALIDATION */
     function isValidEmail(email) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    /* ======================
-       BLUR EVENTS (TAB / CLICK OUT)
-    ====================== */
+    /* BLUR EVENTS */
     [...form.elements].forEach(el => {
       if (!el.required) return;
 
@@ -74,9 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
       el.addEventListener("input", () => hideTooltip(el));
     });
 
-    /* ======================
-       CHARACTER COUNTER
-    ====================== */
+    /* CHARACTER COUNTER */
     const textarea = form.querySelector("textarea[name='message']");
     const counter = form.querySelector(".char-count");
 
@@ -84,9 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
       counter.textContent = `${textarea.value.length} / 2000`;
     });
 
-    /* ======================
-       SUBMIT
-    ====================== */
+    /* SUBMIT */
     form.addEventListener("submit", (e) => {
       e.preventDefault();
 
@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =====================================================
-     PRIVACY & TERMS MODALS (TÜM SAYFALARDA ÇALIŞIR)
+     PRIVACY & TERMS MODALS – TÜM SAYFALAR
   ===================================================== */
   const privacyLink = document.getElementById("privacyLink");
   const termsLink = document.getElementById("termsLink");
