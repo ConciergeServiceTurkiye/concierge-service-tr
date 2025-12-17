@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="contact.css">
 
-<!-- PHONE COUNTRY CODE -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/css/intlTelInput.css">
 </head>
 
@@ -26,7 +25,7 @@
 
     <ul class="nav-menu" id="navMenu">
       <li><a href="index.html">Home</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="Contact.html" class="active">Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -38,50 +37,25 @@
 <h2 class="form-title">Request a Bespoke Service</h2>
 <p id="form-status" class="form-status"></p>
 
-<!-- FULL NAME -->
 <div class="input-wrapper">
-  <input
-    type="text"
-    name="name"
-    placeholder="Full Name"
-    required
-    minlength="3"
-    data-error="This field cannot be left empty."
-  >
+  <input type="text" name="name" placeholder="Full Name" required minlength="3"
+    data-error="This field cannot be left empty.">
 </div>
 
-<!-- EMAIL -->
 <div class="input-wrapper">
-  <input
-    type="email"
-    name="email"
-    placeholder="Email Address"
-    required
-    data-error="Please enter a valid email address."
-  >
+  <input type="email" name="email" placeholder="Email Address" required
+    data-error="Please enter a valid email address.">
 </div>
 
-<!-- PHONE -->
 <div class="input-wrapper">
-  <input
-    type="tel"
-    id="phone"
-    name="phone"
-    required
-    data-error="Please select your country code and enter a valid phone number."
-  >
+  <input type="tel" id="phone" name="phone" required
+    data-error="Please select your country code and enter a valid phone number.">
 </div>
 
-<!-- MESSAGE -->
 <div class="input-wrapper textarea-wrapper">
   <span class="char-count">0 / 2000</span>
-  <textarea
-    name="message"
-    placeholder="Your Request"
-    maxlength="2000"
-    required
-    data-error="Please describe your request."
-  ></textarea>
+  <textarea name="message" placeholder="Your Request" maxlength="2000" required
+    data-error="Please describe your request."></textarea>
 </div>
 
 <button type="submit" class="btn send-btn">Send</button>
@@ -92,60 +66,65 @@
 <footer class="luxury-footer">
   <div class="footer-inner">
 
-    <!-- LOGO -->
     <div class="footer-logo">
       <img src="assets/logo.png" alt="Concierge Service Türkiye">
     </div>
 
-    <!-- COPYRIGHT -->
     <p class="footer-copy">
       © 2025 Concierge Service Türkiye<br>
       <span>VIP Istanbul Concierge Services</span>
     </p>
 
-    <!-- LINKS -->
     <div class="footer-links">
       <a href="#" id="privacyLink">Privacy Policy</a>
       <span class="divider">•</span>
       <a href="#" id="termsLink">Terms & Conditions</a>
     </div>
 
-    <!-- SOCIAL -->
     <div class="footer-social">
       <a href="https://www.instagram.com/conciergeserviceturkiye/" target="_blank">
-        <img src="assets/instagram.png" alt="Instagram">
+        <img src="assets/instagram.png">
       </a>
       <a href="https://www.youtube.com/" target="_blank">
-        <img src="assets/youtube.png" alt="YouTube">
+        <img src="assets/youtube.png">
       </a>
       <a href="https://x.com/ConSerTurkiye" target="_blank">
-        <img src="assets/x.png" alt="X">
+        <img src="assets/x.png">
       </a>
       <a href="https://www.facebook.com/profile.php?id=61585196308964" target="_blank">
-        <img src="assets/facebook.png" alt="Facebook">
+        <img src="assets/facebook.png">
       </a>
     </div>
 
   </div>
 </footer>
 
+<!-- PRIVACY MODAL -->
+<div class="modal" id="privacyModal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>Privacy Policy</h2>
+    <p>
+      Concierge Service Türkiye respects your privacy and protects your personal data.
+      Information is used solely for service communication purposes.
+    </p>
+  </div>
+</div>
+
+<!-- TERMS MODAL -->
+<div class="modal" id="termsModal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>Terms of Service</h2>
+    <p>
+      All services are provided on a best-effort basis and subject to availability.
+    </p>
+  </div>
+</div>
 
 <script src="script.js"></script>
-
-<!-- PHONE SCRIPT -->
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/intlTelInput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"></script>
 
-<script>
-  const phoneInput = document.querySelector("#phone");
-  window.intlTelInput(phoneInput, {
-    initialCountry: "tr",
-    separateDialCode: false,
-    utilsScript:
-      "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
-  });
-</script>
-
 </body>
 </html>
-
