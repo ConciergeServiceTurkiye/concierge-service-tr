@@ -173,7 +173,7 @@
 }
 
 /* ======================
-   PHONE INPUT FULL FIX
+   PHONE INPUT – FINAL FIX
 ====================== */
 .contact-hero .iti {
   width: 100%;
@@ -181,15 +181,51 @@
 
 .contact-hero .iti input {
   height: 56px !important;
-  padding: 14px 14px 14px 52px;
+  padding: 14px 14px 14px 56px;
   font-size: 14px;
   border-radius: 6px;
 }
 
-.contact-hero .iti__flag-container {
+/* Flag area */
+.contact-hero .iti__flag-container,
+.contact-hero .iti__selected-flag {
   height: 56px;
 }
 
-.contact-hero .iti__selected-flag {
-  height: 56px;
+/* Country dropdown */
+.contact-hero .iti__country-list {
+  background: rgba(0,0,0,0.95);
+  border: 1px solid rgba(212,175,55,0.45);
+  max-height: 260px;
+  scrollbar-width: thin;
+  scrollbar-color: #d4af37 #000;
+  z-index: 99999;
+}
+
+.contact-hero .iti__country {
+  color: #d4af37;
+  font-size: 13px;
+}
+
+.contact-hero .iti__country:hover,
+.contact-hero .iti__country.iti__highlight {
+  background: rgba(212,175,55,0.18);
+}
+
+/* Dial code */
+.contact-hero .iti__dial-code {
+  color: rgba(255,255,255,0.65);
+}
+
+/* ======================
+   MOBILE TWEAKS
+====================== */
+@media (max-width: 480px) {
+  .contact-form {
+    padding: 28px 22px;
+  }
+
+  .form-title {
+    font-size: 24px;
+  }
 }
