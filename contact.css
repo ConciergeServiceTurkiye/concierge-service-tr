@@ -173,7 +173,7 @@
 }
 
 /* ======================
-   PHONE INPUT – FINAL FIX
+   PHONE INPUT – CLEAN FINAL
 ====================== */
 .contact-hero .iti {
   width: 100%;
@@ -192,7 +192,7 @@
   height: 56px;
 }
 
-/* Country dropdown */
+/* Country dropdown (BASE LOOK ONLY) */
 .contact-hero .iti__country-list {
   background: rgba(0,0,0,0.95) !important;
   border: 1px solid rgba(212,175,55,0.45);
@@ -212,14 +212,6 @@
   color: rgba(255,255,255,0.7) !important;
 }
 
-/* UNIFY HOVER COLOR – ALL COUNTRIES */
-.contact-hero .iti__country-list li:hover,
-.contact-hero .iti__country-list li:focus,
-.contact-hero .iti__country-list .iti__country:hover,
-.contact-hero .iti__country-list .iti__country.iti__highlight {
-  background-color: rgba(212,175,55,0.22) !important;
-}
-
 /* ======================
    MOBILE TWEAKS
 ====================== */
@@ -232,74 +224,3 @@
     font-size: 24px;
   }
 }
-/* ======================
-   INTL TEL INPUT – HARD OVERRIDE (FINAL)
-====================== */
-
-.contact-hero .iti__country-list {
-  background-color: #000 !important;
-}
-
-.contact-hero .iti__country-list li,
-.contact-hero .iti__country-list .iti__country {
-  background-color: #000 !important;
-  color: #d4af37 !important;
-}
-
-/* Alttan gelen (virtualized) country rows */
-.contact-hero .iti__country-list li[role="option"],
-.contact-hero .iti__country-list li[aria-selected],
-.contact-hero .iti__country-list li[aria-selected="false"],
-.contact-hero .iti__country-list li[aria-selected="true"] {
-  background-color: #000 !important;
-  color: #d4af37 !important;
-}
-
-/* Hover – HEPSİ AYNI ALTIN TON */
-.contact-hero .iti__country-list li:hover,
-.contact-hero .iti__country-list .iti__country:hover,
-.contact-hero .iti__country-list li.iti__highlight {
-  background-color: rgba(212,175,55,0.22) !important;
-}
-
-/* Country name & dial code */
-.contact-hero .iti__country-name {
-  color: #d4af37 !important;
-}
-
-.contact-hero .iti__dial-code {
-  color: rgba(255,255,255,0.7) !important;
-}
-
-/* ======================
-   INTL TEL INPUT – HOVER FORCE FIX (FINAL)
-====================== */
-
-/* Kill ALL default hover / active backgrounds */
-.contact-hero .iti__country-list li,
-.contact-hero .iti__country-list li:hover,
-.contact-hero .iti__country-list li:focus,
-.contact-hero .iti__country-list li:active,
-.contact-hero .iti__country-list .iti__country,
-.contact-hero .iti__country-list .iti__country:hover,
-.contact-hero .iti__country-list .iti__country:focus,
-.contact-hero .iti__country-list .iti__country:active {
-  background: #000 !important;
-}
-
-/* OUR hover – SINGLE GOLD COLOR FOR ALL */
-.contact-hero .iti__country-list li:hover,
-.contact-hero .iti__country-list .iti__country:hover,
-.contact-hero .iti__country-list li.iti__highlight {
-  background: rgba(212,175,55,0.25) !important;
-}
-
-/* Text colors stay consistent */
-.contact-hero .iti__country-name {
-  color: #d4af37 !important;
-}
-
-.contact-hero .iti__dial-code {
-  color: rgba(255,255,255,0.7) !important;
-}
-
