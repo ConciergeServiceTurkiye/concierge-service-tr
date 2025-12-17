@@ -163,14 +163,14 @@
 }
 
 /* ======================
-   INTL TEL INPUT – FINAL & CLEAN
+   INTL TEL INPUT – FINAL & STABLE
 ====================== */
 
 .contact-hero .iti {
   width: 100%;
 }
 
-/* INPUT – FIXED OVERLAP */
+/* INPUT */
 .contact-hero .iti input {
   height: 56px !important;
   padding-left: 72px !important;
@@ -187,42 +187,32 @@
 
 /* DROPDOWN */
 .contact-hero .iti__country-list {
-  background: #000 !important;
+  background-color: #000 !important;
   border: 1px solid rgba(212,175,55,0.45);
   max-height: 260px;
   z-index: 99999;
 }
 
-/* ALL ROWS – FORCE BLACK */
-.contact-hero .iti__country-list li,
-.contact-hero .iti__country-list li * {
-  background: #000 !important;
+/* COUNTRY ROW – DEFAULT BLACK */
+.contact-hero .iti__country {
+  background-color: #000 !important;
   color: #d4af37 !important;
 }
 
-/* 🔥 KILL INLINE BEJ */
-.contact-hero .iti__country-list li[style],
-.contact-hero .iti__country-list li[style]:hover,
-.contact-hero .iti__country-list li[style]:focus,
-.contact-hero .iti__country-list li[style]:active {
-  background: rgba(212,175,55,0.25) !important;
-}
-
-/* GOLD HOVER – EVERYWHERE */
-.contact-hero .iti__country-list li:hover,
-.contact-hero .iti__country-list li:focus,
-.contact-hero .iti__country-list li:active,
-.contact-hero .iti__country-list li.iti__highlight {
-  background: rgba(212,175,55,0.25) !important;
-}
-
-/* TEXT */
+/* COUNTRY NAME */
 .contact-hero .iti__country-name {
   color: #d4af37 !important;
 }
 
+/* DIAL CODE – SOFT WHITE */
 .contact-hero .iti__dial-code {
-  color: rgba(255,255,255,0.7) !important;
+  color: rgba(255,255,255,0.75) !important;
+}
+
+/* HOVER – GOLD */
+.contact-hero .iti__country:hover,
+.contact-hero .iti__country.iti__highlight {
+  background-color: rgba(212,175,55,0.25) !important;
 }
 
 /* ======================
