@@ -170,18 +170,26 @@
 
 .send-btn:hover::after {
   left: 0;
-
 }
+
 /* ======================
-   PHONE INPUT HEIGHT FIX
+   PHONE INPUT FULL FIX
 ====================== */
-.contact-hero .contact-form .iti input {
-  height: 54px !important;
-  padding: 14px;
+.contact-hero .iti {
+  width: 100%;
+}
+
+.contact-hero .iti input {
+  height: 56px !important;
+  padding: 14px 14px 14px 52px;
   font-size: 14px;
   border-radius: 6px;
 }
+
 .contact-hero .iti__flag-container {
-  height: 54px;
+  height: 56px;
 }
 
+.contact-hero .iti__selected-flag {
+  height: 56px;
+}
