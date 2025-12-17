@@ -170,4 +170,14 @@
 
 .send-btn:hover::after {
   left: 0;
+
+}
+/* ======================
+   PHONE INPUT HEIGHT FIX
+====================== */
+.contact-hero .contact-form .iti input {
+  height: 54px !important;
+  padding: 14px;
+  font-size: 14px;
+  border-radius: 6px;
 }
