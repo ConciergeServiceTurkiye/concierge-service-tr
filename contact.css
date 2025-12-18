@@ -1,6 +1,4 @@
-/* ======================
-   CONTACT HERO
-===================== */
+/* ====================== CONTACT HERO ====================== */
 .contact-hero {
   min-height: calc(100vh - 70px);
   background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
@@ -10,9 +8,7 @@
   justify-content: center;
 }
 
-/* ======================
-   CONTACT FORM
-===================== */
+/* ====================== CONTACT FORM ====================== */
 .contact-form {
   width: 100%;
   max-width: 500px;
@@ -28,9 +24,7 @@
   overflow: visible;
 }
 
-/* ======================
-   FORM TITLE - GOLD SHINE
-===================== */
+/* ====================== FORM TITLE - GOLD SHINE ====================== */
 .form-title {
   font-size: 28px;
   font-weight: bold;
@@ -40,9 +34,7 @@
   margin-bottom: 16px;
 }
 
-/* ======================
-   INPUTS
-===================== */
+/* ====================== INPUTS ====================== */
 .contact-form input,
 .contact-form textarea {
   width: 100%;
@@ -55,24 +47,11 @@
   line-height: 1.6;
 }
 
-.contact-form input {
-  height: 56px;
-  padding: 14px;
-}
+.contact-form input { height: 56px; padding: 14px; }
+.contact-form textarea { height: 150px; padding: 16px 14px 32px; resize: none; }
 
-.contact-form textarea {
-  height: 150px;
-  padding: 16px 14px 32px;
-  resize: none;
-  font-family: "Inter", sans-serif;
-  color: #f9f1d0;
-}
-
-/* ======================
-   CHAR COUNTER
-===================== */
+/* ====================== CHAR COUNTER ====================== */
 .textarea-wrapper { position: relative; }
-
 .char-count {
   position: absolute;
   top: 8px;        /* üst tarafa taşı */
@@ -85,9 +64,7 @@
   border-radius: 4px;
 }
 
-/* ======================
-   SEND BUTTON
-===================== */
+/* ====================== SEND BUTTON ====================== */
 .send-btn {
   background: #d4af37;
   font-weight: bold;
@@ -98,12 +75,9 @@
   border: none;
   transition: background .3s ease, color .3s ease;
 }
-
 .send-btn:hover { background: #f1d97a; }
 
-/* ======================
-   CONTACT FORM POPUP
-===================== */
+/* ====================== CONTACT FORM POPUP ====================== */
 #popupAlert {
   position: absolute; /* form içinde göster */
   top: 120px; /* form başlığı altı */
@@ -119,105 +93,58 @@
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
-
 #popupAlert.show {
   opacity: 1;
   pointer-events: auto;
   transform: translateX(-50%) translateY(-5px);
 }
 
-/* ======================
-   TEXTAREA SCROLLBAR
-===================== */
-.contact-form textarea::-webkit-scrollbar {
-  width: 8px;
-}
+/* ====================== TEXTAREA SCROLLBAR ====================== */
+.contact-form textarea::-webkit-scrollbar { width: 8px; }
+.contact-form textarea::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 4px; }
+.contact-form textarea::-webkit-scrollbar-thumb { background-color: #d4af37; border-radius: 4px; border: 1px solid rgba(0,0,0,0.2); }
+.contact-form textarea { scrollbar-width: thin; scrollbar-color: #d4af37 rgba(0,0,0,0.2); }
 
-.contact-form textarea::-webkit-scrollbar-track {
-  background: rgba(0,0,0,0.2);
-  border-radius: 4px;
-}
-
-.contact-form textarea::-webkit-scrollbar-thumb {
-  background-color: #d4af37;
-  border-radius: 4px;
-  border: 1px solid rgba(0,0,0,0.2);
-}
-
-.contact-form textarea {
-  scrollbar-width: thin;
-  scrollbar-color: #d4af37 rgba(0,0,0,0.2);
-}
-
-/* ======================
-   INTL TEL INPUT
-===================== */
-.contact-hero .iti {
-  width: 100%;
-  position: relative;
-}
-
-.contact-hero .iti input {
-  height: 56px !important;
-  padding-left: 92px !important;
-  padding-right: 14px;
-  background: rgba(0,0,0,0.6);
-  color: #f9f1d0;
-  font-family: "Inter", sans-serif;
-}
+/* ====================== INTL TEL INPUT ====================== */
+.contact-hero .iti { width: 100%; position: relative; }
+.contact-hero .iti input { height: 56px !important; padding-left: 92px !important; padding-right: 14px; }
 
 .contact-hero .iti__flag-container,
-.contact-hero .iti__selected-flag {
-  width: 92px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.6);
-  border-radius: 6px 0 0 6px;
-  border: 1px solid rgba(212,175,55,0.35);
-  transition: background 0.2s ease;
-}
+.contact-hero .iti__selected-flag { width: 92px; height: 56px; display: flex; align-items: center; justify-content: center; }
 
-.contact-hero .iti__selected-flag:hover {
-  background: rgba(212,175,55,0.15);
-}
-
-/* COUNTRY DROPDOWN */
+/* ===== ÜLKE DROPDOWN - SİYAH + HOVER ALTIN ===== */
 .contact-hero .iti__country-list {
-  background-color: #000 !important;
+  background-color: #000 !important; /* kesin siyah */
+  border: 1px solid rgba(212,175,55,0.45);
   max-height: 260px;
   overflow-y: auto;
-  border: 1px solid rgba(212,175,55,0.45);
-  z-index: 99999 !important;
   position: absolute !important;
   top: 100%;
   left: 0;
   width: 100%;
+  z-index: 99999 !important;
   border-radius: 6px;
 }
 
-/* COUNTRY ITEMS */
 .contact-hero .iti__country,
 .contact-hero .iti__country[style],
 .contact-hero .iti__country--preferred,
 .contact-hero .iti__country[aria-selected="true"] {
-  background-color: #000 !important;
-  color: #d4af37 !important;
-  transition: background .2s ease;
+  background-color: #000 !important; /* item arka plan siyah */
+  color: #d4af37 !important; /* ülke adı altın sarısı */
+  transition: background 0.2s ease;
 }
 
-/* COUNTRY ITEM HOVER */
 .contact-hero .iti__country:hover,
 .contact-hero .iti__country.iti__highlight,
 .contact-hero .iti__country--preferred:hover {
-  background-color: rgba(212,175,55,0.25) !important;
+  background-color: rgba(212,175,55,0.25) !important; /* hover altın sarısı */
+  color: #000 !important; /* hover yazı kontrastı */
 }
 
-.contact-hero .iti__country-name { color: #d4af37 !important; }
-.contact-hero .iti__dial-code { color: rgba(255,255,255,0.75) !important; }
+.contact-hero .iti__country .iti__dial-code {
+  color: rgba(255,255,255,0.85) !important; /* kod biraz beyaz tonlu */
+}
 
-/* ======================
-   MOBILE
-===================== */
+/* ====================== MOBILE ====================== */
 @media (max-width: 480px) { .contact-form { padding: 28px 22px; } }
