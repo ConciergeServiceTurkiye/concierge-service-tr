@@ -48,9 +48,24 @@
   width: 100%;
   font-size: 14px;
   background: rgba(0,0,0,0.6);
-  color: #fff;
+  color: #f9f1d0; /* modern altın-sarımsı ton */
   border-radius: 6px;
   border: 1px solid rgba(212,175,55,0.35);
+  font-family: "Inter", sans-serif; /* modern font */
+  line-height: 1.6;
+}
+
+.contact-form input { 
+  height: 56px; 
+  padding: 14px; 
+}
+
+.contact-form textarea { 
+  height: 150px; 
+  padding: 16px 14px 32px; 
+  resize: none; 
+  font-family: "Inter", sans-serif;
+  color: #f9f1d0;
 }
 
 .contact-form input { height: 56px; padding: 14px; }
@@ -174,3 +189,4 @@
    MOBILE
 ====================== */
 @media (max-width: 480px) { .contact-form { padding: 28px 22px; } }
+
