@@ -75,7 +75,6 @@ sendBtn.classList.add("sending");
 //sendBtn.textContent = "Sending..."; // artık button text değişmeyecek
 showPopup("Sending your request...");
 
-
       const data=new URLSearchParams({
         name: form.name.value,
         email: form.email.value,
