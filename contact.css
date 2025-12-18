@@ -47,7 +47,7 @@
 
 .contact-form textarea {
   height: 150px;
-  padding: 16px 14px 32px; /* ⬅ counter için alt boşluk */
+  padding: 16px 14px 32px;
   resize: none;
 }
 
@@ -108,15 +108,13 @@
   justify-content: center;
 }
 
-/* DROPDOWN LIST – TAM SİYAH, FORMUN ŞEFFAFLIĞINDAN BAĞIMSIZ */
+/* DROPDOWN LIST */
 .contact-hero .iti__country-list {
   background-color: #000 !important;
-  backdrop-filter: none !important;
-  border: 1px solid rgba(212,175,55,0.45);
   max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid rgba(212,175,55,0.45);
   z-index: 99999 !important;
-  position: fixed !important; /* absolute yerine fixed */
-  top: auto !important;        /* JS tarafından konumlandırılacak */
 }
 
 /* DROPDOWN SATIRLAR */
@@ -153,4 +151,3 @@
     padding: 28px 22px;
   }
 }
-
