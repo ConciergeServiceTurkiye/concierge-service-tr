@@ -41,23 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
       utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
     });
 
-    // ────────────── DROPDOWN FIX (body altına taşı) ──────────────
-    const dropdown = phoneInput.parentNode.querySelector(".iti__country-list");
-    if (dropdown) document.body.appendChild(dropdown);
-
-    phoneInput.addEventListener("focus", () => {
-      const rect = phoneInput.getBoundingClientRect();
-      dropdown.style.top = `${rect.bottom + window.scrollY}px`;
-      dropdown.style.left = `${rect.left + window.scrollX}px`;
-      dropdown.style.width = `${rect.width}px`;
-      dropdown.style.display = "block";
-    });
-
-    phoneInput.addEventListener("blur", () => {
-      setTimeout(() => { dropdown.style.display = "none"; }, 200);
-    });
-    // ────────────── END DROPDOWN FIX ──────────────
-
     function showTooltip(el) { const wrapper = el.closest(".input-wrapper"); if(!wrapper) return; hideTooltip(el); const tooltip = document.createElement("div"); tooltip.className = "input-tooltip visible"; tooltip.textContent = el.dataset.error || "This field is required."; wrapper.appendChild(tooltip); el.classList.add("error"); }
     function hideTooltip(el) { const wrapper = el.closest(".input-wrapper"); if(!wrapper) return; const tooltip = wrapper.querySelector(".input-tooltip"); if(tooltip) tooltip.remove(); el.classList.remove("error"); }
     function isValidEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
