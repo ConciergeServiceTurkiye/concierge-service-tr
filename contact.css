@@ -112,6 +112,26 @@
 }
 
 /* ======================
+   TEXTAREA SCROLLBAR
+====================== */
+.contact-form textarea::-webkit-scrollbar {
+  width: 8px;
+}
+.contact-form textarea::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+.contact-form textarea::-webkit-scrollbar-thumb {
+  background-color: #d4af37;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+.contact-form textarea {
+  scrollbar-width: thin;
+  scrollbar-color: #d4af37 rgba(0,0,0,0.2);
+}
+
+/* ======================
    INTL TEL INPUT
 ====================== */
 .contact-hero .iti { width: 100%; position: relative; }
@@ -154,8 +174,3 @@
    MOBILE
 ====================== */
 @media (max-width: 480px) { .contact-form { padding: 28px 22px; } }
-
-
-
-
-
