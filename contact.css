@@ -1,39 +1,31 @@
-/* ======================
-   CONTACT PAGE HERO
-====================== */
+/* CONTACT HERO */
 .contact-hero {
   min-height: calc(100vh - 70px);
-  background:
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
-    url("assets/contact-bg.jpg") center / cover no-repeat;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
+              url("assets/contact-bg.jpg") center / cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative; /* dropdown için gerekli */
-  overflow: visible;
 }
 
-/* ======================
-   GLASS CONTACT FORM
-====================== */
+/* CONTACT FORM */
 .contact-form {
   width: 100%;
   max-width: 500px;
-  background: rgba(15, 15, 15, 0.65);
+  background: rgba(15,15,15,0.65);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(212, 175, 55, 0.35);
+  border: 1px solid rgba(212,175,55,0.35);
   border-radius: 14px;
   padding: 36px 32px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   position: relative; /* dropdown için gerekli */
-  overflow: visible;
+  overflow: visible;   /* ekstra scroll engeller */
 }
 
-/* ======================
-   INPUTS
-====================== */
+/* INPUTS */
 .contact-form input,
 .contact-form textarea {
   width: 100%;
@@ -44,24 +36,11 @@
   border: 1px solid rgba(212,175,55,0.35);
 }
 
-.contact-form input {
-  height: 56px;
-  padding: 14px;
-}
+.contact-form input { height: 56px; padding: 14px; }
+.contact-form textarea { height: 150px; padding: 16px 14px 32px; resize: none; }
 
-.contact-form textarea {
-  height: 150px;
-  padding: 16px 14px 32px;
-  resize: none;
-}
-
-/* ======================
-   TEXTAREA + COUNTER FIX
-====================== */
-.textarea-wrapper {
-  position: relative;
-}
-
+/* CHAR COUNTER */
+.textarea-wrapper { position: relative; }
 .char-count {
   position: absolute;
   bottom: 8px;
@@ -71,9 +50,7 @@
   pointer-events: none;
 }
 
-/* ======================
-   SEND BUTTON
-====================== */
+/* SEND BUTTON */
 .send-btn {
   background: #d4af37;
   font-weight: bold;
@@ -84,42 +61,27 @@
   border: none;
   transition: background .3s ease, color .3s ease;
 }
+.send-btn:hover { background: #f1d97a; }
 
-.send-btn:hover {
-  background: #f1d97a;
-}
-
-/* =====================================================
-   INTL TEL INPUT – ULKE KODU DROPDOWN DÜZENLEME
-===================================================== */
-.contact-hero .iti {
-  width: 100%;
-}
-
-.contact-hero .iti input {
-  height: 56px !important;
-  padding-left: 92px !important;
-  padding-right: 14px;
-}
+/* INTL TEL INPUT */
+.contact-hero .iti { width: 100%; }
+.contact-hero .iti input { height: 56px !important; padding-left: 92px !important; padding-right: 14px; }
 
 /* FLAG AREA */
 .contact-hero .iti__flag-container,
 .contact-hero .iti__selected-flag {
-  width: 92px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 92px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
 }
 
-/* DROPDOWN LIST */
+/* DROPDOWN */
 .contact-hero .iti__country-list {
   background-color: #000 !important;
   max-height: 260px;
   overflow-y: auto;
   border: 1px solid rgba(212,175,55,0.45);
   z-index: 99999 !important;
-  position: absolute !important; /* input altına açılır */
+  position: absolute !important;
 }
 
 /* DROPDOWN SATIRLAR */
@@ -132,27 +94,14 @@
   transition: background .2s ease;
 }
 
-/* HOVER & HIGHLIGHT */
 .contact-hero .iti__country:hover,
 .contact-hero .iti__country.iti__highlight,
 .contact-hero .iti__country--preferred:hover {
   background-color: rgba(212,175,55,0.25) !important;
 }
 
-/* METINLER */
-.contact-hero .iti__country-name {
-  color: #d4af37 !important;
-}
+.contact-hero .iti__country-name { color: #d4af37 !important; }
+.contact-hero .iti__dial-code { color: rgba(255,255,255,0.75) !important; }
 
-.contact-hero .iti__dial-code {
-  color: rgba(255,255,255,0.75) !important;
-}
-
-/* ======================
-   MOBILE
-====================== */
-@media (max-width: 480px) {
-  .contact-form {
-    padding: 28px 22px;
-  }
-}
+/* MOBILE */
+@media (max-width: 480px) { .contact-form { padding: 28px 22px; } }
