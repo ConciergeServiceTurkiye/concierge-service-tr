@@ -108,11 +108,10 @@
 /* ====================== INTL TEL INPUT ====================== */
 .contact-hero .iti { width: 100%; position: relative; }
 .contact-hero .iti input { height: 56px !important; padding-left: 92px !important; padding-right: 14px; }
-
 .contact-hero .iti__flag-container,
 .contact-hero .iti__selected-flag { width: 92px; height: 56px; display: flex; align-items: center; justify-content: center; }
 
-/* ===== ÜLKE DROPDOWN - SİYAH + HOVER ALTIN ===== */
+/* ===== ÜLKE DROPDOWN - SİYAH + HOVER ALTIN + SCROLLBAR ===== */
 .contact-hero .iti__country-list {
   background-color: #000 !important; /* kesin siyah */
   border: 1px solid rgba(212,175,55,0.45);
@@ -124,8 +123,16 @@
   width: 100%;
   z-index: 99999 !important;
   border-radius: 6px;
-}
 
+  /* scrollbar */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #d4af37 #000; /* thumb / track */
+}
+.contact-hero .iti__country-list::-webkit-scrollbar { width: 6px; }
+.contact-hero .iti__country-list::-webkit-scrollbar-track { background: #000; }
+.contact-hero .iti__country-list::-webkit-scrollbar-thumb { background-color: #d4af37; border-radius: 4px; }
+
+/* ===== ÜLKE ITEMS ===== */
 .contact-hero .iti__country,
 .contact-hero .iti__country[style],
 .contact-hero .iti__country--preferred,
@@ -134,14 +141,12 @@
   color: #d4af37 !important; /* ülke adı altın sarısı */
   transition: background 0.2s ease;
 }
-
 .contact-hero .iti__country:hover,
 .contact-hero .iti__country.iti__highlight,
 .contact-hero .iti__country--preferred:hover {
   background-color: rgba(212,175,55,0.25) !important; /* hover altın sarısı */
   color: #000 !important; /* hover yazı kontrastı */
 }
-
 .contact-hero .iti__country .iti__dial-code {
   color: rgba(255,255,255,0.85) !important; /* kod biraz beyaz tonlu */
 }
