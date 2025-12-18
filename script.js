@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const navMenu = document.getElementById("navMenu");
   if(hamburger && navMenu) hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
 
-   /* HERO SLIDER */
+  /* HERO SLIDER */
   const slider = document.getElementById("heroSlider");
   if(slider){
     const totalSlides = 9;
@@ -25,7 +25,22 @@ document.addEventListener("DOMContentLoaded", () => {
       slides[currentSlide].classList.add("active");
     },5000);
   }
-  
+
+  /* ======================
+     POPUP ALERT FUNCTION
+  ====================== */
+  function showPopup(message){
+    const popup = document.createElement("div");
+    popup.className="popup-alert";
+    popup.textContent=message;
+    document.body.appendChild(popup);
+    setTimeout(()=>popup.classList.add("show"), 10);
+    setTimeout(()=>{
+      popup.classList.remove("show");
+      setTimeout(()=>popup.remove(), 300);
+    },3000);
+  }
+
   /* CONTACT FORM */
   const form = document.getElementById("reservation-form");
   if(form){
@@ -38,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
       preferredCountries:["tr","gb","de","fr","us"],
       separateDialCode:true,
       utilsScript:"https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js",
-      dropdownContainer: document.body // form yerine body
+      dropdownContainer: document.body
     });
 
     function isValidEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
@@ -53,10 +68,10 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       // VALIDATION
-      if(!form.name.value.trim()){ alert("Full Name cannot be empty"); form.name.focus(); return; }
-      if(!isValidEmail(form.email.value)){ alert("Please enter a valid Email"); form.email.focus(); return; }
-      if(!iti.isValidNumber()){ alert("Please select your country code and enter a valid phone number"); phoneInput.focus(); return; }
-      if(!textarea.value.trim()){ alert("Please describe your request"); textarea.focus(); return; }
+      if(!form.name.value.trim()){ showPopup("Full Name cannot be empty"); form.name.focus(); return; }
+      if(!isValidEmail(form.email.value)){ showPopup("Please enter a valid Email"); form.email.focus(); return; }
+      if(!iti.isValidNumber()){ showPopup("Please select your country code and enter a valid phone number"); phoneInput.focus(); return; }
+      if(!textarea.value.trim()){ showPopup("Please describe your request"); textarea.focus(); return; }
 
       // SEND
       sendBtn.disabled=true;
@@ -75,13 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
       fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
         {method:"POST", body:data})
       .then(()=>{
-        alert("Your request has been sent successfully.");
+        showPopup("Your request has been sent successfully.");
         form.reset();
         counter.textContent="0 / 2000";
         statusText.textContent="";
       })
       .catch(()=>{
-        alert("Connection error. Please try again.");
+        showPopup("Connection error. Please try again.");
         statusText.textContent="";
       })
       .finally(()=>{
@@ -91,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+
   /* PRIVACY & TERMS MODALS */
   const privacyLink=document.getElementById("privacyLink");
   const termsLink=document.getElementById("termsLink");
