@@ -29,16 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ======================
      POPUP ALERT FUNCTION
   ====================== */
+  const popupAlert = document.getElementById("popupAlert");
   function showPopup(message){
-    const popup = document.createElement("div");
-    popup.className="popup-alert";
-    popup.textContent=message;
-    document.body.appendChild(popup);
-    setTimeout(()=>popup.classList.add("show"), 10);
-    setTimeout(()=>{
-      popup.classList.remove("show");
-      setTimeout(()=>popup.remove(), 300);
-    },3000);
+    if(!popupAlert) return;
+    popupAlert.textContent = message;
+    popupAlert.classList.add("show");
+    setTimeout(()=> popupAlert.classList.remove("show"), 3000);
   }
 
   /* CONTACT FORM */
