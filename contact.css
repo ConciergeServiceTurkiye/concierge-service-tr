@@ -78,6 +78,7 @@
   border-radius: 6px;
   cursor: pointer;
   border: none;
+  transition: background .3s ease, color .3s ease;
 }
 
 .send-btn:hover {
@@ -85,21 +86,19 @@
 }
 
 /* =====================================================
-   INTL TEL INPUT – FINAL / BEJ KİLİTLİ
+   INTL TEL INPUT – ULKE KODU DROPDOWN DÜZENLEME
 ===================================================== */
-
 .contact-hero .iti {
   width: 100%;
 }
 
-/* INPUT */
 .contact-hero .iti input {
   height: 56px !important;
   padding-left: 92px !important;
   padding-right: 14px;
 }
 
-/* FLAG AREA – TAM GÖRÜNÜM */
+/* FLAG AREA */
 .contact-hero .iti__flag-container,
 .contact-hero .iti__selected-flag {
   width: 92px;
@@ -107,14 +106,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 10px;
 }
 
-/* ❌ FLAG SPRITE’A DOKUNMA */
-
-/* ======================
-   DROPDOWN
-====================== */
+/* DROPDOWN LIST */
 .contact-hero .iti__country-list {
   background-color: #000 !important;
   border: 1px solid rgba(212,175,55,0.45);
@@ -122,29 +116,24 @@
   z-index: 99999;
 }
 
-/* TÜM SATIRLAR – MUTLAK SİYAH */
+/* DROPDOWN SATIRLAR */
 .contact-hero .iti__country,
 .contact-hero .iti__country[style],
 .contact-hero .iti__country--preferred,
 .contact-hero .iti__country[aria-selected="true"] {
   background-color: #000 !important;
   color: #d4af37 !important;
+  transition: background .2s ease;
 }
 
-/* HOVER – ALTIN */
+/* HOVER & HIGHLIGHT */
 .contact-hero .iti__country:hover,
 .contact-hero .iti__country.iti__highlight,
 .contact-hero .iti__country--preferred:hover {
-  background-color: rgba(212,175,55,0.3) !important;
+  background-color: rgba(212,175,55,0.25) !important;
 }
 
-/* HOVER ÇIKIŞI – SİYAH (BEJ ÖLÜ) */
-.contact-hero .iti__country:not(:hover):not(.iti__highlight),
-.contact-hero .iti__country[style]:not(:hover) {
-  background-color: #000 !important;
-}
-
-/* METİNLER */
+/* METINLER */
 .contact-hero .iti__country-name {
   color: #d4af37 !important;
 }
