@@ -24,12 +24,12 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  position: relative; /* dropdown için */
+  position: relative; /* popup için */
   overflow: visible;
 }
 
 /* ======================
-   FORM TITLE - GOLD SHINE DÜZ VE PARLAK
+   FORM TITLE - GOLD SHINE
 ====================== */
 .form-title {
   font-size: 28px;
@@ -85,6 +85,30 @@
 .send-btn:hover { background: #f1d97a; }
 
 /* ======================
+   CONTACT FORM POPUP
+====================== */
+#popupAlert {
+  position: absolute; /* form içinde göster */
+  top: 60px; /* form başlığı altı */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(212, 175, 55, 0.95);
+  color: #000;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#popupAlert.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+/* ======================
    INTL TEL INPUT
 ====================== */
 .contact-hero .iti { width: 100%; position: relative; }
@@ -122,30 +146,6 @@
 
 .contact-hero .iti__country-name { color: #d4af37 !important; }
 .contact-hero .iti__dial-code { color: rgba(255,255,255,0.75) !important; }
-
-/* ======================
-   POPUP ALERT
-====================== */
-#popupAlert {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: rgba(212, 175, 55, 0.95);
-  color: #000;
-  padding: 12px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  font-size: 14px;
-  z-index: 999999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-#popupAlert.show {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(-10px);
-}
 
 /* ======================
    MOBILE
