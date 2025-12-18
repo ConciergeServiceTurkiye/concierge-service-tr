@@ -70,10 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if(!textarea.value.trim()){ showPopup("Please describe your request"); textarea.focus(); return; }
 
       // SEND
-      sendBtn.disabled=true;
-      sendBtn.classList.add("sending");
-      sendBtn.textContent="Sending...";
-      statusText.textContent="Sending your request...";
+      sendBtn.disabled = true;
+sendBtn.classList.add("sending");
+//sendBtn.textContent = "Sending..."; // artık button text değişmeyecek
+showPopup("Sending your request...");
+
 
       const data=new URLSearchParams({
         name: form.name.value,
