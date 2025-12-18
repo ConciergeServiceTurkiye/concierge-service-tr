@@ -3,9 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* MOBILE NAV */
   const hamburger = document.getElementById("hamburger");
   const navMenu = document.getElementById("navMenu");
-  if (hamburger && navMenu) {
-    hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
-  }
+  if (hamburger && navMenu) hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
 
   /* HERO SLIDER */
   const slider = document.getElementById("heroSlider");
@@ -38,7 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const iti = window.intlTelInput(phoneInput, {
       preferredCountries: ["tr", "gb", "de", "fr", "us"],
       separateDialCode: true,
-      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
+      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js",
+      dropdownContainer: phoneInput.parentElement // <-- burada parent verildi
     });
 
     function showTooltip(el) {
@@ -51,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
       wrapper.appendChild(tooltip);
       el.classList.add("error");
     }
-
     function hideTooltip(el) {
       const wrapper = el.closest(".input-wrapper");
       if (!wrapper) return;
@@ -59,10 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (tooltip) tooltip.remove();
       el.classList.remove("error");
     }
-
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
+    function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
 
     [...form.elements].forEach(el => {
       if (!el.required) return;
@@ -76,9 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const textarea = form.querySelector("textarea[name='message']");
     const counter = form.querySelector(".char-count");
-    textarea.addEventListener("input", () => {
-      counter.textContent = `${textarea.value.length} / 2000`;
-    });
+    textarea.addEventListener("input", () => { counter.textContent = `${textarea.value.length} / 2000`; });
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -102,7 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
         referrer: document.referrer || "Website"
       });
 
-      fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec", { method: "POST", body: data })
+      fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
+        { method: "POST", body: data })
         .then(() => { statusText.textContent = "Your request has been sent successfully."; form.reset(); counter.textContent = "0 / 2000"; })
         .catch(() => { statusText.textContent = "Connection error. Please try again."; })
         .finally(() => { sendBtn.disabled = false; sendBtn.classList.remove("sending"); sendBtn.textContent = "Send"; });
@@ -116,8 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const termsModal = document.getElementById("termsModal");
   const closeButtons = document.querySelectorAll(".close-modal");
 
-  if (privacyLink && privacyModal) { privacyLink.addEventListener("click", e => { e.preventDefault(); privacyModal.style.display = "flex"; }); }
-  if (termsLink && termsModal) { termsLink.addEventListener("click", e => { e.preventDefault(); termsModal.style.display = "flex"; }); }
+  if (privacyLink && privacyModal) privacyLink.addEventListener("click", e => { e.preventDefault(); privacyModal.style.display = "flex"; });
+  if (termsLink && termsModal) termsLink.addEventListener("click", e => { e.preventDefault(); termsModal.style.display = "flex"; });
   closeButtons.forEach(btn => { btn.addEventListener("click", () => { if (privacyModal) privacyModal.style.display = "none"; if (termsModal) termsModal.style.display = "none"; }); });
   document.addEventListener("keydown", e => { if (e.key === "Escape") { if (privacyModal) privacyModal.style.display = "none"; if (termsModal) termsModal.style.display = "none"; } });
 
