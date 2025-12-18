@@ -1,4 +1,4 @@
-   /* ======================
+/* ======================
    CONTACT PAGE HERO
 ====================== */
 .contact-hero {
@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible; /* ekstra scroll engeller */
 }
 
 /* ======================
@@ -25,6 +26,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow: visible; /* ekstra scroll engeller */
 }
 
 /* ======================
@@ -115,13 +117,8 @@
   overflow-y: auto; /* sadece dropdown scroll */
   border: 1px solid rgba(212,175,55,0.45);
   z-index: 99999 !important;
-  position: absolute !important; /* formun içinde açılır */
+  position: absolute !important; /* input altına açılır */
 }
-.contact-hero,
-.contact-form {
-  overflow: visible; /* ekstra scroll engeller */
-}
-
 
 /* DROPDOWN SATIRLAR */
 .contact-hero .iti__country,
@@ -157,4 +154,3 @@
     padding: 28px 22px;
   }
 }
-
