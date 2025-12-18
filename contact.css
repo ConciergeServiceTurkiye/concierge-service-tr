@@ -108,13 +108,14 @@
   justify-content: center;
 }
 
-/* DROPDOWN LIST */
+/* DROPDOWN LIST – TAM SİYAH, FORMUN ŞEFFAFLIĞINDAN BAĞIMSIZ */
 .contact-hero .iti__country-list {
   background-color: #000 !important;
   backdrop-filter: none !important;   /* blur varsa kaldır */
+  position: absolute !important;      /* formdan bağımsız açılması için */
   border: 1px solid rgba(212,175,55,0.45);
   max-height: 260px;
-  z-index: 99999;
+  z-index: 99999 !important;
 }
 
 /* DROPDOWN SATIRLAR */
@@ -151,4 +152,3 @@
     padding: 28px 22px;
   }
 }
-
