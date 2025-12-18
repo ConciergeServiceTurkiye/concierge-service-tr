@@ -51,23 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
       separateDialCode: true,
       utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
     });
-    /* =====================================================
-   INTL TEL INPUT – FORCE UNIFIED HOVER COLOR
-===================================================== */
-document.addEventListener("mouseover", function (e) {
-  const country = e.target.closest(".iti__country");
-  if (country) {
-    country.style.backgroundColor = "rgba(212,175,55,0.25)";
-  }
-});
-
-document.addEventListener("mouseout", function (e) {
-  const country = e.target.closest(".iti__country");
-  if (country) {
-    country.style.backgroundColor = "#000";
-  }
-});
-
 
     function showTooltip(el) {
       const wrapper = el.closest(".input-wrapper");
