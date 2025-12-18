@@ -52,6 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
       utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
     });
 
+    // DROPDOWN artık normal şekilde açılacak, ekstra JS yok
+
     function showTooltip(el) {
       const wrapper = el.closest(".input-wrapper");
       if (!wrapper) return;
@@ -168,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
   closeButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       if (privacyModal) privacyModal.style.display = "none";
-      if (termsModal) termsModal.style.display = "none";
+      if (termsModal) privacyModal.style.display = "none";
     });
   });
 
