@@ -108,18 +108,14 @@
   justify-content: center;
 }
 
-/* DROPDOWN LIST – sadece kendi içinde scroll, body scroll oluşmaz */
-.contact-hero .iti__country-list {
-  background-color: #000 !important;
-  max-height: 260px;       /* sadece dropdown’un yüksekliği */
-  overflow-y: auto;        /* kendi içinde scroll */
-  border: 1px solid rgba(212,175,55,0.45);
-  z-index: 99999 !important;
-  position: absolute;      /* body’den bağımsız, input’un altında açılır */
-  top: 100%;               /* input’un altından başlat */
-  left: 0;
-  width: 100%;             /* input genişliği ile aynı */
-  box-sizing: border-box;
+/* DROPDOWN LIST */ 
+
+.contact-hero .iti__country-list { 
+   background-color: #000 !important;
+   max-height: 260px;
+   overflow-y: auto;
+   border: 1px solid rgba(212,175,55,0.45);
+   z-index: 99999 !important;
 }
 
 /* DROPDOWN SATIRLAR */
@@ -156,4 +152,5 @@
     padding: 28px 22px;
   }
 }
+
 
