@@ -61,44 +61,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // FORM SUBMIT
     form.addEventListener("submit", e=>{
-  e.preventDefault();
+      e.preventDefault();
 
-  // VALIDATION
-  if(!form.name.value.trim()){ showPopup("Full Name cannot be empty"); form.name.focus(); return; }
-  if(!isValidEmail(form.email.value)){ showPopup("Please enter a valid Email"); form.email.focus(); return; }
-  if(!iti.isValidNumber()){ showPopup("Please select your country code and enter a valid phone number"); phoneInput.focus(); return; }
-  if(!textarea.value.trim()){ showPopup("Please describe your request"); textarea.focus(); return; }
+      // VALIDATION
+      if(!form.name.value.trim()){ showPopup("Full Name cannot be empty"); form.name.focus(); return; }
+      if(!isValidEmail(form.email.value)){ showPopup("Please enter a valid Email"); form.email.focus(); return; }
+      if(!iti.isValidNumber()){ showPopup("Please select your country code and enter a valid phone number"); phoneInput.focus(); return; }
+      if(!textarea.value.trim()){ showPopup("Please describe your request"); textarea.focus(); return; }
 
-  // SEND
-  sendBtn.disabled=true;
-  sendBtn.classList.add("sending");
-  sendBtn.textContent="Sending...";
-  showPopup("Sending your request..."); // burası eklendi
+      // SEND
+      sendBtn.disabled=true;
+      sendBtn.classList.add("sending");
+      sendBtn.textContent="Sending...";
+      statusText.textContent="Sending your request...";
 
-  const data=new URLSearchParams({
-    name: form.name.value,
-    email: form.email.value,
-    phone: iti.getNumber(),
-    message: textarea.value,
-    referrer: document.referrer || "Website"
-  });
+      const data=new URLSearchParams({
+        name: form.name.value,
+        email: form.email.value,
+        phone: iti.getNumber(),
+        message: textarea.value,
+        referrer: document.referrer || "Website"
+      });
 
-  fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
-    {method:"POST", body:data})
-  .then(()=>{
-    showPopup("Your request has been sent successfully.");
-    form.reset();
-    counter.textContent="0 / 2000";
-  })
-  .catch(()=>{
-    showPopup("Connection error. Please try again.");
-  })
-  .finally(()=>{
-    sendBtn.disabled=false;
-    sendBtn.classList.remove("sending");
-    sendBtn.textContent="Send";
-  });
-});
+      fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
+        {method:"POST", body:data})
+      .then(()=>{
+        showPopup("Your request has been sent successfully.");
+        form.reset();
+        counter.textContent="0 / 2000";
+        statusText.textContent="";
+      })
+      .catch(()=>{
+        showPopup("Connection error. Please try again.");
+        statusText.textContent="";
+      })
+      .finally(()=>{
+        sendBtn.disabled=false;
+        sendBtn.classList.remove("sending");
+        sendBtn.textContent="Send";
+      });
+    });
+  }
 
   /* PRIVACY & TERMS MODALS */
   const privacyLink=document.getElementById("privacyLink");
