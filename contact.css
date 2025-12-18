@@ -35,14 +35,9 @@
   font-size: 28px;
   font-weight: bold;
   text-align: center;
-  color: #d4af37; /* düz altın */
-  text-shadow: 0 0 6px rgba(212,175,55,0.8); /* hafif parlaklık efekti */
+  color: #d4af37;
+  text-shadow: 0 0 6px rgba(212,175,55,0.8);
   margin-bottom: 16px;
-}
-
-@keyframes shine {
-  0% { background-position: 200% center; }
-  100% { background-position: -200% center; }
 }
 
 /* ======================
@@ -95,11 +90,9 @@
 .contact-hero .iti { width: 100%; position: relative; }
 .contact-hero .iti input { height: 56px !important; padding-left: 92px !important; padding-right: 14px; }
 
-/* FLAG AREA */
 .contact-hero .iti__flag-container,
 .contact-hero .iti__selected-flag { width: 92px; height: 56px; display: flex; align-items: center; justify-content: center; }
 
-/* DROPDOWN */
 .contact-hero .iti__country-list {
   background-color: #000 !important;
   max-height: 260px;
@@ -112,7 +105,6 @@
   width: 100%;
 }
 
-/* DROPDOWN SATIRLAR */
 .contact-hero .iti__country,
 .contact-hero .iti__country[style],
 .contact-hero .iti__country--preferred,
@@ -134,7 +126,7 @@
 /* ======================
    POPUP ALERT
 ====================== */
-.popup-alert {
+#popupAlert {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -149,7 +141,7 @@
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
-.popup-alert.show {
+#popupAlert.show {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(-10px);
