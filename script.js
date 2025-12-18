@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
   closeButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       if (privacyModal) privacyModal.style.display = "none";
-      if (termsModal) privacyModal.style.display = "none";
+      if (termsModal) termsModal.style.display = "none";
     });
   });
 
