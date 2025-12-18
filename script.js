@@ -44,39 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendBtn = form.querySelector(".send-btn");
     const phoneInput = document.querySelector("#phone");
 
-    // intl-tel-input init
-    const iti = window.intlTelInput(phoneInput,{
-      preferredCountries:["tr","gb","de","fr","us"],
-      separateDialCode:true,
-      utilsScript:"https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js",
-      dropdownContainer: document.body
-    });
-
-    // ============================================
-    // PLACEHOLDER + ÜLKE KODU + ÖRNEK NUMARA
-    // ============================================
-    function setPhonePlaceholder() {
-      const countryData = iti.getSelectedCountryData();
-      if (window.intlTelInputUtils) {
-        try {
-          const exampleNumber = window.intlTelInputUtils.getExampleNumber(
-            countryData.iso2,
-            true, // ulusal format
-            window.intlTelInputUtils.numberFormat.NATIONAL
-          );
-          phoneInput.placeholder = `+${countryData.dialCode} ${exampleNumber}`;
-        } catch(e) {
-          phoneInput.placeholder = `+${countryData.dialCode} 501 234 5678`;
-        }
-      } else {
-        phoneInput.placeholder = `+${countryData.dialCode} 501 234 5678`;
-      }
-    }
-    // başlangıçta placeholder ayarla
-    setPhonePlaceholder();
-    // ülke değiştiğinde placeholder güncelle
-    phoneInput.addEventListener("countrychange", setPhonePlaceholder);
-
     function isValidEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
 
     // CHAR COUNT
@@ -91,19 +58,18 @@ document.addEventListener("DOMContentLoaded", () => {
       // VALIDATION
       if(!form.name.value.trim()){ showPopup("Full Name cannot be empty"); form.name.focus(); return; }
       if(!isValidEmail(form.email.value)){ showPopup("Please enter a valid Email"); form.email.focus(); return; }
-      if(!iti.isValidNumber()){ showPopup("Please select your country code and enter a valid phone number"); phoneInput.focus(); return; }
+      if(!phoneInput.value.trim()){ showPopup("Please enter your phone number"); phoneInput.focus(); return; }
       if(!textarea.value.trim()){ showPopup("Please describe your request"); textarea.focus(); return; }
 
       // SEND
       sendBtn.disabled = true;
       sendBtn.classList.add("sending");
-      //sendBtn.textContent = "Sending..."; // artık button text değişmeyecek
       showPopup("Sending your request...");
 
       const data=new URLSearchParams({
         name: form.name.value,
         email: form.email.value,
-        phone: iti.getNumber(),
+        phone: phoneInput.value,
         message: textarea.value,
         referrer: document.referrer || "Website"
       });
@@ -115,8 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
         form.reset();
         counter.textContent="0 / 2000";
         statusText.textContent="";
-        // reset placeholder
-        setPhonePlaceholder();
       })
       .catch(()=>{
         showPopup("Connection error. Please try again.");
