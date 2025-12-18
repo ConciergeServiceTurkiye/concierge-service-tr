@@ -6,7 +6,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative; /* dropdown için gerekli */
 }
 
 /* CONTACT FORM */
@@ -21,8 +20,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  position: relative; /* dropdown için gerekli */
-  overflow: visible;   /* ekstra scroll engeller */
+  position: relative; /* dropdown için */
+  overflow: visible;
 }
 
 /* INPUTS */
@@ -64,7 +63,7 @@
 .send-btn:hover { background: #f1d97a; }
 
 /* INTL TEL INPUT */
-.contact-hero .iti { width: 100%; }
+.contact-hero .iti { width: 100%; position: relative; }
 .contact-hero .iti input { height: 56px !important; padding-left: 92px !important; padding-right: 14px; }
 
 /* FLAG AREA */
@@ -82,6 +81,9 @@
   border: 1px solid rgba(212,175,55,0.45);
   z-index: 99999 !important;
   position: absolute !important;
+  top: 100%;
+  left: 0;
+  width: 100%;
 }
 
 /* DROPDOWN SATIRLAR */
