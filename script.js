@@ -52,6 +52,32 @@ document.addEventListener("DOMContentLoaded", () => {
       utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
     });
 
+    // ────────────── DROPDOWN FIX ──────────────
+    // Dropdown'un formun üstünde açılmasını sağlamak
+    const originalDropdown = phoneInput.parentNode.querySelector(".iti__country-list");
+    if (originalDropdown) {
+      document.body.appendChild(originalDropdown); // body altına taşı
+      originalDropdown.style.position = "absolute";
+      originalDropdown.style.display = "none";
+    }
+
+    phoneInput.addEventListener("focus", () => {
+      const dropdown = document.querySelector(".iti__country-list");
+      if (!dropdown) return;
+      const rect = phoneInput.getBoundingClientRect();
+      dropdown.style.top = `${rect.bottom + window.scrollY}px`;
+      dropdown.style.left = `${rect.left + window.scrollX}px`;
+      dropdown.style.width = `${rect.width}px`;
+      dropdown.style.display = "block";
+    });
+
+    phoneInput.addEventListener("blur", () => {
+      const dropdown = document.querySelector(".iti__country-list");
+      if (!dropdown) return;
+      setTimeout(() => { dropdown.style.display = "none"; }, 200); // click ile seçim yapılırken kaybolmasın
+    });
+    // ────────────── DROPDOWN FIX ──────────────
+
     function showTooltip(el) {
       const wrapper = el.closest(".input-wrapper");
       if (!wrapper) return;
