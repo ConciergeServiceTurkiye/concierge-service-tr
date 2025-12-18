@@ -37,7 +37,7 @@ if (form) {
     preferredCountries: ["tr","gb","de","fr","us"],
     separateDialCode: true,
     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js",
-    dropdownContainer: phoneInput.parentElement // <-- input parent'ı içine açılır
+    dropdownContainer: phoneInput.parentElement // <-- dropdown input parent'ı altında açılır
   });
 
   function showTooltip(el) {
