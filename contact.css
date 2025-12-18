@@ -109,14 +109,13 @@
 }
 
 /* DROPDOWN LIST */ 
-/* DROPDOWN LIST */
 .contact-hero .iti__country-list {
   background-color: #000 !important;
   max-height: 260px;
   overflow-y: auto; /* sadece dropdown scroll */
   border: 1px solid rgba(212,175,55,0.45);
   z-index: 99999 !important;
-  position: absolute; /* formun içine göre konumlandırılır */
+  position: absolute; /* input altına konumlanacak */
 }
 
 /* Parent overflow kontrolü */
@@ -159,7 +158,3 @@
     padding: 28px 22px;
   }
 }
-
-
-
-
