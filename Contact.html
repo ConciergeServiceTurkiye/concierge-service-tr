@@ -3,36 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Contact | Concierge Service Türkiye</title>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="contact.css">
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/css/intlTelInput.css">
-</head>
 
+</head>
 <body>
 
 <nav class="navbar">
   <div class="nav-container">
-
     <a href="index.html" class="logo">
       <img src="assets/logo.png" alt="Concierge Service Türkiye">
     </a>
 
     <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </div>
 
     <ul class="nav-menu" id="navMenu">
-
-      <li>
-    <a href="#why-us">Why Us</a>
-  </li>
-
-      <!-- SERVICES -->
+      <li><a href="#why-us">Why Us</a></li>
       <li class="dropdown">
         <a href="index.html#services">Services ▾</a>
         <ul class="dropdown-menu">
@@ -43,8 +34,6 @@
           <li><a href="#" data-service="events">🎉 Event Organization</a></li>
         </ul>
       </li>
-
-      <!-- EXPERIENCES -->
       <li class="dropdown">
         <a href="#">Experiences ▾</a>
         <ul class="dropdown-menu">
@@ -54,8 +43,6 @@
           <li><a href="#">🎟 Exclusive Events</a></li>
         </ul>
       </li>
-
-      <!-- DESTINATIONS -->
       <li class="dropdown">
         <a href="#">Destinations ▾</a>
         <ul class="dropdown-menu">
@@ -65,55 +52,45 @@
           <li><a href="#">Antalya</a></li>
         </ul>
       </li>
-
-      <!-- CTA -->
-      <li>
-        <a href="Contact.html" class="cta active">Request Concierge</a>
-      </li>
-
+      <li><a href="Contact.html" class="cta active">Request Concierge</a></li>
     </ul>
   </div>
 </nav>
 
 <section class="section contact contact-hero" style="margin-top:70px">
+  <form id="reservation-form" class="contact-form" novalidate>
 
-<form id="reservation-form" class="contact-form" novalidate>
+    <h2 class="form-title">Request a Bespoke Service</h2>
+    <p id="form-status" class="form-status"></p>
 
-<h2 class="form-title">Request a Bespoke Service</h2>
-<p id="form-status" class="form-status"></p>
+    <div class="input-wrapper">
+      <input type="text" name="name" placeholder="Full Name" required minlength="3">
+    </div>
 
-<div class="input-wrapper">
-  <input type="text" name="name" placeholder="Full Name" required minlength="3"
-    data-error="This field cannot be left empty.">
-</div>
+    <div class="input-wrapper">
+      <input type="email" name="email" placeholder="Email Address" required>
+    </div>
 
-<div class="input-wrapper">
-  <input type="email" name="email" placeholder="Email Address" required
-    data-error="Please enter a valid email address.">
-</div>
+    <div class="input-wrapper">
+      <input type="tel" id="phone" name="phone" required>
+    </div>
 
-<div class="input-wrapper">
-  <input type="tel" id="phone" name="phone" required
-    data-error="Please select your country code and enter a valid phone number.">
-</div>
+    <div class="input-wrapper textarea-wrapper">
+      <span class="char-count">0 / 2000</span>
+      <textarea name="message" placeholder="Your Request" maxlength="2000" required></textarea>
+    </div>
 
-<div class="input-wrapper textarea-wrapper">
-  <span class="char-count">0 / 2000</span>
-  <textarea name="message" placeholder="Your Request" maxlength="2000" required
-    data-error="Please describe your request."></textarea>
-</div>
+    <button type="submit" class="btn send-btn">Send</button>
 
-<button type="submit" class="btn send-btn">Send</button>
-
-</form>
+  </form>
 </section>
-<!-- WHATSAPP -->
-  <a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank">
-    <img src="assets/whatsapp.png" alt="WhatsApp">
-  </a>
+
+<a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank">
+  <img src="assets/whatsapp.png" alt="WhatsApp">
+</a>
+
 <footer class="luxury-footer">
   <div class="footer-inner">
-
     <div class="footer-logo">
       <img src="assets/logo.png" alt="Concierge Service Türkiye">
     </div>
@@ -130,52 +107,34 @@
     </div>
 
     <div class="footer-social">
-      <a href="https://www.instagram.com/conciergeserviceturkiye/" target="_blank">
-        <img src="assets/instagram.png">
-      </a>
-      <a href="https://www.youtube.com/" target="_blank">
-        <img src="assets/youtube.png">
-      </a>
-      <a href="https://x.com/ConSerTurkiye" target="_blank">
-        <img src="assets/x.png">
-      </a>
-      <a href="https://www.facebook.com/profile.php?id=61585196308964" target="_blank">
-        <img src="assets/facebook.png">
-      </a>
+      <a href="https://www.instagram.com/conciergeserviceturkiye/" target="_blank"><img src="assets/instagram.png"></a>
+      <a href="https://www.youtube.com/" target="_blank"><img src="assets/youtube.png"></a>
+      <a href="https://x.com/ConSerTurkiye" target="_blank"><img src="assets/x.png"></a>
+      <a href="https://www.facebook.com/profile.php?id=61585196308964" target="_blank"><img src="assets/facebook.png"></a>
     </div>
-
   </div>
 </footer>
 
-<!-- PRIVACY MODAL -->
 <div class="modal" id="privacyModal">
   <div class="modal-content">
     <span class="close-modal">&times;</span>
     <h2>Privacy Policy</h2>
-    <p>
-      Concierge Service Türkiye respects your privacy and protects your personal data.
-      Information is used solely for service communication purposes.
-    </p>
+    <p>Concierge Service Türkiye respects your privacy and protects your personal data.</p>
   </div>
 </div>
 
-<!-- TERMS MODAL -->
 <div class="modal" id="termsModal">
   <div class="modal-content">
     <span class="close-modal">&times;</span>
     <h2>Terms of Service</h2>
-    <p>
-      All services are provided on a best-effort basis and subject to availability.
-    </p>
+    <p>All services are provided on a best-effort basis and subject to availability.</p>
   </div>
 </div>
 
-<script src="script.js"></script>
+<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/intlTelInput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
-
-
-
