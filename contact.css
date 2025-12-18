@@ -21,7 +21,7 @@
   flex-direction: column;
   gap: 16px;
   position: relative; /* dropdown için */
-  overflow: visible;
+  overflow: visible; /* ekstra scroll engeller */
 }
 
 /* INPUTS */
