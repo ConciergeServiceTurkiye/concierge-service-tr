@@ -5,6 +5,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const navMenu = document.getElementById("navMenu");
   if(hamburger && navMenu) hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
 
+   /* HERO SLIDER */
+  const slider = document.getElementById("heroSlider");
+  if(slider){
+    const totalSlides = 9;
+    let currentSlide = 0;
+    const slides = [];
+    for(let i=1;i<=totalSlides;i++){
+      const slide = document.createElement("div");
+      slide.className="slide";
+      slide.style.backgroundImage=`url('assets/slider-${i}.jpg')`;
+      slider.appendChild(slide);
+      slides.push(slide);
+    }
+    slides[0].classList.add("active");
+    setInterval(()=>{
+      slides[currentSlide].classList.remove("active");
+      currentSlide=(currentSlide+1)%slides.length;
+      slides[currentSlide].classList.add("active");
+    },5000);
+  }
+  
   /* CONTACT FORM */
   const form = document.getElementById("reservation-form");
   if(form){
