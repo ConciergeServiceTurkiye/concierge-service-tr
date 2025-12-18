@@ -91,5 +91,16 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+  /* PRIVACY & TERMS MODALS */
+  const privacyLink=document.getElementById("privacyLink");
+  const termsLink=document.getElementById("termsLink");
+  const privacyModal=document.getElementById("privacyModal");
+  const termsModal=document.getElementById("termsModal");
+  const closeButtons=document.querySelectorAll(".close-modal");
+
+  if(privacyLink && privacyModal) privacyLink.addEventListener("click", e=>{ e.preventDefault(); privacyModal.style.display="flex"; });
+  if(termsLink && termsModal) termsLink.addEventListener("click", e=>{ e.preventDefault(); termsModal.style.display="flex"; });
+  closeButtons.forEach(btn=>{ btn.addEventListener("click", ()=>{ if(privacyModal) privacyModal.style.display="none"; if(termsModal) termsModal.style.display="none"; }); });
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ if(privacyModal) privacyModal.style.display="none"; if(termsModal) termsModal.style.display="none"; } });
 
 });
