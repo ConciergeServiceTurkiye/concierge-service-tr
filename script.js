@@ -159,7 +159,10 @@ options.forEach((option, index) => {
 
 /* Form dışına tıklanınca kapat */
 document.addEventListener("mousedown", e => {
-  if (!subjectWrapper.contains(e.target)) {
+  if (
+    !subjectWrapper.contains(e.target) &&
+    e.target !== subjectSelect
+  ) {
     closeSubject();
   }
 });
