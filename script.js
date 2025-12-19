@@ -70,85 +70,92 @@ document.addEventListener("DOMContentLoaded", () => {
   const counter = form.querySelector(".char-count");
 
   /* ======================
-     SUBJECT SELECT
-  ====================== */
-  const subjectWrapper = document.querySelector(".subject-wrapper");
-  const subjectSelect = document.getElementById("subjectSelect");
-  const subjectOptions = document.getElementById("subjectOptions");
-  const selectedSubject = document.getElementById("selectedSubject");
-  const subjectInput = document.getElementById("subjectInput");
+   SUBJECT SELECT (FIXED)
+====================== */
+const subjectWrapper = document.querySelector(".subject-wrapper");
+const subjectSelect = document.getElementById("subjectSelect");
+const subjectOptions = document.getElementById("subjectOptions");
+const selectedSubject = document.getElementById("selectedSubject");
+const subjectInput = document.getElementById("subjectInput");
+const options = Array.from(subjectOptions.querySelectorAll("li"));
 
-  const options = Array.from(subjectOptions.querySelectorAll("li"));
-  let activeIndex = -1;
+let isOpen = false;
+let activeIndex = -1;
 
-  /* li’leri focusable yap */
-  options.forEach(option => {
-    option.setAttribute("tabindex", "0");
-  });
+function openSubject() {
+  subjectWrapper.classList.add("open");
+  isOpen = true;
+}
 
-  /* Aç / kapa */
-  subjectSelect.addEventListener("click", e => {
+function closeSubject() {
+  subjectWrapper.classList.remove("open");
+  isOpen = false;
+  activeIndex = -1;
+}
+
+function selectOption(index) {
+  const value = options[index].dataset.value;
+  selectedSubject.textContent = value;
+  subjectInput.value = value;
+  closeSubject();
+  subjectSelect.focus();
+}
+
+/* Aç / kapa */
+subjectSelect.addEventListener("click", e => {
+  e.preventDefault();
+  isOpen ? closeSubject() : openSubject();
+});
+
+/* TAB ile gelince aç */
+subjectSelect.addEventListener("focus", () => {
+  openSubject();
+});
+
+/* Klavye kontrolü */
+document.addEventListener("keydown", e => {
+  if (!isOpen) return;
+
+  if (["ArrowDown", "ArrowUp", "Enter", "Escape"].includes(e.key)) {
     e.preventDefault();
-    subjectWrapper.classList.toggle("open");
+  }
+
+  if (e.key === "ArrowDown") {
+    activeIndex = (activeIndex + 1) % options.length;
+    options[activeIndex].classList.add("active");
+    options.forEach((o, i) => i !== activeIndex && o.classList.remove("active"));
+  }
+
+  if (e.key === "ArrowUp") {
+    activeIndex =
+      activeIndex <= 0 ? options.length - 1 : activeIndex - 1;
+    options[activeIndex].classList.add("active");
+    options.forEach((o, i) => i !== activeIndex && o.classList.remove("active"));
+  }
+
+  if (e.key === "Enter" && activeIndex > -1) {
+    selectOption(activeIndex);
+  }
+
+  if (e.key === "Escape") {
+    closeSubject();
+  }
+});
+
+/* Mouse ile seçim */
+options.forEach((option, index) => {
+  option.addEventListener("click", e => {
+    e.stopPropagation();
+    selectOption(index);
   });
+});
 
-  /* Dışarı tıklanınca kapat – BLINK YOK */
-  document.addEventListener("pointerdown", e => {
-    if (!e.target.closest(".subject-wrapper")) {
-      subjectWrapper.classList.remove("open");
-    }
-  });
-
-  /* Mouse ile seçim */
-  options.forEach(option => {
-    option.addEventListener("click", () => {
-      const value = option.dataset.value;
-      selectedSubject.textContent = value;
-      subjectInput.value = value;
-      subjectWrapper.classList.remove("open");
-      subjectSelect.focus();
-    });
-  });
-
-  /* TAB ile gelince aç */
-  subjectSelect.addEventListener("focus", () => {
-    subjectWrapper.classList.add("open");
-  });
-
-  /* Klavye kontrolü (⬆ ⬇ Enter Esc) */
-  subjectSelect.addEventListener("keydown", e => {
-    if (!subjectWrapper.classList.contains("open")) return;
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      activeIndex = (activeIndex + 1) % options.length;
-      options[activeIndex].focus();
-    }
-
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      activeIndex =
-        activeIndex <= 0 ? options.length - 1 : activeIndex - 1;
-      options[activeIndex].focus();
-    }
-
-    if (e.key === "Escape") {
-      subjectWrapper.classList.remove("open");
-    }
-  });
-
-  options.forEach((option, index) => {
-    option.addEventListener("keydown", e => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        const value = option.dataset.value;
-        selectedSubject.textContent = value;
-        subjectInput.value = value;
-        subjectWrapper.classList.remove("open");
-        subjectSelect.focus();
-      }
-    });
-  });
+/* Dışarı tıklanınca kapat */
+document.addEventListener("mousedown", e => {
+  if (!e.target.closest(".subject-wrapper")) {
+    closeSubject();
+  }
+});
 
   /* ======================
      PHONE INPUT
