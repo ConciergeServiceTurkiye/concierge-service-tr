@@ -96,6 +96,38 @@ document.addEventListener("DOMContentLoaded", () => {
       subjectWrapper.classList.remove("open");
     }
   });
+  
+  /* TAB ile focus gelince aç */
+subjectSelect.addEventListener("focus", () => {
+  subjectWrapper.classList.add("open");
+});
+
+/* ENTER ile aç/kapat */
+subjectSelect.addEventListener("keydown", e => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    subjectWrapper.classList.toggle("open");
+  }
+
+  if (e.key === "Escape") {
+    subjectWrapper.classList.remove("open");
+  }
+});
+
+/* OPTION klavye ile seçilebilir */
+subjectOptions.querySelectorAll("li").forEach(option => {
+  option.setAttribute("tabindex", "0");
+
+  option.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      const value = option.dataset.value;
+      selectedSubject.textContent = value;
+      subjectInput.value = value;
+      subjectWrapper.classList.remove("open");
+      subjectSelect.focus();
+    }
+  });
+});
 
   /* ======================
      PHONE INPUT
