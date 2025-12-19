@@ -78,18 +78,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectedSubject = document.getElementById("selectedSubject");
   const subjectInput = document.getElementById("subjectInput");
 
-  subjectSelect.addEventListener("click", () => {
-    subjectWrapper.classList.toggle("open");
-  });
+  subjectSelect.addEventListener("click", e => {
+  e.stopPropagation(); // 👈 KRİTİK
+  subjectWrapper.classList.toggle("open");
+});
 
   subjectOptions.querySelectorAll("li").forEach(option => {
-    option.addEventListener("click", () => {
-      const value = option.dataset.value;
-      selectedSubject.textContent = value;
-      subjectInput.value = value;
-      subjectWrapper.classList.remove("open");
-    });
+  option.addEventListener("click", e => {
+    e.stopPropagation();
+    const value = option.dataset.value;
+    selectedSubject.textContent = value;
+    subjectInput.value = value;
+    subjectWrapper.classList.remove("open");
   });
+});
 
   document.addEventListener("click", e => {
     if (!subjectWrapper.contains(e.target)) {
