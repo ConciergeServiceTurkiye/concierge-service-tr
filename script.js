@@ -23,64 +23,81 @@ document.addEventListener("DOMContentLoaded", () => {
   const counter = form.querySelector(".char-count");
 
   /* ======================
-     PHONE MASK ENGINE
+     PHONE MASK CORE
   ====================== */
-
   const BASE_MASK = "+(___) ___________";
 
   function setCaret(pos){
-    requestAnimationFrame(()=> phoneInput.setSelectionRange(pos, pos));
+    requestAnimationFrame(() => {
+      phoneInput.setSelectionRange(pos, pos);
+    });
   }
 
   function resetMask(){
     phoneInput.value = BASE_MASK;
-    setCaret(3);
+    setCaret(phoneInput.value.indexOf("_"));
   }
 
-  function digitsOnly(val){
-    return val.replace(/\D/g, "");
-  }
-
-  function getFirstUnderscore(){
+  function firstUnderscore(){
     return phoneInput.value.indexOf("_");
   }
 
-  function dialCodeToIso(dialCode){
-    const list = window.intlTelInputGlobals.getCountryData();
-    const found = list.find(c => c.dialCode === dialCode);
-    return found ? found.iso2 : null;
+  function lastNumberIndexBefore(pos){
+    for(let i = pos - 1; i >= 0; i--){
+      if(/\d/.test(phoneInput.value[i])) return i;
+    }
+    return -1;
   }
 
-  function buildMask(iso2, dialCode){
-    try {
-      const example = window.intlTelInputUtils.getExampleNumber(
-        iso2,
-        true,
-        window.intlTelInputUtils.numberFormat.NATIONAL
-      );
-      const blanks = example.replace(/\D/g, "_");
-      return `+(${dialCode}) ${blanks}`;
-    } catch {
-      return `+(${dialCode}) ___________`;
+  function firstNumberIndexAfter(pos){
+    for(let i = pos; i < phoneInput.value.length; i++){
+      if(/\d/.test(phoneInput.value[i])) return i;
     }
+    return -1;
   }
 
   resetMask();
 
   /* ======================
-     KEYDOWN CONTROL
+     KEYDOWN HANDLER
   ====================== */
   phoneInput.addEventListener("keydown", e => {
 
-    // TAB → numara alanına atla
+    const caret = phoneInput.selectionStart;
+
+    /* TAB → numara alanına atla */
     if(e.key === "Tab"){
       e.preventDefault();
-      const pos = getFirstUnderscore();
+      const pos = firstUnderscore();
       if(pos !== -1) setCaret(pos);
       return;
     }
 
-    // sadece rakamlar
+    /* BACKSPACE */
+    if(e.key === "Backspace"){
+      e.preventDefault();
+      const idx = lastNumberIndexBefore(caret);
+      if(idx !== -1){
+        phoneInput.value =
+          phoneInput.value.slice(0, idx) + "_" + phoneInput.value.slice(idx + 1);
+        setCaret(idx);
+      }
+      return;
+    }
+
+    /* DELETE */
+    if(e.key === "Delete"){
+      e.preventDefault();
+      const idx = firstNumberIndexAfter(caret);
+      if(idx !== -1){
+        phoneInput.value =
+          phoneInput.value.slice(0, idx) + "_" + phoneInput.value.slice(idx + 1);
+        setCaret(idx);
+      }
+      return;
+    }
+
+    /* SADECE RAKAM */
     if(!/^\d$/.test(e.key)){
       e.preventDefault();
       return;
@@ -88,63 +105,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     e.preventDefault();
 
-    let value = phoneInput.value;
-    const index = getFirstUnderscore();
-    if(index === -1) return;
+    const idx = firstUnderscore();
+    if(idx === -1) return;
 
     phoneInput.value =
-      value.slice(0, index) + e.key + value.slice(index + 1);
+      phoneInput.value.slice(0, idx) + e.key + phoneInput.value.slice(idx + 1);
 
-    setCaret(index + 1);
-  });
-
-  /* ======================
-     INPUT (COUNTRY DETECT)
-  ====================== */
-  phoneInput.addEventListener("input", () => {
-
-    const rawDigits = digitsOnly(phoneInput.value);
-    if(rawDigits.length < 1){
-      resetMask();
-      return;
-    }
-
-    let dialCode = "";
-    for(let i=1;i<=3;i++){
-      const code = rawDigits.slice(0,i);
-      if(dialCodeToIso(code)){
-        dialCode = code;
-        break;
-      }
-    }
-
-    if(!dialCode) return;
-
-    const iso2 = dialCodeToIso(dialCode);
-    const newMask = buildMask(iso2, dialCode);
-    phoneInput.value = newMask;
-    setCaret(newMask.indexOf("_"));
-  });
-
-  /* ======================
-     PASTE CONTROL
-  ====================== */
-  phoneInput.addEventListener("paste", e => {
-    e.preventDefault();
-    const pasted = digitsOnly(e.clipboardData.getData("text"));
-    if(!pasted) return;
-
-    let value = phoneInput.value;
-    let idx = getFirstUnderscore();
-
-    for(const d of pasted){
-      if(idx === -1) break;
-      value = value.slice(0, idx) + d + value.slice(idx + 1);
-      idx = value.indexOf("_");
-    }
-
-    phoneInput.value = value;
-    if(idx !== -1) setCaret(idx);
+    setCaret(idx + 1);
   });
 
   /* ======================
