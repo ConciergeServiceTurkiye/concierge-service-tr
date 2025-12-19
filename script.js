@@ -58,12 +58,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const phoneInput = document.getElementById("phone");
   const textarea = form.querySelector("textarea[name='message']");
   const counter = form.querySelector(".char-count");
+  const emailInput = form.querySelector("input[name='email']");
 
   /* ======================
      PHONE MASK SYSTEM
   ====================== */
   let countryCode = "";
-  let numberMask = "___ ___ ____";
+  const numberMask = "___ ___ ____";
 
   function buildValue() {
     return `+(${countryCode}) ${numberMask}`;
@@ -77,7 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function resetPhone() {
     countryCode = "";
-    numberMask = "___ ___ ____";
     phoneInput.value = "+() ___ ___ ____";
     setCaret(2);
   }
@@ -92,50 +92,76 @@ document.addEventListener("DOMContentLoaded", () => {
     const caret = phoneInput.selectionStart;
     const closingParen = phoneInput.value.indexOf(")");
 
-    /* TAB → numaraya geç (Shift+Tab serbest) */
-if (e.key === "Tab" && !e.shiftKey) {
-  e.preventDefault();
-  const pos = firstUnderscore();
-  if (pos !== -1) setCaret(pos);
-  return;
-}
+    /* ⛔ HARFLER TAMAMEN YASAK */
+    if (/^[a-zA-Z]$/.test(e.key)) {
+      e.preventDefault();
+      return;
+    }
 
-/* Shift+Tab ve CTRL/CMD kombinasyonlarına dokunma */
-if (e.shiftKey || e.ctrlKey || e.metaKey) {
-  return;
-}
+    /* TAB / SHIFT+TAB NAV */
+    if (e.key === "Tab") {
+      e.preventDefault();
 
-    /* SADECE RAKAM / BACKSPACE / DELETE */
-    if (!/^\d$/.test(e.key)) {
-      if (["Backspace", "Delete"].includes(e.key)) {
-        e.preventDefault();
-
-        const idx = caret - 1;
-
-        /* NUMARA SİLME */
-        if (idx > closingParen) {
-          phoneInput.value =
-            phoneInput.value.slice(0, idx) + "_" + phoneInput.value.slice(idx + 1);
-          setCaret(idx);
-        }
-
-        /* COUNTRY CODE SİLME */
-        if (idx > 1 && idx < closingParen) {
-          countryCode = countryCode.slice(0, -1);
-          phoneInput.value = buildValue();
+      /* SHIFT + TAB */
+      if (e.shiftKey) {
+        if (caret > closingParen) {
           setCaret(2 + countryCode.length);
+          return;
         }
+        emailInput.focus();
+        return;
+      }
+
+      /* NORMAL TAB */
+      const pos = firstUnderscore();
+      if (countryCode.length > 0 && pos !== -1) {
+        setCaret(pos);
+      } else {
+        textarea.focus();
       }
       return;
     }
 
+    /* CTRL / ALT / META serbest */
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+    /* BACKSPACE / DELETE */
+    if (e.key === "Backspace" || e.key === "Delete") {
+      e.preventDefault();
+      const idx = caret - 1;
+
+      /* +() ASLA SİLİNEMEZ */
+      if (idx <= 2) return;
+
+      /* COUNTRY CODE SİLME */
+      if (idx > 1 && idx < closingParen) {
+        countryCode = countryCode.slice(0, -1);
+        phoneInput.value = buildValue();
+        setCaret(2 + countryCode.length);
+        return;
+      }
+
+      /* NUMARA SİLME */
+      if (idx > closingParen) {
+        phoneInput.value =
+          phoneInput.value.slice(0, idx) + "_" + phoneInput.value.slice(idx + 1);
+        setCaret(idx);
+      }
+      return;
+    }
+
+    /* SADECE RAKAM */
+    if (!/^\d$/.test(e.key)) return;
+
     e.preventDefault();
 
-    /* COUNTRY CODE YAZIMI */
+    /* COUNTRY CODE YAZIMI (MAX 3) */
     if (caret <= closingParen) {
-      countryCode += e.key;
-      phoneInput.value = buildValue();
-      setCaret(2 + countryCode.length);
+      if (countryCode.length < 3) {
+        countryCode += e.key;
+        phoneInput.value = buildValue();
+        setCaret(2 + countryCode.length);
+      }
       return;
     }
 
