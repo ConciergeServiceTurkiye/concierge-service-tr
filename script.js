@@ -73,6 +73,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const counter = form.querySelector(".char-count");
 
   /* ======================
+   SUBJECT SELECT
+====================== */
+const subjectWrapper = document.querySelector(".subject-wrapper");
+const subjectSelect = document.getElementById("subjectSelect");
+const subjectOptions = document.getElementById("subjectOptions");
+const selectedSubject = document.getElementById("selectedSubject");
+const subjectInput = document.getElementById("subjectInput");
+
+subjectSelect.addEventListener("click", () => {
+  subjectWrapper.classList.toggle("open");
+});
+
+subjectOptions.querySelectorAll("li").forEach(option => {
+  option.addEventListener("click", () => {
+    const value = option.getAttribute("data-value");
+    selectedSubject.textContent = value;
+    subjectInput.value = value;
+    subjectWrapper.classList.remove("open");
+  });
+});
+
+/* dışarı tıklanınca kapansın */
+document.addEventListener("click", e => {
+  if (!subjectWrapper.contains(e.target)) {
+    subjectWrapper.classList.remove("open");
+  }
+});
+  
+  /* ======================
      PHONE INPUT
   ====================== */
   phoneInput.addEventListener("input", function () {
