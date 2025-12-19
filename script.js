@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ======================
-     POPUP ALERT (FIXED)
+     POPUP ALERT
   ====================== */
   const popupAlert = document.getElementById("popupAlert");
   let popupTimer = null;
@@ -49,10 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     popupAlert.textContent = message;
     popupAlert.classList.add("show");
 
-    if (popupTimer) {
-      clearTimeout(popupTimer);
-      popupTimer = null;
-    }
+    if (popupTimer) clearTimeout(popupTimer);
 
     if (autoClose) {
       popupTimer = setTimeout(() => {
@@ -73,34 +70,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const counter = form.querySelector(".char-count");
 
   /* ======================
-   SUBJECT SELECT
-====================== */
-const subjectWrapper = document.querySelector(".subject-wrapper");
-const subjectSelect = document.getElementById("subjectSelect");
-const subjectOptions = document.getElementById("subjectOptions");
-const selectedSubject = document.getElementById("selectedSubject");
-const subjectInput = document.getElementById("subjectInput");
+     SUBJECT SELECT
+  ====================== */
+  const subjectWrapper = document.querySelector(".subject-wrapper");
+  const subjectSelect = document.getElementById("subjectSelect");
+  const subjectOptions = document.getElementById("subjectOptions");
+  const selectedSubject = document.getElementById("selectedSubject");
+  const subjectInput = document.getElementById("subjectInput");
 
-subjectSelect.addEventListener("click", () => {
-  subjectWrapper.classList.toggle("open");
-});
-
-subjectOptions.querySelectorAll("li").forEach(option => {
-  option.addEventListener("click", () => {
-    const value = option.getAttribute("data-value");
-    selectedSubject.textContent = value;
-    subjectInput.value = value;
-    subjectWrapper.classList.remove("open");
+  subjectSelect.addEventListener("click", () => {
+    subjectWrapper.classList.toggle("open");
   });
-});
 
-/* dışarı tıklanınca kapansın */
-document.addEventListener("click", e => {
-  if (!subjectWrapper.contains(e.target)) {
-    subjectWrapper.classList.remove("open");
-  }
-});
-  
+  subjectOptions.querySelectorAll("li").forEach(option => {
+    option.addEventListener("click", () => {
+      const value = option.dataset.value;
+      selectedSubject.textContent = value;
+      subjectInput.value = value;
+      subjectWrapper.classList.remove("open");
+    });
+  });
+
+  document.addEventListener("click", e => {
+    if (!subjectWrapper.contains(e.target)) {
+      subjectWrapper.classList.remove("open");
+    }
+  });
+
   /* ======================
      PHONE INPUT
   ====================== */
@@ -141,9 +137,9 @@ document.addEventListener("click", e => {
     }
 
     if (!subjectInput.value) {
-  showPopup("Please select a subject before sending your request");
-  return;
-}
+      showPopup("Please select a subject before sending your request");
+      return;
+    }
 
     if (!textarea.value.trim()) {
       showPopup("Please describe your request");
@@ -154,13 +150,13 @@ document.addEventListener("click", e => {
     showPopup("Sending your request...", false);
 
     const data = new URLSearchParams({
-  name: form.name.value,
-  email: form.email.value,
-  phone: phoneInput.value,
-  subject: subjectInput.value,
-  message: textarea.value,
-  referrer: document.referrer || "Website"
-});
+      name: form.name.value,
+      email: form.email.value,
+      phone: phoneInput.value,
+      subject: subjectInput.value,
+      message: textarea.value,
+      referrer: document.referrer || "Website"
+    });
 
     fetch(
       "https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
@@ -170,6 +166,10 @@ document.addEventListener("click", e => {
         showPopup("Your request has been sent successfully.");
         form.reset();
         counter.textContent = "0 / 2000";
+
+        /* SUBJECT RESET */
+        subjectInput.value = "";
+        selectedSubject.textContent = "Select subject";
       })
       .catch(() => {
         showPopup("Connection error. Please try again.");
@@ -180,7 +180,7 @@ document.addEventListener("click", e => {
   });
 
   /* ======================
-     PRIVACY & TERMS MODALS
+     PRIVACY & TERMS
   ====================== */
   const privacyLink = document.getElementById("privacyLink");
   const termsLink = document.getElementById("termsLink");
@@ -188,14 +188,14 @@ document.addEventListener("click", e => {
   const termsModal = document.getElementById("termsModal");
   const closeButtons = document.querySelectorAll(".close-modal");
 
-  if (privacyLink && privacyModal) {
+  if (privacyLink) {
     privacyLink.addEventListener("click", e => {
       e.preventDefault();
       privacyModal.style.display = "flex";
     });
   }
 
-  if (termsLink && termsModal) {
+  if (termsLink) {
     termsLink.addEventListener("click", e => {
       e.preventDefault();
       termsModal.style.display = "flex";
@@ -204,15 +204,15 @@ document.addEventListener("click", e => {
 
   closeButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-      if (privacyModal) privacyModal.style.display = "none";
-      if (termsModal) termsModal.style.display = "none";
+      privacyModal.style.display = "none";
+      termsModal.style.display = "none";
     });
   });
 
   document.addEventListener("keydown", e => {
     if (e.key === "Escape") {
-      if (privacyModal) privacyModal.style.display = "none";
-      if (termsModal) termsModal.style.display = "none";
+      privacyModal.style.display = "none";
+      termsModal.style.display = "none";
     }
   });
 
