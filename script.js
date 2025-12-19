@@ -140,6 +140,11 @@ document.addEventListener("click", e => {
       return;
     }
 
+    if (!subjectInput.value) {
+  showPopup("Please select a subject before sending your request");
+  return;
+}
+
     if (!textarea.value.trim()) {
       showPopup("Please describe your request");
       return;
@@ -149,12 +154,13 @@ document.addEventListener("click", e => {
     showPopup("Sending your request...", false);
 
     const data = new URLSearchParams({
-      name: form.name.value,
-      email: form.email.value,
-      phone: phoneInput.value,
-      message: textarea.value,
-      referrer: document.referrer || "Website"
-    });
+  name: form.name.value,
+  email: form.email.value,
+  phone: phoneInput.value,
+  subject: subjectInput.value,
+  message: textarea.value,
+  referrer: document.referrer || "Website"
+});
 
     fetch(
       "https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
