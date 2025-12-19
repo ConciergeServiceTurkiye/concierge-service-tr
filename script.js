@@ -58,131 +58,39 @@ document.addEventListener("DOMContentLoaded", () => {
   const phoneInput = document.getElementById("phone");
   const textarea = form.querySelector("textarea[name='message']");
   const counter = form.querySelector(".char-count");
-  const emailInput = form.querySelector("input[name='email']");
 
   /* ======================
-     PHONE MASK SYSTEM
+     SIMPLE PHONE INPUT
+     (SADE – SORUNSUZ)
   ====================== */
-  let countryCode = "";
-  const numberMask = "___ ___ ____";
-
-  function buildValue() {
-    return `+(${countryCode}) ${numberMask}`;
-  }
-
-  function setCaret(pos) {
-    requestAnimationFrame(() => {
-      phoneInput.setSelectionRange(pos, pos);
-    });
-  }
-
-  function resetPhone() {
-    countryCode = "";
-    phoneInput.value = "+() ___ ___ ____";
-    setCaret(2);
-  }
-
-  resetPhone();
-
-  function firstUnderscore() {
-    return phoneInput.value.indexOf("_");
-  }
-
   phoneInput.addEventListener("keydown", e => {
-    const caret = phoneInput.selectionStart;
-    const closingParen = phoneInput.value.indexOf(")");
 
-    /* ======================
-       BACKSPACE / DELETE
-    ====================== */
-    if (e.key === "Backspace" || e.key === "Delete") {
-      e.preventDefault();
-
-      let idx = caret;
-      if (e.key === "Backspace") idx = caret - 1;
-
-      /* +() ASLA SİLİNEMEZ */
-      if (idx <= 2) {
-        setCaret(2);
-        return;
-      }
-
-      /* COUNTRY CODE SİLME */
-      if (idx > 1 && idx < closingParen) {
-        countryCode = countryCode.slice(0, -1);
-        phoneInput.value = buildValue();
-        setCaret(2 + countryCode.length);
-        return;
-      }
-
-      /* PHONE NUMBER SİLME */
-      if (idx > closingParen && phoneInput.value[idx] !== " ") {
-        phoneInput.value =
-          phoneInput.value.slice(0, idx) + "_" + phoneInput.value.slice(idx + 1);
-        setCaret(idx);
-      }
-      return;
-    }
-
-    /* ======================
-       TAB / SHIFT + TAB
-    ====================== */
-    if (e.key === "Tab") {
-      e.preventDefault();
-
-      if (e.shiftKey) {
-        if (caret > closingParen) {
-          setCaret(2 + countryCode.length);
-          return;
-        }
-        emailInput.focus();
-        return;
-      }
-
-      const pos = firstUnderscore();
-      if (countryCode.length && pos !== -1) {
-        setCaret(pos);
-      } else {
-        textarea.focus();
-      }
-      return;
-    }
-
-    /* CTRL / ALT / META SERBEST */
-    if (e.ctrlKey || e.metaKey || e.altKey) return;
-
-    /* ======================
-       HARFLER TAMAMEN YASAK
-    ====================== */
+    /* Harfler tamamen yasak */
     if (/^[a-zA-Z]$/.test(e.key)) {
       e.preventDefault();
       return;
     }
 
-    /* ======================
-       SADECE RAKAM
-    ====================== */
-    if (!/^\d$/.test(e.key)) return;
+    /* Rakamlar serbest */
+    if (/^\d$/.test(e.key)) return;
 
+    /* Kontrol tuşları serbest */
+    const allowedKeys = [
+      "Backspace",
+      "Delete",
+      "Tab",
+      "ArrowLeft",
+      "ArrowRight",
+      "Home",
+      "End"
+    ];
+
+    if (allowedKeys.includes(e.key)) return;
+
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+
+    /* Diğer her şey engelli */
     e.preventDefault();
-
-    /* COUNTRY CODE (MAX 3) */
-    if (caret <= closingParen) {
-      if (countryCode.length < 3) {
-        countryCode += e.key;
-        phoneInput.value = buildValue();
-        setCaret(2 + countryCode.length);
-      }
-      return;
-    }
-
-    /* PHONE NUMBER */
-    const idx = firstUnderscore();
-    if (idx === -1) return;
-
-    phoneInput.value =
-      phoneInput.value.slice(0, idx) + e.key + phoneInput.value.slice(idx + 1);
-    setCaret(idx + 1);
   });
 
   /* ======================
@@ -212,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (!countryCode || phoneInput.value.includes("_")) {
+    if (!phoneInput.value.trim()) {
       showPopup("Please enter a valid phone number");
       return;
     }
@@ -241,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
         showPopup("Your request has been sent successfully.");
         form.reset();
         counter.textContent = "0 / 2000";
-        resetPhone();
       })
       .catch(() => {
         showPopup("Connection error. Please try again.");
