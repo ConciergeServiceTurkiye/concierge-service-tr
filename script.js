@@ -38,14 +38,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ======================
-     POPUP ALERT
+     POPUP ALERT (FIXED)
   ====================== */
   const popupAlert = document.getElementById("popupAlert");
-  function showPopup(message) {
+  let popupTimer = null;
+
+  function showPopup(message, autoClose = true) {
     if (!popupAlert) return;
+
     popupAlert.textContent = message;
     popupAlert.classList.add("show");
-    setTimeout(() => popupAlert.classList.remove("show"), 3000);
+
+    if (popupTimer) {
+      clearTimeout(popupTimer);
+      popupTimer = null;
+    }
+
+    if (autoClose) {
+      popupTimer = setTimeout(() => {
+        popupAlert.classList.remove("show");
+      }, 3000);
+    }
   }
 
   /* ======================
@@ -60,10 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const counter = form.querySelector(".char-count");
 
   /* ======================
-     PHONE INPUT (DOĞRU YÖNTEM)
+     PHONE INPUT
   ====================== */
   phoneInput.addEventListener("input", function () {
-    // Rakam ve + dışında her şeyi sil
     this.value = this.value.replace(/[^0-9+]/g, "");
   });
 
@@ -105,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     sendBtn.disabled = true;
-    showPopup("Sending your request...",false);
+    showPopup("Sending your request...", false);
 
     const data = new URLSearchParams({
       name: form.name.value,
