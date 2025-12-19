@@ -113,8 +113,9 @@ subjectSelect.addEventListener("click", e => {
 });
 
 /* Focus ile aç */
-subjectSelect.addEventListener("focus", () => {
-  openSubject();
+subjectSelect.addEventListener("focus", e => {
+  if (e.sourceCapabilities && e.sourceCapabilities.firesTouchEvents) return;
+  if (e.detail === 0) openSubject(); // SADECE klavye focus
 });
 
 /* KLAVYE KONTROLÜ – SADECE SELECT ÜZERİNDE */
