@@ -131,7 +131,6 @@ body{margin:0;font-family:Arial,sans-serif;color:#fff;background:#000;overflow-x
     transition:.3s ease
   }
   .nav-menu.active{right:0}
-  .logo:hover img{height:80px} /* mobilde aşırı büyümesin */
 }
 
 /* ====================== WHATSAPP FIXED ====================== */
