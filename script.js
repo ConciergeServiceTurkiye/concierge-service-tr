@@ -92,13 +92,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const caret = phoneInput.selectionStart;
     const closingParen = phoneInput.value.indexOf(")");
 
-    /* TAB → numaraya geç */
-    if (e.key === "Tab") {
-      e.preventDefault();
-      const pos = firstUnderscore();
-      if (pos !== -1) setCaret(pos);
-      return;
-    }
+    /* TAB → numaraya geç (Shift+Tab serbest) */
+if (e.key === "Tab" && !e.shiftKey) {
+  e.preventDefault();
+  const pos = firstUnderscore();
+  if (pos !== -1) setCaret(pos);
+  return;
+}
+
+/* Shift+Tab ve CTRL/CMD kombinasyonlarına dokunma */
+if (e.shiftKey || e.ctrlKey || e.metaKey) {
+  return;
+}
 
     /* SADECE RAKAM / BACKSPACE / DELETE */
     if (!/^\d$/.test(e.key)) {
