@@ -152,10 +152,10 @@ subjectSelect.addEventListener("keydown", e => {
 
 /* Mouse ile seçim */
 options.forEach((option, index) => {
-  option.addEventListener("mousedown", e => {
-    e.preventDefault();
-    selectOption(index);
-  });
+  option.addEventListener("click", e => {
+  e.stopPropagation();
+  selectOption(index);
+});
 });
 
 /* Form dışına tıklanınca kapat */
