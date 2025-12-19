@@ -92,46 +92,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const caret = phoneInput.selectionStart;
     const closingParen = phoneInput.value.indexOf(")");
 
-    /* ⛔ HARFLER TAMAMEN YASAK */
-    if (/^[a-zA-Z]$/.test(e.key)) {
-      e.preventDefault();
-      return;
-    }
-
-    /* TAB / SHIFT+TAB NAV */
-    if (e.key === "Tab") {
-      e.preventDefault();
-
-      /* SHIFT + TAB */
-      if (e.shiftKey) {
-        if (caret > closingParen) {
-          setCaret(2 + countryCode.length);
-          return;
-        }
-        emailInput.focus();
-        return;
-      }
-
-      /* NORMAL TAB */
-      const pos = firstUnderscore();
-      if (countryCode.length > 0 && pos !== -1) {
-        setCaret(pos);
-      } else {
-        textarea.focus();
-      }
-      return;
-    }
-
-    /* CTRL / ALT / META serbest */
-    if (e.ctrlKey || e.metaKey || e.altKey) return;
-
-    /* BACKSPACE / DELETE */
+    /* ======================
+       BACKSPACE / DELETE
+    ====================== */
     if (e.key === "Backspace" || e.key === "Delete") {
       e.preventDefault();
-      const idx = caret - 1;
+
+      let idx = caret;
+      if (e.key === "Backspace") idx = caret - 1;
 
       /* +() ASLA SİLİNEMEZ */
-      if (idx <= 2) return;
+      if (idx <= 2) {
+        setCaret(2);
+        return;
+      }
 
       /* COUNTRY CODE SİLME */
       if (idx > 1 && idx < closingParen) {
@@ -141,8 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      /* NUMARA SİLME */
-      if (idx > closingParen) {
+      /* PHONE NUMBER SİLME */
+      if (idx > closingParen && phoneInput.value[idx] !== " ") {
         phoneInput.value =
           phoneInput.value.slice(0, idx) + "_" + phoneInput.value.slice(idx + 1);
         setCaret(idx);
@@ -150,12 +124,49 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    /* SADECE RAKAM */
+    /* ======================
+       TAB / SHIFT + TAB
+    ====================== */
+    if (e.key === "Tab") {
+      e.preventDefault();
+
+      if (e.shiftKey) {
+        if (caret > closingParen) {
+          setCaret(2 + countryCode.length);
+          return;
+        }
+        emailInput.focus();
+        return;
+      }
+
+      const pos = firstUnderscore();
+      if (countryCode.length && pos !== -1) {
+        setCaret(pos);
+      } else {
+        textarea.focus();
+      }
+      return;
+    }
+
+    /* CTRL / ALT / META SERBEST */
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+    /* ======================
+       HARFLER TAMAMEN YASAK
+    ====================== */
+    if (/^[a-zA-Z]$/.test(e.key)) {
+      e.preventDefault();
+      return;
+    }
+
+    /* ======================
+       SADECE RAKAM
+    ====================== */
     if (!/^\d$/.test(e.key)) return;
 
     e.preventDefault();
 
-    /* COUNTRY CODE YAZIMI (MAX 3) */
+    /* COUNTRY CODE (MAX 3) */
     if (caret <= closingParen) {
       if (countryCode.length < 3) {
         countryCode += e.key;
@@ -165,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    /* PHONE NUMBER YAZIMI */
+    /* PHONE NUMBER */
     const idx = firstUnderscore();
     if (idx === -1) return;
 
