@@ -5,27 +5,29 @@ document.addEventListener("DOMContentLoaded", () => {
   ====================== */
   const popupAlert = document.getElementById("popupAlert");
   function showPopup(message){
-    if(!popupAlert) return;
     popupAlert.textContent = message;
     popupAlert.classList.add("show");
-    setTimeout(()=> popupAlert.classList.remove("show"), 3000);
+    setTimeout(() => popupAlert.classList.remove("show"), 3000);
   }
 
-  /* ======================
-     CONTACT FORM
-  ====================== */
   const form = document.getElementById("reservation-form");
   if(!form) return;
 
-  const sendBtn = form.querySelector(".send-btn");
   const phoneInput = document.getElementById("phone");
+  const sendBtn = form.querySelector(".send-btn");
   const textarea = form.querySelector("textarea[name='message']");
   const counter = form.querySelector(".char-count");
 
   /* ======================
-     PHONE MASK CORE
+     PHONE MASK SYSTEM
   ====================== */
-  const BASE_MASK = "+(___) ___________";
+
+  let countryCode = "";
+  let numberMask = "___ ___ ____";
+
+  function buildValue(){
+    return `+(${countryCode}) ${numberMask}`;
+  }
 
   function setCaret(pos){
     requestAnimationFrame(() => {
@@ -33,91 +35,78 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function resetMask(){
-    phoneInput.value = BASE_MASK;
-    setCaret(phoneInput.value.indexOf("_"));
+  function resetPhone(){
+    countryCode = "";
+    numberMask = "___ ___ ____";
+    phoneInput.value = "+() ___ ___ ____";
+    setCaret(2);
   }
 
-  function firstUnderscore(){
+  resetPhone();
+
+  function firstNumberUnderscore(){
     return phoneInput.value.indexOf("_");
   }
 
-  function lastNumberIndexBefore(pos){
-    for(let i = pos - 1; i >= 0; i--){
-      if(/\d/.test(phoneInput.value[i])) return i;
-    }
-    return -1;
-  }
-
-  function firstNumberIndexAfter(pos){
-    for(let i = pos; i < phoneInput.value.length; i++){
-      if(/\d/.test(phoneInput.value[i])) return i;
-    }
-    return -1;
-  }
-
-  resetMask();
-
-  /* ======================
-     KEYDOWN HANDLER
-  ====================== */
   phoneInput.addEventListener("keydown", e => {
-
     const caret = phoneInput.selectionStart;
 
-    /* TAB → numara alanına atla */
+    /* TAB → numaraya geç */
     if(e.key === "Tab"){
       e.preventDefault();
-      const pos = firstUnderscore();
+      const pos = firstNumberUnderscore();
       if(pos !== -1) setCaret(pos);
-      return;
-    }
-
-    /* BACKSPACE */
-    if(e.key === "Backspace"){
-      e.preventDefault();
-      const idx = lastNumberIndexBefore(caret);
-      if(idx !== -1){
-        phoneInput.value =
-          phoneInput.value.slice(0, idx) + "_" + phoneInput.value.slice(idx + 1);
-        setCaret(idx);
-      }
-      return;
-    }
-
-    /* DELETE */
-    if(e.key === "Delete"){
-      e.preventDefault();
-      const idx = firstNumberIndexAfter(caret);
-      if(idx !== -1){
-        phoneInput.value =
-          phoneInput.value.slice(0, idx) + "_" + phoneInput.value.slice(idx + 1);
-        setCaret(idx);
-      }
       return;
     }
 
     /* SADECE RAKAM */
     if(!/^\d$/.test(e.key)){
-      e.preventDefault();
+      if(["Backspace","Delete"].includes(e.key)){
+        e.preventDefault();
+
+        /* NUMARA ALANI */
+        const idx = caret - 1;
+        if(idx > phoneInput.value.indexOf(")")){
+          phoneInput.value =
+            phoneInput.value.slice(0, idx) + "_" + phoneInput.value.slice(idx + 1);
+          setCaret(idx);
+        }
+
+        /* COUNTRY CODE */
+        if(idx > 1 && idx < phoneInput.value.indexOf(")")){
+          countryCode = countryCode.slice(0, -1);
+          phoneInput.value = buildValue();
+          setCaret(2 + countryCode.length);
+        }
+      }
       return;
     }
 
     e.preventDefault();
 
-    const idx = firstUnderscore();
+    /* COUNTRY CODE YAZIMI */
+    if(caret <= phoneInput.value.indexOf(")")){
+      if(countryCode.length < 3){
+        countryCode += e.key;
+        phoneInput.value = buildValue();
+        setCaret(2 + countryCode.length);
+      }
+      return;
+    }
+
+    /* PHONE NUMBER YAZIMI */
+    const idx = firstNumberUnderscore();
     if(idx === -1) return;
 
     phoneInput.value =
       phoneInput.value.slice(0, idx) + e.key + phoneInput.value.slice(idx + 1);
-
     setCaret(idx + 1);
   });
 
   /* ======================
      CHAR COUNT
   ====================== */
-  textarea.addEventListener("input", ()=>{
+  textarea.addEventListener("input", () => {
     counter.textContent = `${textarea.value.length} / 2000`;
   });
 
@@ -128,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ======================
      SUBMIT
   ====================== */
-  form.addEventListener("submit", e=>{
+  form.addEventListener("submit", e => {
     e.preventDefault();
 
     if(!form.name.value.trim()){
@@ -137,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if(!isValidEmail(form.email.value)){
       showPopup("Please enter a valid Email"); return;
     }
-    if(phoneInput.value.includes("_")){
+    if(phoneInput.value.includes("_") || !countryCode){
       showPopup("Please enter a valid phone number"); return;
     }
     if(!textarea.value.trim()){
@@ -156,18 +145,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
-      { method:"POST", body:data }
+      { method: "POST", body: data }
     )
-    .then(()=>{
+    .then(() => {
       showPopup("Your request has been sent successfully.");
       form.reset();
       counter.textContent = "0 / 2000";
-      resetMask();
+      resetPhone();
     })
-    .catch(()=>{
+    .catch(() => {
       showPopup("Connection error. Please try again.");
     })
-    .finally(()=>{
+    .finally(() => {
       sendBtn.disabled = false;
     });
   });
