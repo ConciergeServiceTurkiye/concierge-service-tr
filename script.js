@@ -78,76 +78,77 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectedSubject = document.getElementById("selectedSubject");
   const subjectInput = document.getElementById("subjectInput");
 
-  subjectSelect.addEventListener("click", e => {
-  e.stopPropagation(); // 👈 KRİTİK
-  subjectWrapper.classList.toggle("open");
-});
-
-  subjectOptions.querySelectorAll("li").forEach(option => {
-  option.addEventListener("click", e => {
-    e.stopPropagation();
-    const value = option.dataset.value;
-    selectedSubject.textContent = value;
-    subjectInput.value = value;
-    subjectWrapper.classList.remove("open");
-  });
-});
-
-  document.addEventListener("pointerdown", e => {
-  if (!e.target.closest(".subject-wrapper")) {
-    subjectWrapper.classList.remove("open");
-  }
-});
-  
   const options = Array.from(subjectOptions.querySelectorAll("li"));
+  let activeIndex = -1;
 
-options.forEach((option, index) => {
-  option.addEventListener("keydown", e => {
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      const next = options[index + 1] || options[0];
-      next.focus();
-    }
-
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      const prev = options[index - 1] || options[options.length - 1];
-      prev.focus();
-    }
+  /* li’leri focusable yap */
+  options.forEach(option => {
+    option.setAttribute("tabindex", "0");
   });
-});
-  
-  /* TAB ile focus gelince aç */
-subjectSelect.addEventListener("focus", () => {
-  subjectWrapper.classList.add("open");
-});
 
-/* ENTER ile aç/kapat */
-subjectSelect.addEventListener("keydown", e => {
-  if (e.key === "Enter" || e.key === " ") {
+  /* Aç / kapa */
+  subjectSelect.addEventListener("click", e => {
     e.preventDefault();
     subjectWrapper.classList.toggle("open");
-  }
+  });
 
-  if (e.key === "Escape") {
-    subjectWrapper.classList.remove("open");
-  }
-});
+  /* Dışarı tıklanınca kapat – BLINK YOK */
+  document.addEventListener("pointerdown", e => {
+    if (!e.target.closest(".subject-wrapper")) {
+      subjectWrapper.classList.remove("open");
+    }
+  });
 
-/* OPTION klavye ile seçilebilir */
-subjectOptions.querySelectorAll("li").forEach(option => {
-  option.setAttribute("tabindex", "0");
-
-  option.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
+  /* Mouse ile seçim */
+  options.forEach(option => {
+    option.addEventListener("click", () => {
       const value = option.dataset.value;
       selectedSubject.textContent = value;
       subjectInput.value = value;
       subjectWrapper.classList.remove("open");
       subjectSelect.focus();
+    });
+  });
+
+  /* TAB ile gelince aç */
+  subjectSelect.addEventListener("focus", () => {
+    subjectWrapper.classList.add("open");
+  });
+
+  /* Klavye kontrolü (⬆ ⬇ Enter Esc) */
+  subjectSelect.addEventListener("keydown", e => {
+    if (!subjectWrapper.classList.contains("open")) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      activeIndex = (activeIndex + 1) % options.length;
+      options[activeIndex].focus();
+    }
+
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      activeIndex =
+        activeIndex <= 0 ? options.length - 1 : activeIndex - 1;
+      options[activeIndex].focus();
+    }
+
+    if (e.key === "Escape") {
+      subjectWrapper.classList.remove("open");
     }
   });
-});
+
+  options.forEach((option, index) => {
+    option.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const value = option.dataset.value;
+        selectedSubject.textContent = value;
+        subjectInput.value = value;
+        subjectWrapper.classList.remove("open");
+        subjectSelect.focus();
+      }
+    });
+  });
 
   /* ======================
      PHONE INPUT
@@ -218,8 +219,6 @@ subjectOptions.querySelectorAll("li").forEach(option => {
         showPopup("Your request has been sent successfully.");
         form.reset();
         counter.textContent = "0 / 2000";
-
-        /* SUBJECT RESET */
         subjectInput.value = "";
         selectedSubject.textContent = "Select subject";
       })
