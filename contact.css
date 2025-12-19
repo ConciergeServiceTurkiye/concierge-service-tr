@@ -1,7 +1,7 @@
 /* ====================== CONTACT HERO ====================== */
 .contact-hero {
-  min-height: calc(100vh - 70px);
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)), url("assets/contact-bg.jpg") center / cover no-repeat;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
+  url("assets/contact-bg.jpg") center / cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,4 +140,5 @@
     padding: 28px 22px;
   }
 }
+
 
