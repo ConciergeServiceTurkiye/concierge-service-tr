@@ -93,11 +93,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-  document.addEventListener("click", e => {
-    if (!subjectWrapper.contains(e.target)) {
-      subjectWrapper.classList.remove("open");
-    }
-  });
+  document.addEventListener("pointerdown", e => {
+  if (!e.target.closest(".subject-wrapper")) {
+    subjectWrapper.classList.remove("open");
+  }
+});
   
   const options = Array.from(subjectOptions.querySelectorAll("li"));
 
