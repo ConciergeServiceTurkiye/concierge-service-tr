@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const counter = form.querySelector(".char-count");
 
   /* ======================
-     PHONE MASK (ALL COUNTRIES)
+     PHONE MASK ENGINE
   ====================== */
 
   const BASE_MASK = "+(___) ___________";
@@ -37,74 +37,114 @@ document.addEventListener("DOMContentLoaded", () => {
     setCaret(3);
   }
 
-  resetMask();
-
   function digitsOnly(val){
     return val.replace(/\D/g, "");
   }
 
-  function dialCodeToIso(dialCode){
-    const countries = window.intlTelInputGlobals.getCountryData();
-    const match = countries.find(c => c.dialCode === dialCode);
-    return match ? match.iso2 : null;
+  function getFirstUnderscore(){
+    return phoneInput.value.indexOf("_");
   }
 
-  function buildMaskFromCountry(iso2, dialCode){
-    if(!window.intlTelInputUtils || !iso2) return BASE_MASK;
+  function dialCodeToIso(dialCode){
+    const list = window.intlTelInputGlobals.getCountryData();
+    const found = list.find(c => c.dialCode === dialCode);
+    return found ? found.iso2 : null;
+  }
 
+  function buildMask(iso2, dialCode){
     try {
       const example = window.intlTelInputUtils.getExampleNumber(
         iso2,
         true,
         window.intlTelInputUtils.numberFormat.NATIONAL
       );
-
-      const digits = example.replace(/\D/g, "");
-      const blanks = digits.replace(/\d/g, "_");
-
+      const blanks = example.replace(/\D/g, "_");
       return `+(${dialCode}) ${blanks}`;
     } catch {
       return `+(${dialCode}) ___________`;
     }
   }
 
-  phoneInput.addEventListener("focus", ()=>{
-    if(!phoneInput.value) resetMask();
-  });
+  resetMask();
 
-  phoneInput.addEventListener("keydown", e=>{
-    if(e.key === "Backspace"){
+  /* ======================
+     KEYDOWN CONTROL
+  ====================== */
+  phoneInput.addEventListener("keydown", e => {
+
+    // TAB → numara alanına atla
+    if(e.key === "Tab"){
       e.preventDefault();
+      const pos = getFirstUnderscore();
+      if(pos !== -1) setCaret(pos);
+      return;
     }
+
+    // sadece rakamlar
+    if(!/^\d$/.test(e.key)){
+      e.preventDefault();
+      return;
+    }
+
+    e.preventDefault();
+
+    let value = phoneInput.value;
+    const index = getFirstUnderscore();
+    if(index === -1) return;
+
+    phoneInput.value =
+      value.slice(0, index) + e.key + value.slice(index + 1);
+
+    setCaret(index + 1);
   });
 
-  phoneInput.addEventListener("input", ()=>{
-    let digits = digitsOnly(phoneInput.value);
+  /* ======================
+     INPUT (COUNTRY DETECT)
+  ====================== */
+  phoneInput.addEventListener("input", () => {
 
-    if(digits.length < 1){
+    const rawDigits = digitsOnly(phoneInput.value);
+    if(rawDigits.length < 1){
       resetMask();
       return;
     }
 
-    // read country code (1–3 digits)
     let dialCode = "";
     for(let i=1;i<=3;i++){
-      const code = digits.slice(0,i);
+      const code = rawDigits.slice(0,i);
       if(dialCodeToIso(code)){
         dialCode = code;
         break;
       }
     }
 
-    if(!dialCode){
-      resetMask();
-      return;
-    }
+    if(!dialCode) return;
 
     const iso2 = dialCodeToIso(dialCode);
-    const mask = buildMaskFromCountry(iso2, dialCode);
-    phoneInput.value = mask;
-    setCaret(mask.indexOf("_"));
+    const newMask = buildMask(iso2, dialCode);
+    phoneInput.value = newMask;
+    setCaret(newMask.indexOf("_"));
+  });
+
+  /* ======================
+     PASTE CONTROL
+  ====================== */
+  phoneInput.addEventListener("paste", e => {
+    e.preventDefault();
+    const pasted = digitsOnly(e.clipboardData.getData("text"));
+    if(!pasted) return;
+
+    let value = phoneInput.value;
+    let idx = getFirstUnderscore();
+
+    for(const d of pasted){
+      if(idx === -1) break;
+      value = value.slice(0, idx) + d + value.slice(idx + 1);
+      idx = value.indexOf("_");
+    }
+
+    phoneInput.value = value;
+    if(idx !== -1) setCaret(idx);
   });
 
   /* ======================
@@ -119,29 +159,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ======================
-     FORM SUBMIT
+     SUBMIT
   ====================== */
   form.addEventListener("submit", e=>{
     e.preventDefault();
 
     if(!form.name.value.trim()){
-      showPopup("Full Name cannot be empty");
-      return;
+      showPopup("Full Name cannot be empty"); return;
     }
-
     if(!isValidEmail(form.email.value)){
-      showPopup("Please enter a valid Email");
-      return;
+      showPopup("Please enter a valid Email"); return;
     }
-
     if(phoneInput.value.includes("_")){
-      showPopup("Please enter a valid phone number");
-      return;
+      showPopup("Please enter a valid phone number"); return;
     }
-
     if(!textarea.value.trim()){
-      showPopup("Please describe your request");
-      return;
+      showPopup("Please describe your request"); return;
     }
 
     sendBtn.disabled = true;
