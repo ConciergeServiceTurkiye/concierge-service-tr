@@ -191,14 +191,13 @@ body{margin:0;font-family:Arial,sans-serif;color:#fff;background:#000;overflow-x
 .close-modal{position:absolute;top:15px;right:20px;font-size:24px;cursor:pointer;color:var(--gold);font-weight:bold;transition:color .2s ease}
 .close-modal:hover{color:var(--gold-soft)}
 
-.visually-hidden {
+/* === SEO H1 (Mobile Chrome SAFE) === */
+.seo-h1 {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
   overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
+  pointer-events: none;
 }
