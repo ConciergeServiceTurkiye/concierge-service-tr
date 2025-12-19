@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ======================
-     HERO SLIDER (DOKUNULMADI)
+     HERO SLIDER
   ====================== */
   const slider = document.getElementById("heroSlider");
   if (slider) {
@@ -60,38 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const counter = form.querySelector(".char-count");
 
   /* ======================
-     SIMPLE PHONE INPUT
-     (SADE – SORUNSUZ)
+     PHONE INPUT (DOĞRU YÖNTEM)
   ====================== */
-  const phoneInput = document.getElementById("phone");
-
-phoneInput.addEventListener("keydown", function (e) {
-  // Ctrl+A / Cmd+A serbest
-  if (
-    (e.ctrlKey || e.metaKey) &&
-    (e.key.toLowerCase() === "a")
-  ) {
-    return;
-  }
-
-  // Navigasyon tuşları serbest
-  const allowedKeys = [
-    "Backspace",
-    "Delete",
-    "ArrowLeft",
-    "ArrowRight",
-    "Tab",
-    "Home",
-    "End"
-  ];
-
-  if (allowedKeys.includes(e.key)) return;
-
-  // Rakam ve +
-  if (!/^[0-9+]$/.test(e.key)) {
-    e.preventDefault();
-  }
-});
+  phoneInput.addEventListener("input", function () {
+    // Rakam ve + dışında her şeyi sil
+    this.value = this.value.replace(/[^0-9+]/g, "");
+  });
 
   /* ======================
      CHAR COUNT
