@@ -117,15 +117,6 @@ subjectSelect.addEventListener("focus", () => {
   openSubject();
 });
 
-/* Blur olunca kapat (TAB ile çıkış için) */
-subjectSelect.addEventListener("blur", () => {
-  setTimeout(() => {
-    if (!subjectWrapper.contains(document.activeElement)) {
-      closeSubject();
-    }
-  }, 100);
-});
-
 /* KLAVYE KONTROLÜ – SADECE SELECT ÜZERİNDE */
 subjectSelect.addEventListener("keydown", e => {
   if (!isOpen) return;
