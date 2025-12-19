@@ -63,37 +63,35 @@ document.addEventListener("DOMContentLoaded", () => {
      SIMPLE PHONE INPUT
      (SADE – SORUNSUZ)
   ====================== */
-  phoneInput.addEventListener("keydown", e => {
+  const phoneInput = document.getElementById("phone");
 
-    if (e.key === "+" && phoneInput.selectionStart === 0) return;
+phoneInput.addEventListener("keydown", function (e) {
+  // Ctrl+A / Cmd+A serbest
+  if (
+    (e.ctrlKey || e.metaKey) &&
+    (e.key.toLowerCase() === "a")
+  ) {
+    return;
+  }
 
-    /* Harfler tamamen yasak */
-    if (/^[a-zA-Z]$/.test(e.key)) {
-      e.preventDefault();
-      return;
-    }
+  // Navigasyon tuşları serbest
+  const allowedKeys = [
+    "Backspace",
+    "Delete",
+    "ArrowLeft",
+    "ArrowRight",
+    "Tab",
+    "Home",
+    "End"
+  ];
 
-    /* Rakamlar serbest */
-    if (/^\d$/.test(e.key)) return;
+  if (allowedKeys.includes(e.key)) return;
 
-    /* Kontrol tuşları serbest */
-    const allowedKeys = [
-      "Backspace",
-      "Delete",
-      "Tab",
-      "ArrowLeft",
-      "ArrowRight",
-      "Home",
-      "End"
-    ];
-
-    if (allowedKeys.includes(e.key)) return;
-
-    if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
-
-    /* Diğer her şey engelli */
+  // Rakam ve +
+  if (!/^[0-9+]$/.test(e.key)) {
     e.preventDefault();
-  });
+  }
+});
 
   /* ======================
      CHAR COUNT
