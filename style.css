@@ -117,13 +117,6 @@ body{margin:0;font-family:Arial,sans-serif;color:#fff;background:#000;overflow-x
 }
 .send-btn:hover::after{left:0}
 
-/* ====================== FOOTER ====================== */
-.footer{display:flex;justify-content:space-between;padding:20px;background:#111}
-.footer p{font-size:10px;opacity:.6}
-.social-icons{display:flex;gap:10px}
-.social-icons img{width:32px;transition:transform .2s ease}
-.social-icons img:hover{transform:scale(1.1)}
-
 /* HAMBURGER */
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
 .hamburger span{width:25px;height:3px;background:var(--gold)}
