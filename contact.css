@@ -19,11 +19,11 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  position: relative; /* popup için */
+  position: relative;
   overflow: visible;
 }
 
-/* ====================== FORM TITLE - GOLD SHINE ====================== */
+/* ====================== FORM TITLE ====================== */
 .form-title {
   font-size: 28px;
   font-weight: bold;
@@ -39,10 +39,10 @@
   width: 100%;
   font-size: 14px;
   background: rgba(0,0,0,0.6);
-  color: #f9f1d0; /* modern altın-sarımsı ton */
+  color: #f9f1d0;
   border-radius: 6px;
   border: 1px solid rgba(212,175,55,0.35);
-  font-family: "Inter", sans-serif; /* modern font */
+  font-family: "Inter", sans-serif;
   line-height: 1.6;
 }
 
@@ -64,12 +64,12 @@
 
 .char-count {
   position: absolute;
-  top: 8px; /* üst tarafa taşı */
-  right: 12px; /* sağ tarafa hizala */
+  top: 8px;
+  right: 12px;
   font-size: 11px;
   color: rgba(212,175,55,0.85);
   pointer-events: none;
-  background: rgba(0,0,0,0.3); /* daha okunaklı */
+  background: rgba(0,0,0,0.3);
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -94,11 +94,13 @@
   font-size: 14px;
   cursor: pointer;
   transition: border .2s ease, box-shadow .2s ease;
+  outline: none;
 }
 
-.subject-select:hover {
+.subject-select:hover,
+.subject-select:focus {
   border-color: #d4af37;
-  box-shadow: 0 0 0 1px rgba(212,175,55,0.25);
+  box-shadow: 0 0 0 2px rgba(212,175,55,0.35);
 }
 
 .subject-select .arrow {
@@ -122,6 +124,11 @@
   z-index: 20;
 }
 
+.subject-wrapper.open .subject-options {
+  display: block;
+  pointer-events: auto;
+}
+
 .subject-options li {
   padding: 10px 14px;
   font-size: 14px;
@@ -135,8 +142,19 @@
   color: #d4af37;
 }
 
-.subject-wrapper.open .subject-options {
-  display: block;
+/* Keyboard active option */
+.subject-options li.active {
+  background: rgba(212,175,55,0.35);
+  color: #000;
+}
+
+.subject-options li.active:hover {
+  background: rgba(212,175,55,0.45);
+  color: #000;
+}
+
+.subject-options li:focus {
+  outline: none;
 }
 
 /* ====================== SEND BUTTON ====================== */
@@ -157,8 +175,8 @@
 
 /* ====================== CONTACT FORM POPUP ====================== */
 #popupAlert {
-  position: absolute; /* form içinde göster */
-  top: 120px; /* form başlığı altı */
+  position: absolute;
+  top: 120px;
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(212, 175, 55, 0.95);
@@ -205,6 +223,3 @@
     padding: 28px 22px;
   }
 }
-
-
-
