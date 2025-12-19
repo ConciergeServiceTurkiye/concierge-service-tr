@@ -97,6 +97,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   
+  const options = Array.from(subjectOptions.querySelectorAll("li"));
+
+options.forEach((option, index) => {
+  option.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      const next = options[index + 1] || options[0];
+      next.focus();
+    }
+
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      const prev = options[index - 1] || options[options.length - 1];
+      prev.focus();
+    }
+  });
+});
+  
   /* TAB ile focus gelince aç */
 subjectSelect.addEventListener("focus", () => {
   subjectWrapper.classList.add("open");
