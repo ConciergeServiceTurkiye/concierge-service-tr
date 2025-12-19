@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const counter = form.querySelector(".char-count");
 
   /* ======================
-   SUBJECT SELECT (FIXED)
+   SUBJECT SELECT (FINAL – STABLE)
 ====================== */
 const subjectWrapper = document.querySelector(".subject-wrapper");
 const subjectSelect = document.getElementById("subjectSelect");
@@ -82,77 +82,93 @@ const options = Array.from(subjectOptions.querySelectorAll("li"));
 let isOpen = false;
 let activeIndex = -1;
 
+/* Aç */
 function openSubject() {
   subjectWrapper.classList.add("open");
+  subjectSelect.setAttribute("aria-expanded", "true");
   isOpen = true;
 }
 
+/* Kapat */
 function closeSubject() {
   subjectWrapper.classList.remove("open");
+  subjectSelect.setAttribute("aria-expanded", "false");
   isOpen = false;
   activeIndex = -1;
+  options.forEach(o => o.classList.remove("active"));
 }
 
+/* Seç */
 function selectOption(index) {
   const value = options[index].dataset.value;
   selectedSubject.textContent = value;
   subjectInput.value = value;
   closeSubject();
-  subjectSelect.focus();
 }
 
-/* Aç / kapa */
+/* Click ile aç/kapat */
 subjectSelect.addEventListener("click", e => {
   e.preventDefault();
   isOpen ? closeSubject() : openSubject();
 });
 
-/* TAB ile gelince aç */
+/* Focus ile aç */
 subjectSelect.addEventListener("focus", () => {
   openSubject();
 });
 
-/* Klavye kontrolü */
-document.addEventListener("keydown", e => {
+/* Blur olunca kapat (TAB ile çıkış için) */
+subjectSelect.addEventListener("blur", () => {
+  setTimeout(() => {
+    if (!subjectWrapper.contains(document.activeElement)) {
+      closeSubject();
+    }
+  }, 100);
+});
+
+/* KLAVYE KONTROLÜ – SADECE SELECT ÜZERİNDE */
+subjectSelect.addEventListener("keydown", e => {
   if (!isOpen) return;
 
-  if (["ArrowDown", "ArrowUp", "Enter", "Escape"].includes(e.key)) {
+  if (["ArrowDown", "ArrowUp", "Enter", "Escape", "Tab"].includes(e.key)) {
     e.preventDefault();
   }
 
   if (e.key === "ArrowDown") {
     activeIndex = (activeIndex + 1) % options.length;
-    options[activeIndex].classList.add("active");
-    options.forEach((o, i) => i !== activeIndex && o.classList.remove("active"));
   }
 
   if (e.key === "ArrowUp") {
     activeIndex =
       activeIndex <= 0 ? options.length - 1 : activeIndex - 1;
-    options[activeIndex].classList.add("active");
-    options.forEach((o, i) => i !== activeIndex && o.classList.remove("active"));
   }
 
   if (e.key === "Enter" && activeIndex > -1) {
     selectOption(activeIndex);
+    subjectSelect.focus();
   }
 
-  if (e.key === "Escape") {
+  if (e.key === "Escape" || e.key === "Tab") {
     closeSubject();
+    subjectSelect.blur();
   }
+
+  options.forEach((o, i) => {
+    o.classList.toggle("active", i === activeIndex);
+  });
 });
 
 /* Mouse ile seçim */
 options.forEach((option, index) => {
-  option.addEventListener("click", e => {
-    e.stopPropagation();
+  option.addEventListener("mousedown", e => {
+    e.preventDefault();
     selectOption(index);
   });
 });
 
-/* Dışarı tıklanınca kapat */
+/* Form dışına tıklanınca kapat */
 document.addEventListener("mousedown", e => {
-  if (!e.target.closest(".subject-wrapper")) {
+  if (!subjectWrapper.contains(e.target)) {
     closeSubject();
   }
 });
