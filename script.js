@@ -1,33 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* MOBILE NAV */
-  const hamburger = document.getElementById("hamburger");
-  const navMenu = document.getElementById("navMenu");
-  if(hamburger && navMenu) hamburger.addEventListener("click", () => navMenu.classList.toggle("active"));
-
-  /* HERO SLIDER */
-  const slider = document.getElementById("heroSlider");
-  if(slider){
-    const totalSlides = 9;
-    let currentSlide = 0;
-    const slides = [];
-    for(let i=1;i<=totalSlides;i++){
-      const slide = document.createElement("div");
-      slide.className="slide";
-      slide.style.backgroundImage=`url('assets/slider-${i}.jpg')`;
-      slider.appendChild(slide);
-      slides.push(slide);
-    }
-    slides[0].classList.add("active");
-    setInterval(()=>{
-      slides[currentSlide].classList.remove("active");
-      currentSlide=(currentSlide+1)%slides.length;
-      slides[currentSlide].classList.add("active");
-    },5000);
-  }
-
   /* ======================
-     POPUP ALERT FUNCTION
+     POPUP ALERT
   ====================== */
   const popupAlert = document.getElementById("popupAlert");
   function showPopup(message){
@@ -37,73 +11,165 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(()=> popupAlert.classList.remove("show"), 3000);
   }
 
-  /* CONTACT FORM */
+  /* ======================
+     CONTACT FORM
+  ====================== */
   const form = document.getElementById("reservation-form");
-  if(form){
-    const statusText = document.getElementById("form-status");
-    const sendBtn = form.querySelector(".send-btn");
-    const phoneInput = document.querySelector("#phone");
+  if(!form) return;
 
-    function isValidEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+  const sendBtn = form.querySelector(".send-btn");
+  const phoneInput = document.getElementById("phone");
+  const textarea = form.querySelector("textarea[name='message']");
+  const counter = form.querySelector(".char-count");
 
-    // CHAR COUNT
-    const textarea = form.querySelector("textarea[name='message']");
-    const counter = form.querySelector(".char-count");
-    textarea.addEventListener("input", ()=>{ counter.textContent = `${textarea.value.length} / 2000`; });
+  /* ======================
+     PHONE MASK (ALL COUNTRIES)
+  ====================== */
 
-    // FORM SUBMIT
-    form.addEventListener("submit", e=>{
-      e.preventDefault();
+  const BASE_MASK = "+(___) ___________";
 
-      // VALIDATION
-      if(!form.name.value.trim()){ showPopup("Full Name cannot be empty"); form.name.focus(); return; }
-      if(!isValidEmail(form.email.value)){ showPopup("Please enter a valid Email"); form.email.focus(); return; }
-      if(!phoneInput.value.trim()){ showPopup("Please enter your phone number"); phoneInput.focus(); return; }
-      if(!textarea.value.trim()){ showPopup("Please describe your request"); textarea.focus(); return; }
-
-      // SEND
-      sendBtn.disabled = true;
-      sendBtn.classList.add("sending");
-      showPopup("Sending your request...");
-
-      const data=new URLSearchParams({
-        name: form.name.value,
-        email: form.email.value,
-        phone: phoneInput.value,
-        message: textarea.value,
-        referrer: document.referrer || "Website"
-      });
-
-      fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
-        {method:"POST", body:data})
-      .then(()=>{
-        showPopup("Your request has been sent successfully.");
-        form.reset();
-        counter.textContent="0 / 2000";
-        statusText.textContent="";
-      })
-      .catch(()=>{
-        showPopup("Connection error. Please try again.");
-        statusText.textContent="";
-      })
-      .finally(()=>{
-        sendBtn.disabled=false;
-        sendBtn.classList.remove("sending");
-        sendBtn.textContent="Send";
-      });
-    });
+  function setCaret(pos){
+    requestAnimationFrame(()=> phoneInput.setSelectionRange(pos, pos));
   }
 
-  /* PRIVACY & TERMS MODALS */
-  const privacyLink=document.getElementById("privacyLink");
-  const termsLink=document.getElementById("termsLink");
-  const privacyModal=document.getElementById("privacyModal");
-  const termsModal=document.getElementById("termsModal");
-  const closeButtons=document.querySelectorAll(".close-modal");
+  function resetMask(){
+    phoneInput.value = BASE_MASK;
+    setCaret(3);
+  }
 
-  if(privacyLink && privacyModal) privacyLink.addEventListener("click", e=>{ e.preventDefault(); privacyModal.style.display="flex"; });
-  if(termsLink && termsModal) termsLink.addEventListener("click", e=>{ e.preventDefault(); termsModal.style.display="flex"; });
-  closeButtons.forEach(btn=>{ btn.addEventListener("click", ()=>{ if(privacyModal) privacyModal.style.display="none"; if(termsModal) termsModal.style.display="none"; }); });
-  document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ if(privacyModal) privacyModal.style.display="none"; if(termsModal) termsModal.style.display="none"; } });
+  resetMask();
+
+  function digitsOnly(val){
+    return val.replace(/\D/g, "");
+  }
+
+  function dialCodeToIso(dialCode){
+    const countries = window.intlTelInputGlobals.getCountryData();
+    const match = countries.find(c => c.dialCode === dialCode);
+    return match ? match.iso2 : null;
+  }
+
+  function buildMaskFromCountry(iso2, dialCode){
+    if(!window.intlTelInputUtils || !iso2) return BASE_MASK;
+
+    try {
+      const example = window.intlTelInputUtils.getExampleNumber(
+        iso2,
+        true,
+        window.intlTelInputUtils.numberFormat.NATIONAL
+      );
+
+      const digits = example.replace(/\D/g, "");
+      const blanks = digits.replace(/\d/g, "_");
+
+      return `+(${dialCode}) ${blanks}`;
+    } catch {
+      return `+(${dialCode}) ___________`;
+    }
+  }
+
+  phoneInput.addEventListener("focus", ()=>{
+    if(!phoneInput.value) resetMask();
+  });
+
+  phoneInput.addEventListener("keydown", e=>{
+    if(e.key === "Backspace"){
+      e.preventDefault();
+    }
+  });
+
+  phoneInput.addEventListener("input", ()=>{
+    let digits = digitsOnly(phoneInput.value);
+
+    if(digits.length < 1){
+      resetMask();
+      return;
+    }
+
+    // read country code (1–3 digits)
+    let dialCode = "";
+    for(let i=1;i<=3;i++){
+      const code = digits.slice(0,i);
+      if(dialCodeToIso(code)){
+        dialCode = code;
+        break;
+      }
+    }
+
+    if(!dialCode){
+      resetMask();
+      return;
+    }
+
+    const iso2 = dialCodeToIso(dialCode);
+    const mask = buildMaskFromCountry(iso2, dialCode);
+    phoneInput.value = mask;
+    setCaret(mask.indexOf("_"));
+  });
+
+  /* ======================
+     CHAR COUNT
+  ====================== */
+  textarea.addEventListener("input", ()=>{
+    counter.textContent = `${textarea.value.length} / 2000`;
+  });
+
+  function isValidEmail(email){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  /* ======================
+     FORM SUBMIT
+  ====================== */
+  form.addEventListener("submit", e=>{
+    e.preventDefault();
+
+    if(!form.name.value.trim()){
+      showPopup("Full Name cannot be empty");
+      return;
+    }
+
+    if(!isValidEmail(form.email.value)){
+      showPopup("Please enter a valid Email");
+      return;
+    }
+
+    if(phoneInput.value.includes("_")){
+      showPopup("Please enter a valid phone number");
+      return;
+    }
+
+    if(!textarea.value.trim()){
+      showPopup("Please describe your request");
+      return;
+    }
+
+    sendBtn.disabled = true;
+    showPopup("Sending your request...");
+
+    const data = new URLSearchParams({
+      name: form.name.value,
+      email: form.email.value,
+      phone: phoneInput.value,
+      message: textarea.value,
+      referrer: document.referrer || "Website"
+    });
+
+    fetch("https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec",
+      { method:"POST", body:data }
+    )
+    .then(()=>{
+      showPopup("Your request has been sent successfully.");
+      form.reset();
+      counter.textContent = "0 / 2000";
+      resetMask();
+    })
+    .catch(()=>{
+      showPopup("Connection error. Please try again.");
+    })
+    .finally(()=>{
+      sendBtn.disabled = false;
+    });
+  });
 
 });
