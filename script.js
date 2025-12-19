@@ -65,6 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
   ====================== */
   phoneInput.addEventListener("keydown", e => {
 
+    if (e.key === "+" && phoneInput.selectionStart === 0) return;
+
     /* Harfler tamamen yasak */
     if (/^[a-zA-Z]$/.test(e.key)) {
       e.preventDefault();
