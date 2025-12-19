@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     sendBtn.disabled = true;
-    showPopup("Sending your request...");
+    showPopup("Sending your request...",false);
 
     const data = new URLSearchParams({
       name: form.name.value,
