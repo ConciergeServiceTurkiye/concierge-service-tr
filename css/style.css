@@ -207,15 +207,12 @@ body {
   color:var(--gold);
 }
 
-/* PRIVATE ACCESS – 9. BİRİM */
-
-/* PRIVATE ACCESS – INNER + BOTTOM ALIGN */
 /* PRIVATE ACCESS – INNER + BOTTOM ALIGN (FIXED) */
 .footer-private{
   position:absolute;
 
-  bottom:-35px;        /* INNER'IN ALTINA İN */
-  right:20%;           /* 8. birim (10 üzerinden) */
+  bottom:-45px;        /* 1 tık daha aşağı */
+  right:10%;           /* 9. birim */
 
   font-size:13px;
   letter-spacing:1.4px;
@@ -382,6 +379,7 @@ body {
 .whatsapp-fixed img{
   width:30px;
 }
+
 
 
 
