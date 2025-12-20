@@ -76,9 +76,9 @@ body {
 .nav-menu a{
   color:var(--gold);
   text-decoration:none;
-  font-size:15.5px;
-  font-weight:600;
-  letter-spacing:.9px;
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:1px;
   transition:color .25s ease;
 }
 
@@ -269,6 +269,7 @@ body {
 .whatsapp-fixed img{
   width: 30px;
 }
+
 
 
 
