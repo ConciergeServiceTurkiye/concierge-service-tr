@@ -22,7 +22,7 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 70px;
+  height: 90px;
   background: rgba(0,0,0,0.75);
   backdrop-filter: blur(8px);
   z-index: 1000;
@@ -39,7 +39,7 @@ body {
 }
 
 .logo img {
-  height: 70px;
+  height: 90px;
 }
 
 /* MENU */
@@ -161,7 +161,7 @@ body {
 }
 
 .footer-logo img {
-  height: 70px;
+  height: 100px;
   margin-bottom: 15px;
 }
 
@@ -234,6 +234,7 @@ body {
 .whatsapp-fixed img {
   width: 48px;
 }
+
 
 
 
