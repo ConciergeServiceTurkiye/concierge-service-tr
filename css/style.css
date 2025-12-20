@@ -15,7 +15,7 @@ body {
 }
 
 /* ==================================================
-   NAVBAR (FINAL – LUXURY / CLEAN)
+   ROOT COLORS
 ================================================== */
 
 :root{
@@ -24,6 +24,10 @@ body {
   --gold-soft:#f1d97a;
 }
 
+/* ==================================================
+   NAVBAR – LUXURY
+================================================== */
+
 .navbar{
   position:fixed;
   top:0;
@@ -31,46 +35,39 @@ body {
   width:100%;
   height:var(--nav-h);
   background:rgba(0,0,0,.75);
-  backdrop-filter:blur(4px);
+  backdrop-filter:blur(6px);
   z-index:9999;
-  transition:background .25s ease,height .25s ease;
-}
-
-.navbar.scrolled{
-  background:rgba(0,0,0,.95);
 }
 
 .nav-container{
   max-width:1200px;
   height:100%;
   margin:0 auto;
-  padding:0 20px;
+  padding:0 25px;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
 
 /* LOGO */
+
 .logo{
   display:flex;
   align-items:center;
-  justify-content:center;
   height:100%;
 }
 
 .logo img{
   height:100px;
-  transform-origin:center center;
-  transition:transform .25s ease, filter .25s ease, box-shadow .25s ease;
 }
 
 /* NAV LINKS */
+
 .nav-menu{
   list-style:none;
   display:flex;
-  gap:30px;
-  margin:0;
-  padding:0;
+  align-items:center;
+  gap:32px;
 }
 
 .nav-menu a{
@@ -86,7 +83,9 @@ body {
   color:var(--gold-soft);
 }
 
-/* ====================== DROPDOWN ====================== */
+/* ==================================================
+   DROPDOWN
+================================================== */
 
 .dropdown{
   position:relative;
@@ -96,12 +95,12 @@ body {
   position:absolute;
   top:100%;
   left:0;
-  margin-top:8px;
-  min-width:220px;
+  margin-top:10px;
+  min-width:230px;
   background:rgba(0,0,0,.95);
   padding:8px 0;
   list-style:none;
-  border:1px solid rgba(212,175,55,.25);
+  border:1px solid rgba(212,175,55,.3);
   opacity:0;
   visibility:hidden;
   transform:translateY(10px);
@@ -111,7 +110,7 @@ body {
 
 .dropdown-menu li a{
   display:block;
-  padding:12px 22px;
+  padding:13px 22px;
   font-size:15px;
   font-weight:600;
   letter-spacing:.8px;
@@ -130,46 +129,44 @@ body {
   transform:translateY(0);
 }
 
-/* ======================
+/* ==================================================
    HAMBURGER (MOBILE)
-====================== */
+================================================== */
 
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
+.hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
 }
 
-.hamburger span {
-  width: 24px;
-  height: 2px;
-  background: var(--gold);
+.hamburger span{
+  width:24px;
+  height:2px;
+  background:var(--gold);
 }
 
-@media (max-width: 992px) {
+@media (max-width:992px){
 
-  .hamburger {
-    display: flex;
+  .hamburger{display:flex;}
+
+  .nav-menu{
+    position:absolute;
+    top:var(--nav-h);
+    right:0;
+    width:100%;
+    background:#000;
+    flex-direction:column;
+    display:none;
+    padding:20px 0;
   }
 
-  .nav-menu {
-    position: absolute;
-    top: var(--nav-h);
-    right: 0;
-    background: #000;
-    flex-direction: column;
-    width: 100%;
-    display: none;
-    padding: 20px 0;
+  .nav-menu.active{
+    display:flex;
   }
 
-  .nav-menu.active {
-    display: flex;
-  }
-
-  .dropdown-menu {
-    position: static;
+  .dropdown-menu{
+    position:static;
     opacity:1;
     visibility:visible;
     transform:none;
@@ -182,92 +179,101 @@ body {
    FOOTER
 ================================================== */
 
-.luxury-footer {
-  background: #050505;
-  padding: 40px 20px;
-  text-align: center;
+.luxury-footer{
+  position:relative;
+  background:#050505;
+  padding:50px 20px;
+  text-align:center;
 }
 
-.footer-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.footer-inner{
+  max-width:1100px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
-.footer-logo img {
-  height: 100px;
-  margin-bottom: 15px;
+/* FOOTER CONTENT */
+
+.footer-logo img{
+  height:100px;
+  margin-bottom:15px;
 }
 
-.footer-copy {
-  font-size: 13px;
-  opacity: 0.75;
-  margin-bottom: 15px;
+.footer-copy{
+  font-size:13px;
+  opacity:.75;
+  margin-bottom:15px;
 }
 
-.footer-links a {
-  color: var(--gold);
-  font-size: 12px;
-  text-decoration: none;
-  margin: 0 5px;
+.footer-links a{
+  color:var(--gold);
+  font-size:12px;
+  text-decoration:none;
+  margin:0 6px;
 }
 
-.footer-social img {
-  height: 20px;
-  margin: 0 6px;
+.footer-social{
+  margin-top:15px;
 }
-/* ======================
-   FOOTER BOTTOM COPYRIGHT
-====================== */
 
-.footer-bottom {
-  margin-top: 25px;
-  text-align: left;
-  font-size: 13px;
-  color: #d4af37;
-  letter-spacing: 0.5px;
-  opacity: 0.9;
-  text-shadow:
-    0 0 6px rgba(212,175,55,0.45),
-    0 0 12px rgba(212,175,55,0.25);
+.footer-social img{
+  height:20px;
+  margin:0 6px;
 }
 
 /* ==================================================
-   MODAL (Privacy / Terms)
+   COPYRIGHT – FIXED LEFT
 ================================================== */
 
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+.footer-copyright{
+  position:absolute;
+  left:20px;
+  bottom:20px;
+  font-size:13px;
+  color:var(--gold);
+  letter-spacing:.6px;
+  opacity:.9;
+  text-shadow:
+    0 0 6px rgba(212,175,55,.45),
+    0 0 12px rgba(212,175,55,.25);
 }
 
-.modal.active {
-  display: flex;
+/* ==================================================
+   MODAL
+================================================== */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
 }
 
-.modal-content {
-  background: #0d0d0d;
-  padding: 40px;
-  max-width: 500px;
-  width: 90%;
-  position: relative;
-  border: 1px solid rgba(212,175,55,0.35);
+.modal.active{
+  display:flex;
 }
 
-.close-modal {
-  position: absolute;
-  top: 12px;
-  right: 15px;
-  font-size: 24px;
-  color: var(--gold);
-  cursor: pointer;
+.modal-content{
+  background:#0d0d0d;
+  padding:40px;
+  max-width:500px;
+  width:90%;
+  position:relative;
+  border:1px solid rgba(212,175,55,.35);
+}
+
+.close-modal{
+  position:absolute;
+  top:12px;
+  right:15px;
+  font-size:24px;
+  color:var(--gold);
+  cursor:pointer;
 }
 
 /* ==================================================
@@ -275,20 +281,15 @@ body {
 ================================================== */
 
 .whatsapp-fixed{
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
+  position:fixed;
+  right:20px;
+  bottom:20px;
   background:#25D366;
   padding:14px;
   border-radius:50%;
-  z-index: 999;
+  z-index:999;
 }
 
 .whatsapp-fixed img{
-  width: 30px;
+  width:30px;
 }
-
-
-
-
-
