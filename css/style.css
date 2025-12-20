@@ -15,93 +15,132 @@ body {
 }
 
 /* ==================================================
-   NAVBAR
+   NAVBAR (FINAL – LUXURY / CLEAN)
 ================================================== */
 
-.navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 90px;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
+:root{
+  --nav-h:100px;
+  --gold:#d4af37;
+  --gold-soft:#f1d97a;
 }
 
-.nav-container {
-  max-width: 1300px;
-  margin: 0 auto;
-  padding: 0 25px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.navbar{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:var(--nav-h);
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(4px);
+  z-index:9999;
+  transition:background .25s ease,height .25s ease;
 }
 
-.logo img {
-  height: 90px;
+.navbar.scrolled{
+  background:rgba(0,0,0,.95);
 }
 
-/* MENU */
-.nav-menu {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  gap: 28px;
+.nav-container{
+  max-width:1200px;
+  height:100%;
+  margin:0 auto;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-.nav-menu a {
-  color: #d4af37;
-  font-size: 15.5px;
-  font-weight: 600;
-  letter-spacing: 0.9px;
-  text-decoration: none;
-  transition: all 0.3s ease;
+/* LOGO */
+.logo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100%;
 }
 
-.nav-menu a:hover {
-  color: #f5d77a;
+.logo img{
+  height:70px;
+  transform-origin:center center;
+  transition:transform .25s ease, filter .25s ease, box-shadow .25s ease;
 }
 
-/* DROPDOWN */
-.dropdown {
-  position: relative;
+.logo:hover img{
+  transform:scale(1.43);
+  filter:brightness(1.15);
+  box-shadow:
+    0 0 0 1px var(--gold),
+    0 0 12px rgba(212,175,55,.45);
 }
 
-.dropdown-menu {
-  position: absolute;
-  top: 100%; margin-top: 8px;
-  left: 0;
-  background: #0d0d0d;
-  border: 1px solid rgba(212,175,55,0.3);
-  list-style: none;
-  min-width: 220px;
-  display: none;
-  z-index: 999;
+/* NAV LINKS */
+.nav-menu{
+  list-style:none;
+  display:flex;
+  gap:30px;
+  margin:0;
+  padding:0;
 }
 
-.dropdown-menu li{ padding: 0;}
-
-.dropdown-menu li a {
-  font-size: 14px
-  color: #d4af37;
-  font-weight: 500;
-  letter-spacing: 0.7px;
-  transition: all 0.25s ease;
+.nav-menu a{
+  color:var(--gold);
+  text-decoration:none;
+  font-size:15.5px;
+  font-weight:600;
+  letter-spacing:.9px;
+  transition:color .25s ease;
 }
 
-.dropdown-menu li a:hover {
-  background: rgba(212,175,55,0.10);
-  color: #f5d77a;
+.nav-menu a:hover{
+  color:var(--gold-soft);
 }
 
-.dropdown:hover .dropdown-menu {
-  display: block;
+/* ====================== DROPDOWN ====================== */
+
+.dropdown{
+  position:relative;
 }
 
-/* ==================================================
+.dropdown-menu{
+  position:absolute;
+  top:100%;
+  left:0;
+  margin-top:8px;
+  min-width:220px;
+  background:rgba(0,0,0,.95);
+  padding:8px 0;
+  list-style:none;
+  border:1px solid rgba(212,175,55,.25);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(10px);
+  transition:.25s ease;
+  z-index:999;
+}
+
+.dropdown-menu li a{
+  display:block;
+  padding:10px 20px;
+  font-size:14px;
+  font-weight:500;
+  letter-spacing:.7px;
+  color:var(--gold);
+  transition:background .2s ease,color .2s ease;
+}
+
+.dropdown-menu li a:hover{
+  background:rgba(212,175,55,.15);
+  color:var(--gold-soft);
+}
+
+.dropdown:hover .dropdown-menu{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+}
+
+/* ======================
    HAMBURGER (MOBILE)
-================================================== */
+====================== */
 
 .hamburger {
   display: none;
@@ -113,7 +152,7 @@ body {
 .hamburger span {
   width: 24px;
   height: 2px;
-  background: #d4af37;
+  background: var(--gold);
 }
 
 @media (max-width: 992px) {
@@ -124,7 +163,7 @@ body {
 
   .nav-menu {
     position: absolute;
-    top: 70px;
+    top: var(--nav-h);
     right: 0;
     background: #000;
     flex-direction: column;
@@ -139,9 +178,12 @@ body {
 
   .dropdown-menu {
     position: static;
-    border: none;
+    opacity:1;
+    visibility:visible;
+    transform:none;
+    border:none;
+    margin-top:0;
   }
-
 }
 
 /* ==================================================
@@ -171,7 +213,7 @@ body {
 }
 
 .footer-links a {
-  color: #d4af37;
+  color: var(--gold);
   font-size: 12px;
   text-decoration: none;
   margin: 0 5px;
@@ -214,7 +256,7 @@ body {
   top: 12px;
   right: 15px;
   font-size: 24px;
-  color: #d4af37;
+  color: var(--gold);
   cursor: pointer;
 }
 
@@ -222,12 +264,16 @@ body {
    WHATSAPP BUTTON
 ================================================== */
 
-.whatsapp-fixed {position: fixed;right: 20px;bottom: 20px;background:#25D366; padding:14px;border-radius:50%; z-index: 999;}
-.whatsapp-fixed img {width: 30px;}
+.whatsapp-fixed{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background:#25D366;
+  padding:14px;
+  border-radius:50%;
+  z-index: 999;
+}
 
-
-
-
-
-
-
+.whatsapp-fixed img{
+  width: 30px;
+}
