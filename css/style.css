@@ -59,7 +59,7 @@ body {
 }
 
 .logo img{
-  height:70px;
+  height:100px;
   transform-origin:center center;
   transition:transform .25s ease, filter .25s ease, box-shadow .25s ease;
 }
@@ -67,9 +67,6 @@ body {
 .logo:hover img{
   transform:scale(1.43);
   filter:brightness(1.15);
-  box-shadow:
-    0 0 0 1px var(--gold),
-    0 0 12px rgba(212,175,55,.45);
 }
 
 /* NAV LINKS */
@@ -277,3 +274,4 @@ body {
 .whatsapp-fixed img{
   width: 30px;
 }
+
