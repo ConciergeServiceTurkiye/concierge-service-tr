@@ -227,11 +227,13 @@ body {
   position: fixed;
   right: 20px;
   bottom: 80px;
+  background:#25D366;
   z-index: 999;
 }
 
 .whatsapp-fixed img {
   width: 48px;
 }
+
 
 
