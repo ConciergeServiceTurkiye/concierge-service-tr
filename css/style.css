@@ -176,13 +176,13 @@ body {
 }
 
 /* ==================================================
-   FOOTER
+   FOOTER – LUXURY COMPACT LAYOUT
 ================================================== */
 
 .luxury-footer{
   position:relative;
   background:#050505;
-  padding:50px 20px;
+  padding:35px 20px 70px; /* YÜKSEKLİK AZALTILDI */
   text-align:center;
 }
 
@@ -194,69 +194,94 @@ body {
   align-items:center;
 }
 
-/* FOOTER CONTENT */
+/* LOGO */
 
 .footer-logo img{
-  height:100px;
-  margin-bottom:15px;
+  height:110px;
+  margin-bottom:12px;
 }
 
-.footer-copy{
-  font-size:13px;
-  opacity:.75;
-  margin-bottom:15px;
-}
+/* TAGLINE */
 
-.footer-links a{
+.footer-tagline{
+  font-size:14px;
   color:var(--gold);
+  letter-spacing:.8px;
+  margin-bottom:6px;
+}
+
+.footer-world{
   font-size:12px;
-  text-decoration:none;
-  margin:0 6px;
-}
-
-.footer-social{
-  margin-top:15px;
-}
-
-.footer-social img{
-  height:20px;
-  margin:0 6px;
+  color:var(--gold-soft);
+  letter-spacing:1px;
+  opacity:.85;
 }
 
 /* ==================================================
-   FOOTER COPYRIGHT + LINKS – FIXED LEFT
+   COPYRIGHT + SOCIAL – FIXED BOTTOM
 ================================================== */
+
 .footer-copyright{
   position:absolute;
   left:20px;
+  right:20px;
   bottom:20px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 
   font-size:13px;
   color:var(--gold);
   letter-spacing:.6px;
-  opacity:.95;
-
-  display:flex;
-  align-items:center;
-  gap:6px;
 
   text-shadow:
     0 0 6px rgba(212,175,55,.45),
     0 0 12px rgba(212,175,55,.25);
 }
 
-.footer-copyright a{
-  color:var(--gold);
-  text-decoration:none;
-  transition:color .25s ease;
+/* LEFT */
+
+.footer-left{
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 
-.footer-copyright a:hover{
+.footer-left a{
+  color:var(--gold);
+  text-decoration:none;
+}
+
+.footer-left a:hover{
   color:var(--gold-soft);
 }
 
-.footer-copyright .dot{
-  opacity:.8;
+.dot{opacity:.8}
+
+/* RIGHT SOCIAL */
+
+.footer-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.footer-follow{
+  font-size:12px;
+  letter-spacing:1px;
+  opacity:.85;
+}
+
+.footer-right img{
+  width:18px;
+  opacity:.85;
+  transition:opacity .25s ease, transform .25s ease;
+}
+
+.footer-right img:hover{
+  opacity:1;
+  transform:scale(1.15);
 }
 
 /* ==================================================
@@ -356,6 +381,7 @@ body {
 .whatsapp-fixed img{
   width:30px;
 }
+
 
 
 
