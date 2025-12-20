@@ -223,17 +223,9 @@ body {
    WHATSAPP BUTTON
 ================================================== */
 
-.whatsapp-fixed {
-  position: fixed;
-  right: 20px;
-  bottom: 80px;
-  background:#25D366;
-  z-index: 999;
-}
+.whatsapp-fixed {position: fixed;right: 20px;bottom: 20px;background:#25D366; padding:14px;border-radius:50%; z-index: 999;}
+.whatsapp-fixed img {width: 30px;}
 
-.whatsapp-fixed img {
-  width: 48px;
-}
 
 
 
