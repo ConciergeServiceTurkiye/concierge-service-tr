@@ -73,10 +73,11 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
   color:var(--gold);
 }
 
-/* 9.1 BİRİM – PRIVATE (YAPIŞIK DEĞİL) */
+/* 9.1 BİRİM – PRIVATE (EKRANDAN %10 İÇERİ) */
 .footer-private{
   justify-self:end;
-  padding-right:14px;     /* ⬅️ 9.1 hissi */
+  position:relative;
+  right:10%;                 /* ⬅️ ekranın %10’u kadar sola */
   font-size:13px;
   letter-spacing:1.4px;
   color:var(--gold);
@@ -119,4 +120,5 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 /*=== WHATSAPP ===*/
 .whatsapp-fixed{position:fixed;right:20px;bottom:20px;background:#25D366;padding:14px;border-radius:50%;z-index:999}
 .whatsapp-fixed img{width:30px}
+
 
