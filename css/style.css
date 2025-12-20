@@ -50,17 +50,31 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 
 /*=== SOCIAL ICONS (FIXED & VISIBLE) ===*/
 .footer-bottom-right{position:relative;right:10%;display:flex;gap:14px;z-index:5}
+/* === FOOTER SOCIAL ICONS – GOLD FIX === */
+
 .footer-bottom-right img{
-height:20px;
-filter:brightness(0) invert(1); /* siyah PNG -> beyaz */
-opacity:.9;
-transition:transform .25s,filter .25s,box-shadow .25s
+  height:20px;
+  filter:
+    brightness(0)
+    invert(1)
+    sepia(1)
+    saturate(6)
+    hue-rotate(15deg);
+  opacity:.95;
+  transition:transform .25s ease,filter .25s ease,drop-shadow .25s ease;
 }
+
 .footer-bottom-right img:hover{
-transform:translateY(-2px);
-filter:brightness(0) invert(1) sepia(1) saturate(6) hue-rotate(15deg);
-box-shadow:0 0 10px rgba(212,175,55,.6)
+  transform:translateY(-2px);
+  filter:
+    brightness(0)
+    invert(1)
+    sepia(1)
+    saturate(8)
+    hue-rotate(15deg);
+  drop-shadow:0 0 8px rgba(212,175,55,.75);
 }
+
 
 /*=== MODAL ===*/
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:9999}
@@ -74,3 +88,4 @@ box-shadow:0 0 10px rgba(212,175,55,.6)
 /*=== WHATSAPP ===*/
 .whatsapp-fixed{position:fixed;right:20px;bottom:20px;background:#25D366;padding:14px;border-radius:50%;z-index:999}
 .whatsapp-fixed img{width:30px}
+
