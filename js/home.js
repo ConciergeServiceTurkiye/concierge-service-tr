@@ -8,15 +8,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (slider) {
 
     const images = [
-      "assets/slider-1.png",
-      "assets/slider-2.png",
-      "assets/slider-3.png",
-      "assets/slider-4.png",
-      "assets/slider-5.png",
-      "assets/slider-6.png",
-      "assets/slider-7.png",
-      "assets/slider-8.png",
-      "assets/slider-9.png"
+      "assets/slider-1.jpg",
+      "assets/slider-2.jpg",
+      "assets/slider-3.jpg",
+      "assets/slider-4.jpg",
+      "assets/slider-5.jpg",
+      "assets/slider-6.jpg",
+      "assets/slider-7.jpg",
+      "assets/slider-8.jpg",
+      "assets/slider-9.jpg"
     ];
 
     let currentIndex = 0;
@@ -88,5 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
 
 });
