@@ -207,15 +207,16 @@ body {
 /* PRIVATE ACCESS – 9. BİRİM */
 
 /* PRIVATE ACCESS – INNER + BOTTOM ALIGN */
-.footer-private-access{
-  position:absolute;            /* akıştan çıkar */
-  bottom:25px;                  /* ikonlarla aynı yükseklik */
-  right:10%;                    /* 8. birim */
-  
+/* PRIVATE ACCESS – INNER + BOTTOM ALIGN (FIXED) */
+.footer-private{
+  position:absolute;        /* footer-inner referans */
+  bottom:0;                 /* inner'ın en altı */
+  right:10%;                /* 8. birim */
+
   font-size:13px;
   letter-spacing:1.4px;
 
-  color:var(--gold) !important; /* BEYAZI EZ */
+  color:var(--gold);        /* ALTIN */
   opacity:.95;
 
   text-shadow:
@@ -377,6 +378,7 @@ body {
 .whatsapp-fixed img{
   width:30px;
 }
+
 
 
 
