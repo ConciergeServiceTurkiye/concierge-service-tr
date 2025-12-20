@@ -64,11 +64,6 @@ body {
   transition:transform .25s ease, filter .25s ease, box-shadow .25s ease;
 }
 
-.logo:hover img{
-  transform:scale(1.43);
-  filter:brightness(1.15);
-}
-
 /* NAV LINKS */
 .nav-menu{
   list-style:none;
@@ -274,4 +269,5 @@ body {
 .whatsapp-fixed img{
   width: 30px;
 }
+
 
