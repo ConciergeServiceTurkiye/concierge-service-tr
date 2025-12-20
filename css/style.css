@@ -208,12 +208,14 @@ body {
 
 .footer-private-access{
   position:absolute;
-  right:0;
+  right:10%;           /* 8. birim */
   bottom:-30px;
   font-size:13px;
-  letter-spacing:1.3px;
-  color:var(--gold-soft);
-  opacity:.9;
+  letter-spacing:1.4px;
+  color:var(--gold);   /* NET ALTIN */
+  opacity:.95;
+  text-shadow:
+    0 0 6px rgba(212,175,55,.35);
 }
 
 /* ==================================================
@@ -258,33 +260,42 @@ body {
 /* RIGHT – 9. BİRİM (SOCIAL) */
 
 .footer-bottom-right{
+  position:relative;
+  right:10%;           /* 8. birim */
   display:flex;
   gap:14px;
+  z-index:5;           /* WhatsApp üstü */
 }
 
 /* ICONS */
 
 .footer-bottom-right img{
   height:20px;
+
   filter:
     sepia(1)
-    saturate(3)
-    hue-rotate(10deg)
-    brightness(0.9);
+    saturate(5)
+    hue-rotate(15deg)
+    brightness(1.05);
+
+  opacity:.9;
+
   transition:
-    filter .25s ease,
     transform .25s ease,
+    filter .25s ease,
     box-shadow .25s ease;
 }
 
 .footer-bottom-right img:hover{
+  transform:translateY(-2px);
   filter:
     sepia(1)
-    saturate(4)
-    hue-rotate(10deg)
-    brightness(1.2);
-  transform:translateY(-2px);
-  box-shadow:0 0 10px rgba(212,175,55,.5);
+    saturate(6)
+    hue-rotate(15deg)
+    brightness(1.25);
+
+  box-shadow:
+    0 0 10px rgba(212,175,55,.6);
 }
 
 /* ==================================================
@@ -362,4 +373,5 @@ body {
 .whatsapp-fixed img{
   width:30px;
 }
+
 
