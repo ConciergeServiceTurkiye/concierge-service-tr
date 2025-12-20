@@ -31,62 +31,25 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 .dropdown-menu{position:static;opacity:1;visibility:visible;transform:none;border:none;margin-top:0}
 }
 
-/*=== FOOTER ===*/
+/*==================================================
+  FOOTER – FINAL & CLEAN
+==================================================*/
 .luxury-footer{position:relative;background:#050505;padding:35px 0 110px}
-.footer-inner{width:100%;position:relative;text-align:center}
+
+/*=== FOOTER INNER ===*/
+.footer-inner{width:100%;text-align:center}
 .footer-center{max-width:1100px;margin:0 auto}
-.footer-logo img{height:95px}
-.footer-tagline{margin-top:10px;font-size:14px;letter-spacing:1.2px;color:var(--gold)}
+.footer-logo img{height:90px}
 
-/*=== PRIVATE ACCESS ===*/
-.footer-private{position:absolute;bottom:-45px;right:9%;font-size:13px;letter-spacing:1.4px;color:var(--gold);opacity:.95;text-shadow:0 0 6px rgba(212,175,55,.4)}
-
-/*=== FOOTER BOTTOM ===*/
-.footer-bottom{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:space-between;align-items:center;padding:0 25px}
-.footer-bottom-left{font-size:13px;color:var(--gold);letter-spacing:.6px}
-.footer-bottom-left a{color:var(--gold);text-decoration:none}
-.footer-bottom-left a:hover{color:var(--gold-soft)}
-.divider{margin:0 6px;opacity:.7}
-
-/*=== SOCIAL ICONS (FIXED & VISIBLE) ===*/
-.footer-bottom-right{position:relative;right:10%;display:flex;gap:14px;z-index:5}
-/* === FOOTER SOCIAL ICONS – GOLD FIX === */
-
-.footer-bottom-right img{
-  height:20px;
-  filter:
-    brightness(0)
-    invert(1)
-    sepia(1)
-    saturate(6)
-    hue-rotate(15deg);
-  opacity:.95;
-  transition:transform .25s ease,filter .25s ease,drop-shadow .25s ease;
-}
-
-.footer-bottom-right img:hover{
-  transform:translateY(-2px);
-  filter:
-    brightness(0)
-    invert(1)
-    sepia(1)
-    saturate(8)
-    hue-rotate(15deg);
-  drop-shadow:0 0 8px rgba(212,175,55,.75);
-}
-/* === INNER BOTTOM SINGLE LINE (FINAL) === */
-.footer-inner{
-  position:relative;
-}
-
-.footer-bottom-inner{
+/*=== INNER ALT SATIR (1 | 5.5 | 9) ===*/
+.footer-inner-bottom{
+  margin-top:14px;
   display:grid;
-  grid-template-columns:1fr auto 1fr; /* 1 - 5.5 - 9 */
+  grid-template-columns:1fr auto 1fr;
   align-items:center;
-  margin-top:18px;
 }
 
-/* LEFT – 1. BİRİM */
+/* 1. BİRİM */
 .footer-trust{
   justify-self:start;
   font-size:13px;
@@ -95,13 +58,15 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
   white-space:nowrap;
 }
 
-/* CENTER – VIP (DOKUNMA) */
-.footer-bottom-inner .footer-tagline{
+/* ORTA */
+.footer-tagline{
   justify-self:center;
-  margin-top:0;
+  font-size:14px;
+  letter-spacing:1.2px;
+  color:var(--gold);
 }
 
-/* RIGHT – 9. BİRİM */
+/* 9. BİRİM */
 .footer-private{
   justify-self:end;
   font-size:13px;
@@ -111,7 +76,28 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
   white-space:nowrap;
 }
 
+/*==================================================
+  FOOTER BOTTOM (DOKUNULMADI)
+==================================================*/
+.footer-bottom{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:space-between;align-items:center;padding:0 25px}
+.footer-bottom-left{font-size:13px;color:var(--gold);letter-spacing:.6px}
+.footer-bottom-left a{color:var(--gold);text-decoration:none}
+.footer-bottom-left a:hover{color:var(--gold-soft)}
+.divider{margin:0 6px;opacity:.7}
 
+/*=== SOCIAL ICONS – GOLD VISIBLE ===*/
+.footer-bottom-right{position:relative;right:10%;display:flex;gap:14px;z-index:5}
+.footer-bottom-right img{
+  height:20px;
+  filter:brightness(0) invert(1) sepia(1) saturate(6) hue-rotate(15deg);
+  opacity:.95;
+  transition:.25s;
+}
+.footer-bottom-right img:hover{
+  transform:translateY(-2px);
+  filter:brightness(0) invert(1) sepia(1) saturate(8) hue-rotate(15deg);
+  drop-shadow:0 0 8px rgba(212,175,55,.75);
+}
 
 /*=== MODAL ===*/
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:9999}
@@ -125,5 +111,3 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 /*=== WHATSAPP ===*/
 .whatsapp-fixed{position:fixed;right:20px;bottom:20px;background:#25D366;padding:14px;border-radius:50%;z-index:999}
 .whatsapp-fixed img{width:30px}
-
-
