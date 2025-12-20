@@ -1,0 +1,180 @@
+/* ==================================================
+   CONTACT PAGE – HERO
+================================================== */
+
+.contact-hero {
+  min-height: calc(100vh - 70px);
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
+    url("../assets/contact-bg.jpg") center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.contact-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 0 20px;
+}
+
+.contact-hero-content h1 {
+  font-size: 48px;
+  color: #d4af37;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.contact-hero-content p {
+  font-size: 16px;
+  color: #eee;
+  opacity: 0.9;
+}
+
+/* ==================================================
+   CONTACT FORM SECTION
+================================================== */
+
+.contact-section {
+  background: #0b0b0b;
+  padding: 90px 20px;
+}
+
+.contact-container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ==================================================
+   FORM ELEMENTS
+================================================== */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: #d4af37;
+  font-size: 13px;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: #111;
+  border: 1px solid rgba(212,175,55,0.35);
+  padding: 14px 14px;
+  font-size: 14px;
+  color: #fff;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #aaa;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #d4af37;
+}
+
+/* ==================================================
+   TEXTAREA + CHARACTER COUNTER
+================================================== */
+
+.textarea-group {
+  position: relative;
+}
+
+.textarea-group textarea {
+  resize: none;
+  min-height: 140px;
+  padding-bottom: 38px;
+}
+
+.char-count {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-size: 12px;
+  color: #d4af37;
+  opacity: 0.8;
+}
+
+/* ==================================================
+   SUBMIT BUTTON
+================================================== */
+
+.submit-btn {
+  margin-top: 15px;
+  padding: 15px;
+  background: transparent;
+  border: 1px solid #d4af37;
+  color: #d4af37;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #d4af37;
+  color: #000;
+}
+
+/* ==================================================
+   POPUP ALERT
+================================================== */
+
+#popupAlert {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: #111;
+  color: #fff;
+  padding: 14px 18px;
+  border-left: 4px solid #d4af37;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+  z-index: 9999;
+}
+
+#popupAlert.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 768px) {
+
+  .contact-hero-content h1 {
+    font-size: 36px;
+  }
+
+  .contact-section {
+    padding: 70px 15px;
+  }
+
+}
