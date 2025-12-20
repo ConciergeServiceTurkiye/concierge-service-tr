@@ -224,20 +224,39 @@ body {
 }
 
 /* ==================================================
-   COPYRIGHT – FIXED LEFT
+   FOOTER COPYRIGHT + LINKS – FIXED LEFT
 ================================================== */
-
 .footer-copyright{
   position:absolute;
   left:20px;
   bottom:20px;
+
   font-size:13px;
   color:var(--gold);
   letter-spacing:.6px;
-  opacity:.9;
+  opacity:.95;
+
+  display:flex;
+  align-items:center;
+  gap:6px;
+
   text-shadow:
     0 0 6px rgba(212,175,55,.45),
     0 0 12px rgba(212,175,55,.25);
+}
+
+.footer-copyright a{
+  color:var(--gold);
+  text-decoration:none;
+  transition:color .25s ease;
+}
+
+.footer-copyright a:hover{
+  color:var(--gold-soft);
+}
+
+.footer-copyright .dot{
+  opacity:.8;
 }
 
 /* ==================================================
@@ -293,3 +312,4 @@ body {
 .whatsapp-fixed img{
   width:30px;
 }
+
