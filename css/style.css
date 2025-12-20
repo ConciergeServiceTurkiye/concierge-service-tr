@@ -1,388 +1,76 @@
-/* ==================================================
-   GLOBAL RESET & BASE
-================================================== */
+/*=== GLOBAL RESET & BASE ===*/
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#000;color:#fff}
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/*=== ROOT ===*/
+:root{--nav-h:100px;--gold:#d4af37;--gold-soft:#f1d97a}
+
+/*=== NAVBAR ===*/
+.navbar{position:fixed;top:0;left:0;width:100%;height:var(--nav-h);background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:9999}
+.nav-container{max-width:1200px;height:100%;margin:0 auto;padding:0 25px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;height:100%}
+.logo img{height:100px}
+.nav-menu{list-style:none;display:flex;align-items:center;gap:32px}
+.nav-menu a{color:var(--gold);text-decoration:none;font-size:17px;font-weight:700;letter-spacing:1px;transition:.25s}
+.nav-menu a:hover{color:var(--gold-soft)}
+
+/*=== DROPDOWN ===*/
+.dropdown{position:relative}
+.dropdown-menu{position:absolute;top:100%;left:0;margin-top:10px;min-width:230px;background:rgba(0,0,0,.95);padding:8px 0;list-style:none;border:1px solid rgba(212,175,55,.3);opacity:0;visibility:hidden;transform:translateY(10px);transition:.25s;z-index:999}
+.dropdown-menu li a{display:block;padding:13px 22px;font-size:15px;font-weight:600;letter-spacing:.8px;color:var(--gold);transition:.2s}
+.dropdown-menu li a:hover{background:rgba(212,175,55,.15);color:var(--gold-soft)}
+.dropdown:hover .dropdown-menu{opacity:1;visibility:visible;transform:translateY(0)}
+
+/*=== HAMBURGER ===*/
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{width:24px;height:2px;background:var(--gold)}
+@media(max-width:992px){
+.hamburger{display:flex}
+.nav-menu{position:absolute;top:var(--nav-h);right:0;width:100%;background:#000;flex-direction:column;display:none;padding:20px 0}
+.nav-menu.active{display:flex}
+.dropdown-menu{position:static;opacity:1;visibility:visible;transform:none;border:none;margin-top:0}
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #000;
-  color: #fff;
-}
+/*=== FOOTER ===*/
+.luxury-footer{position:relative;background:#050505;padding:35px 0 110px}
+.footer-inner{width:100%;position:relative;text-align:center}
+.footer-center{max-width:1100px;margin:0 auto}
+.footer-logo img{height:110px}
+.footer-tagline{margin-top:10px;font-size:14px;letter-spacing:1.2px;color:var(--gold)}
 
-/* ==================================================
-   ROOT
-================================================== */
+/*=== PRIVATE ACCESS ===*/
+.footer-private{position:absolute;bottom:-45px;right:9%;font-size:13px;letter-spacing:1.4px;color:var(--gold);opacity:.95;text-shadow:0 0 6px rgba(212,175,55,.4)}
 
-:root{
-  --nav-h:100px;
-  --gold:#d4af37;
-  --gold-soft:#f1d97a;
-}
+/*=== FOOTER BOTTOM ===*/
+.footer-bottom{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:space-between;align-items:center;padding:0 25px}
+.footer-bottom-left{font-size:13px;color:var(--gold);letter-spacing:.6px}
+.footer-bottom-left a{color:var(--gold);text-decoration:none}
+.footer-bottom-left a:hover{color:var(--gold-soft)}
+.divider{margin:0 6px;opacity:.7}
 
-/* ==================================================
-   NAVBAR – LUXURY
-================================================== */
-
-.navbar{
-  position:fixed;
-  top:0; left:0;
-  width:100%;
-  height:var(--nav-h);
-  background:rgba(0,0,0,.75);
-  backdrop-filter:blur(6px);
-  z-index:9999;
-}
-
-.nav-container{
-  max-width:1200px;
-  height:100%;
-  margin:0 auto;
-  padding:0 25px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-/* LOGO */
-
-.logo{
-  display:flex;
-  align-items:center;
-  height:100%;
-}
-
-.logo img{
-  height:100px;
-}
-
-/* NAV LINKS */
-
-.nav-menu{
-  list-style:none;
-  display:flex;
-  align-items:center;
-  gap:32px;
-}
-
-.nav-menu a{
-  color:var(--gold);
-  text-decoration:none;
-  font-size:17px;
-  font-weight:700;
-  letter-spacing:1px;
-  transition:color .25s ease;
-}
-
-.nav-menu a:hover{
-  color:var(--gold-soft);
-}
-
-/* ==================================================
-   DROPDOWN
-================================================== */
-
-.dropdown{ position:relative; }
-
-.dropdown-menu{
-  position:absolute;
-  top:100%; left:0;
-  margin-top:10px;
-  min-width:230px;
-  background:rgba(0,0,0,.95);
-  padding:8px 0;
-  list-style:none;
-  border:1px solid rgba(212,175,55,.3);
-  opacity:0;
-  visibility:hidden;
-  transform:translateY(10px);
-  transition:.25s ease;
-  z-index:999;
-}
-
-.dropdown-menu li a{
-  display:block;
-  padding:13px 22px;
-  font-size:15px;
-  font-weight:600;
-  letter-spacing:.8px;
-  color:var(--gold);
-  transition:background .2s ease,color .2s ease;
-}
-
-.dropdown-menu li a:hover{
-  background:rgba(212,175,55,.15);
-  color:var(--gold-soft);
-}
-
-.dropdown:hover .dropdown-menu{
-  opacity:1;
-  visibility:visible;
-  transform:translateY(0);
-}
-
-/* ==================================================
-   HAMBURGER
-================================================== */
-
-.hamburger{
-  display:none;
-  flex-direction:column;
-  gap:5px;
-  cursor:pointer;
-}
-
-.hamburger span{
-  width:24px;
-  height:2px;
-  background:var(--gold);
-}
-
-@media (max-width:992px){
-  .hamburger{display:flex;}
-
-  .nav-menu{
-    position:absolute;
-    top:var(--nav-h);
-    right:0;
-    width:100%;
-    background:#000;
-    flex-direction:column;
-    display:none;
-    padding:20px 0;
-  }
-
-  .nav-menu.active{ display:flex; }
-
-  .dropdown-menu{
-    position:static;
-    opacity:1;
-    visibility:visible;
-    transform:none;
-    border:none;
-    margin-top:0;
-  }
-}
-
-/* ==================================================
-   FOOTER – CLEAN & POSITIONAL
-================================================== */
-
-.luxury-footer{
-  position:relative;
-  background:#050505;
-  padding:35px 0 110px;
-}
-
-/* ======================
-   INNER (LOGO + CENTER)
-====================== */
-
-.footer-inner{
-  width:100%;              /* EKRANI REFERANS AL */
-  position:relative;
-  text-align:center;
-}
-.footer-center{
-  max-width:1100px;
-  margin:0 auto;
-}
-
-/* LOGO */
-
-.footer-logo img{
-  height:110px;
-}
-
-/* VIP TEXT */
-
-.footer-tagline{
-  margin-top:10px;
-  font-size:14px;
-  letter-spacing:1.2px;
-  color:var(--gold);
-}
-
-/* PRIVATE ACCESS – INNER + BOTTOM ALIGN (FIXED) */
-.footer-private{
-  position:absolute;
-
-  bottom:-45px;        /* 1 tık daha aşağı */
-  right:9%;           /* 9. birim */
-
-  font-size:13px;
-  letter-spacing:1.4px;
-
-  color:var(--gold);
-  opacity:.95;
-
-  text-shadow:
-    0 0 6px rgba(212,175,55,.4);
-}
-
-/* ==================================================
-   FOOTER BOTTOM BAR (FULL WIDTH)
-================================================== */
-
-.footer-bottom{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:20px;
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  padding:0 25px;
-}
-
-/* LEFT – 1. BİRİM */
-
-.footer-bottom-left{
-  font-size:13px;
-  color:var(--gold);
-  letter-spacing:.6px;
-}
-
-.footer-bottom-left a{
-  color:var(--gold);
-  text-decoration:none;
-}
-
-.footer-bottom-left a:hover{
-  color:var(--gold-soft);
-}
-
-.divider{
-  margin:0 6px;
-  opacity:.7;
-}
-
-/* RIGHT – 9. BİRİM (SOCIAL) */
-
-.footer-bottom-right{
-  position:relative;
-  right:10%;           /* 8. birim */
-  display:flex;
-  gap:14px;
-  z-index:5;           /* WhatsApp üstü */
-}
-
-/* ICONS */
-
+/*=== SOCIAL ICONS (FIXED & VISIBLE) ===*/
+.footer-bottom-right{position:relative;right:10%;display:flex;gap:14px;z-index:5}
 .footer-bottom-right img{
-  height:20px;
-
-  filter:
-    sepia(1)
-    saturate(5)
-    hue-rotate(15deg)
-    brightness(1.05);
-
-  opacity:.9;
-
-  transition:
-    transform .25s ease,
-    filter .25s ease,
-    box-shadow .25s ease;
+height:20px;
+filter:brightness(0) invert(1); /* siyah PNG -> beyaz */
+opacity:.9;
+transition:transform .25s,filter .25s,box-shadow .25s
 }
-
 .footer-bottom-right img:hover{
-  transform:translateY(-2px);
-  filter:
-    sepia(1)
-    saturate(6)
-    hue-rotate(15deg)
-    brightness(1.25);
-
-  box-shadow:
-    0 0 10px rgba(212,175,55,.6);
+transform:translateY(-2px);
+filter:brightness(0) invert(1) sepia(1) saturate(6) hue-rotate(15deg);
+box-shadow:0 0 10px rgba(212,175,55,.6)
 }
 
-/* ==================================================
-   MODAL – LUXURY
-================================================== */
+/*=== MODAL ===*/
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:9999}
+.modal.active{display:flex}
+.modal-content{background:#0d0d0d;padding:50px 45px;max-width:620px;width:90%;position:relative;border:1px solid rgba(212,175,55,.45);box-shadow:0 0 0 1px rgba(212,175,55,.15),0 0 25px rgba(212,175,55,.15)}
+.modal-content h2{color:var(--gold);font-size:24px;margin-bottom:20px;letter-spacing:1px}
+.modal-content p{color:var(--gold);font-size:16px;line-height:1.75;opacity:.9}
+.close-modal{position:absolute;top:15px;right:18px;font-size:30px;color:var(--gold);cursor:pointer;transition:.25s}
+.close-modal:hover{color:var(--gold-soft);transform:scale(1.25);text-shadow:0 0 12px rgba(212,175,55,.6)}
 
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.8);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
-
-.modal.active{ display:flex; }
-
-.modal-content{
-  background:#0d0d0d;
-  padding:50px 45px;
-  max-width:620px;
-  width:90%;
-  position:relative;
-  border:1px solid rgba(212,175,55,.45);
-  box-shadow:
-    0 0 0 1px rgba(212,175,55,.15),
-    0 0 25px rgba(212,175,55,.15);
-}
-
-.modal-content h2{
-  color:var(--gold);
-  font-size:24px;
-  margin-bottom:20px;
-  letter-spacing:1px;
-}
-
-.modal-content p{
-  color:var(--gold);
-  font-size:16px;
-  line-height:1.75;
-  opacity:.9;
-}
-
-.close-modal{
-  position:absolute;
-  top:15px;
-  right:18px;
-  font-size:30px;
-  color:var(--gold);
-  cursor:pointer;
-  transition:color .25s ease, transform .25s ease, text-shadow .25s ease;
-}
-
-.close-modal:hover{
-  color:var(--gold-soft);
-  transform:scale(1.25);
-  text-shadow:0 0 12px rgba(212,175,55,.6);
-}
-
-/* ==================================================
-   WHATSAPP
-================================================== */
-
-.whatsapp-fixed{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  background:#25D366;
-  padding:14px;
-  border-radius:50%;
-  z-index:999;
-}
-
-.whatsapp-fixed img{
-  width:30px;
-}
-
-
-
-
-
-
-
+/*=== WHATSAPP ===*/
+.whatsapp-fixed{position:fixed;right:20px;bottom:20px;background:#25D366;padding:14px;border-radius:50%;z-index:999}
+.whatsapp-fixed img{width:30px}
