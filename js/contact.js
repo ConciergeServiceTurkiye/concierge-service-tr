@@ -1,18 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ======================
-     INLINE FORM ALERT
-     (NO LAYOUT SHIFT)
+     ELEMENTS
   ====================== */
-
+  const form = document.getElementById("contactForm");
   const alertBox = document.getElementById("formInlineAlert");
 
-  function showInlineAlert(message) {
-    if (!alertBox) return;
+  const nameField = document.getElementById("name");
+  const emailField = document.getElementById("email");
+  const phoneField = document.getElementById("phone");
+  const subjectHidden = document.getElementById("subject");
+  const messageField = document.getElementById("message");
+  const charCount = document.getElementById("charCount");
 
-    alertBox.textContent = message;
-    alertBox.style.opacity = "1";
+  const customSelect = document.getElementById("customSubject");
+  const trigger = customSelect.querySelector(".select-trigger");
+  const options = customSelect.querySelectorAll(".select-options li");
+
+  if (!form) return;
+
+  /* ======================
+     INLINE ALERT
+     (NO LAYOUT SHIFT)
+  ====================== */
+  function showInlineAlert(text, success = false) {
+    alertBox.textContent = text;
     alertBox.style.visibility = "visible";
+    alertBox.style.opacity = "1";
+    alertBox.style.borderColor = success ? "#d4af37" : "#c9a24d";
 
     setTimeout(() => {
       alertBox.style.opacity = "0";
@@ -21,25 +36,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ======================
-     FORM ELEMENTS
-  ====================== */
-
-  const form = document.getElementById("contactForm");
-  const nameField = document.getElementById("name");
-  const emailField = document.getElementById("email");
-  const phoneField = document.getElementById("phone");
-  const subjectField = document.getElementById("subject");
-  const messageField = document.getElementById("message");
-  const charCount = document.getElementById("charCount");
-
-  if (!form) return;
-
-  /* ======================
      CHARACTER COUNTER (2000)
   ====================== */
-
   messageField.setAttribute("maxlength", "2000");
-
   charCount.textContent = "0 / 2000";
 
   messageField.addEventListener("input", () => {
@@ -47,10 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ======================
-     PHONE INPUT
-     NUMERIC ONLY (+ CTRL+A)
+     PHONE INPUT (NUMERIC)
   ====================== */
-
   phoneField.addEventListener("keydown", e => {
     if (
       e.ctrlKey ||
@@ -59,50 +56,42 @@ document.addEventListener("DOMContentLoaded", () => {
     ) {
       return;
     }
-
     if (!/^[0-9]$/.test(e.key)) {
       e.preventDefault();
     }
   });
 
   /* ======================
-     FORM VALIDATION
+     CUSTOM SUBJECT DROPDOWN
   ====================== */
-
-  /* ===============================
-   FORM SUBMIT → GOOGLE APPS SCRIPT
-================================ */
-
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const formData = new FormData(form);
-
-  fetch(form.action, {
-    method: "POST",
-    body: formData,
-  })
-  .then(res => res.text())
-  .then(response => {
-    if (response === "success") {
-      showInlineAlert("Your private concierge request has been received.", true);
-      form.reset();
-      charCount.textContent = "0 / 2000";
-      document.querySelector(".select-trigger").textContent = "Select a subject";
-    } else {
-      showInlineAlert("Something went wrong. Please try again.");
-    }
-  })
-  .catch(() => {
-    showInlineAlert("Connection error. Please try again later.");
+  trigger.addEventListener("click", () => {
+    customSelect.classList.toggle("open");
   });
-});
 
+  options.forEach(option => {
+    option.addEventListener("click", () => {
+      trigger.textContent = option.textContent;
+      subjectHidden.value = option.dataset.value;
+      customSelect.classList.remove("open");
+    });
+  });
+
+  document.addEventListener("click", e => {
+    if (!customSelect.contains(e.target)) {
+      customSelect.classList.remove("open");
+    }
+  });
+
+  /* ======================
+     FORM SUBMIT
+  ====================== */
+  form.addEventListener("submit", e => {
+    e.preventDefault();
 
     const name = nameField.value.trim();
     const email = emailField.value.trim();
     const phone = phoneField.value.trim();
-    const subject = subjectField.value;
+    const subject = subjectHidden.value.trim();
     const message = messageField.value.trim();
 
     if (!name) {
@@ -136,58 +125,29 @@ form.addEventListener("submit", function (e) {
       return;
     }
 
-    /* ======================
-       SUCCESS
-    ====================== */
+    const formData = new FormData(form);
 
-    showInlineAlert("Your private concierge request has been received.");
-
-    form.reset();
-    charCount.textContent = "0 / 2000";
+    fetch(form.action, {
+      method: "POST",
+      body: formData
+    })
+    .then(res => res.text())
+    .then(response => {
+      if (response === "success") {
+        showInlineAlert(
+          "Your private concierge request has been received.",
+          true
+        );
+        form.reset();
+        charCount.textContent = "0 / 2000";
+        trigger.textContent = "Select a subject";
+      } else {
+        showInlineAlert("Something went wrong. Please try again.");
+      }
+    })
+    .catch(() => {
+      showInlineAlert("Connection error. Please try again later.");
+    });
   });
 
 });
-/* ===============================
-   CUSTOM SUBJECT DROPDOWN
-================================ */
-
-const customSelect = document.getElementById("customSubject");
-const trigger = customSelect.querySelector(".select-trigger");
-const options = customSelect.querySelectorAll(".select-options li");
-const hiddenSubject = document.getElementById("subject");
-
-trigger.addEventListener("click", () => {
-  customSelect.classList.toggle("open");
-});
-
-options.forEach(option => {
-  option.addEventListener("click", () => {
-    trigger.textContent = option.textContent;
-    hiddenSubject.value = option.dataset.value;
-    customSelect.classList.remove("open");
-  });
-});
-
-/* CLICK OUTSIDE CLOSE */
-document.addEventListener("click", e => {
-  if (!customSelect.contains(e.target)) {
-    customSelect.classList.remove("open");
-  }
-});
-/* ===============================
-   CUSTOM SUBJECT DROPDOWN
-================================ */
-
-const subjectTrigger = document.querySelector(".select-trigger");
-const subjectOptions = document.querySelectorAll(".select-options li");
-const subjectHiddenInput = document.getElementById("subject");
-
-subjectOptions.forEach(option => {
-  option.addEventListener("click", () => {
-    subjectTrigger.textContent = option.textContent;
-    subjectHiddenInput.value = option.dataset.value;
-  });
-});
-
-
-
