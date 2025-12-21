@@ -147,4 +147,19 @@ document.addEventListener("click", e => {
     customSelect.classList.remove("open");
   }
 });
+/* ===============================
+   CUSTOM SUBJECT DROPDOWN
+================================ */
+
+const subjectTrigger = document.querySelector(".select-trigger");
+const subjectOptions = document.querySelectorAll(".select-options li");
+const subjectHiddenInput = document.getElementById("subject");
+
+subjectOptions.forEach(option => {
+  option.addEventListener("click", () => {
+    subjectTrigger.textContent = option.textContent;
+    subjectHiddenInput.value = option.dataset.value;
+  });
+});
+
 
