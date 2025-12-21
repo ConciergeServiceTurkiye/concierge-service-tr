@@ -1,51 +1,61 @@
 /* ==================================================
-   CONTACT PAGE – HERO
+   CONTACT PAGE – HERO + FORM (FINAL)
+   Navbar’a dokunulmaz
 ================================================== */
 
 .contact-hero {
   min-height: calc(100vh - var(--nav-h));
+  padding-top: var(--nav-h);
   background:
     linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
     url("../assets/contact-bg.jpg") center / cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   position: relative;
-}
-
-.contact-hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
-  padding: 0 20px;
-}
-
-.contact-hero-content h1 {
-  font-size: 48px;
-  color: #d4af37;
-  margin-bottom: 15px;
-  letter-spacing: 1px;
-}
-
-.contact-hero-content p {
-  font-size: 16px;
-  color: #eee;
-  opacity: 0.9;
 }
 
 /* ==================================================
-   CONTACT FORM SECTION
+   CONTACT FORM WRAPPER (GOLD FRAME)
 ================================================== */
 
-.contact-section {
-  background: #0b0b0b;
-  padding: 90px 20px;
+.contact-form-wrapper {
+  position: relative;
+  z-index: 3;
+  max-width: 620px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 45px 40px 40px;
+  background: rgba(10,10,10,0.88);
+  border: 1.5px solid #d4af37;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px rgba(212,175,55,0.25),
+    0 0 35px rgba(212,175,55,0.15);
 }
 
-.contact-container {
-  max-width: 640px;
-  margin: 0 auto;
+/* ==================================================
+   FORM HEADER
+================================================== */
+
+.contact-form-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contact-form-header h1 {
+  font-size: 28px;
+  color: #d4af37;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.form-subline {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: rgba(212,175,55,0.75);
+  text-transform: uppercase;
 }
 
 /* ==================================================
@@ -75,7 +85,7 @@ form {
 .form-group textarea {
   background: #111;
   border: 1px solid rgba(212,175,55,0.35);
-  padding: 14px 14px;
+  padding: 14px;
   font-size: 14px;
   color: #fff;
   outline: none;
@@ -169,62 +179,12 @@ form {
 
 @media (max-width: 768px) {
 
-  .contact-hero-content h1 {
-    font-size: 36px;
+  .contact-form-wrapper {
+    padding: 35px 25px 30px;
   }
 
-  .contact-section {
-    padding: 70px 15px;
+  .contact-form-header h1 {
+    font-size: 24px;
   }
 
-
 }
-/* ==========================================
-   CONTACT FORM – HERO CENTERED
-========================================== */
-
-.contact-form-wrapper {
-  position: relative;
-  z-index: 3;
-  max-width: 620px;
-  width: 90%;
-  margin: 0 auto;
-  padding: 45px 40px 40px;
-  background: rgba(10,10,10,0.88);
-  border: 1.5px solid #d4af37;
-  border-radius: 14px;
-  box-shadow:
-    0 0 0 1px rgba(212,175,55,0.25),
-    0 0 35px rgba(212,175,55,0.15);
-}
-
-/* HERO CENTERING */
-.contact-hero {
-  min-height: calc(100vh - var(--nav-h));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* HEADER */
-.contact-form-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.contact-form-header h1 {
-  font-size: 28px;
-  color: #d4af37;
-  letter-spacing: 1px;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
-.form-subline {
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: rgba(212,175,55,0.75);
-  text-transform: uppercase;
-}
-
-
