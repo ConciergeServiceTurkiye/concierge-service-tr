@@ -120,3 +120,31 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+/* ===============================
+   CUSTOM SUBJECT DROPDOWN
+================================ */
+
+const customSelect = document.getElementById("customSubject");
+const trigger = customSelect.querySelector(".select-trigger");
+const options = customSelect.querySelectorAll(".select-options li");
+const hiddenSubject = document.getElementById("subject");
+
+trigger.addEventListener("click", () => {
+  customSelect.classList.toggle("open");
+});
+
+options.forEach(option => {
+  option.addEventListener("click", () => {
+    trigger.textContent = option.textContent;
+    hiddenSubject.value = option.dataset.value;
+    customSelect.classList.remove("open");
+  });
+});
+
+/* CLICK OUTSIDE CLOSE */
+document.addEventListener("click", e => {
+  if (!customSelect.contains(e.target)) {
+    customSelect.classList.remove("open");
+  }
+});
+
