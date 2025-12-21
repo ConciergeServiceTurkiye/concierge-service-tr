@@ -50,6 +50,13 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
   display: grid;
   grid-template-columns: repeat(10, 1fr); /* 10 birimlik grid */
 }
+/* FOOTER LOGO */
+.footer-logo img {
+  height: 90px; /* Footer içindeki logo boyutu */
+  max-width: 100%; /* Taşmasın */
+  display: block;
+  margin: 0 auto;
+}
 
 /* VIP ve Private Access satırı */
 .footer-inner-row {
@@ -149,6 +156,7 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 /*=== WHATSAPP ===*/
 .whatsapp-fixed{position:fixed;right:20px;bottom:20px;background:#25D366;padding:14px;border-radius:50%;z-index:999}
 .whatsapp-fixed img{width:30px}
+
 
 
 
