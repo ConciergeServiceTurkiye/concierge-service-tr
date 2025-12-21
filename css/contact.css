@@ -331,5 +331,38 @@ textarea::-webkit-scrollbar-track {
 .submit-btn:active {
   transform: scale(0.97);
 }
+/* ==========================================
+   SUBJECT DROPDOWN – REMOVE BLUE HOVER
+========================================== */
+
+#subject {
+  background-color: rgba(0, 0, 0, 0.95);
+  color: #d4af37;
+  border: 1px solid rgba(212,175,55,0.45);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* OPTIONS */
+#subject option {
+  background-color: rgba(0, 0, 0, 0.95);
+  color: #d4af37;
+}
+
+/* HOVER & SELECTED STATE (BEST POSSIBLE OVERRIDE) */
+#subject option:hover,
+#subject option:focus,
+#subject option:checked {
+  background-color: rgba(212,175,55,0.15) !important;
+  color: #f1d97a !important;
+}
+
+/* REMOVE DEFAULT BLUE SELECTION (WINDOWS) */
+#subject::-ms-value {
+  background: transparent;
+  color: #d4af37;
+}
+
 
 
