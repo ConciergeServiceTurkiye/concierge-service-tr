@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showPopup("Your request has been sent successfully.");
 
     form.reset();
-    charCount.textContent = "0 / 500";
+    charCount.textContent = "0 / 2000";
   });
 
 
@@ -154,3 +154,4 @@ phoneInput.addEventListener("keydown", function (e) {
     e.preventDefault();
   }
 });
+
