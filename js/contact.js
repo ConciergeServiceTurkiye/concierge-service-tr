@@ -69,8 +69,35 @@ document.addEventListener("DOMContentLoaded", () => {
      FORM VALIDATION
   ====================== */
 
-  form.addEventListener("submit", e => {
-    e.preventDefault();
+  /* ===============================
+   FORM SUBMIT → GOOGLE APPS SCRIPT
+================================ */
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+
+  fetch(form.action, {
+    method: "POST",
+    body: formData,
+  })
+  .then(res => res.text())
+  .then(response => {
+    if (response === "success") {
+      showInlineAlert("Your private concierge request has been received.", true);
+      form.reset();
+      charCount.textContent = "0 / 2000";
+      document.querySelector(".select-trigger").textContent = "Select a subject";
+    } else {
+      showInlineAlert("Something went wrong. Please try again.");
+    }
+  })
+  .catch(() => {
+    showInlineAlert("Connection error. Please try again later.");
+  });
+});
+
 
     const name = nameField.value.trim();
     const email = emailField.value.trim();
@@ -161,5 +188,6 @@ subjectOptions.forEach(option => {
     subjectHiddenInput.value = option.dataset.value;
   });
 });
+
 
 
