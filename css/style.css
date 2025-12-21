@@ -42,21 +42,11 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 }
 
 /*=== FOOTER INNER ===*/
-.footer-inner {
-  width: 100vw; /* Tüm ekranı kaplasın */
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 40px 20px 10px;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr); /* 10 birimlik grid */
-}
+.footer-inner {display: grid; grid-template-columns: repeat(10, 1fr); width: 100vw; padding: 0; margin: 0 auto; poisiton: relative;}
+
 /* FOOTER LOGO */
-.footer-logo img {
-  height: 90px; /* Footer içindeki logo boyutu */
-  max-width: 100%; /* Taşmasın */
-  display: block;
-  margin: 0 auto;
-}
+.footer-logo{grid-column: 5 / 7; justify-self:center; align-self: start;}
+.footer-logo img { height: 90px; max-width: 100%; display: block;}
 
 /* VIP ve Private Access satırı */
 .footer-inner-row {
@@ -66,14 +56,14 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
   grid-column: 5 / 7;
   justify-self: center;
   font-size: 15px;
-  color: var(--gold);
+  color: var(--gold); margin-top: 5px;
 }
 .footer-private {
   grid-column: 9 / 10;
   justify-self: end;
   font-size: 13px;
   color: var(--gold);
-  text-align: right;
+  text-align: center;
 }
 
 /* ALTIN ÇİZGİ */
@@ -156,6 +146,7 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 /*=== WHATSAPP ===*/
 .whatsapp-fixed{position:fixed;right:20px;bottom:20px;background:#25D366;padding:14px;border-radius:50%;z-index:999}
 .whatsapp-fixed img{width:30px}
+
 
 
 
