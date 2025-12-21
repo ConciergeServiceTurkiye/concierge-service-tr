@@ -1,76 +1,111 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* ======================
-     POPUP ALERT
+     INLINE FORM ALERT
+     (NO LAYOUT SHIFT)
   ====================== */
-  const popupAlert = document.getElementById("popupAlert");
 
-  function showPopup(message) {
-    if (!popupAlert) return;
-    popupAlert.textContent = message;
-    popupAlert.classList.add("show");
+  const alertBox = document.getElementById("formInlineAlert");
+
+  function showInlineAlert(message) {
+    if (!alertBox) return;
+
+    alertBox.textContent = message;
+    alertBox.style.opacity = "1";
+    alertBox.style.visibility = "visible";
 
     setTimeout(() => {
-      popupAlert.classList.remove("show");
-    }, 3000);
+      alertBox.style.opacity = "0";
+      alertBox.style.visibility = "hidden";
+    }, 3500);
   }
 
   /* ======================
-     CHARACTER COUNTER
+     FORM ELEMENTS
   ====================== */
+
+  const form = document.getElementById("contactForm");
+  const nameField = document.getElementById("name");
+  const emailField = document.getElementById("email");
+  const phoneField = document.getElementById("phone");
+  const subjectField = document.getElementById("subject");
   const messageField = document.getElementById("message");
   const charCount = document.getElementById("charCount");
 
-  if (messageField && charCount) {
-    messageField.addEventListener("input", () => {
-      charCount.textContent = `${messageField.value.length} / 500`;
-    });
-  }
+  if (!form) return;
+
+  /* ======================
+     CHARACTER COUNTER (2000)
+  ====================== */
+
+  messageField.setAttribute("maxlength", "2000");
+
+  charCount.textContent = "0 / 2000";
+
+  messageField.addEventListener("input", () => {
+    charCount.textContent = `${messageField.value.length} / 2000`;
+  });
+
+  /* ======================
+     PHONE INPUT
+     NUMERIC ONLY (+ CTRL+A)
+  ====================== */
+
+  phoneField.addEventListener("keydown", e => {
+    if (
+      e.ctrlKey ||
+      e.metaKey ||
+      ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(e.key)
+    ) {
+      return;
+    }
+
+    if (!/^[0-9]$/.test(e.key)) {
+      e.preventDefault();
+    }
+  });
 
   /* ======================
      FORM VALIDATION
   ====================== */
-  const form = document.getElementById("contactForm");
-
-  if (!form) return;
 
   form.addEventListener("submit", e => {
     e.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const subject = document.getElementById("subject").value;
+    const name = nameField.value.trim();
+    const email = emailField.value.trim();
+    const phone = phoneField.value.trim();
+    const subject = subjectField.value;
     const message = messageField.value.trim();
 
     if (!name) {
-      showPopup("Please enter your full name.");
+      showInlineAlert("Please enter your full name.");
       return;
     }
 
     if (!email) {
-      showPopup("Please enter your email address.");
+      showInlineAlert("Please enter your email address.");
       return;
     }
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      showPopup("Please enter a valid email address.");
+      showInlineAlert("Please enter a valid email address.");
       return;
     }
 
     if (!phone) {
-      showPopup("Please enter your phone number.");
+      showInlineAlert("Please enter your phone number.");
       return;
     }
 
     if (!subject) {
-      showPopup("Please select a subject.");
+      showInlineAlert("Please select a subject.");
       return;
     }
 
     if (!message) {
-      showPopup("Please enter your request details.");
+      showInlineAlert("Please enter your request details.");
       return;
     }
 
@@ -78,80 +113,10 @@ document.addEventListener("DOMContentLoaded", () => {
        SUCCESS
     ====================== */
 
-    showPopup("Your request has been sent successfully.");
+    showInlineAlert("Your private concierge request has been received.");
 
     form.reset();
     charCount.textContent = "0 / 2000";
   });
 
-
 });
-
-const form = document.getElementById("contactForm");
-const alertBox = document.getElementById("formInlineAlert");
-const textarea = document.getElementById("message");
-const charCount = document.getElementById("charCount");
-const phoneInput = document.getElementById("phone");
-
-/* ===============================
-   INLINE VALIDATION
-================================ */
-
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const phone = phoneInput.value.trim();
-  const subject = document.getElementById("subject").value;
-  const message = textarea.value.trim();
-
-  if (!name || !email || !phone || !subject || !message) {
-    showInlineAlert("Please complete all required fields.");
-    return;
-  }
-
-  showInlineAlert("Your private request has been received.", true);
-  form.reset();
-  charCount.textContent = "0 / 2000";
-});
-
-function showInlineAlert(text, success = false) {
-  alertBox.textContent = text;
-  alertBox.style.display = "block";
-  alertBox.style.borderColor = success ? "#d4af37" : "#c9a24d";
-
-  setTimeout(() => {
-    alertBox.style.display = "none";
-  }, 3500);
-}
-
-/* ===============================
-   TEXTAREA COUNTER (2000)
-================================ */
-
-textarea.setAttribute("maxlength", "2000");
-
-textarea.addEventListener("input", () => {
-  charCount.textContent = `${textarea.value.length} / 2000`;
-});
-
-/* ===============================
-   PHONE INPUT – NUMERIC ONLY
-   (CTRL+A works)
-================================ */
-
-phoneInput.addEventListener("keydown", function (e) {
-  if (
-    e.ctrlKey ||
-    e.metaKey ||
-    ["Backspace", "ArrowLeft", "ArrowRight", "Delete", "Tab"].includes(e.key)
-  ) {
-    return;
-  }
-
-  if (!/^[0-9]$/.test(e.key)) {
-    e.preventDefault();
-  }
-});
-
