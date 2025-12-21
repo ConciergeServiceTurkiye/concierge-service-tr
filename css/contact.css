@@ -3,7 +3,7 @@
 ================================================== */
 
 .contact-hero {
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - var(--nav-h));
   background:
     linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
     url("../assets/contact-bg.jpg") center / cover no-repeat;
@@ -176,5 +176,6 @@ form {
   .contact-section {
     padding: 70px 15px;
   }
+
 
 }
