@@ -34,75 +34,114 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 /*==================================================
   FOOTER
 ==================================================*/
-.luxury-footer{position:relative;background:#050505;padding:35px 0 110px}
+/*=== FOOTER ===*/
+.luxury-footer {
+  position: relative;
+  background: #050505;
+  padding: 20px 0 10px;
+}
 
 /*=== FOOTER INNER ===*/
-.footer-inner{width:100%;max-width:1400px;margin:0 auto; padding:40px 20px 20px}
-.footer-center{max-width:1100px;margin:0 auto;text-align:center}
-.footer-logo img{height:90px}
-
-/*==================================================
-  INNER ALT SATIR — EKRAN REFERANSLI (FIX)
-==================================================*/
-/*=== INNER ALT SATIR (1 | 5.5 | 9.1) – MILIM AYAR ===*/
-.footer-inner-bottom{display:grid; grid-template-columns: repeat (10, auto 1fr); align-items:end; margin-top:20px;}
-
-/* 1. BİRİM */
-.footer-trust{
-  justify-self:start;
-  font-size:13px;
-  letter-spacing:1px;
-  color:rgba(212,175,55,.85);
-  white-space:nowrap;
+.footer-inner {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 20px 10px;
+}
+.footer-center {
+  text-align: center;
+}
+.footer-logo img {
+  height: 90px;
 }
 
-/* ORTA – VIP (DOKUNMADIK) */
-.footer-tagline{grid-column: 5 / 7; text-align: center; color: $bfa45a; font-size:14px; font-weight: 400;}
-
-/* 9.1 BİRİM – PRIVATE (EKRANDAN %10 İÇERİ) */
-.footer-private{grid-column:8 / 9; text-align:right; color:#bfa45a; font-size: 13px; font-weight:300;}
-
-/* === FOOTER INNER / BOTTOM DIVIDER === */
-.luxury-footer::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:65px; /* footer-bottom’un hemen üstü */
-  height:1px;
-
-  background:linear-gradient(
-    to right,
-    transparent,
-    rgba(212,175,55,.45),
-    rgba(212,175,55,.85),
-    rgba(212,175,55,.45),
-    transparent
-  );
-
-  opacity:.9;
+/*=== VIP ve Private Access satırı ===*/
+.footer-inner-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  margin-top: 15px;
+}
+.footer-tagline {
+  justify-self: center;
+  font-size: 15px;
+  color: var(--gold);
+}
+.footer-private {
+  justify-self: end;
+  font-size: 13px;
+  color: var(--gold);
+  text-align: right;
 }
 
-/*==================================================
-  FOOTER BOTTOM (AYNEN KALDI)
-==================================================*/
-.footer-bottom{width:100%; display:grid; grid-template-columns:repeat(10, 1fr); align-items:center; padding:6px 20px;min-height:23px}
-.footer-bottom-left{grid-column:1 / 4; display:flex; align-items:center; gap:6px; white-space:nowrap; font-size:15px; color:var(--gold);}
-.footer-bottom-left a{color:var(--gold);text-decoration:none;font-size:17px}
-.footer-bottom-left a:hover{color:var(--gold-soft)}
-.divider{opacity:.9}
-.footer-bottom-left{display:grid; grid-template-columns: repeat(10, 1fr); align-items:center; gap:6px;}
-.footer-bottom-trust{grid-column:5 / 7; text-align: center; white-space:bowrap; font-size:11px; color:var(--gold); opacity:.95;}
-
-/*=== SOCIAL ICONS ===*/
-.footer-bottom-right{grid-column:8 / 9; display:flex; gap:12px; justify-content:flex-end;}
-.footer-bottom-right img{width:20px; height:20px; filter:sepia(1) saturate(6) hue-rotate(15deg) brightness(1.15); transition: transform .25s ease, filter .25 ease, box-shadow .25s ease;}
-.footer-bottom-right a:hover img{transform:scale(1.15); filter: sepia(1) saturate(7) hue-rotate(15deg) brightness(1.35); box-shadow: 0 0 10px rgba(212,175,55,.6);}
-.footer-bottom-right img:hover{
-  transform:translateY(-2px);
-  filter:brightness(0) invert(1) sepia(1) saturate(8) hue-rotate(15deg);
-  box-shadow:0 0 8px rgba(212,175,55,.7);
+/*=== ALTIN ÇİZGİ ===*/
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212,175,55,.45), rgba(212,175,55,.85), rgba(212,175,55,.45), transparent);
+  margin: 10px 0;
 }
+
+/*=== FOOTER BOTTOM ===*/
+.footer-bottom {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  align-items: center;
+  padding: 2px 20px;
+  min-height: 23px;
+}
+
+/* Sol 1. birim */
+.footer-bottom-left {
+  grid-column: 1 / 4;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-size: 15px;
+  color: rgba(212,175,55,.85);
+}
+.footer-bottom-left a {
+  color: rgba(212,175,55,.95);
+  text-decoration: none;
+  font-size: 15px;
+}
+.footer-bottom-left a:hover {
+  color: var(--gold-soft);
+}
+.divider {
+  opacity: .9;
+}
+
+/* Orta 5-6 birim */
+.footer-bottom-trust {
+  grid-column: 5 / 7;
+  text-align: center;
+  font-size: 15px;
+  color: rgba(212,175,55,.95);
+  white-space: nowrap;
+}
+
+/* Sağ 9. birim - sosyal ikonlar */
+.footer-bottom-right {
+  grid-column: 8 / 10;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.footer-bottom-right img {
+  width: 20px;
+  height: 20px;
+  filter: sepia(1) saturate(6) hue-rotate(15deg) brightness(1.15);
+  transition: transform .25s ease, filter .25s ease, box-shadow .25s ease;
+}
+.footer-bottom-right a:hover img {
+  transform: scale(1.2);
+  filter: sepia(1) saturate(7) hue-rotate(15deg) brightness(1.35);
+  box-shadow: 0 0 10px rgba(212,175,55,.6);
+}
+
 
 /*=== MODAL ===*/
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:center;justify-content:center;z-index:9999}
@@ -116,6 +155,7 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 /*=== WHATSAPP ===*/
 .whatsapp-fixed{position:fixed;right:20px;bottom:20px;background:#25D366;padding:14px;border-radius:50%;z-index:999}
 .whatsapp-fixed img{width:30px}
+
 
 
 
