@@ -62,6 +62,27 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 /* 9.1 BİRİM – PRIVATE (EKRANDAN %10 İÇERİ) */
 .footer-private{grid-column:8 / 9; text-align:right; color:#bfa45a; font-size: 13px; font-weight:300;}
 
+/* === FOOTER INNER / BOTTOM DIVIDER === */
+.luxury-footer::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:65px; /* footer-bottom’un hemen üstü */
+  height:1px;
+
+  background:linear-gradient(
+    to right,
+    transparent,
+    rgba(212,175,55,.45),
+    rgba(212,175,55,.85),
+    rgba(212,175,55,.45),
+    transparent
+  );
+
+  opacity:.9;
+}
+
 /*==================================================
   FOOTER BOTTOM (AYNEN KALDI)
 ==================================================*/
@@ -95,6 +116,7 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 /*=== WHATSAPP ===*/
 .whatsapp-fixed{position:fixed;right:20px;bottom:20px;background:#25D366;padding:14px;border-radius:50%;z-index:999}
 .whatsapp-fixed img{width:30px}
+
 
 
 
