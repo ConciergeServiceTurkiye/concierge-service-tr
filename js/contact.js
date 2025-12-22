@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ======================
-     ELEMENTS
-  ====================== */
   const form = document.getElementById("contactForm");
   if (!form) return;
 
@@ -37,9 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ======================
      CHARACTER COUNTER
   ====================== */
-  messageField.setAttribute("maxlength", "2000");
   charCount.textContent = "0 / 2000";
-
   messageField.addEventListener("input", () => {
     charCount.textContent = `${messageField.value.length} / 2000`;
   });
@@ -54,25 +49,17 @@ document.addEventListener("DOMContentLoaded", () => {
       ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(e.key)
     ) return;
 
-    if (!/^[0-9]$/.test(e.key)) {
-      e.preventDefault();
-    }
+    if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   });
 
-  /* ===============================
-     CUSTOM SUBJECT DROPDOWN
-  ================================ */
+  /* ======================
+     CUSTOM SELECT LOGIC
+  ====================== */
 
   let currentIndex = -1;
 
   function openDropdown() {
     customSelect.classList.add("open");
-
-    // 🔴 KRİTİK FIX
-    if (currentIndex === -1) {
-      currentIndex = 0;
-    }
-    setActiveOption();
   }
 
   function closeDropdown() {
@@ -81,36 +68,34 @@ document.addEventListener("DOMContentLoaded", () => {
     clearActive();
   }
 
-  function toggleDropdown() {
-    customSelect.classList.contains("open")
-      ? closeDropdown()
-      : openDropdown();
+  function move(direction) {
+    if (!customSelect.classList.contains("open")) {
+      openDropdown();
+      currentIndex = direction === 1 ? 0 : options.length - 1;
+    } else {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = options.length - 1;
+      if (currentIndex >= options.length) currentIndex = 0;
+    }
+
+    setActive();
   }
 
-  function moveOption(direction) {
-    currentIndex += direction;
-
-    if (currentIndex < 0) currentIndex = options.length - 1;
-    if (currentIndex >= options.length) currentIndex = 0;
-
-    setActiveOption();
-  }
-
-  function setActiveOption() {
+  function setActive() {
     clearActive();
-    const active = options[currentIndex];
-    active.classList.add("active");
-    active.scrollIntoView({ block: "nearest" });
+    const opt = options[currentIndex];
+    opt.classList.add("active");
+    opt.scrollIntoView({ block: "nearest" });
   }
 
   function clearActive() {
-    options.forEach(opt => opt.classList.remove("active"));
+    options.forEach(o => o.classList.remove("active"));
   }
 
-  function selectOption(index) {
-    const option = options[index];
-    trigger.textContent = option.textContent;
-    subjectHidden.value = option.dataset.value;
+  function select(index) {
+    const opt = options[index];
+    trigger.textContent = opt.textContent;
+    subjectHidden.value = opt.dataset.value;
     closeDropdown();
   }
 
@@ -118,54 +103,40 @@ document.addEventListener("DOMContentLoaded", () => {
      TRIGGER EVENTS
   ====================== */
 
-  trigger.addEventListener("click", toggleDropdown);
-
-  trigger.addEventListener("keydown", e => {
-    if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
-      e.preventDefault(); // scroll iptal
-    }
-
-    switch (e.key) {
-      case "Enter":
-      case " ":
-        toggleDropdown();
-        break;
-
-      case "ArrowDown":
-        if (!customSelect.classList.contains("open")) {
-          openDropdown();
-        } else {
-          moveOption(1);
-        }
-        break;
-
-      case "ArrowUp":
-        if (!customSelect.classList.contains("open")) {
-          openDropdown();
-        } else {
-          moveOption(-1);
-        }
-        break;
-
-      case "Escape":
-        closeDropdown();
-        break;
-    }
+  trigger.addEventListener("click", () => {
+    customSelect.classList.contains("open")
+      ? closeDropdown()
+      : openDropdown();
   });
 
-  /* OPTION CLICK */
-  options.forEach((option, index) => {
-    option.addEventListener("click", () => {
-      selectOption(index);
+  trigger.addEventListener("keydown", e => {
+    if (["ArrowDown", "ArrowUp", "Enter", " ", "Escape"].includes(e.key)) {
+      e.preventDefault();
+    }
+
+    if (e.key === "ArrowDown") move(1);
+    if (e.key === "ArrowUp") move(-1);
+
+    if (e.key === "Enter" || e.key === " ") {
+      if (customSelect.classList.contains("open") && currentIndex >= 0) {
+        select(currentIndex);
+      } else {
+        openDropdown();
+      }
+    }
+
+    if (e.key === "Escape") closeDropdown();
+  });
+
+  options.forEach((opt, index) => {
+    opt.addEventListener("click", () => {
+      select(index);
       messageField.focus();
     });
   });
 
-  /* CLICK OUTSIDE */
   document.addEventListener("click", e => {
-    if (!customSelect.contains(e.target)) {
-      closeDropdown();
-    }
+    if (!customSelect.contains(e.target)) closeDropdown();
   });
 
   /* ======================
@@ -174,30 +145,24 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", e => {
     e.preventDefault();
 
-    const name = nameField.value.trim();
-    const email = emailField.value.trim();
-    const phone = phoneField.value.trim();
-    const subject = subjectHidden.value.trim();
-    const message = messageField.value.trim();
+    if (!nameField.value.trim())
+      return showInlineAlert("Please enter your full name.");
 
-    if (!name) return showInlineAlert("Please enter your full name.");
-    if (!email) return showInlineAlert("Please enter your email address.");
+    if (!emailField.value.trim())
+      return showInlineAlert("Please enter your email address.");
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-      return showInlineAlert("Please enter a valid email address.");
-    }
+    if (!subjectHidden.value.trim())
+      return showInlineAlert("Please select a subject.");
 
-    if (!phone) return showInlineAlert("Please enter your phone number.");
-    if (!subject) return showInlineAlert("Please select a subject.");
-    if (!message) return showInlineAlert("Please enter your request details.");
+    if (!messageField.value.trim())
+      return showInlineAlert("Please enter your request details.");
 
     const formData = new FormData(form);
 
     fetch(form.action, { method: "POST", body: formData })
-      .then(res => res.text())
-      .then(response => {
-        if (response.trim() === "success") {
+      .then(r => r.text())
+      .then(t => {
+        if (t.trim() === "success") {
           showInlineAlert("Your private concierge request has been received.", true);
           form.reset();
           charCount.textContent = "0 / 2000";
@@ -206,9 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
           showInlineAlert("Something went wrong. Please try again.");
         }
       })
-      .catch(() => {
-        showInlineAlert("Connection error. Please try again later.");
-      });
+      .catch(() => showInlineAlert("Connection error. Please try again later."));
   });
 
 });
