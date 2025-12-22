@@ -9,6 +9,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/css/intlTelInput.css">
 </head>
 <body>
 
@@ -20,23 +21,20 @@
     </a>
 
     <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </div>
 
     <ul class="nav-menu" id="navMenu">
-
       <li><a href="#why-us">Why Us</a></li>
 
       <li class="dropdown">
         <a href="#services">Services ▾</a>
         <ul class="dropdown-menu">
-          <li><a href="#" data-service="airport">✈ Airport Transfer</a></li>
-          <li><a href="#" data-service="tours">🕌 City Tours</a></li>
-          <li><a href="#" data-service="restaurants">🍽 Restaurant Reservations</a></li>
-          <li><a href="#" data-service="vip">⭐ VIP Assistance</a></li>
-          <li><a href="#" data-service="events">🎉 Event Organization</a></li>
+          <li><a href="#">✈ Airport Transfer</a></li>
+          <li><a href="#">🕌 City Tours</a></li>
+          <li><a href="#">🍽 Restaurant Reservations</a></li>
+          <li><a href="#">⭐ VIP Assistance</a></li>
+          <li><a href="#">🎉 Event Organization</a></li>
         </ul>
       </li>
 
@@ -63,14 +61,12 @@
       <li>
         <a href="contact.html" class="cta">Request Concierge</a>
       </li>
-
     </ul>
   </div>
 </nav>
 
 <!-- CONTACT FORM -->
 <section class="contact-hero">
-
   <div class="contact-form-wrapper">
 
     <div class="contact-form-header">
@@ -81,11 +77,11 @@
     <div id="formInlineAlert"></div>
 
     <form
-  id="contactForm"
-  method="POST"
-  action="https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec"
-  novalidate
->
+      id="contactForm"
+      method="POST"
+      action="https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec"
+      novalidate
+    >
 
       <div class="form-group">
         <label>Full Name</label>
@@ -99,15 +95,13 @@
 
       <div class="form-group">
         <label>Phone Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="+1 234 567 8901">
+        <input type="tel" id="phone" name="phone">
       </div>
 
       <div class="form-group">
         <label>Subject</label>
-
         <div class="custom-select" id="customSubject">
           <div class="select-trigger" tabindex="0">Select a subject</div>
-
           <ul class="select-options">
             <li data-value="Airport Transfer">Airport Transfer</li>
             <li data-value="Private Tours">Private Tours</li>
@@ -117,21 +111,16 @@
             <li data-value="Other">Other</li>
           </ul>
         </div>
-
-        <!-- Apps Script için gerçek değer -->
         <input type="hidden" id="subject" name="subject">
       </div>
 
       <div class="form-group textarea-group">
         <label>Request Details</label>
-        <textarea id="message"
-                  name="message"
-                  maxlength="2000"
-                  placeholder="Please describe your request with as much detail as you wish..."></textarea>
+        <textarea id="message" name="message" maxlength="2000"
+          placeholder="Please describe your request with as much detail as you wish..."></textarea>
         <span class="char-count" id="charCount">0 / 2000</span>
       </div>
 
-      <!-- referrer -->
       <input type="hidden" name="referrer" value="contact-page">
 
       <button type="submit" class="submit-btn">
@@ -139,9 +128,7 @@
       </button>
 
     </form>
-
   </div>
-
 </section>
 
 <!-- WHATSAPP -->
@@ -149,36 +136,27 @@
   <img src="assets/whatsapp.png" alt="WhatsApp">
 </a>
 
-<!-- FOOTER -->
+<!-- FOOTER (AYNEN KORUNDU) -->
 <footer class="luxury-footer">
   <div class="footer-inner">
     <div class="footer-logo">
       <img src="assets/logo.png" alt="Concierge Service Türkiye">
     </div>
-
-    <div class="footer-tagline">
-      VIP Istanbul Concierge Services
-    </div>
-    <div class="footer-private">
-      Private Access to Our World
-    </div>
+    <div class="footer-tagline">VIP Istanbul Concierge Services</div>
+    <div class="footer-private">Private Access to Our World</div>
   </div>
 
   <div class="footer-divider"></div>
 
   <div class="footer-bottom">
     <div class="footer-bottom-left">
-      © 2025 Concierge Service Türkiye
-      <span class="divider">•</span>
-      <a href="#" id="privacyLink">Privacy Policy</a>
-      <span class="divider">•</span>
-      <a href="#" id="termsLink">Terms & Conditions</a>
+      © 2025 Concierge Service Türkiye •
+      <a href="#">Privacy Policy</a> •
+      <a href="#">Terms & Conditions</a>
     </div>
-
     <div class="footer-bottom-trust">
       Trusted Concierge Service — Your personal information is securely protected.
     </div>
-
     <div class="footer-bottom-right">
       <a href="https://www.instagram.com/conciergeserviceturkiye/" target="_blank"><img src="assets/instagram.png"></a>
       <a href="https://www.youtube.com/" target="_blank"><img src="assets/youtube.png"></a>
@@ -189,11 +167,10 @@
 </footer>
 
 <!-- JS -->
-<script src="js/common.js" defer></script>
-<script src="js/contact.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/intlTelInput.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"></script>
+<script src="js/common.js"></script>
+<script src="js/contact.js"></script>
 
 </body>
 </html>
-
-
-
