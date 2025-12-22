@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
      ELEMENTS
   ====================== */
   const form = document.getElementById("contactForm");
+  if (!form) return;
+
   const alertBox = document.getElementById("formInlineAlert");
 
   const nameField = document.getElementById("name");
@@ -15,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const customSelect = document.getElementById("customSubject");
   const trigger = customSelect.querySelector(".select-trigger");
-  const options = customSelect.querySelectorAll(".select-options li");
-
-  if (!form) return;
+  const options = Array.from(
+    customSelect.querySelectorAll(".select-options li")
+  );
 
   /* ======================
      INLINE ALERT
@@ -36,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ======================
-     CHARACTER COUNTER (2000)
+     CHARACTER COUNTER
   ====================== */
   messageField.setAttribute("maxlength", "2000");
   charCount.textContent = "0 / 2000";
@@ -53,125 +55,114 @@ document.addEventListener("DOMContentLoaded", () => {
       e.ctrlKey ||
       e.metaKey ||
       ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(e.key)
-    ) {
-      return;
-    }
+    ) return;
+
     if (!/^[0-9]$/.test(e.key)) {
       e.preventDefault();
     }
   });
-  trigger.addEventListener("keydown", e => {
-  if (e.key === "Enter" || e.key === " ") {
-    e.preventDefault();
-    customSelect.classList.toggle("open");
-  }
 
-  if (e.key === "Escape") {
-    customSelect.classList.remove("open");
-  }
-});
+  /* ===============================
+     CUSTOM SUBJECT DROPDOWN
+     (MOUSE + KEYBOARD)
+  ================================ */
 
-/* ===============================
-   CUSTOM SUBJECT DROPDOWN
-   (KEYBOARD + MOUSE)
-================================ */
+  let currentIndex = -1;
 
-let currentIndex = -1;
-
-trigger.addEventListener("click", () => {
-  customSelect.classList.toggle("open");
-  setActiveOption();
-});
-
-trigger.addEventListener("keydown", e => {
-  if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
-    e.preventDefault(); // ❗ scroll iptal
-  }
-
-  if (e.key === "Enter" || e.key === " ") {
-    customSelect.classList.toggle("open");
+  function openDropdown() {
+    customSelect.classList.add("open");
+    if (currentIndex === -1) currentIndex = 0;
     setActiveOption();
   }
 
-  if (e.key === "ArrowDown") {
-    openIfClosed();
-    moveOption(1);
+  function closeDropdown() {
+    customSelect.classList.remove("open");
+    currentIndex = -1;
+    clearActive();
   }
 
-  if (e.key === "ArrowUp") {
-    openIfClosed();
-    moveOption(-1);
+  function toggleDropdown() {
+    if (customSelect.classList.contains("open")) {
+      closeDropdown();
+    } else {
+      openDropdown();
+    }
   }
 
-  if (e.key === "Escape") {
+  function moveOption(direction) {
+    currentIndex += direction;
+
+    if (currentIndex < 0) currentIndex = options.length - 1;
+    if (currentIndex >= options.length) currentIndex = 0;
+
+    setActiveOption();
+  }
+
+  function setActiveOption() {
+    clearActive();
+    const active = options[currentIndex];
+    active.classList.add("active");
+    active.scrollIntoView({ block: "nearest" });
+  }
+
+  function clearActive() {
+    options.forEach(opt => opt.classList.remove("active"));
+  }
+
+  function selectOption(index) {
+    const option = options[index];
+    trigger.textContent = option.textContent;
+    subjectHidden.value = option.dataset.value;
     closeDropdown();
   }
-});
 
-options.forEach((option, index) => {
-  option.addEventListener("click", () => {
-    selectOption(index);
-    messageField.focus();
+  /* CLICK */
+  trigger.addEventListener("click", () => {
+    toggleDropdown();
   });
-});
 
-/* ===============================
-   HELPERS
-================================ */
+  /* KEYBOARD */
+  trigger.addEventListener("keydown", e => {
+    if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
+      e.preventDefault(); // scroll iptal
+    }
 
-function openIfClosed() {
-  if (!customSelect.classList.contains("open")) {
-    customSelect.classList.add("open");
-  }
-}
+    switch (e.key) {
+      case "Enter":
+      case " ":
+        toggleDropdown();
+        break;
 
-function closeDropdown() {
-  customSelect.classList.remove("open");
-  currentIndex = -1;
-  clearActive();
-}
+      case "ArrowDown":
+        openDropdown();
+        moveOption(1);
+        break;
 
-function moveOption(direction) {
-  currentIndex += direction;
+      case "ArrowUp":
+        openDropdown();
+        moveOption(-1);
+        break;
 
-  if (currentIndex < 0) currentIndex = options.length - 1;
-  if (currentIndex >= options.length) currentIndex = 0;
+      case "Escape":
+        closeDropdown();
+        break;
+    }
+  });
 
-  setActiveOption();
-}
-
-function setActiveOption() {
-  clearActive();
-  if (currentIndex >= 0) {
-    options[currentIndex].classList.add("active");
-    options[currentIndex].scrollIntoView({
-      block: "nearest"
+  /* OPTION CLICK */
+  options.forEach((option, index) => {
+    option.addEventListener("click", () => {
+      selectOption(index);
+      messageField.focus();
     });
-  }
-}
+  });
 
-function clearActive() {
-  options.forEach(opt => opt.classList.remove("active"));
-}
-
-function selectOption(index) {
-  const option = options[index];
-  trigger.textContent = option.textContent;
-  subjectHidden.value = option.dataset.value;
-  closeDropdown();
-}
-
-/* CLICK OUTSIDE */
-document.addEventListener("click", e => {
-  if (!customSelect.contains(e.target)) {
-    closeDropdown();
-  }
-});
-  .select-options li.active {
-  background: rgba(212,175,55,0.18);
-  color: #d4af37;
-}
-
+  /* CLICK OUTSIDE */
+  document.addEventListener("click", e => {
+    if (!customSelect.contains(e.target)) {
+      closeDropdown();
+    }
+  });
 
   /* ======================
      FORM SUBMIT
@@ -222,27 +213,23 @@ document.addEventListener("click", e => {
       method: "POST",
       body: formData
     })
-    .then(res => res.text())
-    .then(response => {
-      if (response.trim() === "success") {
-        showInlineAlert(
-          "Your private concierge request has been received.",
-          true
-        );
-        form.reset();
-        charCount.textContent = "0 / 2000";
-        trigger.textContent = "Select a subject";
-      } else {
-        showInlineAlert("Something went wrong. Please try again.");
-      }
-    })
-    .catch(() => {
-      showInlineAlert("Connection error. Please try again later.");
-    });
+      .then(res => res.text())
+      .then(response => {
+        if (response.trim() === "success") {
+          showInlineAlert(
+            "Your private concierge request has been received.",
+            true
+          );
+          form.reset();
+          charCount.textContent = "0 / 2000";
+          trigger.textContent = "Select a subject";
+        } else {
+          showInlineAlert("Something went wrong. Please try again.");
+        }
+      })
+      .catch(() => {
+        showInlineAlert("Connection error. Please try again later.");
+      });
   });
 
 });
-
-
-
-
