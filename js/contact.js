@@ -167,6 +167,11 @@ document.addEventListener("click", e => {
     closeDropdown();
   }
 });
+  .select-options li.active {
+  background: rgba(212,175,55,0.18);
+  color: #d4af37;
+}
+
 
   /* ======================
      FORM SUBMIT
@@ -237,6 +242,7 @@ document.addEventListener("click", e => {
   });
 
 });
+
 
 
 
