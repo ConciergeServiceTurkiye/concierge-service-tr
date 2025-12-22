@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!form) return;
 
   const alertBox = document.getElementById("formInlineAlert");
-
   const nameField = document.getElementById("name");
   const emailField = document.getElementById("email");
   const phoneField = document.getElementById("phone");
@@ -40,33 +39,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ======================
-     PHONE INPUT
+     PHONE INPUT – intl-tel-input
   ====================== */
+  const iti = intlTelInput(phoneField, {
+    initialCountry: "us",
+    separateDialCode: true
+  });
+
   phoneField.addEventListener("keydown", e => {
     if (
       e.ctrlKey ||
       e.metaKey ||
       ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(e.key)
     ) return;
-
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   });
 
   /* ======================
      CUSTOM SELECT LOGIC
   ====================== */
-
   let currentIndex = -1;
 
-  function openDropdown() {
-    customSelect.classList.add("open");
-  }
-
-  function closeDropdown() {
-    customSelect.classList.remove("open");
-    currentIndex = -1;
-    clearActive();
-  }
+  function openDropdown() { customSelect.classList.add("open"); }
+  function closeDropdown() { customSelect.classList.remove("open"); currentIndex = -1; clearActive(); }
 
   function move(direction) {
     if (!customSelect.classList.contains("open")) {
@@ -77,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (currentIndex < 0) currentIndex = options.length - 1;
       if (currentIndex >= options.length) currentIndex = 0;
     }
-
     setActive();
   }
 
@@ -88,9 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     opt.scrollIntoView({ block: "nearest" });
   }
 
-  function clearActive() {
-    options.forEach(o => o.classList.remove("active"));
-  }
+  function clearActive() { options.forEach(o => o.classList.remove("active")); }
 
   function select(index) {
     const opt = options[index];
@@ -99,32 +91,18 @@ document.addEventListener("DOMContentLoaded", () => {
     closeDropdown();
   }
 
-  /* ======================
-     TRIGGER EVENTS
-  ====================== */
-
   trigger.addEventListener("click", () => {
-    customSelect.classList.contains("open")
-      ? closeDropdown()
-      : openDropdown();
+    customSelect.classList.contains("open") ? closeDropdown() : openDropdown();
   });
 
   trigger.addEventListener("keydown", e => {
-    if (["ArrowDown", "ArrowUp", "Enter", " ", "Escape"].includes(e.key)) {
-      e.preventDefault();
-    }
-
+    if (["ArrowDown", "ArrowUp", "Enter", " ", "Escape"].includes(e.key)) e.preventDefault();
     if (e.key === "ArrowDown") move(1);
     if (e.key === "ArrowUp") move(-1);
-
     if (e.key === "Enter" || e.key === " ") {
-      if (customSelect.classList.contains("open") && currentIndex >= 0) {
-        select(currentIndex);
-      } else {
-        openDropdown();
-      }
+      if (customSelect.classList.contains("open") && currentIndex >= 0) select(currentIndex);
+      else openDropdown();
     }
-
     if (e.key === "Escape") closeDropdown();
   });
 
@@ -145,19 +123,15 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", e => {
     e.preventDefault();
 
-    if (!nameField.value.trim())
-      return showInlineAlert("Please enter your full name.");
-
-    if (!emailField.value.trim())
-      return showInlineAlert("Please enter your email address.");
-
-    if (!subjectHidden.value.trim())
-      return showInlineAlert("Please select a subject.");
-
-    if (!messageField.value.trim())
-      return showInlineAlert("Please enter your request details.");
+    // Zorunlu alan kontrolleri
+    if (!nameField.value.trim()) return showInlineAlert("Please enter your full name.");
+    if (!emailField.value.trim()) return showInlineAlert("Please enter your email address.");
+    if (!subjectHidden.value.trim()) return showInlineAlert("Please select a subject.");
+    if (!messageField.value.trim()) return showInlineAlert("Please enter your request details.");
+    if (!iti.isValidNumber()) return showInlineAlert("Please enter a valid phone number.");
 
     const formData = new FormData(form);
+    formData.set("phone", iti.getNumber());
 
     fetch(form.action, { method: "POST", body: formData })
       .then(r => r.text())
@@ -175,42 +149,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-
-  const form = document.getElementById("contactForm");
-  const alertBox = document.getElementById("formInlineAlert");
-
-  const iti = intlTelInput(document.getElementById("phone"), {
-    initialCountry: "us",
-    separateDialCode: true
-  });
-
-  function showAlert(text) {
-    alertBox.textContent = text;
-    alertBox.style.visibility = "visible";
-    alertBox.style.opacity = "1";
-    setTimeout(() => {
-      alertBox.style.opacity = "0";
-      alertBox.style.visibility = "hidden";
-    }, 3000);
-  }
-
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-
-    if (!iti.isValidNumber()) {
-      showAlert("Please enter a valid phone number.");
-      return;
-    }
-
-    const formData = new FormData(form);
-    formData.set("phone", iti.getNumber());
-
-    fetch(form.action, { method: "POST", body: formData })
-      .then(() => showAlert("Your private concierge request has been received."))
-      .catch(() => showAlert("Something went wrong."));
-  });
-});
-
-
