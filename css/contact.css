@@ -304,7 +304,7 @@ form {
 .iti__country {
   padding: 10px 14px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   font-size: 14px;
   color: #d4af37;
@@ -330,6 +330,7 @@ form {
 /* Kod kısmı */
 .iti__dial-code {
   color: rgba(212,175,55,0.85);
-  margin-left: 6px;
+  margin-left: auto;
   font-weight: 500;
 }
+
