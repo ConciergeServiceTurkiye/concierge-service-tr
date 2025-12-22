@@ -273,8 +273,8 @@ form {
 
 /* Arama input kutusu */
 .iti__country-list .iti__search {
-  background: #111;       /* koyu arka plan */
-  color: #d4af37;         /* yazı rengi altın */
+  background: #111;       
+  color: #d4af37;         
   border: 1px solid rgba(212,175,55,0.5);
   padding: 8px 12px;
   border-radius: 8px;
@@ -291,7 +291,7 @@ form {
 
 /* Dropdown liste */
 .iti__country-list {
-  background: rgba(10,10,10,0.95);  /* koyu arka plan */
+  background: rgba(10,10,10,0.95);
   border: 1px solid rgba(212,175,55,0.5);
   border-radius: 12px;
   padding: 6px 0;
@@ -304,7 +304,7 @@ form {
 .iti__country {
   padding: 10px 14px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-start; /* SOLDAN HİZALI */
   align-items: center;
   font-size: 14px;
   color: #d4af37;
@@ -334,3 +334,32 @@ form {
   font-weight: 500;
 }
 
+/* ==============================
+   INTL-TEL-INPUT SCROLLBAR – PREMIUM
+============================== */
+
+/* Chrome, Edge, Safari */
+.iti__country-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.iti__country-list::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05); 
+  border-radius: 8px;
+}
+
+.iti__country-list::-webkit-scrollbar-thumb {
+  background: #d4af37; 
+  border-radius: 8px;
+  border: 2px solid rgba(0,0,0,0.1); 
+}
+
+.iti__country-list::-webkit-scrollbar-thumb:hover {
+  background: #f1d97a; 
+}
+
+/* Firefox */
+.iti__country-list {
+  scrollbar-width: thin;
+  scrollbar-color: #d4af37 rgba(255,255,255,0.05);
+}
