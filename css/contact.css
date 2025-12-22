@@ -266,3 +266,70 @@ form {
     font-size: 24px;
   }
 }
+
+/* ==============================
+   INTL-TEL-INPUT CUSTOM STYLING
+============================== */
+
+/* Arama input kutusu */
+.iti__country-list .iti__search {
+  background: #111;       /* koyu arka plan */
+  color: #d4af37;         /* yazı rengi altın */
+  border: 1px solid rgba(212,175,55,0.5);
+  padding: 8px 12px;
+  border-radius: 8px;
+  width: calc(100% - 24px);
+  margin: 6px auto;
+  font-size: 14px;
+}
+
+/* Placeholder rengi */
+.iti__country-list .iti__search::placeholder {
+  color: #aaa;
+  opacity: 0.8;
+}
+
+/* Dropdown liste */
+.iti__country-list {
+  background: rgba(10,10,10,0.95);  /* koyu arka plan */
+  border: 1px solid rgba(212,175,55,0.5);
+  border-radius: 12px;
+  padding: 6px 0;
+  max-height: 260px;
+  overflow-y: auto;
+  z-index: 9999;
+}
+
+/* Her ülke satırı */
+.iti__country {
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #d4af37;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+}
+
+/* Hover ve seçili satır */
+.iti__country:hover,
+.iti__country.iti__highlight {
+  background: rgba(212,175,55,0.15);
+  color: #f1d97a;
+}
+
+/* Bayrak ikonları */
+.iti__flag {
+  margin-right: 8px;
+  width: 20px;
+  height: 15px;
+  object-fit: cover;
+}
+
+/* Kod kısmı */
+.iti__dial-code {
+  color: rgba(212,175,55,0.85);
+  margin-left: 6px;
+  font-weight: 500;
+}
