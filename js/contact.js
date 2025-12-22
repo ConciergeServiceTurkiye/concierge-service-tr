@@ -60,6 +60,17 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
     }
   });
+  trigger.addEventListener("keydown", e => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    customSelect.classList.toggle("open");
+  }
+
+  if (e.key === "Escape") {
+    customSelect.classList.remove("open");
+  }
+});
+
 
   /* ======================
      CUSTOM SUBJECT DROPDOWN
@@ -73,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
       trigger.textContent = option.textContent;
       subjectHidden.value = option.dataset.value;
       customSelect.classList.remove("open");
+      messageField.focus();
     });
   });
 
@@ -151,4 +163,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
