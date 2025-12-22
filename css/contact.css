@@ -6,9 +6,8 @@
 .contact-hero {
   min-height: calc(100vh - var(--nav-h));
   padding-top: var(--nav-h);
-  background:
-    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
-    url("../assets/contact-bg.jpg") center / cover no-repeat;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
+              url("../assets/contact-bg.jpg") center / cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -188,7 +187,14 @@ form {
 }
 
 /* ==================================================
-   CUSTOM SUBJECT DROPDOWN (FINAL)
+   PHONE INPUT
+================================================== */
+
+.iti { width: 100%; }
+.iti input { padding-left: 52px; }
+
+/* ==================================================
+   CUSTOM SUBJECT DROPDOWN
 ================================================== */
 
 .custom-select {
@@ -203,53 +209,47 @@ form {
   font-size: 14px;
   color: #d4af37;
   cursor: pointer;
-  transition: border .3s, box-shadow .3s;
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
 .select-trigger:hover,
 .select-trigger:focus {
   border-color: #d4af37;
-  box-shadow: 0 0 10px rgba(212,175,55,.25);
+  box-shadow: 0 0 10px rgba(212,175,55,0.25);
   outline: none;
 }
 
-/* DROPDOWN LIST */
-
 .select-options {
+  display: none;
   position: absolute;
   top: calc(100% + 6px);
   left: 0;
-  right: 0;
-  background: rgba(0,0,0,.95);
-  border: 1px solid rgba(212,175,55,.4);
+  width: 100%;
+  background: rgba(0,0,0,0.95);
+  border: 1px solid rgba(212,175,55,0.4);
   list-style: none;
   padding: 6px 0;
   margin: 0;
-  display: none;
   z-index: 50;
 }
 
-.custom-select.open .select-options {
-  display: block;
-}
+.custom-select.open .select-options { display: block; }
 
 .select-options li {
   padding: 12px 16px;
   font-size: 14px;
   color: #d4af37;
   cursor: pointer;
-  transition: background .25s, color .25s;
+  transition: background 0.25s, color 0.25s;
 }
 
-/* MOUSE HOVER */
 .select-options li:hover {
-  background: rgba(212,175,55,.15);
+  background: rgba(212,175,55,0.15);
   color: #f1d97a;
 }
 
-/* ✅ KEYBOARD ACTIVE STATE */
 .select-options li.active {
-  background: rgba(212,175,55,.18);
+  background: rgba(212,175,55,0.18);
   color: #f1d97a;
   box-shadow: inset 3px 0 0 #d4af37;
 }
@@ -259,117 +259,10 @@ form {
 ================================================== */
 
 @media (max-width: 768px) {
-
   .contact-form-wrapper {
     padding: 35px 25px 30px;
   }
-
   .contact-form-header h1 {
     font-size: 24px;
   }
-
 }
-/* ==================================================
-   CONTACT PAGE – FINAL
-================================================== */
-
-.contact-hero {
-  min-height: calc(100vh - var(--nav-h));
-  padding-top: var(--nav-h);
-  background: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.75)),
-  url("../assets/contact-bg.jpg") center/cover no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.contact-form-wrapper {
-  max-width:620px;
-  width:90%;
-  background:rgba(10,10,10,.88);
-  border:1.5px solid #d4af37;
-  padding:45px 40px;
-  border-radius:14px;
-}
-
-form {
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-}
-
-.form-group label {
-  color:#d4af37;
-  font-size:13px;
-  margin-bottom:6px;
-}
-
-.form-group input,
-.form-group textarea {
-  background:#111;
-  border:1px solid rgba(212,175,55,.35);
-  padding:14px;
-  color:#d4af37;
-}
-
-.textarea-group {
-  position:relative;
-}
-
-.char-count {
-  position:absolute;
-  top:8px;
-  right:12px;
-  font-size:12px;
-  color:#d4af37;
-}
-
-.submit-btn {
-  padding:15px;
-  background:#d4af37;
-  color:#000;
-  border:none;
-  border-radius:28px;
-  cursor:pointer;
-}
-
-/* INLINE ALERT */
-#formInlineAlert {
-  height:48px;
-  padding:12px;
-  border:1px solid rgba(212,175,55,.6);
-  background:rgba(212,175,55,.08);
-  color:#d4af37;
-  text-align:center;
-  border-radius:10px;
-  opacity:0;
-  visibility:hidden;
-}
-
-/* PHONE INPUT */
-.iti { width:100%; }
-.iti input { padding-left:52px; }
-
-/* DROPDOWN */
-.custom-select { position:relative; }
-.select-options {
-  display:none;
-  position:absolute;
-  width:100%;
-  background:#000;
-  border:1px solid rgba(212,175,55,.4);
-}
-.custom-select.open .select-options { display:block; }
-.select-options li {
-  padding:12px;
-  cursor:pointer;
-  color:#d4af37;
-}
-/* ==================================================
-   PHONE INPUT – intl-tel-input
-================================================== */
-.iti { width: 100%; }
-.iti input { padding-left: 52px; background: #111; color: #d4af37; border: 1px solid rgba(212,175,55,.35); }
-.iti.iti--allow-dropdown input { cursor: pointer; }
-
-
