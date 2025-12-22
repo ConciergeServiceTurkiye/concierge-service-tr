@@ -204,7 +204,7 @@ form {
 
 .select-trigger {
   background: #111;
-  border: 1px solid rgba(212,175,55,0.45);
+  border: 1px solid #d4af37;
   padding: 14px;
   font-size: 14px;
   color: #d4af37;
@@ -226,7 +226,7 @@ form {
   left: 0;
   width: 100%;
   background: rgba(0,0,0,0.95);
-  border: 1px solid rgba(212,175,55,0.4);
+  border: 1px solid #d4af37;
   list-style: none;
   padding: 6px 0;
   margin: 0;
@@ -335,10 +335,35 @@ form {
 }
 
 /* ==============================
-   INTL-TEL-INPUT SCROLLBAR – PREMIUM
+   SCROLLBAR – PREMIUM ALTIN
 ============================== */
 
-/* Chrome, Edge, Safari */
+/* TEXTAREA SCROLLBAR (Webkit) */
+.textarea-group textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.textarea-group textarea::-webkit-scrollbar-track {
+  background: #111;
+  border-radius: 8px;
+}
+
+.textarea-group textarea::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 8px;
+}
+
+.textarea-group textarea::-webkit-scrollbar-thumb:hover {
+  background: #f1d97a;
+}
+
+/* TEXTAREA SCROLLBAR (Firefox) */
+.textarea-group textarea {
+  scrollbar-width: thin;
+  scrollbar-color: #d4af37 #111;
+}
+
+/* PHONE INPUT / COUNTRY LIST SCROLLBAR (Webkit) */
 .iti__country-list::-webkit-scrollbar {
   width: 8px;
 }
@@ -358,9 +383,8 @@ form {
   background: #f1d97a; 
 }
 
-/* Firefox */
+/* PHONE INPUT SCROLLBAR (Firefox) */
 .iti__country-list {
   scrollbar-width: thin;
   scrollbar-color: #d4af37 rgba(255,255,255,0.05);
 }
-
