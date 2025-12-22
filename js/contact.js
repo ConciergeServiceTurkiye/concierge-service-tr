@@ -175,3 +175,42 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const form = document.getElementById("contactForm");
+  const alertBox = document.getElementById("formInlineAlert");
+
+  const iti = intlTelInput(document.getElementById("phone"), {
+    initialCountry: "us",
+    separateDialCode: true
+  });
+
+  function showAlert(text) {
+    alertBox.textContent = text;
+    alertBox.style.visibility = "visible";
+    alertBox.style.opacity = "1";
+    setTimeout(() => {
+      alertBox.style.opacity = "0";
+      alertBox.style.visibility = "hidden";
+    }, 3000);
+  }
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    if (!iti.isValidNumber()) {
+      showAlert("Please enter a valid phone number.");
+      return;
+    }
+
+    const formData = new FormData(form);
+    formData.set("phone", iti.getNumber());
+
+    fetch(form.action, { method: "POST", body: formData })
+      .then(() => showAlert("Your private concierge request has been received."))
+      .catch(() => showAlert("Something went wrong."));
+  });
+});
+
+
