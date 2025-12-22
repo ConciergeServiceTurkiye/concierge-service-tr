@@ -71,28 +71,102 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+/* ===============================
+   CUSTOM SUBJECT DROPDOWN
+   (KEYBOARD + MOUSE)
+================================ */
 
-  /* ======================
-     CUSTOM SUBJECT DROPDOWN
-  ====================== */
-  trigger.addEventListener("click", () => {
+let currentIndex = -1;
+
+trigger.addEventListener("click", () => {
+  customSelect.classList.toggle("open");
+  setActiveOption();
+});
+
+trigger.addEventListener("keydown", e => {
+  if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
+    e.preventDefault(); // ❗ scroll iptal
+  }
+
+  if (e.key === "Enter" || e.key === " ") {
     customSelect.classList.toggle("open");
-  });
+    setActiveOption();
+  }
 
-  options.forEach(option => {
-    option.addEventListener("click", () => {
-      trigger.textContent = option.textContent;
-      subjectHidden.value = option.dataset.value;
-      customSelect.classList.remove("open");
-      messageField.focus();
+  if (e.key === "ArrowDown") {
+    openIfClosed();
+    moveOption(1);
+  }
+
+  if (e.key === "ArrowUp") {
+    openIfClosed();
+    moveOption(-1);
+  }
+
+  if (e.key === "Escape") {
+    closeDropdown();
+  }
+});
+
+options.forEach((option, index) => {
+  option.addEventListener("click", () => {
+    selectOption(index);
+    messageField.focus();
+  });
+});
+
+/* ===============================
+   HELPERS
+================================ */
+
+function openIfClosed() {
+  if (!customSelect.classList.contains("open")) {
+    customSelect.classList.add("open");
+  }
+}
+
+function closeDropdown() {
+  customSelect.classList.remove("open");
+  currentIndex = -1;
+  clearActive();
+}
+
+function moveOption(direction) {
+  currentIndex += direction;
+
+  if (currentIndex < 0) currentIndex = options.length - 1;
+  if (currentIndex >= options.length) currentIndex = 0;
+
+  setActiveOption();
+}
+
+function setActiveOption() {
+  clearActive();
+  if (currentIndex >= 0) {
+    options[currentIndex].classList.add("active");
+    options[currentIndex].scrollIntoView({
+      block: "nearest"
     });
-  });
+  }
+}
 
-  document.addEventListener("click", e => {
-    if (!customSelect.contains(e.target)) {
-      customSelect.classList.remove("open");
-    }
-  });
+function clearActive() {
+  options.forEach(opt => opt.classList.remove("active"));
+}
+
+function selectOption(index) {
+  const option = options[index];
+  trigger.textContent = option.textContent;
+  subjectHidden.value = option.dataset.value;
+  closeDropdown();
+}
+
+/* CLICK OUTSIDE */
+document.addEventListener("click", e => {
+  if (!customSelect.contains(e.target)) {
+    closeDropdown();
+  }
+});
 
   /* ======================
      FORM SUBMIT
@@ -163,5 +237,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
