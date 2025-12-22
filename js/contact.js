@@ -17,13 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const customSelect = document.getElementById("customSubject");
   const trigger = customSelect.querySelector(".select-trigger");
-  const options = Array.from(
-    customSelect.querySelectorAll(".select-options li")
-  );
+  const options = Array.from(customSelect.querySelectorAll(".select-options li"));
 
   /* ======================
      INLINE ALERT
-     (NO LAYOUT SHIFT)
   ====================== */
   function showInlineAlert(text, success = false) {
     alertBox.textContent = text;
@@ -48,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ======================
-     PHONE INPUT (NUMERIC)
+     PHONE INPUT
   ====================== */
   phoneField.addEventListener("keydown", e => {
     if (
@@ -64,14 +61,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ===============================
      CUSTOM SUBJECT DROPDOWN
-     (MOUSE + KEYBOARD)
   ================================ */
 
   let currentIndex = -1;
 
   function openDropdown() {
     customSelect.classList.add("open");
-    if (currentIndex === -1) currentIndex = 0;
+
+    // 🔴 KRİTİK FIX
+    if (currentIndex === -1) {
+      currentIndex = 0;
+    }
     setActiveOption();
   }
 
@@ -82,11 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function toggleDropdown() {
-    if (customSelect.classList.contains("open")) {
-      closeDropdown();
-    } else {
-      openDropdown();
-    }
+    customSelect.classList.contains("open")
+      ? closeDropdown()
+      : openDropdown();
   }
 
   function moveOption(direction) {
@@ -116,12 +114,12 @@ document.addEventListener("DOMContentLoaded", () => {
     closeDropdown();
   }
 
-  /* CLICK */
-  trigger.addEventListener("click", () => {
-    toggleDropdown();
-  });
+  /* ======================
+     TRIGGER EVENTS
+  ====================== */
 
-  /* KEYBOARD */
+  trigger.addEventListener("click", toggleDropdown);
+
   trigger.addEventListener("keydown", e => {
     if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
       e.preventDefault(); // scroll iptal
@@ -134,13 +132,19 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
 
       case "ArrowDown":
-        openDropdown();
-        moveOption(1);
+        if (!customSelect.classList.contains("open")) {
+          openDropdown();
+        } else {
+          moveOption(1);
+        }
         break;
 
       case "ArrowUp":
-        openDropdown();
-        moveOption(-1);
+        if (!customSelect.classList.contains("open")) {
+          openDropdown();
+        } else {
+          moveOption(-1);
+        }
         break;
 
       case "Escape":
@@ -176,50 +180,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const subject = subjectHidden.value.trim();
     const message = messageField.value.trim();
 
-    if (!name) {
-      showInlineAlert("Please enter your full name.");
-      return;
-    }
-
-    if (!email) {
-      showInlineAlert("Please enter your email address.");
-      return;
-    }
+    if (!name) return showInlineAlert("Please enter your full name.");
+    if (!email) return showInlineAlert("Please enter your email address.");
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
-      showInlineAlert("Please enter a valid email address.");
-      return;
+      return showInlineAlert("Please enter a valid email address.");
     }
 
-    if (!phone) {
-      showInlineAlert("Please enter your phone number.");
-      return;
-    }
-
-    if (!subject) {
-      showInlineAlert("Please select a subject.");
-      return;
-    }
-
-    if (!message) {
-      showInlineAlert("Please enter your request details.");
-      return;
-    }
+    if (!phone) return showInlineAlert("Please enter your phone number.");
+    if (!subject) return showInlineAlert("Please select a subject.");
+    if (!message) return showInlineAlert("Please enter your request details.");
 
     const formData = new FormData(form);
 
-    fetch(form.action, {
-      method: "POST",
-      body: formData
-    })
+    fetch(form.action, { method: "POST", body: formData })
       .then(res => res.text())
       .then(response => {
         if (response.trim() === "success") {
-          showInlineAlert(
-            "Your private concierge request has been received.",
-            true
-          );
+          showInlineAlert("Your private concierge request has been received.", true);
           form.reset();
           charCount.textContent = "0 / 2000";
           trigger.textContent = "Select a subject";
