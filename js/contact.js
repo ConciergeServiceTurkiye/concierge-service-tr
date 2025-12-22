@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(res => res.text())
     .then(response => {
-      if (response === "success") {
+      if (response.trim() === "success") {
         showInlineAlert(
           "Your private concierge request has been received.",
           true
@@ -151,3 +151,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
