@@ -365,4 +365,11 @@ form {
   cursor:pointer;
   color:#d4af37;
 }
+/* ==================================================
+   PHONE INPUT – intl-tel-input
+================================================== */
+.iti { width: 100%; }
+.iti input { padding-left: 52px; background: #111; color: #d4af37; border: 1px solid rgba(212,175,55,.35); }
+.iti.iti--allow-dropdown input { cursor: pointer; }
+
 
