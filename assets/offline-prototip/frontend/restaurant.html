@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant Tavsiyeleri</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="restaurant.css">
+</head>
+
+<div id="historyDetailModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeHistoryDetail">&times;</span>
+
+    <h3>Rezervasyon Detayı</h3>
+
+    <div id="historyDetailContent"></div>
+  </div>
+</div>
+
+<body>
+
+<div class="restaurant-container">
+  <h2>Restaurant Tavsiyeleri</h2>
+  <p>Beğendiğiniz restoran için tarih ve saat seçip rezervasyon isteği gönderebilirsiniz.</p>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <select id="filterLocation">
+      <option value="">Konuma Göre</option>
+      <option value="karakoy">Karaköy</option>
+      <option value="fatih">Fatih</option>
+      <option value="besiktas">Beşiktaş</option>
+      <option value="nisantasi">Nişantaşı</option>
+      <option value="ulus">Şişli</option>
+    </select>
+
+    <select id="filterCuisine">
+      <option value="">Mutfağa Göre</option>
+      <option value="turkish">Türk Mutfağı</option>
+      <option value="international">International</option>
+      <option value="fine-dining">Fine Dining</option>
+    </select>
+
+    <select id="sortBy">
+      <option value="">Sırala</option>
+      <option value="rating">Yıldıza Göre</option>
+      <option value="difficulty">Rezervasyon Zorluğu</option>
+      <option value="name">Alfabetik</option>
+    </select>
+  </div>
+  <select id="filterMap">
+  <option value="">Haritaya Göre</option>
+  <option value="near">Yakınımdaki</option>
+</select>
+
+
+  <p id="noResult" style="display:none; text-align:center; margin-top:30px;">
+    Üzgünüz, bu konumda bu mutfağa sahip restoran önerimiz bulunmuyor.
+  </p>
+</div>
+
+<!-- RESERVATION HISTORY -->
+<div class="reservation-history">
+  <h3>Rezervasyon Geçmişim</h3>
+  <div id="historyList">
+    <p class="empty-history">Henüz rezervasyon yok.</p>
+  </div>
+</div>
+
+
+<!-- RESTAURANT LIST -->
+<div id="restaurantList">
+
+  <!-- FATIH TUTAK -->
+<div class="restaurant-card"
+     data-name="Fatih Tutak"
+     data-location="nisantasi"
+     data-cuisine="fine-dining"
+     data-rating="4.8"
+     data-google="https://www.google.com/search?q=Fatih+Tutak+Istanbul"
+     data-tripadvisor="https://www.tripadvisor.com.tr/"
+     data-michelin="2">
+
+  <img src="assets/fatih-tutak.jpg" alt="Fatih Tutak">
+
+  <div class="restaurant-info">
+    <h3>Fatih Tutak</h3>
+
+    <!-- RATING -->
+    <div class="rating">
+      <span class="rating-score">4.8</span>
+      <span class="rating-stars"></span>
+      <span class="rating-note">Fine Dining • Turkish</span>
+    </div>
+
+    <!-- META ICONS -->
+    <div class="restaurant-meta">
+      <span class="meta-icon michelin" data-stars="2" title="2 Michelin Yıldızı"></span>
+
+      <a
+        href="https://www.google.com/search?q=Fatih+Tutak+Istanbul"
+        target="_blank"
+        class="meta-icon google"
+        title="Google Yorumları">
+        G
+      </a>
+
+      <a
+        href="https://www.tripadvisor.com.tr/"
+        target="_blank"
+        class="meta-icon tripadvisor"
+        title="Tripadvisor Yorumları">
+        T
+      </a>
+    </div>
+
+    <!-- REVIEW SCORES -->
+    <div class="review-score"></div>
+
+    <!-- LOCATION -->
+    <div class="restaurant-location">
+      <span class="address">📍 Şişli, İstanbul</span>
+      <a
+        href="#"
+        class="map-link"
+        data-map="https://www.google.com/maps?q=Fatih+Tutak+Istanbul&output=embed"
+        data-title="Fatih Tutak">
+        Haritada Göster
+      </a>
+    </div>
+
+    <button class="reserve-btn">Rezervasyon Yap</button>
+  </div>
+</div>
+
+
+  <!-- NEOLOKAL -->
+  <div class="restaurant-card" data-name="Neolokal">
+    <img src="assets/neolokal.jpg" alt="Neolokal">
+    <div class="restaurant-info">
+      <h3>Neolokal</h3>
+      <div class="rating">
+        <span class="stars">★★★★☆</span>
+        <span class="rating-note">Modern Turkish</span>
+      </div>
+
+      <div class="restaurant-meta">
+        <span class="meta-icon michelin" title="Michelin Yıldızlı Restaurant">⭐</span>
+        <a href="https://www.google.com/search?q=Neolokal+Istanbul" target="_blank" class="meta-icon google">G</a>
+        <a href="https://www.tripadvisor.com/" target="_blank" class="meta-icon tripadvisor">T</a>
+      </div>
+
+      <button class="reserve-btn">Rezervasyon Yap</button>
+    </div>
+  </div>
+
+  <!-- SERICA -->
+  <div class="restaurant-card" data-name="Serica Restaurant">
+    <img src="assets/serica.jpg" alt="Serica Restaurant">
+    <div class="restaurant-info">
+      <h3>Serica Restaurant</h3>
+
+      <div class="rating">
+        <span class="stars">★★★★☆</span>
+        <span class="rating-note">International</span>
+      </div>
+
+      <div class="restaurant-meta">
+        <a href="https://www.google.com/search?q=Serica+Restaurant+Istanbul" target="_blank" class="meta-icon google">G</a>
+        <a href="https://www.tripadvisor.com/" target="_blank" class="meta-icon tripadvisor">T</a>
+      </div>
+
+      <button class="reserve-btn">Rezervasyon Yap</button>
+    </div>
+  </div>
+
+  <!-- MURVER -->
+  <div class="restaurant-card" data-name="Mürver Restaurant">
+    <img src="assets/murver.jpg" alt="Mürver Restaurant">
+    <div class="restaurant-info">
+      <h3>Mürver Restaurant</h3>
+
+      <div class="rating">
+        <span class="stars">★★★★☆</span>
+        <span class="rating-note">International Grill</span>
+      </div>
+
+      <div class="restaurant-meta">
+        <a href="https://www.google.com/search?q=Murver+Restaurant+Istanbul" target="_blank" class="meta-icon google">G</a>
+        <a href="https://www.tripadvisor.com/" target="_blank" class="meta-icon tripadvisor">T</a>
+      </div>
+
+      <button class="reserve-btn">Rezervasyon Yap</button>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- MODAL -->
+<div id="reservationModal" class="modal">
+  <div class="modal-content">
+<div class="reservation-status pending" id="reservationStatus">
+  ⏳ Beklemede
+</div>
+
+    <span class="close-btn">&times;</span>
+    <h3 id="modalRestaurantName">Restaurant Adı</h3>
+
+    <form id="reservationForm">
+
+      <div class="form-group">
+        <label for="resDate">Tarih</label>
+        <input type="date" id="resDate" required>
+      </div>
+
+      <div class="form-group">
+        <label for="resTime">Saat</label>
+        <select id="resTime" required></select>
+      </div>
+
+      <div class="form-group">
+        <label for="resGuests">Kişi Sayısı</label>
+        <select id="resGuests" required>
+          <option value="">Seçiniz</option>
+          <option>1</option><option>2</option><option>3</option>
+          <option>4</option><option>5</option><option>6</option>
+          <option>7+</option>
+        </select>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label>
+          <input type="checkbox" id="hasAllergy">
+          Alerjen durumu var
+        </label>
+      </div>
+
+      <div class="form-group" id="allergyBox" style="display:none;">
+        <label for="allergyText">Alerjen Detayı</label>
+        <textarea id="allergyText" placeholder="Gluten, fındık, deniz ürünü..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="resNote">Not / Ek Bilgi</label>
+        <textarea id="resNote" placeholder="Özel istekler..."></textarea>
+      </div>
+
+      <button type="submit">Rezervasyon İsteği Gönder</button>
+    </form>
+
+    <div id="resMessage" class="res-message">
+  <p>
+    <strong>Rezervasyon ID:</strong>
+    <span id="reservationIdText"></span>
+    <button id="copyReservationId" type="button">Kopyala</button>
+  </p>
+
+  <p><strong>Rezervasyon Durumu:</strong></p>
+  <span class="status-badge pending">İnceleniyor</span>
+</div>
+
+<div id="reservationSummary" class="reservation-summary" style="display:none;">
+  <h4>Rezervasyon Özeti</h4>
+
+  <ul>
+    <li><strong>ID:</strong> <span id="sumId"></span></li>
+    <li><strong>Restaurant:</strong> <span id="sumRestaurant"></span></li>
+    <li><strong>Tarih:</strong> <span id="sumDate"></span></li>
+    <li><strong>Saat:</strong> <span id="sumTime"></span></li>
+    <li><strong>Kişi:</strong> <span id="sumGuests"></span></li>
+  </ul>
+</div>
+
+<!-- HISTORY DETAIL MODAL -->
+<div id="historyModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeHistory">&times;</span>
+    <h3>Rezervasyon Detayı</h3>
+
+    <div id="historyDetail"></div>
+  </div>
+</div>
+
+
+
+<div id="reservationStatus" class="status-badge"></div>
+
+  </div>
+</div>
+<!-- MAP MODAL -->
+<div id="mapModal" class="modal">
+  <div class="modal-content map-modal">
+    <span class="close-btn" id="closeMap">&times;</span>
+    <h3 id="mapTitle">Restaurant Konumu</h3>
+
+    <iframe
+      id="mapFrame"
+      src=""
+      width="100%"
+      height="380"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+
+    <a
+      id="openInMaps"
+      href="#"
+      target="_blank"
+      class="open-maps-btn"
+    >
+      Google Maps’te Aç
+    </a>
+  </div>
+</div>
+
+<script src="restaurant.js"></script>
+</body>
+</html>

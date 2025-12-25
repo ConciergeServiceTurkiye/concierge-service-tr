@@ -1,0 +1,255 @@
+/* ===============================
+   RESET
+=============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+body {
+  background: #0f0f0f;
+  color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* ===============================
+   CONTAINER
+=============================== */
+.admin-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* ===============================
+   HEADER
+=============================== */
+.admin-header {
+  margin-bottom: 30px;
+}
+
+.admin-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #d4af37;
+}
+
+.admin-sub {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* ===============================
+   FILTER BAR
+=============================== */
+.admin-filters {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.admin-filters select {
+  background: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.admin-filters select:focus {
+  outline: none;
+  border-color: #d4af37;
+}
+
+/* ===============================
+   RESERVATION LIST
+=============================== */
+.reservation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===============================
+   CARD
+=============================== */
+.reservation-card {
+  background: #151515;
+  border: 1px solid #222;
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* ===============================
+   TOP
+=============================== */
+.reservation-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.reservation-id {
+  font-size: 15px;
+  font-weight: 600;
+  color: #d4af37;
+}
+
+/* ===============================
+   STATUS BADGE
+=============================== */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.status-badge.pending {
+  background: rgba(212, 175, 55, 0.15);
+  color: #d4af37;
+  border: 1px solid #d4af37;
+}
+
+.status-badge.approved {
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+  border: 1px solid #2ecc71;
+}
+
+.status-badge.cancelled {
+  background: rgba(231, 76, 60, 0.15);
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
+/* ===============================
+   BODY
+=============================== */
+.reservation-body p {
+  font-size: 14px;
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+
+.reservation-body strong {
+  color: #d4af37;
+  font-weight: 500;
+}
+
+/* ===============================
+   ACTIONS
+=============================== */
+.reservation-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.reservation-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+/* APPROVE */
+.approve-btn {
+  background: #2ecc71;
+  color: #000;
+}
+
+.approve-btn:hover {
+  background: #27ae60;
+}
+
+/* CANCEL */
+.cancel-btn {
+  background: transparent;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
+.cancel-btn:hover {
+  background: rgba(231, 76, 60, 0.15);
+}
+
+/* ===============================
+   MOBILE
+=============================== */
+@media (max-width: 600px) {
+  .admin-filters {
+    flex-direction: column;
+  }
+
+  .reservation-actions {
+    flex-direction: column;
+  }
+}
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: #111;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: .3s;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.success {
+  background: #1f8f4e;
+}
+
+.toast.cancel {
+  background: #b63a3a;
+}
+button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+body {
+  font-family: Arial;
+  padding: 20px;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.reservation-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.status.new { background: gold; }
+.status.review { background: orange; }
+.status.approved { background: green; color: white; }

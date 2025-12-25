@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Hadi Planlayalım</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="plan.css">
+</head>
+<body>
+
+<div class="plan-container">
+  <h2>Hadi Planlayalım!</h2>
+  <p>Planınızı oluşturun ve kısa süre içinde kontrol edilecektir.</p>
+
+  <form id="planForm">
+    <!-- Tarih Seçimi -->
+    <div class="form-group">
+      <label for="planDate">Tarih</label>
+      <input type="date" id="planDate" required>
+    </div>
+
+    <!-- Aktivite Seçimi -->
+    <div class="form-group">
+      <label for="planActivity">Aktivite</label>
+      <select id="planActivity" required>
+        <option value="">Seçiniz...</option>
+        <option value="restaurant">Restaurant</option>
+        <option value="privateTour">Private Tur</option>
+        <option value="yacht">Yat Turu</option>
+        <option value="other">Diğer</option>
+      </select>
+    </div>
+
+    <!-- Saat Seçimi (dinamik) -->
+    <div class="form-group" id="timeGroup" style="display:none;">
+      <label for="planTime">Saat</label>
+      <select id="planTime" required></select>
+    </div>
+
+    <!-- Ek Bilgi -->
+    <div class="form-group">
+      <label for="planExtra">Ek Bilgi / Not</label>
+      <textarea id="planExtra" placeholder="Otel, pickup, özel istekler..."></textarea>
+    </div>
+
+    <button type="submit">Planı Oluştur</button>
+  </form>
+
+  <div id="planMessage" class="plan-message"></div>
+</div>
+
+<script src="plan.js"></script>
+</body>
+</html>
