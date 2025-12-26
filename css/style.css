@@ -2,6 +2,7 @@ html, body{width:100%;overflow-x:hidden;}
 
 /*=== GLOBAL RESET & BASE ===*/
 *{margin:0;padding:0;box-sizing:border-box}
+*{max-width:100%;}
 body{font-family:Arial,sans-serif;background:#000;color:#fff;padding-top: var(--nav-h);}
 
 /*=== ROOT ===*/
@@ -81,6 +82,7 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff;padding-top: var(--
 /*=== WHATSAPP ===*/
 .whatsapp-fixed{position:fixed;right:20px;bottom:20px;background:#25D366;padding:14px;border-radius:50%;z-index:999}
 .whatsapp-fixed img{width:30px}
+
 
 
 
