@@ -67,6 +67,29 @@ document.addEventListener("DOMContentLoaded", () => {
       termsModal?.classList.remove("active");
     }
   });
-
-
 });
+
+/* ===== MOBILE DROPDOWN FIX ===== */
+document.querySelectorAll(".dropdown > a").forEach(link=>{
+  link.addEventListener("click",e=>{
+    if(window.innerWidth<=992){
+      e.preventDefault();
+      const parent=link.parentElement;
+      parent.classList.toggle("open");
+      document.querySelectorAll(".dropdown").forEach(d=>{
+        if(d!==parent)d.classList.remove("open");
+      });
+    }
+  });
+});
+
+/* ===== CLOSE MENU ON LINK CLICK ===== */
+document.querySelectorAll(".nav-menu a").forEach(link=>{
+  link.addEventListener("click",()=>{
+    if(window.innerWidth<=992){
+      document.getElementById("navMenu").classList.remove("active");
+      document.querySelectorAll(".dropdown").forEach(d=>d.classList.remove("open"));
+    }
+  });
+});
+
