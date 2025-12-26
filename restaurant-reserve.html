@@ -65,7 +65,7 @@ const alertBox = document.getElementById("formInlineAlert");
 form.addEventListener("submit", e => {
   e.preventDefault();
   const data = new FormData(form);
-  fetch("PASTE_APPS_SCRIPT_URL_HERE", {
+  fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
     method: "POST",
     body: data
   })
@@ -88,4 +88,5 @@ form.addEventListener("submit", e => {
 </script>
 </body>
 </html>
+
 
