@@ -16,13 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
      DROPDOWN (MOBILE)
   ====================== */
   document.querySelectorAll(".dropdown > a").forEach(link => {
-    link.addEventListener("click", e => {
-      if (window.innerWidth <= 992) {
-        e.preventDefault();
-        link.nextElementSibling.classList.toggle("active");
-      }
-    });
+  link.addEventListener("click", e => {
+    if (window.innerWidth <= 992) {
+      e.preventDefault();
+      const parent = link.parentElement;
+      parent.classList.toggle("open");
+    }
   });
+});
+
 
   /* ======================
      PRIVACY & TERMS MODALS
@@ -65,5 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
       termsModal?.classList.remove("active");
     }
   });
+
 
 });
