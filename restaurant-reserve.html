@@ -62,6 +62,16 @@
 
       <button class="submit-btn">Submit Reservation</button>
 
+      <script>
+const params = new URLSearchParams(window.location.search);
+const restaurantName = params.get("restaurant") || "Example Restaurant";
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector("input[name='restaurant']").value = restaurantName;
+  document.querySelector(".contact-form-header h1").textContent = restaurantName;
+});
+</script>
+      
     </form>
 
   </div>
@@ -95,4 +105,5 @@ form.addEventListener("submit", e => {
 </script>
 
 </body>
+
 </html>
