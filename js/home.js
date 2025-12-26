@@ -63,17 +63,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const closePopup = document.querySelector(".close-popup");
 
   document.querySelectorAll("[data-service]").forEach(item => {
-    item.addEventListener("click", e => {
-      e.preventDefault();
+  item.addEventListener("click", e => {
 
-      const key = item.getAttribute("data-service");
-      if (!serviceData[key]) return;
+    const key = item.getAttribute("data-service");
 
-      popupTitle.textContent = serviceData[key].title;
-      popupText.textContent = serviceData[key].text;
-      popup.classList.add("active");
-    });
+    // 🍽 Restaurant → popup YOK, link çalışsın
+    if (key === "restaurants") return;
+
+    e.preventDefault();
+
+    if (!serviceData[key]) return;
+
+    popupTitle.textContent = serviceData[key].title;
+    popupText.textContent = serviceData[key].text;
+    popup.classList.add("active");
   });
+});
+
 
   if (closePopup) {
     closePopup.addEventListener("click", () => {
@@ -91,3 +97,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
+
