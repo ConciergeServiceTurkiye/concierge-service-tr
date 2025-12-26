@@ -1,6 +1,6 @@
 /*=== GLOBAL RESET & BASE ===*/
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#000;color:#fff}
+body{font-family:Arial,sans-serif;background:#000;color:#fff;padding-top: var(--nav-h);}
 
 /*=== ROOT ===*/
 :root{--nav-h:100px;--gold:#d4af37;--gold-soft:#f1d97a}
@@ -22,9 +22,12 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 .hamburger span{width:24px;height:2px;background:var(--gold)}
 @media (max-width: 992px){.logo{left:15px;}.logo img{height:72px;}
 .hamburger{display:flex}
-.nav-menu{position:fixed;top:var(--nav-h);right:-100%;width:100%;height:calc(100vh - var(--nav-h));background:#000;flex-direction:column;padding:30px 0;transition:.35s;}
+.nav-menu{overflow-y:auto;position:fixed;top:var(--nav-h);right:-100%;width:100%;height:calc(100vh - var(--nav-h));background:#000;flex-direction:column;padding:30px 0;transition:.35s;}
+.nav-menu li{width:100%;text-align:center;}
+.nav-menu a{font-size:18px;padding:14px 0;}
 .nav-menu.active{right:0;}
 .dropdown-menu{position:static;opacity:1;visibility:visible;transform:none;border:none;margin-top:0}
+.dropdown-menu li a{font-size:16px;padding:12px 0;}
 }
 
 /*==================================================
@@ -76,6 +79,7 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff}
 /*=== WHATSAPP ===*/
 .whatsapp-fixed{position:fixed;right:20px;bottom:20px;background:#25D366;padding:14px;border-radius:50%;z-index:999}
 .whatsapp-fixed img{width:30px}
+
 
 
 
