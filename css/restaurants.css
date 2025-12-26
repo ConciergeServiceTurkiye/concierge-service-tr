@@ -42,18 +42,50 @@
   gap: 26px;
 }
 
-.restaurant-card {
-  height: 180px;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #fff;
-  cursor: pointer;
-  transition: transform .3s ease, box-shadow .3s ease;
+.restaurant-card{
+  position:relative;
+  padding:22px;
+  border-radius:14px;
+  display:flex;
+  flex-direction:column;
+  min-height:180px;
+  cursor:default;
+}
+
+/* RESTAURANT ADI */
+.restaurant-title{
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:.8px;
+}
+
+/* ORTA BOŞ ALAN (ileride image gelir) */
+.restaurant-spacer{
+  flex:1;
+}
+
+/* BUTON ALANI */
+.restaurant-action{
+  display:flex;
+  justify-content:flex-end;
+}
+
+/* RESERVE BUTTON */
+.reserve-btn{
+  padding:9px 18px;
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:8px;
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:600;
+  transition:.25s;
+  background:transparent;
+}
+
+.reserve-btn:hover{
+  background:#fff;
+  color:#000;
 }
 
 .restaurant-card:hover {
@@ -92,3 +124,4 @@
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
