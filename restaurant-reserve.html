@@ -4,64 +4,48 @@
 <meta charset="UTF-8">
 <title>Restaurant Reservation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/contact.css">
 </head>
-
 <body>
-
 <section class="contact-hero">
   <div class="contact-form-wrapper">
-
     <div class="contact-form-header">
       <h1>Restaurant Reservation</h1>
       <span class="form-subline">Handled by Concierge Team</span>
     </div>
-
     <div id="formInlineAlert"></div>
-
     <form id="reservationForm">
-
       <input type="hidden" name="restaurant" value="Example Restaurant">
-
       <div class="form-group">
         <label>Full Name</label>
         <input type="text" name="name" required>
       </div>
-
       <div class="form-group">
         <label>Email</label>
         <input type="email" name="email" required>
       </div>
-
       <div class="form-group">
         <label>Phone / WhatsApp</label>
         <input type="tel" name="phone" required>
       </div>
-
       <div class="form-group">
         <label>Date</label>
         <input type="date" name="date" required>
       </div>
-
       <div class="form-group">
         <label>Time</label>
         <input type="time" name="time" required>
       </div>
-
       <div class="form-group">
         <label>Guests</label>
         <input type="number" name="guests" min="1" max="20" required>
       </div>
-
       <div class="form-group">
         <label>Allergy / Notes</label>
         <textarea name="notes"></textarea>
       </div>
-
       <button class="submit-btn">Submit Reservation</button>
-
       <script>
 const params = new URLSearchParams(window.location.search);
 const restaurantName = params.get("restaurant") || "Example Restaurant";
@@ -73,27 +57,26 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
       
     </form>
-
   </div>
 </section>
-
 <script>
 const form = document.getElementById("reservationForm");
 const alertBox = document.getElementById("formInlineAlert");
-
 form.addEventListener("submit", e => {
   e.preventDefault();
-
   const data = new FormData(form);
-
-  fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
+  fetch("PASTE_APPS_SCRIPT_URL_HERE", {
     method: "POST",
     body: data
   })
-  .then(r => r.text())
-  .then(t => {
-    if (t === "success") {
-      alertBox.textContent = "Reservation received. Confirmation email sent.";
+  .then(r => r.json())
+  .then(res => {
+    if (res.status === "success") {
+      alertBox.innerHTML = `
+        <strong>Reservation received</strong><br>
+        Reservation ID: <b>${res.reservationId}</b><br>
+        Our concierge team will contact you shortly.
+      `;
       alertBox.style.opacity = 1;
       form.reset();
     } else {
@@ -103,7 +86,6 @@ form.addEventListener("submit", e => {
   });
 });
 </script>
-
 </body>
-
 </html>
+
