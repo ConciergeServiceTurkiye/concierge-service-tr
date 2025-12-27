@@ -4,34 +4,34 @@
 <meta charset="UTF-8">
 <title>Restaurant Reservation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/contact.css">
 </head>
+
 <body>
-  <!-- NAVBAR -->
+
+<!-- NAVBAR (AYNEN KALIYOR) -->
 <nav class="navbar">
   <a href="index.html" class="logo">
-      <img src="assets/logo.png" alt="Concierge Service Türkiye">
-    </a>
+    <img src="assets/logo.png" alt="Concierge Service Türkiye">
+  </a>
   <div class="nav-container">
     <div class="hamburger" id="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </div>
 
     <ul class="nav-menu" id="navMenu">
-
       <li><a href="#why-us">Why Us</a></li>
 
       <li class="dropdown">
         <a href="#services">Services ▾</a>
         <ul class="dropdown-menu">
-          <li><a href="#" data-service="airport">✈ Airport Transfer</a></li>
-          <li><a href="#" data-service="tours">🕌 City Tours</a></li>
+          <li><a href="#">✈ Airport Transfer</a></li>
+          <li><a href="#">🕌 City Tours</a></li>
           <li><a href="restaurants.html">🍽 Restaurant Reservations</a></li>
-          <li><a href="#" data-service="vip">⭐ VIP Assistance</a></li>
-          <li><a href="#" data-service="events">🎉 Event Organization</a></li>
+          <li><a href="#">⭐ VIP Assistance</a></li>
+          <li><a href="#">🎉 Event Organization</a></li>
         </ul>
       </li>
 
@@ -54,77 +54,100 @@
           <li><a href="#">Antalya</a></li>
         </ul>
       </li>
-
+      
       <li>
         <a href="contact.html" class="cta">Request Concierge</a>
       </li>
-
     </ul>
   </div>
 </nav>
+
 <section class="contact-hero">
   <div class="contact-form-wrapper">
+
     <div class="contact-form-header">
       <h1>Restaurant Reservation</h1>
       <span class="form-subline">Handled by Concierge Team</span>
     </div>
+
     <div id="formInlineAlert"></div>
+
     <form id="reservationForm">
-      <input type="hidden" name="restaurant" value="Example Restaurant">
+      <!-- RESTAURANT (URL’den geliyor) -->
+      <input type="hidden" name="restaurant" value="">
+
       <div class="form-group">
         <label>Full Name</label>
         <input type="text" name="name" required>
       </div>
+
       <div class="form-group">
         <label>Email</label>
         <input type="email" name="email" required>
       </div>
+
       <div class="form-group">
         <label>Phone / WhatsApp</label>
         <input type="tel" name="phone" required>
       </div>
+
       <div class="form-group">
         <label>Date</label>
         <input type="date" name="date" required>
       </div>
-      <div class="form-group">
+
+       <div class="form-group">
         <label>Time</label>
         <select name="time" id="timeSelect" required></select>
       </div>
+
       <div class="form-group">
         <label>Guests</label>
         <select name="guests" required> <option value="">Select guests</option> <option>1</option> <option>2</option> <option>3</option> <option>4</option> <option>5</option> <option>6</option> <option>7+</option> </select>
       </div>
-      <label>
-  <input type="checkbox" id="allergyToggle"> Allergy
-</label>
 
-<textarea id="allergyField" name="allergy" style="display:none"
-placeholder="Gluten, nuts, lactose..."></textarea>
+      <div class="form-group">
+        <label>
+          <input type="checkbox" id="allergyToggle">
+          Allergy
+        </label>
+        <textarea id="allergyField" name="allergy" style="display:none"
+          placeholder="Gluten, nuts, lactose..."></textarea>
+      </div>
+
       <div class="form-group">
         <label>Notes</label>
-        <textarea name="notes" placeholder="If you are 7+ guests or have any special requests, please write here."></textarea>
+        <textarea name="notes"
+          placeholder="If you are 7+ guests or have any special requests, please write here."></textarea>
       </div>
+
       <button class="submit-btn">Submit Reservation</button>
-      <script>
+    </form>
+
+  </div>
+</section>
+
+<!-- URL → RESTAURANT NAME -->
+<script>
 const params = new URLSearchParams(window.location.search);
-const restaurantName = params.get("restaurant") || "Example Restaurant";
+const restaurantName = params.get("restaurant") || "Restaurant Reservation";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("input[name='restaurant']").value = restaurantName;
   document.querySelector(".contact-form-header h1").textContent = restaurantName;
 });
 </script>
-      
-    </form>
-  </div>
-</section>
+
+<!-- FORM SUBMIT (SHEETS) -->
 <script>
 const form = document.getElementById("reservationForm");
 const alertBox = document.getElementById("formInlineAlert");
+
 form.addEventListener("submit", e => {
   e.preventDefault();
+
   const data = new FormData(form);
+
   fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
     method: "POST",
     body: data
@@ -146,7 +169,8 @@ form.addEventListener("submit", e => {
   });
 });
 </script>
-  <!-- WHATSAPP -->
+
+<!-- WHATSAPP -->
 <a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank">
   <img src="assets/whatsapp.png" alt="WhatsApp">
 </a>
@@ -211,11 +235,12 @@ form.addEventListener("submit", e => {
     <p>All services are provided on a best-effort basis and subject to availability.</p>
   </div>
 </div>
+
 <script src="js/common.js"></script>
 <script src="js/restaurants.js" defer></script>
+
 </body>
 </html>
-
 
 
 
