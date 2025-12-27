@@ -3,8 +3,8 @@
 ============================== */
 
 .restaurants-hero {
-  min-height: 40vh;
-  padding-top: calc(var(--nav-h) + 8px);
+  min-height: 28vh;
+  padding-top: 20px;
   background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.85));
   display: flex;
   align-items: flex-start;
@@ -12,14 +12,14 @@
   text-align: center;
 }
 
-.hero-inner h1 {
+.hero-inner h1 { margin-top:0;
   font-size: 42px;
   color: var(--gold);
   letter-spacing: 2px;
   margin-bottom: 10px;
 }
 
-.hero-inner p {
+.hero-inner p {margin-top:0;
   font-size: 14px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -136,6 +136,7 @@
     padding-top: 30px;
   }
 }
+
 
 
 
