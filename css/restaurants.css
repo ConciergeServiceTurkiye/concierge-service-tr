@@ -94,6 +94,42 @@
 }
 
 /* ==============================
+   FILTERS
+============================== */
+
+.restaurants-filters{
+  max-width:1400px;
+  margin:20px auto 30px;
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.filter-btn{
+  padding:8px 18px;
+  border:1px solid rgba(212,175,55,.6);
+  background:transparent;
+  color:var(--gold);
+  font-size:13px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  border-radius:20px;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.filter-btn:hover{
+  background:rgba(212,175,55,.15);
+}
+
+.filter-btn.active{
+  background:var(--gold);
+  color:#000;
+}
+
+
+/* ==============================
    COLORS (PLACEHOLDER)
 ============================== */
 
@@ -136,6 +172,7 @@
     padding-top: 30px;
   }
 }
+
 
 
 
