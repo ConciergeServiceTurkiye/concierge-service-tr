@@ -95,6 +95,12 @@
         <label>Guests</label>
         <select name="guests" required> <option value="">Select guests</option> <option>1</option> <option>2</option> <option>3</option> <option>4</option> <option>5</option> <option>6</option> <option>7+</option> </select>
       </div>
+      <label>
+  <input type="checkbox" id="allergyToggle"> Allergy
+</label>
+
+<textarea id="allergyField" name="allergy" style="display:none"
+placeholder="Gluten, nuts, lactose..."></textarea>
       <div class="form-group">
         <label>Notes</label>
         <textarea name="notes" placeholder="If you are 7+ guests or have any special requests, please write here."></textarea>
@@ -209,6 +215,7 @@ form.addEventListener("submit", e => {
 <script src="js/restaurants.js" defer></script>
 </body>
 </html>
+
 
 
 
