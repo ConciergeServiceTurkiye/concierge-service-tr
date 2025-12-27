@@ -4,10 +4,10 @@
 
 .restaurants-hero {
   min-height: 55vh;
-  padding-top: var(--nav-h);
+  padding-top: calc(var(--nav-h) + 60px);
   background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.85));
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   text-align: center;
 }
@@ -122,5 +122,12 @@
 @media (max-width: 768px) {
   .restaurants-grid {
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .restaurants-hero {
+    padding-top: calc(var(--nav-h) + 40px);
+    min-height: 45vh;
   }
 }
