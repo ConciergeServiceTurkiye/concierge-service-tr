@@ -16,7 +16,7 @@
   font-size: 42px;
   color: var(--gold);
   letter-spacing: 2px;
-  margin-bottom: -10px;
+  margin-bottom: -20px;
 }
 
 .hero-inner p {margin-top:0;
@@ -172,6 +172,7 @@
     padding-top: 30px;
   }
 }
+
 
 
 
