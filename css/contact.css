@@ -388,3 +388,17 @@ form {
   scrollbar-width: thin;
   scrollbar-color: #d4af37 rgba(255,255,255,0.05);
 }
+.form-group select {
+  background: #111;
+  border: 1px solid rgba(212,175,55,0.35);
+  padding: 14px;
+  font-size: 14px;
+  color: #d4af37;
+  outline: none;
+}
+
+.form-group select option {
+  background: #111;
+  color: #d4af37;
+}
+
