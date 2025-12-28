@@ -401,4 +401,42 @@ form {
   background: #111;
   color: #d4af37;
 }
+/* ==============================
+   RESTAURANT FORM OVERRIDES
+============================== */
+
+.restaurant-form .form-group input,
+.restaurant-form .form-group textarea,
+.restaurant-form .form-group select {
+  background: #111 !important;
+  color: #d4af37;
+  border: 1px solid rgba(212,175,55,0.35);
+}
+
+/* DATE INPUT – Takvim zorunlu */
+.restaurant-form input[type="date"] {
+  cursor: pointer;
+}
+
+/* TIME & GUESTS dropdown */
+.restaurant-form select {
+  appearance: none;
+}
+
+/* DROPDOWN OPTIONS */
+.restaurant-form select option {
+  background: #111;
+  color: #d4af37;
+}
+
+/* ALLERGY TEXTAREA */
+#allergyField {
+  margin-top: 10px;
+}
+
+/* Checkbox label hizası */
+.restaurant-form label input[type="checkbox"] {
+  margin-right: 8px;
+}
+
 
