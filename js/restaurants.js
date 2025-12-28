@@ -116,23 +116,20 @@ buildTimes();
     data.append("phone", iti.getNumber());
 
     fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
-      method: "POST",
-      body: data
-    })
-    .then(r => r.json())
-    .then(res => {
-      if (res.status === "success") {
-        showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
-        form.reset();
-        allergyField.style.display = "none";
-      } else {
-        showInlineAlert("Something went wrong. Please try again.");
-      }
-    })
-    .catch(() => showInlineAlert("Connection error. Please try again later."));
-  });
+  method: "POST",
+  body: data
+})
+.then(() => {
+  showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
+  form.reset();
+  allergyField.style.display = "none";
+})
+.catch(() => {
+  showInlineAlert("Connection error. Please try again later.");
+});
 
 });
+
 
 
 
