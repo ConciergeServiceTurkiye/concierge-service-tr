@@ -76,12 +76,25 @@ document.addEventListener("DOMContentLoaded", () => {
     return times;
   }
 
-  buildTimes().forEach(t => {
+ /* TIME OPTIONS — 18:00–22:00 / 15 min */
+function buildTimes() {
+  let minutes = 18 * 60;
+  const end = 22 * 60;
+
+  while (minutes <= end) {
+    const h = String(Math.floor(minutes / 60)).padStart(2, "0");
+    const m = String(minutes % 60).padStart(2, "0");
+
     const opt = document.createElement("option");
-    opt.value = t;
-    opt.textContent = t;
+    opt.value = `${h}:${m}`;
+    opt.textContent = `${h}:${m}`;
+
     time.appendChild(opt);
-  });
+    minutes += 15;
+  }
+}
+
+buildTimes();
 
   /* ALLERGY TOGGLE */
   allergyToggle.addEventListener("change", () => {
@@ -120,5 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
