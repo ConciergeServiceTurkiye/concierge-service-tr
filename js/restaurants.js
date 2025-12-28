@@ -19,6 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
     alertBox.textContent = text;
     alertBox.style.visibility = "visible";
     alertBox.style.opacity = "1";
+    alertBox.scrollIntoView({
+  behavior: "smooth",
+  block: "center"
+});
+
 
     setTimeout(() => {
       alertBox.style.opacity = "0";
@@ -100,3 +105,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
