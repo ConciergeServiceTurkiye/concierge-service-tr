@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  const form = document.getElementById("reservationForm");
   const alertBox = document.getElementById("formInlineAlert");
-  const form = document.getElementById("restaurantForm");
 
   const name = document.getElementById("name");
   const email = document.getElementById("email");
@@ -14,42 +14,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const allergyToggle = document.getElementById("allergyToggle");
   const allergyField = document.getElementById("allergyField");
 
-  function showAlert(msg) {
-    alertBox.textContent = msg;
-    alertBox.style.opacity = "1";
+  /* INLINE ALERT (CONTACT STANDARD) */
+  function showInlineAlert(text) {
+    alertBox.textContent = text;
     alertBox.style.visibility = "visible";
+    alertBox.style.opacity = "1";
+
     setTimeout(() => {
       alertBox.style.opacity = "0";
       alertBox.style.visibility = "hidden";
     }, 3500);
   }
 
-  /* PHONE */
+  /* PHONE INPUT */
   const iti = intlTelInput(phone, {
     initialCountry: "us",
     separateDialCode: true
   });
 
   phone.addEventListener("keydown", e => {
-    if (e.ctrlKey || e.metaKey || ["Backspace","Delete","ArrowLeft","ArrowRight","Tab"].includes(e.key)) return;
+    if (
+      e.ctrlKey ||
+      e.metaKey ||
+      ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(e.key)
+    ) return;
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   });
 
-  /* TIME OPTIONS (18:00–22:30 / 15 min) */
-  function buildTimes(start, end) {
+  /* TIME OPTIONS — Example Restaurant 1 (18:00–22:00 / 15 min) */
+  function buildTimes() {
     const times = [];
-    let current = start * 60;
-    const endMin = end * 60 + 30;
-    while (current <= endMin) {
-      const h = String(Math.floor(current / 60)).padStart(2, "0");
-      const m = String(current % 60).padStart(2, "0");
+    let minutes = 18 * 60;
+    const end = 22 * 60;
+
+    while (minutes <= end) {
+      const h = String(Math.floor(minutes / 60)).padStart(2, "0");
+      const m = String(minutes % 60).padStart(2, "0");
       times.push(`${h}:${m}`);
-      current += 15;
+      minutes += 15;
     }
     return times;
   }
 
-  buildTimes(18, 22).forEach(t => {
+  buildTimes().forEach(t => {
     const opt = document.createElement("option");
     opt.value = t;
     opt.textContent = t;
@@ -65,16 +72,31 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", e => {
     e.preventDefault();
 
-    if (!name.value.trim()) return showAlert("Please enter your full name.");
-    if (!email.value.trim()) return showAlert("Please enter your email.");
-    if (!iti.isValidNumber()) return showAlert("Please enter a valid phone number.");
-    if (!date.value) return showAlert("Please select a date.");
-    if (!time.value) return showAlert("Please select a time.");
-    if (!guests.value) return showAlert("Please select number of guests.");
+    if (!name.value.trim()) return showInlineAlert("Please enter your full name.");
+    if (!email.value.trim()) return showInlineAlert("Please enter your email address.");
+    if (!iti.isValidNumber()) return showInlineAlert("Please enter a valid phone number.");
+    if (!date.value) return showInlineAlert("Please select a date.");
+    if (!time.value) return showInlineAlert("Please select a time.");
+    if (!guests.value) return showInlineAlert("Please select number of guests.");
 
-    showAlert("Reservation request sent successfully.");
-    form.reset();
-    allergyField.style.display = "none";
+    const data = new FormData(form);
+    data.set("phone", iti.getNumber());
+
+    fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
+      method: "POST",
+      body: data
+    })
+    .then(r => r.json())
+    .then(res => {
+      if (res.status === "success") {
+        showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
+        form.reset();
+        allergyField.style.display = "none";
+      } else {
+        showInlineAlert("Something went wrong. Please try again.");
+      }
+    })
+    .catch(() => showInlineAlert("Connection error. Please try again later."));
   });
 
 });
