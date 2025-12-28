@@ -2,132 +2,51 @@
    RESTAURANTS PAGE
 ============================== */
 
-.restaurants-hero {
-  min-height: 28vh;
-  padding-top: 20px;
-  background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.85));
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  text-align: center;
-}
+.restaurants-hero { min-height: 28vh; padding-top: 20px; background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.85)); display: flex; align-items: flex-start; justify-content: center; text-align: center; }
 
-.hero-inner h1 { margin-top:0;
-  font-size: 42px;
-  color: var(--gold);
-  letter-spacing: 2px;
-  margin-bottom: -10px;
-}
+.hero-inner h1 { margin-top:0; font-size: 42px; color: var(--gold); letter-spacing: 2px; margin-bottom: -10px; }
 
-.hero-inner p {margin-top:0;
-  font-size: 14px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: rgba(212,175,55,.8);
-}
+.hero-inner p {margin-top:0; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: rgba(212,175,55,.8); }
 
 /* ==============================
    GRID
 ============================== */
 
-.restaurants-section {
-  padding: 0px 40px 80px;
-}
+.restaurants-section { padding: 0px 40px 80px; }
 
-.restaurants-grid {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 26px;
-}
+.restaurants-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 26px; }
 
-.restaurant-card{
-  position:relative;
-  padding:22px;
-  border-radius:14px;
-  display:flex;
-  flex-direction:column;
-  min-height:180px;
-  cursor:default;
-}
+.restaurant-card{ position:relative; padding:22px; border-radius:14px; display:flex; flex-direction:column; min-height:180px; cursor:default; }
 
 /* RESTAURANT ADI */
-.restaurant-title{
-  font-size:18px;
-  font-weight:700;
-  letter-spacing:.8px;
-}
+
+.restaurant-title{ font-size:18px; font-weight:700; letter-spacing:.8px; }
 
 /* ORTA BOŞ ALAN (ileride image gelir) */
-.restaurant-spacer{
-  flex:1;
-}
+.restaurant-spacer{ flex:1; }
 
 /* BUTON ALANI */
-.restaurant-action{
-  display:flex;
-  justify-content:flex-end;
-}
+.restaurant-action{ display:flex; justify-content:flex-end; }
 
 /* RESERVE BUTTON */
-.reserve-btn{
-  padding:9px 18px;
-  border:1px solid rgba(255,255,255,.9);
-  border-radius:8px;
-  color:#fff;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:600;
-  transition:.25s;
-  background:transparent;
-}
+.reserve-btn{ padding:9px 18px; border:1px solid rgba(255,255,255,.9); border-radius:8px; color:#fff; text-decoration:none; font-size:14px; font-weight:600; transition:.25s; background:transparent; }
 
-.reserve-btn:hover{
-  background:#fff;
-  color:#000;
-}
+.reserve-btn:hover{ background:#fff; color:#000; }
 
-.restaurant-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0,0,0,.45);
-}
+.restaurant-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,.45); }
 
 /* ==============================
    FILTERS
 ============================== */
 
-.restaurants-filters{
-  max-width:1400px;
-  margin: 5px auto 20px;
-  display:flex;
-  gap:14px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
+.restaurants-filters{ max-width:1400px; margin: 5px auto 20px; display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
 
-.filter-btn{
-  padding:8px 18px;
-  border:1px solid rgba(212,175,55,.6);
-  background:transparent;
-  color:var(--gold);
-  font-size:13px;
-  letter-spacing:1px;
-  text-transform:uppercase;
-  border-radius:20px;
-  cursor:pointer;
-  transition:.25s;
-}
+.filter-btn{ padding:8px 18px; border:1px solid rgba(212,175,55,.6); background:transparent; color:var(--gold); font-size:13px; letter-spacing:1px; text-transform:uppercase; border-radius:20px;
+            cursor:pointer; transition:.25s;}
 
-.filter-btn:hover{
-  background:rgba(212,175,55,.15);
-}
+.filter-btn:hover{ background:rgba(212,175,55,.15); }
 
-.filter-btn.active{
-  background:var(--gold);
-  color:#000;
-}
-
+.filter-btn.active{ background:var(--gold); color:#000; }
 
 /* ==============================
    COLORS (PLACEHOLDER)
@@ -138,7 +57,6 @@
 .color-3 { background:#3f5a4a; }
 .color-4 { background:#5a5340; }
 .color-5 { background:#4b3f5a; }
-
 .color-6 { background:#2f4f4f; }
 .color-7 { background:#4a2f4f; }
 .color-8 { background:#4f3b2f; }
@@ -149,36 +67,10 @@
    RESPONSIVE
 ============================== */
 
-@media (max-width: 1200px) {
-  .restaurants-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+@media (max-width: 1200px) {.restaurants-grid { grid-template-columns: repeat(3, 1fr); }}
 
-@media (max-width: 768px) {
-  .restaurants-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
+@media (max-width: 768px) {.restaurants-grid { grid-template-columns: repeat(1, 1fr); }}
 
-@media (max-width: 768px) {
-  .restaurants-hero {
-    padding-top: calc(var(--nav-h) + 40px);
-    min-height: 45vh;
-  }
-}
-@media (max-width: 768px) {
-  .restaurants-section {
-    padding-top: 30px;
-  }
-}
+@media (max-width: 768px) {.restaurants-hero { padding-top: calc(var(--nav-h) + 40px); min-height: 45vh; }}
 
-
-
-
-
-
-
-
-
-
+@media (max-width: 768px) {.restaurants-section { padding-top: 30px; }}
