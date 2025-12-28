@@ -113,7 +113,7 @@ buildTimes();
     if (!guests.value) return showInlineAlert("Please select number of guests.");
 
     const data = new FormData(form);
-    data.set("phone", iti.getNumber());
+    data.append("phone", iti.getNumber());
 
     fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
       method: "POST",
@@ -133,6 +133,7 @@ buildTimes();
   });
 
 });
+
 
 
 
