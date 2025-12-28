@@ -140,38 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- FORM SUBMIT (SHEETS) -->
-<script>
-const form = document.getElementById("reservationForm");
-const alertBox = document.getElementById("formInlineAlert");
-
-form.addEventListener("submit", e => {
-  e.preventDefault();
-
-  const data = new FormData(form);
-
-  fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
-    method: "POST",
-    body: data
-  })
-  .then(r => r.json())
-  .then(res => {
-    if (res.status === "success") {
-      alertBox.innerHTML = `
-        <strong>Reservation received</strong><br>
-        Reservation ID: <b>${res.reservationId}</b><br>
-        Our concierge team will contact you shortly.
-      `;
-      alertBox.style.opacity = 1;
-      form.reset();
-    } else {
-      alertBox.textContent = "Something went wrong.";
-      alertBox.style.opacity = 1;
-    }
-  });
-});
-</script>
-
 <!-- WHATSAPP -->
 <a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank">
   <img src="assets/whatsapp.png" alt="WhatsApp">
@@ -246,6 +214,7 @@ form.addEventListener("submit", e => {
 
 </body>
 </html>
+
 
 
 
