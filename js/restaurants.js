@@ -19,10 +19,25 @@ document.addEventListener("DOMContentLoaded", () => {
     alertBox.textContent = text;
     alertBox.style.visibility = "visible";
     alertBox.style.opacity = "1";
-    alertBox.scrollIntoView({
-  behavior: "smooth",
-  block: "center"
-});
+    function showInlineAlert(text) {
+  alertBox.textContent = text;
+  alertBox.style.visibility = "visible";
+  alertBox.style.opacity = "1";
+
+  const formTop =
+    form.getBoundingClientRect().top + window.pageYOffset;
+
+  window.scrollTo({
+    top: formTop - 140, // navbar + nefes payı
+    behavior: "smooth"
+  });
+
+  setTimeout(() => {
+    alertBox.style.opacity = "0";
+    alertBox.style.visibility = "hidden";
+  }, 3500);
+}
+
 
 
     setTimeout(() => {
@@ -105,4 +120,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
