@@ -438,5 +438,9 @@ form {
 .restaurant-form label input[type="checkbox"] {
   margin-right: 8px;
 }
+body {
+  outline: 5px solid red;
+}
+
 
 
