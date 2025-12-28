@@ -9,36 +9,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const date = document.getElementById("date");
   const time = document.getElementById("time");
   const guests = document.getElementById("guests");
-  const notes = document.getElementById("notes");
 
   const allergyToggle = document.getElementById("allergyToggle");
   const allergyField = document.getElementById("allergyField");
 
-  /* INLINE ALERT (CONTACT STANDARD) */
+  /* INLINE ALERT */
   function showInlineAlert(text) {
     alertBox.textContent = text;
     alertBox.style.visibility = "visible";
     alertBox.style.opacity = "1";
-    function showInlineAlert(text) {
-  alertBox.textContent = text;
-  alertBox.style.visibility = "visible";
-  alertBox.style.opacity = "1";
 
-  const formTop =
-    form.getBoundingClientRect().top + window.pageYOffset;
+    const formTop =
+      form.getBoundingClientRect().top + window.pageYOffset;
 
-  window.scrollTo({
-    top: formTop - 140, // navbar + nefes payı
-    behavior: "smooth"
-  });
-
-  setTimeout(() => {
-    alertBox.style.opacity = "0";
-    alertBox.style.visibility = "hidden";
-  }, 3500);
-}
-
-
+    window.scrollTo({
+      top: formTop - 140,
+      behavior: "smooth"
+    });
 
     setTimeout(() => {
       alertBox.style.opacity = "0";
@@ -61,40 +48,27 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   });
 
-  /* TIME OPTIONS — Example Restaurant 1 (18:00–22:00 / 15 min) */
+  /* TIME OPTIONS — 18:00–22:00 / 15 min */
   function buildTimes() {
-    const times = [];
+    time.innerHTML = `<option value="" disabled selected>Select time</option>`;
+
     let minutes = 18 * 60;
     const end = 22 * 60;
 
     while (minutes <= end) {
       const h = String(Math.floor(minutes / 60)).padStart(2, "0");
       const m = String(minutes % 60).padStart(2, "0");
-      times.push(`${h}:${m}`);
+
+      const opt = document.createElement("option");
+      opt.value = `${h}:${m}`;
+      opt.textContent = `${h}:${m}`;
+
+      time.appendChild(opt);
       minutes += 15;
     }
-    return times;
   }
 
- /* TIME OPTIONS — 18:00–22:00 / 15 min */
-function buildTimes() {
-  let minutes = 18 * 60;
-  const end = 22 * 60;
-
-  while (minutes <= end) {
-    const h = String(Math.floor(minutes / 60)).padStart(2, "0");
-    const m = String(minutes % 60).padStart(2, "0");
-
-    const opt = document.createElement("option");
-    opt.value = `${h}:${m}`;
-    opt.textContent = `${h}:${m}`;
-
-    time.appendChild(opt);
-    minutes += 15;
-  }
-}
-
-buildTimes();
+  buildTimes();
 
   /* ALLERGY TOGGLE */
   allergyToggle.addEventListener("change", () => {
@@ -113,24 +87,21 @@ buildTimes();
     if (!guests.value) return showInlineAlert("Please select number of guests.");
 
     const data = new FormData(form);
-    data.append("phone", iti.getNumber());
+    data.set("phone", iti.getNumber());
 
     fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
-  method: "POST",
-  body: data
-})
-.then(() => {
-  showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
-  form.reset();
-  allergyField.style.display = "none";
-})
-.catch(() => {
-  showInlineAlert("Connection error. Please try again later.");
-});
+      method: "POST",
+      body: data
+    })
+    .then(() => {
+      showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
+      form.reset();
+      allergyField.style.display = "none";
+      buildTimes();
+    })
+    .catch(() => {
+      showInlineAlert("Connection error. Please try again later.");
+    });
+  });
 
 });
-
-
-
-
-
