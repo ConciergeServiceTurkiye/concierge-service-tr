@@ -527,16 +527,16 @@ body {
   outline: none;
 }
 
-/* Yıl artır / azalt okları */
+/* Yıl okları – default BEYAZ */
 .flatpickr-current-month .numInputWrapper span::after {
-  border-top-color: #ffffff;
-  border-bottom-color: #ffffff;
+  border-top-color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
 }
 
-/* Hover */
+/* Hover edilen ok SARI */
 .flatpickr-current-month .numInputWrapper span:hover::after {
-  border-top-color: #d4af37;
-  border-bottom-color: #d4af37;
+  border-top-color: #d4af37 !important;
+  border-bottom-color: #d4af37 !important;
 }
 
 /* GÜN İSİMLERİ (Sun Mon Tue ...) */
@@ -546,7 +546,7 @@ body {
 }
 
 .flatpickr-weekday {
-  color: #d4af37;
+  color: #ffffff; !important;
   font-weight: 500;
 }
 .flatpickr-current-month {
@@ -554,20 +554,21 @@ body {
 }
 /* Ay dropdown arka plan */
 .flatpickr-monthDropdown-months {
-  background-color: #2b2b2b; /* takvimle uyumlu koyu ama okunur */
-  color: #ffffff;
+  background-color: #2b2b2b; !important; /* takvimle uyumlu koyu ama okunur */
+  color: #ffffff; !important;
 }
 
 /* Ay seçenekleri */
 .flatpickr-monthDropdown-months option {
-  background-color: #2b2b2b;
-  color: #ffffff;
+  background-color: #2b2b2b; !important;
+  color: #ffffff; !important;
 }
 
 /* Hover edilen ay */
 .flatpickr-monthDropdown-months option:hover {
-  background-color: #d4af37;
-  color: #000000;
+  background-color: #d4af37; !important;
+  color: #000000; !important;
 }
+
 
 
