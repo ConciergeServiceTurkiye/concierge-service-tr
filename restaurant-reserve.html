@@ -109,47 +109,55 @@
         <select name="guests" id="guests"> <option value="">Select guests</option> <option>1</option> <option>2</option> <option>3</option> <option>4</option> <option>5</option> <option>6</option> <option>7+</option> </select>
       </div>
 
-      <div class="form-group children-row">
+      <div class="form-group children-form-group">
 
-  <!-- CHILDREN -->
-  <label class="child-checkbox">
-    <input type="checkbox" id="childrenToggle">
-    Children
-  </label>
+  <div class="children-row">
 
-  <!-- AGES (same row) -->
-  <div id="childrenAges" class="children-ages">
+    <!-- CHILDREN -->
+    <label class="child-checkbox">
+      <input type="checkbox" id="childrenToggle">
+      Children
+    </label>
 
-    <div class="age-item">
-      <label>
-        <input type="checkbox" class="age-toggle" data-target="age03">
-        Age 0–3
-      </label>
-      <input type="text" id="age03" name="age_0_3"
-             class="child-input"
-             placeholder="Number">
+    <!-- AGES (SAME ROW – RIGHT SIDE) -->
+    <div id="childrenAges" class="children-ages">
+
+      <div class="age-item">
+        <label>
+          <input type="checkbox" class="age-toggle" data-target="age03">
+          Age 0–3
+        </label>
+        <input type="text"
+               id="age03"
+               name="age_0_3"
+               class="child-input"
+               placeholder="Number">
+      </div>
+
+      <div class="age-item">
+        <label>
+          <input type="checkbox" class="age-toggle" data-target="age313">
+          Age 3–13
+        </label>
+        <input type="text"
+               id="age313"
+               name="age_3_13"
+               class="child-input"
+               placeholder="Number">
+      </div>
+
+      <div class="age-item">
+        <label>
+          <input type="checkbox" class="age-toggle" data-target="age1317">
+          Age 13–17
+        </label>
+        <input type="text"
+               id="age1317"
+               name="age_13_17"
+               class="child-input"
+               placeholder="Number">
+      </div>
     </div>
-
-    <div class="age-item">
-      <label>
-        <input type="checkbox" class="age-toggle" data-target="age313">
-        Age 3–13
-      </label>
-      <input type="text" id="age313" name="age_3_13"
-             class="child-input"
-             placeholder="Number">
-    </div>
-
-    <div class="age-item">
-      <label>
-        <input type="checkbox" class="age-toggle" data-target="age1317">
-        Age 13–17
-      </label>
-      <input type="text" id="age1317" name="age_13_17"
-             class="child-input"
-             placeholder="Number">
-    </div>
-
   </div>
 </div>
       
@@ -261,4 +269,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
