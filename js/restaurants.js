@@ -90,38 +90,42 @@ flatpickr("#date", {
   allergyField.style.display = allergyToggle.checked ? "block" : "none";
   });
 
-  /* CHILDREN TOGGLE */
+  /* CHILDREN & AGE LOGIC */
 const childrenToggle = document.getElementById("childrenToggle");
-const childrenGroup = document.getElementById("childrenGroup");
+const childrenAges = document.getElementById("childrenAges");
 const ageToggles = document.querySelectorAll(".age-toggle");
 
 childrenToggle.addEventListener("change", () => {
-  childrenGroup.style.display = childrenToggle.checked ? "block" : "none";
+  childrenAges.style.display = childrenToggle.checked ? "flex" : "none";
 
   if (!childrenToggle.checked) {
     ageToggles.forEach(cb => {
       cb.checked = false;
       const input = document.getElementById(cb.dataset.target);
+      input.style.display = "none";
       input.value = "";
-      input.disabled = true;
     });
   }
 });
 
-/* AGE CHECKBOX → INPUT */
 ageToggles.forEach(cb => {
   const input = document.getElementById(cb.dataset.target);
 
   cb.addEventListener("change", () => {
-    input.disabled = !cb.checked;
-    if (!cb.checked) input.value = "";
+    if (cb.checked) {
+      input.style.display = "inline-block";
+    } else {
+      input.style.display = "none";
+      input.value = "";
+    }
   });
 
-  /* ONLY NUMBERS – max 6 digits */
+  /* ONLY NUMBERS – MAX 6 DIGITS */
   input.addEventListener("input", () => {
     input.value = input.value.replace(/\D/g, "").slice(0, 6);
   });
 });
+
 
 
   /* SUBMIT */
@@ -157,6 +161,7 @@ ageToggles.forEach(cb => {
 });
   });
 });
+
 
 
 
