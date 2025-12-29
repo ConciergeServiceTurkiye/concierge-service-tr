@@ -90,6 +90,40 @@ flatpickr("#date", {
   allergyField.style.display = allergyToggle.checked ? "block" : "none";
   });
 
+  /* CHILDREN TOGGLE */
+const childrenToggle = document.getElementById("childrenToggle");
+const childrenGroup = document.getElementById("childrenGroup");
+const ageToggles = document.querySelectorAll(".age-toggle");
+
+childrenToggle.addEventListener("change", () => {
+  childrenGroup.style.display = childrenToggle.checked ? "block" : "none";
+
+  if (!childrenToggle.checked) {
+    ageToggles.forEach(cb => {
+      cb.checked = false;
+      const input = document.getElementById(cb.dataset.target);
+      input.value = "";
+      input.disabled = true;
+    });
+  }
+});
+
+/* AGE CHECKBOX → INPUT */
+ageToggles.forEach(cb => {
+  const input = document.getElementById(cb.dataset.target);
+
+  cb.addEventListener("change", () => {
+    input.disabled = !cb.checked;
+    if (!cb.checked) input.value = "";
+  });
+
+  /* ONLY NUMBERS – max 6 digits */
+  input.addEventListener("input", () => {
+    input.value = input.value.replace(/\D/g, "").slice(0, 6);
+  });
+});
+
+
   /* SUBMIT */
   form.addEventListener("submit", e => {
     e.preventDefault();
@@ -123,6 +157,7 @@ flatpickr("#date", {
 });
   });
 });
+
 
 
 
