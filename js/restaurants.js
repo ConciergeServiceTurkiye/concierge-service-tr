@@ -33,12 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3500);
   }
 
-  const dateInput = document.getElementById("date");
-
-dateInput.addEventListener("click", () => {
-  dateInput.type = "date";
-});
-
   /* PHONE INPUT */
   const iti = intlTelInput(phone, {
     initialCountry: "us",
@@ -78,7 +72,7 @@ dateInput.addEventListener("click", () => {
 
   /* ALLERGY TOGGLE */
   allergyToggle.addEventListener("change", () => {
-    allergyField.style.display = allergyToggle.checked ? "block" : "none";
+  allergyField.style.display = allergyToggle.checked ? "block" : "none";
   });
 
   /* SUBMIT */
@@ -111,5 +105,3 @@ dateInput.addEventListener("click", () => {
   });
 
 });
-
-
