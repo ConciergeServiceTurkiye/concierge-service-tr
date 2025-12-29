@@ -109,48 +109,45 @@
         <select name="guests" id="guests"> <option value="">Select guests</option> <option>1</option> <option>2</option> <option>3</option> <option>4</option> <option>5</option> <option>6</option> <option>7+</option> </select>
       </div>
 
-      <div class="form-group">
-  <label>
+      <div class="form-group children-row">
+
+  <!-- CHILDREN -->
+  <label class="child-checkbox">
     <input type="checkbox" id="childrenToggle">
     Children
   </label>
 
-  <div id="childrenGroup" style="display:none; margin-top:10px;">
+  <!-- AGES (same row) -->
+  <div id="childrenAges" class="children-ages">
 
-    <!-- AGE 0-3 -->
-    <div class="child-row">
+    <div class="age-item">
       <label>
         <input type="checkbox" class="age-toggle" data-target="age03">
         Age 0–3
       </label>
       <input type="text" id="age03" name="age_0_3"
              class="child-input"
-             placeholder="Number"
-             disabled>
+             placeholder="Number">
     </div>
 
-    <!-- AGE 3-13 -->
-    <div class="child-row">
+    <div class="age-item">
       <label>
         <input type="checkbox" class="age-toggle" data-target="age313">
         Age 3–13
       </label>
       <input type="text" id="age313" name="age_3_13"
              class="child-input"
-             placeholder="Number"
-             disabled>
+             placeholder="Number">
     </div>
 
-    <!-- AGE 13-18 -->
-    <div class="child-row">
+    <div class="age-item">
       <label>
-        <input type="checkbox" class="age-toggle" data-target="age1318">
-        Age 13–18
+        <input type="checkbox" class="age-toggle" data-target="age1317">
+        Age 13–17
       </label>
-      <input type="text" id="age1318" name="age_13_18"
+      <input type="text" id="age1317" name="age_13_17"
              class="child-input"
-             placeholder="Number"
-             disabled>
+             placeholder="Number">
     </div>
 
   </div>
@@ -264,3 +261,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
