@@ -444,10 +444,22 @@ body {
 
 /* ===== FLATPICKR BASE ===== */
 .flatpickr-calendar {
-  background: rgba(25, 25, 25, 0.92); /* koyu ama nefes alan */
-  border: 1px solid rgba(212, 175, 55, 0.35);
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.6);
+  background: #2b2b2b; /* koyu ama nefes alan */
+  border: none;
+  box-shadow: 0 12px 30px rgba(0,0,0,.4);
+}
+
+/* AY DEĞİŞTİRME OKLARI < > */
+.flatpickr-prev-month,
+.flatpickr-next-month {
+  color: #ffffff;
+  fill: #ffffff;
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+  color: #d4af37; /* altın sarısı */
+  fill: #d4af37;
 }
 
 /* ===== MONTH + YEAR ===== */
@@ -515,4 +527,20 @@ body {
 /* ===== REMOVE BLUE FOCUS ===== */
 .flatpickr-day:focus {
   outline: none;
+}
+/* YIL YUKARI / AŞAĞI OKLARI */
+.flatpickr-current-month .numInputWrapper span.arrowUp,
+.flatpickr-current-month .numInputWrapper span.arrowDown {
+  color: #ffffff;
+}
+
+.flatpickr-current-month .numInputWrapper span.arrowUp:hover,
+.flatpickr-current-month .numInputWrapper span.arrowDown:hover {
+  color: #d4af37;
+}
+
+/* GÜN İSİMLERİ (Sun Mon Tue ...) */
+.flatpickr-weekday {
+  color: #d4af37;
+  font-weight: 500;
 }
