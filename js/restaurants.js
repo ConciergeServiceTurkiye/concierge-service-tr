@@ -13,6 +13,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const allergyToggle = document.getElementById("allergyToggle");
   const allergyField = document.getElementById("allergyField");
 
+  const dateInput = document.getElementById("date");
+
+dateInput.addEventListener("focus", () => {
+  dateInput.type = "date";
+  dateInput.showPicker && dateInput.showPicker();
+});
+
+dateInput.addEventListener("blur", () => {
+  if (!dateInput.value) {
+    dateInput.type = "text";
+  }
+});
+
   /* INLINE ALERT */
   function showInlineAlert(text) {
     alertBox.textContent = text;
@@ -105,3 +118,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
