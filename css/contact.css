@@ -442,5 +442,11 @@ body {
   outline: 5px solid red;
 }
 
+/* DATE PICKER ICON – GOLD */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(70%) sepia(90%) saturate(500%) hue-rotate(10deg);
+  cursor: pointer;
+}
+
 
 
