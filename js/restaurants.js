@@ -75,6 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
       minutes += 15;
     }
   }
+/* DATE PICKER — FLATPICKR */
+flatpickr("#date", {
+  minDate: "today",
+  locale: navigator.language,
+  dateFormat: "Y-m-d",
+  disableMobile: true
+});
 
   buildTimes();
 
@@ -116,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
   });
 });
+
 
 
 
