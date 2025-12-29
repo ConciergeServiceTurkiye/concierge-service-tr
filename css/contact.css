@@ -420,7 +420,7 @@ form {
 
 /* TIME & GUESTS dropdown */
 .restaurant-form select {
-  appearance: none;
+  appearance: none; color: #ffffff;
 }
 
 /* DROPDOWN OPTIONS */
@@ -578,6 +578,7 @@ body {
   background: #2b2b2b !important;
   color: #ffffff !important;
 }
+
 
 
 
