@@ -612,9 +612,10 @@ body {
 /* NUMBER INPUT */
 .child-input {
   display: none;
-  width: 70px;
+  width: 56px;
   height: 32px;
   padding: 0px 6px;
+  box-sizing: border-box;
   font-size: 13px;
   line-height: 32px;
   color:rgba(255, 255, 255, 0,65);
@@ -624,7 +625,7 @@ body {
 }
 
 .child-input::placeholder {
-  color: rgba(255, 255, 255, 0.65); font-size: 12px; line-height: 32px;
+  color: rgba(255, 255, 255, 0.65); font-size: 12px; white-space: nowrap;
 }
 
 /* FORCE CHILDREN ROW TO BE LEFT & SINGLE LINE */
@@ -661,4 +662,5 @@ body {
   align-items: center;
   gap: 6px;
 }
+
 
