@@ -47,6 +47,12 @@ document.addEventListener("DOMContentLoaded", () => {
     ) return;
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   });
+  date.addEventListener("input", () => {
+  // YYYY-MM-DD = 10 karakter
+  if (date.value.length > 10) {
+    date.value = date.value.slice(0, 10);
+  }
+});
 
   /* TIME OPTIONS — 18:00–22:00 / 15 min */
   function buildTimes() {
@@ -108,4 +114,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
   });
 });
+
 
