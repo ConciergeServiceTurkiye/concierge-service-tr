@@ -450,16 +450,14 @@ body {
 }
 
 /* AY DEĞİŞTİRME OKLARI < > */
-.flatpickr-prev-month,
-.flatpickr-next-month {
-  color: #ffffff;
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
   fill: #ffffff;
 }
 
-.flatpickr-prev-month:hover,
-.flatpickr-next-month:hover {
-  color: #d4af37; /* altın sarısı */
-  fill: #d4af37;
+.flatpickr-prev-month:hover svg,
+.flatpickr-next-month:hover svg {
+  fill: #d4af37; /* sarı */
 }
 
 /* ===== MONTH + YEAR ===== */
@@ -529,18 +527,24 @@ body {
   outline: none;
 }
 /* YIL YUKARI / AŞAĞI OKLARI */
-.flatpickr-current-month .numInputWrapper span.arrowUp,
-.flatpickr-current-month .numInputWrapper span.arrowDown {
+.flatpickr-current-month .numInputWrapper span {
   color: #ffffff;
 }
 
-.flatpickr-current-month .numInputWrapper span.arrowUp:hover,
-.flatpickr-current-month .numInputWrapper span.arrowDown:hover {
+.flatpickr-current-month .numInputWrapper span:hover {
   color: #d4af37;
 }
 
 /* GÜN İSİMLERİ (Sun Mon Tue ...) */
+.flatpickr-weekdays {
+  background: transparent;
+}
+
 .flatpickr-weekday {
   color: #d4af37;
   font-weight: 500;
 }
+.flatpickr-current-month {
+  color: #ffffff;
+}
+
