@@ -570,5 +570,11 @@ body {
   color: #000000; !important;
 }
 
+.flatpickr-monthDropdown-months,
+.flatpickr-monthDropdown-months * {
+  background: #2b2b2b !important;
+  color: #ffffff !important;
+}
+
 
 
