@@ -622,3 +622,38 @@ body {
 .child-input::placeholder {
   color: rgba(255, 255, 255, 0.65);
 }
+
+/* FORCE CHILDREN ROW TO BE LEFT & SINGLE LINE */
+.children-form-group {
+  align-items: flex-start !important;
+}
+
+/* MAIN ROW */
+.children-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  width: 100%;
+}
+
+/* CHILDREN CHECKBOX LEFT */
+.children-row > label {
+  flex-shrink: 0;
+}
+
+/* AGES ALWAYS ON THE RIGHT – SAME LINE */
+.children-ages {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: nowrap;
+}
+
+/* EACH AGE ITEM INLINE */
+.age-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
