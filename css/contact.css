@@ -509,17 +509,20 @@ body {
   border: 1px solid #d4af37;
 }
 
-/* ===== NAV ARROWS ===== */
-.flatpickr-prev-month,
-.flatpickr-next-month {
-  color: #d4af37;
-  fill: #d4af37;
+/* ===== NAV ARROWS – FORCE COLORS ===== */
+
+/* Default: BEYAZ */
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
 }
 
-.flatpickr-prev-month:hover,
-.flatpickr-next-month:hover {
-  color: #ffffff;
-  fill: #ffffff;
+/* Hover: ALTIN SARI */
+.flatpickr-prev-month:hover svg,
+.flatpickr-next-month:hover svg {
+  fill: #d4af37 !important;
+  stroke: #d4af37 !important;
 }
 
 /* ===== REMOVE BLUE FOCUS ===== */
@@ -575,6 +578,7 @@ body {
   background: #2b2b2b !important;
   color: #ffffff !important;
 }
+
 
 
 
