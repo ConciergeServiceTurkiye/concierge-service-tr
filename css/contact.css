@@ -442,47 +442,77 @@ body {
   outline: 5px solid red;
 }
 
-/* DATE PICKER ICON – GOLD */
-input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(70%) sepia(90%) saturate(500%) hue-rotate(10deg);
-  cursor: pointer;
-}
-
-/* FLATPICKR ICON */
-.flatpickr-input {
-  position: relative;
-  cursor: pointer;
-}
-
+/* ===== FLATPICKR BASE ===== */
 .flatpickr-calendar {
-  background: #111;
-  color: #fff;
-  border: 1px solid rgba(212,175,55,.3);
-  border-radius: 12px;
+  background: rgba(25, 25, 25, 0.92); /* koyu ama nefes alan */
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.6);
 }
 
-/* Günler */
+/* ===== MONTH + YEAR ===== */
+.flatpickr-current-month,
+.flatpickr-current-month span.cur-month,
+.flatpickr-current-month input.cur-year {
+  color: #d4af37; /* altın */
+  font-weight: 500;
+}
+
+/* ===== WEEKDAY HEADERS ===== */
+.flatpickr-weekday {
+  color: #e0e0e0; /* açık gri – okunur */
+  font-weight: 400;
+}
+
+/* ===== DAY NUMBERS ===== */
 .flatpickr-day {
-  color: #ddd;
+  color: #d4af37; /* seçilebilir günler ALTIN */
+  border-radius: 8px;
 }
 
+/* ===== PAST DAYS ===== */
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay,
+.flatpickr-day.flatpickr-disabled {
+  color: #ffffff; /* geçmiş / pasif beyaz */
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ===== HOVER (SELECTABLE DAYS) ===== */
+.flatpickr-day:not(.flatpickr-disabled):hover {
+  background: #ffffff;
+  color: #000;
+}
+
+/* ===== SELECTED DAY ===== */
 .flatpickr-day.selected,
-.flatpickr-day.today {
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
   background: #d4af37;
   color: #000;
-  border: none;
+  font-weight: 600;
 }
 
-/* Ay başlığı */
-.flatpickr-current-month,
-.flatpickr-weekday {
-  color: #d4af37;
+/* ===== TODAY ===== */
+.flatpickr-day.today {
+  border: 1px solid #d4af37;
 }
 
-/* Oklar */
+/* ===== NAV ARROWS ===== */
 .flatpickr-prev-month,
 .flatpickr-next-month {
   color: #d4af37;
+  fill: #d4af37;
 }
 
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover {
+  color: #ffffff;
+  fill: #ffffff;
+}
 
+/* ===== REMOVE BLUE FOCUS ===== */
+.flatpickr-day:focus {
+  outline: none;
+}
