@@ -121,11 +121,12 @@ ageToggles.forEach(cb => {
   });
 
   /* ONLY NUMBERS – MAX 6 DIGITS */
+  document.querySelectorAll(".child-input").forEach(input => {
   input.addEventListener("input", () => {
-    input.value = input.value.replace(/\D/g, "").slice(0, 6);
+    input.value = input.value.replace(/\D/g, "").slice(0, 4);
   });
 });
-
+});
 
 
   /* SUBMIT */
@@ -161,6 +162,7 @@ ageToggles.forEach(cb => {
 });
   });
 });
+
 
 
 
