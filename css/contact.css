@@ -613,14 +613,18 @@ body {
 .child-input {
   display: none;
   width: 70px;
-  padding: 5px 6px;
+  height: 32px;
+  padding: 0px 6px;
+  font-size: 13px;
+  line-height: 32px;
+  color:rgba(255, 255, 255, 0,65);
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.3);
-  color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 6px;
 }
 
 .child-input::placeholder {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.65); font-size: 12px; line-height: 32px;
 }
 
 /* FORCE CHILDREN ROW TO BE LEFT & SINGLE LINE */
@@ -657,3 +661,4 @@ body {
   align-items: center;
   gap: 6px;
 }
+
