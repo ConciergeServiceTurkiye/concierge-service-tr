@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const time = document.getElementById("time");
   const guests = document.getElementById("guests");
 
+  date.min = new Date().toISOString().split("T")[0];
+
   const allergyToggle = document.getElementById("allergyToggle");
   const allergyField = document.getElementById("allergyField");
 
@@ -114,5 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
   });
 });
+
 
 
