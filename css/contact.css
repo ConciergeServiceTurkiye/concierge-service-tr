@@ -681,6 +681,12 @@ select:not([value=""]) {
   }
 }
 
+@media (min-width: 1024px) {
+  .contact-hero .contact-form-wrapper:has(.restaurant-form) {
+    max-width: 880px;
+  }
+}
+
 
 
 
