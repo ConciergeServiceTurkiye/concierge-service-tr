@@ -587,6 +587,15 @@ body {
   color: rgba(255, 255, 255, 0.65);
 }
 
+select {
+  color: rgba(255,255,255,0.65); /* default */
+}
+
+select:not([value=""]) {
+  color: #d4af37; /* altın sarısı */
+}
+
+
 /* CHILDREN MAIN ROW */
 .children-row {
   display: flex;
@@ -662,5 +671,6 @@ body {
   align-items: center;
   gap: 6px;
 }
+
 
 
