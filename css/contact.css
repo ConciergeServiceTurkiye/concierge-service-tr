@@ -692,3 +692,11 @@ select:not([value=""]) {
   max-width: 100%;
 }
 
+
+/* ===== FORCE FORM WIDTH (OVERRIDE ALL) ===== */
+section.contact-hero > .contact-form-wrapper {
+  max-width: 760px !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
