@@ -671,6 +671,16 @@ select:not([value=""]) {
   align-items: center;
   gap: 6px;
 }
+/* ==============================
+   RESTAURANT FORM – WIDER LAYOUT
+============================== */
+
+@media (min-width: 1024px) {
+  .restaurant-form {
+    max-width: 860px; /* 820–880 arası oynayabiliriz */
+  }
+}
+
 
 
 
