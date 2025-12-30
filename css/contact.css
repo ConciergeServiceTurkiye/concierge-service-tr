@@ -688,12 +688,7 @@ select:not([value=""]) {
 }
 
 /* ===== FORM WIDTH FIX ===== */
-.contact-form-wrapper {
-  max-width: 780px;
-  margin-left: auto;
-  margin-right: auto;
+.restaurant-form {
+  max-width: 100%;
 }
-
-
-
 
