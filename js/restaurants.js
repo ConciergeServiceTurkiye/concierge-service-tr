@@ -85,6 +85,10 @@ flatpickr("#date", {
 
   buildTimes();
 
+  time.style.color = "rgba(255,255,255,0.65)";
+  guests.style.color = "rgba(255,255,255,0.65)";
+
+
   /* ======================
    SELECT COLOR SWITCH
 ====================== */
@@ -215,6 +219,7 @@ if (childrenToggle && childrenToggle.checked) {
 });
   });
 });
+
 
 
 
