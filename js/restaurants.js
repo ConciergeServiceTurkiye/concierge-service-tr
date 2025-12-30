@@ -85,6 +85,22 @@ flatpickr("#date", {
 
   buildTimes();
 
+  /* ======================
+   SELECT COLOR SWITCH
+====================== */
+time.addEventListener("change", () => {
+  time.style.color = time.value
+    ? "#d4af37"
+    : "rgba(255,255,255,0.65)";
+});
+
+guests.addEventListener("change", () => {
+  guests.style.color = guests.value
+    ? "#d4af37"
+    : "rgba(255,255,255,0.65)";
+});
+
+
   /* ALLERGY TOGGLE */
   allergyToggle.addEventListener("change", () => {
   allergyField.style.display = allergyToggle.checked ? "block" : "none";
@@ -140,9 +156,46 @@ ageToggles.forEach(cb => {
     if (!time.value) return showInlineAlert("Please select a time.");
     if (!guests.value) return showInlineAlert("Please select number of guests.");
 
+    /* ======================
+   ALLERGY VALIDATION
+====================== */
+if (allergyToggle.checked) {
+  const allergyText = document.getElementById("allergyField");
+  if (!allergyText.value.trim()) {
+    return showInlineAlert("Please specify your allergy details.");
+  }
+}
+
+/* ======================
+   CHILDREN VALIDATION
+====================== */
+const childrenToggle = document.getElementById("childrenToggle");
+const ageToggles = document.querySelectorAll(".age-toggle");
+
+if (childrenToggle && childrenToggle.checked) {
+  let atLeastOneAge = false;
+
+  for (let toggle of ageToggles) {
+    if (toggle.checked) {
+      atLeastOneAge = true;
+      const targetId = toggle.dataset.target;
+      const input = document.getElementById(targetId);
+
+      if (!input.value.trim()) {
+        return showInlineAlert("Please enter number of children for selected age group.");
+      }
+    }
+  }
+
+  if (!atLeastOneAge) {
+    return showInlineAlert("Please select at least one age group for children.");
+  }
+}
+
+
     const data = new FormData(form);
     data.set("phone", iti.getNumber());
-
+    
     fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
   method: "POST",
   body: data
@@ -162,6 +215,7 @@ ageToggles.forEach(cb => {
 });
   });
 });
+
 
 
 
