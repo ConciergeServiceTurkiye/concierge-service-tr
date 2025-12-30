@@ -700,3 +700,9 @@ section.contact-hero > .contact-form-wrapper {
   margin-left: auto !important;
   margin-right: auto !important;
 }
+
+@media (max-width: 768px) {
+  section.contact-hero > .contact-form-wrapper {
+    max-width: 94% !important;
+  }
+}
