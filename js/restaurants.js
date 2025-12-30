@@ -135,13 +135,13 @@ ageToggles.forEach(cb => {
       input.value = "";
     }
   });
+});
 
-  /* ONLY NUMBERS – MAX 6 DIGITS */
+   /* ONLY NUMBERS – MAX 6 DIGITS */
   document.querySelectorAll(".child-input").forEach(input => {
   input.addEventListener("input", () => {
     input.value = input.value.replace(/\D/g, "").slice(0, 4);
   });
-});
 });
 
 
@@ -215,6 +215,7 @@ if (childrenToggle && childrenToggle.checked) {
 });
   });
 });
+
 
 
 
