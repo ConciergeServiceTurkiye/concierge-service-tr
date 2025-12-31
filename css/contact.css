@@ -771,5 +771,10 @@ section.contact-hero > .contact-form-wrapper {
   box-shadow: none !important;
 }
 
+.iti__country-list input {
+  color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important;
+}
+
 
 
