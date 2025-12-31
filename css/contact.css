@@ -722,150 +722,16 @@ section.contact-hero > .contact-form-wrapper {
   }
 }
 
-/* ==============================
-   INTL TEL INPUT – SEARCH TEXT FIX (FINAL)
-============================== */
-
-.iti__country-list input.iti__search-input {
-  background-color: #111 !important;
+/* 🔥 INTL TEL INPUT SEARCH – REAL FINAL FIX */
+.iti__search-input {
   color: #d4af37 !important;
-  -webkit-text-fill-color: #d4af37 !important; /* KRİTİK */
-  caret-color: #d4af37 !important;
-  font-size: 14px;
-}
-
-/* Placeholder */
-.iti__country-list input.iti__search-input::placeholder {
-  color: rgba(212,175,55,0.65) !important;
-  -webkit-text-fill-color: rgba(212,175,55,0.65) !important;
-}
-
-/* Focus */
-.iti__country-list input.iti__search-input:focus {
-  outline: none;
-  border-color: #d4af37 !important;
-}
-
-/* ==============================
-   INTL TEL INPUT – SEARCH FIX (FINAL)
-============================== */
-
-/* Gerçek input */
-.iti__country-list input[type="search"] {
-  background-color: #111 !important;
-  color: #d4af37 !important;
-  -webkit-text-fill-color: #d4af37 !important; /* CHROME FIX */
-  caret-color: #d4af37 !important;
-  border: 1px solid #d4af37 !important;
-  font-size: 14px;
-}
-
-/* Placeholder */
-.iti__country-list input[type="search"]::placeholder {
-  color: rgba(212,175,55,0.6) !important;
-}
-
-/* Focus */
-.iti__country-list input[type="search"]:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.iti__country-list input {
-  color: #d4af37 !important;
-  -webkit-text-fill-color: #d4af37 !important;
-}
-
-/* 🔥 FIX: intl-tel-input SEARCH TEXT INVISIBLE (Chrome/WebKit) */
-.iti__country-list .iti__search {
-  -webkit-text-fill-color: #d4af37 !important;
-  color: #d4af37 !important;
-}
-
-.iti__country-list .iti__search::placeholder {
-  -webkit-text-fill-color: rgba(212,175,55,0.65) !important;
-}
-
-/* ==============================
-   🔥 INTL-TEL-INPUT SEARCH FIX (FINAL)
-============================== */
-
-/* Tüm olası search input varyantları */
-.iti__country-list input[type="search"],
-.iti__country-list .iti__search,
-.iti__country-list .iti__search-input {
-  color: #d4af37 !important;
-  -webkit-text-fill-color: #d4af37 !important;
-  caret-color: #d4af37 !important;
-  opacity: 1 !important;
-  background-color: #111 !important;
-}
-
-/* Placeholder */
-.iti__country-list input[type="search"]::placeholder,
-.iti__country-list .iti__search::placeholder,
-.iti__country-list .iti__search-input::placeholder {
-  color: rgba(212,175,55,0.65) !important;
-  -webkit-text-fill-color: rgba(212,175,55,0.65) !important;
-  opacity: 1 !important;
-}
-/* ==============================
-   🔥 INTL-TEL-INPUT SEARCH – CHROME FIX
-============================== */
-
-/* Asıl yazıyı Chrome'da boyayan katman */
-.iti__country-list input[type="search"]::-webkit-search-field {
-  color: #d4af37 !important;
-  -webkit-text-fill-color: #d4af37 !important;
-}
-
-/* Focus hali */
-.iti__country-list input[type="search"]:focus::-webkit-search-field {
-  color: #d4af37 !important;
-  -webkit-text-fill-color: #d4af37 !important;
-}
-
-/* Input’un kendisi */
-.iti__country-list input[type="search"] {
   background: #111 !important;
-  color: #d4af37 !important;
   caret-color: #d4af37 !important;
   opacity: 1 !important;
+  -webkit-text-fill-color: #d4af37 !important;
 }
 
-/* Placeholder */
-.iti__country-list input[type="search"]::placeholder {
-  color: rgba(212,175,55,0.65) !important;
-  -webkit-text-fill-color: rgba(212,175,55,0.65) !important;
+.iti__search-input::placeholder {
+  color: rgba(212,175,55,0.6) !important;
+  -webkit-text-fill-color: rgba(212,175,55,0.6) !important;
 }
-
-/* ================================
-   intl-tel-input SEARCH FIX
-================================ */
-
-/* dropdown container */
-.iti--allow-dropdown .iti__country-list {
-  background-color: #111 !important;
-}
-
-/* search input */
-.iti--allow-dropdown .iti__search-input {
-  background-color: #111 !important;
-  color: #d4af37 !important;
-  caret-color: #d4af37 !important;
-  font-size: 14px;
-}
-
-/* placeholder */
-.iti--allow-dropdown .iti__search-input::placeholder {
-  color: rgba(212, 175, 55, 0.55) !important;
-}
-
-/* typed text (Chrome / Safari fix) */
-.iti--allow-dropdown .iti__search-input:not(:placeholder-shown) {
-  color: #d4af37 !important;
-}
-
-
-
-
