@@ -839,6 +839,33 @@ section.contact-hero > .contact-form-wrapper {
   -webkit-text-fill-color: rgba(212,175,55,0.65) !important;
 }
 
+/* ================================
+   intl-tel-input SEARCH FIX
+================================ */
+
+/* dropdown container */
+.iti--allow-dropdown .iti__country-list {
+  background-color: #111 !important;
+}
+
+/* search input */
+.iti--allow-dropdown .iti__search-input {
+  background-color: #111 !important;
+  color: #d4af37 !important;
+  caret-color: #d4af37 !important;
+  font-size: 14px;
+}
+
+/* placeholder */
+.iti--allow-dropdown .iti__search-input::placeholder {
+  color: rgba(212, 175, 55, 0.55) !important;
+}
+
+/* typed text (Chrome / Safari fix) */
+.iti--allow-dropdown .iti__search-input:not(:placeholder-shown) {
+  color: #d4af37 !important;
+}
+
 
 
 
