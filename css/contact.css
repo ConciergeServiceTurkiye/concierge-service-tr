@@ -809,6 +809,36 @@ section.contact-hero > .contact-form-wrapper {
   -webkit-text-fill-color: rgba(212,175,55,0.65) !important;
   opacity: 1 !important;
 }
+/* ==============================
+   🔥 INTL-TEL-INPUT SEARCH – CHROME FIX
+============================== */
+
+/* Asıl yazıyı Chrome'da boyayan katman */
+.iti__country-list input[type="search"]::-webkit-search-field {
+  color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important;
+}
+
+/* Focus hali */
+.iti__country-list input[type="search"]:focus::-webkit-search-field {
+  color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important;
+}
+
+/* Input’un kendisi */
+.iti__country-list input[type="search"] {
+  background: #111 !important;
+  color: #d4af37 !important;
+  caret-color: #d4af37 !important;
+  opacity: 1 !important;
+}
+
+/* Placeholder */
+.iti__country-list input[type="search"]::placeholder {
+  color: rgba(212,175,55,0.65) !important;
+  -webkit-text-fill-color: rgba(212,175,55,0.65) !important;
+}
+
 
 
 
