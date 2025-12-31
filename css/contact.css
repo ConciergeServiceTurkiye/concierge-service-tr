@@ -292,8 +292,9 @@ form {
 /* Dropdown liste */
 .iti__country-list {
   background: rgba(10,10,10,0.95);
-  min-width: 320px !important;
-  width: max-content !important;
+  width: 100% !important
+  max-width: 360px;
+  min-width: 320px;
   border: 1px solid #d4af37;
   border-radius: 12px;
   padding: 6px 0;
@@ -306,13 +307,14 @@ form {
 .iti__country {
   padding: 10px 14px;
   display: flex;
-  justify-content: flex-start; /* SOLDAN HİZALI */
-  align-items: center;
-  white-space: nowrap;
+  justify-content: flex-start;   /* KALSIN */
+  align-items: center;           /* KALSIN */
+  gap: 8px;                      /* EKLE */
+  white-space: normal;           /* 🔥 nowrap KALKTI */
   font-size: 14px;
   color: #d4af37;
-  cursor: pointer;
-  transition: background 0.25s, color 0.25s;
+  cursor: pointer;               /* KALSIN */
+  transition: background 0.25s, color 0.25s; /* KALSIN */
 }
 
 /* Ülke adı */
@@ -323,8 +325,9 @@ form {
 
 /* Dial code sağa kaçmasın */
 .iti__dial-code {
-  margin-left: 12px;
-  flex-shrink: 0;
+  margin-left: auto;   /* kod sağa gider */
+  opacity: 0.85;
+  font-weight: 500;
 }
 
 /* Hover ve seçili satır */
@@ -735,3 +738,4 @@ section.contact-hero > .contact-form-wrapper {
   color: rgba(212,175,55,0.6) !important;
   -webkit-text-fill-color: rgba(212,175,55,0.6) !important;
 }
+
