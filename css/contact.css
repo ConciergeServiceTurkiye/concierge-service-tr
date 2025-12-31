@@ -292,6 +292,8 @@ form {
 /* Dropdown liste */
 .iti__country-list {
   background: rgba(10,10,10,0.95);
+  min-width: 320px !important;
+  width: max-content !important;
   border: 1px solid #d4af37;
   border-radius: 12px;
   padding: 6px 0;
@@ -306,10 +308,23 @@ form {
   display: flex;
   justify-content: flex-start; /* SOLDAN HİZALI */
   align-items: center;
+  white-space: nowrap;
   font-size: 14px;
   color: #d4af37;
   cursor: pointer;
   transition: background 0.25s, color 0.25s;
+}
+
+/* Ülke adı */
+.iti__country-name {
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+/* Dial code sağa kaçmasın */
+.iti__dial-code {
+  margin-left: 12px;
+  flex-shrink: 0;
 }
 
 /* Hover ve seçili satır */
@@ -706,3 +721,4 @@ section.contact-hero > .contact-form-wrapper {
     max-width: 94% !important;
   }
 }
+
