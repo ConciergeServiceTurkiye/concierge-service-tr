@@ -744,3 +744,29 @@ section.contact-hero > .contact-form-wrapper {
   border-color: #d4af37;
 }
 
+/* ==============================
+   INTL TEL INPUT – SEARCH TEXT FIX (FINAL)
+============================== */
+
+.iti__country-list input.iti__search-input {
+  background-color: #111 !important;
+  color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important; /* KRİTİK */
+  caret-color: #d4af37 !important;
+  font-size: 14px;
+}
+
+/* Placeholder */
+.iti__country-list input.iti__search-input::placeholder {
+  color: rgba(212,175,55,0.65) !important;
+  -webkit-text-fill-color: rgba(212,175,55,0.65) !important;
+}
+
+/* Focus */
+.iti__country-list input.iti__search-input:focus {
+  outline: none;
+  border-color: #d4af37 !important;
+}
+
+
+
