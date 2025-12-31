@@ -36,10 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* PHONE INPUT */
-  const iti = intlTelInput(phone, {
-    initialCountry: "us",
-    separateDialCode: true
-  });
+ const iti = intlTelInput(phone, {
+  initialCountry: "us",
+  separateDialCode: true,
+  utilsScript:
+    "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
+});
 
   phone.addEventListener("keydown", e => {
     if (
@@ -216,6 +218,7 @@ if (childrenToggle && childrenToggle.checked) {
 });
   });
 });
+
 
 
 
