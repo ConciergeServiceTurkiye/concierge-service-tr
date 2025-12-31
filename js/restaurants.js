@@ -173,9 +173,6 @@ if (allergyToggle.checked) {
 /* ======================
    CHILDREN VALIDATION
 ====================== */
-const childrenToggle = document.getElementById("childrenToggle");
-const ageToggles = document.querySelectorAll(".age-toggle");
-
 if (childrenToggle && childrenToggle.checked) {
   let atLeastOneAge = false;
 
@@ -219,6 +216,7 @@ if (childrenToggle && childrenToggle.checked) {
 });
   });
 });
+
 
 
 
