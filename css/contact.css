@@ -722,3 +722,25 @@ section.contact-hero > .contact-form-wrapper {
   }
 }
 
+/* ==============================
+   PHONE COUNTRY SEARCH INPUT FIX
+============================== */
+
+/* Search input yazı rengi */
+.iti__country-list .iti__search {
+  color: #d4af37 !important;           /* yazılan metin */
+  background: #111 !important;         /* arka plan */
+  caret-color: #d4af37;                /* imleç rengi */
+}
+
+/* Placeholder rengi */
+.iti__country-list .iti__search::placeholder {
+  color: rgba(212,175,55,0.65) !important;
+}
+
+/* Focus olunca */
+.iti__country-list .iti__search:focus {
+  outline: none;
+  border-color: #d4af37;
+}
+
