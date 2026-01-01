@@ -665,3 +665,28 @@ section.contact-hero > .contact-form-wrapper {
   margin-left: auto !important;
   white-space: nowrap !important;
 }
+/* === INTL TEL INPUT – CORE FIX (ZORUNLU) === */
+
+.iti {
+  width: 100% !important;
+  display: block !important;
+  position: relative !important;
+}
+
+.iti input {
+  width: 100% !important;
+  height: 48px !important;
+  padding-left: 58px !important; /* bayrak + code alanı */
+  box-sizing: border-box;
+}
+
+.iti__flag-container {
+  height: 100% !important;
+}
+
+.iti__selected-flag {
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
