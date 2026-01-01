@@ -694,6 +694,17 @@ section.contact-hero > .contact-form-wrapper {
   white-space: nowrap !important;
 }
 
+/* === INTL TEL INPUT – FINAL CLICK FIX === */
+.iti,
+.iti * {
+  pointer-events: auto !important;
+}
+
+.iti__country-list {
+  position: absolute !important;
+  z-index: 99999 !important;
+}
+
 
 
 
