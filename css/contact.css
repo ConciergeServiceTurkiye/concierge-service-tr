@@ -187,88 +187,6 @@ form {
 }
 
 /* ==================================================
-   PHONE INPUT
-================================================== */
-
-.iti {
-  width: 100%;
-}
-
-.iti input {
-  padding-left: 52px;
-}
-
-/* SEARCH */
-.iti__country-list .iti__search {
-  background: #111;
-  color: #d4af37;
-  border: 1px solid #d4af37;
-  padding: 8px 12px;
-  border-radius: 8px;
-  width: calc(100% - 24px);
-  margin: 6px auto;
-  font-size: 14px;
-}
-
-.iti__country-list .iti__search::placeholder {
-  color: #aaa;
-}
-
-/* DROPDOWN LIST */
-.iti__country-list {
-  background: rgba(10,10,10,0.95);
-  width: 100vw !important;
-  max-width: 420px !important;
-  min-width: unset !important;
-  left: 0 !important;
-  right: auto !important;
-  border: 1px solid #d4af37;
-  border-radius: 12px;
-  padding: 6px 0;
-  max-height: 260px;
-  overflow-y: auto;
-  z-index: 9999;
-}
-
-/* COUNTRY ROW */
-.iti__country {
-  padding: 10px 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  white-space: normal;
-  font-size: 14px;
-  color: #d4af37;
-  cursor: pointer;
-  transition: background 0.25s, color 0.25s;
-}
-
-.iti__country-name {
-  flex: 1 1 auto;
-  white-space: normal;
-}
-
-.iti__dial-code {
-  flex-shrink: 0;
-  margin-left: auto;
-  color: rgba(212,175,55,0.85);
-  font-weight: 500;
-}
-
-.iti__country:hover,
-.iti__country.iti__highlight {
-  background: rgba(212,175,55,0.15);
-  color: #f1d97a;
-}
-
-.iti__flag {
-  width: 20px;
-  height: 15px;
-  margin-right: 6px;
-  flex-shrink: 0;
-}
-
-/* ==================================================
    CUSTOM SUBJECT DROPDOWN
 ================================================== */
 
@@ -717,27 +635,31 @@ body > .iti__country-list {
    overflow-x: hidden !important;
    background: rgba(10,10,10,0.97) !important;
    border: 1px solid #d4af37 !important;
-   box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important;} 
+   box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important;
+} 
 
 body > .iti__country-list .iti__search { 
    color: #d4af37 !important; 
    background: #111 !important;
-   border: 1px solid rgba(212,175,55,0.6) !important;}
+   border: 1px solid rgba(212,175,55,0.6) !important;
+}
 
 body > .iti__country-list .iti__search::placeholder{
-   color: rgba(212,175,55,0.65) !important;}
+   color: rgba(212,175,55,0.65) !important;
+}
 
-/* COUNTRY ROW – CLEAN ALIGN */
-body > .iti__country {
+body > .iti__country-list .iti__country {
   display: flex !important;
   align-items: center !important;
-  gap: 10px !important;}
+  gap: 10px !important;
+  white-space: nowrap !important;
+}
 
-body > .iti__dial-code {
+body > .iti__country-list .iti__country-name {
+  flex: 1 1 auto !important;
+}
+
+body > .iti__country-list .iti__dial-code {
   margin-left: auto !important;
-  white-space: nowrap !important;}
-
-
-
-
-
+  white-space: nowrap !important;
+}
