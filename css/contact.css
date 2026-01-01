@@ -217,9 +217,11 @@ form {
 /* DROPDOWN LIST */
 .iti__country-list {
   background: rgba(10,10,10,0.95);
-  width: 100% !important;
-  max-width: 360px;
-  min-width: 320px;
+  width: 100vw !important;
+  max-width: 420px !important;
+  min-width: unset !important;
+  left: 0 !important;
+  right: auto !important;
   border: 1px solid #d4af37;
   border-radius: 12px;
   padding: 6px 0;
@@ -709,6 +711,7 @@ section.contact-hero > .contact-form-wrapper {
     max-width: 94% !important;
   }
 }
+
 
 
 
