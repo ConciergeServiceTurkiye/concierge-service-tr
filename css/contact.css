@@ -803,6 +803,31 @@ section.contact-hero > .contact-form-wrapper {
   color: #000;
 }
 
+/* === INTL TEL INPUT v19 – SEARCH INPUT TEXT FIX === */
+
+.iti__search-input {
+  color: #d4af37 !important;        /* yazı rengi */
+  caret-color: #d4af37 !important; /* imleç */
+  background: #111 !important;
+  font-size: 14px;
+}
+
+/* Placeholder */
+.iti__search-input::placeholder {
+  color: rgba(212,175,55,0.65) !important;
+}
+
+/* Seçili yazı */
+.iti__search-input::selection {
+  background: rgba(212,175,55,0.35);
+  color: #000;
+}
+
+.iti__search-input::-moz-selection {
+  background: rgba(212,175,55,0.35);
+  color: #000;
+}
+
 
 
 
