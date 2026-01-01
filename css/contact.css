@@ -746,5 +746,50 @@ section.contact-hero > .contact-form-wrapper {
   width: 360px !important;
   max-width: 360px !important;
 }
+/* ==============================
+   INTL TEL INPUT – COUNTRY LIST FIX
+================================ */
+
+/* Ana container */
+.iti {
+  width: 100% !important;
+}
+
+/* Dropdown list */
+.iti__country-list {
+  width: 380px !important;
+  min-width: 380px !important;
+  max-width: 380px !important;
+
+  white-space: nowrap !important;
+  overflow-x: hidden !important;
+}
+
+/* Her ülke satırı */
+.iti__country {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+/* Ülke adı */
+.iti__country-name {
+  flex: 1 1 auto !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+}
+
+/* Dial code */
+.iti__dial-code {
+  flex-shrink: 0 !important;
+  margin-left: 8px;
+}
+
+/* Search input */
+.iti__search-input {
+  width: 100% !important;
+  color: #ffffff !important;
+  background: transparent !important;
+}
 
 
