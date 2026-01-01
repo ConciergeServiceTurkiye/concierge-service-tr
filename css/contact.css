@@ -735,6 +735,18 @@ section.contact-hero > .contact-form-wrapper {
   margin-left: auto !important;
 }
 
+/* === INTL TEL INPUT – COUNTRY NAME COLOR === */
+
+/* Ülke isimleri altın sarısı */
+.iti__country-name {
+  color: #d4af37 !important;
+}
+
+/* Ülke kodu (dial code) rengi DEĞİŞMESİN */
+.iti__dial-code {
+  color: inherit !important;
+}
+
 
 
 
