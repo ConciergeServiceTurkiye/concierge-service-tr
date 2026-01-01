@@ -481,12 +481,6 @@ body {
   font-weight: 500;
 }
 
-/* ===== WEEKDAY HEADERS ===== */
-.flatpickr-weekday {
-  color: #e0e0e0; /* açık gri – okunur */
-  font-weight: 400;
-}
-
 /* ===== DAY NUMBERS ===== */
 .flatpickr-day {
   color: #d4af37; /* seçilebilir günler ALTIN */
@@ -561,17 +555,13 @@ body {
   font-weight: 500;
 }
 
-.flatpickr-weekday {
-  color: #ffffff; !important;
-  font-weight: 500;
-}
 .flatpickr-current-month {
   color: #ffffff;
 }
 /* Ay dropdown arka plan */
 .flatpickr-monthDropdown-months {
-  background-color: #2b2b2b; !important; /* takvimle uyumlu koyu ama okunur */
-  color: #ffffff; !important;
+  background-color: #2b2b2b !important; /* takvimle uyumlu koyu ama okunur */
+  color: #ffffff !important;
 }
 
 /* Ay seçenekleri */
@@ -719,5 +709,6 @@ section.contact-hero > .contact-form-wrapper {
     max-width: 94% !important;
   }
 }
+
 
 
