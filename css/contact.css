@@ -698,4 +698,45 @@ section.contact-hero > .contact-form-wrapper {
   transform: none !important;
 }
 
+/* === INTL TEL INPUT – STABLE FINAL === */
+
+.iti__country-list {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(10,10,10,0.97);
+  border: 1px solid #d4af37;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(212,175,55,0.25);
+  overflow-x: hidden;
+}
+
+.iti__country {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  white-space: nowrap;
+}
+
+.iti__country-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.iti__dial-code {
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.iti__search {
+  background: #111;
+  color: #d4af37;
+  border: 1px solid rgba(212,175,55,0.6);
+}
+
+.iti__search::placeholder {
+  color: rgba(212,175,55,0.65);
+}
+
 
