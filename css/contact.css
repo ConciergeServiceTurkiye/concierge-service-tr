@@ -663,17 +663,17 @@ section.contact-hero > .contact-form-wrapper {
    overflow-x: hidden !important;
 } 
 
-.iti__country-list .iti__search { 
+.iti__search { 
    color: #d4af37 !important; 
    background: #111 !important;
    border: 1px solid rgba(212,175,55,0.6) !important;
 }
 
-.iti__country-list .iti__search::placeholder{
+.iti__search::placeholder{
    color: rgba(212,175,55,0.65) !important;
 }
 
-.iti__country-list .iti__country {
+.iti__country {
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
@@ -681,14 +681,15 @@ section.contact-hero > .contact-form-wrapper {
   white-space: nowrap !important;
 }
 
-.iti__country-list .iti__country-name {
+.iti__country-name {
   flex: 1 !important;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.iti__country-list .iti__dial-code {
+.iti__dial-code {
   margin-left: auto !important;
   white-space: nowrap !important;
 }
+
 
