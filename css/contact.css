@@ -828,6 +828,14 @@ section.contact-hero > .contact-form-wrapper {
   color: #000;
 }
 
+/* INTL TEL INPUT – SEARCH */
+.iti__search-input {
+  color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important;
+  caret-color: #d4af37 !important;
+  background: #111 !important;
+}
+
 
 
 
