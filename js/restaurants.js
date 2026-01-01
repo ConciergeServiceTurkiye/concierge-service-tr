@@ -220,15 +220,3 @@ if (childrenToggle && childrenToggle.checked) {
   });
 });
 
-/* === INTL TEL INPUT – FINAL FIX === */
-body > .iti__country-list {
-  width: 380px !important;
-  min-width: 380px !important;
-  max-width: 380px !important;
-}
-
-body > .iti__country-list .iti__search {
-  color: #d4af37 !important;
-  background: #111 !important;
-}
-
