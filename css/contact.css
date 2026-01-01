@@ -783,6 +783,26 @@ section.contact-hero > .contact-form-wrapper {
   background: rgba(212, 175, 55, 0.35);
   color: #000;
 }
+/* === INTL TEL INPUT – SEARCH TEXT COLOR (FIXED) === */
+
+/* Arama inputunun kendisi */
+.iti__search input {
+  color: #d4af37 !important;
+  caret-color: #d4af37 !important;
+  background: #111 !important;
+}
+
+/* Seçili metin */
+.iti__search input::selection {
+  background: rgba(212, 175, 55, 0.35);
+  color: #000;
+}
+
+.iti__search input::-moz-selection {
+  background: rgba(212, 175, 55, 0.35);
+  color: #000;
+}
+
 
 
 
