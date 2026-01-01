@@ -39,20 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
  const iti = intlTelInput(phone, {
   initialCountry: "us",
   separateDialCode: true,
+  dropdownContainer: document.body, // 🔥 EN KRİTİK SATIR
   utilsScript:
     "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
 });
-
-  /* ======================
-     COUNTRY DROPDOWN WIDTH FIX
-  ====================== */
-  phone.addEventListener("open:countrydropdown", () => {
-    const dropdown = document.querySelector(".iti__country-list");
-    if (dropdown) {
-      dropdown.style.width = "360px";
-      dropdown.style.minWidth = "360px";
-    }
-  });
 
   phone.addEventListener("keydown", e => {
     if (
@@ -229,16 +219,3 @@ if (childrenToggle && childrenToggle.checked) {
 });
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
