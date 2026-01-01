@@ -689,4 +689,13 @@ section.contact-hero > .contact-form-wrapper {
   display: flex !important;
   align-items: center !important;
 }
+/* === INTL TEL INPUT – SCROLL JUMP FIX === */
+
+.iti__country-list {
+  position: fixed !important;
+  top: auto !important;
+  left: auto !important;
+  transform: none !important;
+}
+
 
