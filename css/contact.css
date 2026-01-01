@@ -705,6 +705,36 @@ section.contact-hero > .contact-form-wrapper {
   z-index: 99999 !important;
 }
 
+/* === INTL TEL INPUT – DROPDOWN WIDTH FIX (ONLY WIDTH) === */
+
+.iti__country-list {
+  min-width: 320px !important;   /* mobil için */
+  width: 100% !important;        /* input genişliği kadar */
+  max-width: 420px !important;   /* masaüstü için ideal */
+}
+
+/* Ülke satırları tek satır ve taşma olmasın */
+.iti__country {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  white-space: nowrap !important;
+}
+
+/* Ülke adı alanı genişlesin */
+.iti__country-name {
+  flex: 1 !important;
+  min-width: 0 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Kod sağda sabit kalsın */
+.iti__dial-code {
+  flex-shrink: 0 !important;
+  margin-left: auto !important;
+}
+
 
 
 
