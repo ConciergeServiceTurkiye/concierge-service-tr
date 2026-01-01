@@ -628,7 +628,7 @@ section.contact-hero > .contact-form-wrapper {
 
 /* === INTL TEL INPUT – FINAL FIX === */ 
 
-body > .iti__country-list { 
+.iti__country-list { 
    width: 420px !important;
    min-width: 420px !important;
    max-width: 420px !important;
@@ -638,30 +638,30 @@ body > .iti__country-list {
    box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important;
 } 
 
-body > .iti__country-list .iti__search { 
+.iti__country-list .iti__search { 
    color: #d4af37 !important; 
    background: #111 !important;
    border: 1px solid rgba(212,175,55,0.6) !important;
 }
 
-body > .iti__country-list .iti__search::placeholder{
+.iti__country-list .iti__search::placeholder{
    color: rgba(212,175,55,0.65) !important;
 }
 
-body > .iti__country-list .iti__country {
+.iti__country-list .iti__country {
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
   white-space: nowrap !important;
 }
 
-body > .iti__country-list .iti__country-name {
+.iti__country-list .iti__country-name {
   flex: 1 1 auto !important;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-body > .iti__country-list .iti__dial-code {
+.iti__country-list .iti__dial-code {
   margin-left: auto !important;
   white-space: nowrap !important;
 }
@@ -677,4 +677,5 @@ body > .iti__country-list .iti__dial-code {
   box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important;
   z-index: 9999 !important;
 }
+
 
