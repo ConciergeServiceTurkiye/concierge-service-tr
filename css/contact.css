@@ -711,9 +711,9 @@ section.contact-hero > .contact-form-wrapper {
 /* === INTL TEL INPUT – FINAL FIX === */ 
 
 body > .iti__country-list { 
-   width: 420px !important;
-   min-width: 420px !important;
-   max-width: 420px !important;
+   width: 360px !important;
+   min-width: 360px !important;
+   max-width: 360px !important;
    overflow-x: hidden !important;
    background: rgba(10,10,10,0.97) !important;
    border: 1px solid #d4af37 !important;
@@ -736,6 +736,7 @@ body > .iti__country {
 body > .iti__dial-code {
   margin-left: auto !important;
   white-space: nowrap !important;}
+
 
 
 
