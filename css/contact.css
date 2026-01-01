@@ -740,4 +740,11 @@ section.contact-hero > .contact-form-wrapper {
   -webkit-text-fill-color: rgba(212,175,55,0.6) !important;
 }
 
+/* 🔥 REAL FIX — COUNTRY DROPDOWN WIDTH */
+.iti--allow-dropdown .iti__country-list {
+  min-width: 360px !important;
+  width: 360px !important;
+  max-width: 360px !important;
+}
+
 
