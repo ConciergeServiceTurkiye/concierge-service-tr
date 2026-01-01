@@ -40,19 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const iti = intlTelInput(phoneInput, {
   initialCountry: "us",
-  separateDialCode: true,
-  dropdownContainer: document.body,
-  utilsScript:
-    "https://cdn.jsdelivr.net/npm/intl-tel-input@18/build/js/utils.js"
-});
-
-// 🔒 SCROLL FIX (ZORUNLU)
-phoneInput.addEventListener("open:countrydropdown", () => {
-  document.body.style.overflow = "hidden";
-});
-
-phoneInput.addEventListener("close:countrydropdown", () => {
-  document.body.style.overflow = "";
+  separateDialCode: true
 });
 
   phone.addEventListener("keydown", e => {
@@ -230,5 +218,6 @@ if (childrenToggle && childrenToggle.checked) {
 });
   });
 });
+
 
 
