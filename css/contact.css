@@ -828,12 +828,22 @@ section.contact-hero > .contact-form-wrapper {
   color: #000;
 }
 
-/* INTL TEL INPUT – SEARCH */
+/* === INTL TEL INPUT v19 – SEARCH TEXT HARD FIX === */
 .iti__search-input {
+  display: block !important;
+  width: 100% !important;
+placeholder {
+  color: rgba(212,175,55,0.6) !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  font-family: inherit !important;
+
   color: #d4af37 !important;
   -webkit-text-fill-color: #d4af37 !important;
   caret-color: #d4af37 !important;
-  background: #111 !important;
+
+  background-color: #111 !important;
+  opacity: 1 !important;
 }
 
 
