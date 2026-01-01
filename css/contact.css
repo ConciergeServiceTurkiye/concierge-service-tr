@@ -764,6 +764,26 @@ section.contact-hero > .contact-form-wrapper {
   color: inherit !important;
 }
 
+/* === INTL TEL INPUT – SEARCH INPUT TEXT COLOR === */
+
+/* Kullanıcının yazdığı metin (search) */
+.iti__search {
+  color: #d4af37 !important;       /* altın yazı */
+  caret-color: #d4af37 !important; /* imleç (cursor) */
+}
+
+/* Yazı seçilince (selection) */
+.iti__search::selection {
+  background: rgba(212, 175, 55, 0.35);
+  color: #000;
+}
+
+/* Firefox selection */
+.iti__search::-moz-selection {
+  background: rgba(212, 175, 55, 0.35);
+  color: #000;
+}
+
 
 
 
