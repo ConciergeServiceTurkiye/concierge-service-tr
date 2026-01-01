@@ -747,6 +747,23 @@ section.contact-hero > .contact-form-wrapper {
   color: inherit !important;
 }
 
+/* === INTL TEL INPUT – COUNTRY HOVER EFFECT === */
+
+/* Hover arka plan */
+.iti__country:hover {
+  background: rgba(212, 175, 55, 0.18) !important;
+}
+
+/* Hover’da ülke adı biraz daha parlak */
+.iti__country:hover .iti__country-name {
+  color: #f1d97a !important;
+}
+
+/* Hover’da kod rengi değişmesin */
+.iti__country:hover .iti__dial-code {
+  color: inherit !important;
+}
+
 
 
 
