@@ -626,45 +626,6 @@ section.contact-hero > .contact-form-wrapper {
   }
 }
 
-/* === INTL TEL INPUT – FINAL FIX === */ 
-
-.iti__country-list { 
-   width: 420px !important;
-   min-width: 420px !important;
-   max-width: 420px !important;
-   overflow-x: hidden !important;
-   background: rgba(10,10,10,0.97) !important;
-   border: 1px solid #d4af37 !important;
-   box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important;
-} 
-
-.iti__country-list .iti__search { 
-   color: #d4af37 !important; 
-   background: #111 !important;
-   border: 1px solid rgba(212,175,55,0.6) !important;
-}
-
-.iti__country-list .iti__search::placeholder{
-   color: rgba(212,175,55,0.65) !important;
-}
-
-.iti__country-list .iti__country {
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  white-space: nowrap !important;
-}
-
-.iti__country-list .iti__country-name {
-  flex: 1 1 auto !important;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.iti__country-list .iti__dial-code {
-  margin-left: auto !important;
-  white-space: nowrap !important;
-}
 /* === INTL TEL INPUT – CORE FIX (ZORUNLU) === */
 
 .iti {
@@ -689,54 +650,57 @@ section.contact-hero > .contact-form-wrapper {
   display: flex !important;
   align-items: center !important;
 }
-/* === INTL TEL INPUT – SCROLL JUMP FIX === */
 
-.iti__country-list {
-  position: fixed !important;
-  top: auto !important;
-  left: auto !important;
-  transform: none !important;
-}
+/* === INTL TEL INPUT – FINAL FIX === */ 
 
-/* === INTL TEL INPUT – STABLE FINAL === */
+.iti__country-list { 
+   width: 100% !important;
+   max-width: 420px !important;
+   background: rgba(10,10,10,0.97) !important;
+   border: 1px solid #d4af37 !important;
+   border-radius: 12px;
+   box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important;
+   overflow-x: hidden !important;
+} 
 
-.iti__country-list {
-  width: 100%;
-  max-width: 420px;
-  background: rgba(10,10,10,0.97);
-  border: 1px solid #d4af37;
-  border-radius: 12px;
-  box-shadow: 0 12px 30px rgba(212,175,55,0.25);
-  overflow-x: hidden;
-}
-
-.iti__country {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  white-space: nowrap;
+.iti__country-list .iti__search { 
+   color: #d4af37 !important; 
+   background: #111 !important;
+   border: 1px solid rgba(212,175,55,0.6) !important;
 }
 
 .iti__country-name {
-  flex: 1;
+   flex: 1;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+iti.__dial-code {
+   margin-left: auto;
+   white-space: nowrap;
+}
+
+
+.iti__country-list .iti__search::placeholder{
+   color: rgba(212,175,55,0.65) !important;
+}
+
+.iti__country-list .iti__country {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 14px;
+  white-space: nowrap !important;
+}
+
+.iti__country-list .iti__country-name {
+  flex: 1 1 auto !important;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.iti__dial-code {
-  margin-left: auto;
-  white-space: nowrap;
+.iti__country-list .iti__dial-code {
+  margin-left: auto !important;
+  white-space: nowrap !important;
 }
-
-.iti__search {
-  background: #111;
-  color: #d4af37;
-  border: 1px solid rgba(212,175,55,0.6);
-}
-
-.iti__search::placeholder {
-  color: rgba(212,175,55,0.65);
-}
-
 
