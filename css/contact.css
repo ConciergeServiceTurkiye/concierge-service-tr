@@ -669,18 +669,6 @@ section.contact-hero > .contact-form-wrapper {
    border: 1px solid rgba(212,175,55,0.6) !important;
 }
 
-.iti__country-name {
-   flex: 1;
-   overflow: hidden;
-   text-overflow: ellipsis;
-}
-
-iti.__dial-code {
-   margin-left: auto;
-   white-space: nowrap;
-}
-
-
 .iti__country-list .iti__search::placeholder{
    color: rgba(212,175,55,0.65) !important;
 }
@@ -694,7 +682,7 @@ iti.__dial-code {
 }
 
 .iti__country-list .iti__country-name {
-  flex: 1 1 auto !important;
+  flex: 1 !important;
   overflow: hidden;
   text-overflow: ellipsis;
 }
