@@ -708,5 +708,34 @@ section.contact-hero > .contact-form-wrapper {
   }
 }
 
+/* === INTL TEL INPUT – FINAL FIX === */ 
+
+body > .iti__country-list { 
+   width: 420px !important;
+   min-width: 420px !important;
+   max-width: 420px !important;
+   overflow-x: hidden !important;
+   background: rgba(10,10,10,0.97) !important;
+   border: 1px solid #d4af37 !important;
+   box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important;} 
+
+body > .iti__country-list .iti__search { 
+   color: #d4af37 !important; 
+   background: #111 !important;
+   border: 1px solid rgba(212,175,55,0.6) !important;}
+
+body > .iti__country-list .iti__search::placeholder{
+   color: rgba(212,175,55,0.65) !important;}
+
+/* COUNTRY ROW – CLEAN ALIGN */
+body > .iti__country {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;}
+
+body > .iti__dial-code {
+  margin-left: auto !important;
+  white-space: nowrap !important;}
+
 
 
