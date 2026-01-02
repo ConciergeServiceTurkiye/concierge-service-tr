@@ -859,6 +859,22 @@ placeholder {
   font-size: 14px !important;
   line-height: 1.4 !important;
 }
+/* === INTL TEL INPUT v19 – SEARCH FINAL REAL FIX === */
+
+/* PROBLEMİN KAYNAĞI BURASI */
+.iti__search {
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+/* ARAMA INPUT */
+.iti__search-input {
+  color: #d4af37 !important;
+  caret-color: #d4af37 !important;
+  background: #111 !important;
+  -webkit-text-fill-color: #d4af37 !important;
+}
+
 
 
 
