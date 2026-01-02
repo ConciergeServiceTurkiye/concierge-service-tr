@@ -43,15 +43,6 @@ const iti = intlTelInput(phoneInput, {
   separateDialCode: true
 });
 
-/* === INTL TEL INPUT v19 – HARD FIX (FORCED) === */
-document.addEventListener('input', (e) => {
-  if (e.target && e.target.classList.contains('iti__search-input')) {
-    e.target.style.setProperty('-webkit-text-fill-color', '#d4af37', 'important');
-    e.target.style.setProperty('color', '#d4af37', 'important');
-    e.target.style.caretColor = '#d4af37';
-  }
-});
-
   phone.addEventListener("keydown", e => {
     if (
       e.ctrlKey ||
@@ -227,6 +218,7 @@ if (childrenToggle && childrenToggle.checked) {
 });
   });
 });
+
 
 
 
