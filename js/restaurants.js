@@ -43,19 +43,14 @@ const iti = intlTelInput(phoneInput, {
   separateDialCode: true
 });
 
-/* FIX: intl-tel-input search input text visibility (v19) */
-phoneInput.addEventListener("focus", () => {
-  setTimeout(() => {
-    const searchInput = document.querySelector('.iti__search-input');
-    if (searchInput) {
-      searchInput.style.color = '#d4af37';
-      searchInput.style.webkitTextFillColor = '#d4af37';
-      searchInput.style.caretColor = '#d4af37';
-      searchInput.style.background = '#111';
-    }
-  }, 50);
+/* === INTL TEL INPUT v19 – HARD FIX (FORCED) === */
+document.addEventListener('input', (e) => {
+  if (e.target && e.target.classList.contains('iti__search-input')) {
+    e.target.style.setProperty('-webkit-text-fill-color', '#d4af37', 'important');
+    e.target.style.setProperty('color', '#d4af37', 'important');
+    e.target.style.caretColor = '#d4af37';
+  }
 });
-
 
   phone.addEventListener("keydown", e => {
     if (
@@ -232,6 +227,7 @@ if (childrenToggle && childrenToggle.checked) {
 });
   });
 });
+
 
 
 
