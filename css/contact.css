@@ -828,39 +828,6 @@ section.contact-hero > .contact-form-wrapper {
   color: #000;
 }
 
-/* === INTL TEL INPUT v19 – SEARCH TEXT HARD FIX === */
-.iti__search-input {
-  display: block !important;
-  width: 100% !important;
-placeholder {
-  color: rgba(212,175,55,0.6) !important;
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-  font-family: inherit !important;
-
-  color: #d4af37 !important;
-  -webkit-text-fill-color: #d4af37 !important;
-  caret-color: #d4af37 !important;
-
-  background-color: #111 !important;
-  opacity: 1 !important;
-}
-
-/* === INTL TEL INPUT v19 – SEARCH FINAL REAL FIX === */
-
-/* PROBLEMİN KAYNAĞI BURASI */
-.iti__search {
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-}
-
-/* === INTL TEL INPUT – SEARCH TEXT HARD FIX === */
-
-/* search wrapper */
-.iti__search {
-  position: relative !important;
-}
-
 /* gerçek input */
 .iti__search-input {
   position: relative !important;
@@ -890,5 +857,6 @@ placeholder {
 .iti__dropdown-content {
   background-color: #0a0a0a !important;
 }
+
 
 
