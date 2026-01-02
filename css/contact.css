@@ -846,19 +846,6 @@ placeholder {
   opacity: 1 !important;
 }
 
-/* === INTL TEL INPUT v19 – SEARCH TEXT ABSOLUTE FIX === */
-.iti__search-input {
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-
-  text-shadow: 0 0 0 #d4af37 !important;
-
-  caret-color: #d4af37 !important;
-  background: #111 !important;
-
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-}
 /* === INTL TEL INPUT v19 – SEARCH FINAL REAL FIX === */
 
 /* PROBLEMİN KAYNAĞI BURASI */
@@ -867,11 +854,6 @@ placeholder {
   line-height: 1.4 !important;
 }
 
-/* ARAMA INPUT */
-.iti__search-input {
-  caret-color: #d4af37 !important;
-  background: #111 !important;
-}
 /* === INTL TEL INPUT – SEARCH TEXT HARD FIX === */
 
 /* search wrapper */
@@ -897,4 +879,16 @@ placeholder {
 .iti__search::after {
   display: none !important;
 }
+/* === INTL TEL INPUT – SEARCH FIX === */
+.iti__search-input {
+  background-color: #111 !important;
+  color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important;
+  caret-color: #d4af37 !important;
+  font-size: 14px;
+}
+.iti__dropdown-content {
+  background-color: #0a0a0a !important;
+}
+
 
