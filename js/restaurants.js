@@ -43,6 +43,16 @@ const iti = intlTelInput(phoneInput, {
   separateDialCode: true
 });
 
+  // FIX: intl-tel-input search text visibility (v19 bug)
+setTimeout(() => {
+  const searchInput = document.querySelector('.iti__search-input');
+  if (searchInput) {
+    searchInput.style.color = '#d4af37';
+    searchInput.style.webkitTextFillColor = '#d4af37';
+    searchInput.style.caretColor = '#d4af37';
+  }
+}, 0);
+
   phone.addEventListener("keydown", e => {
     if (
       e.ctrlKey ||
@@ -218,6 +228,7 @@ if (childrenToggle && childrenToggle.checked) {
 });
   });
 });
+
 
 
 
