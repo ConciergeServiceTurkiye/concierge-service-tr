@@ -872,3 +872,29 @@ placeholder {
   caret-color: #d4af37 !important;
   background: #111 !important;
 }
+/* === INTL TEL INPUT – SEARCH TEXT HARD FIX === */
+
+/* search wrapper */
+.iti__search {
+  position: relative !important;
+}
+
+/* gerçek input */
+.iti__search-input {
+  position: relative !important;
+  z-index: 999999 !important;
+
+  color: #d4af37 !important;
+  background: #111 !important;
+  caret-color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important;
+
+  opacity: 1 !important;
+}
+
+/* üst katmanı pasifleştir */
+.iti__search::before,
+.iti__search::after {
+  display: none !important;
+}
+
