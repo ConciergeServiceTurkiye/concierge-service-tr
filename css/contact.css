@@ -857,6 +857,38 @@ section.contact-hero > .contact-form-wrapper {
 .iti__dropdown-content {
   background-color: #0a0a0a !important;
 }
+/* === INTL TEL INPUT – SEARCH INPUT FINAL FIX === */
+
+.iti__search-input {
+  display: block !important;
+  width: 100% !important;
+
+  background-color: #111 !important;
+  color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important;
+  caret-color: #d4af37 !important;
+
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  opacity: 1 !important;
+}
+
+/* Placeholder */
+.iti__search-input::placeholder {
+  color: rgba(212,175,55,0.65) !important;
+}
+
+/* Selection */
+.iti__search-input::selection {
+  background: rgba(212,175,55,0.35);
+  color: #000;
+}
+
+.iti__search-input::-moz-selection {
+  background: rgba(212,175,55,0.35);
+  color: #000;
+}
+
 
 
 
