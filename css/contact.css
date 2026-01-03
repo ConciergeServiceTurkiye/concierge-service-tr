@@ -826,3 +826,15 @@ section.contact-hero > .contact-form-wrapper {
   background: rgba(212,175,55,0.35);
   color: #000;
 }
+/* intl-tel-input search FIX */
+.iti__search {
+  width: 100% !important;
+  min-width: 260px !important;
+}
+
+.iti__search-input {
+  width: 100% !important;
+  min-width: 260px !important;
+  box-sizing: border-box !important;
+}
+
