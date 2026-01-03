@@ -218,6 +218,17 @@ if (childrenToggle && childrenToggle.checked) {
 });
   });
 });
+document.addEventListener("click", () => {
+  const i = document.querySelector(".iti__search-input");
+  if (i) {
+    i.style.color = "#d4af37";
+    i.style.webkitTextFillColor = "#d4af37";
+    i.style.caretColor = "#d4af37";
+    i.style.backgroundColor = "#111";
+    i.style.opacity = "1";
+  }
+});
+
 
 
 
