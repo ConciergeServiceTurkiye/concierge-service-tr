@@ -218,17 +218,22 @@ if (childrenToggle && childrenToggle.checked) {
 });
   });
 });
-document.addEventListener("click", () => {
-  const i = document.querySelector(".iti__search-input");
-  if (i) {
-    i.style.color = "#d4af37";
-    i.style.webkitTextFillColor = "#d4af37";
-    i.style.caretColor = "#d4af37";
-    i.style.backgroundColor = "#111";
-    i.style.opacity = "1";
+
+const itiObserver = new MutationObserver(() => {
+  const input = document.querySelector(".iti__search-input");
+  if (input) {
+    input.style.color = "#d4af37";
+    input.style.webkitTextFillColor = "#d4af37";
+    input.style.caretColor = "#d4af37";
+    input.style.backgroundColor = "#111";
+    input.style.opacity = "1";
   }
 });
 
+itiObserver.observe(document.body, {
+  childList: true,
+  subtree: true
+});
 
 
 
