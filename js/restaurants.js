@@ -176,11 +176,8 @@ const submitBtn = form.querySelector("button[type='submit']");
 ====================== */
 if (allergyToggle.checked) {
   const allergyText = document.getElementById("allergyField");
-  if (!allergyText.value.trim()) {
-    return showInlineAlert("Please specify your allergy details.");
-  }
+  if (!allergyText.value.trim()) { showInlineAlert("Please specify your allergy details."); unlockSubmit(); return;}
 }
-
 /* ======================
    CHILDREN VALIDATION
 ====================== */
@@ -193,15 +190,11 @@ if (childrenToggle && childrenToggle.checked) {
       const targetId = toggle.dataset.target;
       const input = document.getElementById(targetId);
 
-      if (!input.value.trim()) {
-        return showInlineAlert("Please enter number of children for selected age group.");
-      }
+      if (!input.value.trim()) { showInlineAlert("Please enter number of children for selected age group."); unlockSubmit(); return;}
     }
   }
 
-  if (!atLeastOneAge) {
-    return showInlineAlert("Please select at least one age group for children.");
-  }
+  if (!atLeastOneAge) { showInlineAlert("Please select at least one age group for children."); unlockSubmit();return;}
 }
 
     showInlineAlert("Sending your reservation...");
@@ -257,6 +250,7 @@ itiObserver.observe(document.body, {
   childList: true,
   subtree: true
 });
+
 
 
 
