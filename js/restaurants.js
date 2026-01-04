@@ -200,6 +200,7 @@ if (childrenToggle && childrenToggle.checked) {
 }
 
     showInlineAlert("Sending your reservation...");
+    setTimeout(() => {}, 50); // UI flush
 
 const data = new FormData(form);
 
@@ -251,6 +252,7 @@ itiObserver.observe(document.body, {
   childList: true,
   subtree: true
 });
+
 
 
 
