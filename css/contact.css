@@ -837,8 +837,19 @@ section.contact-hero > .contact-form-wrapper {
   min-width: 260px !important;
   box-sizing: border-box !important;
 }
-/* intl-tel-input search placeholder */
 .iti__search-input::placeholder {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.iti__search-input::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.iti__search-input::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.iti__search-input:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.65) !important;
 }
 
