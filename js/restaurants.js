@@ -34,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
       alertBox.style.visibility = "hidden";
     }, 3500);
   }
+  
+  function unlockSubmit() {
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Submit Reservation";
+}
 
     /* PHONE INPUT */
  const phoneInput = document.querySelector("#phone");
@@ -159,12 +164,12 @@ const submitBtn = form.querySelector("button[type='submit']");
   submitBtn.disabled = true;
   submitBtn.textContent = "Sending...";
 
-    if (!name.value.trim()) return showInlineAlert("Please enter your full name.");
-    if (!email.value.trim()) return showInlineAlert("Please enter your email address.");
-    if (!iti.isValidNumber()) return showInlineAlert("Please enter a valid phone number.");
-    if (!date.value) return showInlineAlert("Please select a date.");
-    if (!time.value) return showInlineAlert("Please select a time.");
-    if (!guests.value) return showInlineAlert("Please select number of guests.");
+    if (!name.value.trim()) { showInlineAlert("Please enter your full name."); unlockSubmit(); return;}
+    if (!email.value.trim()) { showInlineAlert("Please enter your email address."); unlockSubmit(); return;}
+    if (!iti.isValidNumber()) { showInlineAlert("Please enter a valid phone number."); unlockSubmit(); return;}
+    if (!date.value) { showInlineAlert("Please select a date."); unlockSubmit(); return;}
+    if (!time.value) { showInlineAlert("Please select a time."); unlockSubmit(); return;}
+    if (!guests.value) { showInlineAlert("Please select number of guests."); unlockSubmit(); return;}
 
     /* ======================
    ALLERGY VALIDATION
@@ -252,6 +257,7 @@ itiObserver.observe(document.body, {
   childList: true,
   subtree: true
 });
+
 
 
 
