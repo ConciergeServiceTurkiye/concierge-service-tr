@@ -203,17 +203,20 @@ if (childrenToggle && childrenToggle.checked) {
   method: "POST",
   body: data
 })
-.then(res => {
-  if (!res.ok) throw new Error("Network Error");
-  return res.text();
+.then(res => res.json())
+.then(result => {
+  if (result.status === "success") {
+    showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
+    form.reset();
+    allergyField.style.display = "none";
+    childrenAges.style.display = "none";
+    buildTimes();
+  } else {
+    throw new Error("Server error");
+  }
 })
-.then(() => {
-  showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
-  form.reset();
-  allergyField.style.display = "none";
-  buildTimes();
-})
-.catch(() => {
+.catch(err => {
+  console.error(err);
   showInlineAlert("Connection error. Please try again later.");
 });
   });
@@ -234,6 +237,7 @@ itiObserver.observe(document.body, {
   childList: true,
   subtree: true
 });
+
 
 
 
