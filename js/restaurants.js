@@ -150,10 +150,14 @@ ageToggles.forEach(cb => {
   });
 });
 
-
+const submitBtn = form.querySelector("button[type='submit']");
+  
   /* SUBMIT */
   form.addEventListener("submit", e => {
-    e.preventDefault();
+  e.preventDefault();
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Sending...";
 
     if (!name.value.trim()) return showInlineAlert("Please enter your full name.");
     if (!email.value.trim()) return showInlineAlert("Please enter your email address.");
@@ -195,8 +199,9 @@ if (childrenToggle && childrenToggle.checked) {
   }
 }
 
+    showInlineAlert("Sending your reservation...");
 
-    const data = new FormData(form);
+const data = new FormData(form);
 
 data.set("phone", iti.getNumber());
 
@@ -212,7 +217,9 @@ data.set("age_14_17", document.getElementById("age1417")?.value || "");
 .then(result => {
   if (result.status === "success") {
     showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
-    form.reset();
+submitBtn.disabled = false;
+submitBtn.textContent = "Submit Reservation";
+form.reset();
     allergyField.style.display = "none";
     childrenAges.style.display = "none";
     buildTimes();
@@ -223,6 +230,8 @@ data.set("age_14_17", document.getElementById("age1417")?.value || "");
 .catch(err => {
   console.error(err);
   showInlineAlert("Connection error. Please try again later.");
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Submit Reservation";
 });
   });
 });
@@ -242,6 +251,7 @@ itiObserver.observe(document.body, {
   childList: true,
   subtree: true
 });
+
 
 
 
