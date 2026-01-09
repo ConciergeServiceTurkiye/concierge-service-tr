@@ -207,6 +207,20 @@ data.set("phone", iti.getNumber());
 data.set("age_0_3", document.getElementById("age03")?.value || "");
 data.set("age_4_13", document.getElementById("age413")?.value || "");
 data.set("age_14_17", document.getElementById("age1417")?.value || "");
+
+    const petsToggle = document.getElementById("petsToggle");
+const petsField = document.getElementById("petsField");
+const petsError = document.getElementById("petsError");
+
+petsToggle.addEventListener("change", () => {
+  if (petsToggle.checked) {
+    petsField.style.display = "block";
+  } else {
+    petsField.style.display = "none";
+    petsField.value = "";
+    petsError.style.display = "none";
+  }
+});
     
     fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
   method: "POST",
@@ -250,6 +264,7 @@ itiObserver.observe(document.body, {
   childList: true,
   subtree: true
 });
+
 
 
 
