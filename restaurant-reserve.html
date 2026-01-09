@@ -152,21 +152,18 @@
     Pets
   </label>
 
+  <div class="textarea-group">
   <textarea
-  id="petsField"
-  name="pets"
-  class="pets-textarea char-count"
-  style="display:none;"
-  placeholder="Please provide details (age, size, quantity)"
-  maxlength="250"
-  data-max="250"
-    <div class="char-counter" data-for="textareaID">0 / XXX</div>
-></textarea>
-
+    id="petsField"
+    name="pets"
+    class="pets-textarea"
+    maxlength="250"
+  ></textarea>
+  <div class="char-count" data-max="250">0 / 250</div>
+</div>
 <div class="char-counter" data-for="petsField">
   0 / 250
 </div>
-
 
   <div class="field-error" id="petsError" style="display:none;">
     Please fill in pet details.
@@ -302,6 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="js/restaurants.js" defer></script>
 </body>
 </html>
+
 
 
 
