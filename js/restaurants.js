@@ -1,5 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  document.querySelectorAll(".textarea-group").forEach(group => {
+    const textarea = group.querySelector("textarea");
+    const counter = group.querySelector(".char-count");
+    const max = counter.dataset.max;
+    const update = () => {
+      counter.textContent = `${textarea.value.length} / ${max}`;
+    };
+    textarea.addEventListener("input", update);
+    update();
+  });
+
   const form = document.getElementById("reservationForm");
   const alertBox = document.getElementById("formInlineAlert");
 
@@ -300,23 +311,3 @@ function clearActiveCountries(countries) {
     select.blur();
   });
 });
-
-/* ==============================
-   CHARACTER COUNTER
-============================== */
-
-document.querySelectorAll(".textarea-group").forEach(group => {
-  const textarea = group.querySelector("textarea");
-  const counter = group.querySelector(".char-count");
-  const max = counter.dataset.max;
-
-  const update = () => {
-    counter.textContent = `${textarea.value.length} / ${max}`;
-  };
-
-  textarea.addEventListener("input", update);
-  update();
-});
-
-
-
