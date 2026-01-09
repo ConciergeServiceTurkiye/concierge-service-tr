@@ -65,6 +65,65 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   });
 
+  /* ==============================
+   INTL TEL INPUT – KEYBOARD UX
+============================== */
+
+let countryIndex = -1;
+
+phone.addEventListener("keydown", e => {
+  const dropdown = document.querySelector(".iti__country-list");
+  const search = dropdown?.querySelector(".iti__search-input");
+  const countries = dropdown?.querySelectorAll(".iti__country");
+
+  if (!dropdown || !countries.length) return;
+
+  // TAB → ülke listesine geç
+  if (e.key === "Tab" && dropdown.classList.contains("iti__country-list--visible")) {
+    e.preventDefault();
+    countryIndex = 0;
+    setActiveCountry(countries);
+  }
+
+  // ALT + TAB → search input
+  if (e.altKey && e.key === "Tab") {
+    e.preventDefault();
+    search.focus();
+    clearActiveCountries(countries);
+  }
+
+  // OK TUŞLARI
+  if (["ArrowDown", "ArrowUp"].includes(e.key)) {
+    e.preventDefault();
+
+    if (e.key === "ArrowDown" && countryIndex < countries.length - 1) {
+      countryIndex++;
+    }
+    if (e.key === "ArrowUp" && countryIndex > 0) {
+      countryIndex--;
+    }
+    setActiveCountry(countries);
+  }
+
+  // ENTER → ülke seç
+  if (e.key === "Enter" && countryIndex >= 0) {
+    e.preventDefault();
+    countries[countryIndex].click();
+    phone.focus();
+  }
+});
+
+function setActiveCountry(countries) {
+  clearActiveCountries(countries);
+  countries[countryIndex].classList.add("active");
+  countries[countryIndex].scrollIntoView({ block: "nearest" });
+}
+
+function clearActiveCountries(countries) {
+  countries.forEach(c => c.classList.remove("active"));
+}
+
+
   /* DATE PICKER */
   flatpickr("#date", {
     minDate: "today",
@@ -224,3 +283,40 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+/* ==============================
+   SELECT AUTO OPEN ON FOCUS
+============================== */
+
+[time, guests].forEach(select => {
+  select.addEventListener("focus", () => {
+    select.size = select.options.length;
+  });
+
+  select.addEventListener("blur", () => {
+    select.size = 1;
+  });
+
+  select.addEventListener("change", () => {
+    select.blur();
+  });
+});
+
+/* ==============================
+   CHARACTER COUNTER
+============================== */
+
+document.querySelectorAll(".textarea-group").forEach(group => {
+  const textarea = group.querySelector("textarea");
+  const counter = group.querySelector(".char-count");
+  const max = counter.dataset.max;
+
+  const update = () => {
+    counter.textContent = `${textarea.value.length} / ${max}`;
+  };
+
+  textarea.addEventListener("input", update);
+  update();
+});
+
+
+
