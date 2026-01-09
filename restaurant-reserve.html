@@ -153,12 +153,20 @@
   </label>
 
   <textarea
-    id="petsField"
-    name="pets"
-    class="pets-textarea"
-    style="display:none;"
-    placeholder="Please provide details (age, size, quantity)"
-  ></textarea>
+  id="petsField"
+  name="pets"
+  class="pets-textarea char-count"
+  style="display:none;"
+  placeholder="Please provide details (age, size, quantity)"
+  maxlength="250"
+  data-max="250"
+    <div class="char-counter" data-for="textareaID">0 / XXX</div>
+></textarea>
+
+<div class="char-counter" data-for="petsField">
+  0 / 250
+</div>
+
 
   <div class="field-error" id="petsError" style="display:none;">
     Please fill in pet details.
@@ -170,14 +178,39 @@
           <input type="checkbox" id="allergyToggle">
           Allergy
         </label>
-        <textarea id="allergyField" name="allergy" style="display:none"
-          placeholder="Gluten, nuts, lactose..."></textarea>
+        <textarea
+  id="allergyField"
+  name="allergy"
+  class="char-count"
+  style="display:none"
+  placeholder="Gluten, nuts, lactose..."
+  maxlength="2000"
+  data-max="2000"
+          <div class="char-counter" data-for="textareaID">0 / XXXX</div>
+></textarea>
+
+<div class="char-counter" data-for="allergyField">
+  0 / 200
+</div>
+
       </div>
 
       <div class="form-group">
         <label>Notes</label>
-        <textarea id="notes" name="notes"
-          placeholder="If you are 7+ guests or have any special requests, please write here."></textarea>
+        <textarea
+  id="notes"
+  name="notes"
+  class="char-count"
+  placeholder="If you are 7+ guests or have any special requests, please write here."
+  maxlength="500"
+  data-max="500"
+          <div class="char-counter" data-for="textareaID">0 / XXX</div>
+></textarea>
+
+<div class="char-counter" data-for="notes">
+  0 / 500
+</div>
+
       </div>
 
       <button type="submit" class="submit-btn">Submit Reservation</button>
@@ -269,6 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="js/restaurants.js" defer></script>
 </body>
 </html>
+
 
 
 
