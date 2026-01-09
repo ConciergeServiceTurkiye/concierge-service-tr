@@ -852,5 +852,11 @@ section.contact-hero > .contact-form-wrapper {
 .iti__search-input:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.65) !important;
 }
+.field-error {
+  color: #d9534f;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
 
 
