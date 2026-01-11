@@ -307,9 +307,14 @@ if (guestSelect) {
   const timeSelect = document.getElementById("timeSelect");
 
 if (timeSelect) {
-  timeSelect.addEventListener("focus", () => {
-    timeSelect.dispatchEvent(new MouseEvent("mousedown"));
-  });
+  for (let h = 18; h <= 23; h++) {
+    ["00", "30"].forEach(m => {
+      const opt = document.createElement("option");
+      opt.value = `${h}:${m}`;
+      opt.textContent = `${h}:${m}`;
+      timeSelect.appendChild(opt);
+    });
+  }
 }
 
   const petsToggle = document.getElementById("petsToggle");
@@ -329,3 +334,4 @@ if (allergyToggle && allergyGroup) {
     allergyGroup.classList.toggle("active", allergyToggle.checked);
   });
 }
+
