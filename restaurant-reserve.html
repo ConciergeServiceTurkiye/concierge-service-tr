@@ -152,7 +152,7 @@
     Pets
   </label>
 
-  <div class="textarea-group">
+ <div class="textarea-group" id="petsGroup" style="display:none">
   <textarea
     id="petsField"
     name="pets"
@@ -168,29 +168,35 @@
 </div>
       <!-- ALLERGY -->
 <div class="form-group">
-  <label> <input type="checkbox" id="allergyToggle"> Allergy 
+  <label>
+    <input type="checkbox" id="allergyToggle"> Allergy
   </label>
+
   <div class="textarea-group" id="allergyGroup" style="display:none">
-  <textarea id="allergyField" name="allergy" style="display:none" placeholder="Gluten, nuts, lactose..." maxlength="2000" data-max="2000"</textarea>
-  <div class="char-count" data-max="2000">0 / 2000</div>
+    <textarea
+      id="allergyField"
+      name="allergy"
+      placeholder="Gluten, nuts, lactose..."
+      maxlength="2000"
+    ></textarea>
+    <div class="char-count" data-max="2000">0 / 2000</div>
+  </div>
+</div>
     
  <!-- NOTES -->
       <div class="form-group">
-        <label>Notes</label>
-        <textarea
-  id="notes"
-  name="notes"
-  placeholder="If you are 7+ guests or have any special requests, please write here."
-  maxlength="500"
-  data-max="500"
-></textarea>
-        <div class="char-counter" data-for="textareaID">0 / XXX</div>
+  <label>Notes</label>
 
-<div class="char-counter" data-for="notes">
-  0 / 500
+  <div class="textarea-group">
+    <textarea
+      id="notes"
+      name="notes"
+      placeholder="If you are 7+ guests or have any special requests, please write here."
+      maxlength="500"
+    ></textarea>
+    <div class="char-count" data-max="500">0 / 500</div>
+  </div>
 </div>
-
-      </div>
 
       <button type="submit" class="submit-btn">Submit Reservation</button>
     </form>
@@ -281,6 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="js/restaurants.js" defer></script>
 </body>
 </html>
+
 
 
 
