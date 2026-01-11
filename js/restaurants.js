@@ -277,6 +277,10 @@ function clearActiveCountries(countries) {
     .then(() => {
       showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
       form.reset();
+      document.querySelectorAll(".char-count").forEach(c => {
+  const max = c.dataset.max;
+  c.textContent = `0 / ${max}`;
+});
       unlockSubmit();
       childrenAges.style.display = "none";
       allergyField.style.display = "none";
@@ -288,8 +292,7 @@ function clearActiveCountries(countries) {
       unlockSubmit();
     });
   });
-});
-/* ==============================
+  /* ==============================
    SELECT AUTO OPEN ON FOCUS
 ============================== */
 
@@ -307,4 +310,6 @@ function clearActiveCountries(countries) {
   });
 });
 });
+
+
 
