@@ -293,4 +293,23 @@ function clearActiveCountries(countries) {
       unlockSubmit();
     });
   });
+  const guestSelect = document.getElementById("guestSelect");
+
+guestSelect.addEventListener("focus", () => {
+  guestSelect.dispatchEvent(new MouseEvent("mousedown"));
 });
+
+  const timeSelect = document.getElementById("timeSelect");
+
+timeSelect.addEventListener("focus", () => {
+  timeSelect.dispatchEvent(new MouseEvent("mousedown"));
+});
+  petsToggle.addEventListener("change", () => {
+  petsGroup.classList.toggle("active", petsToggle.checked);
+});
+allergyToggle.addEventListener("change", () => {
+  allergyGroup.classList.toggle("active", allergyToggle.checked);
+});
+
+});
+
