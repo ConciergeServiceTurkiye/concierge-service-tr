@@ -911,19 +911,21 @@ select option:focus {
   background-color: var(--hover-color);
   color: #000;
 }
+
 .textarea-group {
   display: none;
   width: 100%;
+  gap: 12px;
 }
 
 .textarea-group.active {
   display: flex;
-  gap: 12px;
 }
 
 .textarea-group textarea {
   flex: 1;
 }
+
 
 .textarea-group {
   width: 100%;
@@ -933,6 +935,7 @@ select option:focus {
   width: 100%;
   min-height: 120px;
 }
+
 
 
 
