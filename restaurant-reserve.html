@@ -166,29 +166,15 @@
     Please fill in pet details.
   </div>
 </div>
-      
-      <div class="form-group">
-        <label>
-          <input type="checkbox" id="allergyToggle">
-          Allergy
-        </label>
-        <textarea
-  id="allergyField"
-  name="allergy"
-  class="char-count"
-  style="display:none"
-  placeholder="Gluten, nuts, lactose..."
-  maxlength="2000"
-  data-max="2000"
-          <div class="char-counter" data-for="textareaID">0 / XXXX</div>
-></textarea>
-
-<div class="char-counter" data-for="allergyField">
-  0 / 200
-</div>
-
-      </div>
-
+      <!-- ALLERGY -->
+<div class="form-group">
+  <label> <input type="checkbox" id="allergyToggle"> Allergy 
+  </label>
+  <div class="textarea-group" id="allergyGroup" style="display:none">
+  <textarea id="allergyField" name="allergy" class="char-count" style="display:none" placeholder="Gluten, nuts, lactose..." maxlength="2000" data-max="2000"</textarea>
+  <div class="char-count" data-max="2000">0 / 2000</div>
+    
+ <!-- NOTES -->
       <div class="form-group">
         <label>Notes</label>
         <textarea
@@ -296,6 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="js/restaurants.js" defer></script>
 </body>
 </html>
+
 
 
 
