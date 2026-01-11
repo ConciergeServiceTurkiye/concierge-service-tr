@@ -1,12 +1,10 @@
 /* ==================================================
-   CONTACT PAGE – HERO + FORM (FINAL)
-   Navbar’a dokunulmaz
+   CONTACT PAGE – HERO + FORM
 ================================================== */
-
 .contact-hero {
   min-height: 100vh; padding-top: var(--nav-h);
   background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),
-              url("../assets/contact-bg.jpg") center / cover no-repeat;
+  url("../assets/contact-bg.jpg") center / cover no-repeat;
   overflow: visible !important;
   display: flex;
   align-items: center;
@@ -17,7 +15,6 @@
 /* ==================================================
    CONTACT FORM WRAPPER (GOLD FRAME)
 ================================================== */
-
 .contact-form-wrapper {
   position: relative;
   z-index: 3;
@@ -37,65 +34,21 @@
 /* ==================================================
    FORM HEADER
 ================================================== */
-
-.contact-form-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.contact-form-header h1 {
-  font-size: 28px;
-  color: #d4af37;
-  letter-spacing: 1px;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
-.form-subline {
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: rgba(212,175,55,0.75);
-  text-transform: uppercase;
-}
+.contact-form-header {text-align: center; margin-bottom: 30px;}
+.contact-form-header h1 {font-size: 28px; color: #d4af37; letter-spacing: 1px; margin-bottom: 6px; font-weight: 600;}
+.form-subline {font-size: 12px; letter-spacing: 2px; color: rgba(212,175,55,0.75); text-transform: uppercase;}
 
 /* ==================================================
    FORM ELEMENTS
 ================================================== */
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  color: #d4af37;
-  font-size: 13px;
-  margin-bottom: 6px;
-  letter-spacing: 0.5px;
-}
-
+form {display: flex; flex-direction: column; gap: 22px;}
+.form-group {display: flex; flex-direction: column;}
+.form-group label {color: #d4af37; font-size: 13px; margin-bottom: 6px; letter-spacing: 0.5px;}
 .form-group input,
-.form-group textarea {
-  background: #111;
-  border: 1px solid rgba(212,175,55,0.35);
-  padding: 14px;
-  font-size: 14px;
-  color: #d4af37;
-  outline: none;
-  transition: border 0.3s ease;
-}
-
+.form-group textarea {background: #111; border: 1px solid rgba(212,175,55,0.35); padding: 14px; font-size: 14px;
+                      color: #d4af37; outline: none; transition: border 0.3s ease;}
 .form-group input::placeholder,
-.form-group textarea::placeholder {
-  color: #aaa;
-}
-
+.form-group textarea::placeholder {color: #aaa;}
 .form-group input:focus,
 .form-group textarea:focus {
   border-color: #d4af37;
@@ -104,654 +57,237 @@ form {
 /* ==================================================
    TEXTAREA + CHARACTER COUNTER
 ================================================== */
-
-.textarea-group {
-  position: relative;
-}
-
-.textarea-group textarea {
-  resize: none;
-  min-height: 140px;
-  padding-bottom: 38px;
-  max-height: 240px;
-}
-
-.char-count {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  font-size: 12px;
-  color: #d4af37;
-  opacity: 0.8;
-}
+.textarea-group {display: none; width: 100%; gap: 12px; position: relative;}
+.textarea-group textarea {resize: none; flex: 1; min-height: 140px; padding-bottom: 38px; max-height: 240px;}
+.char-count {position: absolute; top: 8px; right: 12px; font-size: 12px; color: #d4af37; opacity: 0.8;}
+.textarea-group.active { display: flex;}
 
 /* ==================================================
    SUBMIT BUTTON – PREMIUM
 ================================================== */
-
-.submit-btn {
-  margin-top: 15px;
-  padding: 15px;
-  background: #d4af37;
-  color: #000;
-  border: none;
-  border-radius: 28px;
-  font-size: 14px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.submit-btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 120%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.5),
-    transparent
-  );
-  transition: all 0.6s ease;
-}
-
-.submit-btn:hover::after {
-  left: 120%;
-}
-
-.submit-btn:active {
-  transform: scale(0.97);
-}
+.submit-btn {margin-top: 15px; padding: 15px; background: #d4af37; color: #000; border: none; border-radius: 28px;
+             font-size: 14px; letter-spacing: 1px; cursor: pointer; position: relative; overflow: hidden; transition: all 0.3s ease;}
+.submit-btn::after {content: ""; position: absolute; top: 0; left: -120%; width: 120%; height: 100%; background: linear-gradient(
+             120deg, transparent, rgba(255,255,255,0.5), transparent); transition: all 0.6s ease;}
+.submit-btn:hover::after {left: 120%;}
+.submit-btn:active { transform: scale(0.97);}
 
 /* ==================================================
-   INLINE FORM ALERT (FIXED HEIGHT)
+   INLINE FORM ALERT
 ================================================== */
-
-#formInlineAlert {
-  height: 48px;
-  margin-bottom: 18px;
-  padding: 12px 16px;
-  border: 1px solid rgba(212,175,55,0.6);
-  background: rgba(212,175,55,0.08);
-  color: #d4af37;
-  font-size: 13px;
-  text-align: center;
-  border-radius: 10px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-}
+#formInlineAlert {height: 48px; margin-bottom: 18px; padding: 12px 16px; border: 1px solid rgba(212,175,55,0.6); background: rgba(212,175,55,0.08);
+                  color: #d4af37; font-size: 13px; text-align: center; border-radius: 10px; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;}
 
 /* ==================================================
    CUSTOM SUBJECT DROPDOWN
 ================================================== */
-
-.custom-select {
-  position: relative;
-  user-select: none;
-}
-
-.select-trigger {
-  background: #111;
-  border: 1px solid #d4af37;
-  padding: 14px;
-  font-size: 14px;
-  color: #d4af37;
-  cursor: pointer;
-  transition: border 0.3s, box-shadow 0.3s;
-}
-
+.custom-select {position: relative; user-select: none;}
+.select-trigger {background: #111; border: 1px solid #d4af37; padding: 14px; font-size: 14px; color: #d4af37; cursor: pointer; transition: border 0.3s, box-shadow 0.3s;}
 .select-trigger:hover,
-.select-trigger:focus {
-  border-color: #d4af37;
-  box-shadow: 0 0 10px rgba(212,175,55,0.25);
-  outline: none;
-}
-
-.select-options {
-  display: none;
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
-  width: 100%;
-  background: rgba(0,0,0,0.95);
-  border: 1px solid #d4af37;
-  list-style: none;
-  padding: 6px 0;
-  margin: 0;
-  z-index: 50;
-}
-
+.select-trigger:focus {border-color: #d4af37; box-shadow: 0 0 10px rgba(212,175,55,0.25); outline: none;}
+.select-options {display: none; position: absolute; top: calc(100% + 6px); left: 0; width: 100%; background: rgba(0,0,0,0.95); border: 1px solid #d4af37;
+                 list-style: none; padding: 6px 0; margin: 0; z-index: 50;}
 .custom-select.open .select-options { display: block; }
-
-.select-options li {
-  padding: 12px 16px;
-  font-size: 14px;
-  color: #d4af37;
-  cursor: pointer;
-  transition: background 0.25s, color 0.25s;
-}
-
-.select-options li:hover {
-  background: rgba(212,175,55,0.15);
-  color: #f1d97a;
-}
-
-.select-options li.active {
-  background: rgba(212,175,55,0.18);
-  color: #f1d97a;
-  box-shadow: inset 3px 0 0 #d4af37;
-}
+.select-options li {padding: 12px 16px; font-size: 14px; color: #d4af37; cursor: pointer; transition: background 0.25s, color 0.25s;}
+.select-options li:hover {background: rgba(212,175,55,0.15); color: #f1d97a;}
+.select-options li.active {background: rgba(212,175,55,0.18); color: #f1d97a; box-shadow: inset 3px 0 0 #d4af37;}
 
 /* ==================================================
    RESPONSIVE
 ================================================== */
-
-section.contact-hero > .contact-form-wrapper {
-  max-width: 760px !important;
-  width: 100% !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
+section.contact-hero > .contact-form-wrapper {max-width: 760px !important; width: 100% !important; margin-left: auto !important; margin-right: auto !important;}
 
 @media (max-width: 768px) {
-  .contact-form-wrapper {
-    padding: 35px 25px 30px;
-  }
-  .contact-form-header h1 {
-    font-size: 24px;
-  }
-}
+  .contact-form-wrapper {padding: 35px 25px 30px;}
+  .contact-form-header h1 {font-size: 24px;}}
 
 /* ==============================
    SCROLLBAR – PREMIUM ALTIN
 ============================== */
-
 /* TEXTAREA SCROLLBAR (Webkit) */
-.textarea-group textarea::-webkit-scrollbar {
-  width: 8px;
-}
-
-.textarea-group textarea::-webkit-scrollbar-track {
-  background: #111;
-  border-radius: 8px;
-}
-
-.textarea-group textarea::-webkit-scrollbar-thumb {
-  background: #d4af37;
-  border-radius: 8px;
-}
-
-.textarea-group textarea::-webkit-scrollbar-thumb:hover {
-  background: #f1d97a;
-}
+.textarea-group textarea::-webkit-scrollbar {width: 8px;}
+.textarea-group textarea::-webkit-scrollbar-track {background: #111; border-radius: 8px;}
+.textarea-group textarea::-webkit-scrollbar-thumb {background: #d4af37; border-radius: 8px;}
+.textarea-group textarea::-webkit-scrollbar-thumb:hover {background: #f1d97a;}
 
 /* TEXTAREA SCROLLBAR (Firefox) */
-.textarea-group textarea {
-  scrollbar-width: thin;
-  scrollbar-color: #d4af37 #111;
-}
+.textarea-group textarea {scrollbar-width: thin; scrollbar-color: #d4af37 #111;}
 
 /* PHONE INPUT / COUNTRY LIST SCROLLBAR (Webkit) */
-.iti__country-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.iti__country-list::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.05); 
-  border-radius: 8px;
-}
-
-.iti__country-list::-webkit-scrollbar-thumb {
-  background: #d4af37; 
-  border-radius: 8px;
-  border: 2px solid rgba(0,0,0,0.1); 
-}
-
-.iti__country-list::-webkit-scrollbar-thumb:hover {
-  background: #f1d97a; 
-}
+.iti__country-list::-webkit-scrollbar {width: 8px;}
+.iti__country-list::-webkit-scrollbar-track {background: rgba(255,255,255,0.05); border-radius: 8px;}
+.iti__country-list::-webkit-scrollbar-thumb {background: #d4af37; border-radius: 8px; border: 2px solid rgba(0,0,0,0.1); }
+.iti__country-list::-webkit-scrollbar-thumb:hover {background: #f1d97a; }
 
 /* PHONE INPUT SCROLLBAR (Firefox) */
-.iti__country-list {
-  scrollbar-width: thin;
-  scrollbar-color: #d4af37 rgba(255,255,255,0.05);
-}
-.form-group select {
-  background: #111;
-  border: 1px solid rgba(212,175,55,0.35);
-  padding: 14px;
-  font-size: 14px;
-  color: #d4af37;
-  outline: none;
-}
+.iti__country-list {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
+.form-group select {background: #111; border: 1px solid rgba(212,175,55,0.35); padding: 14px; font-size: 14px; color: #d4af37; outline: none;}
+.form-group select option {background: #111; color: #d4af37;}
 
-.form-group select option {
-  background: #111;
-  color: #d4af37;
-}
 /* ==============================
    RESTAURANT FORM OVERRIDES
 ============================== */
-
 .restaurant-form .form-group input,
 .restaurant-form .form-group textarea,
-.restaurant-form .form-group select {
-  background: #111 !important;
-  color: #d4af37;
-  border: 1px solid rgba(212,175,55,0.35);
-}
+.restaurant-form .form-group select {background: #111 !important; color: #d4af37; border: 1px solid rgba(212,175,55,0.35);}
 
 /* DATE INPUT – Takvim zorunlu */
-.restaurant-form input[type="date"] {
-  cursor: pointer;
-}
+.restaurant-form input[type="date"] {cursor: pointer;}
 
 /* TIME & GUESTS dropdown */
-.restaurant-form select {
-  appearance: none; color: #ffffff;
-}
+.restaurant-form select {appearance: none; color: #ffffff;}
 
 /* DROPDOWN OPTIONS */
-.restaurant-form select option {
-  background: #111;
-  color: #d4af37;
-}
+.restaurant-form select option {background: #111;color: #d4af37;}
 
 /* ALLERGY TEXTAREA */
-#allergyField {
-  margin-top: 10px;
-}
+#allergyField {margin-top: 10px;}
 
 /* Checkbox label hizası */
-.restaurant-form label input[type="checkbox"] {
-  margin-right: 8px;
-}
+.restaurant-form label input[type="checkbox"] {margin-right: 8px;}
 
 /* ===== FLATPICKR BASE ===== */
-.flatpickr-calendar {
-  background: #2b2b2b; /* koyu ama nefes alan */
-  border: none;
-  box-shadow: 0 12px 30px rgba(0,0,0,.4);
-}
+.flatpickr-calendar { background: #2b2b2b; border: none; box-shadow: 0 12px 30px rgba(0,0,0,.4);}
 
 /* AY DEĞİŞTİRME OKLARI < > */
 .flatpickr-prev-month svg,
-.flatpickr-next-month svg {
-  fill: #ffffff;
-}
+.flatpickr-next-month svg {fill: #ffffff;}
 
 .flatpickr-prev-month:hover svg,
-.flatpickr-next-month:hover svg {
-  fill: #d4af37; /* sarı */
-}
+.flatpickr-next-month:hover svg {fill: #d4af37;}
 
 /* ===== MONTH + YEAR ===== */
 .flatpickr-current-month,
 .flatpickr-current-month span.cur-month,
-.flatpickr-current-month input.cur-year {
-  color: #d4af37; /* altın */
-  font-weight: 500;
-}
+.flatpickr-current-month input.cur-year {color: #d4af37; font-weight: 500;}
 
 /* ===== DAY NUMBERS ===== */
-.flatpickr-day {
-  color: #d4af37; /* seçilebilir günler ALTIN */
-  border-radius: 8px;
-}
+.flatpickr-day {color: #d4af37; border-radius: 8px;}
 
 /* ===== PAST DAYS ===== */
 .flatpickr-day.prevMonthDay,
 .flatpickr-day.nextMonthDay,
-.flatpickr-day.flatpickr-disabled {
-  color: #ffffff; /* geçmiş / pasif beyaz */
-  opacity: 0.35;
-  cursor: not-allowed;
-}
+.flatpickr-day.flatpickr-disabled {color: #ffffff; opacity: 0.35; cursor: not-allowed;}
 
 /* ===== HOVER (SELECTABLE DAYS) ===== */
-.flatpickr-day:not(.flatpickr-disabled):hover {
-  background: #ffffff;
-  color: #000;
-}
+.flatpickr-day:not(.flatpickr-disabled):hover {background: #ffffff; color: #000;}
 
 /* ===== SELECTED DAY ===== */
 .flatpickr-day.selected,
 .flatpickr-day.startRange,
-.flatpickr-day.endRange {
-  background: #d4af37;
-  color: #000;
-  font-weight: 600;
-}
+.flatpickr-day.endRange {background: #d4af37; color: #000; font-weight: 600;}
 
 /* ===== TODAY ===== */
-.flatpickr-day.today {
-  border: 1px solid #d4af37;
-}
+.flatpickr-day.today {border: 1px solid #d4af37;}
 
 /* ===== NAV ARROWS – FORCE COLORS ===== */
-
 /* Default: BEYAZ */
 .flatpickr-prev-month svg,
-.flatpickr-next-month svg {
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
-}
+.flatpickr-next-month svg {fill: #ffffff !important; stroke: #ffffff !important;}
 
 /* Hover: ALTIN SARI */
 .flatpickr-prev-month:hover svg,
-.flatpickr-next-month:hover svg {
-  fill: #d4af37 !important;
-  stroke: #d4af37 !important;
-}
+.flatpickr-next-month:hover svg {fill: #d4af37 !important; stroke: #d4af37 !important;}
 
 /* ===== REMOVE BLUE FOCUS ===== */
-.flatpickr-day:focus {
-  outline: none;
-}
+.flatpickr-day:focus {outline: none;}
 
 /* Yıl okları – default BEYAZ */
-.flatpickr-current-month .numInputWrapper span::after {
-  border-top-color: #ffffff !important;
-  border-bottom-color: #ffffff !important;
-}
+.flatpickr-current-month .numInputWrapper span::after {border-top-color: #ffffff !important; border-bottom-color: #ffffff !important;}
 
 /* Hover edilen ok SARI */
-.flatpickr-current-month .numInputWrapper span:hover::after {
-  border-top-color: #d4af37 !important;
-  border-bottom-color: #d4af37 !important;
-}
+.flatpickr-current-month .numInputWrapper span:hover::after {border-top-color: #d4af37 !important; border-bottom-color: #d4af37 !important;}
 
 /* GÜN İSİMLERİ (Sun Mon Tue ...) */
-.flatpickr-weekday {
-  color: #d4af37 !important;
-  font-weight: 500;
-}
+.flatpickr-weekday {color: #d4af37 !important; font-weight: 500;}
+.flatpickr-current-month {color: #ffffff;}
 
-.flatpickr-current-month {
-  color: #ffffff;
-}
 /* Ay dropdown arka plan */
-.flatpickr-monthDropdown-months {
-  background-color: #2b2b2b !important; /* takvimle uyumlu koyu ama okunur */
-  color: #ffffff !important;
-}
+.flatpickr-monthDropdown-months {background-color: #2b2b2b !important; color: #ffffff !important;}
 
 /* Ay seçenekleri */
-.flatpickr-monthDropdown-months option {
-  background-color: #2b2b2b !important;
-  color: #ffffff !important;
-}
+.flatpickr-monthDropdown-months option {background-color: #2b2b2b !important; color: #ffffff !important;}
 
 /* Hover edilen ay */
-.flatpickr-monthDropdown-months option:hover {
-  background-color: #d4af37 !important;
-  color: #000000 !important;
-}
+.flatpickr-monthDropdown-months option:hover {background-color: #d4af37 !important; color: #000000 !important;}
 
 .flatpickr-monthDropdown-months,
-.flatpickr-monthDropdown-months * {
-  background: #2b2b2b !important;
-  color: #ffffff !important;
-}
+.flatpickr-monthDropdown-months * {background: #2b2b2b !important; color: #ffffff !important;}
 
-#time {
-  color: rgba(255, 255, 255, 0.65);
-}
+#time {color: rgba(255, 255, 255, 0.65);}
+#guests {color: rgba(255, 255, 255, 0.65);}
+select {color: rgba(255,255,255,0.65); /* default */}
 
-#guests {
-  color: rgba(255, 255, 255, 0.65);
-}
-
-select {
-  color: rgba(255,255,255,0.65); /* default */
-}
-
-select:has(option:checked:not([value=""])) {
-  color: #d4af37;
-}
+select:has(option:checked:not([value=""])) {color: #d4af37;}
 
 /* CHILDREN MAIN ROW */
-.children-row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
+.children-row {display: flex; align-items: center; gap: 16px; flex-wrap: wrap;}
 
 /* AGE GROUP CONTAINER */
-.children-ages {
-  display: none;
-  align-items: center;
-  gap: 14px;
-}
+.children-ages {display: none; align-items: center; gap: 14px;}
 
 /* EACH AGE ITEM */
-.age-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+.age-item {display: flex; align-items: center; gap: 6px;}
 
 /* NUMBER INPUT */
-.child-input {
-  display: none;
-  width: 56px;
-  height: 32px;
-  padding: 0px 6px;
-  box-sizing: border-box;
-  font-size: 13px;
-  line-height: 32px;
-  color: rgba(255, 255, 255, 0.65);
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.35);
-  border-radius: 6px;
-}
-
-.child-input::placeholder {
-  color: rgba(255, 255, 255, 0.65); font-size: 12px; white-space: nowrap;
-}
+.child-input {display: none; width: 56px; height: 32px; padding: 0px 6px; box-sizing: border-box; font-size: 13px; line-height: 32px;
+              color: rgba(255, 255, 255, 0.65); background: transparent; border: 1px solid rgba(255,255,255,0.35); border-radius: 6px;}
+.child-input::placeholder {color: rgba(255, 255, 255, 0.65); font-size: 12px; white-space: nowrap;}
 
 /* FORCE CHILDREN ROW TO BE LEFT & SINGLE LINE */
-.children-form-group {
-  align-items: flex-start !important;
-}
+.children-form-group {align-items: flex-start !important;}
 
 /* MAIN ROW */
-.children-row {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 18px;
-  width: 100%;
-}
+.children-row {display: flex; align-items: center; justify-content: flex-start; gap: 18px; width: 100%;}
 
 /* CHILDREN CHECKBOX LEFT */
-.children-row > label {
-  flex-shrink: 0;
-}
+.children-row > label {flex-shrink: 0;}
 
 /* AGES ALWAYS ON THE RIGHT – SAME LINE */
-.children-ages {
-  display: none;
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: nowrap;
-}
+.children-ages {display: none; flex-direction: row; align-items: center; gap: 16px; flex-wrap: nowrap;}
 
 /* EACH AGE ITEM INLINE */
-.age-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
+.age-item {display: flex; align-items: center; gap: 6px;}
+
 /* ==============================
    RESTAURANT FORM – WIDER LAYOUT
 ============================== */
 
 @media (min-width: 1024px) {
-  .restaurant-form {
-    max-width: 860px; /* 820–880 arası oynayabiliriz */
-  }
-}
+  .restaurant-form {max-width: 860px;}}
 
 @media (min-width: 1024px) {
-  .contact-hero .contact-form-wrapper:has(.restaurant-form) {
-    max-width: 880px;
-  }
-}
+  .contact-hero .contact-form-wrapper:has(.restaurant-form) {max-width: 880px;}}
 
 /* ===== FORM WIDTH FIX ===== */
-.restaurant-form {
-  max-width: 100%;
-}
-
+.restaurant-form {max-width: 100%;}
 
 /* ===== FORCE FORM WIDTH (OVERRIDE ALL) ===== */
-section.contact-hero > .contact-form-wrapper {
-  max-width: 760px !important;
-  width: 100% !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
+section.contact-hero > .contact-form-wrapper {max-width: 760px !important; width: 100% !important; margin-left: auto !important; margin-right: auto !important;}
 
 @media (max-width: 768px) {
-  section.contact-hero > .contact-form-wrapper {
-    max-width: 94% !important;
-  }
-}
+  section.contact-hero > .contact-form-wrapper {max-width: 94% !important;}}
 
 /* === INTL TEL INPUT – CORE FIX (ZORUNLU) === */
-
-.iti {
-  width: 100% !important;
-  display: block !important;
-  position: relative !important;
-}
-
-.iti input {
-  width: 100% !important;
-  height: 48px !important;
-  box-sizing: border-box;
-}
-
-.iti__flag-container {
-  height: 100% !important;
-}
-
-.iti__selected-flag {
-  height: 100% !important;
-  display: flex !important;
-  align-items: center !important;
-}
+.iti {width: 100% !important; display: block !important; position: relative !important;}
+.iti input {width: 100% !important; height: 48px !important; box-sizing: border-box;}
+.iti__flag-container {height: 100% !important;}
+.iti__selected-flag {height: 100% !important; display: flex !important; align-items: center !important;}
 
 /* === INTL TEL INPUT – FINAL FIX === */ 
-
-.iti__country-list { 
-   width: 100% !important;
-   max-width: 420px !important;
-   background: rgba(10,10,10,0.97) !important;
-   border: 1px solid #d4af37 !important;
-   border-radius: 12px;
-   box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important;
-   overflow-x: hidden !important;
-   z-index: 9999 !important;
-} 
-
-.iti__search { 
-   color: #d4af37 !important; 
-   background: #111 !important;
-   border: 1px solid rgba(212,175,55,0.6) !important;
-}
-
-.iti__search::placeholder{
-   color: rgba(212,175,55,0.65) !important;
-}
-
-.iti__country {
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  padding: 10px 14px;
-  white-space: nowrap !important;
-}
-
-.iti__country-name {
-  flex: 1 !important;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.iti__dial-code {
-  margin-left: auto !important;
-  white-space: nowrap !important;
-}
-
-/* === INTL TEL INPUT – FINAL CLICK FIX === */
-.iti,
-.iti * {
-  pointer-events: auto !important;
-}
-
-.iti__country-list {
-  position: absolute !important;
-  z-index: 99999 !important;
-}
-
-/* === INTL TEL INPUT – DROPDOWN WIDTH FIX (ONLY WIDTH) === */
-
-.iti__country-list {
-  min-width: 320px !important;   /* mobil için */
-  width: 100% !important;        /* input genişliği kadar */
-  max-width: 420px !important;   /* masaüstü için ideal */
-}
-
-/* Ülke satırları tek satır ve taşma olmasın */
-.iti__country {
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  white-space: nowrap !important;
-}
-
-/* Ülke adı alanı genişlesin */
-.iti__country-name {
-  flex: 1 !important;
-  min-width: 0 !important;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Kod sağda sabit kalsın */
-.iti__dial-code {
-  flex-shrink: 0 !important;
-  margin-left: auto !important;
-}
-
-/* === INTL TEL INPUT – COUNTRY NAME COLOR === */
-
-/* Ülke isimleri altın sarısı */
-.iti__country-name {
-  color: #d4af37 !important;
-}
-
-/* Ülke kodu (dial code) rengi DEĞİŞMESİN */
-.iti__dial-code {
-  color: inherit !important;
-}
-
-/* === INTL TEL INPUT – COUNTRY HOVER EFFECT === */
-
-/* Hover arka plan */
+.iti__country-list {width: 100% !important; min-width: 320px !important; max-width: 420px !important; position: absolute !important; background: rgba(10,10,10,0.97) !important; border: 1px solid #d4af37 !important; border-radius: 12px;
+                    box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important; overflow-x: hidden !important; z-index: 9999 !important;} 
+.iti__search {color: #d4af37 !important;  background: #111 !important; border: 1px solid rgba(212,175,55,0.6) !important;}
+.iti__search::placeholder{color: rgba(212,175,55,0.65) !important;}
+.iti__country {display: flex !important; align-items: center !important; gap: 10px !important; padding: 10px 14px; white-space: nowrap !important;}
+.iti__country-name {color: #d4af37 !important; flex: 1 !important; overflow: hidden; min-width: 0 !important; text-overflow: ellipsis;}
+.iti__dial-code {margin-left: auto !important; white-space: nowrap !important; flex-shrink: 0 !important; color: inherit !important}
 .iti__country:hover {
   background: rgba(212, 175, 55, 0.18) !important;
 }
+/* === INTL TEL INPUT – FINAL CLICK FIX === */
+.iti,
+.iti * {pointer-events: auto !important;}
 
 /* Hover’da ülke adı biraz daha parlak */
 .iti__country:hover .iti__country-name {
@@ -911,36 +447,4 @@ select option:focus {
   background-color: var(--hover-color);
   color: #000;
 }
-
-.textarea-group {
-  display: none;
-  width: 100%;
-  gap: 12px;
-}
-
-.textarea-group.active {
-  display: flex;
-}
-
-.textarea-group textarea {
-  flex: 1;
-}
-
-
-.textarea-group {
-  width: 100%;
-}
-
-.textarea-group textarea {
-  width: 100%;
-  min-height: 120px;
-}
-
-
-
-
-
-
-
-
 
