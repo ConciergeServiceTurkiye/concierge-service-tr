@@ -911,6 +911,20 @@ select option:focus {
   background-color: var(--hover-color);
   color: #000;
 }
+.textarea-group {
+  display: none;
+  width: 100%;
+}
+
+.textarea-group.active {
+  display: flex;
+  gap: 12px;
+}
+
+.textarea-group textarea {
+  flex: 1;
+}
+
 
 
 
