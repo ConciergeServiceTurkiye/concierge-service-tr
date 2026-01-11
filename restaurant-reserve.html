@@ -100,13 +100,13 @@
 
        <div class="form-group">
         <label>Time</label>
-        <select name="time" id="time">
+        <select name="time" name="time" id="time">
   <option value="" selected>Select time</option></select>
       </div>
 
       <div class="form-group">
         <label>Guests</label>
-        <select name="guests" id="guests"> <option value="">Select guests</option> <option>1</option> <option>2</option> <option>3</option> <option>4</option> <option>5</option> <option>6</option> <option>7+</option> </select>
+        <select name="guests" name="guests" id="guests"> <option value="">Select guests</option> <option>1</option> <option>2</option> <option>3</option> <option>4</option> <option>5</option> <option>6</option> <option>7+</option> </select>
       </div>
 
       <div class="form-group children-form-group">
@@ -151,12 +151,10 @@
     <input type="checkbox" id="petsToggle">
     Pets
   </label>
-
- <div class="textarea-group" id="petsGroup" style="display:none">
+ <div class="textarea-group" id="petsGroup"
   <textarea
     id="petsField"
     name="pets"
-    class="pets-textarea"
     maxlength="250"
     style="display:none"
   ></textarea>
@@ -173,7 +171,7 @@
     <input type="checkbox" id="allergyToggle"> Allergy
   </label>
 
-  <div class="textarea-group" id="allergyGroup" style="display:none">
+  <div class="textarea-group" id="allergyGroup">
     <textarea
   id="allergyField"
   name="allergy"
@@ -289,6 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="js/restaurants.js" defer></script>
 </body>
 </html>
+
 
 
 
