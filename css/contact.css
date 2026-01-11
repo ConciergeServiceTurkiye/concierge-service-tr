@@ -895,6 +895,12 @@ textarea::-webkit-scrollbar-thumb:hover {
   background: #f1d97a;
 }
 
+label,
+label * {
+  pointer-events: auto !important;
+}
+
+
 
 
 
