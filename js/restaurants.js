@@ -293,23 +293,39 @@ function clearActiveCountries(countries) {
       unlockSubmit();
     });
   });
+
+
   const guestSelect = document.getElementById("guestSelect");
 
-guestSelect.addEventListener("focus", () => {
-  guestSelect.dispatchEvent(new MouseEvent("mousedown"));
-});
+if (guestSelect) {
+  guestSelect.addEventListener("focus", () => {
+    guestSelect.dispatchEvent(new MouseEvent("mousedown"));
+  });
+}
+
 
   const timeSelect = document.getElementById("timeSelect");
 
-timeSelect.addEventListener("focus", () => {
-  timeSelect.dispatchEvent(new MouseEvent("mousedown"));
-});
+if (timeSelect) {
+  timeSelect.addEventListener("focus", () => {
+    timeSelect.dispatchEvent(new MouseEvent("mousedown"));
+  });
+}
+
+  const petsToggle = document.getElementById("petsToggle");
+const petsGroup = document.getElementById("petsGroup");
+
+if (petsToggle && petsGroup) {
   petsToggle.addEventListener("change", () => {
-  petsGroup.classList.toggle("active", petsToggle.checked);
-});
-allergyToggle.addEventListener("change", () => {
-  allergyGroup.classList.toggle("active", allergyToggle.checked);
-});
+    petsGroup.classList.toggle("active", petsToggle.checked);
+  });
+}
 
-});
+const allergyToggle = document.getElementById("allergyToggle");
+const allergyGroup = document.getElementById("allergyGroup");
 
+if (allergyToggle && allergyGroup) {
+  allergyToggle.addEventListener("change", () => {
+    allergyGroup.classList.toggle("active", allergyToggle.checked);
+  });
+}
