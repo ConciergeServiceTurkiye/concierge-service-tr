@@ -126,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Zorunlu alan kontrolleri
     if (!nameField.value.trim()) return showInlineAlert("Please enter your full name.");
     if (!emailField.value.trim()) return showInlineAlert("Please enter your email address.");
+    if (!emailField.checkValidity()) return showInlineAlert("Please enter a valid email address.");
     if (!subjectHidden.value.trim()) return showInlineAlert("Please select a subject.");
     if (!messageField.value.trim()) return showInlineAlert("Please enter your request details.");
     if (!iti.isValidNumber()) return showInlineAlert("Please enter a valid phone number.");
@@ -149,3 +150,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
