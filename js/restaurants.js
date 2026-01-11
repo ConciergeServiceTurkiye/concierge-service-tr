@@ -168,9 +168,10 @@ function clearActiveCountries(countries) {
   });
 
   /* ALLERGY */
-  allergyToggle.addEventListener("change", () => {
-    allergyField.style.display = allergyToggle.checked ? "block" : "none";
-  });
+ allergyToggle.addEventListener("change", () => {
+  document.getElementById("allergyGroup").style.display =
+    allergyToggle.checked ? "block" : "none";
+});
 
   /* CHILDREN */
   childrenToggle.addEventListener("change", () => {
@@ -207,14 +208,14 @@ function clearActiveCountries(countries) {
 
   /* PETS TOGGLE */
   petsToggle.addEventListener("change", () => {
-    if (petsToggle.checked) {
-      petsField.style.display = "block";
-    } else {
-      petsField.style.display = "none";
-      petsField.value = "";
-      petsError.style.display = "none";
-    }
-  });
+  document.getElementById("petsGroup").style.display =
+    petsToggle.checked ? "block" : "none";
+
+  if (!petsToggle.checked) {
+    petsField.value = "";
+    petsError.style.display = "none";
+  }
+});
 
   /* SUBMIT */
   form.addEventListener("submit", e => {
@@ -310,6 +311,7 @@ function clearActiveCountries(countries) {
   });
 });
 });
+
 
 
 
