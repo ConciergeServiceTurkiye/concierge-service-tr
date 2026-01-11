@@ -900,6 +900,12 @@ label * {
   pointer-events: auto !important;
 }
 
+/* Country list – klavye ile seçili olan */
+.iti__country.iti__highlight {
+  background-color: var(--hover-color); /* senin hover rengin */
+  color: #000;
+}
+
 
 
 
