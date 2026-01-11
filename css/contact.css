@@ -925,6 +925,15 @@ select option:focus {
   flex: 1;
 }
 
+.textarea-group {
+  width: 100%;
+}
+
+.textarea-group textarea {
+  width: 100%;
+  min-height: 120px;
+}
+
 
 
 
