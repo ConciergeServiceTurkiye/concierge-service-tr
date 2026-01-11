@@ -208,8 +208,7 @@ function clearActiveCountries(countries) {
 
   /* PETS TOGGLE */
   petsToggle.addEventListener("change", () => {
-  document.getElementById("petsGroup").style.display =
-    petsToggle.checked ? "block" : "none";
+  document.getElementById("petsGroup").classList.toggle("active", petsToggle.checked);
 
   if (!petsToggle.checked) {
     petsField.value = "";
@@ -284,8 +283,13 @@ function clearActiveCountries(countries) {
 });
       unlockSubmit();
       childrenAges.style.display = "none";
-      allergyField.style.display = "none";
-      petsField.style.display = "none";
+      
+      allergyToggle.checked = false;
+      petsToggle.checked = false;
+      childrenToggle.checked = false;
+
+document.getElementById("allergyGroup").classList.remove("active");
+document.getElementById("petsGroup").classList.remove("active");
       buildTimes();
     })
     .catch(() => {
@@ -293,45 +297,3 @@ function clearActiveCountries(countries) {
       unlockSubmit();
     });
   });
-
-
-  const guestSelect = document.getElementById("guestSelect");
-
-if (guestSelect) {
-  guestSelect.addEventListener("focus", () => {
-    guestSelect.dispatchEvent(new MouseEvent("mousedown"));
-  });
-}
-
-
-  const timeSelect = document.getElementById("timeSelect");
-
-if (timeSelect) {
-  for (let h = 18; h <= 23; h++) {
-    ["00", "30"].forEach(m => {
-      const opt = document.createElement("option");
-      opt.value = `${h}:${m}`;
-      opt.textContent = `${h}:${m}`;
-      timeSelect.appendChild(opt);
-    });
-  }
-}
-
-  const petsToggle = document.getElementById("petsToggle");
-const petsGroup = document.getElementById("petsGroup");
-
-if (petsToggle && petsGroup) {
-  petsToggle.addEventListener("change", () => {
-    petsGroup.classList.toggle("active", petsToggle.checked);
-  });
-}
-
-const allergyToggle = document.getElementById("allergyToggle");
-const allergyGroup = document.getElementById("allergyGroup");
-
-if (allergyToggle && allergyGroup) {
-  allergyToggle.addEventListener("change", () => {
-    allergyGroup.classList.toggle("active", allergyToggle.checked);
-  });
-}
-
