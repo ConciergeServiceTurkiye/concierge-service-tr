@@ -638,7 +638,6 @@ section.contact-hero > .contact-form-wrapper {
 .iti input {
   width: 100% !important;
   height: 48px !important;
-  padding-left: 58px !important; /* bayrak + code alanı */
   box-sizing: border-box;
 }
 
@@ -895,6 +894,7 @@ textarea::-webkit-scrollbar-thumb {
 textarea::-webkit-scrollbar-thumb:hover {
   background: #f1d97a;
 }
+
 
 
 
