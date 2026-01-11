@@ -293,25 +293,4 @@ function clearActiveCountries(countries) {
       unlockSubmit();
     });
   });
-  /* ==============================
-   SELECT AUTO OPEN ON FOCUS
-============================== */
-
-[time, guests].forEach(select => {
-  select.addEventListener("focus", () => {
-    select.size = select.options.length;
-  });
-
-  select.addEventListener("blur", () => {
-    select.size = 1;
-  });
-
-  select.addEventListener("change", () => {
-    select.blur();
-  });
 });
-});
-
-
-
-
