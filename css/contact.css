@@ -905,6 +905,13 @@ label * {
   background-color: var(--hover-color); /* senin hover rengin */
   color: #000;
 }
+select option:hover,
+select option:checked,
+select option:focus {
+  background-color: var(--hover-color);
+  color: #000;
+}
+
 
 
 
