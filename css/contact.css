@@ -57,9 +57,9 @@ form {display: flex; flex-direction: column; gap: 22px;}
 /* ==================================================
    TEXTAREA + CHARACTER COUNTER
 ================================================== */
-.textarea-group {display: flex !important; width: 100%; gap: 12px; position: relative;}
+.textarea-group {display: flex !important; width: 100%; gap: 12px; position: relative; margin-bottom: 20px}
 .textarea-group textarea {resize: none; flex: 1; min-height: 140px; padding-bottom: 38px; max-height: 240px;}
-.char-count {position: absolute; top: 8px; right: 12px; font-size: 12px; color: #d4af37; opacity: 0.8;}
+.char-count {position: absolute; top: -20px; right: 0px; font-size: 0.8rem; color: #d4af37;}
 .textarea-group.active { display: flex;}
 
 /* ==================================================
@@ -468,6 +468,14 @@ select option:focus {
   opacity: 1;
   pointer-events: auto;
 }
+textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
 
 
 
