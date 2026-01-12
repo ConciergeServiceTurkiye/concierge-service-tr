@@ -282,20 +282,18 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
   unlockSubmit();
 });
 });
-  const dateInput = document.getElementById("date");
-  const timeSelectWrapper = document.querySelector("#time").closest(".custom-select");
+   const timeSelectWrapper = document.querySelector("#time").closest(".custom-select");
   const timeTrigger = timeSelectWrapper.querySelector(".select-trigger");
 
-  dateInput.addEventListener("keydown", (e) => {
-    if (e.key === "Tab" && !e.shiftKey) {
-      setTimeout(() => {
-        timeSelectWrapper.classList.add("open");
-      }, 10);
-    }
+  // TAB veya focus ile Time alanına gelindiğinde aç
+  timeTrigger.addEventListener("focus", () => {
+    timeSelectWrapper.classList.add("open");
   });
 
+  // Blur olursa kapat
   timeTrigger.addEventListener("blur", () => {
     timeSelectWrapper.classList.remove("open");
   });
 });
+
 
