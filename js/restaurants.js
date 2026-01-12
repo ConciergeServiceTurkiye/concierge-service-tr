@@ -123,25 +123,82 @@ function clearActiveCountries(countries) {
     disableMobile: true
   });
 
-  /* TIME OPTIONS */
-  function buildTimes() {
-    time.innerHTML = `<option value="" disabled selected>Select time</option>`;
-    let minutes = 18 * 60;
-    const end = 22 * 60;
+  // ===== TIME DROPDOWN =====
+const timeSelect = document.getElementById("timeSelect");
+const timeTrigger = timeSelect.querySelector(".select-trigger");
+const timeOptions = timeSelect.querySelector(".select-options");
 
-    while (minutes <= end) {
-      const h = String(Math.floor(minutes / 60)).padStart(2, "0");
-      const m = String(minutes % 60).padStart(2, "0");
+// Saatleri ekle
+function buildTimeOptions() {
+  let minutes = 18 * 60;
+  const end = 22 * 60;
+  timeOptions.innerHTML = ""; // temizle
+  while (minutes <= end) {
+    const h = String(Math.floor(minutes / 60)).padStart(2, "0");
+    const m = String(minutes % 60).padStart(2, "0");
+    const li = document.createElement("li");
+    li.textContent = `${h}:${m}`;
+    timeOptions.appendChild(li);
 
-      const opt = document.createElement("option");
-      opt.value = `${h}:${m}`;
-      opt.textContent = `${h}:${m}`;
-      time.appendChild(opt);
+    // Seçildiğinde trigger güncellenir
+    li.addEventListener("click", () => {
+      timeTrigger.textContent = li.textContent;
+      timeTrigger.style.color = "#d4af37";
+      timeSelect.classList.remove("open");
+    });
 
-      minutes += 15;
-    }
+    minutes += 15;
   }
-  buildTimes();
+}
+buildTimeOptions();
+
+// Tab veya focus ile aç
+timeTrigger.addEventListener("focus", () => {
+  timeSelect.classList.add("open");
+});
+
+// Blur olursa kapat
+timeTrigger.addEventListener("blur", () => {
+  setTimeout(() => {
+    timeSelect.classList.remove("open");
+  }, 150);
+});
+
+// Mouse ile toggle aç/kapat
+timeTrigger.addEventListener("click", () => {
+  timeSelect.classList.toggle("open");
+});
+
+// ===== GUESTS DROPDOWN =====
+const guestsSelect = document.getElementById("guestsSelect");
+const guestsTrigger = guestsSelect.querySelector(".select-trigger");
+const guestsOptions = guestsSelect.querySelectorAll(".select-options li");
+
+// Tab veya focus ile aç
+guestsTrigger.addEventListener("focus", () => {
+  guestsSelect.classList.add("open");
+});
+
+// Blur ile kapat
+guestsTrigger.addEventListener("blur", () => {
+  setTimeout(() => {
+    guestsSelect.classList.remove("open");
+  }, 150);
+});
+
+// Mouse ile toggle aç/kapat
+guestsTrigger.addEventListener("click", () => {
+  guestsSelect.classList.toggle("open");
+});
+
+// Seçildiğinde trigger güncellenir
+guestsOptions.forEach(li => {
+  li.addEventListener("click", () => {
+    guestsTrigger.textContent = li.textContent;
+    guestsTrigger.style.color = "#d4af37";
+    guestsSelect.classList.remove("open");
+  });
+});
 
   /* SELECT COLOR */
   time.addEventListener("change", () => {
@@ -295,5 +352,6 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
     timeSelectWrapper.classList.remove("open");
   });
 });
+
 
 
