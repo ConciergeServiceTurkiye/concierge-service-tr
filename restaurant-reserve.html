@@ -135,16 +135,10 @@
     Pets
   </label>
  <div class="textarea-group" id="petsGroup">
-  <textarea
-    id="petsField"
-    name="pets"
-    maxlength="250"
-    style="display:none"
-  ></textarea>
+  <textarea id="petsField" name="pets" maxlength="250"></textarea>
   <div class="char-count" data-for="petsField" data-max="250">0 / 250</div>
 </div>
-
-  <div class="field-error" id="petsError" style="display:none;">
+<div class="field-error" id="petsError" style="display:none;">
     Please fill in pet details.
   </div>
 </div>
@@ -153,15 +147,8 @@
   <label>
     <input type="checkbox" id="allergyToggle"> Allergy
   </label>
-
   <div class="textarea-group" id="allergyGroup">
-    <textarea
-  id="allergyField"
-  name="allergy"
-  style="display:none"
-  placeholder="Gluten, nuts, lactose..."
-  maxlength="1000"
-></textarea>
+    <textarea id="allergyField" name="allergy" placeholder="Gluten, nuts, lactose..." maxlength="1000"></textarea>
     <div class="char-count" data-for="allergyField" data-max="1000">0 / 1000</div>
   </div>
 </div>
@@ -270,6 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="js/restaurants.js" defer></script>
 </body>
 </html>
+
 
 
 
