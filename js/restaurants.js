@@ -5,6 +5,7 @@ document.querySelectorAll(".textarea-group").forEach(group => {
     const textarea = group.querySelector("textarea");
     const counter = group.querySelector(".char-count");
     const max = counter.dataset.max;
+    if (!textarea || !counter || !max) return;
     const update = () => {
       counter.textContent = `${textarea.value.length} / ${max}`;
     };
@@ -25,6 +26,10 @@ document.querySelectorAll(".textarea-group").forEach(group => {
   const childrenToggle = document.getElementById("childrenToggle");
   const childrenAges = document.getElementById("childrenAges");
   const ageToggles = document.querySelectorAll(".age-toggle");
+  const petsToggle = document.getElementById("petsToggle");
+  const petsGroup = document.getElementById("petsGroup");
+  const allergyToggle = document.getElementById("allergyToggle");
+  const allergyGroup = document.getElementById("allergyGroup");
 
   /* INLINE ALERT */
   function showInlineAlert(text) {
@@ -33,11 +38,7 @@ document.querySelectorAll(".textarea-group").forEach(group => {
     alertBox.style.opacity = "1";
 
     const formTop = form.getBoundingClientRect().top + window.pageYOffset;
-
-    window.scrollTo({
-      top: formTop - 140,
-      behavior: "smooth"
-    });
+    window.scrollTo({top: formTop - 140, behavior: "smooth"});
 
     setTimeout(() => {
       alertBox.style.opacity = "0";
@@ -75,7 +76,6 @@ phone.addEventListener("keydown", e => {
   const dropdown = document.querySelector(".iti__country-list");
   const search = dropdown?.querySelector(".iti__search-input");
   const countries = dropdown?.querySelectorAll(".iti__country");
-
   if (!dropdown || !countries.length) return;
 
   // TAB → ülke listesine geç
@@ -95,13 +95,8 @@ phone.addEventListener("keydown", e => {
   // OK TUŞLARI
   if (["ArrowDown", "ArrowUp"].includes(e.key)) {
     e.preventDefault();
-
-    if (e.key === "ArrowDown" && countryIndex < countries.length - 1) {
-      countryIndex++;
-    }
-    if (e.key === "ArrowUp" && countryIndex > 0) {
-      countryIndex--;
-    }
+    if (e.key === "ArrowDown" && countryIndex < countries.length - 1) {countryIndex++;}
+    if (e.key === "ArrowUp" && countryIndex > 0) {countryIndex--;}
     setActiveCountry(countries);
   }
 
@@ -122,7 +117,6 @@ function setActiveCountry(countries) {
 function clearActiveCountries(countries) {
   countries.forEach(c => c.classList.remove("active"));
 }
-
 
   /* DATE PICKER */
   flatpickr("#date", {
@@ -177,7 +171,6 @@ function clearActiveCountries(countries) {
 
   ageToggles.forEach(cb => {
     const input = document.getElementById(cb.dataset.target);
-
     cb.addEventListener("change", () => {
       if (cb.checked) {
         input.style.display = "inline-block";
@@ -194,6 +187,20 @@ function clearActiveCountries(countries) {
     });
   });
 
+    /* ======================
+     PETS & ALLERGY (FIX)
+  ====================== */
+  petsGroup.style.display = "none";
+  allergyGroup.style.display = "none";
+
+  petsToggle.addEventListener("change", () => {
+    petsGroup.style.display = petsToggle.checked ? "flex" : "none";
+  });
+
+  allergyToggle.addEventListener("change", () => {
+    allergyGroup.style.display = allergyToggle.checked ? "flex" : "none";
+  });
+
   /* SUBMIT */
   form.addEventListener("submit", e => {
     e.preventDefault();
@@ -208,37 +215,6 @@ function clearActiveCountries(countries) {
     if (!date.value) return showInlineAlert("Please select a date."), unlockSubmit();
     if (!time.value) return showInlineAlert("Please select a time."), unlockSubmit();
     if (!guests.value) return showInlineAlert("Please select number of guests."), unlockSubmit();
-
-      unlockSubmit();
-      return;
-    }
-                          /* =========================
-     PETS & ALLERGY TOGGLES
-  ========================= */
-
-  const petsToggle = document.getElementById("petsToggle");
-  const petsGroup = document.getElementById("petsGroup");
-
-  const allergyToggle = document.getElementById("allergyToggle");
-  const allergyGroup = document.getElementById("allergyGroup");
-
-  if (petsToggle && petsGroup) {
-    petsGroup.style.display = "none";
-
-    petsToggle.addEventListener("change", () => {
-      petsGroup.style.display = petsToggle.checked ? "flex" : "none";
-    });
-  }
-
-  if (allergyToggle && allergyGroup) {
-    allergyGroup.style.display = "none";
-
-    allergyToggle.addEventListener("change", () => {
-      allergyGroup.style.display = allergyToggle.checked ? "flex" : "none";
-    });
-  }
-
-
     if (childrenToggle.checked) {
       let valid = false;
       for (let toggle of ageToggles) {
@@ -286,3 +262,4 @@ function clearActiveCountries(countries) {
   unlockSubmit();
 });
 });
+
