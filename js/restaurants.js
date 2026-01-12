@@ -185,19 +185,30 @@ function clearActiveCountries(countries) {
     });
   });
 
-    /* ======================
-     PETS & ALLERGY (FIX)
-  ====================== */
-  petsGroup.style.display = "none";
-  allergyGroup.style.display = "none";
+const petsTextarea = petsGroup.querySelector("textarea");
+const allergyTextarea = allergyGroup.querySelector("textarea");
 
-  petsToggle.addEventListener("change", () => {
-    petsGroup.style.display = petsToggle.checked ? "flex" : "none";
-  });
+// başlangıç
+petsGroup.style.display = "none";
+allergyGroup.style.display = "none";
 
-  allergyToggle.addEventListener("change", () => {
-    allergyGroup.style.display = allergyToggle.checked ? "flex" : "none";
-  });
+petsToggle.addEventListener("change", () => {
+  if (petsToggle.checked) {
+    petsGroup.style.setProperty("display", "flex", "important");
+  } else {
+    petsGroup.style.display = "none";
+    petsTextarea.value = "";
+  }
+});
+
+allergyToggle.addEventListener("change", () => {
+  if (allergyToggle.checked) {
+    allergyGroup.style.setProperty("display", "flex", "important");
+  } else {
+    allergyGroup.style.display = "none";
+    allergyTextarea.value = "";
+  }
+});
 
   /* SUBMIT */
   form.addEventListener("submit", e => {
@@ -230,6 +241,18 @@ function clearActiveCountries(countries) {
         showInlineAlert("Please select at least one age group for children.");
         unlockSubmit();
         return;
+          if (petsToggle.checked && !petsTextarea.value.trim()) {
+  showInlineAlert("Please describe your pet.");
+  unlockSubmit();
+  return;
+}
+
+if (allergyToggle.checked && !allergyTextarea.value.trim()) {
+  showInlineAlert("Please specify your allergy.");
+  unlockSubmit();
+  return;
+}
+
       }
     }
 
@@ -261,5 +284,6 @@ function clearActiveCountries(countries) {
 });
 });
 });
+
 
 
