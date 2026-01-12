@@ -119,7 +119,7 @@ function clearActiveCountries(countries) {
   /* DATE PICKER */
   flatpickr("#date", {
     minDate: "today",
-    locale: navigator.language,
+    locale: "en",
     dateFormat: "Y-m-d",
     disableMobile: true
   });
@@ -284,6 +284,7 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
 });
 });
 });
+
 
 
 
