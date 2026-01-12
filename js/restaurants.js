@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-
-  document.querySelectorAll(".textarea-group").forEach(group => {
+document.querySelectorAll(".textarea-group").forEach(group => {
     const textarea = group.querySelector("textarea");
     const counter = group.querySelector(".char-count");
     const max = counter.dataset.max;
@@ -296,4 +294,3 @@ document.getElementById("petsGroup").classList.remove("active");
       showInlineAlert("Connection error. Please try again later.");
       unlockSubmit();
     });
-  });
