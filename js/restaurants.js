@@ -282,26 +282,4 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
   unlockSubmit();
 });
 });
-   const dateInput = document.getElementById("date");
-  const timeSelect = document.getElementById("time");
-
-  dateInput.addEventListener("keydown", (e) => {
-    if (e.key === "Tab") {
-      // Tab basıldığında dropdown açılıyor
-      e.preventDefault(); // normal tab geçişini engelle (isteğe bağlı)
-      timeSelect.focus(); // Time selecta focus
-      timeSelect.size = timeSelect.options.length; // Dropdown açılıyor
-    }
-  });
-
-  // Seçim sonrası tekrar küçültmek için
-  timeSelect.addEventListener("blur", () => {
-    timeSelect.size = 1; // Dropdown kapanır
-  });
 });
-
-
-
-
-
-
