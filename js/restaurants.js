@@ -272,28 +272,28 @@ function clearActiveCountries(countries) {
       method: "POST",
       body: data
     })
-    .then(res => res.json())
+    .then(res => res.text())
     .then(() => {
-      showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
-      form.reset();
-      document.querySelectorAll(".char-count").forEach(c => {
-  const max = c.dataset.max;
-  c.textContent = `0 / ${max}`;
-});
-      unlockSubmit();
-      childrenAges.style.display = "none";
-      
-      allergyToggle.checked = false;
-      petsToggle.checked = false;
-      childrenToggle.checked = false;
+  showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
+  form.reset();
+  document.querySelectorAll(".char-count").forEach(c => {
+    const max = c.dataset.max;
+    c.textContent = `0 / ${max}`;
+  });
+  unlockSubmit();
+  childrenAges.style.display = "none";
+  allergyToggle.checked = false;
+  petsToggle.checked = false;
+  childrenToggle.checked = false;
+  document.getElementById("allergyGroup").classList.remove("active");
+  document.getElementById("petsGroup").classList.remove("active");
+  buildTimes();
+})
 
-document.getElementById("allergyGroup").classList.remove("active");
-document.getElementById("petsGroup").classList.remove("active");
-      buildTimes();
-    })
     .catch(() => {
       showInlineAlert("Connection error. Please try again later.");
       unlockSubmit();
     });
 });
+
 
