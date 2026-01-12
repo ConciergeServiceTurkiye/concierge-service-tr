@@ -299,6 +299,7 @@ function clearActiveCountries(countries) {
   unlockSubmit();
 });
 });
+});
 
 
 
