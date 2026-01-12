@@ -143,12 +143,12 @@ section.contact-hero > .contact-form-wrapper {max-width: 760px !important; width
 /* ALLERGY TEXTAREA */
 #allergyGroup,
 #petsGroup {
-  display: none;
+  display: none !important;
 }
 
 #allergyGroup.active,
 #petsGroup.active {
-  display: flex;
+  display: flex !important!;
 }
 
 /* Checkbox label hizası */
@@ -455,6 +455,7 @@ select option:focus {
   background-color: var(--hover-color);
   color: #000;
 }
+
 
 
 
