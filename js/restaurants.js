@@ -298,6 +298,7 @@ function clearActiveCountries(countries) {
   showInlineAlert("Connection error. Please try again later.");
   unlockSubmit();
 });
+});
 
 
 
