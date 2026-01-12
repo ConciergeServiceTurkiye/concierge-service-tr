@@ -21,6 +21,8 @@ document.querySelectorAll(".textarea-group").forEach(group => {
   const guests = document.getElementById("guests");
   const submitBtn = form.querySelector("button[type='submit']");
   const allergyToggle = document.getElementById("allergyToggle");
+  const allergyGroup = document.getElementById("allergyGroup");
+  const petsGroup = document.getElementById("petsGroup");
   const allergyField = document.getElementById("allergyField");
   const childrenToggle = document.getElementById("childrenToggle");
   const childrenAges = document.getElementById("childrenAges");
@@ -168,8 +170,7 @@ function clearActiveCountries(countries) {
 
   /* ALLERGY */
  allergyToggle.addEventListener("change", () => {
-  document
-    .getElementById("allergyGroup")
+  document.getElementById("allergyGroup")
     .classList.toggle("active", allergyToggle.checked);
 });
 
@@ -299,9 +300,3 @@ function clearActiveCountries(countries) {
 });
 });
 });
-
-
-
-
-
-
