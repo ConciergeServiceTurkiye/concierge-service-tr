@@ -22,18 +22,9 @@ document.querySelectorAll(".textarea-group").forEach(group => {
   const time = document.getElementById("time");
   const guests = document.getElementById("guests");
   const submitBtn = form.querySelector("button[type='submit']");
-  const allergyToggle = document.getElementById("allergyToggle");
-  const allergyGroup = document.getElementById("allergyGroup");
-  const petsGroup = document.getElementById("petsGroup");
-  const allergyField = document.getElementById("allergyField");
   const childrenToggle = document.getElementById("childrenToggle");
   const childrenAges = document.getElementById("childrenAges");
   const ageToggles = document.querySelectorAll(".age-toggle");
-
-  /* PETS */
-  const petsToggle = document.getElementById("petsToggle");
-  const petsField = document.getElementById("petsField");
-  const petsError = document.getElementById("petsError");
 
   /* INLINE ALERT */
   function showInlineAlert(text) {
@@ -170,12 +161,6 @@ function clearActiveCountries(countries) {
     guests.style.color = guests.value ? "#d4af37" : "rgba(255,255,255,0.65)";
   });
 
-  /* ALLERGY */
- allergyToggle.addEventListener("change", () => {
-  document.getElementById("allergyGroup")
-    .classList.toggle("active", allergyToggle.checked);
-});
-
   /* CHILDREN */
   childrenToggle.addEventListener("change", () => {
     childrenAges.style.display = childrenToggle.checked ? "flex" : "none";
@@ -209,16 +194,6 @@ function clearActiveCountries(countries) {
     });
   });
 
-  /* PETS TOGGLE */
-  petsToggle.addEventListener("change", () => {
-  document.getElementById("petsGroup").classList.toggle("active", petsToggle.checked);
-
-  if (!petsToggle.checked) {
-    petsField.value = "";
-    petsError.style.display = "none";
-  }
-});
-
   /* SUBMIT */
   form.addEventListener("submit", e => {
     e.preventDefault();
@@ -234,11 +209,35 @@ function clearActiveCountries(countries) {
     if (!time.value) return showInlineAlert("Please select a time."), unlockSubmit();
     if (!guests.value) return showInlineAlert("Please select number of guests."), unlockSubmit();
 
-    if (allergyToggle.checked && !allergyField.value.trim()) {
-      showInlineAlert("Please specify your allergy details.");
       unlockSubmit();
       return;
     }
+                          /* =========================
+     PETS & ALLERGY TOGGLES
+  ========================= */
+
+  const petsToggle = document.getElementById("petsToggle");
+  const petsGroup = document.getElementById("petsGroup");
+
+  const allergyToggle = document.getElementById("allergyToggle");
+  const allergyGroup = document.getElementById("allergyGroup");
+
+  if (petsToggle && petsGroup) {
+    petsGroup.style.display = "none";
+
+    petsToggle.addEventListener("change", () => {
+      petsGroup.style.display = petsToggle.checked ? "flex" : "none";
+    });
+  }
+
+  if (allergyToggle && allergyGroup) {
+    allergyGroup.style.display = "none";
+
+    allergyToggle.addEventListener("change", () => {
+      allergyGroup.style.display = allergyToggle.checked ? "flex" : "none";
+    });
+  }
+
 
     if (childrenToggle.checked) {
       let valid = false;
@@ -260,16 +259,6 @@ function clearActiveCountries(countries) {
       }
     }
 
-    /* PETS VALIDATION */
-    if (petsToggle.checked && !petsField.value.trim()) {
-      petsError.style.display = "block";
-      petsField.focus();
-      unlockSubmit();
-      return;
-    }
-
-    petsError.style.display = "none";
-
     const data = new FormData(form);
     data.set("phone", iti.getNumber());
 
@@ -289,11 +278,7 @@ function clearActiveCountries(countries) {
 
   unlockSubmit();
   childrenAges.style.display = "none";
-  allergyToggle.checked = false;
-  petsToggle.checked = false;
   childrenToggle.checked = false;
-  document.getElementById("allergyGroup").classList.remove("active");
-  document.getElementById("petsGroup").classList.remove("active");
   buildTimes();
 })
 .catch(() => {
@@ -301,9 +286,3 @@ function clearActiveCountries(countries) {
   unlockSubmit();
 });
 });
-    allergyGroup.classList.remove("active");
-petsGroup.classList.remove("active");
-
-});
-
-
