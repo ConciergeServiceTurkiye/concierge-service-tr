@@ -260,5 +260,6 @@ function clearActiveCountries(countries) {
   unlockSubmit();
 });
 });
+});
 
 
