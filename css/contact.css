@@ -222,11 +222,19 @@ section.contact-hero > .contact-form-wrapper {max-width: 760px !important; width
 .flatpickr-monthDropdown-months,
 .flatpickr-monthDropdown-months * {background: #2b2b2b !important; color: #ffffff !important;}
 
-#time {color: rgba(255, 255, 255, 0.65);}
-#guests {color: rgba(255, 255, 255, 0.65);}
-select {color: rgba(255,255,255,0.65); /* default */}
+/* Default placeholder color (first option / empty value) */
 
-select:has(option:checked:not([value=""])) {color: #d4af37;}
+#time,
+#guests,
+select {
+  color: rgba(255, 255, 255, 0.65); /* Beyaz + %65 opak */
+}
+
+/* Seçili bir değer varsa rengi altın yapmak istiyorsan: */
+#time option:not([value=""]):checked,
+#guests option:not([value=""]):checked {
+  color: #d4af37; /* sadece seçili seçenek altın */
+}
 
 /* CHILDREN MAIN ROW */
 .children-row {display: flex; align-items: center; gap: 16px; flex-wrap: wrap;}
@@ -475,6 +483,7 @@ textarea {
   box-sizing: border-box;
   font-size: 14px;
 }
+
 
 
 
