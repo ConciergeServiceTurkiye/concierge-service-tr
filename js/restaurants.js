@@ -1,15 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-document.querySelectorAll(".textarea-group").forEach(group => {
-    const textarea = group.querySelector("textarea");
-    const counter = group.querySelector(".char-count");
-    const max = counter.dataset.max;
-    if (!textarea || !counter || !max) return;
-    const update = () => {
-      counter.textContent = `${textarea.value.length} / ${max}`;
-    };
-    textarea.addEventListener("input", update);
-    update();
-  });
+document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
+  const charCount = textarea.parentElement.querySelector(".char-count");
+  const max = charCount.dataset.max;
+  if (!textarea || !charCount || !max) return;
+  const updateCount = () => {
+    charCount.textContent = `${textarea.value.length} / ${max}`;
+  };
+  textarea.addEventListener("input", updateCount);
+  updateCount();
+});
 
   const form = document.getElementById("reservationForm");
   const alertBox = document.getElementById("formInlineAlert");
@@ -284,6 +283,7 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
 });
 });
 });
+
 
 
 
