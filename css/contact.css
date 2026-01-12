@@ -141,7 +141,15 @@ section.contact-hero > .contact-form-wrapper {max-width: 760px !important; width
 .restaurant-form select option {background: #111;color: #d4af37;}
 
 /* ALLERGY TEXTAREA */
-#allergyField {margin-top: 10px;}
+#allergyGroup,
+#petsGroup {
+  display: none;
+}
+
+#allergyGroup.active,
+#petsGroup.active {
+  display: block;
+}
 
 /* Checkbox label hizası */
 .restaurant-form label input[type="checkbox"] {margin-right: 8px;}
@@ -447,5 +455,6 @@ select option:focus {
   background-color: var(--hover-color);
   color: #000;
 }
+
 
 
