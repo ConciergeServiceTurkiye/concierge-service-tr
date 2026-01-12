@@ -200,15 +200,6 @@ guestsOptions.forEach(li => {
   });
 });
 
-  /* SELECT COLOR */
-  time.addEventListener("change", () => {
-    time.style.color = time.value ? "#d4af37" : "rgba(255,255,255,0.65)";
-  });
-
-  guests.addEventListener("change", () => {
-    guests.style.color = guests.value ? "#d4af37" : "rgba(255,255,255,0.65)";
-  });
-
   /* CHILDREN */
   childrenToggle.addEventListener("change", () => {
     childrenAges.style.display = childrenToggle.checked ? "flex" : "none";
@@ -339,30 +330,4 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
   unlockSubmit();
 });
 });
-   const timeSelectWrapper = document.querySelector("#time").closest(".custom-select");
-  const timeTrigger = timeSelectWrapper.querySelector(".select-trigger");
-
-  // TAB veya focus ile Time alanına gelindiğinde aç
-  timeTrigger.addEventListener("focus", () => {
-    timeSelectWrapper.classList.add("open");
-  });
-
-  // Blur olursa kapat
-  timeTrigger.addEventListener("blur", () => {
-    timeSelectWrapper.classList.remove("open");
-  });
-  // Seçilen itemin altın renk olmasını sağla
-options.forEach(opt => {
-  opt.addEventListener("click", () => {
-    options.forEach(o => o.classList.remove("selected"));
-    opt.classList.add("selected");
-    trigger.textContent = opt.textContent;
-    trigger.style.color = "#d4af37"; // seçili altın
-    select.value = opt.textContent; // orijinal select update
-  });
 });
-});
-
-
-
-
