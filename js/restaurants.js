@@ -219,9 +219,9 @@ function clearActiveCountries(countries) {
 
   /* SUBMIT */
   form.addEventListener("submit", e => {
+      alert("submit yakalandı");
     e.preventDefault();
-      alert("SUBMIT HANDLER ÇALIŞTI");
-
+    
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending...";
 
@@ -298,5 +298,6 @@ function clearActiveCountries(countries) {
   showInlineAlert("Connection error. Please try again later.");
   unlockSubmit();
 });
+
 
 
