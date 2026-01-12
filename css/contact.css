@@ -77,21 +77,21 @@ form {display: flex; flex-direction: column; gap: 22px;}
 ================================================== */
 #formInlineAlert {height: 48px; margin-bottom: 18px; padding: 12px 16px; border: 1px solid rgba(212,175,55,0.6); background: rgba(212,175,55,0.08);
                   color: #d4af37; font-size: 13px; text-align: center; border-radius: 10px; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;}
-
 /* ==================================================
-   CUSTOM SUBJECT DROPDOWN
+   CUSTOM SELECT (Time & Guests)
 ================================================== */
-.custom-select {position: relative; user-select: none;}
-.select-trigger {background: #111; border: 1px solid #d4af37; padding: 14px; font-size: 14px; color: #d4af37; cursor: pointer; transition: border 0.3s, box-shadow 0.3s;}
+.custom-select {position: relative;user-select: none;cursor: pointer;}
+.select-trigger {background: #111;border: 1px solid #d4af37;padding: 14px;font-size: 14px;color: rgba(255,255,255,0.65); /* default beyaz */transition: border 0.3s, box-shadow 0.3s, color 0.3s;}
 .select-trigger:hover,
-.select-trigger:focus {border-color: #d4af37; box-shadow: 0 0 10px rgba(212,175,55,0.25); outline: none;}
-.select-options {display: none; position: absolute; top: calc(100% + 6px); left: 0; width: 100%; background: rgba(0,0,0,0.95); border: 1px solid #d4af37;
-                 list-style: none; padding: 6px 0; margin: 0; z-index: 50;}
-.custom-select.open .select-options { display: block; }
-.select-options li {padding: 12px 16px; font-size: 14px; color: #d4af37; cursor: pointer; transition: background 0.25s, color 0.25s;}
-.select-options li:hover {background: rgba(212,175,55,0.15); color: #f1d97a;}
-.select-options li.active {background: rgba(212,175,55,0.18); color: #f1d97a; box-shadow: inset 3px 0 0 #d4af37;}
-
+.select-trigger:focus {border-color: #d4af37;box-shadow: 0 0 10px rgba(212,175,55,0.25);outline: none;color: /* buraya hover rengin */ #f1d97a; /* örnek hover rengi */}
+.select-options {display: none;position: absolute;top: calc(100% + 6px);left: 0;width: 100%;background: rgba(0,0,0,0.95);border: 1px solid #d4af37;list-style: none;
+                 padding: 6px 0;margin: 0;z-index: 50;max-height: 200px; /* scroll için sınır */overflow-y: auto;}
+.custom-select.open .select-options {display: block;}
+.select-options li {padding: 12px 16px;font-size: 14px;color: rgba(255,255,255,0.65); /* default beyaz */cursor: pointer;transition: background 0.25s, color 0.25s;}
+.select-options li:hover,
+.select-options li:focus,
+.select-options li.active {background: rgba(212,175,55,0.15); /* hover arka plan */color: #f1d97a; /* hover / ok ile focus renk */}
+.select-options li.selected {background: rgba(212,175,55,0.18); /* seçili arka plan */color: #d4af37; /* seçili altın rengi */font-weight: 500;}
 /* ==================================================
    RESPONSIVE
 ================================================== */
@@ -483,6 +483,7 @@ textarea {
   box-sizing: border-box;
   font-size: 14px;
 }
+
 
 
 
