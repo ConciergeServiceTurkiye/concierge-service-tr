@@ -351,7 +351,18 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
   timeTrigger.addEventListener("blur", () => {
     timeSelectWrapper.classList.remove("open");
   });
+  // Seçilen itemin altın renk olmasını sağla
+options.forEach(opt => {
+  opt.addEventListener("click", () => {
+    options.forEach(o => o.classList.remove("selected"));
+    opt.classList.add("selected");
+    trigger.textContent = opt.textContent;
+    trigger.style.color = "#d4af37"; // seçili altın
+    select.value = opt.textContent; // orijinal select update
+  });
 });
+});
+
 
 
 
