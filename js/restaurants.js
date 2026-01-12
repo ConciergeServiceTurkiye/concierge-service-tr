@@ -299,4 +299,8 @@ function clearActiveCountries(countries) {
   unlockSubmit();
 });
 });
+    allergyGroup.classList.remove("active");
+petsGroup.classList.remove("active");
+
 });
+
