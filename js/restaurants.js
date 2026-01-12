@@ -269,17 +269,19 @@ function clearActiveCountries(countries) {
     data.set("phone", iti.getNumber());
 
     fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
-      method: "POST",
-      body: data
-    })
-    .then(res => res.text())
-    .then(() => {
+  method: "POST",
+  body: data,
+  mode: "no-cors"
+})
+.then(() => {
   showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
   form.reset();
+
   document.querySelectorAll(".char-count").forEach(c => {
     const max = c.dataset.max;
     c.textContent = `0 / ${max}`;
   });
+
   unlockSubmit();
   childrenAges.style.display = "none";
   allergyToggle.checked = false;
@@ -289,11 +291,7 @@ function clearActiveCountries(countries) {
   document.getElementById("petsGroup").classList.remove("active");
   buildTimes();
 })
-
-    .catch(() => {
-      showInlineAlert("Connection error. Please try again later.");
-      unlockSubmit();
-    });
+.catch(() => {
+  showInlineAlert("Connection error. Please try again later.");
+  unlockSubmit();
 });
-
-
