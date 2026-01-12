@@ -1,3 +1,5 @@
+console.log("restaurants.js LOADED");
+
 document.addEventListener("DOMContentLoaded", () => {
 document.querySelectorAll(".textarea-group").forEach(group => {
     const textarea = group.querySelector("textarea");
@@ -303,4 +305,5 @@ function clearActiveCountries(countries) {
 petsGroup.classList.remove("active");
 
 });
+
 
