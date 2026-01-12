@@ -227,6 +227,7 @@ function clearActiveCountries(countries) {
 
     if (!name.value.trim()) return showInlineAlert("Please enter your full name."), unlockSubmit();
     if (!email.value.trim()) return showInlineAlert("Please enter your email address."), unlockSubmit();
+    if (!email.checkValidity()) return showInlineAlert("Please enter a valid email address."), unlockSubmit();
     if (!iti.isValidNumber()) return showInlineAlert("Please enter a valid phone number."), unlockSubmit();
     if (!date.value) return showInlineAlert("Please select a date."), unlockSubmit();
     if (!time.value) return showInlineAlert("Please select a time."), unlockSubmit();
@@ -300,6 +301,7 @@ function clearActiveCountries(countries) {
 });
 });
 });
+
 
 
 
