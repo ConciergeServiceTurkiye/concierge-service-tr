@@ -1,5 +1,3 @@
-alert("restaurants.js çalıştı");
-
 document.addEventListener("DOMContentLoaded", () => {
 document.querySelectorAll(".textarea-group").forEach(group => {
     const textarea = group.querySelector("textarea");
@@ -219,7 +217,6 @@ function clearActiveCountries(countries) {
 
   /* SUBMIT */
   form.addEventListener("submit", e => {
-      alert("submit yakalandı");
     e.preventDefault();
     
     submitBtn.disabled = true;
@@ -301,6 +298,7 @@ function clearActiveCountries(countries) {
 });
 });
 });
+
 
 
 
