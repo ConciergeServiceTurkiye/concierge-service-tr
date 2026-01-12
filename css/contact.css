@@ -456,6 +456,19 @@ select option:focus {
   color: #000;
 }
 
+/* DEFAULT: KAPALI */
+.textarea-group {
+  display: none;
+}
+
+/* ACTIVE: AÇIK */
+.textarea-group.active {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  pointer-events: auto;
+}
+
 
 
 
