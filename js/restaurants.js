@@ -168,8 +168,9 @@ function clearActiveCountries(countries) {
 
   /* ALLERGY */
  allergyToggle.addEventListener("change", () => {
-  document.getElementById("allergyGroup").style.display =
-    allergyToggle.checked ? "block" : "none";
+  document
+    .getElementById("allergyGroup")
+    .classList.toggle("active", allergyToggle.checked);
 });
 
   /* CHILDREN */
@@ -298,6 +299,7 @@ function clearActiveCountries(countries) {
 });
 });
 });
+
 
 
 
