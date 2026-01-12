@@ -1,3 +1,5 @@
+alert("restaurants.js çalıştı");
+
 document.addEventListener("DOMContentLoaded", () => {
 document.querySelectorAll(".textarea-group").forEach(group => {
     const textarea = group.querySelector("textarea");
@@ -296,4 +298,5 @@ function clearActiveCountries(countries) {
   showInlineAlert("Connection error. Please try again later.");
   unlockSubmit();
 });
+
 
