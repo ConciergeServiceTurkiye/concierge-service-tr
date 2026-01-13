@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =====================================
-     HERO SLIDER
+     HERO SLIDER (SOFT CROSSFADE – NO DARKEN)
   ===================================== */
 
   const slider = document.getElementById("heroSlider");
-  if (slider) {
 
+  if (slider) {
     const images = [
       "assets/slider-1.jpg",
       "assets/slider-2.jpg",
@@ -19,56 +19,29 @@ document.addEventListener("DOMContentLoaded", () => {
       "assets/slider-9.jpg"
     ];
 
+    const layer = slider.querySelector(".slide-layer");
     let currentIndex = 0;
 
-   function changeSlide() {
-  const nextImage = images[currentIndex];
+    // İlk görsel
+    slider.style.backgroundImage = `url('${images[0]}')`;
+    currentIndex = 1;
 
-  // Yeni görseli preload et
-  const img = new Image();
-  img.src = nextImage;
+    function changeSlide() {
+      const nextImage = images[currentIndex];
 
-  img.onload = () => {
-    // Fade out
-    slider.style.opacity = 0;
+      // Üst katmana yeni görseli koy
+      layer.style.backgroundImage = `url('${nextImage}')`;
+      layer.style.opacity = "1";
 
-    setTimeout(() => {
-      // Görseli değiştir
-      slider.style.backgroundImage = `url('${nextImage}')`;
+      // Crossfade bitince alttaki slider'a geçir
+      setTimeout(() => {
+        slider.style.backgroundImage = `url('${nextImage}')`;
+        layer.style.opacity = "0";
+        currentIndex = (currentIndex + 1) % images.length;
+      }, 1000); // 🔥 yumuşak ama karartmasız geçiş
+    }
 
-      // Fade in
-      slider.style.opacity = 1;
-
-      // Index artır
-      currentIndex = (currentIndex + 1) % images.length;
-
-    }, 900); // ← yumuşaklık burada
-  };
-}
-
-    let currentIndex = 0;
-
-const layer = slider.querySelector(".slide-layer");
-
-// İlk görsel
-slider.style.backgroundImage = `url('${images[0]}')`;
-currentIndex = 1;
-
-function changeSlide() {
-  const nextImage = images[currentIndex];
-
-  layer.style.backgroundImage = `url('${nextImage}')`;
-  layer.style.opacity = 1;
-
-  setTimeout(() => {
-    slider.style.backgroundImage = `url('${nextImage}')`;
-    layer.style.opacity = 0;
-    currentIndex = (currentIndex + 1) % images.length;
-  }, 1200);
-}
-
-setInterval(changeSlide, 5000);
-
+    setInterval(changeSlide, 5000);
   }
 
   /* =====================================
@@ -104,23 +77,20 @@ setInterval(changeSlide, 5000);
   const closePopup = document.querySelector(".close-popup");
 
   document.querySelectorAll("[data-service]").forEach(item => {
-  item.addEventListener("click", e => {
+    item.addEventListener("click", e => {
+      const key = item.getAttribute("data-service");
 
-    const key = item.getAttribute("data-service");
+      // Restaurant → popup yok
+      if (key === "restaurants") return;
 
-    // 🍽 Restaurant → popup YOK, link çalışsın
-    if (key === "restaurants") return;
+      e.preventDefault();
+      if (!serviceData[key]) return;
 
-    e.preventDefault();
-
-    if (!serviceData[key]) return;
-
-    popupTitle.textContent = serviceData[key].title;
-    popupText.textContent = serviceData[key].text;
-    popup.classList.add("active");
+      popupTitle.textContent = serviceData[key].title;
+      popupText.textContent = serviceData[key].text;
+      popup.classList.add("active");
+    });
   });
-});
-
 
   if (closePopup) {
     closePopup.addEventListener("click", () => {
@@ -136,8 +106,4 @@ setInterval(changeSlide, 5000);
     });
   }
 
-
 });
-
-
-
