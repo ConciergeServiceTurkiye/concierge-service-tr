@@ -46,9 +46,29 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 }
 
+    let currentIndex = 0;
 
-    changeSlide(); // first load
-    setInterval(changeSlide, 5000); // 5 saniye
+const layer = slider.querySelector(".slide-layer");
+
+// İlk görsel
+slider.style.backgroundImage = `url('${images[0]}')`;
+currentIndex = 1;
+
+function changeSlide() {
+  const nextImage = images[currentIndex];
+
+  layer.style.backgroundImage = `url('${nextImage}')`;
+  layer.style.opacity = 1;
+
+  setTimeout(() => {
+    slider.style.backgroundImage = `url('${nextImage}')`;
+    layer.style.opacity = 0;
+    currentIndex = (currentIndex + 1) % images.length;
+  }, 1200);
+}
+
+setInterval(changeSlide, 5000);
+
   }
 
   /* =====================================
@@ -118,5 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
+
 
 
