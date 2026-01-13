@@ -370,7 +370,6 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
   unlockSubmit();
   childrenAges.style.display = "none";
   childrenToggle.checked = false;
-  buildTimes();
 })
 .catch(() => {
   showInlineAlert("Connection error. Please try again later.");
@@ -378,4 +377,5 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
 });
 });
 });
+
 
