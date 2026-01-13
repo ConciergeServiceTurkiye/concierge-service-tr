@@ -45,7 +45,7 @@ form {display: flex; flex-direction: column; gap: 22px;}
 .form-group {display: flex; flex-direction: column;}
 .form-group label {color: #d4af37; font-size: 13px; margin-bottom: 6px; letter-spacing: 0.5px;}
 .form-group input,
-.form-group textarea {background: #111; border: 1px solid rgba(212,175,55,0.35); padding: 14px; font-size: 14px;
+.form-group textarea {background: #111; border: 1px solid rgba(212,175,55,0.65); padding: 14px; font-size: 14px;
                       color: #d4af37; outline: none; transition: border 0.3s ease;}
 .form-group input::placeholder,
 .form-group textarea::placeholder {color: #aaa;}
@@ -483,6 +483,7 @@ textarea {
   box-sizing: border-box;
   font-size: 14px;
 }
+
 
 
 
