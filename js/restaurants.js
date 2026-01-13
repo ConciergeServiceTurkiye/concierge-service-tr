@@ -75,45 +75,47 @@ document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
    INTL TEL INPUT – KEYBOARD UX
 ============================== */
 
+/* ==============================
+   INTL TEL INPUT – KEYBOARD UX
+============================== */
+
 let countryIndex = -1;
 
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-phone.addEventListener("keydown", e => {
-  const dropdown = document.querySelector(".iti__country-list");
-  const search = dropdown?.querySelector(".iti__search-input");
-  const countries = dropdown?.querySelectorAll(".iti__country");
-  if (!dropdown || !countries.length) return;
+if (!isMobile) {
+  phone.addEventListener("keydown", e => {
+    const dropdown = document.querySelector(".iti__country-list");
+    const search = dropdown?.querySelector(".iti__search-input");
+    const countries = dropdown?.querySelectorAll(".iti__country");
+    if (!dropdown || !countries.length) return;
 
-  // TAB → ülke listesine geç
-  if (e.key === "Tab" && dropdown.classList.contains("iti__country-list--visible")) {
-    e.preventDefault();
-    countryIndex = 0;
-    setActiveCountry(countries);
-  }
+    if (e.key === "Tab" && dropdown.classList.contains("iti__country-list--visible")) {
+      e.preventDefault();
+      countryIndex = 0;
+      setActiveCountry(countries);
+    }
 
-  // ALT + TAB → search input
-  if (e.altKey && e.key === "Tab") {
-    e.preventDefault();
-    search.focus();
-    clearActiveCountries(countries);
-  }
+    if (e.altKey && e.key === "Tab") {
+      e.preventDefault();
+      search.focus();
+      clearActiveCountries(countries);
+    }
 
-  // OK TUŞLARI
-  if (["ArrowDown", "ArrowUp"].includes(e.key)) {
-    e.preventDefault();
-    if (e.key === "ArrowDown" && countryIndex < countries.length - 1) {countryIndex++;}
-    if (e.key === "ArrowUp" && countryIndex > 0) {countryIndex--;}
-    setActiveCountry(countries);
-  }
+    if (["ArrowDown", "ArrowUp"].includes(e.key)) {
+      e.preventDefault();
+      if (e.key === "ArrowDown" && countryIndex < countries.length - 1) countryIndex++;
+      if (e.key === "ArrowUp" && countryIndex > 0) countryIndex--;
+      setActiveCountry(countries);
+    }
 
-  // ENTER → ülke seç
-  if (e.key === "Enter" && countryIndex >= 0) {
-    e.preventDefault();
-    countries[countryIndex].click();
-    phone.focus();
-  }
-});
+    if (e.key === "Enter" && countryIndex >= 0) {
+      e.preventDefault();
+      countries[countryIndex].click();
+      phone.focus();
+    }
+  });
+}
 
 function setActiveCountry(countries) {
   clearActiveCountries(countries);
