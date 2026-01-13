@@ -77,6 +77,8 @@ document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
 
 let countryIndex = -1;
 
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 phone.addEventListener("keydown", e => {
   const dropdown = document.querySelector(".iti__country-list");
   const search = dropdown?.querySelector(".iti__search-input");
