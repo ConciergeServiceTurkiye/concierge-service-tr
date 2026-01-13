@@ -295,7 +295,7 @@ section.contact-hero > .contact-form-wrapper {max-width: 760px !important; width
 .iti__selected-flag {height: 100% !important; display: flex !important; align-items: center !important;}
 
 /* === INTL TEL INPUT – FINAL FIX === */ 
-.iti__country-list {width: 100% !important; min-width: 320px !important; max-width: 420px !important; position: absolute !important; background: rgba(10,10,10,0.97) !important; border: 1px solid #d4af37 !important; border-radius: 12px;
+.iti__country-list {width: 100% !important; min-width: 320px !important; max-width: 420px !important; max-height: 70vh !important; position: absolute !important; background: rgba(10,10,10,0.97) !important; border: 1px solid #d4af37 !important; border-radius: 12px;
                     box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important; overflow-x: hidden !important; z-index: 9999 !important;} 
 .iti__search {color: #d4af37 !important;  background: #111 !important; border: 1px solid rgba(212,175,55,0.6) !important;}
 .iti__search::placeholder{color: rgba(212,175,55,0.65) !important;}
@@ -321,6 +321,7 @@ section.contact-hero > .contact-form-wrapper {max-width: 760px !important; width
 /* === INTL TEL INPUT – SEARCH INPUT FINAL FIX === */
 
 .iti__search-input {
+  position: sticky; top: 0; z-index: 10; background: #111; color: #fff;
   display: block !important;
   width: 100% !important;
 
