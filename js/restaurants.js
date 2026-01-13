@@ -127,6 +127,29 @@ function clearActiveCountries(countries) {
 const timeSelect = document.getElementById("timeSelect");
 const timeTrigger = timeSelect.querySelector(".select-trigger");
 const timeOptions = timeSelect.querySelector(".select-options");
+  let timeIndex = -1;
+
+timeTrigger.addEventListener("keydown", e => {
+  const items = timeOptions.querySelectorAll("li");
+  if (!timeSelect.classList.contains("open") || !items.length) return;
+
+  if (["ArrowDown", "ArrowUp"].includes(e.key)) {
+    e.preventDefault(); // 🔥 SAYFA SCROLL ENGELLENDİ
+
+    if (e.key === "ArrowDown" && timeIndex < items.length - 1) timeIndex++;
+    if (e.key === "ArrowUp" && timeIndex > 0) timeIndex--;
+
+    items.forEach(li => li.classList.remove("active"));
+    items[timeIndex].classList.add("active");
+    items[timeIndex].scrollIntoView({ block: "nearest" });
+  }
+
+  if (e.key === "Enter" && timeIndex >= 0) {
+    e.preventDefault();
+    items[timeIndex].click();
+  }
+});
+
 
 // Saatleri ekle
 function buildTimeOptions() {
@@ -173,6 +196,30 @@ timeTrigger.addEventListener("click", () => {
 const guestsSelect = document.getElementById("guestsSelect");
 const guestsTrigger = guestsSelect.querySelector(".select-trigger");
 const guestsOptions = guestsSelect.querySelectorAll(".select-options li");
+
+  let guestsIndex = -1;
+
+guestsTrigger.addEventListener("keydown", e => {
+  const items = guestsSelect.querySelectorAll(".select-options li");
+  if (!guestsSelect.classList.contains("open") || !items.length) return;
+
+  if (["ArrowDown", "ArrowUp"].includes(e.key)) {
+    e.preventDefault(); // 🔥 SAYFA SCROLL ENGELLENDİ
+
+    if (e.key === "ArrowDown" && guestsIndex < items.length - 1) guestsIndex++;
+    if (e.key === "ArrowUp" && guestsIndex > 0) guestsIndex--;
+
+    items.forEach(li => li.classList.remove("active"));
+    items[guestsIndex].classList.add("active");
+    items[guestsIndex].scrollIntoView({ block: "nearest" });
+  }
+
+  if (e.key === "Enter" && guestsIndex >= 0) {
+    e.preventDefault();
+    items[guestsIndex].click();
+  }
+});
+
 
 // Tab veya focus ile aç
 guestsTrigger.addEventListener("focus", () => {
@@ -331,3 +378,4 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
 });
 });
 });
+
