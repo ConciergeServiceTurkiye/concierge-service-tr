@@ -319,23 +319,28 @@ allergyToggle.addEventListener("change", () => {
     if (!time.value) return showInlineAlert("Please select a time."), unlockSubmit();
     if (!guests.value) return showInlineAlert("Please select number of guests."), unlockSubmit();
     if (childrenToggle.checked) {
-      let valid = false;
-      for (let toggle of ageToggles) {
-        if (toggle.checked) {
-          valid = true;
-          const input = document.getElementById(toggle.dataset.target);
-          if (!input.value.trim()) {
-            showInlineAlert("Please enter number of children for selected age group.");
-            unlockSubmit();
-            return;
-          }
-        }
-      }
-      if (!valid) {
-        showInlineAlert("Please select at least one age group for children.");
+  let valid = false;
+
+  for (let toggle of ageToggles) {
+    if (toggle.checked) {
+      valid = true;
+      const input = document.getElementById(toggle.dataset.target);
+      if (!input.value.trim()) {
+        showInlineAlert("Please enter number of children for selected age group.");
         unlockSubmit();
         return;
-          if (petsToggle.checked && !petsTextarea.value.trim()) {
+      }
+    }
+  }
+
+  if (!valid) {
+    showInlineAlert("Please select at least one age group for children.");
+    unlockSubmit();
+    return;
+  }
+}
+
+if (petsToggle.checked && !petsTextarea.value.trim()) {
   showInlineAlert("Please describe your pet.");
   unlockSubmit();
   return;
@@ -347,8 +352,6 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
   return;
 }
 
-      }
-    }
 
     const data = new FormData(form);
     data.set("phone", iti.getNumber());
@@ -377,5 +380,6 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
 });
 });
 });
+
 
 
