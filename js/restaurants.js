@@ -167,6 +167,7 @@ function buildTimeOptions() {
     li.addEventListener("click", () => {
       timeTrigger.textContent = li.textContent;
       timeTrigger.style.color = "#d4af37";
+      time.value = li.textContent;
       timeSelect.classList.remove("open");
     });
 
@@ -243,6 +244,7 @@ guestsOptions.forEach(li => {
   li.addEventListener("click", () => {
     guestsTrigger.textContent = li.textContent;
     guestsTrigger.style.color = "#d4af37";
+    guests.value = li.textContent;
     guestsSelect.classList.remove("open");
   });
 });
@@ -380,6 +382,7 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
 });
 });
 });
+
 
 
 
