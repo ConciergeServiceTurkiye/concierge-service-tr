@@ -18,15 +18,19 @@ document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
   const phone = document.getElementById("phone");
   const date = document.getElementById("date");
   const time = document.getElementById("time");
+  const timeTrigger = document.querySelector("#timeSelect .select-trigger");
   const guests = document.getElementById("guests");
+  const guestsTrigger = document.querySelector("#guestsSelect .select-trigger");
   const submitBtn = form.querySelector("button[type='submit']");
   const childrenToggle = document.getElementById("childrenToggle");
   const childrenAges = document.getElementById("childrenAges");
   const ageToggles = document.querySelectorAll(".age-toggle");
   const petsToggle = document.getElementById("petsToggle");
   const petsGroup = document.getElementById("petsGroup");
+  const petsTextarea = document.getElementById("petsField");
   const allergyToggle = document.getElementById("allergyToggle");
   const allergyGroup = document.getElementById("allergyGroup");
+  const allergyTextarea = document.getElementById("allergyField");
 
   /* INLINE ALERT */
   function showInlineAlert(text) {
@@ -124,8 +128,6 @@ function clearActiveCountries(countries) {
   });
 
   // ===== TIME DROPDOWN =====
-const timeSelect = document.getElementById("timeSelect");
-const timeTrigger = timeSelect.querySelector(".select-trigger");
 const timeOptions = timeSelect.querySelector(".select-options");
   let timeIndex = -1;
 
@@ -194,8 +196,6 @@ timeTrigger.addEventListener("click", () => {
 });
 
 // ===== GUESTS DROPDOWN =====
-const guestsSelect = document.getElementById("guestsSelect");
-const guestsTrigger = guestsSelect.querySelector(".select-trigger");
 const guestsOptions = guestsSelect.querySelectorAll(".select-options li");
 
   let guestsIndex = -1;
@@ -281,9 +281,6 @@ guestsOptions.forEach(li => {
     });
   });
 
-const petsTextarea = petsGroup.querySelector("textarea");
-const allergyTextarea = allergyGroup.querySelector("textarea");
-
 // başlangıç
 petsGroup.style.display = "none";
 allergyGroup.style.display = "none";
@@ -366,6 +363,30 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
 .then(() => {
   showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
   form.reset();
+  // TIME reset
+time.value = "";
+timeTrigger.textContent = "Select time";
+timeTrigger.style.color = "rgba(255,255,255,0.65)";
+
+// GUESTS reset
+guests.value = "";
+guestsTrigger.textContent = "Select guests";
+guestsTrigger.style.color = "rgba(255,255,255,0.65)";
+
+// PHONE reset (intl-tel-input)
+iti.setCountry("us"); // default ülke
+phone.value = "";
+
+// PETS reset
+petsToggle.checked = false;
+petsGroup.style.display = "none";
+petsTextarea.value = "";
+
+// ALLERGY reset
+allergyToggle.checked = false;
+allergyGroup.style.display = "none";
+allergyTextarea.value = "";
+
 
   document.querySelectorAll(".char-count").forEach(c => {
     const max = c.dataset.max;
@@ -382,6 +403,7 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
 });
 });
 });
+
 
 
 
