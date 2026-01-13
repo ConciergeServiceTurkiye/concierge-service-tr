@@ -54,9 +54,13 @@ document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
 
   /* PHONE INPUT */
   const iti = intlTelInput(phone, {
-    initialCountry: "us",
-    separateDialCode: true
-  });
+  initialCountry: "us",
+  separateDialCode: true,
+  dropdownContainer: document.body, // iOS için stabil
+  allowDropdown: true,
+  autoPlaceholder: "polite",
+  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js"
+});
 
   phone.addEventListener("keydown", e => {
     if (
