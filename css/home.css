@@ -18,7 +18,8 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: background-image 1.2s ease-in-out;
+  opacity: 1;
+  transition: opacity 1.2s ease-in-out;
   z-index: 1;
 }
 
@@ -122,3 +123,4 @@
 
 
 }
+
