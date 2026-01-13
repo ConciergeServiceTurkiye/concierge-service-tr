@@ -183,16 +183,24 @@ timeTrigger.addEventListener("focus", () => {
   timeSelect.classList.add("open");
 });
 
-// Blur olursa kapat
-timeTrigger.addEventListener("blur", () => {
-  setTimeout(() => {
-    timeSelect.classList.remove("open");
-  }, 150);
+// Mouse ile toggle aç/kapat
+// Mouse ile aç
+timeTrigger.addEventListener("mousedown", e => {
+  e.preventDefault(); // blur tetiklenmesini engeller
+  timeSelect.classList.add("open");
 });
 
-// Mouse ile toggle aç/kapat
-timeTrigger.addEventListener("click", () => {
-  timeSelect.classList.toggle("open");
+// Klavye (Tab) ile aç
+timeTrigger.addEventListener("focus", () => {
+  timeSelect.classList.add("open");
+});
+
+// Gerçekten dışarı çıkınca kapat
+document.addEventListener("click", e => {
+  if (!timeSelect.contains(e.target)) {
+    timeSelect.classList.remove("open");
+    timeIndex = -1;
+  }
 });
 
 // ===== GUESTS DROPDOWN =====
@@ -227,17 +235,26 @@ guestsTrigger.addEventListener("focus", () => {
   guestsSelect.classList.add("open");
 });
 
-// Blur ile kapat
-guestsTrigger.addEventListener("blur", () => {
-  setTimeout(() => {
-    guestsSelect.classList.remove("open");
-  }, 150);
+
+// Mouse ile aç
+guestsTrigger.addEventListener("mousedown", e => {
+  e.preventDefault();
+  guestsSelect.classList.add("open");
 });
 
-// Mouse ile toggle aç/kapat
-guestsTrigger.addEventListener("click", () => {
-  guestsSelect.classList.toggle("open");
+// Klavye ile aç
+guestsTrigger.addEventListener("focus", () => {
+  guestsSelect.classList.add("open");
 });
+
+// Dışarı tıklanınca kapat
+document.addEventListener("click", e => {
+  if (!guestsSelect.contains(e.target)) {
+    guestsSelect.classList.remove("open");
+    guestsIndex = -1;
+  }
+});
+
 
 // Seçildiğinde trigger güncellenir
 guestsOptions.forEach(li => {
@@ -403,6 +420,7 @@ allergyTextarea.value = "";
 });
 });
 });
+
 
 
 
