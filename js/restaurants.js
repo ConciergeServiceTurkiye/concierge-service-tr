@@ -56,7 +56,7 @@ document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
   const iti = intlTelInput(phone, {
   initialCountry: "us",
   separateDialCode: true,
-  dropdownContainer: document.body, // iOS için stabil
+  dropdownContainer: phone.closest("form"),
   allowDropdown: true,
   autoPlaceholder: "polite",
   utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js"
@@ -428,6 +428,7 @@ allergyTextarea.value = "";
 });
 });
 });
+
 
 
 
