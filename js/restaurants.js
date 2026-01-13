@@ -306,6 +306,9 @@ allergyToggle.addEventListener("change", () => {
   }
 });
 
+console.log(time.value, guests.value);
+
+  
   /* SUBMIT */
   form.addEventListener("submit", e => {
     e.preventDefault();
@@ -382,6 +385,7 @@ if (allergyToggle.checked && !allergyTextarea.value.trim()) {
 });
 });
 });
+
 
 
 
