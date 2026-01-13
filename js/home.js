@@ -21,10 +21,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentIndex = 0;
 
-    function changeSlide() {
-      slider.style.backgroundImage = `url('${images[currentIndex]}')`;
+   function changeSlide() {
+  const nextImage = images[currentIndex];
+
+  // Yeni görseli preload et
+  const img = new Image();
+  img.src = nextImage;
+
+  img.onload = () => {
+    // Fade out
+    slider.style.opacity = 0;
+
+    setTimeout(() => {
+      // Görseli değiştir
+      slider.style.backgroundImage = `url('${nextImage}')`;
+
+      // Fade in
+      slider.style.opacity = 1;
+
+      // Index artır
       currentIndex = (currentIndex + 1) % images.length;
-    }
+
+    }, 900); // ← yumuşaklık burada
+  };
+}
+
 
     changeSlide(); // first load
     setInterval(changeSlide, 5000); // 5 saniye
@@ -97,4 +118,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 });
+
 
