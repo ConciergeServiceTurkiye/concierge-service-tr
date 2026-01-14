@@ -1,25 +1,25 @@
-/* <- CONTACT PAGE - HERO + FORM ->*/
-      .contact-hero {min-height: 100vh; padding-top: var(--nav-h);background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)),url("../assets/contact-bg.jpg") center / cover no-repeat;
-                     overflow: visible !important;display: flex;align-items: center;justify-content: center;position: relative;}
-/* <- CONTACT FORM WRAPPER ->*/
-      .contact-form-wrapper {position: relative;z-index: 3;max-width: 620px;width: 90%;margin: 0 auto;padding: 45px 40px 40px;
-                             background: rgba(10,10,10,0.88);border: 1.5px solid #d4af37;border-radius: 14px;overflow: visible !important;
-                             box-shadow:0 0 0 1px rgba(212,175,55,0.25),0 0 35px rgba(212,175,55,0.15);}
-/* <- FORM HEADER ->*/
-      .contact-form-header {text-align: center; margin-bottom: 30px;}
-      .contact-form-header h1 {font-size: 28px; color: #d4af37; letter-spacing: 1px; margin-bottom: 6px; font-weight: 600;}
-      .form-subline {font-size: 12px; letter-spacing: 2px; color: rgba(212,175,55,0.75); text-transform: uppercase;}
-/* <- FORM ELEMENTS ->*/
-      form {display: flex; flex-direction: column; gap: 22px;} /* Form içindeki alanları dikey sırala ve aralarına boşluk bırak */
-      .form-group {display: flex; flex-direction: column;} /* Her form grubu dikey hizalanır */
-      .form-group label {color: #d4af37; font-size: 13px; margin-bottom: 6px; letter-spacing: 0.5px;} /* Label stilini belirler */
+/* <- CONTACT PAGE - HERO + FORM -> */
+      .contact-hero {min-height: 100vh;padding-top: var(--nav-h);background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75)), url("../assets/contact-bg.jpg") center / cover no-repeat;
+               overflow: visible !important;display: flex;align-items: center;justify-content: center;position: relative;}
+/* <- CONTACT FORM WRAPPER -> */
+      .contact-form-wrapper {position: relative;z-index: 3;max-width: 760px;width: 100%;margin: 0 auto;padding: 45px 40px 40px;background: rgba(10,10,10,0.88);
+                             border: 1.5px solid #d4af37;border-radius: 14px;overflow: visible !important;
+                             box-shadow: 0 0 0 1px rgba(212,175,55,0.25), 0 0 35px rgba(212,175,55,0.15);}
+/* <- FORM HEADER -> */
+      .contact-form-header {text-align: center;margin-bottom: 30px;}
+      .contact-form-header h1 {font-size: 28px;color: #d4af37;letter-spacing: 1px;margin-bottom: 6px;font-weight: 600;}
+      .form-subline {font-size: 12px;letter-spacing: 2px;color: rgba(212,175,55,0.75);text-transform: uppercase;}
+/* <- FORM ELEMENTS -> */
+      form {display: flex;flex-direction: column;gap: 22px;}  /* Form içindeki alanları dikey sırala ve aralarına boşluk bırak */
+      .form-group {display: flex;flex-direction: column;} /* Her form grubu dikey hizalanır */
+      .form-group label {color: #d4af37;font-size: 13px;margin-bottom: 6px;letter-spacing: 0.5px;} /* Label stilini belirler */
       .form-group input,
-      .form-group textarea {background: #111; /* Koyu arka plan */border: 1px solid #d4af37; /* Altın kenarlık */padding: 14px; font-size: 14px;
+      .form-group textarea {background: #111; /* Koyu arka plan */border: 1px solid #d4af37; /* Altın kenarlık */padding: 14px;font-size: 14px;
                             color: #d4af37; /* Yazı rengi altın */outline: none;transition: border 0.3s ease; /* Focus animasyonu */}
       .form-group input::placeholder,
-      .form-group textarea::placeholder {color: #aaa;} /* Placeholder hafif gri */
+      .form-group textarea::placeholder {color: #aaa;}  /* Placeholder hafif gri */
       .form-group input:focus,
-      .form-group textarea:focus {border-color: #d4af37;} /* Focus olduğunda kenarlık altın */
+      .form-group textarea:focus {border-color: #d4af37;}  /* Focus olduğunda kenarlık altın */
 /* <- TEXTAREA + KARAKTER SAYACI + SCROLLBAR ->*/
       .textarea-group {display: none; flex-direction: column; width: 100%; gap: 12px; position: relative; margin-bottom: 20px; 
                        opacity: 1; pointer-events: auto;} /* textarea grubu varsayılan kapalı, active olunca açık */
@@ -72,8 +72,6 @@
       .iti__country-list::-webkit-scrollbar-thumb {background: #d4af37; border-radius: 8px; border: 2px solid rgba(0,0,0,0.1);} /* Scrollbar sürükleme alanı */
       .iti__country-list::-webkit-scrollbar-thumb:hover {background: #f1d97a;} /* Hover efekti */
       .iti__country-list {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);} /* Firefox scrollbar */
-      .form-group select {background: #111; border: 1px solid rgba(212,175,55,0.35); padding: 14px; font-size: 14px; color: #d4af37; outline: none;} /* Form dropdown genel stil */
-      .form-group select option {background: #111; color: #d4af37;} /* Dropdown seçenekleri */
       .iti {width: 100% !important; display: block !important; position: relative !important;} /* Telefon input container */
       .iti input {width: 100% !important; height: 48px !important; box-sizing: border-box;} /* Telefon input alanı */
       .iti__flag-container {height: 100% !important;} /* Bayrak alanı yüksekliği */
@@ -147,7 +145,14 @@
       .flatpickr-monthDropdown-months option:hover {background-color: #d4af37 !important; color: #000000 !important;} /* Hover edilen ay */
       .flatpickr-monthDropdown-months,
       .flatpickr-monthDropdown-months * {background: #2b2b2b !important; color: #ffffff !important;} /* Tüm ay dropdown elemanları */
+/* <- RESPONSIVE -> */
+      @media (max-width: 768px) {
+      section.contact-hero > .contact-form-wrapper {max-width: 94%; /* Küçük ekranlarda form genişliğini %94 yapar */ padding: 35px 25px 30px; /* Küçük ekranlarda iç boşluk */}
+      .contact-form-header h1 {font-size: 24px;}} /* Küçük ekranlarda başlık boyutu küçültülür */
+      @media (min-width: 1024px) {.restaurant-form {max-width: 860px;}} /* Büyük ekranlarda restaurant formunu genişletir */
 /* <- FORM DROPDOWN VE SEÇİMLER – RENKLER -> */
+      .form-group select {background: #111; border: 1px solid rgba(212,175,55,0.35); padding: 14px; font-size: 14px; color: #d4af37; outline: none;} /* Form dropdown genel stil */
+      .form-group select option {background: #111; color: #d4af37;} /* Dropdown seçenekleri */
       #time,
       #guests,
       select {color: rgba(255, 255, 255, 0.65);} /* Placeholder / default seçenek rengi */
@@ -163,16 +168,7 @@
       .children-form-group {align-items: flex-start !important;} /* Children satırındaki öğeleri sola hizalar */
       .children-row > label {flex-shrink: 0;} /* Checkbox etiketinin küçülmesini engeller, solda sabit kalır */
 /* <- RESPONSIVE – FORM WRAPPER DESKTOP & MOBILE -> */
-      section.contact-hero > .contact-form-wrapper { max-width: 760px !important;width: 100% !important; 
-                                                    margin-left: auto !important; margin-right: auto !important; } /* Desktop için temel genişlik */
-      @media (max-width: 768px) {section.contact-hero > .contact-form-wrapper { 
-             max-width: 94% !important; /* Küçük ekranlarda form genişliğini %94 yapar */
-             padding: 35px 25px 30px;} /* Küçük ekranlarda iç boşluk ayarı */
-     .contact-form-header h1 {font-size: 24px;}} /* Küçük ekranlarda başlık boyutu küçültülür */
-      @media (min-width: 1024px) {.restaurant-form {max-width: 860px;} /* Büyük ekranlarda restaurant formunu genişletir */
-     .contact-hero .contact-form-wrapper:has(.restaurant-form) {max-width: 880px;}} /* Büyük ekranlarda form wrapper genişliğini ayarlar */
-/* ===== FORM WIDTH FIX ===== */
-      .restaurant-form {max-width: 100%;}
+     
 /* ===== FORCE FORM WIDTH (OVERRIDE ALL) ===== */
       section.contact-hero > .contact-form-wrapper {max-width: 760px !important; width: 100% !important; margin-left: auto !important; margin-right: auto !important;}
 /*<- CHECKBOX FOCUS VE GÖRÜNÜRLÜK ->*/
@@ -181,4 +177,5 @@
 /*<- LABEL VE İÇERİK TIKLANABİLİRLİĞİ ->*/
       label,
       label * {pointer-events: auto !important; /* label içi tıklanabilir */}
+
 
