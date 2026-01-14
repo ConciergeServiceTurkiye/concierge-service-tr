@@ -146,10 +146,10 @@
       .flatpickr-monthDropdown-months,
       .flatpickr-monthDropdown-months * {background: #2b2b2b !important; color: #ffffff !important;} /* Tüm ay dropdown elemanları */
 /* <- RESPONSIVE -> */
-      @media (max-width: 768px) {
-      section.contact-hero > .contact-form-wrapper {max-width: 94%; /* Küçük ekranlarda form genişliğini %94 yapar */ padding: 35px 25px 30px; /* Küçük ekranlarda iç boşluk */}
+      @media (max-width: 768px) {section.contact-hero > .contact-form-wrapper {max-width: 94%; /* Küçük ekranlarda form genişliğini %94 yapar */ padding: 35px 25px 30px; /* Küçük ekranlarda iç boşluk */}
       .contact-form-header h1 {font-size: 24px;}} /* Küçük ekranlarda başlık boyutu küçültülür */
       @media (min-width: 1024px) {.restaurant-form {max-width: 860px;}} /* Büyük ekranlarda restaurant formunu genişletir */
+      @media (max-width: 768px) {.iti__country-list {max-height: 60vh !important;}}
 /* <- FORM DROPDOWN VE SEÇİMLER – RENKLER -> */
       .form-group select {background: #111; border: 1px solid rgba(212,175,55,0.35); padding: 14px; font-size: 14px; color: #d4af37; outline: none;} /* Form dropdown genel stil */
       .form-group select option {background: #111; color: #d4af37;} /* Dropdown seçenekleri */
@@ -173,6 +173,7 @@
 /*<- LABEL VE İÇERİK TIKLANABİLİRLİĞİ ->*/
       label,
       label * {pointer-events: auto !important; /* label içi tıklanabilir */}
+
 
 
 
