@@ -12,61 +12,10 @@
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="logo">
-      <img src="assets/logo.png" alt="Concierge Service Türkiye">
-    </a>
-
-    <div class="hamburger" id="hamburger">
-      <span></span><span></span><span></span>
-    </div>
-
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="#why-us">Why Us</a></li>
-
-      <li class="dropdown">
-        <a href="#services">Services ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="#">✈ Airport Transfer</a></li>
-          <li><a href="guidetours.html">🕌 City Tours</a></li>
-          <li><a href="restaurants.html">🍽 Restaurant Reservations</a></li>
-          <li><a href="#">⭐ VIP Assistance</a></li>
-          <li><a href="#">🎉 Event Organization</a></li>
-        </ul>
-      </li>
-
-      <li class="dropdown">
-        <a href="#">Experiences ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="#">🛥 Yacht & Bosphorus</a></li>
-          <li><a href="#">🍷 Private Dining</a></li>
-          <li><a href="#">🛍 Luxury Shopping</a></li>
-          <li><a href="#">🎟 Exclusive Events</a></li>
-        </ul>
-      </li>
-
-      <li class="dropdown">
-        <a href="#">Destinations ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Istanbul</a></li>
-          <li><a href="#">Bodrum</a></li>
-          <li><a href="#">Cappadocia</a></li>
-          <li><a href="#">Antalya</a></li>
-        </ul>
-      </li>
-
-      <li>
-        <a href="contact.html" class="cta">Request Concierge</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
+    <div id="navbarInclude"></div>
 <!-- CONTACT / RESTAURANT FORM -->
-<section class="contact-hero">
-  <div class="contact-form-wrapper restaurant-form">
-
+    <section class="contact-hero">
+    <div class="contact-form-wrapper restaurant-form">
     <div class="contact-form-header">
       <h1>Restaurant Reservation</h1>
       <span class="form-subline">Handled by Concierge Team</span>
@@ -206,56 +155,15 @@ document.addEventListener("DOMContentLoaded", () => {
 </a>
 
 <!-- FOOTER -->
-<footer class="luxury-footer">
-  <div class="footer-inner">
-    <!-- Logo -->
-    <div class="footer-logo">
-      <img src="assets/logo.png" alt="Concierge Service Türkiye">
-    </div>
-
-    <!-- VIP ve Private Access aynı satırda -->
-    <div class="footer-tagline">
-      VIP Istanbul Concierge Services
-    </div>
-    <div class="footer-private">
-      Private Access to Our World
-    </div>
-  </div>
-
-  <!-- ALTIN ÇİZGİ -->
-  <div class="footer-divider"></div>
-
-  <!-- FOOTER BOTTOM -->
-  <div class="footer-bottom">
-    <div class="footer-bottom-left">
-      © 2025 Concierge Service Türkiye
-      <span class="divider">•</span>
-      <a href="#" id="privacyLink">Privacy Policy</a>
-      <span class="divider">•</span>
-      <a href="#" id="termsLink">Terms & Conditions</a>
-    </div>
-
-    <div class="footer-bottom-trust">
-      Trusted Concierge Service — Your personal information is securely protected.
-    </div>
-
-    <div class="footer-bottom-right">
-      <a href="https://www.instagram.com/conciergeserviceturkiye/" target="_blank"><img src="assets/instagram.png"></a>
-      <a href="https://www.youtube.com/" target="_blank"><img src="assets/youtube.png"></a>
-      <a href="https://x.com/ConSerTurkiye" target="_blank"><img src="assets/x.png"></a>
-      <a href="https://www.facebook.com/profile.php?id=61585196308964" target="_blank"><img src="assets/facebook.png"></a>
-    </div>
-  </div>
-</footer>
-
+    <div id="footerInclude"></div>
 <!-- PRIVACY MODAL -->
-<div class="modal" id="privacyModal">
-  <div class="modal-content">
+    <div class="modal" id="privacyModal">
+    <div class="modal-content">
     <span class="close-modal">&times;</span>
     <h2>Privacy Policy</h2>
     <p>Concierge Service Türkiye respects your privacy and protects your personal data.</p>
-  </div>
-</div>
+    </div>
+    </div>
 
 <!-- TERMS MODAL -->
 <div class="modal" id="termsModal">
@@ -271,8 +179,11 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="js/common.js"></script>
 <script src="js/restaurants.js" defer></script>
+<script>function includeHTML(id, url) {fetch(url).then(resp => resp.text()).then(data => document.getElementById(id).innerHTML = data);}
+    includeHTML('navbarInclude', 'navbar.html');includeHTML('footerInclude', 'footer.html');
 
 </body>
 </html>
+
 
 
