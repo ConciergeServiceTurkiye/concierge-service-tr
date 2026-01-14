@@ -103,3 +103,68 @@
   background: var(--gold);
   color: #000;
 }
+/* THEME COLORS */
+.tour-card[data-theme="gold"] {
+  border-color: rgba(212,175,55,.6);
+  box-shadow: 0 0 30px rgba(212,175,55,.15);
+}
+
+.tour-card[data-theme="emerald"] {
+  border-color: rgba(0,180,140,.5);
+  box-shadow: 0 0 30px rgba(0,180,140,.15);
+}
+
+.tour-card[data-theme="blue"] {
+  border-color: rgba(70,130,180,.5);
+  box-shadow: 0 0 30px rgba(70,130,180,.15);
+}
+
+.tour-card[data-theme="wine"] {
+  border-color: rgba(140,40,60,.5);
+  box-shadow: 0 0 30px rgba(140,40,60,.15);
+}
+.tour-card[data-theme="copper"] {
+  border-color: rgba(184,115,51,.6);
+  box-shadow: 0 0 30px rgba(184,115,51,.18);
+}
+
+.tour-card[data-theme="purple"] {
+  border-color: rgba(120,80,180,.55);
+  box-shadow: 0 0 30px rgba(120,80,180,.18);
+}
+
+.tour-card[data-theme="blackgold"] {
+  border-color: rgba(212,175,55,.8);
+  background: linear-gradient(160deg, #050505, #0c0c0c);
+  box-shadow: 0 0 40px rgba(212,175,55,.35);
+}
+
+/*BAŞLIKLAR CANLI*/
+.tour-title {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: all .35s ease;
+}
+
+/* underline animation */
+.tour-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width .35s ease;
+}
+
+.tour-title:hover {
+  letter-spacing: 1px;
+  transform: translateY(-2px);
+}
+
+.tour-title:hover::after {
+  width: 100%;
+}
+
