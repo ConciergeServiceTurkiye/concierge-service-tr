@@ -10,20 +10,31 @@
 <link rel="stylesheet" href="css/contact.css">
 </head>
 <body>
+
 <!-- NAVBAR -->
 <nav class="navbar">
   <div class="nav-container">
-    <a href="index.html" class="logo"> <img src="assets/logo.png" alt="Concierge Service Türkiye"></a>
-    <div class="hamburger" id="hamburger"> <span></span><span></span><span></span> </div>
+    <a href="index.html" class="logo">
+      <img src="assets/logo.png" alt="Concierge Service Türkiye">
+    </a>
+
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+
     <ul class="nav-menu" id="navMenu">
       <li><a href="#why-us">Why Us</a></li>
-      <li class="dropdown"> <a href="#services">Services ▾</a>
-    <ul class="dropdown-menu">
+
+      <li class="dropdown">
+        <a href="#services">Services ▾</a>
+        <ul class="dropdown-menu">
           <li><a href="#">✈ Airport Transfer</a></li>
           <li><a href="#">🕌 City Tours</a></li>
           <li><a href="restaurants.html">🍽 Restaurant Reservations</a></li>
           <li><a href="#">⭐ VIP Assistance</a></li>
-          <li><a href="#">🎉 Event Organization</a></li> </ul> </li>
+          <li><a href="#">🎉 Event Organization</a></li>
+        </ul>
+      </li>
 
       <li class="dropdown">
         <a href="#">Experiences ▾</a>
@@ -31,7 +42,9 @@
           <li><a href="#">🛥 Yacht & Bosphorus</a></li>
           <li><a href="#">🍷 Private Dining</a></li>
           <li><a href="#">🛍 Luxury Shopping</a></li>
-          <li><a href="#">🎟 Exclusive Events</a></li> </ul> </li>
+          <li><a href="#">🎟 Exclusive Events</a></li>
+        </ul>
+      </li>
 
       <li class="dropdown">
         <a href="#">Destinations ▾</a>
@@ -39,68 +52,140 @@
           <li><a href="#">Istanbul</a></li>
           <li><a href="#">Bodrum</a></li>
           <li><a href="#">Cappadocia</a></li>
-          <li><a href="#">Antalya</a></li> </ul> </li>
-      
-      <li> <a href="contact.html" class="cta">Request Concierge</a> </li> </ul> </div> </nav>
+          <li><a href="#">Antalya</a></li>
+        </ul>
+      </li>
 
+      <li>
+        <a href="contact.html" class="cta">Request Concierge</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- CONTACT / RESTAURANT FORM -->
 <section class="contact-hero">
-  <div class="contact-form-wrapper">
-    <div class="contact-form-header"> <h1>Restaurant Reservation</h1> <span class="form-subline">Handled by Concierge Team</span></div>
+  <div class="contact-form-wrapper restaurant-form">
+
+    <div class="contact-form-header">
+      <h1>Restaurant Reservation</h1>
+      <span class="form-subline">Handled by Concierge Team</span>
+    </div>
 
     <div id="formInlineAlert"></div>
-    <form id="reservationForm" class="restaurant-form" novalidate>
-<!-- RESTAURANT (URL’den geliyor) -->
+
+    <form id="reservationForm" novalidate>
+
+      <!-- RESTAURANT (URL’den geliyor) -->
       <input type="hidden" name="restaurant" value="">
 
-      <div class="form-group"><label>Full Name</label> <input type="text" id="name" name="name" placeholder="Your full name" required></div>
-      <div class="form-group"><label>Email</label><input type="email" id="email" name="email" placeholder="Your email address" required></div>
-      <div class="form-group"><label>Phone / WhatsApp</label><input type="tel" id="phone" name="phone" placeholder="Phone" required></div>
-      <div class="form-group"><label>Date</label><input type="text" id="date" name="date" placeholder="Select date" required></div>
-      <div class="form-group"><label>Time</label><div class="custom-select" id="timeSelect"><div class="select-trigger" tabindex="0">Select time</div>
-        <ul class="select-options"></ul></div><input type="hidden" id="time" name="time"></div>
-      <div class="form-group"><label>Guests</label><div class="custom-select" id="guestsSelect"><div class="select-trigger" tabindex="0">Select guests</div>
-        <ul class="select-options"><li>1</li> <li>2</li> <li>3</li> <li>4</li> <li>5</li> <li>6</li> <li>7+</li></ul></div><input type="hidden" id="guests" name="guests"></div>
-<!-- CHILDREN -->
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="email" name="email" placeholder="Your email address" required>
+      </div>
+
+      <div class="form-group">
+        <label>Phone / WhatsApp</label>
+        <input type="tel" id="phone" name="phone" placeholder="Phone" required>
+      </div>
+
+      <div class="form-group">
+        <label>Date</label>
+        <input type="text" id="date" name="date" placeholder="Select date" required>
+      </div>
+
+      <div class="form-group">
+        <label>Time</label>
+        <div class="custom-select" id="timeSelect">
+          <div class="select-trigger" tabindex="0">Select time</div>
+          <ul class="select-options"></ul>
+        </div>
+        <input type="hidden" id="time" name="time">
+      </div>
+
+      <div class="form-group">
+        <label>Guests</label>
+        <div class="custom-select" id="guestsSelect">
+          <div class="select-trigger" tabindex="0">Select guests</div>
+          <ul class="select-options">
+            <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7+</li>
+          </ul>
+        </div>
+        <input type="hidden" id="guests" name="guests">
+      </div>
+
+      <!-- CHILDREN -->
       <div class="form-group children-form-group">
-           <div class="children-row">
-           <label class="child-checkbox"> <input type="checkbox" id="childrenToggle">Children</label>
-           <!-- AGES (SAME ROW – RIGHT SIDE) -->
-                 <div id="childrenAges" class="children-ages">
-                     <div class="age-item"><label><input type="checkbox" class="age-toggle" data-target="age03">Age 0–3</label>
-                                                  <input type="text" id="age03" name="age_0_3" class="child-input" placeholder="No." maxlength="4"></div>
-                     <div class="age-item"><label><input type="checkbox" class="age-toggle" data-target="age413">Age 4–13</label>
-                                                  <input type="text" id="age413" name="age_4_13" class="child-input" placeholder="No." maxlength="4"> </div>
-                     <div class="age-item"><label><input type="checkbox" class="age-toggle" data-target="age1417">Age 14–17</label>
-                                                  <input type="text" id="age1417" name="age_14_17" class="child-input" placeholder="No." maxlength="4"> </div>
-                </div>
+        <div class="children-row">
+          <label class="child-checkbox">
+            <input type="checkbox" id="childrenToggle"> Children
+          </label>
+
+          <div id="childrenAges" class="children-ages">
+            <div class="age-item">
+              <label><input type="checkbox" class="age-toggle" data-target="age03"> Age 0–3</label>
+              <input type="text" id="age03" name="age_0_3" class="child-input" placeholder="No." maxlength="4">
+            </div>
+
+            <div class="age-item">
+              <label><input type="checkbox" class="age-toggle" data-target="age413"> Age 4–13</label>
+              <input type="text" id="age413" name="age_4_13" class="child-input" placeholder="No." maxlength="4">
+            </div>
+
+            <div class="age-item">
+              <label><input type="checkbox" class="age-toggle" data-target="age1417"> Age 14–17</label>
+              <input type="text" id="age1417" name="age_14_17" class="child-input" placeholder="No." maxlength="4">
+            </div>
           </div>
+        </div>
       </div>
-          <!-- PETS -->
+
+      <!-- PETS -->
       <div class="form-group">
-           <label class="child-checkbox"><input type="checkbox" id="petsToggle">Pets</label>
-           <div class="textarea-group" id="petsGroup">
-           <div class="char-count" data-for="petsField" data-max="500">0 / 500</div>
-           <textarea id="petsField" name="pets" maxlength="500"></textarea></div>
-           <div class="field-error" id="petsError" style="display:none;">Please fill in pet details.</div>
+        <label class="child-checkbox">
+          <input type="checkbox" id="petsToggle"> Pets
+        </label>
+
+        <div class="textarea-group" id="petsGroup">
+          <div class="char-count" data-for="petsField" data-max="500">0 / 500</div>
+          <textarea id="petsField" name="pets" maxlength="500"></textarea>
+        </div>
+
+        <div class="field-error" id="petsError" style="display:none;">
+          Please fill in pet details.
+        </div>
       </div>
-           <!-- ALLERGY -->
+
+      <!-- ALLERGY -->
       <div class="form-group">
-           <label><input type="checkbox" id="allergyToggle"> Allergy</label>
-           <div class="textarea-group" id="allergyGroup">
-           <div class="char-count" data-for="allergyField" data-max="1000">0 / 1000</div>
-           <textarea id="allergyField" name="allergy" placeholder="Gluten, nuts, lactose..." maxlength="1000"></textarea></div>
+        <label>
+          <input type="checkbox" id="allergyToggle"> Allergy
+        </label>
+
+        <div class="textarea-group" id="allergyGroup">
+          <div class="char-count" data-for="allergyField" data-max="1000">0 / 1000</div>
+          <textarea id="allergyField" name="allergy" placeholder="Gluten, nuts, lactose..." maxlength="1000"></textarea>
+        </div>
       </div>
-           <!-- NOTES -->
+
+      <!-- NOTES -->
       <div class="form-group">
-           <label for="notesField">Notes</label>
-           <div class="textarea-group active">
-           <div class="char-count" data-for="notesField" data-max="2000">0 / 2000</div>
-           <textarea id="notesField" name="notes" placeholder="If you are 7+ guests or have any special requests, please write here." maxlength="2000" ></textarea></div>
+        <label for="notesField">Notes</label>
+
+        <div class="textarea-group active">
+          <div class="char-count" data-for="notesField" data-max="2000">0 / 2000</div>
+          <textarea id="notesField" name="notes" placeholder="If you are 7+ guests or have any special requests, please write here." maxlength="2000"></textarea>
+        </div>
       </div>
 
       <button type="submit" class="submit-btn">Submit Reservation</button>
-    </form>
 
+    </form>
   </div>
 </section>
 
@@ -115,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
-<!-- WHATSAPP -->
+  <!-- WHATSAPP -->
 <a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank">
   <img src="assets/whatsapp.png" alt="WhatsApp">
 </a>
@@ -180,53 +265,12 @@ document.addEventListener("DOMContentLoaded", () => {
     <p>All services are provided on a best-effort basis and subject to availability.</p>
   </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/intlTelInput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="js/common.js"></script>
 <script src="js/restaurants.js" defer></script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
