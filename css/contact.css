@@ -167,15 +167,12 @@
       .child-input::placeholder {color: rgba(255, 255, 255, 0.65); font-size: 12px; white-space: nowrap;} /* Input placeholder stili */
       .children-form-group {align-items: flex-start !important;} /* Children satırındaki öğeleri sola hizalar */
       .children-row > label {flex-shrink: 0;} /* Checkbox etiketinin küçülmesini engeller, solda sabit kalır */
-/* <- RESPONSIVE – FORM WRAPPER DESKTOP & MOBILE -> */
-     
-/* ===== FORCE FORM WIDTH (OVERRIDE ALL) ===== */
-      section.contact-hero > .contact-form-wrapper {max-width: 760px !important; width: 100% !important; margin-left: auto !important; margin-right: auto !important;}
 /*<- CHECKBOX FOCUS VE GÖRÜNÜRLÜK ->*/
       input[type="checkbox"]:focus-visible + span,
       input[type="checkbox"]:focus-visible {outline: 2px solid #d4af37; /* altın odak çizgisi */box-shadow: 0 0 8px rgba(212,175,55,0.45);} /* hafif parlak efekt */
 /*<- LABEL VE İÇERİK TIKLANABİLİRLİĞİ ->*/
       label,
       label * {pointer-events: auto !important; /* label içi tıklanabilir */}
+
 
 
