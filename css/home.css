@@ -106,9 +106,12 @@
 ================================================== */
 
 .seo-h1 {
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
+  position: static;
+  left: auto;
+  top: auto;
+  font-size: 32px;
+  color: #000;
+  margin: 20px 0;
 }
 
 /* ==================================================
@@ -131,6 +134,7 @@
 
 
 }
+
 
 
 
