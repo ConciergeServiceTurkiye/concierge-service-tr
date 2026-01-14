@@ -24,7 +24,7 @@
       .textarea-group {display: none; flex-direction: column; width: 100%; gap: 12px; position: relative; margin-bottom: 20px; 
                        opacity: 1; pointer-events: auto;} /* textarea grubu varsayılan kapalı, active olunca açık */
       .textarea-group.active {display: flex;} /* textarea grubu aktif olduğunda gösterir */
-      .textarea-group textarea {width: 100%;min-height: 80px;max-height: 240px;padding: 8px 0 38px 0;resize: none;flex: 1;box-sizing: border-box;font-size: 14px;}
+      .textarea-group textarea {width: 100%;min-height: 80px;max-height: 240px;padding: 8px 14px 38px 14px;resize: none;flex: 1;box-sizing: border-box;font-size: 14px;}
 /* Karakter sayacı */
       .char-count {position: absolute; top: -20px; right: 0; font-size: 0.8rem; color: rgba(255,255,255,0.65);} /* hafif beyaz */
 /* Scrollbar (Webkit) */
@@ -183,6 +183,7 @@
       label * {pointer-events: auto !important; /* label içi tıklanabilir */}
 /*<- HATA MESAJI ->*/
       .field-error {color: #d9534f; font-size: 13px; margin-top: 6px;} /* Hata mesajları */
+
 
 
 
