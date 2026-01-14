@@ -13,50 +13,14 @@
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="logo">
-      <img src="assets/logo.png" alt="Concierge Service Türkiye">
-    </a>
-    <div class="hamburger" id="hamburger">
-      <span></span><span></span><span></span>
-    </div>
-    <ul class="nav-menu" id="navMenu">
-      <li><a href="index.html#why-us">Why Us</a></li>
-
-      <li class="dropdown">
-        <a href="#">Services ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="#">✈ Airport Transfer</a></li>
-          <li><a href="guidetours.html">🕌 City Tours</a></li>
-          <li><a href="restaurants.html">🍽 Restaurant Reservations</a></li>
-          <li><a href="#">⭐ VIP Assistance</a></li>
-          <li><a href="#">🎉 Event Organization</a></li>
-        </ul>
-      </li>
-
-      <li class="dropdown">
-        <a href="#">Experiences ▾</a>
-        <ul class="dropdown-menu">
-          <li><a href="#">🛥 Yacht & Bosphorus</a></li>
-          <li><a href="#">🍷 Private Dining</a></li>
-          <li><a href="#">🛍 Luxury Shopping</a></li>
-          <li><a href="#">🎟 Exclusive Events</a></li>
-        </ul>
-      </li>
-
-      <li><a href="contact.html" class="cta">Request Concierge</a></li>
-    </ul>
-  </div>
-</nav>
-
+    <div id="navbarInclude"></div>
 <!-- HERO -->
-<section class="guidetours-hero">
-  <div class="hero-inner">
+    <section class="guidetours-hero">
+    <div class="hero-inner">
     <h1>Private City Tours</h1>
     <p>Chauffeured • Walking • Culinary • Tailor-Made Experiences</p>
-  </div>
-</section>
+    </div>
+    </section>
 
 <!-- FILTERS -->
 <section class="tour-filters">
@@ -128,27 +92,10 @@
 </a>
 
 <!-- FOOTER (AYNI) -->
-<footer class="luxury-footer">
-  <div class="footer-inner">
-    <div class="footer-logo">
-      <img src="assets/logo.png" alt="Concierge Service Türkiye">
-    </div>
-    <div class="footer-tagline">VIP Istanbul Concierge Services</div>
-    <div class="footer-private">Private Access to Our World</div>
-  </div>
-  <div class="footer-divider"></div>
-  <div class="footer-bottom">
-    <div class="footer-bottom-left">
-      © 2025 Concierge Service Türkiye •
-      <a href="#" id="privacyLink">Privacy Policy</a> •
-      <a href="#" id="termsLink">Terms & Conditions</a>
-    </div>
-  </div>
-</footer>
-
+    <div id="footerInclude"></div>
 <!-- MODALS -->
-<div class="modal" id="privacyModal">
-  <div class="modal-content">
+    <div class="modal" id="privacyModal">
+    <div class="modal-content">
     <span class="close-modal">&times;</span>
     <h2>Privacy Policy</h2>
     <p>Your information is handled with full confidentiality.</p>
@@ -166,6 +113,8 @@
 <!-- JS -->
 <script src="js/common.js"></script>
 <script src="js/guidetours.js"></script>
+<script>function includeHTML(id, url) {fetch(url).then(resp => resp.text()).then(data => document.getElementById(id).innerHTML = data);}
+    includeHTML('navbarInclude', 'navbar.html');includeHTML('footerInclude', 'footer.html');
 
 </body>
   <div class="tour-modal" id="tourModal">
@@ -177,5 +126,6 @@
 </div>
 
 </html>
+
 
 
