@@ -17,7 +17,7 @@
       .form-group input {height: var(--form-h);padding: 0 14px;font-size: 13.5px;}
       .form-group textarea {min-height: 120px;padding: 12px 16px;resize: vertical;}
       ::placeholder {color: #aaa;}
-      .form-group input:focus, .form-group textarea:focus {outline: none;border-color: rgba(255,255,255,0.9);box-shadow: 0 0 0 1px rgba(212,175,55,0.25);background: #111;}
+      .form-group input:focus, .form-group textarea:focus {outline: none;border-color: #d4af37;box-shadow: 0 0 0 1px rgba(212,175,55,0.25);background: #111;}
 /* INTL TEL INPUT – CONTACT FORM */
 /* Ana container */
       .contact-form-wrapper .iti {width: 100%;position: relative;z-index: 1;}
@@ -98,6 +98,7 @@
       .iti__country-list {background: #0b0b0b;border: 1px solid #d4af37;z-index: 50;}
 /* RESPONSIVE */
       @media (max-width: 768px) {.contact-form-wrapper {max-width: 94%;padding: 35px 25px;}}
+
 
 
 
