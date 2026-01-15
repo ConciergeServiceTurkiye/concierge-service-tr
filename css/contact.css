@@ -89,7 +89,7 @@
       .iti__country[aria-selected="true"],
       .iti__country.active {background: rgba(212,175,55,0.18) !important;}
       .iti, .iti * {pointer-events: auto !important;} /* Tüm alanlarda tıklanabilir */
-      .iti {width: 100%;}
+      .iti {width: 100%;position: absolute !important;z-index: 9999 !important;}
       .iti__country:hover .iti__country-name,
       .iti__country.iti__highlight .iti__country-name,
       .iti__country[aria-selected="true"] .iti__country-name,
@@ -185,6 +185,8 @@
       label * {pointer-events: auto !important; /* label içi tıklanabilir */}
 /*<- HATA MESAJI ->*/
       .field-error {color: #d9534f; font-size: 13px; margin-top: 6px;} /* Hata mesajları */
+      body{overflow-x: hidden;}
+
 
 
 
