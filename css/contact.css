@@ -12,7 +12,7 @@
 /* <- FORM ELEMENTS -> */
       :root {--form-h: 52px;}
       form {display: flex;flex-direction: column;gap: 22px;}  /* Form içindeki alanları dikey sırala ve aralarına boşluk bırak */
-      .form-group {display: flex;flex-direction: column;} /* Her form grubu dikey hizalanır */
+      .form-group {display: flex;flex-direction: column;position: relative;overflow: visible;} /* Her form grubu dikey hizalanır */
       .form-group label {color: #d4af37;font-size: 13px;margin-bottom: 6px;letter-spacing: 0.5px;} /* Label stilini belirler */
       .form-group input,
       .form-group select{height: var(--form-h);line-height: normal;width: 100%;padding: 0 16px;font-size: 14px;background: #111;border: 1px solid #d4af37;color: #d4af37;
@@ -55,8 +55,8 @@
                        height: var(--form-h);padding: 0 16px;box-sizing: border-box;transition: border 0.3s, box-shadow 0.3s, color 0.3s;}
       .select-trigger:hover,
       .select-trigger:focus {border-color: #d4af37;box-shadow: 0 0 10px rgba(212,175,55,0.25);outline: none;color: #f1d97a; /* hover rengi altın */}
-      .select-options {display: none;position: absolute;top: calc(100% + 6px);left: 0;width: 100%;background: rgba(0,0,0,0.95);border: 1px solid #d4af37;z-index: 100 !important;
-                       list-style: none;padding: 6px 0;margin: 0;z-index: 50;max-height: 200px;overflow-y: auto;scrollbar-width: thin;scrollbar-color: #d4af37 #111;}
+      .select-options {display: none;position: absolute;top: calc(100% + 6px);left: 0;width: 100%;background: rgba(0,0,0,0.95);border: 1px solid #d4af37;z-index: 6;
+                       list-style: none;padding: 6px 0;margin: 0;max-height: 200px;overflow-y: auto;scrollbar-width: thin;scrollbar-color: #d4af37 #111;}
       .select-options::-webkit-scrollbar {width: 8px;}
       .select-options::-webkit-scrollbar-track {background: #111;}
       .select-options::-webkit-scrollbar-thumb {background-color: #d4af37;border-radius: 6px;border: 2px solid #111;}
@@ -77,7 +77,7 @@
       .iti__country-list::-webkit-scrollbar-thumb {background: #d4af37; border-radius: 8px; border: 2px solid rgba(0,0,0,0.1);} /* Scrollbar sürükleme alanı */
       .iti__country-list::-webkit-scrollbar-thumb:hover {background: #f1d97a;} /* Hover efekti */
       .iti__country-list {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);} /* Firefox scrollbar */
-      .iti {width: 100% !important; z-index: 9999 !important; display: block !important; position: relative !important;} /* Telefon input container */
+      .iti {width: 100%; z-index: 6; display: block !important; position: relative;} /* Telefon input container */
       .iti input {width: 100% !important;box-sizing: border-box;padding-left: 52px !important;} /* Telefon input alanı */
       .iti__flag-container {height: 100% !important;} /* Bayrak alanı yüksekliği */
       .iti__selected-flag {height: 100% !important; display: flex !important; align-items: center !important;} /* Seçili bayrak hizalama */
@@ -190,6 +190,7 @@
 /*<- HATA MESAJI ->*/
       .field-error {color: #d9534f; font-size: 13px; margin-top: 6px;} /* Hata mesajları */
       body{overflow-x: hidden;}
+
 
 
 
