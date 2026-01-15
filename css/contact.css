@@ -36,11 +36,21 @@
       .contact-form-wrapper .iti__country-list::-webkit-scrollbar-thumb:hover {background: #f1d97a;}
 /* Scrollbar – Firefox */
       .contact-form-wrapper .iti__country-list {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
-/* SEARCH INPUT */
-      .contact-form-wrapper .iti__search {background: #111;border-bottom: 1px solid rgba(212,175,55,0.6);}
-      .contact-form-wrapper .iti__search-input {width: 100%;box-sizing: border-box;background: #111;color: #d4af37;font-size: 14px;caret-color: #d4af37;}
-      .contact-form-wrapper .iti__search-input::placeholder {color: rgba(212,175,55,0.65);}
+/* INTL TEL INPUT – SEARCH BOX FIX */
+/* Search container */
+      .contact-form-wrapper .iti__search {width: 100%;min-width: 260px;background: #111;border-bottom: 1px solid rgba(212,175,55,0.6);}
+/* Search input – temel */
+      .contact-form-wrapper .iti__search-input {position: sticky;top: 0;z-index: 10;width: 100%;min-width: 260px;
+                                                box-sizing: border-box;background: #111 !important;border: 0 !important;font-size: 14px;
+                                                line-height: 1.4;color: #d4af37 !important;-webkit-text-fill-color: #d4af37 !important;
+                                                caret-color: #d4af37 !important;opacity: 1 !important;}
+/* Placeholder – "Search" yazısı */
+      .contact-form-wrapper .iti__search-input::placeholder {color: rgba(255,255,255,0.65) !important;}
+/* Selection (mouse drag / shift + ok) */
       .contact-form-wrapper .iti__search-input::selection {background: rgba(212,175,55,0.35);color: #000;}
+      .contact-form-wrapper .iti__search-input::-moz-selection {background: rgba(212,175,55,0.35);color: #000;}
+/* Focus state – ekstra güvenlik */
+      .contact-form-wrapper .iti__search-input:focus {outline: none;background: #111;color: #d4af37;}
 /* COUNTRY ROWS */
       .contact-form-wrapper .iti__country {display: flex;align-items: center;gap: 10px;padding: 10px 14px;cursor: pointer;}
       .contact-form-wrapper .iti__country-name {color: #d4af37;flex: 1;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
@@ -83,6 +93,7 @@
       .iti__country-list {background: #0b0b0b;border: 1px solid #d4af37;z-index: 50;}
 /* RESPONSIVE */
       @media (max-width: 768px) {.contact-form-wrapper {max-width: 94%;padding: 35px 25px;}}
+
 
 
 
