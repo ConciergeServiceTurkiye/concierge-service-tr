@@ -23,6 +23,10 @@
       .form-group textarea::placeholder {color: #aaa;}  /* Placeholder hafif gri */
       .form-group input:focus,
       .form-group textarea:focus {border-color: #d4af37;}  /* Focus olduğunda kenarlık altın */
+      .form-group input,
+      .form-group select,
+      .select-trigger,
+      .iti input {height: var(--form-h);line-height: var(--form-h);}
 /* <- TEXTAREA + KARAKTER SAYACI + SCROLLBAR ->*/
       .textarea-group {display: none; flex-direction: column; width: 100%; gap: 12px; position: relative;
                        opacity: 1; pointer-events: auto;} /* textarea grubu varsayılan kapalı, active olunca açık */
@@ -188,6 +192,7 @@
 /*<- HATA MESAJI ->*/
       .field-error {color: #d9534f; font-size: 13px; margin-top: 6px;} /* Hata mesajları */
       body{overflow-x: hidden;}
+
 
 
 
