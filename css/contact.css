@@ -4,7 +4,7 @@
 /* <- CONTACT FORM WRAPPER -> */
       .contact-form-wrapper {position: relative;z-index: 3;max-width: 760px;width: 100%;margin: 0 auto;padding: 45px 40px 40px;background: rgba(10,10,10,0.88);
                              border: 1.5px solid #d4af37;border-radius: 14px;overflow: visible !important;
-                             box-shadow: 0 0 0 1px rgba(212,175,55,0.25), 0 0 35px rgba(212,175,55,0.15);z-index: 10;}
+                             box-shadow: 0 0 0 1px rgba(212,175,55,0.25), 0 0 35px rgba(212,175,55,0.15);z-index: 5;}
 /* <- FORM HEADER -> */
       .contact-form-header {text-align: center;margin-bottom: 30px;}
       .contact-form-header h1 {font-size: 28px;color: #d4af37;letter-spacing: 1px;margin-bottom: 6px;font-weight: 600;}
@@ -78,7 +78,7 @@
       .iti__selected-flag {height: 100% !important; display: flex !important; align-items: center !important;} /* Seçili bayrak hizalama */
       .iti__country-list {width: 100% !important; min-width: 320px !important; max-width: 420px !important; max-height: 440px !important; 
                           background: rgba(10,10,10,0.97) !important; border: 1px solid #d4af37 !important; border-radius: 12px;
-                          box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important; overflow-x: hidden !important; z-index: 9999 !important;} /* Ülke listesi kutusu */
+                          box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important; overflow-x: hidden !important; z-index: 9999 !important;position: absolute !important;} /* Ülke listesi kutusu */
       .iti__search {color: #d4af37 !important;  background: #111 !important; border: 1px solid rgba(212,175,55,0.6) !important;} /* Arama input container */
       .iti__search::placeholder{color: rgba(255,255,255,0.65) !important;} /* Arama placeholder rengi */
       .iti__country {display: flex !important; align-items: center !important; gap: 10px !important; padding: 10px 14px; white-space: nowrap !important;} /* Ülke satırı */
@@ -89,6 +89,7 @@
       .iti__country[aria-selected="true"],
       .iti__country.active {background: rgba(212,175,55,0.18) !important;}
       .iti, .iti * {pointer-events: auto !important;} /* Tüm alanlarda tıklanabilir */
+      .iti {width: 100%;}
       .iti__country:hover .iti__country-name,
       .iti__country.iti__highlight .iti__country-name,
       .iti__country[aria-selected="true"] .iti__country-name,
@@ -110,7 +111,7 @@
       .iti__country.active .iti__country-name {color: #d4af37 !important;} /* Klavyeyle seçili ülke adı */
       .iti__country.active .iti__dial-code {color: #d4af37 !important;}
 /* <- RESTAURANT FORM – GÖRÜNÜM VE DAVRANIŞ -> */
-      .restaurant-form {z-index: 10;}
+      .restaurant-form {z-index: 5;}
       .restaurant-form .form-group input,
       .restaurant-form .form-group textarea,
       .restaurant-form .form-group select {background: #111 !important; color: #d4af37; border: 1px solid #d4af37;} /* Form elemanları arka plan ve renk */
@@ -184,6 +185,7 @@
       label * {pointer-events: auto !important; /* label içi tıklanabilir */}
 /*<- HATA MESAJI ->*/
       .field-error {color: #d9534f; font-size: 13px; margin-top: 6px;} /* Hata mesajları */
+
 
 
 
