@@ -1,26 +1,37 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =========================
+   HTML INCLUDE (NAVBAR & FOOTER)
+========================= */
+function includeHTML(targetId, file, callback) {
+  fetch(file)
+    .then(res => res.text())
+    .then(html => {
+      const el = document.getElementById(targetId);
+      if (!el) return;
+      el.innerHTML = html;
+      if (typeof callback === "function") callback();
+    });
+}
 
-  /* ======================
-     MOBILE NAV
-  ====================== */
+/* =========================
+   NAVBAR INIT (HAMBURGER + DROPDOWNS)
+========================= */
+function initNavbar() {
   const hamburger = document.getElementById("hamburger");
   const navMenu = document.getElementById("navMenu");
 
-  if (hamburger && navMenu) {
-    hamburger.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
-    });
-  }
+  if (!hamburger || !navMenu) return;
 
-  /* ======================
-     MOBILE DROPDOWN (ONLY TOGGLE)
-  ====================== */
+  // Hamburger
+  hamburger.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+  });
+
+  // Dropdowns (mobile)
   document.querySelectorAll(".dropdown > a").forEach(link => {
     link.addEventListener("click", e => {
       if (window.innerWidth <= 992) {
         e.preventDefault();
         const parent = link.parentElement;
-
         parent.classList.toggle("open");
 
         document.querySelectorAll(".dropdown").forEach(d => {
@@ -30,58 +41,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ======================
-     CLOSE MENU ON REAL LINKS
-  ====================== */
-  document.querySelectorAll(".dropdown-menu a, .nav-menu > li > a:not(.dropdown > a)").forEach(link => {
-    link.addEventListener("click", () => {
+  // Link tıklanınca menüyü kapat
+  document.querySelectorAll(".nav-menu a").forEach(a => {
+    a.addEventListener("click", () => {
       if (window.innerWidth <= 992) {
         navMenu.classList.remove("active");
-        document.querySelectorAll(".dropdown").forEach(d => d.classList.remove("open"));
+        document
+          .querySelectorAll(".dropdown")
+          .forEach(d => d.classList.remove("open"));
       }
     });
   });
+}
 
-  /* ======================
-     PRIVACY & TERMS MODALS
-  ====================== */
+/* =========================
+   MODALS (PRIVACY / TERMS)
+========================= */
+function initModals() {
   const privacyLink = document.getElementById("privacyLink");
   const termsLink = document.getElementById("termsLink");
   const privacyModal = document.getElementById("privacyModal");
   const termsModal = document.getElementById("termsModal");
-  const closeButtons = document.querySelectorAll(".close-modal");
+
+  document.querySelectorAll(".close-modal").forEach(btn => {
+    btn.addEventListener("click", () => {
+      btn.closest(".modal").style.display = "none";
+    });
+  });
 
   if (privacyLink && privacyModal) {
     privacyLink.addEventListener("click", e => {
       e.preventDefault();
-      privacyModal.classList.add("active");
+      privacyModal.style.display = "flex";
     });
   }
 
   if (termsLink && termsModal) {
     termsLink.addEventListener("click", e => {
       e.preventDefault();
-      termsModal.classList.add("active");
+      termsModal.style.display = "flex";
     });
   }
 
-  closeButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      privacyModal?.classList.remove("active");
-      termsModal?.classList.remove("active");
-    });
-  });
-
   window.addEventListener("click", e => {
-    if (e.target === privacyModal) privacyModal.classList.remove("active");
-    if (e.target === termsModal) termsModal.classList.remove("active");
-  });
-
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") {
-      privacyModal?.classList.remove("active");
-      termsModal?.classList.remove("active");
+    if (e.target.classList.contains("modal")) {
+      e.target.style.display = "none";
     }
   });
+}
 
+/* =========================
+   PAGE LOAD
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+  includeHTML("navbarInclude", "navbar.html", initNavbar);
+  includeHTML("footerInclude", "footer.html", initModals);
 });
