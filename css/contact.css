@@ -10,7 +10,7 @@
       .form-subline {font-size: 12px;letter-spacing: 2px;color: rgba(212,175,55,.75);text-transform: uppercase;}
 /* FORM BASE */ 
       :root { --form-h: 46px; }form {display: flex;flex-direction: column;gap: 22px;}
-      .form-group {display: flex;flex-direction: column;}
+      .form-group {display: flex;flex-direction: column;position: relative;z-index: 2;}
       .form-group label {color: #d4af37;font-size: 13px;margin-bottom: 6px;}
       .form-group input,
       .form-group textarea {width: 100%;box-sizing: border-box;background: #111;border: 1px solid #d4af37;color: #d4af37;font-size: 14px;}
@@ -20,7 +20,7 @@
       .form-group textarea:focus {outline: none;border-color: #d4af37;box-shadow: 0 0 0 1px rgba(212,175,55,0.25);background: #111;}
 /* INTL TEL INPUT – CONTACT FORM */
 /* Ana container */
-      .contact-form-wrapper .iti {width: 100%;position: relative;z-index: 6;}
+      .contact-form-wrapper .iti {width: 100%;position: relative;z-index: 1;}
 /* Telefon inputu */
       .contact-form-wrapper .iti input {width: 100% !important;box-sizing: border-box;padding-left: 56px !important;background: #111;color: #d4af37;border: 1px solid #d4af37;}
 /* Bayrak alanı */
@@ -70,7 +70,8 @@
 /* MOBILE */
       @media (max-width: 768px) {.contact-form-wrapper .iti__country-list {max-height: 60vh;}}
 /* SUBJECT – CUSTOM SELECT */ 
-      .custom-select {position: relative;}
+      .custom-select {position: relative;z-index:3;}
+      .custom-select.open {z-index: 10;}
       .select-trigger {height: var(--form-h);padding: 0 14px;font-size: 13.5px;display: flex;align-items: center;background: #111;border: 1px solid #d4af37;color: rgba(255,255,255,.65);cursor: pointer;}
       .select-options {display: none;position: absolute;top: calc(100% + 6px);width: 100%;background: #000;border: 1px solid #d4af37;z-index: 10;list-style: none;margin: 0;padding: 0;padding-left: 0;}
       .custom-select.open .select-options {display: block;}
@@ -97,6 +98,7 @@
       .iti__country-list {background: #0b0b0b;border: 1px solid #d4af37;z-index: 50;}
 /* RESPONSIVE */
       @media (max-width: 768px) {.contact-form-wrapper {max-width: 94%;padding: 35px 25px;}}
+
 
 
 
