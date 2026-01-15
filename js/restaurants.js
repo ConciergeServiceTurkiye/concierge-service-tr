@@ -58,7 +58,6 @@ document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
   separateDialCode: true,
   allowDropdown: true,
   autoPlaceholder: "polite",
-  dropdownContainer: document.querySelector(".restaurant-form"), // BURASI EKLENDİ
   utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@18.2.1/build/js/utils.js"
 });
 
@@ -428,6 +427,7 @@ allergyTextarea.value = "";
 });
 });
 });
+
 
 
 
