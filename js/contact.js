@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
  const iti = intlTelInput(phoneField, {
     initialCountry: "us",
     separateDialCode: true,
-    dropdownContainer: document.querySelector(".contact-form-wrapper"), // BURASI EKLENDİ
     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
 });
   phoneField.addEventListener("focus", () => {
@@ -158,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
 
