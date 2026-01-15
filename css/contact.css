@@ -1,191 +1,40 @@
-/* ==============================
-   CONTACT PAGE – HERO
-================================ */
-.contact-hero {
-  min-height: 100vh;
-  padding-top: var(--nav-h);
-  background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.75)),
-              url("../assets/contact-bg.jpg") center / cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: visible;
-}
+/* CONTACT PAGE – HERO */ 
+      .contact-hero {min-height: 100vh;padding-top: var(--nav-h);background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.75)),url("../assets/contact-bg.jpg") center / cover no-repeat;
+                     display: flex;align-items: center;justify-content: center;position: relative;overflow: visible;}
+/* CONTACT FORM WRAPPER */
+      .contact-form-wrapper {position: relative;max-width: 760px;width: 100%;margin: 0 auto;padding: 45px 40px 40px;background: rgba(10,10,10,.88);border: 1.5px solid #d4af37;
+                             border-radius: 14px;z-index: 5;}
+/* HEADER */ 
+      .contact-form-header {text-align: center;margin-bottom: 30px;}
+      .contact-form-header h1 {font-size: 28px;color: #d4af37;margin-bottom: 6px;}
+      .form-subline {font-size: 12px;letter-spacing: 2px;color: rgba(212,175,55,.75);text-transform: uppercase;}
+/* FORM BASE */ 
+      :root { --form-h: 52px; }form {display: flex;flex-direction: column;gap: 22px;}
+      .form-group {display: flex;flex-direction: column;}
+      .form-group label {color: #d4af37;font-size: 13px;margin-bottom: 6px;}
+      .form-group input,
+      .form-group textarea {width: 100%;box-sizing: border-box;background: #111;border: 1px solid #d4af37;color: #d4af37;font-size: 14px;}
+      .form-group input {height: var(--form-h);padding: 0 16px;}
+      .form-group textarea {min-height: 120px;padding: 12px 16px;resize: vertical;}
+      ::placeholder {color: #aaa;}
+/* SUBJECT – CUSTOM SELECT */ 
+      .custom-select {position: relative;}
+      .select-trigger {height: var(--form-h);padding: 0 16px;display: flex;align-items: center;background: #111;border: 1px solid #d4af37;color: rgba(255,255,255,.65);cursor: pointer;}
+      .select-options {display: none;position: absolute;top: calc(100% + 6px);width: 100%;background: #000;border: 1px solid #d4af37;z-index: 10;}
+      .custom-select.open .select-options {display: block;}
+      .select-options li {padding: 12px 16px;cursor: pointer;color: #d4af37;}
+      .select-options li:hover {background: rgba(212,175,55,.2);}
+/* CHAR COUNT */
+      .char-count {text-align: right;font-size: 12px;color: rgba(255,255,255,.6);}
+/* SUBMIT */
+      .submit-btn {height: var(--form-h);border-radius: 28px;background: #d4af37;color: #000;border: none;cursor: pointer;}
 
-/* ==============================
-   CONTACT FORM WRAPPER
-================================ */
-.contact-form-wrapper {
-  position: relative;
-  max-width: 760px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 45px 40px 40px;
-  background: rgba(10,10,10,.88);
-  border: 1.5px solid #d4af37;
-  border-radius: 14px;
-  z-index: 5;
-}
+/* INLINE ALERT */
+      #formInlineAlert {display: none;}
 
-/* ==============================
-   HEADER
-================================ */
-.contact-form-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
+/* INTL TEL INPUT – CONTACT */
+      .iti {width: 100%;position: relative;}
+      .iti__country-list {background: #0b0b0b;border: 1px solid #d4af37;z-index: 50;}
+/* RESPONSIVE */
+      @media (max-width: 768px) {.contact-form-wrapper {max-width: 94%;padding: 35px 25px;}}
 
-.contact-form-header h1 {
-  font-size: 28px;
-  color: #d4af37;
-  margin-bottom: 6px;
-}
-
-.form-subline {
-  font-size: 12px;
-  letter-spacing: 2px;
-  color: rgba(212,175,55,.75);
-  text-transform: uppercase;
-}
-
-/* ==============================
-   FORM BASE
-================================ */
-:root { --form-h: 52px; }
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  color: #d4af37;
-  font-size: 13px;
-  margin-bottom: 6px;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  box-sizing: border-box;
-  background: #111;
-  border: 1px solid #d4af37;
-  color: #d4af37;
-  font-size: 14px;
-}
-
-.form-group input {
-  height: var(--form-h);
-  padding: 0 16px;
-}
-
-.form-group textarea {
-  min-height: 120px;
-  padding: 12px 16px;
-  resize: vertical;
-}
-
-::placeholder {
-  color: #aaa;
-}
-
-/* ==============================
-   SUBJECT – CUSTOM SELECT
-================================ */
-.custom-select {
-  position: relative;
-}
-
-.select-trigger {
-  height: var(--form-h);
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  background: #111;
-  border: 1px solid #d4af37;
-  color: rgba(255,255,255,.65);
-  cursor: pointer;
-}
-
-.select-options {
-  display: none;
-  position: absolute;
-  top: calc(100% + 6px);
-  width: 100%;
-  background: #000;
-  border: 1px solid #d4af37;
-  z-index: 10;
-}
-
-.custom-select.open .select-options {
-  display: block;
-}
-
-.select-options li {
-  padding: 12px 16px;
-  cursor: pointer;
-  color: #d4af37;
-}
-
-.select-options li:hover {
-  background: rgba(212,175,55,.2);
-}
-
-/* ==============================
-   CHAR COUNT
-================================ */
-.char-count {
-  text-align: right;
-  font-size: 12px;
-  color: rgba(255,255,255,.6);
-}
-
-/* ==============================
-   SUBMIT
-================================ */
-.submit-btn {
-  height: var(--form-h);
-  border-radius: 28px;
-  background: #d4af37;
-  color: #000;
-  border: none;
-  cursor: pointer;
-}
-
-/* ==============================
-   INLINE ALERT
-================================ */
-#formInlineAlert {
-  display: none;
-}
-
-/* ==============================
-   INTL TEL INPUT – CONTACT
-================================ */
-.iti {
-  width: 100%;
-  position: relative;
-}
-
-.iti__country-list {
-  background: #0b0b0b;
-  border: 1px solid #d4af37;
-  z-index: 50;
-}
-
-/* ==============================
-   RESPONSIVE
-================================ */
-@media (max-width: 768px) {
-  .contact-form-wrapper {
-    max-width: 94%;
-    padding: 35px 25px;
-  }
-}
