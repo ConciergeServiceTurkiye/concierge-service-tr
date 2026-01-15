@@ -75,6 +75,7 @@
       .custom-select.open .select-options {display: block;}
       .select-options li {padding: 12px 16px;cursor: pointer;color: #d4af37;}
       .select-options li:hover {background: rgba(212,175,55,.2);}
+      .select-trigger:focus {outline: none;border-color: #d4af37;box-shadow: 0 0 0 1px rgba(212,175,55,0.35);color: #d4af37;}
 /* SADECE textarea için referans alan */
       .textarea-wrapper {position: relative;width: 100%;}
 /* CHAR COUNT – textarea border DIŞI */
@@ -94,6 +95,7 @@
       .iti__country-list {background: #0b0b0b;border: 1px solid #d4af37;z-index: 50;}
 /* RESPONSIVE */
       @media (max-width: 768px) {.contact-form-wrapper {max-width: 94%;padding: 35px 25px;}}
+
 
 
 
