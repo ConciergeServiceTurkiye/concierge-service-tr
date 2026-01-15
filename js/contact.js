@@ -47,6 +47,12 @@ document.addEventListener("DOMContentLoaded", () => {
     dropdownContainer: document.querySelector(".contact-form-wrapper"), // BURASI EKLENDİ
     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
 });
+  phoneField.addEventListener("focus", () => {
+  setTimeout(() => {
+    iti.setCountry(iti.getSelectedCountryData().iso2);
+  }, 50);
+});
+
 
   phoneField.addEventListener("keydown", e => {
     if (
@@ -152,5 +158,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
