@@ -9,7 +9,7 @@
       .contact-form-header h1 {font-size: 28px;color: #d4af37;margin-bottom: 6px;}
       .form-subline {font-size: 12px;letter-spacing: 2px;color: rgba(212,175,55,.75);text-transform: uppercase;}
 /* FORM BASE */ 
-      :root { --form-h: 46px; }form {display: flex;flex-direction: column;gap: 22px;}
+      :root { --form-h: 42px; }form {display: flex;flex-direction: column;gap: 22px;}
       .form-group {display: flex;flex-direction: column;}
       .form-group label {color: #d4af37;font-size: 13px;margin-bottom: 6px;}
       .form-group input,
@@ -36,4 +36,5 @@
       .iti__country-list {background: #0b0b0b;border: 1px solid #d4af37;z-index: 50;}
 /* RESPONSIVE */
       @media (max-width: 768px) {.contact-form-wrapper {max-width: 94%;padding: 35px 25px;}}
+
 
