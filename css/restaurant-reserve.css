@@ -20,5 +20,8 @@
       .flatpickr-day.selected {background: #d4af37;color: #000;}
 /* TEL INPUT – RESTAURANT */
       .restaurant-form .iti__country-list {z-index: 30;}
+/* INLINE ALERT */
+      #formInlineAlert {height: 48px; margin-bottom: 18px; padding: 12px 16px; border: 1px solid rgba(212,175,55,0.6); background: rgba(212,175,55,0.08);
+                  color: #d4af37; font-size: 13px; text-align: center; border-radius: 10px; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;}
 /* MOBILE */
       @media (max-width: 768px) {.restaurant-form {max-width: 94%;}}
