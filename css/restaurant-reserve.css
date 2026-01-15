@@ -1,97 +1,24 @@
-/* ==============================
-   RESTAURANT FORM WRAPPER
-================================ */
-.restaurant-form {
-  max-width: 860px;
-}
-
-/* ==============================
-   BASE INPUTS
-================================ */
-.restaurant-form .form-group input,
-.restaurant-form .form-group textarea {
-  background: #111;
-  border: 1px solid #d4af37;
-  color: #d4af37;
-}
-
-/* ==============================
-   CUSTOM SELECT (TIME / GUESTS)
-================================ */
-.restaurant-form .custom-select {
-  position: relative;
-}
-
-.restaurant-form .select-options {
-  z-index: 20;
-}
-
-/* ==============================
-   CHILDREN
-================================ */
-.children-row {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.children-ages {
-  display: none;
-  gap: 14px;
-}
-
-.children-ages.active {
-  display: flex;
-}
-
-.child-input {
-  width: 56px;
-  height: 32px;
-  font-size: 13px;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,.35);
-  color: #fff;
-}
-
-/* ==============================
-   TEXTAREA GROUPS
-================================ */
-.textarea-group {
-  display: none;
-}
-
-.textarea-group.active {
-  display: block;
-}
-
-/* ==============================
-   FLATPICKR – RESTAURANT ONLY
-================================ */
-.flatpickr-calendar {
-  background: #2b2b2b;
-}
-
-.flatpickr-day {
-  color: #d4af37;
-}
-
-.flatpickr-day.selected {
-  background: #d4af37;
-  color: #000;
-}
-
-/* ==============================
-   TEL INPUT – RESTAURANT
-================================ */
-.restaurant-form .iti__country-list {
-  z-index: 30;
-}
-
-/* ==============================
-   MOBILE
-================================ */
-@media (max-width: 768px) {
-  .restaurant-form {
-    max-width: 94%;
-  }
-}
+/* RESTAURANT FORM WRAPPER */
+      .restaurant-form {max-width: 860px;}
+/* BASE INPUTS */
+      .restaurant-form .form-group input,
+      .restaurant-form .form-group textarea {background: #111;border: 1px solid #d4af37;color: #d4af37;}
+/* CUSTOM SELECT (TIME / GUESTS) */
+      .restaurant-form .custom-select {position: relative;}
+      .restaurant-form .select-options {z-index: 20;}
+/*CHILDREN*/
+      .children-row {display: flex;gap: 16px;flex-wrap: wrap;}
+      .children-ages {display: none;gap: 14px;}
+      .children-ages.active {display: flex;}
+      .child-input {width: 56px;height: 32px;font-size: 13px;background: transparent;border: 1px solid rgba(255,255,255,.35);color: #fff;}
+/* TEXTAREA GROUPS */
+      .textarea-group {display: none;}
+      .textarea-group.active {display: block;}
+/* FLATPICKR – RESTAURANT ONLY */
+      .flatpickr-calendar {background: #2b2b2b;}
+      .flatpickr-day {color: #d4af37;}
+      .flatpickr-day.selected {background: #d4af37;color: #000;}
+/* TEL INPUT – RESTAURANT */
+      .restaurant-form .iti__country-list {z-index: 30;}
+/* MOBILE */
+      @media (max-width: 768px) {.restaurant-form {max-width: 94%;}}
