@@ -83,7 +83,7 @@
       .iti__selected-flag {height: 100% !important; display: flex !important; align-items: center !important;} /* Seçili bayrak hizalama */
       .iti__country-list {width: 100% !important; min-width: 320px !important; max-width: 420px !important; max-height: 440px !important; 
                           background: rgba(10,10,10,0.97) !important; border: 1px solid #d4af37 !important; border-radius: 12px;
-                          box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important; overflow-x: hidden !important; z-index: 9999 !important;position: absolute !important;} /* Ülke listesi kutusu */
+                          box-shadow: 0 12px 30px rgba(212,175,55,0.25) !important; overflow-x: hidden !important; z-index: 20;position: absolute;} /* Ülke listesi kutusu */
       .iti__search {color: #d4af37 !important;  background: #111 !important; border: 1px solid rgba(212,175,55,0.6) !important;} /* Arama input container */
       .iti__search::placeholder{color: rgba(255,255,255,0.65) !important;} /* Arama placeholder rengi */
       .iti__country {display: flex !important; align-items: center !important; gap: 10px !important; padding: 10px 14px; white-space: nowrap !important;} /* Ülke satırı */
@@ -190,6 +190,7 @@
 /*<- HATA MESAJI ->*/
       .field-error {color: #d9534f; font-size: 13px; margin-top: 6px;} /* Hata mesajları */
       body{overflow-x: hidden;}
+
 
 
 
