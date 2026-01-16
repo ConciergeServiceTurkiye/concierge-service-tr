@@ -1,24 +1,49 @@
-/* RESTAURANT FORM WRAPPER */
-      .restaurant-form {max-width: 860px;}
+/* ==============================
+   RESTAURANT FORM WRAPPER
+============================== */
+.restaurant-form {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ==============================
+   FORM GROUPS
+============================== */
 .restaurant-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   margin-bottom: 18px;
 }
 
-/* BASE INPUTS */
-      .restaurant-form .form-group input,
-      .restaurant-form .form-group textarea {background: #111;border: 1px solid #d4af37;color: #d4af37;}
-/* CUSTOM SELECT (TIME / GUESTS) */
-      .restaurant-form .custom-select {position: relative;}
-      .restaurant-form .select-options {z-index: 20;}
-/*CHILDREN*/
-      .children-row {flex-direction: column;gap: 10px;}
-      .children-ages {flex-wrap: wrap;}
-      .children-ages.active {display: flex;}
-      .child-input {width: 56px;height: 32px;font-size: 13px;background: transparent;border: 1px solid rgba(255,255,255,.35);color: #fff;}
-/* TEXTAREA GROUPS */
-      .textarea-group {display: none;flex-direction: column;gap: 6px;}
-      .textarea-group.active {display: flex;}
-/* CUSTOM SELECT */
+/* ==============================
+   BASE INPUTS
+============================== */
+.restaurant-form input,
+.restaurant-form textarea {
+  height: 44px;
+  padding: 0 14px;
+  background: #111;
+  border: 1px solid #d4af37;
+  border-radius: 10px;
+  color: #d4af37;
+  font-size: 14px;
+  outline: none;
+}
+
+.restaurant-form textarea {
+  height: auto;
+  padding: 10px 14px;
+  resize: none;
+}
+
+/* ==============================
+   CUSTOM SELECT (TIME / GUESTS)
+============================== */
+.custom-select {
+  position: relative;
+}
+
 .custom-select .select-trigger {
   height: 44px;
   display: flex;
@@ -30,9 +55,10 @@
   color: rgba(255,255,255,0.65);
   cursor: pointer;
 }
+
 .custom-select .select-options {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 6px);
   left: 0;
   width: 100%;
   background: #111;
@@ -41,25 +67,159 @@
   max-height: 220px;
   overflow-y: auto;
   display: none;
+  z-index: 40;
 }
 
 .custom-select.open .select-options {
   display: block;
 }
 
+.custom-select .select-options li {
+  padding: 10px 14px;
+  cursor: pointer;
+  color: #d4af37;
+}
 
-/* FLATPICKR – RESTAURANT ONLY */
-      .flatpickr-calendar {background: #2b2b2b;}
-      .flatpickr-day {color: #d4af37;}
-      .flatpickr-day.selected {background: #d4af37;color: #000;}
-/* TEL INPUT – RESTAURANT */
-      .restaurant-form .iti__country-list {z-index: 30;}
+.custom-select .select-options li:hover,
+.custom-select .select-options li.active {
+  background: rgba(212,175,55,0.15);
+}
+
+/* ==============================
+   TEXTAREA GROUPS (PETS / ALLERGY / NOTES)
+============================== */
+.textarea-group {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.textarea-group.active {
+  display: flex;
+}
+
+.char-count {
+  font-size: 11px;
+  text-align: right;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ==============================
+   CHILDREN
+============================== */
+.children-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.children-ages {
+  display: none;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.children-ages.active {
+  display: flex;
+}
+
+.child-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.child-input {
+  width: 56px;
+  height: 32px;
+  font-size: 13px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.35);
+  color: #fff;
+  border-radius: 6px;
+  padding: 0 6px;
+}
+
+/* ==============================
+   CHECKBOX BASE
+============================== */
+input[type="checkbox"] {
+  accent-color: #d4af37;
+  cursor: pointer;
+}
+
+/* ==============================
+   FLATPICKR
+============================== */
+.flatpickr-calendar {
+  background: #2b2b2b;
+  border-radius: 12px;
+}
+
+.flatpickr-day {
+  color: #d4af37;
+}
+
+.flatpickr-day.selected {
+  background: #d4af37;
+  color: #000;
+}
+
+/* ==============================
+   INTL TEL INPUT
+============================== */
+.restaurant-form .iti {
+  width: 100%;
+}
+
 .restaurant-form .iti input {
   height: 44px;
 }
 
-/* INLINE ALERT */
-      #formInlineAlert {height: 48px; margin-bottom: 18px; padding: 12px 16px; border: 1px solid rgba(212,175,55,0.6); background: rgba(212,175,55,0.08);
-                  color: #d4af37; font-size: 13px; text-align: center; border-radius: 10px; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;}
-/* MOBILE */
-      @media (max-width: 768px) {.restaurant-form {max-width: 94%;}}
+/* ==============================
+   INLINE ALERT
+============================== */
+#formInlineAlert {
+  height: 48px;
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  border: 1px solid rgba(212,175,55,0.6);
+  background: rgba(212,175,55,0.08);
+  color: #d4af37;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* ==============================
+   SUBMIT BUTTON
+============================== */
+.restaurant-form .submit-btn {
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #d4af37, #b9982f);
+  border: none;
+  color: #000;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.restaurant-form .submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(212,175,55,0.35);
+}
+
+/* ==============================
+   MOBILE
+============================== */
+@media (max-width: 768px) {
+  .restaurant-form {
+    max-width: 94%;
+  }
+}
