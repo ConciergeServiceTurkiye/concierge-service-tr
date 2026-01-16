@@ -296,6 +296,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }).then(() => {
       showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
       form.reset();
+      
+timeSelect.classList.remove("has-value");
+guestsSelect.classList.remove("has-value");
+
+timeTrigger.textContent = "Select time";
+guestsTrigger.textContent = "Select guests";
       unlockSubmit();
     }).catch(() => {
       showInlineAlert("Connection error. Please try again.");
@@ -304,5 +310,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
