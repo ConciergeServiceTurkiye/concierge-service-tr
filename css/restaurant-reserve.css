@@ -1,3 +1,261 @@
+/* ================================
+   RESTAURANT RESERVE – HERO
+================================ */
+.restaurant-hero {
+  min-height: 100vh;
+  padding-top: var(--nav-h);
+  background:
+    linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.75)),
+    url("../assets/restaurant-bg.jpg") center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================================
+   FORM WRAPPER
+================================ */
+.restaurant-form-wrapper {
+  position: relative;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 45px 40px 40px;
+  background: rgba(10,10,10,.88);
+  border: 1.5px solid #d4af37;
+  border-radius: 14px;
+}
+
+/* ================================
+   HEADER
+================================ */
+.restaurant-form-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.restaurant-form-header h1 {
+  font-size: 28px;
+  color: #d4af37;
+  margin-bottom: 6px;
+}
+
+.restaurant-form-subline {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: rgba(212,175,55,.75);
+  text-transform: uppercase;
+}
+
+/* ================================
+   FORM BASE
+================================ */
+:root {
+  --form-h: 46px;
+}
+
+.restaurant-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.restaurant-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.restaurant-form label {
+  color: #d4af37;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+/* INPUT & TEXTAREA */
+.restaurant-form input,
+.restaurant-form textarea {
+  width: 100%;
+  background: #111;
+  border: 1px solid #d4af37;
+  border-radius: 10px;
+  color: #d4af37;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.restaurant-form input {
+  height: var(--form-h);
+  padding: 0 14px;
+}
+
+.restaurant-form textarea {
+  min-height: 120px;
+  padding: 12px 16px;
+  resize: vertical;
+}
+
+.restaurant-form ::placeholder {
+  color: rgba(255,255,255,.6);
+}
+
+.restaurant-form input:focus,
+.restaurant-form textarea:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 1px rgba(212,175,55,.25);
+}
+
+/* ================================
+   INTL TEL INPUT – RESTAURANT
+================================ */
+.restaurant-form-wrapper .iti {
+  width: 100%;
+}
+
+.restaurant-form-wrapper .iti input {
+  height: var(--form-h);
+  padding-left: 56px !important;
+  background: #111;
+  color: #d4af37;
+  border: 1px solid #d4af37;
+  border-radius: 10px;
+}
+
+/* COUNTRY LIST */
+.restaurant-form-wrapper .iti__country-list {
+  background: rgba(10,10,10,.97);
+  border: 1px solid #d4af37;
+  border-radius: 12px;
+  max-height: 420px;
+  box-shadow: 0 12px 30px rgba(212,175,55,.25);
+}
+
+/* Scrollbar */
+.restaurant-form-wrapper .iti__country-list::-webkit-scrollbar {
+  width: 8px;
+}
+.restaurant-form-wrapper .iti__country-list::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 8px;
+}
+.restaurant-form-wrapper .iti__country-list {
+  scrollbar-width: thin;
+  scrollbar-color: #d4af37 rgba(255,255,255,0.05);
+}
+
+/* ================================
+   CUSTOM SELECT (Guests / Time)
+================================ */
+.restaurant-form .custom-select {
+  position: relative;
+}
+
+.restaurant-form .select-trigger {
+  height: var(--form-h);
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  background: #111;
+  border: 1px solid #d4af37;
+  border-radius: 10px;
+  color: rgba(255,255,255,.65);
+  cursor: pointer;
+}
+
+.restaurant-form .select-trigger.selected {
+  color: #d4af37;
+}
+
+.restaurant-form .select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #0b0b0b;
+  border: 1px solid #d4af37;
+  border-radius: 12px;
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  display: none;
+  z-index: 50;
+}
+
+.restaurant-form .custom-select.open .select-options {
+  display: block;
+}
+
+.restaurant-form .select-options li {
+  padding: 12px 16px;
+  cursor: pointer;
+  color: rgba(255,255,255,.6);
+}
+
+.restaurant-form .select-options li:hover,
+.restaurant-form .select-options li.active {
+  background: rgba(212,175,55,.2);
+  color: #d4af37;
+}
+
+/* Scrollbar – dropdown */
+.restaurant-form .select-options::-webkit-scrollbar {
+  width: 8px;
+}
+.restaurant-form .select-options::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 8px;
+}
+.restaurant-form .select-options {
+  scrollbar-width: thin;
+  scrollbar-color: #d4af37 rgba(255,255,255,0.05);
+}
+
+/* ================================
+   TEXTAREA GROUP (Pets / Notes)
+================================ */
+.textarea-group {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.textarea-group.active {
+  display: flex;
+}
+
+/* ================================
+   SUBMIT BUTTON
+================================ */
+.restaurant-submit-btn {
+  margin-top: 15px;
+  height: var(--form-h);
+  background: #d4af37;
+  color: #000;
+  border: none;
+  border-radius: 28px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+
+.restaurant-submit-btn:active {
+  transform: scale(.97);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  .restaurant-form-wrapper {
+    max-width: 94%;
+    padding: 35px 25px;
+  }
+}
+
+
 /* ==============================
    RESTAURANT FORM WRAPPER
 ============================== */
