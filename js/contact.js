@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = -1;
 
   function openDropdown() { customSelect.classList.add("open"); }
-  function closeDropdown() { customSelect.classList.remove("open"); currentIndex = -1; clearActive(); trigger.focus();}
+  function closeDropdown() { customSelect.classList.remove("open"); currentIndex = -1; clearActive();}
 
   function move(direction) {
     if (!customSelect.classList.contains("open")) {
@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
 
