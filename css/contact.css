@@ -112,6 +112,10 @@
 .iti--allow-dropdown .iti__country-list {
   pointer-events: auto;
 }
+.select-trigger.selected {
+  color: #d4af37;
+}
+
 
 
 
