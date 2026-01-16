@@ -105,43 +105,180 @@
   box-shadow: 0 0 0 1px rgba(212,175,55,.25);
 }
 
-/* ================================
-   INTL TEL INPUT – RESTAURANT
-================================ */
+/* =========================================
+   INTL TEL INPUT – RESTAURANT RESERVE FORM
+========================================= */
+
+/* Ana container */
 .restaurant-form-wrapper .iti {
   width: 100%;
+  position: relative;
+  z-index: 30;
 }
 
+/* Telefon inputu */
 .restaurant-form-wrapper .iti input {
-  height: var(--form-h);
+  width: 100% !important;
+  box-sizing: border-box;
   padding-left: 56px !important;
   background: #111;
   color: #d4af37;
   border: 1px solid #d4af37;
-  border-radius: 10px;
 }
 
-/* COUNTRY LIST */
+/* Bayrak alanı */
+.restaurant-form-wrapper .iti__flag-container {
+  height: 100%;
+}
+
+.restaurant-form-wrapper .iti__selected-flag {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* COUNTRY LIST (DROPDOWN) */
 .restaurant-form-wrapper .iti__country-list {
-  background: rgba(10,10,10,.97);
+  position: absolute;
+  width: 100%;
+  min-width: 320px;
+  max-width: 420px;
+  max-height: 440px;
+  background: rgba(10,10,10,0.97);
   border: 1px solid #d4af37;
   border-radius: 12px;
-  max-height: 420px;
-  box-shadow: 0 12px 30px rgba(212,175,55,.25);
+  box-shadow: 0 12px 30px rgba(212,175,55,0.25);
+  overflow-x: hidden;
+  top: 100%;
+  left: 0;
+  z-index: 50;
 }
 
-/* Scrollbar */
+/* Scrollbar – Webkit */
 .restaurant-form-wrapper .iti__country-list::-webkit-scrollbar {
   width: 8px;
 }
+
+.restaurant-form-wrapper .iti__country-list::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+}
+
 .restaurant-form-wrapper .iti__country-list::-webkit-scrollbar-thumb {
   background: #d4af37;
   border-radius: 8px;
 }
+
+.restaurant-form-wrapper .iti__country-list::-webkit-scrollbar-thumb:hover {
+  background: #f1d97a;
+}
+
+/* Scrollbar – Firefox */
 .restaurant-form-wrapper .iti__country-list {
   scrollbar-width: thin;
   scrollbar-color: #d4af37 rgba(255,255,255,0.05);
 }
+
+/* INTL TEL INPUT – SEARCH BOX FIX */
+
+/* Search container */
+.restaurant-form-wrapper .iti__search {
+  width: 100%;
+  min-width: 260px;
+  background: #111;
+  border-bottom: 1px solid rgba(212,175,55,0.6);
+}
+
+/* Search input – temel */
+.restaurant-form-wrapper .iti__search-input {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  min-width: 260px;
+  box-sizing: border-box;
+  background: #111 !important;
+  border: 1px solid rgba(212,175,55,0.6) !important;
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important;
+  caret-color: #d4af37 !important;
+  opacity: 1 !important;
+}
+
+/* Placeholder – "Search" yazısı */
+.restaurant-form-wrapper .iti__search-input::placeholder {
+  color: rgba(255,255,255,0.65) !important;
+  -webkit-text-fill-color: rgba(255,255,255,0.65) !important;
+}
+
+/* Selection (mouse drag / shift + ok) */
+.restaurant-form-wrapper .iti__search-input::selection {
+  background: rgba(212,175,55,0.35);
+  color: #000;
+}
+
+.restaurant-form-wrapper .iti__search-input::-moz-selection {
+  background: rgba(212,175,55,0.35);
+  color: #000;
+}
+
+/* Focus state */
+.restaurant-form-wrapper .iti__search-input:focus {
+  outline: none;
+  background: #111;
+  color: #d4af37;
+  border-color: #d4af37 !important;
+  box-shadow: 0 0 0 1px rgba(212,175,55,0.25);
+}
+
+/* COUNTRY ROWS */
+.restaurant-form-wrapper .iti__country {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.restaurant-form-wrapper .iti__country-name {
+  color: #d4af37;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.restaurant-form-wrapper .iti__dial-code {
+  color: rgba(255,255,255,0.65);
+  white-space: nowrap;
+}
+
+/* Hover + Mouse */
+.restaurant-form-wrapper .iti__country:hover {
+  background: rgba(212,175,55,0.18);
+}
+
+.restaurant-form-wrapper .iti__country:hover .iti__dial-code,
+.restaurant-form-wrapper .iti__country:hover .iti__country-name {
+  color: #d4af37;
+}
+
+/* Klavye / Active / Tab */
+.restaurant-form-wrapper .iti__country.iti__highlight,
+.restaurant-form-wrapper .iti__country[aria-selected="true"],
+.restaurant-form-wrapper .iti__country.active {
+  background: rgba(212,175,55,0.18);
+  outline: none;
+}
+
+.restaurant-form-wrapper .iti__country.active .iti__country-name,
+.restaurant-form-wrapper .iti__country.active .iti__dial-code {
+  color: #d4af37;
+}
+
 
 /* ================================
    CUSTOM SELECT (Guests / Time)
@@ -391,17 +528,6 @@ input[type="checkbox"] {
 }
 
 /* ==============================
-   INTL TEL INPUT
-============================== */
-.restaurant-form .iti {
-  width: 100%;
-}
-
-.restaurant-form .iti input {
-  height: 44px;
-}
-
-/* ==============================
    INLINE ALERT
 ============================== */
 #formInlineAlert {
@@ -437,40 +563,5 @@ input[type="checkbox"] {
 .restaurant-form .submit-btn:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(212,175,55,0.35);
-}
-/* ==============================
-   INTL TEL INPUT – UX FIX
-============================== */
-
-/* Dropdown container */
-.restaurant-form-wrapper .iti__country-list {
-  min-width: 300px;
-  width: max-content;
-}
-
-/* Country row */
-.restaurant-form-wrapper .iti__country {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  white-space: nowrap;
-}
-
-/* Country name */
-.restaurant-form-wrapper .iti__country-name {
-  flex: 1;
-  font-size: 13px;
-}
-
-/* Dial code */
-.restaurant-form-wrapper .iti__dial-code {
-  font-size: 13px;
-  opacity: 0.85;
-}
-@media (max-width: 480px) {
-  .restaurant-form-wrapper .iti__country-list {
-    min-width: 260px;
-  }
 }
 
