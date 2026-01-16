@@ -601,4 +601,45 @@ input[type="checkbox"] {
   font-size: 14px;
   line-height: 1.4;
 }
+/* ==============================
+   CHECKBOX FIX – RESTAURANT FORM
+============================== */
+
+/* Checkbox'ları input stilinden kurtar */
+.restaurant-form input[type="checkbox"] {
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Checkbox + yazıyı aynı hizada tut */
+.restaurant-form label,
+.restaurant-form .child-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Checkbox boyutu (kontrollü & estetik) */
+.restaurant-form input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Allergy label da aynı hizaya gelsin */
+.restaurant-form .form-group > label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Checkboxlar asla ortalanmasın */
+.restaurant-form input[type="checkbox"] {
+  align-self: flex-start;
+}
 
