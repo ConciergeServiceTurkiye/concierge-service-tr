@@ -6,7 +6,7 @@
   padding-top: var(--nav-h);
   background:
     linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.75)),
-    url("../assets/restaurant-bg.jpg") center / cover no-repeat;
+    url("../assets/contact-bg.jpg") center / cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
