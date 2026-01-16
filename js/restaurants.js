@@ -255,9 +255,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!allergyToggle.checked) allergyTextarea.value = "";
   });
 
-  /* ==============================
-     SUBMIT
-  ============================== */
     /* ==============================
      SUBMIT
   ============================== */
@@ -324,3 +321,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
   });
+
