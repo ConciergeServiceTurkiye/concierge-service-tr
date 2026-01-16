@@ -132,7 +132,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   buildTimeOptions();
 
-  timeTrigger.addEventListener("focus", () => timeSelect.classList.add("open"));
+  timeTrigger.addEventListener("focus", () => {
+  timeIndex = -1;
+  timeSelect.classList.add("open");
+});
   timeTrigger.addEventListener("mousedown", e => {
     e.preventDefault();
     timeSelect.classList.add("open");
@@ -163,7 +166,10 @@ document.addEventListener("DOMContentLoaded", () => {
   ============================== */
   let guestsIndex = -1;
 
-  guestsTrigger.addEventListener("focus", () => guestsSelect.classList.add("open"));
+  guestsTrigger.addEventListener("focus", () => {
+  guestsIndex = -1;
+  guestsSelect.classList.add("open");
+});
   guestsTrigger.addEventListener("mousedown", e => {
     e.preventDefault();
     guestsSelect.classList.add("open");
@@ -310,6 +316,7 @@ guestsTrigger.textContent = "Select guests";
   });
 
 });
+
 
 
 
