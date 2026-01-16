@@ -159,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   options.forEach(o => o.classList.remove("active"));
   currentIndex = -1;
+          closeDropdown();
 } else {
           showInlineAlert("Something went wrong. Please try again.");
         }
@@ -167,6 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
 
