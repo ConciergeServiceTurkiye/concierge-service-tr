@@ -159,6 +159,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   options.forEach(o => o.classList.remove("active"));
   currentIndex = -1;
+          iti.setCountry("us");   // veya default neyse
+phoneField.value = "";
+
           closeDropdown();
 } else {
           showInlineAlert("Something went wrong. Please try again.");
@@ -168,6 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
 
