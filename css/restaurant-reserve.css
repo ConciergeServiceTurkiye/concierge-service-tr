@@ -438,12 +438,3 @@ input[type="checkbox"] {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(212,175,55,0.35);
 }
-
-/* ==============================
-   MOBILE
-============================== */
-@media (max-width: 768px) {
-  .restaurant-form {
-    max-width: 94%;
-  }
-}
