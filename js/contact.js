@@ -92,11 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function clearActive() { options.forEach(o => o.classList.remove("active")); }
 
   function select(index) {
-    const opt = options[index];
-    trigger.textContent = opt.textContent;
-    subjectHidden.value = opt.dataset.value;
-    closeDropdown();
-  }
+  const opt = options[index];
+  trigger.textContent = opt.textContent;
+  subjectHidden.value = opt.dataset.value;
+  trigger.classList.add("selected");
+  closeDropdown();
+}
 
   trigger.addEventListener("click", () => {
     customSelect.classList.contains("open") ? closeDropdown() : openDropdown();
@@ -157,6 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
 
