@@ -468,4 +468,9 @@ input[type="checkbox"] {
   font-size: 13px;
   opacity: 0.85;
 }
+@media (max-width: 480px) {
+  .restaurant-form-wrapper .iti__country-list {
+    min-width: 260px;
+  }
+}
 
