@@ -67,6 +67,31 @@
       .contact-form-wrapper .iti__country.active {background: rgba(212,175,55,0.18);outline: none;}
       .contact-form-wrapper .iti__country.active .iti__country-name,
       .contact-form-wrapper .iti__country.active .iti__dial-code {color: #d4af37;}
+/* TEXTAREA SCROLLBAR – CONTACT FORM (UX MATCH WITH COUNTRY LIST) */
+.contact-form-wrapper textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.contact-form-wrapper textarea::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+}
+
+.contact-form-wrapper textarea::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 8px;
+}
+
+.contact-form-wrapper textarea::-webkit-scrollbar-thumb:hover {
+  background: #f1d97a;
+}
+
+/* Firefox */
+.contact-form-wrapper textarea {
+  scrollbar-width: thin;
+  scrollbar-color: #d4af37 rgba(255,255,255,0.05);
+}
+
 /* MOBILE */
       @media (max-width: 768px) {.contact-form-wrapper .iti__country-list {max-height: 60vh;}}
 /* SUBJECT – CUSTOM SELECT */ 
@@ -115,6 +140,7 @@
 .select-trigger.selected {
   color: #d4af37;
 }
+
 
 
 
