@@ -255,40 +255,6 @@
   }
 }
 
-
-/* ==============================
-   RESTAURANT FORM WRAPPER
-============================== */
-.restaurant-form {
-  max-width: 860px;
-  margin: 0 auto;
-}
-
-/* ==============================
-   FORM GROUPS
-============================== */
-.restaurant-form .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 18px;
-}
-
-/* ==============================
-   BASE INPUTS
-============================== */
-.restaurant-form input,
-.restaurant-form textarea {
-  height: 44px;
-  padding: 0 14px;
-  background: #111;
-  border: 1px solid #d4af37;
-  border-radius: 10px;
-  color: #d4af37;
-  font-size: 14px;
-  outline: none;
-}
-
 .restaurant-form textarea {
   height: auto;
   padding: 10px 14px;
