@@ -151,9 +151,11 @@ document.addEventListener("DOMContentLoaded", () => {
   form.reset();
   charCount.textContent = "0 / 2000";
 
-  // SUBJECT RESET (KRİTİK)
+  // SUBJECT RESET
   subjectHidden.value = "";
   trigger.textContent = "Select a subject";
+
+  trigger.classList.remove("selected"); // ← EKSİK OLAN BUYDU
 
   options.forEach(o => o.classList.remove("active"));
   currentIndex = -1;
@@ -165,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
 
