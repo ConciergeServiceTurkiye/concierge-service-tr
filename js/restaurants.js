@@ -257,6 +257,9 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ==============================
      SUBMIT
   ============================== */
+    /* ==============================
+     SUBMIT
+  ============================== */
   form.addEventListener("submit", e => {
     e.preventDefault();
 
@@ -299,28 +302,23 @@ document.addEventListener("DOMContentLoaded", () => {
       method: "POST",
       body: data,
       mode: "no-cors"
-    }).then(() => {
-  showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
-  form.reset();
+    })
+    .then(() => {
+      showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
+      form.reset();
 
-  // 🔥 intl-tel-input country reset
-  iti.setCountry("us");
+      iti.setCountry("us");
 
-  timeSelect.classList.remove("has-value");
-  guestsSelect.classList.remove("has-value");
+      timeSelect.classList.remove("has-value");
+      guestsSelect.classList.remove("has-value");
 
-  timeTrigger.textContent = "Select time";
-  guestsTrigger.textContent = "Select guests";
+      timeTrigger.textContent = "Select time";
+      guestsTrigger.textContent = "Select guests";
 
-  unlockSubmit();
-})
+      unlockSubmit();
+    })
+    .catch(() => {
+      showInlineAlert("Connection error. Please try again.");
+      unlockSubmit();
     });
   });
-
-});
-
-
-
-
-
-
