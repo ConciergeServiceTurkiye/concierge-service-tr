@@ -20,7 +20,7 @@
       .form-group input:focus, .form-group textarea:focus {outline: none;border-color: #d4af37;box-shadow: 0 0 0 1px rgba(212,175,55,0.25);background: #111;}
 /* INTL TEL INPUT – CONTACT FORM */
 /* Ana container */
-      .contact-form-wrapper .iti {width: 100%;position: relative;}
+      .contact-form-wrapper .iti {width: 100%;position: relative;z-index: 30;}
 /* Telefon inputu */
       .contact-form-wrapper .iti input {width: 100% !important;box-sizing: border-box;padding-left: 56px !important;background: #111;color: #d4af37;border: 1px solid #d4af37;}
 /* Bayrak alanı */
@@ -29,7 +29,7 @@
 /* COUNTRY LIST (DROPDOWN) */
       .contact-form-wrapper .iti__country-list {position: absolute;width: 100%;min-width: 320px;max-width: 420px;max-height: 440px;
                                                 background: rgba(10,10,10,0.97);border: 1px solid #d4af37;border-radius: 12px;
-                                                box-shadow: 0 12px 30px rgba(212,175,55,0.25);overflow-x: hidden;top: 100%;left: 0;z-index: 100;}
+                                                box-shadow: 0 12px 30px rgba(212,175,55,0.25);overflow-x: hidden;top: 100%;left: 0;z-index: 50;}
 /* Scrollbar – Webkit */
       .contact-form-wrapper .iti__country-list::-webkit-scrollbar {width: 8px;} 
       .contact-form-wrapper .iti__country-list::-webkit-scrollbar-track {background: rgba(255,255,255,0.05);}
@@ -70,7 +70,7 @@
 /* MOBILE */
       @media (max-width: 768px) {.contact-form-wrapper .iti__country-list {max-height: 60vh;}}
 /* SUBJECT – CUSTOM SELECT */ 
-      .custom-select {position: relative;z-index:3;}
+      .custom-select {position: relative;z-index:10;}
       .custom-select.open {z-index: 10;}
       .select-trigger {height: var(--form-h);padding: 0 14px;font-size: 13.5px;display: flex;align-items: center;background: #111;border: 1px solid #d4af37;color: rgba(255,255,255,.65);cursor: pointer;}
       .select-options {display: none;position: absolute;top: calc(100% + 6px);width: 100%;background: #000;border: 1px solid #d4af37;list-style: none;margin: 0;padding: 0;padding-left: 0;top: 100%;left: 0;}
@@ -102,5 +102,16 @@
 .contact-form-wrapper .select-options {
   pointer-events: auto;
 }
+.contact-form-wrapper * {
+  pointer-events: auto;
+}
+.iti__country-list {
+  pointer-events: none;
+}
+
+.iti--allow-dropdown .iti__country-list {
+  pointer-events: auto;
+}
+
 
 
