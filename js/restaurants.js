@@ -194,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
   guestsSelect.classList.add("has-value"); // 🔥 EKLENDİ
   guestsSelect.classList.remove("open");
 });
+   }); 
 
   document.addEventListener("click", e => {
     if (!timeSelect.contains(e.target)) timeSelect.classList.remove("open");
@@ -303,4 +304,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
