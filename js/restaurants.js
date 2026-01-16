@@ -119,11 +119,12 @@ document.addEventListener("DOMContentLoaded", () => {
       li.textContent = `${h}:${m}`;
 
       li.addEventListener("click", () => {
-        timeTrigger.textContent = li.textContent;
-        timeTrigger.style.color = "#d4af37";
-        time.value = li.textContent;
-        timeSelect.classList.remove("open");
-      });
+  timeTrigger.textContent = li.textContent;
+  time.value = li.textContent;
+
+  timeSelect.classList.add("has-value"); // 🔥 EKLENDİ
+  timeSelect.classList.remove("open");
+});
 
       timeOptions.appendChild(li);
       minutes += 15;
@@ -187,12 +188,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   guestsOptions.forEach(li => {
     li.addEventListener("click", () => {
-      guestsTrigger.textContent = li.textContent;
-      guestsTrigger.style.color = "#d4af37";
-      guests.value = li.textContent;
-      guestsSelect.classList.remove("open");
-    });
-  });
+  guestsTrigger.textContent = li.textContent;
+  guests.value = li.textContent;
+
+  guestsSelect.classList.add("has-value"); // 🔥 EKLENDİ
+  guestsSelect.classList.remove("open");
+});
 
   document.addEventListener("click", e => {
     if (!timeSelect.contains(e.target)) timeSelect.classList.remove("open");
@@ -302,3 +303,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
