@@ -580,4 +580,25 @@ input[type="checkbox"] {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(212,175,55,0.35);
 }
+/* =========================================
+   CUSTOM SELECT – FONT SIZE FIX (RESERVE)
+========================================= */
+
+.restaurant-form-wrapper .custom-select .select-trigger {
+  font-size: 14px;              /* inputlarla birebir */
+  line-height: 1.4;
+  padding: 12px 14px;           /* input padding ile uyum */
+  color: rgba(255,255,255,0.65); /* placeholder hissi */
+}
+
+/* Seçim yapıldıktan sonra */
+.restaurant-form-wrapper .custom-select.has-value .select-trigger {
+  color: #d4af37;               /* seçili değer altın */
+}
+
+/* Dropdown item font */
+.restaurant-form-wrapper .custom-select .select-options li {
+  font-size: 14px;
+  line-height: 1.4;
+}
 
