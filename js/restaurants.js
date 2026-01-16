@@ -320,5 +320,6 @@ document.addEventListener("DOMContentLoaded", () => {
       unlockSubmit();
     });
   });
+});
 
 
