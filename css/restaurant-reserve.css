@@ -1,5 +1,9 @@
 /* RESTAURANT FORM WRAPPER */
       .restaurant-form {max-width: 860px;}
+.restaurant-form .form-group {
+  margin-bottom: 18px;
+}
+
 /* BASE INPUTS */
       .restaurant-form .form-group input,
       .restaurant-form .form-group textarea {background: #111;border: 1px solid #d4af37;color: #d4af37;}
