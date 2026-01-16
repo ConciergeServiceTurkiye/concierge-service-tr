@@ -300,22 +300,25 @@ document.addEventListener("DOMContentLoaded", () => {
       body: data,
       mode: "no-cors"
     }).then(() => {
-      showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
-      form.reset();
-      
-timeSelect.classList.remove("has-value");
-guestsSelect.classList.remove("has-value");
+  showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
+  form.reset();
 
-timeTrigger.textContent = "Select time";
-guestsTrigger.textContent = "Select guests";
-      unlockSubmit();
-    }).catch(() => {
-      showInlineAlert("Connection error. Please try again.");
-      unlockSubmit();
+  // 🔥 intl-tel-input country reset
+  iti.setCountry("us");
+
+  timeSelect.classList.remove("has-value");
+  guestsSelect.classList.remove("has-value");
+
+  timeTrigger.textContent = "Select time";
+  guestsTrigger.textContent = "Select guests";
+
+  unlockSubmit();
+})
     });
   });
 
 });
+
 
 
 
