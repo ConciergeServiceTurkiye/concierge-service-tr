@@ -146,11 +146,18 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(r => r.text())
       .then(t => {
         if (t.trim() === "success") {
-          showInlineAlert("Your private concierge request has been received.", true);
-          form.reset();
-          charCount.textContent = "0 / 2000";
-          trigger.textContent = "Select a subject";
-        } else {
+  showInlineAlert("Your private concierge request has been received.", true);
+
+  form.reset();
+  charCount.textContent = "0 / 2000";
+
+  // SUBJECT RESET (KRİTİK)
+  subjectHidden.value = "";
+  trigger.textContent = "Select a subject";
+
+  options.forEach(o => o.classList.remove("active"));
+  currentIndex = -1;
+} else {
           showInlineAlert("Something went wrong. Please try again.");
         }
       })
@@ -158,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
 
