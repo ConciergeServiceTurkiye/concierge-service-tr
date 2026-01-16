@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
       li.addEventListener("click", () => {
   timeTrigger.textContent = li.textContent;
   time.value = li.textContent;
-
+  timeIndex = -1; // 🔥 EKLE
   timeSelect.classList.add("has-value"); // 🔥 EKLENDİ
   timeSelect.classList.remove("open");
 });
@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
     li.addEventListener("click", () => {
   guestsTrigger.textContent = li.textContent;
   guests.value = li.textContent;
-
+  guestsIndex = -1; // 🔥 EKLE
   guestsSelect.classList.add("has-value"); // 🔥 EKLENDİ
   guestsSelect.classList.remove("open");
 });
@@ -310,6 +310,7 @@ guestsTrigger.textContent = "Select guests";
   });
 
 });
+
 
 
 
