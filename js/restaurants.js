@@ -119,12 +119,12 @@ document.addEventListener("DOMContentLoaded", () => {
       li.textContent = `${h}:${m}`;
 
       li.addEventListener("click", () => {
-  timeTrigger.textContent = li.textContent;
-  time.value = li.textContent;
-  timeIndex = -1; // 🔥 EKLE
-  timeSelect.classList.add("has-value"); // 🔥 EKLENDİ
-  timeSelect.classList.remove("open");
-});
+        timeTrigger.textContent = li.textContent;
+        time.value = li.textContent;
+        timeIndex = -1;
+        timeSelect.classList.add("has-value");
+        timeSelect.classList.remove("open");
+      });
 
       timeOptions.appendChild(li);
       minutes += 15;
@@ -133,9 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
   buildTimeOptions();
 
   timeTrigger.addEventListener("focus", () => {
-  timeIndex = -1;
-  timeSelect.classList.add("open");
-});
+    timeIndex = -1;
+    timeSelect.classList.add("open");
+  });
+
   timeTrigger.addEventListener("mousedown", e => {
     e.preventDefault();
     timeSelect.classList.add("open");
@@ -159,6 +160,11 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       items[timeIndex].click();
     }
+
+    if (e.key === "Tab") {
+      timeSelect.classList.remove("open");
+      timeIndex = -1;
+    }
   });
 
   /* ==============================
@@ -167,9 +173,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let guestsIndex = -1;
 
   guestsTrigger.addEventListener("focus", () => {
-  guestsIndex = -1;
-  guestsSelect.classList.add("open");
-});
+    guestsIndex = -1;
+    guestsSelect.classList.add("open");
+  });
+
   guestsTrigger.addEventListener("mousedown", e => {
     e.preventDefault();
     guestsSelect.classList.add("open");
@@ -190,44 +197,28 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       guestsOptions[guestsIndex].click();
     }
+
+    if (e.key === "Tab") {
+      guestsSelect.classList.remove("open");
+      guestsIndex = -1;
+    }
   });
 
   guestsOptions.forEach(li => {
     li.addEventListener("click", () => {
-  guestsTrigger.textContent = li.textContent;
-  guests.value = li.textContent;
-  guestsIndex = -1; // 🔥 EKLE
-  guestsSelect.classList.add("has-value"); // 🔥 EKLENDİ
-  guestsSelect.classList.remove("open");
-});
-});
+      guestsTrigger.textContent = li.textContent;
+      guests.value = li.textContent;
+      guestsIndex = -1;
+      guestsSelect.classList.add("has-value");
+      guestsSelect.classList.remove("open");
+    });
+  });
 
-
+  // Click dışına tıklanırsa dropdown kapat
   document.addEventListener("click", e => {
     if (!timeSelect.contains(e.target)) timeSelect.classList.remove("open");
     if (!guestsSelect.contains(e.target)) guestsSelect.classList.remove("open");
   });
-
-// CUSTOM SELECT – TIME / GUESTS (update)
-document.querySelectorAll('.custom-select').forEach(select => {
-  const trigger = select.querySelector('.select-trigger');
-  const options = select.querySelector('.select-options');
-
-  // Tık ile aç/kapat
-  trigger.addEventListener('click', () => {
-    select.classList.toggle('open');
-  });
-
-  // Tab veya mouse ile focus kaybolduğunda dropdown kapansın
-  select.addEventListener('focusout', (e) => {
-    // e.relatedTarget, yeni focus elementini gösterir
-    // Eğer yeni focus bu select veya içindeki bir element değilse, dropdown kapansın
-    if (!e.relatedTarget || !select.contains(e.relatedTarget)) {
-      select.classList.remove('open');
-    }
-  });
-});
-
 
   /* ==============================
      CHILDREN
@@ -276,7 +267,7 @@ document.querySelectorAll('.custom-select').forEach(select => {
     if (!allergyToggle.checked) allergyTextarea.value = "";
   });
 
-    /* ==============================
+  /* ==============================
      SUBMIT
   ============================== */
   form.addEventListener("submit", e => {
@@ -341,8 +332,5 @@ document.querySelectorAll('.custom-select').forEach(select => {
       unlockSubmit();
     });
   });
+
 });
-
-
-
-
