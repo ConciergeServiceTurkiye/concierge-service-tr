@@ -56,16 +56,23 @@ function initNavbar() {
 
   // Link tıklanınca menüyü kapat
   document.querySelectorAll(".nav-menu a").forEach(a => {
-    a.addEventListener("click", () => {
-      if (window.innerWidth <= 992) {
-        navMenu.classList.remove("active");
-        document
-          .querySelectorAll(".dropdown")
-          .forEach(d => d.classList.remove("open"));
+  a.addEventListener("click", e => {
+    if (window.innerWidth <= 992) {
+      const parentLi = a.parentElement;
+
+      // ❌ Dropdown parent ise menüyü kapatma
+      if (parentLi.classList.contains("dropdown")) {
+        return;
       }
-    });
+
+      // ✅ Normal link → menüyü kapat
+      navMenu.classList.remove("active");
+      document
+        .querySelectorAll(".dropdown")
+        .forEach(d => d.classList.remove("open"));
+    }
   });
-}
+});
 
 /* =========================
    MODALS (PRIVACY / TERMS)
