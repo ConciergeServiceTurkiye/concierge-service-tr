@@ -648,4 +648,40 @@ input[type="checkbox"] {
   box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.35);
   border-color: #f1d97a;
 }
+/* CHILDREN AGE GROUP – ROW LAYOUT */
+#childrenAges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Each age option (checkbox + input) */
+.child-age {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Small number input next to checkbox */
+.child-input {
+  display: none; /* JS açacak */
+  width: 64px;
+  max-width: 64px;
+  padding: 6px 8px;
+  font-size: 14px;
+  text-align: center;
+
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 8px;
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+}
+
+/* Focus luxury effect */
+.child-input:focus {
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 2px rgba(212,175,55,0.25);
+}
 
