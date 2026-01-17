@@ -208,6 +208,25 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!guestsSelect.contains(e.target)) guestsSelect.classList.remove("open");
   });
 
+  // CUSTOM SELECT – TIME / GUESTS
+document.querySelectorAll('.custom-select').forEach(select => {
+  const trigger = select.querySelector('.select-trigger');
+  const options = select.querySelector('.select-options');
+
+  // Tık ile aç/kapat
+  trigger.addEventListener('click', () => {
+    select.classList.toggle('open');
+  });
+
+  // Tab ile focus kaybolduğunda dropdown kapansın
+  select.addEventListener('focusout', (e) => {
+    // Eğer focus select'in dışına çıktıysa
+    if (!select.contains(e.relatedTarget)) {
+      select.classList.remove('open');
+    }
+  });
+});
+
   /* ==============================
      CHILDREN
   ============================== */
@@ -321,5 +340,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
 
