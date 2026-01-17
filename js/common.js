@@ -9,6 +9,7 @@ function includeHTML(targetId, file, callback) {
     .then(html => {
       const el = document.getElementById(targetId);
       if (!el) return;
+
       el.innerHTML = html;
 
       requestAnimationFrame(() => {
@@ -28,51 +29,48 @@ function initNavbar() {
 
   if (!hamburger || !navMenu) return;
 
-  // Hamburger
+  // Hamburger toggle
   hamburger.addEventListener("click", () => {
     navMenu.classList.toggle("active");
   });
 
-  // Dropdowns (mobile)
+  // Dropdown parent click (mobile)
   document.querySelectorAll(".dropdown > a").forEach(link => {
-  link.addEventListener("click", e => {
-    if (window.innerWidth <= 992) {
-      const parent = link.parentElement;
+    link.addEventListener("click", e => {
+      if (window.innerWidth <= 992) {
+        const parent = link.parentElement;
 
-      // ⛔ SADECE submenu varsa engelle
-      if (parent.querySelector(".dropdown-menu")) {
-        e.preventDefault();
+        // submenu varsa → aç/kapat
+        if (parent.querySelector(".dropdown-menu")) {
+          e.preventDefault();
 
-        parent.classList.toggle("open");
+          parent.classList.toggle("open");
 
-        document.querySelectorAll(".dropdown").forEach(d => {
-          if (d !== parent) d.classList.remove("open");
-        });
+          document.querySelectorAll(".dropdown").forEach(d => {
+            if (d !== parent) d.classList.remove("open");
+          });
+        }
       }
-      // submenu yoksa → link NORMAL çalışır
-    }
+    });
   });
-});
 
-  // Link tıklanınca menüyü kapat
+  // Normal link tıklanınca menüyü kapat
   document.querySelectorAll(".nav-menu a").forEach(a => {
-  a.addEventListener("click", e => {
-    if (window.innerWidth <= 992) {
-      const parentLi = a.parentElement;
+    a.addEventListener("click", e => {
+      if (window.innerWidth <= 992) {
+        const parentLi = a.parentElement;
 
-      // ❌ Dropdown parent ise menüyü kapatma
-      if (parentLi.classList.contains("dropdown")) {
-        return;
+        // dropdown parent ise kapatma
+        if (parentLi.classList.contains("dropdown")) return;
+
+        navMenu.classList.remove("active");
+        document
+          .querySelectorAll(".dropdown")
+          .forEach(d => d.classList.remove("open"));
       }
-
-      // ✅ Normal link → menüyü kapat
-      navMenu.classList.remove("active");
-      document
-        .querySelectorAll(".dropdown")
-        .forEach(d => d.classList.remove("open"));
-    }
+    });
   });
-});
+}
 
 /* =========================
    MODALS (PRIVACY / TERMS)
@@ -117,4 +115,3 @@ document.addEventListener("DOMContentLoaded", () => {
   includeHTML("navbarInclude", "navbar.html", initNavbar);
   includeHTML("footerInclude", "footer.html", initModals);
 });
-
