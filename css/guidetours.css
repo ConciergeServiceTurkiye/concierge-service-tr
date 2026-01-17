@@ -1,12 +1,21 @@
+/* =========================
+   HERO
+========================= */
+
 .guidetours-hero {
-  min-height: 70vh;
-  padding-top: var(--nav-h);
+  min-height: 45vh;
+  padding-top: 120px;
   background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
               url("../assets/tours-hero.jpg") center / cover no-repeat;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   text-align: center;
+}
+
+.hero-inner {
+  margin: 0;
+  padding: 0;
 }
 
 .hero-inner h1 {
@@ -22,11 +31,16 @@
   text-transform: uppercase;
 }
 
+/* =========================
+   FILTERS
+========================= */
+
 .tour-filters {
   display: flex;
   justify-content: center;
   gap: 14px;
-  padding: 40px 20px;
+  padding: 30px 20px;
+  margin-top: 20px;
   flex-wrap: wrap;
 }
 
@@ -37,7 +51,11 @@
   padding: 10px 22px;
   border-radius: 30px;
   cursor: pointer;
-  transition: .25s;
+  transition: background .25s, color .25s, transform .25s;
+}
+
+.filter-btn:hover {
+  transform: translateY(-1px);
 }
 
 .filter-btn.active,
@@ -46,14 +64,22 @@
   color: #000;
 }
 
+/* =========================
+   TOURS GRID
+========================= */
+
 .tours-grid {
   max-width: 1200px;
-  margin: 0 auto 80px;
+  margin: 20px auto 80px;
   padding: 0 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 28px;
 }
+
+/* =========================
+   TOUR CARD
+========================= */
 
 .tour-card {
   background: rgba(10,10,10,0.9);
@@ -83,6 +109,10 @@
   color: var(--gold-soft);
 }
 
+/* =========================
+   BUTTONS
+========================= */
+
 .tour-btn {
   margin-top: auto;
   text-align: center;
@@ -91,7 +121,7 @@
   border: 1px solid var(--gold);
   color: var(--gold);
   text-decoration: none;
-  transition: .25s;
+  transition: background .25s, color .25s;
 }
 
 .tour-btn:hover {
@@ -103,7 +133,11 @@
   background: var(--gold);
   color: #000;
 }
-/* THEME COLORS */
+
+/* =========================
+   THEME COLORS
+========================= */
+
 .tour-card[data-theme="gold"] {
   border-color: rgba(212,175,55,.6);
   box-shadow: 0 0 30px rgba(212,175,55,.15);
@@ -123,6 +157,7 @@
   border-color: rgba(140,40,60,.5);
   box-shadow: 0 0 30px rgba(140,40,60,.15);
 }
+
 .tour-card[data-theme="copper"] {
   border-color: rgba(184,115,51,.6);
   box-shadow: 0 0 30px rgba(184,115,51,.18);
@@ -139,7 +174,10 @@
   box-shadow: 0 0 40px rgba(212,175,55,.35);
 }
 
-/*BAŞLIKLAR CANLI*/
+/* =========================
+   INTERACTIVE TITLES
+========================= */
+
 .tour-title {
   cursor: pointer;
   position: relative;
@@ -147,7 +185,6 @@
   transition: all .35s ease;
 }
 
-/* underline animation */
 .tour-title::after {
   content: "";
   position: absolute;
@@ -168,8 +205,10 @@
   width: 100%;
 }
 
+/* =========================
+   MODAL
+========================= */
 
-/*LUXURY POPUP*/
 .tour-modal {
   position: fixed;
   inset: 0;
@@ -181,6 +220,7 @@
 }
 
 .tour-modal-content {
+  position: relative;
   background: #0b0b0b;
   border: 1px solid var(--gold);
   border-radius: 20px;
@@ -204,4 +244,3 @@
   cursor: pointer;
   color: var(--gold);
 }
-
