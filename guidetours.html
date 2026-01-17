@@ -13,14 +13,15 @@
 <body>
 
 <!-- NAVBAR -->
-    <div id="navbarInclude"></div>
+<div id="navbarInclude"></div>
+
 <!-- HERO -->
-    <section class="guidetours-hero">
-    <div class="hero-inner">
+<section class="guidetours-hero">
+  <div class="hero-inner">
     <h1>Private City Tours</h1>
     <p>Chauffeured • Walking • Culinary • Tailor-Made Experiences</p>
-    </div>
-    </section>
+  </div>
+</section>
 
 <!-- FILTERS -->
 <section class="tour-filters">
@@ -36,49 +37,49 @@
 <section class="tours-grid">
 
   <div class="tour-card full" data-theme="gold">
-    <h3 class="tour-title" data-tour="oldcity">Old City Private Tour</h3>
+    <h3 class="tour-title">Old City Private Tour</h3>
     <p>Sultanahmet, Topkapi Palace, Hagia Sophia and Basilica Cistern with private chauffeur or walking option.</p>
     <span class="tour-tag">Chauffeured / Walking</span>
     <a href="contact.html" class="tour-btn">Request Tour</a>
   </div>
 
   <div class="tour-card full" data-theme="emerald">
-    <h3 class="tour-title" data-tour="highlights">Istanbul Highlights Tour</h3>
+    <h3 class="tour-title">Istanbul Highlights Tour</h3>
     <p>Full day experience covering Old City, Bosphorus line and panoramic viewpoints.</p>
     <span class="tour-tag">Full Day</span>
     <a href="contact.html" class="tour-btn">Request Tour</a>
   </div>
 
   <div class="tour-card half bosphorus" data-theme="blue">
-    <h3 class="tour-title" data-tour="bosphorus">Bosphorus Shore Experience</h3>
+    <h3 class="tour-title">Bosphorus Shore Experience</h3>
     <p>Ortakoy, Bebek, Arnavutkoy and scenic coastal drives with photo stops.</p>
     <span class="tour-tag">Half Day</span>
     <a href="contact.html" class="tour-btn">Request Tour</a>
   </div>
 
   <div class="tour-card half food" data-theme="wine">
-    <h3 class="tour-title" data-tour="streetfood">Street Food Discovery</h3>
+    <h3 class="tour-title">Street Food Discovery</h3>
     <p>Local flavors in Eminonu, Karakoy or Kadikoy guided by culinary experts.</p>
     <span class="tour-tag">Food Tour</span>
     <a href="contact.html" class="tour-btn">Request Tour</a>
   </div>
 
   <div class="tour-card full food" data-theme="copper">
-    <h3 class="tour-title" data-tour="cuisine">Turkish Cuisine Experience</h3>
+    <h3 class="tour-title">Turkish Cuisine Experience</h3>
     <p>Handpicked restaurants showcasing traditional Turkish cuisine and meze culture.</p>
     <span class="tour-tag">Gastronomy</span>
     <a href="contact.html" class="tour-btn">Request Tour</a>
   </div>
 
   <div class="tour-card half" data-theme="purple">
-    <h3 class="tour-title" data-tour="asian">Asian Side Tour</h3>
+    <h3 class="tour-title">Asian Side Tour</h3>
     <p>Discover Kadikoy, Moda, Camlica Hill and Uskudar’s waterfront.</p>
     <span class="tour-tag">Half Day</span>
     <a href="contact.html" class="tour-btn">Request Tour</a>
   </div>
 
   <div class="tour-card custom" data-theme="blackgold">
-    <h3 class="tour-title" data-tour="custom">Tailor-Made City Tour</h3>
+    <h3 class="tour-title">Tailor-Made City Tour</h3>
     <p>Fully customized itinerary designed around your interests, timing and comfort.</p>
     <span class="tour-tag">Custom</span>
     <a href="contact.html" class="tour-btn gold">Create Your Tour</a>
@@ -91,11 +92,12 @@
   <img src="assets/whatsapp.png" alt="WhatsApp">
 </a>
 
-<!-- FOOTER (AYNI) -->
-    <div id="footerInclude"></div>
+<!-- FOOTER -->
+<div id="footerInclude"></div>
+
 <!-- MODALS -->
-    <div class="modal" id="privacyModal">
-    <div class="modal-content">
+<div class="modal" id="privacyModal">
+  <div class="modal-content">
     <span class="close-modal">&times;</span>
     <h2>Privacy Policy</h2>
     <p>Your information is handled with full confidentiality.</p>
@@ -110,14 +112,8 @@
   </div>
 </div>
 
-<!-- JS -->
-<script src="js/common.js"></script>
-<script src="js/guidetours.js"></script>
-<script>function includeHTML(id, url) {fetch(url).then(resp => resp.text()).then(data => document.getElementById(id).innerHTML = data);}
-    includeHTML('navbarInclude', 'navbar.html');includeHTML('footerInclude', 'footer.html');</script>
-
-</body>
-  <div class="tour-modal" id="tourModal">
+<!-- TOUR MODAL (ARTIK BODY İÇİNDE) -->
+<div class="tour-modal" id="tourModal">
   <div class="tour-modal-content">
     <span class="close-tour-modal">&times;</span>
     <h2 id="modalTitle"></h2>
@@ -125,8 +121,9 @@
   </div>
 </div>
 
+<!-- JS -->
+<script src="js/common.js"></script>
+<script src="js/guidetours.js"></script>
+
+</body>
 </html>
-
-
-
-
