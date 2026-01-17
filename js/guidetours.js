@@ -74,3 +74,51 @@ modal.addEventListener("click", e => {
 
 });
 
+const tourData = {
+  oldcity: {
+    title: "Old City Private Tour",
+    img: "assets/tours/oldcity.jpg",
+    desc: "Discover the heart of Istanbul with a private licensed guide. A perfectly paced journey through history, culture and architecture.",
+    highlights: [
+      "Hagia Sophia & Blue Mosque",
+      "Topkapi Palace (Skip-the-line)",
+      "Basilica Cistern",
+      "Private chauffeur or walking option"
+    ]
+  }
+};
+
+const modal = document.getElementById("tourDetailModal");
+
+document.querySelectorAll(".tour-title").forEach(title => {
+  title.addEventListener("click", () => {
+    const key = title.dataset.tour;
+    const data = tourData[key];
+
+    if (!data) return;
+
+    document.getElementById("tourDetailTitle").innerText = data.title;
+    document.getElementById("tourDetailDesc").innerText = data.desc;
+    document.getElementById("tourDetailImg").src = data.img;
+
+    const ul = document.getElementById("tourDetailList");
+    ul.innerHTML = "";
+    data.highlights.forEach(item => {
+      const li = document.createElement("li");
+      li.innerText = item;
+      ul.appendChild(li);
+    });
+
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  });
+});
+
+document.querySelector(".close-tour-detail").onclick = closeTour;
+document.querySelector(".tour-detail-overlay").onclick = closeTour;
+
+function closeTour() {
+  modal.style.display = "none";
+  document.body.style.overflow = "";
+}
+
