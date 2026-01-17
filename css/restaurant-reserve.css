@@ -691,3 +691,35 @@ input[type="checkbox"] {
   box-shadow: 0 0 0 2px rgba(212,175,55,0.25);
 }
 
+/* ==============================
+   CHECKBOX FOCUS & HOVER
+============================== */
+
+/* Hover ile fark */
+input[type="checkbox"]:hover {
+  outline: none;
+  border: 2px solid #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+  background: rgba(212, 175, 55, 0.05);
+}
+
+/* Tab ile focus geldiğinde */
+input[type="checkbox"]:focus-visible {
+  outline: none;
+  border: 2px solid #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.35);
+  background: rgba(212, 175, 55, 0.08);
+}
+
+/* Checkbox + custom label wrapper */
+.child-checkbox:hover,
+.child-checkbox:focus-within {
+  background: rgba(212, 175, 55, 0.05);
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+/* Luxury glow effect */
+input[type="checkbox"]:checked:focus-visible {
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.5);
+}
