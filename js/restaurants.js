@@ -78,17 +78,17 @@ document.addEventListener("DOMContentLoaded", () => {
   ============================== */
   let iti;
 
-function initPhoneInput() {
-  iti = intlTelInput(phone, {
-    initialCountry: "us",
-    separateDialCode: true,
-    allowDropdown: true,
-    autoPlaceholder: "polite",
-    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
-  });
-}
+  function initPhoneInput() {
+    iti = intlTelInput(phone, {
+      initialCountry: "us",
+      separateDialCode: true,
+      allowDropdown: true,
+      autoPlaceholder: "polite",
+      utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
+    });
+  }
 
-initPhoneInput();
+  initPhoneInput();
 
   phone.addEventListener("keydown", e => {
     if (
@@ -220,7 +220,6 @@ initPhoneInput();
     });
   });
 
-  // Click dışına tıklanırsa dropdown kapat
   document.addEventListener("click", e => {
     if (!timeSelect.contains(e.target)) timeSelect.classList.remove("open");
     if (!guestsSelect.contains(e.target)) guestsSelect.classList.remove("open");
@@ -246,8 +245,13 @@ initPhoneInput();
   ageToggles.forEach(cb => {
     const input = document.getElementById(cb.dataset.target);
     cb.addEventListener("change", () => {
-      input.style.display = cb.checked ? "inline-block" : "none";
-      if (!cb.checked) input.value = "";
+      if (cb.checked) {
+        input.style.display = "inline-block";
+        setTimeout(() => input.focus(), 0);
+      } else {
+        input.style.display = "none";
+        input.value = "";
+      }
     });
   });
 
@@ -264,13 +268,23 @@ initPhoneInput();
   allergyGroup.style.display = "none";
 
   petsToggle.addEventListener("change", () => {
-    petsGroup.style.display = petsToggle.checked ? "flex" : "none";
-    if (!petsToggle.checked) petsTextarea.value = "";
+    if (petsToggle.checked) {
+      petsGroup.style.display = "flex";
+      setTimeout(() => petsTextarea.focus(), 0);
+    } else {
+      petsGroup.style.display = "none";
+      petsTextarea.value = "";
+    }
   });
 
   allergyToggle.addEventListener("change", () => {
-    allergyGroup.style.display = allergyToggle.checked ? "flex" : "none";
-    if (!allergyToggle.checked) allergyTextarea.value = "";
+    if (allergyToggle.checked) {
+      allergyGroup.style.display = "flex";
+      setTimeout(() => allergyTextarea.focus(), 0);
+    } else {
+      allergyGroup.style.display = "none";
+      allergyTextarea.value = "";
+    }
   });
 
   /* ==============================
@@ -289,28 +303,6 @@ initPhoneInput();
     if (!time.value) return showInlineAlert("Please select a time."), unlockSubmit();
     if (!guests.value) return showInlineAlert("Please select number of guests."), unlockSubmit();
 
-    if (childrenToggle.checked) {
-      let valid = false;
-      for (let toggle of ageToggles) {
-        if (toggle.checked) {
-          valid = true;
-          const input = document.getElementById(toggle.dataset.target);
-          if (!input.value.trim()) {
-            showInlineAlert("Please enter number of children.");
-            unlockSubmit();
-            return;
-          }
-        }
-      }
-      if (!valid) return showInlineAlert("Please select age group for children."), unlockSubmit();
-    }
-
-    if (petsToggle.checked && !petsTextarea.value.trim())
-      return showInlineAlert("Please describe your pet."), unlockSubmit();
-
-    if (allergyToggle.checked && !allergyTextarea.value.trim())
-      return showInlineAlert("Please specify your allergy."), unlockSubmit();
-
     const data = new FormData(form);
     data.set("phone", iti.getNumber());
 
@@ -323,65 +315,33 @@ initPhoneInput();
       showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
       form.reset();
 
-      iti.setCountry("us");
-      /* ==============================
-   PHONE INPUT – HARD RESET
-============================== */
+      iti.destroy();
+      phone.value = "";
+      initPhoneInput();
 
-// Plugin'i tamamen yok et
-iti.destroy();
+      flatpickr("#date", {
+        minDate: "today",
+        dateFormat: "Y-m-d",
+        disableMobile: true,
+        defaultDate: null
+      });
+      date.placeholder = "Select a date";
 
-// Input'u DOM seviyesinde temizle
-phone.value = "";
+      childrenToggle.checked = false;
+      childrenAges.style.display = "none";
 
-// Yeniden init et (US + temiz dropdown)
-initPhoneInput();
+      petsToggle.checked = false;
+      petsGroup.style.display = "none";
+      petsTextarea.value = "";
 
+      allergyToggle.checked = false;
+      allergyGroup.style.display = "none";
+      allergyTextarea.value = "";
 
-      const searchInput = document.querySelector(".iti__search-input");
-if (searchInput) searchInput.value = "";
-
-      timeSelect.classList.remove("has-value");
-      guestsSelect.classList.remove("has-value");
-
-      timeTrigger.textContent = "Select time";
-      guestsTrigger.textContent = "Select guests";
-
-      // =======================
-  // DATE PICKER RESET
-  // =======================
-  flatpickr("#date", {
-    minDate: "today",
-    dateFormat: "Y-m-d",
-    disableMobile: true,
-    defaultDate: null
-  });
-  date.placeholder = "Select a date";
-
-  // =======================
-  // CHILDREN / PETS / ALLERGY RESET
-  // =======================
-  childrenToggle.checked = false;
-  childrenAges.style.display = "none";
-  ageToggles.forEach(cb => {
-    cb.checked = false;
-    const input = document.getElementById(cb.dataset.target);
-    input.value = "";
-    input.style.display = "none";
-  });
-
-  petsToggle.checked = false;
-  petsGroup.style.display = "none";
-  petsTextarea.value = "";
-
-  allergyToggle.checked = false;
-  allergyGroup.style.display = "none";
-  allergyTextarea.value = "";
-      // Char count sıfırlama
-document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
-  const charCount = textarea.parentElement.querySelector(".char-count");
-  if (charCount) charCount.textContent = `0 / ${charCount.dataset.max}`;
-});
+      document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
+        const charCount = textarea.parentElement.querySelector(".char-count");
+        if (charCount) charCount.textContent = `0 / ${charCount.dataset.max}`;
+      });
 
       unlockSubmit();
     })
@@ -392,7 +352,3 @@ document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
   });
 
 });
-
-
-
-
