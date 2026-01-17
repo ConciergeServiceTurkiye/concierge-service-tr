@@ -325,6 +325,37 @@ document.addEventListener("DOMContentLoaded", () => {
       timeTrigger.textContent = "Select time";
       guestsTrigger.textContent = "Select guests";
 
+      // =======================
+  // DATE PICKER RESET
+  // =======================
+  flatpickr("#date", {
+    minDate: "today",
+    dateFormat: "Y-m-d",
+    disableMobile: true,
+    defaultDate: null
+  });
+  date.placeholder = "Select a date";
+
+  // =======================
+  // CHILDREN / PETS / ALLERGY RESET
+  // =======================
+  childrenToggle.checked = false;
+  childrenAges.style.display = "none";
+  ageToggles.forEach(cb => {
+    cb.checked = false;
+    const input = document.getElementById(cb.dataset.target);
+    input.value = "";
+    input.style.display = "none";
+  });
+
+  petsToggle.checked = false;
+  petsGroup.style.display = "none";
+  petsTextarea.value = "";
+
+  allergyToggle.checked = false;
+  allergyGroup.style.display = "none";
+  allergyTextarea.value = "";
+
       unlockSubmit();
     })
     .catch(() => {
@@ -334,3 +365,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
