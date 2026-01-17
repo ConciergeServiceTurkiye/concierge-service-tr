@@ -2,12 +2,19 @@
    HTML INCLUDE (NAVBAR & FOOTER)
 ========================= */
 function includeHTML(targetId, file, callback) {
+  const scrollY = window.scrollY;
+
   fetch(file)
     .then(res => res.text())
     .then(html => {
       const el = document.getElementById(targetId);
       if (!el) return;
       el.innerHTML = html;
+
+      requestAnimationFrame(() => {
+        window.scrollTo(0, scrollY);
+      });
+
       if (typeof callback === "function") callback();
     });
 }
@@ -97,3 +104,4 @@ document.addEventListener("DOMContentLoaded", () => {
   includeHTML("navbarInclude", "navbar.html", initNavbar);
   includeHTML("footerInclude", "footer.html", initModals);
 });
+
