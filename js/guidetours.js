@@ -29,7 +29,6 @@ const tourData = {
         "Basilica Cistern",
         "Private chauffeur or walking option"
       ]
-    }
   },
   bosphorus: {
     title: "Bosphorus Shore Experience",
@@ -91,6 +90,7 @@ document.querySelectorAll(".tour-title").forEach(title => {
   }
 
 });
+
 
 
 
