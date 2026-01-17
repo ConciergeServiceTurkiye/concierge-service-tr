@@ -319,6 +319,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       iti.setCountry("us");
 
+      const searchInput = document.querySelector(".iti__search-input");
+if (searchInput) searchInput.value = "";
+
       timeSelect.classList.remove("has-value");
       guestsSelect.classList.remove("has-value");
 
@@ -365,4 +368,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
