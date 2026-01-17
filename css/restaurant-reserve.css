@@ -2,8 +2,8 @@
    RESTAURANT RESERVE – HERO
 ================================ */
 .restaurant-hero {
-  min-height: 100vh;
-  padding-top: var(--nav-h);
+  min-height: 45vh;
+  padding-top: 120px;
   background:
     linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.75)),
     url("../assets/contact-bg.jpg") center / cover no-repeat;
