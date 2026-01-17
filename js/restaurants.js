@@ -76,13 +76,19 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ==============================
      PHONE (INTL TEL INPUT)
   ============================== */
-  const iti = intlTelInput(phone, {
+  let iti;
+
+function initPhoneInput() {
+  iti = intlTelInput(phone, {
     initialCountry: "us",
     separateDialCode: true,
     allowDropdown: true,
     autoPlaceholder: "polite",
     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
   });
+}
+
+initPhoneInput();
 
   phone.addEventListener("keydown", e => {
     if (
@@ -318,6 +324,19 @@ document.addEventListener("DOMContentLoaded", () => {
       form.reset();
 
       iti.setCountry("us");
+      /* ==============================
+   PHONE INPUT – HARD RESET
+============================== */
+
+// Plugin'i tamamen yok et
+iti.destroy();
+
+// Input'u DOM seviyesinde temizle
+phone.value = "";
+
+// Yeniden init et (US + temiz dropdown)
+initPhoneInput();
+
 
       const searchInput = document.querySelector(".iti__search-input");
 if (searchInput) searchInput.value = "";
@@ -373,6 +392,7 @@ document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
   });
 
 });
+
 
 
 
