@@ -11,23 +11,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const filter = btn.dataset.filter;
 
       cards.forEach(card => {
-        if (filter === "all" || card.classList.contains(filter)) {
-          card.style.display = "flex";
-        } else {
-          card.style.display = "none";
-        }
+        card.style.display =
+          filter === "all" || card.classList.contains(filter)
+            ? "flex"
+            : "none";
       });
     });
   });
 const tourData = {
   oldcity: {
-    title: "Old City Private Tour",
-    body: "Sultanahmet bölgesinde Ayasofya, Topkapı Sarayı, Blue Mosque ve Basilica Cistern ziyaretleri. Araçlı veya walking seçenekli, özel planlanmış yarım veya tam gün tur."
-  },
-  highlights: {
-    title: "Istanbul Highlights Tour",
-    body: "Old City, Boğaz hattı, panoramik noktalar ve şehrin iki yakasını kapsayan tam günlük özel şehir turu."
-  },
+      title: "Old City Private Tour",
+      img: "assets/oldcityprivatetour.jpg",
+      desc: "Explore Sultanahmet with a private licensed guide including Hagia Sophia, Blue Mosque, Topkapi Palace and Basilica Cistern.",
+      highlights: [
+        "Hagia Sophia & Blue Mosque",
+        "Topkapi Palace",
+        "Basilica Cistern",
+        "Private chauffeur or walking option"
+      ]
+    }
+  };
   bosphorus: {
     title: "Bosphorus Shore Experience",
     body: "Ortaköy, Bebek, Arnavutköy boyunca sahil hattı, fotoğraf molaları ve Boğaz manzaralı duraklar."
@@ -51,74 +54,42 @@ const tourData = {
 };
 
 
-const modal = document.getElementById("tourModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalBody = document.getElementById("modalBody");
+ const modal = document.getElementById("tourDetailModal");
+  const titleEl = document.getElementById("tourDetailTitle");
+  const descEl = document.getElementById("tourDetailDesc");
+  const imgEl = document.getElementById("tourDetailImg");
+  const listEl = document.getElementById("tourDetailList");
 
 document.querySelectorAll(".tour-title").forEach(title => {
-  title.addEventListener("click", () => {
-    const key = title.dataset.tour;
-    modalTitle.innerText = tourData[key].title;
-    modalBody.innerText = tourData[key].body;
-    modal.style.display = "flex";
-  });
-});
+    title.addEventListener("click", () => {
+      const key = title.dataset.tour;
+      const data = tourData[key];
+      if (!data) return;
 
-document.querySelector(".close-tour-modal").onclick = () => {
-  modal.style.display = "none";
-};
+      titleEl.innerText = data.title;
+      descEl.innerText = data.desc;
+      imgEl.src = data.img;
 
-modal.addEventListener("click", e => {
-  if (e.target === modal) modal.style.display = "none";
-});
+      listEl.innerHTML = "";
+      data.highlights.forEach(h => {
+        const li = document.createElement("li");
+        li.textContent = h;
+        listEl.appendChild(li);
+      });
 
-});
-
-const tourData = {
-  oldcity: {
-    title: "Old City Private Tour",
-    img: "assets/tours/oldcity.jpg",
-    desc: "Discover the heart of Istanbul with a private licensed guide. A perfectly paced journey through history, culture and architecture.",
-    highlights: [
-      "Hagia Sophia & Blue Mosque",
-      "Topkapi Palace (Skip-the-line)",
-      "Basilica Cistern",
-      "Private chauffeur or walking option"
-    ]
-  }
-};
-
-const modal = document.getElementById("tourDetailModal");
-
-document.querySelectorAll(".tour-title").forEach(title => {
-  title.addEventListener("click", () => {
-    const key = title.dataset.tour;
-    const data = tourData[key];
-
-    if (!data) return;
-
-    document.getElementById("tourDetailTitle").innerText = data.title;
-    document.getElementById("tourDetailDesc").innerText = data.desc;
-    document.getElementById("tourDetailImg").src = data.img;
-
-    const ul = document.getElementById("tourDetailList");
-    ul.innerHTML = "";
-    data.highlights.forEach(item => {
-      const li = document.createElement("li");
-      li.innerText = item;
-      ul.appendChild(li);
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
     });
-
-    modal.style.display = "flex";
-    document.body.style.overflow = "hidden";
   });
+
+  document.querySelector(".close-tour-detail").onclick = closeModal;
+  document.querySelector(".tour-detail-overlay").onclick = closeModal;
+
+  function closeModal() {
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
 });
 
-document.querySelector(".close-tour-detail").onclick = closeTour;
-document.querySelector(".tour-detail-overlay").onclick = closeTour;
-
-function closeTour() {
-  modal.style.display = "none";
-  document.body.style.overflow = "";
-}
 
