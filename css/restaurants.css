@@ -11,9 +11,23 @@
   justify-content: center;
   text-align: center; }
 
-.hero-inner h1 { margin-top:0; font-size: 42px; color: var(--gold); letter-spacing: 2px; margin-bottom: -10px; }
+.hero-inner {
+  margin: 0;
+  padding: 0;
+}
 
-.hero-inner p {margin-top:20px; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: rgba(212,175,55,.8); }
+.hero-inner h1 {
+  font-size: 42px;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.hero-inner p {
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.75);
+  text-transform: uppercase;
+}
 
 /* ==============================
    GRID
@@ -81,6 +95,7 @@
 @media (max-width: 768px) {.restaurants-hero { padding-top: calc(var(--nav-h) + 40px); min-height: 45vh; }}
 
 @media (max-width: 768px) {.restaurants-section { padding-top: 30px; }}
+
 
 
 
