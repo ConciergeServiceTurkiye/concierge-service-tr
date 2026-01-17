@@ -30,7 +30,7 @@ const tourData = {
         "Private chauffeur or walking option"
       ]
     }
-  };
+  },
   bosphorus: {
     title: "Bosphorus Shore Experience",
     body: "Ortaköy, Bebek, Arnavutköy boyunca sahil hattı, fotoğraf molaları ve Boğaz manzaralı duraklar."
@@ -91,5 +91,6 @@ document.querySelectorAll(".tour-title").forEach(title => {
   }
 
 });
+
 
 
