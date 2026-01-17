@@ -2,7 +2,14 @@
    RESTAURANTS PAGE
 ============================== */
 
-.restaurants-hero { min-height: 28vh; padding-top: 20px; background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.85)); display: flex; align-items: flex-start; justify-content: center; text-align: center; }
+.restaurants-hero { min-height: 45vh;
+  padding-top: 120px;
+  background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
+              url("../assets/tours-hero.jpg") center / cover no-repeat;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: center; }
 
 .hero-inner h1 { margin-top:0; font-size: 42px; color: var(--gold); letter-spacing: 2px; margin-bottom: -10px; }
 
@@ -74,6 +81,7 @@
 @media (max-width: 768px) {.restaurants-hero { padding-top: calc(var(--nav-h) + 40px); min-height: 45vh; }}
 
 @media (max-width: 768px) {.restaurants-section { padding-top: 30px; }}
+
 
 
 
