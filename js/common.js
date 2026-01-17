@@ -35,18 +35,24 @@ function initNavbar() {
 
   // Dropdowns (mobile)
   document.querySelectorAll(".dropdown > a").forEach(link => {
-    link.addEventListener("click", e => {
-      if (window.innerWidth <= 992) {
+  link.addEventListener("click", e => {
+    if (window.innerWidth <= 992) {
+      const parent = link.parentElement;
+
+      // ⛔ SADECE submenu varsa engelle
+      if (parent.querySelector(".dropdown-menu")) {
         e.preventDefault();
-        const parent = link.parentElement;
+
         parent.classList.toggle("open");
 
         document.querySelectorAll(".dropdown").forEach(d => {
           if (d !== parent) d.classList.remove("open");
         });
       }
-    });
+      // submenu yoksa → link NORMAL çalışır
+    }
   });
+});
 
   // Link tıklanınca menüyü kapat
   document.querySelectorAll(".nav-menu a").forEach(a => {
