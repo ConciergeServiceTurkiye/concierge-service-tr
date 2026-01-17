@@ -642,4 +642,10 @@ input[type="checkbox"] {
 .restaurant-form input[type="checkbox"] {
   align-self: flex-start;
 }
+/* Checkbox seçili + focus */
+.checkbox-option input[type="checkbox"]:checked:focus-visible + .checkbox-custom {
+  background: rgba(212, 175, 55, 0.18);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.35);
+  border-color: #f1d97a;
+}
 
