@@ -358,6 +358,11 @@ if (searchInput) searchInput.value = "";
   allergyToggle.checked = false;
   allergyGroup.style.display = "none";
   allergyTextarea.value = "";
+      // Char count sıfırlama
+document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
+  const charCount = textarea.parentElement.querySelector(".char-count");
+  if (charCount) charCount.textContent = `0 / ${charCount.dataset.max}`;
+});
 
       unlockSubmit();
     })
@@ -368,5 +373,6 @@ if (searchInput) searchInput.value = "";
   });
 
 });
+
 
 
