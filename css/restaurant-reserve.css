@@ -663,6 +663,12 @@ input[type="checkbox"] {
   gap: 8px;
 }
 
+.age-item { /* her checkbox + input sarmalayıcı */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* Small number input next to checkbox */
 .child-input {
   display: none; /* JS açacak */
