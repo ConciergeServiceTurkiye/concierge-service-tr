@@ -386,7 +386,7 @@
 }
 
 /* ===== LUXURY TEST CARD (ONLY 2nd CARD) ===== */
-.tour-card.luxury-test {
+.tour-card {
   position: relative;
   overflow: hidden;
   transform: scale(1);
@@ -394,7 +394,7 @@
 }
 
 /* Invisible grain */
-.tour-card.luxury-test::before {
+.tour-card::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -405,7 +405,7 @@
 }
 
 /* Ghost map line */
-.tour-card.luxury-test::after {
+.tour-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -417,10 +417,10 @@
   pointer-events: none;
   z-index: 0;
 }
-.tour-card.luxury-test:hover {
+.tour-card:hover {
   transform: scale(1.035);
 }
-.tour-card.luxury-test .tour-title {
+.tour-card .tour-title {
   position: relative;
   text-align: center;
   color: #d8c7a2; /* champagne gold */
@@ -428,7 +428,7 @@
 }
 
 /* underline */
-.tour-card.luxury-test .tour-title::after {
+.tour-card .tour-title::after {
   content: "";
   position: absolute;
   left: 0;
@@ -446,14 +446,14 @@
   transition: transform 0.45s ease;
 }
 
-.tour-card.luxury-test:hover .tour-title::after {
+.tour-card:hover .tour-title::after {
   transform: scaleX(1);
 }
-.tour-card.luxury-test {
+.tour-card {
   cursor: pointer;
 }
 
-.tour-card.luxury-test .tour-btn {
+.tour-card .tour-btn {
   position: relative;
   z-index: 5;
 }
@@ -466,7 +466,7 @@ body {
     ),
     #0b0b0b;
 }
-.tour-card.luxury-test::before {
+.tour-card::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -479,7 +479,7 @@ body {
   opacity: 0.4;
   pointer-events: none;
 }
-.tour-card.luxury-test::after {
+.tour-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -488,7 +488,7 @@ body {
   pointer-events: none;
 }
 
-.tour-card.luxury-test::before {
+.tour-card::before {
   content: "";
   position: absolute;
   inset: -40%;
@@ -502,9 +502,10 @@ body {
   transition: transform 1.1s ease;
   pointer-events: none;
 }
-.tour-card.luxury-test:hover::before {
+.tour-card:hover::before {
   transform: translateX(100%);
 }
+
 
 
 
