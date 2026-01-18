@@ -37,7 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
         "Private chauffeur or walking option"
       ]
     },
-    bosphorus: {
+
+    highlights: {
+      title: "Istanbul Highlights Tour",
+      img: "assets/highlights.jpg",
+      desc: "Full day experience covering Old City, Bosphorus line and panoramic viewpoints.",
+      highlights: ["Old City", 
+                   "Bosphorus", 
+                   "Panoramic viewpoints"
+                  ]
+  },
+    
+      bosphorus: {
       title: "Bosphorus Shore Experience",
       img: "assets/bosphorus.jpg",
       desc: "Ortaköy, Bebek, Arnavutköy shoreline with photo stops and Bosphorus views.",
@@ -148,3 +159,4 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".tour-detail-overlay").onclick = closeModal;
 
 });
+
