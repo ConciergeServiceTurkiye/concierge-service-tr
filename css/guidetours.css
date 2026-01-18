@@ -385,4 +385,77 @@
   transform: scaleX(1);
 }
 
+/* ===== LUXURY TEST CARD (ONLY 2nd CARD) ===== */
+.tour-card.luxury-test {
+  position: relative;
+  overflow: hidden;
+  transform: scale(1);
+  transition: transform 0.45s cubic-bezier(.4,0,.2,1);
+}
+
+/* Invisible grain */
+.tour-card.luxury-test::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/grain.png");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ghost map line */
+.tour-card.luxury-test::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("../assets/istanbul-map-line.svg");
+  background-repeat: no-repeat;
+  background-position: 120% 20%;
+  background-size: 140%;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+.tour-card.luxury-test:hover {
+  transform: scale(1.035);
+}
+.tour-card.luxury-test .tour-title {
+  position: relative;
+  text-align: center;
+  color: #d8c7a2; /* champagne gold */
+  z-index: 1;
+}
+
+/* underline */
+.tour-card.luxury-test .tour-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #d8c7a2,
+    transparent
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s ease;
+}
+
+.tour-card.luxury-test:hover .tour-title::after {
+  transform: scaleX(1);
+}
+.tour-card.luxury-test {
+  cursor: pointer;
+}
+
+.tour-card.luxury-test .tour-btn {
+  position: relative;
+  z-index: 5;
+}
+
 
