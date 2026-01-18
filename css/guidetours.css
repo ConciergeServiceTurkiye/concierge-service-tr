@@ -343,4 +343,16 @@
   cursor: pointer;
 }
 
+.tour-card {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  transform-origin: center;
+}
+
+.tour-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+}
+
 
