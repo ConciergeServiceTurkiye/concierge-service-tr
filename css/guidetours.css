@@ -488,5 +488,23 @@ body {
   pointer-events: none;
 }
 
+.tour-card.luxury-test::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(212,175,55,0.12),
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 1.1s ease;
+  pointer-events: none;
+}
+.tour-card.luxury-test:hover::before {
+  transform: translateX(100%);
+}
+
 
 
