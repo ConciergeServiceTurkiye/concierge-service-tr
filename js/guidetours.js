@@ -114,7 +114,10 @@ document.addEventListener("DOMContentLoaded", () => {
      OPEN MODAL FROM CARD
   ========================= */
   document.querySelectorAll(".tour-card").forEach(card => {
-    card.addEventListener("click", () => {
+    card.addEventListener("click", e => {
+  
+      // Eğer buton veya link tıklandıysa modal açma
+  if (e.target.closest(".tour-btn")) return;
       const key = card.dataset.tour;
       const data = tourData[key];
       if (!data) return;
@@ -159,4 +162,5 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".tour-detail-overlay").onclick = closeModal;
 
 });
+
 
