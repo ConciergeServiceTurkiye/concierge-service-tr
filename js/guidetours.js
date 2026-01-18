@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     highlights: {
       title: "Istanbul Highlights Tour",
-      img: "assets/highlights.jpg",
+      img: "assets/highlightstour.jpg",
       desc: "Full day experience covering Old City, Bosphorus line and panoramic viewpoints.",
       highlights: ["Old City", 
                    "Bosphorus", 
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
       bosphorus: {
       title: "Bosphorus Shore Experience",
-      img: "assets/bosphorus.jpg",
+      img: "assets/bosphorusguidetour.jpg",
       desc: "Ortaköy, Bebek, Arnavutköy shoreline with photo stops and Bosphorus views.",
       highlights: [
         "Scenic coastal route",
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     streetfood: {
       title: "Street Food Discovery",
-      img: "assets/streetfood.jpg",
+      img: "assets/streetfoodtour.jpg",
       desc: "Discover Istanbul’s iconic street flavors in Eminönü, Karaköy or Kadıköy.",
       highlights: [
         "Local tastes",
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     cuisine: {
       title: "Turkish Cuisine Experience",
-      img: "assets/cuisine.jpg",
+      img: "assets/cuisinetour.jpg",
       desc: "A refined gastronomy-focused experience at selected Turkish restaurants.",
       highlights: [
         "Meze culture",
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     asian: {
       title: "Asian Side Tour",
-      img: "assets/asian.jpg",
+      img: "assets/asiantour.jpg",
       desc: "Kadıköy, Moda, Çamlıca Hill and Üsküdar waterfront exploration.",
       highlights: [
         "Local neighborhoods",
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     custom: {
       title: "Tailor-Made City Tour",
-      img: "assets/custom.jpg",
+      img: "assets/customtour.jpg",
       desc: "Fully customized private city tour designed around guest preferences.",
       highlights: [
         "100% personalized",
@@ -162,5 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".tour-detail-overlay").onclick = closeModal;
 
 });
+
 
 
