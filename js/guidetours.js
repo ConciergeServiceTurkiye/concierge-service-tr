@@ -81,15 +81,16 @@ document.querySelectorAll(".tour-title").forEach(title => {
     });
   });
 
-  document.querySelector(".close-tour-detail").onclick = closeModal;
-  document.querySelector(".tour-detail-overlay").onclick = closeModal;
-
   function closeModal() {
     modal.style.display = "none";
     document.body.style.overflow = "";
   }
 
+    document.querySelector(".close-tour-detail").onclick = closeModal;
+  document.querySelector(".tour-detail-overlay").onclick = closeModal;
+
 });
+
 
 
 
