@@ -505,29 +505,3 @@ body {
 .tour-card:hover::before {
   transform: translateX(100%);
 }
-
-.tour-card {
-  position: relative;
-  background: #111;
-}
-
-.tour-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: red;
-  opacity: 0.2;
-  z-index: 1;
-}
-
-.tour-card > * {
-  position: relative;
-  z-index: 2;
-}
-
-
-
-
-
-
-
