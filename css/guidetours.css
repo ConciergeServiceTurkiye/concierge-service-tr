@@ -399,7 +399,7 @@
   position: absolute;
   inset: 0;
   background-image: url("../assets/grain.png");
-  opacity: 2;
+  opacity: 0,04;
   pointer-events: none;
   z-index: 0;
 }
@@ -505,6 +505,7 @@ body {
 .tour-card:hover::before {
   transform: translateX(100%);
 }
+
 
 
 
