@@ -1,5 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* =========================
+     FILTER BUTTONS
+  ========================= */
   const buttons = document.querySelectorAll(".filter-btn");
   const cards = document.querySelectorAll(".tour-card");
 
@@ -18,8 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
-const tourData = {
-  oldcity: {
+
+  /* =========================
+     TOUR DATA
+  ========================= */
+  const tourData = {
+    oldcity: {
       title: "Old City Private Tour",
       img: "assets/oldcityprivatetour.jpg",
       desc: "Explore Sultanahmet with a private licensed guide including Hagia Sophia, Blue Mosque, Topkapi Palace and Basilica Cistern.",
@@ -29,39 +36,75 @@ const tourData = {
         "Basilica Cistern",
         "Private chauffeur or walking option"
       ]
-  },
-  bosphorus: {
-    title: "Bosphorus Shore Experience",
-    body: "Ortaköy, Bebek, Arnavutköy boyunca sahil hattı, fotoğraf molaları ve Boğaz manzaralı duraklar."
-  },
-  streetfood: {
-    title: "Street Food Discovery",
-    body: "Eminönü, Karaköy veya Kadıköy’de İstanbul’un sokak lezzetlerini keşfettiğiniz local deneyim."
-  },
-  cuisine: {
-    title: "Turkish Cuisine Experience",
-    body: "Geleneksel Türk mutfağını temsil eden seçilmiş restoranlarda meze kültürü, ana yemekler ve tatlılarla gastronomi odaklı deneyim."
-  },
-  asian: {
-    title: "Asian Side Tour",
-    body: "Kadıköy, Moda, Çamlıca Tepesi ve Üsküdar sahil hattını kapsayan, İstanbul’un daha local yüzünü gösteren yarım günlük tur."
-  },
-  custom: {
-    title: "Tailor-Made City Tour",
-    body: "Misafirin ilgi alanı, zamanı ve beklentilerine göre sıfırdan planlanan, tamamen kişiye özel şehir turu."
-  }
-};
+    },
+    bosphorus: {
+      title: "Bosphorus Shore Experience",
+      img: "assets/bosphorus.jpg",
+      desc: "Ortaköy, Bebek, Arnavutköy shoreline with photo stops and Bosphorus views.",
+      highlights: [
+        "Scenic coastal route",
+        "Photo stops",
+        "Local neighborhoods",
+        "Private chauffeur"
+      ]
+    },
+    streetfood: {
+      title: "Street Food Discovery",
+      img: "assets/streetfood.jpg",
+      desc: "Discover Istanbul’s iconic street flavors in Eminönü, Karaköy or Kadıköy.",
+      highlights: [
+        "Local tastes",
+        "Hidden spots",
+        "Authentic experience"
+      ]
+    },
+    cuisine: {
+      title: "Turkish Cuisine Experience",
+      img: "assets/cuisine.jpg",
+      desc: "A refined gastronomy-focused experience at selected Turkish restaurants.",
+      highlights: [
+        "Meze culture",
+        "Traditional dishes",
+        "Desserts & stories"
+      ]
+    },
+    asian: {
+      title: "Asian Side Tour",
+      img: "assets/asian.jpg",
+      desc: "Kadıköy, Moda, Çamlıca Hill and Üsküdar waterfront exploration.",
+      highlights: [
+        "Local neighborhoods",
+        "Scenic views",
+        "Half-day tour"
+      ]
+    },
+    custom: {
+      title: "Tailor-Made City Tour",
+      img: "assets/custom.jpg",
+      desc: "Fully customized private city tour designed around guest preferences.",
+      highlights: [
+        "100% personalized",
+        "Flexible timing",
+        "Luxury planning"
+      ]
+    }
+  };
 
-
- const modal = document.getElementById("tourDetailModal");
+  /* =========================
+     MODAL ELEMENTS
+  ========================= */
+  const modal = document.getElementById("tourDetailModal");
   const titleEl = document.getElementById("tourDetailTitle");
   const descEl = document.getElementById("tourDetailDesc");
   const imgEl = document.getElementById("tourDetailImg");
   const listEl = document.getElementById("tourDetailList");
 
-document.querySelectorAll(".tour-title").forEach(title => {
-    title.addEventListener("click", () => {
-      const key = title.dataset.tour;
+  /* =========================
+     OPEN MODAL FROM CARD
+  ========================= */
+  document.querySelectorAll(".tour-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const key = card.dataset.tour;
       const data = tourData[key];
       if (!data) return;
 
@@ -70,28 +113,38 @@ document.querySelectorAll(".tour-title").forEach(title => {
       imgEl.src = data.img;
 
       listEl.innerHTML = "";
-      data.highlights.forEach(h => {
-        const li = document.createElement("li");
-        li.textContent = h;
-        listEl.appendChild(li);
-      });
+      if (data.highlights) {
+        data.highlights.forEach(h => {
+          const li = document.createElement("li");
+          li.textContent = h;
+          listEl.appendChild(li);
+        });
+      }
 
       modal.style.display = "flex";
       document.body.style.overflow = "hidden";
     });
   });
 
+  /* =========================
+     BUTTON CLICK = NO MODAL
+  ========================= */
+  document.querySelectorAll(".tour-btn").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.stopPropagation();
+      // burada request / form logic olabilir
+    });
+  });
+
+  /* =========================
+     CLOSE MODAL
+  ========================= */
   function closeModal() {
     modal.style.display = "none";
     document.body.style.overflow = "";
   }
 
-    document.querySelector(".close-tour-detail").onclick = closeModal;
+  document.querySelector(".close-tour-detail").onclick = closeModal;
   document.querySelector(".tour-detail-overlay").onclick = closeModal;
 
 });
-
-
-
-
-
