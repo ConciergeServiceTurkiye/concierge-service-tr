@@ -91,6 +91,11 @@
   background-position: center;
   background-size: 90%;
 }
+.tour-card::before,
+.tour-card::after {
+  opacity: 0.25 !important;
+}
+
 
 
 
