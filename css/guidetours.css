@@ -86,12 +86,3 @@
                           transform: translateX(-100%); transition: transform 1.1s ease; pointer-events: none; }/*altın ışık sweep efekti*/
       .tour-card:hover::before { transform: translateX(100%); }/*hoverda ışık sweep animasyonu*/
 
-.tour-card::after {
-  content: "MAP";
-  color: red;
-  font-size: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
