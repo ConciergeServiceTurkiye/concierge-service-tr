@@ -86,16 +86,3 @@
                           transform: translateX(-100%); transition: transform 1.1s ease; pointer-events: none; }/*altın ışık sweep efekti*/
       .tour-card:hover::before { transform: translateX(100%); }/*hoverda ışık sweep animasyonu*/
 
-.tour-card::after {
-  opacity: 0.3;
-  background-position: center;
-  background-size: 90%;
-}
-.tour-card::before,
-.tour-card::after {
-  opacity: 0.25 !important;
-}
-
-
-
-
