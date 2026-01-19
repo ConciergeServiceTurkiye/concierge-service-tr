@@ -1,303 +1,88 @@
-/* =========================
-   HERO
-========================= */
-
-.guidetours-hero {
-  min-height: 45vh;
-  padding-top: 120px;
-  background:
-    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
-    url("../assets/guidetours.jpg") center / cover no-repeat;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  text-align: center;
-}
-
-.hero-inner h1 {
-  font-size: 42px;
-  color: var(--gold);
-  margin-bottom: 10px;
-}
-
-.hero-inner p {
-  font-size: 14px;
-  letter-spacing: 2px;
-  color: rgba(255,255,255,0.75);
-  text-transform: uppercase;
-}
-
-/* =========================
-   FILTERS
-========================= */
-
-.tour-filters {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  padding: 30px 20px;
-  flex-wrap: wrap;
-}
-
-.filter-btn {
-  background: transparent;
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  padding: 10px 22px;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: all .25s ease;
-}
-
-.filter-btn.active,
-.filter-btn:hover {
-  background: var(--gold);
-  color: #000;
-}
-
-/* =========================
-   GRID
-========================= */
-
-.tours-grid {
-  max-width: 1200px;
-  margin: 40px auto 80px;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 28px;
-}
-
-/* =========================
-   TOUR CARD (FINAL LUXURY)
-========================= */
-
-.tour-card {
-  position: relative;
-  background: rgba(10,10,10,0.92);
-  border: 1px solid rgba(212,175,55,0.45);
-  border-radius: 16px;
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
-  transition: transform .4s ease, box-shadow .4s ease;
-}
-
-/* Hover scale */
-.tour-card:hover {
-  transform: scale(1.035);
-  box-shadow: 0 30px 70px rgba(0,0,0,0.55);
-}
-
-/* Grain texture */
-.tour-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("../assets/grain.png");
-  opacity: 0.06;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Ghost map */
-.tour-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("../assets/istanbul-map-line.svg");
-  background-repeat: no-repeat;
-  background-position: 110% 15%;
-  background-size: 140%;
-  opacity: 0.04;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Bring content above textures */
-.tour-card > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* =========================
-   CARD CONTENT
-========================= */
-
-.tour-title {
-  text-align: center;
-  color: var(--gold);
-  font-size: 20px;
-  position: relative;
-  margin-bottom: 20px;
-}
-
-/* Animated underline */
-.tour-title::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -12px;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #d4af37,
-    transparent
-  );
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .45s ease;
-}
-
-.tour-card:hover .tour-title::after {
-  transform: scaleX(1);
-}
-
-.tour-card p {
-  font-size: 14px;
-  color: rgba(255,255,255,0.75);
-  line-height: 1.5;
-}
-
-.tour-tag {
-  font-size: 12px;
-  letter-spacing: 1px;
-  color: var(--gold-soft);
-}
-
-/* =========================
-   BUTTON
-========================= */
-
-.tour-btn {
-  margin-top: auto;
-  text-align: center;
-  padding: 12px;
-  border-radius: 28px;
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  text-decoration: none;
-  transition: background .25s, color .25s;
-}
-
-.tour-btn:hover {
-  background: var(--gold);
-  color: #000;
-}
-
-.tour-btn.gold {
-  background: var(--gold);
-  color: #000;
-}
-
-/* =========================
-   DETAIL MODAL
-========================= */
-
-.tour-detail-modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.tour-detail-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,.75);
-}
-
-.tour-detail-content {
-  position: relative;
-  background: #0b0b0b;
-  max-width: 900px;
-  width: 92%;
-  border-radius: 22px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border: 1px solid rgba(212,175,55,.5);
-  box-shadow: 0 0 60px rgba(212,175,55,.25);
-}
-
-.tour-detail-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.tour-detail-text {
-  padding: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.tour-detail-text h2 {
-  color: var(--gold);
-  font-size: 28px;
-}
-
-.tour-detail-text p {
-  color: rgba(255,255,255,.8);
-  line-height: 1.6;
-}
-
-.tour-detail-highlights {
-  list-style: none;
-  padding: 0;
-}
-
-.tour-detail-highlights li {
-  padding-left: 18px;
-  position: relative;
-  margin-bottom: 10px;
-}
-
-.tour-detail-highlights li::before {
-  content: "✦";
-  position: absolute;
-  left: 0;
-  color: var(--gold);
-}
-
-.tour-detail-btn {
-  margin-top: auto;
-  text-align: center;
-  padding: 14px;
-  border-radius: 30px;
-  background: linear-gradient(135deg, var(--gold), #b89632);
-  color: #000;
-  text-decoration: none;
-}
-
-.close-tour-detail {
-  position: absolute;
-  top: 18px;
-  right: 22px;
-  font-size: 24px;
-  color: var(--gold);
-  cursor: pointer;
-}
-
-/* =========================
-   PAGE BACKGROUND
-========================= */
-
-body {
-  background:
-    radial-gradient(
-      800px circle at 70% 20%,
-      rgba(212,175,55,0.06),
-      transparent 60%
-    ),
-    #0b0b0b;
-}
+/* ========================= HERO ========================= */
+      .guidetours-hero { min-height: 45vh; padding-top: 120px; background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)), url("../assets/guidetours.jpg") center / cover no-repeat;
+                        display: flex; align-items: flex-start; justify-content: center; text-align: center; }
+      .hero-inner { margin: 0; padding: 0; }
+      .hero-inner h1 { font-size: 42px; color: var(--gold); margin-bottom: 10px; } 
+      .hero-inner p { font-size: 14px; letter-spacing: 2px; color: rgba(255,255,255,0.75); text-transform: uppercase; }
+/* ========================= FILTERS ========================= */ 
+      .tour-filters { display: flex; justify-content: center; gap: 14px; padding: 30px 20px; margin-top: 20px; flex-wrap: wrap; }
+      .filter-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 10px 22px; border-radius: 30px; cursor: pointer;
+                   transition: background .25s, color .25s, transform .25s; }
+      .filter-btn:hover { transform: translateY(-1px); }
+      .filter-btn.active, .filter-btn:hover { background: var(--gold); color: #000; }
+/* ========================= TOURS GRID ========================= */ 
+      .tours-grid { max-width: 1200px; margin: 20px auto 80px; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+/* ========================= TOUR CARD ========================= */
+      .tour-card { background: rgba(10,10,10,0.9); border: 1px solid rgba(212,175,55,0.4); border-radius: 16px; padding: 28px; display: flex; flex-direction: column;
+                  gap: 14px; box-shadow: 0 0 25px rgba(212,175,55,0.12); }
+      .tour-card h3 { color: var(--gold); font-size: 20px; }
+      .tour-card p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+      .tour-tag { font-size: 12px; letter-spacing: 1px; color: var(--gold-soft); }
+/* ========================= BUTTONS ========================= */
+      .tour-btn { margin-top: auto; text-align: center; padding: 12px; border-radius: 28px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none;
+                 transition: background .25s, color .25s; }
+      .tour-btn:hover { background: var(--gold); color: #000; }
+      .tour-btn.gold { background: var(--gold); color: #000; }
+/* ========================= THEME COLORS ========================= */
+      .tour-card[data-theme="gold"] { border-color: rgba(212,175,55,.6); box-shadow: 0 0 30px rgba(212,175,55,.15); }
+      .tour-card[data-theme="emerald"] { border-color: rgba(0,180,140,.5); box-shadow: 0 0 30px rgba(0,180,140,.15); }
+      .tour-card[data-theme="blue"] { border-color: rgba(70,130,180,.5); box-shadow: 0 0 30px rgba(70,130,180,.15); }
+      .tour-card[data-theme="wine"] { border-color: rgba(140,40,60,.5); box-shadow: 0 0 30px rgba(140,40,60,.15); }
+      .tour-card[data-theme="copper"] { border-color: rgba(184,115,51,.6); box-shadow: 0 0 30px rgba(184,115,51,.18); }
+      .tour-card[data-theme="purple"] { border-color: rgba(120,80,180,.55); box-shadow: 0 0 30px rgba(120,80,180,.18); }
+      .tour-card[data-theme="blackgold"] { border-color: rgba(212,175,55,.8); background: linear-gradient(160deg, #050505, #0c0c0c);
+                                          box-shadow: 0 0 40px rgba(212,175,55,.35); }
+/* ========================= INTERACTIVE TITLES ========================= */
+      .tour-title { cursor: pointer; position: relative; display: inline-block; transition: all .35s ease; }
+      .tour-title::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px; background: var(--gold); transition: width .35s ease; }
+      .tour-title:hover { letter-spacing: 1px; transform: translateY(-2px); }
+      .tour-title:hover::after { width: 100%; }
+/* ========================= MODAL ========================= */
+      .tour-modal { position: fixed; inset: 0; background: rgba(0,0,0,.75); display: none; align-items: center; justify-content: center; z-index: 9999; }
+      .tour-modal-content { position: relative; background: #0b0b0b; border: 1px solid var(--gold); border-radius: 20px; max-width: 520px; width: 90%;
+                           padding: 40px; box-shadow: 0 0 40px rgba(212,175,55,.25); animation: modalFade .35s ease;}
+      @keyframes modalFade { from { opacity: 0;transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      .close-tour-modal { position: absolute; top: 18px; right: 22px;
+                           font-size: 22px; cursor: pointer; color: var(--gold); }
+/* ========================= TOUR DETAIL MODAL ========================= */
+      .tour-detail-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 9999; }
+      .tour-detail-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.75); }
+      .tour-detail-content { position: relative; background: #0b0b0b; max-width: 900px; width: 92%; border-radius: 22px; overflow: hidden; display: grid;
+                            grid-template-columns: 1fr 1fr; border: 1px solid rgba(212,175,55,.5); box-shadow: 0 0 60px rgba(212,175,55,.25); animation: modalUp .4s ease; }
+      @keyframes modalUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      .tour-detail-image img { width: 100%; height: 100%; object-fit: cover; }
+      .tour-detail-text { padding: 50px; display: flex; flex-direction: column; gap: 20px; }
+      .tour-detail-text h2 { color: var(--gold); font-size: 28px; }
+      .tour-detail-text p { color: rgba(255,255,255,.8); line-height: 1.6; }
+      .tour-detail-highlights { list-style: none; padding: 0; }
+      .tour-detail-highlights li { padding-left: 18px; position: relative; margin-bottom: 10px; }
+      .tour-detail-highlights li::before { content: "✦"; position: absolute; left: 0; color: var(--gold); }
+      .tour-detail-btn { margin-top: auto; text-align: center; padding: 14px; border-radius: 30px; background: linear-gradient(135deg, var(--gold), #b89632);
+                        color: #000; text-decoration: none; font-weight: 500; }
+      .close-tour-detail { position: absolute; top: 18px; right: 22px; font-size: 24px; color: var(--gold); cursor: pointer; }
+      .tour-card { position: relative;cursor: pointer; transition: transform 0.35s ease, box-shadow 0.35s ease; transform-origin: center; }
+      .tour-card:hover { transform: scale(1.03); box-shadow: 0 25px 60px rgba(0,0,0,0.35); }
+      .tour-title { position: relative; text-align: center; margin-bottom: 20px; } /* Çizgi */
+      .tour-title::after { content: ""; position: absolute; left: 0; bottom: -12px; width: 100%; height: 2px; background: linear-gradient( 90deg, transparent, #d4af37, transparent );
+                          transform: scaleX(0); transform-origin: left; transition: transform 0.45s ease; } /* Kart hover olunca çizgi akar */
+      .tour-card:hover .tour-title::after { transform: scaleX(1); }
+/* ===== LUXURY TEST CARD (ONLY 2nd CARD) ===== */
+      .tour-card { position: relative; overflow: hidden; transform: scale(1); transition: transform 0.45s cubic-bezier(.4,0,.2,1); } /* Invisible grain */
+      .tour-card::before { content: ""; position: absolute; inset: 0; background-image: url("../assets/grain.png"); opacity: 0,04; pointer-events: none; z-index: 0; } /* Ghost map line */
+      .tour-card::after { content: ""; position: absolute; inset: 0; background-image: url("../assets/istanbul-map-line.svg"); background-repeat: no-repeat; background-position: 120% 20%;
+                         background-size: 140%; opacity: 0.05; pointer-events: none; z-index: 0; }
+      .tour-card:hover { transform: scale(1.035); }
+      .tour-card .tour-title { position: relative; text-align: center; color: #d8c7a2; /* champagne gold */ z-index: 1; } /* underline */
+      .tour-card .tour-title::after { content: ""; position: absolute; left: 0; bottom: -10px; width: 100%; height: 1px; background: linear-gradient( 90deg, transparent, #d8c7a2, transparent );
+                                     transform: scaleX(0); transform-origin: left; transition: transform 0.45s ease; }
+      .tour-card:hover .tour-title::after { transform: scaleX(1); }
+      .tour-card { cursor: pointer; }
+      .tour-card .tour-btn { position: relative; z-index: 5; }
+      body { background: radial-gradient( 800px circle at 70% 20%, rgba(212, 175, 55, 0.06), transparent 60% ), #0b0b0b; }
+      .tour-card::before { content: ""; position: absolute; inset: 0; background: linear-gradient( 135deg, rgba(255,255,255,0.03), rgba(0,0,0,0.25) ); opacity: 0.4; pointer-events: none; }
+      .tour-card::after { content: ""; position: absolute; inset: 0;
+                         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+                         opacity: 0.08; pointer-events: none; }
+      .tour-card::before { content: ""; position: absolute; inset: -40%; background: linear-gradient( 120deg, transparent 40%, rgba(212,175,55,0.12), transparent 60% );
+                          transform: translateX(-100%); transition: transform 1.1s ease; pointer-events: none; }
+      .tour-card:hover::before { transform: translateX(100%); }
