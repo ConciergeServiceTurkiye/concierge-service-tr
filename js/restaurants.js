@@ -102,9 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ==============================
      DATE PICKER
   ============================== */
-  // ==============================
-// DATE PICKER FIXED TOGGLE
-// ==============================
 let dateInput = document.getElementById("date");
 
 let datePicker = flatpickr("#date", {
@@ -113,31 +110,33 @@ let datePicker = flatpickr("#date", {
   disableMobile: true,
 });
 
-// Toggle için flag
+// Toggle flag
 let dateOpen = false;
 
+// Click ile toggle
 dateInput.addEventListener("click", (e) => {
   e.stopPropagation(); // body click ile çakışmasın
 
   if (dateOpen) {
     datePicker.close();
-    dateOpen = false;
   } else {
     datePicker.open();
-    dateOpen = true;
   }
 });
 
-// Flatpickr açıldığında flag’ı sync et
+// Flag’i sync et
 datePicker.config.onOpen.push(() => { dateOpen = true; });
 datePicker.config.onClose.push(() => { dateOpen = false; });
 
 // Body click ile kapanma
 document.addEventListener("click", (e) => {
-  if (!dateInput.contains(e.target)) {
+  if (dateOpen && !dateInput.contains(e.target)) {
     datePicker.close();
   }
 });
+
+// **Önemli:** input focus listener kaldırıldı, artık çakışma yok
+
 
 
   /* ==============================
@@ -400,6 +399,7 @@ document.addEventListener("click", e => {
   });
 
 });
+
 
 
 
