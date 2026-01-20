@@ -108,25 +108,22 @@ let datePicker = flatpickr("#date", {
   minDate: "today",
   dateFormat: "Y-m-d",
   disableMobile: true,
+  onOpen: () => { dateOpen = true; },
+  onClose: () => { dateOpen = false; }
 });
 
-// Toggle flag
-let dateOpen = false;
-
-// Click ile toggle
+// Mouse click için
 dateInput.addEventListener("click", (e) => {
-  e.stopPropagation(); // body click ile çakışmasın
+  e.stopPropagation();
 
-  if (dateOpen) {
-    datePicker.close();
-  } else {
-    datePicker.open();
+  // Eğer zaten açıksa kapatma yok, sadece açmaya izin ver
+  if (!dateOpen) {
+    // setTimeout ile next tick’e atıyoruz
+    setTimeout(() => {
+      datePicker.open();
+    }, 0);
   }
 });
-
-// Flag’i sync et
-datePicker.config.onOpen.push(() => { dateOpen = true; });
-datePicker.config.onClose.push(() => { dateOpen = false; });
 
 // Body click ile kapanma
 document.addEventListener("click", (e) => {
@@ -135,7 +132,6 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// **Önemli:** input focus listener kaldırıldı, artık çakışma yok
 
 
   /* ==============================
@@ -398,6 +394,7 @@ document.addEventListener("click", e => {
   });
 
 });
+
 
 
 
