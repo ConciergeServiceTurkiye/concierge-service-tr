@@ -99,43 +99,44 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   });
 /* ==============================
-   DATE PICKER
-============================== */
-/* ==============================
-   DATE PICKER
+   DATE PICKER (FINAL – NO BLINK)
 ============================== */
 const dateInput = document.getElementById("date");
 
-// Flag ile açık/kapalı durum
-let dateOpen = false;
-
-let datePicker = flatpickr(dateInput, {
+const datePicker = flatpickr(dateInput, {
   minDate: "today",
   dateFormat: "Y-m-d",
   disableMobile: true,
-  // Flag’i open/close ile senkronize ediyoruz
-  onOpen: () => { dateOpen = true; },
-  onClose: () => { dateOpen = false; }
 });
 
-// Mouse click
-dateInput.addEventListener("click", (e) => {
-  e.stopPropagation();
-
-  // Sadece kapalıysa aç
-  if (!dateOpen) {
-    datePicker.open();
-  }
-  // Açıksa kapatma yok → toggle yok, böylece göz kırpma yok
-});
-
-// Body click ile kapanma
-document.addEventListener("click", (e) => {
-  const fpContainer = datePicker.calendarContainer;
-  if (dateOpen && !dateInput.contains(e.target) && !fpContainer.contains(e.target)) {
+// Input mousedown → açıksa KAPAT
+dateInput.addEventListener("mousedown", (e) => {
+  if (datePicker.isOpen) {
+    e.preventDefault(); // focus olmasın
     datePicker.close();
   }
 });
+
+// Input click → kapalıysa AÇ
+dateInput.addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (!datePicker.isOpen) {
+    datePicker.open();
+  }
+});
+
+// Input & takvim dışına tıklanınca kapat
+document.addEventListener("click", (e) => {
+  const fp = datePicker.calendarContainer;
+  if (
+    datePicker.isOpen &&
+    !dateInput.contains(e.target) &&
+    !fp.contains(e.target)
+  ) {
+    datePicker.close();
+  }
+});
+
 
   /* ==============================
      TIME DROPDOWN
@@ -397,6 +398,7 @@ document.addEventListener("click", e => {
   });
 
 });
+
 
 
 
