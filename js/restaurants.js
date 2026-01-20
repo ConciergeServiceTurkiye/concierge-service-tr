@@ -102,23 +102,43 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ==============================
      DATE PICKER
   ============================== */
-  let datePicker = flatpickr("#date", {
+  // ==============================
+// DATE PICKER FIXED TOGGLE
+// ==============================
+let dateInput = document.getElementById("date");
+
+let datePicker = flatpickr("#date", {
   minDate: "today",
   dateFormat: "Y-m-d",
   disableMobile: true,
-  onReady: function(selectedDates, dateStr, instance) {
-    const input = instance.input;
+});
 
-    input.addEventListener("click", (e) => {
-      e.stopPropagation(); // click eventi body’ye yayılmasın
-      if (instance.isOpen) {
-        instance.close(); // açık ise kapat
-      } else {
-        instance.open(); // kapalı ise aç
-      }
-    });
+// Toggle için flag
+let dateOpen = false;
+
+dateInput.addEventListener("click", (e) => {
+  e.stopPropagation(); // body click ile çakışmasın
+
+  if (dateOpen) {
+    datePicker.close();
+    dateOpen = false;
+  } else {
+    datePicker.open();
+    dateOpen = true;
   }
 });
+
+// Flatpickr açıldığında flag’ı sync et
+datePicker.config.onOpen.push(() => { dateOpen = true; });
+datePicker.config.onClose.push(() => { dateOpen = false; });
+
+// Body click ile kapanma
+document.addEventListener("click", (e) => {
+  if (!dateInput.contains(e.target)) {
+    datePicker.close();
+  }
+});
+
 
   /* ==============================
      TIME DROPDOWN
@@ -380,6 +400,7 @@ document.addEventListener("click", e => {
   });
 
 });
+
 
 
 
