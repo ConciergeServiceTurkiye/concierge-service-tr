@@ -420,7 +420,8 @@
 .custom-select .select-options {
   position: absolute;
   top: calc(100% + 6px);
-  left: 0;
+  left: 0 !important;
+  text-align: left;         /* seçenekler solda */
   width: 100%;
   background: #111;
   border: 1px solid #d4af37;
