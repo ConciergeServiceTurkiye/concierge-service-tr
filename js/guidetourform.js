@@ -40,6 +40,20 @@ document.addEventListener("DOMContentLoaded", () => {
     • Designed exclusively for your party
   `
 };
+  const payload = {
+  tour_name: document.getElementById("tourName").value,
+  full_name: document.querySelector('[name="full_name"]').value,
+  email: document.querySelector('[name="email"]').value,
+  phone: iti.getNumber(),
+  tour_date: document.querySelector('[name="tour_date"]').value,
+  language: document.getElementById("language").value,
+  transportation: getTransportationValue(),
+  hotel: document.querySelector('[name="hotel_name"]').value,
+  mobility: document.getElementById("mobilityToggle").checked ? "Yes" : "No",
+  notes: document.querySelector('[name="notes"]').value,
+  participants: participantsArray
+};
+
 
 const params = new URLSearchParams(window.location.search);
 const tourName = params.get("tour") || "Private Guide Tour";
