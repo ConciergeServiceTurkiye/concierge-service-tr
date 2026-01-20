@@ -204,32 +204,39 @@ document.addEventListener("click", e => {
     guestsSelect.classList.add("open");
   });
 
-  guestsTrigger.addEventListener("mousedown", e => {
+  // ==============================
+// GUESTS DROPDOWN
+// ==============================
+guestsTrigger.addEventListener("mousedown", e => {
+  e.preventDefault();
+  guestsSelect.classList.toggle("open"); // toggle yap
+});
+
+guestsTrigger.addEventListener("keydown", e => {
+  if (["ArrowDown", "ArrowUp"].includes(e.key)) {
     e.preventDefault();
-    guestsSelect.classList.add("open");
-  });
+    guestsIndex += e.key === "ArrowDown" ? 1 : -1;
+    guestsIndex = Math.max(0, Math.min(guestsOptions.length - 1, guestsIndex));
 
-  guestsTrigger.addEventListener("keydown", e => {
-    if (["ArrowDown", "ArrowUp"].includes(e.key)) {
-      e.preventDefault();
-      guestsIndex += e.key === "ArrowDown" ? 1 : -1;
-      guestsIndex = Math.max(0, Math.min(guestsOptions.length - 1, guestsIndex));
+    guestsOptions.forEach(li => li.classList.remove("active"));
+    guestsOptions[guestsIndex].classList.add("active");
+    guestsOptions[guestsIndex].scrollIntoView({ block: "nearest" });
+  }
 
-      guestsOptions.forEach(li => li.classList.remove("active"));
-      guestsOptions[guestsIndex].classList.add("active");
-      guestsOptions[guestsIndex].scrollIntoView({ block: "nearest" });
-    }
+  if (e.key === "Enter" && guestsIndex >= 0) {
+    e.preventDefault();
+    guestsOptions[guestsIndex].click();
+  }
 
-    if (e.key === "Enter" && guestsIndex >= 0) {
-      e.preventDefault();
-      guestsOptions[guestsIndex].click();
-    }
+  if (["Tab", "Shift+Tab", "Escape"].includes(e.key)) {
+    guestsSelect.classList.remove("open"); // kapanış
+    guestsIndex = -1;
+  }
+});
 
-    if (e.key === "Tab") {
-      guestsSelect.classList.remove("open");
-      guestsIndex = -1;
-    }
-  });
+document.addEventListener("click", e => {
+  if (!guestsSelect.contains(e.target)) guestsSelect.classList.remove("open");
+});
 
   guestsOptions.forEach(li => {
     li.addEventListener("click", () => {
@@ -373,5 +380,6 @@ document.addEventListener("click", e => {
   });
 
 });
+
 
 
