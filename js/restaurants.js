@@ -99,21 +99,38 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   });
 /* ==============================
-   DATE PICKER – FINAL FIX
-============================== */
-/* ==============================
-   DATE PICKER – REAL FINAL
+   DATE PICKER – FINAL FINAL
 ============================== */
 const dateInput = document.getElementById("date");
+
+let lastInteractionWasKeyboard = false;
 
 const datePicker = flatpickr(dateInput, {
   minDate: "today",
   dateFormat: "Y-m-d",
   disableMobile: true,
-  clickOpens: false, // 🔥 KRİTİK NOKTA
+  clickOpens: false, // mouse click tamamen bizim kontrolümüzde
 });
 
-// Input click → toggle
+// Klavye ile geliniyor mu takip et
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Tab") {
+    lastInteractionWasKeyboard = true;
+  }
+});
+
+document.addEventListener("mousedown", () => {
+  lastInteractionWasKeyboard = false;
+});
+
+// Focus → sadece klavye ile gelindiyse aç
+dateInput.addEventListener("focus", () => {
+  if (lastInteractionWasKeyboard && !datePicker.isOpen) {
+    datePicker.open();
+  }
+});
+
+// Mouse click → toggle
 dateInput.addEventListener("click", (e) => {
   e.stopPropagation();
 
@@ -124,7 +141,7 @@ dateInput.addEventListener("click", (e) => {
   }
 });
 
-// Takvim & input dışı click → kapat
+// Input & takvim dışı click → kapat
 document.addEventListener("click", (e) => {
   const fp = datePicker.calendarContainer;
   if (
@@ -135,6 +152,7 @@ document.addEventListener("click", (e) => {
     datePicker.close();
   }
 });
+
   /* ==============================
      TIME DROPDOWN
   ============================== */
@@ -395,6 +413,7 @@ document.addEventListener("click", e => {
   });
 
 });
+
 
 
 
