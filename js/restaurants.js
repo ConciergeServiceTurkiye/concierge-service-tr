@@ -103,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
      DATE PICKER
   ============================== */
 let dateInput = document.getElementById("date");
+let dateOpen = false;
 
 let datePicker = flatpickr("#date", {
   minDate: "today",
@@ -112,13 +113,15 @@ let datePicker = flatpickr("#date", {
   onClose: () => { dateOpen = false; }
 });
 
-// Toggle input click
+// Input click toggle
 dateInput.addEventListener("click", (e) => {
   e.stopPropagation();
+
+  // Eğer takvim açıksa kapat
   if (dateOpen) {
     datePicker.close();
   } else {
-    // Açma işlemini setTimeout ile next tick'e atıyoruz
+    // Açma işlemini next tick’e atıyoruz → göz kırpma sorunu çözülür
     setTimeout(() => {
       datePicker.open();
     }, 0);
@@ -127,7 +130,6 @@ dateInput.addEventListener("click", (e) => {
 
 // Body click ile kapanma
 document.addEventListener("click", (e) => {
-  // Eğer tıklanan yer dateInput veya flatpickr takvim paneli değilse kapan
   const fpContainer = datePicker.calendarContainer;
   if (
     dateOpen &&
@@ -137,6 +139,7 @@ document.addEventListener("click", (e) => {
     datePicker.close();
   }
 });
+
   /* ==============================
      TIME DROPDOWN
   ============================== */
@@ -397,6 +400,7 @@ document.addEventListener("click", e => {
   });
 
 });
+
 
 
 
