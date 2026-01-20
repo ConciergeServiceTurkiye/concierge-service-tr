@@ -155,35 +155,44 @@ document.addEventListener("DOMContentLoaded", () => {
     timeSelect.classList.add("open");
   });
 
-  timeTrigger.addEventListener("mousedown", e => {
+  // ==============================
+// TIME DROPDOWN
+// ==============================
+timeTrigger.addEventListener("mousedown", e => {
+  e.preventDefault();
+  timeSelect.classList.toggle("open"); // toggle yap
+});
+
+timeTrigger.addEventListener("keydown", e => {
+  const items = timeOptions.querySelectorAll("li");
+  if (!items.length) return;
+
+  if (["ArrowDown", "ArrowUp"].includes(e.key)) {
     e.preventDefault();
-    timeSelect.classList.add("open");
-  });
+    timeIndex += e.key === "ArrowDown" ? 1 : -1;
+    timeIndex = Math.max(0, Math.min(items.length - 1, timeIndex));
 
-  timeTrigger.addEventListener("keydown", e => {
-    const items = timeOptions.querySelectorAll("li");
-    if (!items.length) return;
+    items.forEach(i => i.classList.remove("active"));
+    items[timeIndex].classList.add("active");
+    items[timeIndex].scrollIntoView({ block: "nearest" });
+  }
 
-    if (["ArrowDown", "ArrowUp"].includes(e.key)) {
-      e.preventDefault();
-      timeIndex += e.key === "ArrowDown" ? 1 : -1;
-      timeIndex = Math.max(0, Math.min(items.length - 1, timeIndex));
+  if (e.key === "Enter" && timeIndex >= 0) {
+    e.preventDefault();
+    items[timeIndex].click();
+  }
 
-      items.forEach(i => i.classList.remove("active"));
-      items[timeIndex].classList.add("active");
-      items[timeIndex].scrollIntoView({ block: "nearest" });
-    }
+  if (["Tab", "Shift+Tab", "Escape"].includes(e.key)) {
+    timeSelect.classList.remove("open"); // kapanış
+    timeIndex = -1;
+  }
+});
 
-    if (e.key === "Enter" && timeIndex >= 0) {
-      e.preventDefault();
-      items[timeIndex].click();
-    }
+// Body click: açık dropdown kapansın
+document.addEventListener("click", e => {
+  if (!timeSelect.contains(e.target)) timeSelect.classList.remove("open");
+});
 
-    if (e.key === "Tab") {
-      timeSelect.classList.remove("open");
-      timeIndex = -1;
-    }
-  });
 
   /* ==============================
      GUESTS DROPDOWN
@@ -364,4 +373,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
