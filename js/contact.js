@@ -107,6 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
   openDropdown();
 });
 
+  trigger.addEventListener("blur", (e) => {
+  // Eğer blur ile gidilen element dropdown içindeyse bırak
+  if (!customSelect.contains(e.relatedTarget)) {
+    closeDropdown();
+  }
+});
+
   trigger.addEventListener("keydown", e => {
     if (["ArrowDown", "ArrowUp", "Enter", " ", "Escape"].includes(e.key)) e.preventDefault();
     if (e.key === "ArrowDown") move(1);
@@ -175,6 +182,7 @@ phoneField.value = "";
   });
 
 });
+
 
 
 
