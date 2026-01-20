@@ -42,10 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
 };
   const payload = {
   tour_name: document.getElementById("tourName").value,
-  full_name: document.querySelector('[name="full_name"]').value,
+  full_name: document.querySelector('[name="name"]').value,
   email: document.querySelector('[name="email"]').value,
-  phone: iti.getNumber(),
-  tour_date: document.querySelector('[name="tour_date"]').value,
+  const iti = intlTelInput(phone, {...});
+  tour_date: document.querySelector('[name="date"]').value,
   language: document.getElementById("language").value,
   transportation: getTransportationValue(),
   hotel: document.querySelector('[name="hotel_name"]').value,
@@ -65,12 +65,7 @@ document.getElementById("tourExperience").innerHTML =
   TOUR_EXPERIENCES[tourName] || "";
 
   const transportGroup = document.getElementById("transportationGroup");
-const vehicleProvided = document.getElementById("vehicleProvided");
-
-if (tourName === "Old City Private Tour") {
-  // walking / vehicle radio aktif
-  vehicleProvided.style.display = "none";
-}
+        if (tourName === "Old City Private Tour") 
 
 else if (tourName === "Tailor-Made City Tour") {
   // sadece vehicle assisted
@@ -145,25 +140,6 @@ else {
     ) {
       datePicker.close();
     }
-  });
-
-  /* CUSTOM SELECTS */
-  document.querySelectorAll(".custom-select").forEach(select => {
-    const trigger = select.querySelector(".select-trigger");
-    const options = select.querySelectorAll("li");
-    const hidden = select.nextElementSibling;
-
-    trigger.addEventListener("click", () => {
-      select.classList.toggle("open");
-    });
-
-    options.forEach(li => {
-      li.addEventListener("click", () => {
-        trigger.textContent = li.textContent;
-        hidden.value = li.textContent;
-        select.classList.remove("open");
-      });
-    });
   });
 
   /* BIRTH YEARS */
@@ -247,44 +223,48 @@ else {
     mobilityGroup.classList.toggle("active", mobilityToggle.checked);
   });
 
-  /* FORM SUBMIT → GOOGLE APPS SCRIPT */
-  document
-    .getElementById("guideTourForm")
-    .addEventListener("submit", function (e) {
+document.getElementById("guideTourForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-      e.preventDefault();
-
-      const participants = [];
-
-      document.querySelectorAll(".participant-row").forEach(row => {
-        participants.push({
-          name: row.querySelector(".participant-name").value.trim(),
-          nationality: row.querySelector(".participant-nationality").value,
-          birthYear: row.querySelector(".participant-birthyear").value
-        });
-      });
-
-      participantsJsonInput.value =
-        JSON.stringify(participants);
-
-      const formData = new FormData(this);
-
-      fetch(
-        "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec",
-        {
-          method: "POST",
-  body: JSON.stringify(payload)
-})
-.then(res => res.json())
-.then(res => {
-  if (res.status === "success") {
-    document.getElementById("guideTourForm").style.display = "none";
-    document.getElementById("successScreen").style.display = "block";
-    document.querySelector(".reservation-id").textContent =
-      `Reservation ID: ${res.reservation_id}`;
-  }
-});
-
+  const participants = [];
+  document.querySelectorAll(".participant-row").forEach(row => {
+    participants.push({
+      name: row.querySelector(".participant-name").value.trim(),
+      nationality: row.querySelector(".participant-nationality").value,
+      birthYear: row.querySelector(".participant-birthyear").value
     });
+  });
+
+  const payload = {
+    tour_name: document.getElementById("tourName").value,
+    full_name: document.querySelector('[name="name"]').value,
+    email: document.querySelector('[name="email"]').value,
+    phone: iti.getNumber(),
+    tour_date: document.querySelector('[name="date"]').value,
+    language: document.getElementById("language").value,
+    transportation: document.querySelector('input[name="transportation"]:checked')?.value || "",
+    hotel: document.querySelector('[name="hotel_name"]').value +
+           (document.querySelector('[name="room_number"]').value
+             ? " / Room: " + document.querySelector('[name="room_number"]').value
+             : ""),
+    mobility: document.getElementById("mobilityToggle").checked ? "Yes" : "No",
+    notes: document.querySelector('[name="notes"]').value,
+    participants: participants
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec", {
+    method: "POST",
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(res => {
+    if (res.status === "success") {
+      document.getElementById("guideTourForm").style.display = "none";
+      document.getElementById("successScreen").style.display = "block";
+      document.querySelector(".reservation-id").textContent =
+        `Reservation ID: ${res.reservation_id}`;
+    }
+  });
+});
 
 });
