@@ -102,11 +102,23 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ==============================
      DATE PICKER
   ============================== */
-  flatpickr("#date", {
-    minDate: "today",
-    dateFormat: "Y-m-d",
-    disableMobile: true
-  });
+  let datePicker = flatpickr("#date", {
+  minDate: "today",
+  dateFormat: "Y-m-d",
+  disableMobile: true,
+  onReady: function(selectedDates, dateStr, instance) {
+    const input = instance.input;
+
+    input.addEventListener("click", (e) => {
+      e.stopPropagation(); // click eventi body’ye yayılmasın
+      if (instance.isOpen) {
+        instance.close(); // açık ise kapat
+      } else {
+        instance.open(); // kapalı ise aç
+      }
+    });
+  }
+});
 
   /* ==============================
      TIME DROPDOWN
@@ -352,3 +364,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
