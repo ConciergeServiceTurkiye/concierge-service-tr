@@ -102,6 +102,10 @@ document.addEventListener("DOMContentLoaded", () => {
   trigger.addEventListener("click", () => {
     customSelect.classList.contains("open") ? closeDropdown() : openDropdown();
   });
+  
+  trigger.addEventListener("focus", () => {
+  openDropdown();
+});
 
   trigger.addEventListener("keydown", e => {
     if (["ArrowDown", "ArrowUp", "Enter", " ", "Escape"].includes(e.key)) e.preventDefault();
@@ -171,6 +175,7 @@ phoneField.value = "";
   });
 
 });
+
 
 
 
