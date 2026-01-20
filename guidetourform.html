@@ -21,9 +21,12 @@
   <div class="guidetour-form-wrapper">
 
     <div class="guidetour-form-header">
-      <h1 id="tourFormTitle">Private Guide Tour Request</h1>
-      <span class="guidetour-form-subline">Handled by Concierge Team</span>
-    </div>
+  <h1 id="tourFormTitle">Private Guide Tour</h1>
+  <span class="guidetour-form-subline">Handled by Concierge Team</span>
+
+  <!-- WHAT YOU'LL EXPERIENCE -->
+  <div id="tourExperience" class="tour-experience"></div>
+</div>
 
     <div id="formInlineAlert"></div>
 
@@ -51,32 +54,46 @@
         <label>Preferred Tour Date</label>
         <input type="text" id="date" name="date" placeholder="Select date" required>
       </div>
+      <!-- TRANSPORTATION -->
+<div class="form-group" id="transportationGroup">
+  <label>Transportation</label>
 
-      <div class="form-group">
-        <label>Tour Duration</label>
-        <div class="custom-select" id="durationSelect">
-          <div class="select-trigger">Select duration</div>
-          <ul class="select-options">
-            <li>Half Day (4 hours)</li>
-            <li>Full Day (8 hours)</li>
-            <li>Multi-Day</li>
-            <li>Flexible / Not Sure</li>
-          </ul>
-        </div>
-        <input type="hidden" name="duration" id="duration">
-      </div>
+  <div class="checkbox-grid">
+    <label>
+      <input type="radio" name="transportation" value="Walking Tour">
+      Walking Tour
+    </label>
 
-      <div class="form-group">
-        <label>Number of Guests</label>
-        <div class="custom-select" id="guestsSelect">
-          <div class="select-trigger">Select guests</div>
-          <ul class="select-options">
-            <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li>
-            <li>7+ (Please specify in notes)</li>
-          </ul>
-        </div>
-        <input type="hidden" name="guests" id="guests">
-      </div>
+    <label>
+      <input type="radio" name="transportation" value="Vehicle Assisted">
+      Vehicle Assisted Tour
+    </label>
+
+    <label>
+      <input type="checkbox" id="vehicleProvided" name="transportation"
+             value="Vehicle Provided by Hotel / Agency">
+      Vehicle Provided by Hotel / Agency
+    </label>
+  </div>
+</div>
+<!-- HOTEL INFORMATION -->
+<div class="form-group">
+  <label>Hotel Information</label>
+
+  <input
+    type="text"
+    name="hotel_name"
+    placeholder="Hotel name"
+    required
+  >
+
+  <input
+    type="text"
+    name="room_number"
+    placeholder="Room number (optional)"
+  >
+</div>
+
 
       <!-- PARTICIPANTS -->
 <div class="form-group participants-group">
@@ -131,19 +148,6 @@
 
 <!-- HIDDEN JSON -->
 <input type="hidden" name="participants_json" id="participantsJson">
-
-      <!-- INTERESTS -->
-      <div class="form-group">
-        <label>Interests</label>
-        <div class="checkbox-grid">
-          <label><input type="checkbox" name="interest" value="History"> History</label>
-          <label><input type="checkbox" name="interest" value="Food"> Food</label>
-          <label><input type="checkbox" name="interest" value="Art"> Art</label>
-          <label><input type="checkbox" name="interest" value="Architecture"> Architecture</label>
-          <label><input type="checkbox" name="interest" value="Shopping"> Shopping</label>
-          <label><input type="checkbox" name="interest" value="Local Life"> Local Life</label>
-        </div>
-      </div>
 
       <!-- MOBILITY -->
       <div class="form-group">
