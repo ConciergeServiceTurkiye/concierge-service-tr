@@ -101,36 +101,41 @@ document.addEventListener("DOMContentLoaded", () => {
 /* ==============================
    DATE PICKER
 ============================== */
+/* ==============================
+   DATE PICKER
+============================== */
 const dateInput = document.getElementById("date");
+
+// Flag ile açık/kapalı durum
+let dateOpen = false;
 
 let datePicker = flatpickr(dateInput, {
   minDate: "today",
   dateFormat: "Y-m-d",
   disableMobile: true,
+  // Flag’i open/close ile senkronize ediyoruz
+  onOpen: () => { dateOpen = true; },
+  onClose: () => { dateOpen = false; }
 });
 
-// Mouse click toggle (göz kırpma yok)
+// Mouse click
 dateInput.addEventListener("click", (e) => {
   e.stopPropagation();
 
-  if (datePicker.isOpen) {
-    datePicker.close();
-  } else {
-    // Açma işlemini requestAnimationFrame ile yapıyoruz
-    requestAnimationFrame(() => datePicker.open());
+  // Sadece kapalıysa aç
+  if (!dateOpen) {
+    datePicker.open();
   }
+  // Açıksa kapatma yok → toggle yok, böylece göz kırpma yok
 });
 
-// Body click ile kapanma, sadece input ve takvim paneli dışına tıklayınca
+// Body click ile kapanma
 document.addEventListener("click", (e) => {
   const fpContainer = datePicker.calendarContainer;
-  if (datePicker.isOpen && !dateInput.contains(e.target) && !fpContainer.contains(e.target)) {
+  if (dateOpen && !dateInput.contains(e.target) && !fpContainer.contains(e.target)) {
     datePicker.close();
   }
 });
-
-// ESC ile kapanma ve klavye navigasyonu zaten flatpickr içinde çalışıyor
-
 
   /* ==============================
      TIME DROPDOWN
@@ -392,6 +397,7 @@ document.addEventListener("click", e => {
   });
 
 });
+
 
 
 
