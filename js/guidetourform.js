@@ -12,11 +12,60 @@ document.addEventListener("DOMContentLoaded", () => {
     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
   });
 
-  /* DATE */
-  flatpickr("#date", {
-    minDate: "today",
-    dateFormat: "Y-m-d"
-  });
+  /* ==============================
+   DATE PICKER – FINAL FINAL
+============================== */
+const dateInput = document.getElementById("date");
+
+let lastInteractionWasKeyboard = false;
+
+const datePicker = flatpickr(dateInput, {
+  minDate: "today",
+  dateFormat: "Y-m-d",
+  disableMobile: true,
+  clickOpens: false, // mouse click tamamen bizim kontrolümüzde
+});
+
+// Klavye ile geliniyor mu takip et
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Tab") {
+    lastInteractionWasKeyboard = true;
+  }
+});
+
+document.addEventListener("mousedown", () => {
+  lastInteractionWasKeyboard = false;
+});
+
+// Focus → sadece klavye ile gelindiyse aç
+dateInput.addEventListener("focus", () => {
+  if (lastInteractionWasKeyboard && !datePicker.isOpen) {
+    datePicker.open();
+  }
+});
+
+// Mouse click → toggle
+dateInput.addEventListener("click", (e) => {
+  e.stopPropagation();
+
+  if (datePicker.isOpen) {
+    datePicker.close();
+  } else {
+    datePicker.open();
+  }
+});
+
+// Input & takvim dışı click → kapat
+document.addEventListener("click", (e) => {
+  const fp = datePicker.calendarContainer;
+  if (
+    datePicker.isOpen &&
+    !dateInput.contains(e.target) &&
+    !fp.contains(e.target)
+  ) {
+    datePicker.close();
+  }
+});
 
   /* CUSTOM SELECTS */
   document.querySelectorAll(".custom-select").forEach(select => {
