@@ -273,16 +273,17 @@ else {
         "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec",
         {
           method: "POST",
-          body: formData
-        }
-      )
-        .then(() => {
-          alert("Your tour request has been sent successfully.");
-          this.reset();
-        })
-        .catch(() => {
-          alert("Something went wrong. Please try again.");
-        });
+  body: JSON.stringify(payload)
+})
+.then(res => res.json())
+.then(res => {
+  if (res.status === "success") {
+    document.getElementById("guideTourForm").style.display = "none";
+    document.getElementById("successScreen").style.display = "block";
+    document.querySelector(".reservation-id").textContent =
+      `Reservation ID: ${res.reservation_id}`;
+  }
+});
 
     });
 
