@@ -107,12 +107,14 @@ document.addEventListener("DOMContentLoaded", () => {
   openDropdown();
 });
 
-  trigger.addEventListener("blur", (e) => {
-  // Eğer blur ile gidilen element dropdown içindeyse bırak
+  // Trigger + dropdown içindeki tüm elementler için focus değişimini dinle
+customSelect.addEventListener("focusout", (e) => {
+  // Eğer focus customSelect içinde değilse, dropdown kapansın
   if (!customSelect.contains(e.relatedTarget)) {
     closeDropdown();
   }
 });
+
 
   trigger.addEventListener("keydown", e => {
     if (["ArrowDown", "ArrowUp", "Enter", " ", "Escape"].includes(e.key)) e.preventDefault();
@@ -182,6 +184,7 @@ phoneField.value = "";
   });
 
 });
+
 
 
 
