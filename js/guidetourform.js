@@ -155,6 +155,27 @@ addParticipantBtn.addEventListener('click', () => {
   participantsContainer.appendChild(newRow);
 });
 
+function saveParticipants(participants, formData) {
+
+  if (!participants.length) return;
+
+  const sheet = SpreadsheetApp
+    .openById("SPREADSHEET_ID")
+    .getSheetByName("Participants");
+
+  const timestamp = new Date();
+
+  participants.forEach(p => {
+    sheet.appendRow([
+      timestamp,
+      formData.tour_name || "",
+      formData.name || "",
+      p.name || "",
+      p.nationality || "",
+      p.birthYear || ""
+    ]);
+  });
+}
 
   /* TEXTAREA COUNTS */
   document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
