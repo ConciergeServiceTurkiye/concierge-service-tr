@@ -78,6 +78,60 @@
         <input type="hidden" name="guests" id="guests">
       </div>
 
+      <!-- PARTICIPANTS -->
+<div class="form-group participants-group">
+
+  <label>Participants Details</label>
+
+  <div id="participantsContainer">
+
+    <!-- PARTICIPANT ROW (1 - PRIMARY) -->
+    <div class="participant-row primary">
+
+      <div class="participant-field">
+        <input
+          type="text"
+          name="participant_name"
+          class="participant-name"
+          placeholder="Full name"
+          required
+        >
+      </div>
+
+      <div class="participant-field">
+        <select class="participant-nationality" required>
+          <option value="" disabled selected>Nationality</option>
+          <option value="TR">Turkey</option>
+          <option value="US">United States</option>
+          <option value="UK">United Kingdom</option>
+          <option value="DE">Germany</option>
+          <option value="FR">France</option>
+          <!-- liste sonra genişler -->
+        </select>
+      </div>
+
+      <div class="participant-field">
+        <select class="participant-birthyear" required>
+          <option value="" disabled selected>Birth Year</option>
+          <!-- JS ile doldurulacak -->
+        </select>
+      </div>
+
+    </div>
+    <!-- /PARTICIPANT ROW 1 -->
+
+  </div>
+
+  <!-- ADD PARTICIPANT -->
+  <button type="button" class="add-participant-btn">
+    + Add Participant
+  </button>
+
+</div>
+
+<!-- HIDDEN JSON -->
+<input type="hidden" name="participants_json" id="participantsJson">
+
       <!-- INTERESTS -->
       <div class="form-group">
         <label>Interests</label>
