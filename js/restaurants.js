@@ -112,13 +112,13 @@ let datePicker = flatpickr("#date", {
   onClose: () => { dateOpen = false; }
 });
 
-// Mouse click için
+// Toggle input click
 dateInput.addEventListener("click", (e) => {
   e.stopPropagation();
-
-  // Eğer zaten açıksa kapatma yok, sadece açmaya izin ver
-  if (!dateOpen) {
-    // setTimeout ile next tick’e atıyoruz
+  if (dateOpen) {
+    datePicker.close();
+  } else {
+    // Açma işlemini setTimeout ile next tick'e atıyoruz
     setTimeout(() => {
       datePicker.open();
     }, 0);
@@ -127,13 +127,16 @@ dateInput.addEventListener("click", (e) => {
 
 // Body click ile kapanma
 document.addEventListener("click", (e) => {
-  if (dateOpen && !dateInput.contains(e.target)) {
+  // Eğer tıklanan yer dateInput veya flatpickr takvim paneli değilse kapan
+  const fpContainer = datePicker.calendarContainer;
+  if (
+    dateOpen &&
+    !dateInput.contains(e.target) &&
+    !fpContainer.contains(e.target)
+  ) {
     datePicker.close();
   }
 });
-
-
-
   /* ==============================
      TIME DROPDOWN
   ============================== */
@@ -394,6 +397,7 @@ document.addEventListener("click", e => {
   });
 
 });
+
 
 
 
