@@ -4,6 +4,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const params = new URLSearchParams(window.location.search);
   document.getElementById("tourName").value = params.get("tour") || "Private Guide Tour";
 
+  const fullNameInput = document.querySelector('input[name="name"]');
+const participantsContainer = document.getElementById('participantsContainer');
+const addParticipantBtn = document.querySelector('.add-participant-btn');
+const participantsJsonInput = document.getElementById('participantsJson');
+
+
   /* PHONE */
   const phone = document.getElementById("phone");
   const iti = intlTelInput(phone, {
@@ -86,6 +92,70 @@ document.addEventListener("click", (e) => {
     });
   });
 
+  function populateBirthYears(selectEl) {
+  const currentYear = new Date().getFullYear();
+  for (let y = currentYear - 5; y >= 1900; y--) {
+    const opt = document.createElement('option');
+    opt.value = y;
+    opt.textContent = y;
+    selectEl.appendChild(opt);
+  }
+}
+
+// İlk participant için çalıştır
+populateBirthYears(
+  document.querySelector('.participant-birthyear')
+);
+const primaryParticipantName =
+  document.querySelector('.participant-row.primary .participant-name');
+
+fullNameInput.addEventListener('input', () => {
+  primaryParticipantName.value = fullNameInput.value;
+});
+function createParticipantRow() {
+  const row = document.createElement('div');
+  row.className = 'participant-row';
+
+  row.innerHTML = `
+    <div class="participant-field">
+      <input type="text" class="participant-name" placeholder="Full name" required>
+    </div>
+
+    <div class="participant-field">
+      <select class="participant-nationality" required>
+        <option value="" disabled selected>Nationality</option>
+        <option value="TR">Turkey</option>
+        <option value="US">United States</option>
+        <option value="UK">United Kingdom</option>
+        <option value="DE">Germany</option>
+        <option value="FR">France</option>
+      </select>
+    </div>
+
+    <div class="participant-field">
+      <select class="participant-birthyear" required>
+        <option value="" disabled selected>Birth Year</option>
+      </select>
+    </div>
+
+    <button type="button" class="remove-participant">×</button>
+  `;
+
+  populateBirthYears(
+    row.querySelector('.participant-birthyear')
+  );
+
+  row.querySelector('.remove-participant')
+    .addEventListener('click', () => row.remove());
+
+  return row;
+}
+addParticipantBtn.addEventListener('click', () => {
+  const newRow = createParticipantRow();
+  participantsContainer.appendChild(newRow);
+});
+
+
   /* TEXTAREA COUNTS */
   document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
     const counter = textarea.parentElement.querySelector(".char-count");
@@ -101,5 +171,23 @@ document.addEventListener("click", (e) => {
   mobilityToggle.addEventListener("change", () => {
     mobilityGroup.classList.toggle("active", mobilityToggle.checked);
   });
+
+  document
+  .getElementById('guideTourForm')
+  .addEventListener('submit', () => {
+
+    const participants = [];
+
+    document.querySelectorAll('.participant-row').forEach(row => {
+      participants.push({
+        name: row.querySelector('.participant-name').value.trim(),
+        nationality: row.querySelector('.participant-nationality').value,
+        birthYear: row.querySelector('.participant-birthyear').value
+      });
+    });
+
+    participantsJsonInput.value = JSON.stringify(participants);
+});
+
 
 });
