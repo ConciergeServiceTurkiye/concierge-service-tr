@@ -1,116 +1,36 @@
-.guidetour-hero{
-  min-height:45vh;
-  padding-top:120px;
-  background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.85)),
-             url("../assets/guidetours.jpg") center/cover no-repeat;
-  display:flex;
-  justify-content:center;
-}
+    .guidetour-hero{min-height:45vh;padding-top:120px;background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.85)),url("../assets/guidetours.jpg") center/cover no-repeat;
+                    display:flex;justify-content:center;}
+    .guidetour-form-wrapper{max-width:760px;width:100%;background:rgba(10,10,10,.88);border:1.5px solid #d4af37;border-radius:14px;padding:45px 40px;}
+    .guidetour-form-header{text-align:center;margin-bottom:30px;}
+    .guidetour-form-header h1{color:#d4af37;font-size:28px;}
+    .guidetour-form-subline{font-size:12px;letter-spacing:2px;color:rgba(212,175,55,.75);text-transform:uppercase;}
+    .guidetour-form{display:flex;flex-direction:column;gap:22px;}
 
-.guidetour-form-wrapper{
-  max-width:760px;
-  width:100%;
-  background:rgba(10,10,10,.88);
-  border:1.5px solid #d4af37;
-  border-radius:14px;
-  padding:45px 40px;
-}
+    .form-group{display:flex;flex-direction:column;} label{color:#d4af37;font-size:13px;margin-bottom:6px;}
+    input, textarea{background:#111;border:1px solid #d4af37;border-radius:10px;color:#d4af37;padding:12px 14px;}
+    textarea{resize:none;}
 
-.guidetour-form-header{
-  text-align:center;
-  margin-bottom:30px;
-}
+    .custom-select{position:relative;}
+    .select-trigger{border:1px solid #d4af37;border-radius:10px;padding:12px 14px;cursor:pointer;}
+    .select-options{display:none;position:absolute;top:100%;left:0;width:100%;background:#111;border:1px solid #d4af37;border-radius:10px;z-index:50;}
+    .custom-select.open .select-options{display:block;}
+    .select-options li{padding:12px 14px;cursor:pointer;}
+    .select-options li:hover{background:rgba(212,175,55,.2);}
+    .checkbox-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;}
+    .textarea-group{display:none;flex-direction:column;gap:6px;}
+    .textarea-group.active{display:flex;}
+    .char-count{font-size:11px;text-align:right;color:rgba(255,255,255,.45);}
+    .submit-btn{height:48px;border-radius:12px;background:linear-gradient(135deg,#d4af37,#b9982f);border:none;font-weight:600;cursor:pointer;}
+/* ============================== PHONE INPUT – FULL WIDTH FIX ============================== */
+    .guidetour-form-wrapper .iti {width: 100%;}
+    .guidetour-form-wrapper .iti input {width: 100% !important;box-sizing: border-box;}
 
-.guidetour-form-header h1{
-  color:#d4af37;
-  font-size:28px;
-}
+/* ============================== CUSTOM SELECT – PLACEHOLDER ============================== */
+    .guidetour-form-wrapper .custom-select .select-trigger {color: rgba(255,255,255,0.60);font-size: 14px;line-height: 1.4;}
 
-.guidetour-form-subline{
-  font-size:12px;
-  letter-spacing:2px;
-  color:rgba(212,175,55,.75);
-  text-transform:uppercase;
-}
+/* Selected value */
+    .guidetour-form-wrapper .custom-select.has-value .select-trigger {color: #d4af37;}
+    .guidetour-form-wrapper .custom-select .select-options li {font-size: 14px;color: rgba(255,255,255,0.65);}
+    .guidetour-form-wrapper .custom-select .select-options li:hover,
+    .guidetour-form-wrapper .custom-select .select-options li.active {color: #d4af37;}
 
-.guidetour-form{
-  display:flex;
-  flex-direction:column;
-  gap:22px;
-}
-
-.form-group{
-  display:flex;
-  flex-direction:column;
-}
-
-label{
-  color:#d4af37;
-  font-size:13px;
-  margin-bottom:6px;
-}
-
-input, textarea{
-  background:#111;
-  border:1px solid #d4af37;
-  border-radius:10px;
-  color:#d4af37;
-  padding:12px 14px;
-}
-
-textarea{resize:none;}
-
-.custom-select{position:relative;}
-.select-trigger{
-  border:1px solid #d4af37;
-  border-radius:10px;
-  padding:12px 14px;
-  cursor:pointer;
-}
-
-.select-options{
-  display:none;
-  position:absolute;
-  top:100%;
-  left:0;
-  width:100%;
-  background:#111;
-  border:1px solid #d4af37;
-  border-radius:10px;
-  z-index:50;
-}
-
-.custom-select.open .select-options{display:block;}
-
-.select-options li{
-  padding:12px 14px;
-  cursor:pointer;
-}
-
-.select-options li:hover{
-  background:rgba(212,175,55,.2);
-}
-
-.checkbox-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:10px;
-}
-
-.textarea-group{display:none;flex-direction:column;gap:6px;}
-.textarea-group.active{display:flex;}
-
-.char-count{
-  font-size:11px;
-  text-align:right;
-  color:rgba(255,255,255,.45);
-}
-
-.submit-btn{
-  height:48px;
-  border-radius:12px;
-  background:linear-gradient(135deg,#d4af37,#b9982f);
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-}
