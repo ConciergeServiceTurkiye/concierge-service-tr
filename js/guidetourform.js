@@ -10,6 +10,80 @@ document.addEventListener("DOMContentLoaded", () => {
   const addParticipantBtn = document.querySelector('.add-participant-btn');
   const participantsJsonInput = document.getElementById('participantsJson');
 
+  const TOUR_EXPERIENCES = {
+  "Old City Private Tour": `
+    <strong>What you'll experience</strong>
+    • Byzantine & Ottoman heritage with a licensed private guide<br>
+    • Hagia Sophia, Blue Mosque & Grand Bazaar storytelling<br>
+    • Hidden courtyards & local insights<br>
+    • Walking or vehicle-assisted options
+  `,
+
+  "Bosphorus Experience": `
+    <strong>What you'll experience</strong>
+    • Scenic Bosphorus coastline narration<br>
+    • Palaces, waterfront mansions & local life<br>
+    • Relaxed, non-rushed private experience
+  `,
+
+  "Istanbul Food Tour": `
+    <strong>What you'll experience</strong>
+    • Authentic local flavors beyond tourist routes<br>
+    • Street food & traditional restaurants<br>
+    • Cultural stories behind Turkish cuisine
+  `,
+
+  "Tailor-Made City Tour": `
+    <strong>What you'll experience</strong>
+    • Fully customized route based on your preferences<br>
+    • Flexible timing & pacing<br>
+    • Designed exclusively for your party
+  `
+};
+
+const params = new URLSearchParams(window.location.search);
+const tourName = params.get("tour") || "Private Guide Tour";
+
+document.getElementById("tourFormTitle").textContent = tourName;
+document.getElementById("tourName").value = tourName;
+
+document.getElementById("tourExperience").innerHTML =
+  TOUR_EXPERIENCES[tourName] || "";
+
+  const transportGroup = document.getElementById("transportationGroup");
+const vehicleProvided = document.getElementById("vehicleProvided");
+
+if (tourName === "Old City Private Tour") {
+  // walking / vehicle radio aktif
+  vehicleProvided.style.display = "none";
+}
+
+else if (tourName === "Tailor-Made City Tour") {
+  // sadece vehicle assisted
+  transportGroup.querySelectorAll('input').forEach(i => {
+    if (i.value === "Vehicle Assisted") {
+      i.checked = true;
+    }
+    i.disabled = true;
+  });
+}
+
+else if (tourName === "Bosphorus Experience") {
+  // vehicle provided zorunlu
+  vehicleProvided.checked = true;
+  vehicleProvided.disabled = true;
+
+  transportGroup.querySelectorAll('input[type="radio"]').forEach(r => {
+    r.disabled = true;
+  });
+}
+
+else {
+  // Food tour vs
+  transportGroup.style.display = "none";
+}
+
+
   /* PHONE */
   const phone = document.getElementById("phone");
   intlTelInput(phone, {
