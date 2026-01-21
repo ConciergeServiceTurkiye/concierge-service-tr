@@ -259,6 +259,7 @@
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
+  pointer-events: auto;
   cursor: pointer;
   transition: color 0.25s ease, text-shadow 0.25s ease;
 }
