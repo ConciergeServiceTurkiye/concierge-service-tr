@@ -129,15 +129,11 @@
       </div>
 
       <div class="participant-field">
-        <select class="participant-nationality" required>
-          <option value="" disabled selected>Nationality</option>
-          <option value="TR">Turkey</option>
-          <option value="US">United States</option>
-          <option value="UK">United Kingdom</option>
-          <option value="DE">Germany</option>
-          <option value="FR">France</option>
-          <!-- liste sonra genişler -->
-        </select>
+        <div class="nationality-select">
+  <input type="hidden" class="participant-nationality" required>
+  <div class="nationality-trigger">Select nationality</div>
+  <div class="nationality-dropdown"></div>
+</div>
       </div>
 
       <div class="participant-field">
