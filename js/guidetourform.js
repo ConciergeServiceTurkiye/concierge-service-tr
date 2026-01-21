@@ -34,7 +34,15 @@ document.addEventListener("DOMContentLoaded", () => {
     alert.textContent = message;
     alert.style.opacity = "1";
     alert.style.visibility = "visible";
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    scrollToFirstError() {
+  const firstError = document.querySelector(".has-error");
+  if (firstError) {
+    firstError.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+}
   }
 
   function hideInlineAlert() {
