@@ -40,15 +40,6 @@
     document.getElementById("tourExperience").innerHTML =
       TOUR_EXPERIENCES[tourName] || "";
     
-      const transportGroup = document.getElementById("transportationGroup");
-            if (tourName === "Old City Private Tour"){}
-    
-            else {
-      // Food tour vs
-      transportGroup.style.display = "none";
-    }
-    
-    
       /* PHONE */
       const iti = intlTelInput(phone, {
   initialCountry: "us",
