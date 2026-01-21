@@ -31,13 +31,6 @@
         • Authentic local flavors beyond tourist routes<br>
         • Street food & traditional restaurants<br>
         • Cultural stories behind Turkish cuisine
-      `,
-    
-      "Tailor-Made City Tour": `
-        <strong>What you'll experience</strong>
-        • Fully customized route based on your preferences<br>
-        • Flexible timing & pacing<br>
-        • Designed exclusively for your party
       `
     };
   
