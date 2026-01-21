@@ -1,157 +1,210 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================
-     FILTER BUTTONS
+     TOUR NAME FROM URL
   ========================= */
-  const buttons = document.querySelectorAll(".filter-btn");
-  const cards = document.querySelectorAll(".tour-card");
+  const params = new URLSearchParams(window.location.search);
+  const tourName = params.get("tour") || "Private Guide Tour";
 
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      buttons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
+  const tourNameInput = document.getElementById("tourName");
+  const tourFormTitle = document.getElementById("tourFormTitle");
+  const tourExperienceBox = document.getElementById("tourExperience");
 
-      const filter = btn.dataset.filter;
+  if (tourNameInput) tourNameInput.value = tourName;
+  if (tourFormTitle) tourFormTitle.textContent = tourName;
 
-      cards.forEach(card => {
-        card.style.display =
-          filter === "all" || card.classList.contains(filter)
-            ? "flex"
-            : "none";
-      });
-    });
-  });
-
-  /* =========================
-     TOUR DATA
-  ========================= */
-  const tourData = {
-    oldcity: {
-      title: "Old City Private Tour",
-      img: "assets/oldcityprivatetour.jpg",
-      desc: "Explore Sultanahmet with a private licensed guide including Hagia Sophia, Blue Mosque, Topkapi Palace and Basilica Cistern.",
-      highlights: [
-        "Hagia Sophia & Blue Mosque",
-        "Topkapi Palace",
-        "Basilica Cistern",
-        "Private chauffeur or walking option"
-      ]
-    },
-
-    highlights: {
-      title: "Istanbul Highlights Tour",
-      img: "assets/highlightstour.jpg",
-      desc: "Full day experience covering Old City, Bosphorus line and panoramic viewpoints.",
-      highlights: ["Old City", 
-                   "Bosphorus", 
-                   "Panoramic viewpoints"
-                  ]
-  },
-    
-      bosphorus: {
-      title: "Bosphorus Shore Experience",
-      img: "assets/bosphorusguidetour.jpg",
-      desc: "Ortaköy, Bebek, Arnavutköy shoreline with photo stops and Bosphorus views.",
-      highlights: [
-        "Scenic coastal route",
-        "Photo stops",
-        "Local neighborhoods",
-        "Private chauffeur"
-      ]
-    },
-    streetfood: {
-      title: "Street Food Discovery",
-      img: "assets/streetfoodtour.jpg",
-      desc: "Discover Istanbul’s iconic street flavors in Eminönü, Karaköy or Kadıköy.",
-      highlights: [
-        "Local tastes",
-        "Hidden spots",
-        "Authentic experience"
-      ]
-    },
-    cuisine: {
-      title: "Turkish Cuisine Experience",
-      img: "assets/cuisinetour.jpg",
-      desc: "A refined gastronomy-focused experience at selected Turkish restaurants.",
-      highlights: [
-        "Meze culture",
-        "Traditional dishes",
-        "Desserts & stories"
-      ]
-    },
-    asian: {
-      title: "Asian Side Tour",
-      img: "assets/asiantour.jpg",
-      desc: "Kadıköy, Moda, Çamlıca Hill and Üsküdar waterfront exploration.",
-      highlights: [
-        "Local neighborhoods",
-        "Scenic views",
-        "Half-day tour"
-      ]
+  const TOUR_EXPERIENCES = {
+    "Old City Private Tour": `
+      <strong>What you'll experience</strong><br>
+      • Byzantine & Ottoman heritage with a licensed private guide<br>
+      • Hagia Sophia, Blue Mosque & Grand Bazaar storytelling<br>
+      • Hidden courtyards & local insights<br>
+      • Walking or vehicle-assisted options
+    `,
+    "Bosphorus Experience": `
+      <strong>What you'll experience</strong><br>
+      • Scenic Bosphorus coastline narration<br>
+      • Palaces, waterfront mansions & local life<br>
+      • Relaxed, non-rushed private experience
+    `,
+    "Istanbul Food Tour": `
+      <strong>What you'll experience</strong><br>
+      • Authentic local flavors beyond tourist routes<br>
+      • Street food & traditional restaurants<br>
+      • Cultural stories behind Turkish cuisine
+    `
   };
 
-  /* =========================
-     MODAL ELEMENTS
-  ========================= */
-  const modal = document.getElementById("tourDetailModal");
-  const titleEl = document.getElementById("tourDetailTitle");
-  const descEl = document.getElementById("tourDetailDesc");
-  const imgEl = document.getElementById("tourDetailImg");
-  const listEl = document.getElementById("tourDetailList");
-
-  /* =========================
-     OPEN MODAL FROM CARD
-  ========================= */
-  document.querySelectorAll(".tour-card").forEach(card => {
-    card.addEventListener("click", e => {
-  
-      // Eğer buton veya link tıklandıysa modal açma
-  if (e.target.closest(".tour-btn")) return;
-      const key = card.dataset.tour;
-      const data = tourData[key];
-      if (!data) return;
-
-      titleEl.innerText = data.title;
-      descEl.innerText = data.desc;
-      imgEl.src = data.img;
-
-      listEl.innerHTML = "";
-      if (data.highlights) {
-        data.highlights.forEach(h => {
-          const li = document.createElement("li");
-          li.textContent = h;
-          listEl.appendChild(li);
-        });
-      }
-
-      modal.style.display = "flex";
-      document.body.style.overflow = "hidden";
-    });
-  });
-
-  /* =========================
-     BUTTON CLICK = NO MODAL
-  ========================= */
-  document.querySelectorAll(".tour-btn").forEach(btn => {
-    btn.addEventListener("click", e => {
-      e.stopPropagation();
-      // burada request / form logic olabilir
-    });
-  });
-
-  /* =========================
-     CLOSE MODAL
-  ========================= */
-  function closeModal() {
-    modal.style.display = "none";
-    document.body.style.overflow = "";
+  if (tourExperienceBox) {
+    tourExperienceBox.innerHTML = TOUR_EXPERIENCES[tourName] || "";
   }
 
-  document.querySelector(".close-tour-detail").onclick = closeModal;
-  document.querySelector(".tour-detail-overlay").onclick = closeModal;
+  /* =========================
+     TRANSPORTATION VISIBILITY
+  ========================= */
+  const transportGroup = document.getElementById("transportationGroup");
+  if (transportGroup && tourName !== "Old City Private Tour") {
+    transportGroup.style.display = "none";
+  }
+
+  /* =========================
+     PHONE INPUT
+  ========================= */
+  const phoneInput = document.getElementById("phone");
+  let iti = null;
+
+  if (phoneInput) {
+    iti = intlTelInput(phoneInput, {
+      initialCountry: "us",
+      separateDialCode: true,
+      utilsScript:
+        "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
+    });
+  }
+
+  /* =========================
+     DATE PICKER
+  ========================= */
+  const dateInput = document.getElementById("date");
+  if (dateInput) {
+    const datePicker = flatpickr(dateInput, {
+      minDate: "today",
+      dateFormat: "Y-m-d",
+      disableMobile: true
+    });
+  }
+
+  /* =========================
+     PARTICIPANTS
+  ========================= */
+  const fullNameInput = document.querySelector('input[name="name"]');
+  const participantsContainer = document.getElementById("participantsContainer");
+  const addParticipantBtn = document.querySelector(".add-participant-btn");
+
+  function populateBirthYears(selectEl) {
+    const currentYear = new Date().getFullYear();
+    for (let y = currentYear - 5; y >= 1900; y--) {
+      const opt = document.createElement("option");
+      opt.value = y;
+      opt.textContent = y;
+      selectEl.appendChild(opt);
+    }
+  }
+
+  document.querySelectorAll(".participant-birthyear").forEach(populateBirthYears);
+
+  const primaryParticipantName =
+    document.querySelector(".participant-row.primary .participant-name");
+
+  if (fullNameInput && primaryParticipantName) {
+    fullNameInput.addEventListener("input", () => {
+      primaryParticipantName.value = fullNameInput.value;
+    });
+  }
+
+  function createParticipantRow() {
+    const row = document.createElement("div");
+    row.className = "participant-row";
+
+    row.innerHTML = `
+      <div class="participant-field">
+        <input type="text" class="participant-name" placeholder="Full name" required>
+      </div>
+      <div class="participant-field">
+        <select class="participant-nationality" required>
+          <option value="" disabled selected>Nationality</option>
+          <option value="TR">Turkey</option>
+          <option value="US">United States</option>
+          <option value="UK">United Kingdom</option>
+          <option value="DE">Germany</option>
+          <option value="FR">France</option>
+        </select>
+      </div>
+      <div class="participant-field">
+        <select class="participant-birthyear" required>
+          <option value="" disabled selected>Birth Year</option>
+        </select>
+      </div>
+      <button type="button" class="remove-participant">×</button>
+    `;
+
+    populateBirthYears(row.querySelector(".participant-birthyear"));
+
+    row.querySelector(".remove-participant")
+      .addEventListener("click", () => row.remove());
+
+    return row;
+  }
+
+  if (addParticipantBtn && participantsContainer) {
+    addParticipantBtn.addEventListener("click", () => {
+      participantsContainer.appendChild(createParticipantRow());
+    });
+  }
+
+  /* =========================
+     MOBILITY
+  ========================= */
+  const mobilityToggle = document.getElementById("mobilityToggle");
+  const mobilityGroup = document.getElementById("mobilityGroup");
+
+  if (mobilityToggle && mobilityGroup) {
+    mobilityToggle.addEventListener("change", () => {
+      mobilityGroup.classList.toggle("active", mobilityToggle.checked);
+    });
+  }
+
+  /* =========================
+     FORM SUBMIT
+  ========================= */
+  const form = document.getElementById("guideTourForm");
+
+  if (form) {
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+
+      const participants = [];
+      document.querySelectorAll(".participant-row").forEach(row => {
+        participants.push({
+          name: row.querySelector(".participant-name")?.value.trim() || "",
+          nationality: row.querySelector(".participant-nationality")?.value || "",
+          birthYear: row.querySelector(".participant-birthyear")?.value || ""
+        });
+      });
+
+      const payload = {
+        tour_name: tourName,
+        full_name: document.querySelector('[name="name"]')?.value || "",
+        email: document.querySelector('[name="email"]')?.value || "",
+        phone: iti ? iti.getNumber() : "",
+        tour_date: document.querySelector('[name="date"]')?.value || "",
+        language: document.getElementById("language")?.value || "",
+        transportation:
+          document.querySelector('input[name="transportation"]:checked')?.value || "",
+        hotel:
+          (document.querySelector('[name="hotel_name"]')?.value || "") +
+          (document.querySelector('[name="room_number"]')?.value
+            ? " / Room: " + document.querySelector('[name="room_number"]').value
+            : ""),
+        mobility: mobilityToggle?.checked ? "Yes" : "No",
+        notes: document.querySelector('[name="notes"]')?.value || "",
+        participants: participants
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec", {
+        method: "POST",
+        body: JSON.stringify(payload)
+      })
+        .then(res => res.json())
+        .then(res => {
+          if (res.status === "success") {
+            form.style.display = "none";
+            document.getElementById("successScreen").style.display = "block";
+            document.querySelector(".reservation-id").textContent =
+              `Reservation ID: ${res.reservation_id}`;
+          }
+        });
+    });
+  }
 
 });
-
-
-
-
