@@ -63,12 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
       • Hagia Sophia, Blue Mosque & Grand Bazaar storytelling<br>
       • Hidden courtyards & local insights
     `,
-    "Bosphorus Experience": `
+    "Bosphorus Shore Experience": `
       <strong>What you'll experience</strong><br>
       • Scenic Bosphorus coastline narration<br>
       • Palaces, waterfront mansions & local life
     `,
-    "Istanbul Food Tour": `
+    "Street Food Discovery": `
       <strong>What you'll experience</strong><br>
       • Authentic local flavors beyond tourist routes<br>
       • Street food & traditional restaurants
