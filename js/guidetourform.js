@@ -58,16 +58,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const TOUR_EXPERIENCES = {
     "Old City Private Tour": `
-  <strong>What you'll experience</strong>
-  <span class="experience-link" data-experience="byzantine">Byzantine</span> &
-  <span class="experience-link" data-experience="ottoman">Ottoman</span> heritage with a licensed private guide •
-  <span class="experience-link" data-experience="hagiaphia">Hagia Sophia</span>,
-  <span class="experience-link" data-experience="bluemosque">Blue Mosque</span>,
-  <span class="experience-link" data-experience="topkapi">Topkapı Palace</span>,
-  <span class="experience-link" data-experience="basilica">Basilica Cistern</span>,
-  <span class="experience-link" data-experience="hippodrome">Hippodrome</span> &
-  <span class="experience-link" data-experience="grandbazaar">Grand Bazaar</span> storytelling •
-  Hidden courtyards & local insights
+<strong>What you'll experience</strong>
+<span class="experience-link" data-experience="byzantine">Byzantine</span> &
+<span class="experience-link" data-experience="ottoman">Ottoman</span> heritage with a licensed private guide •
+<span class="experience-link" data-experience="hagiaphia">Hagia Sophia</span>,
+<span class="experience-link" data-experience="bluemosque">Blue Mosque</span>,
+<span class="experience-link" data-experience="topkapi">Topkapı Palace</span>,
+<span class="experience-link" data-experience="basilica">Basilica Cistern</span>,
+<span class="experience-link" data-experience="hippodrome">Hippodrome</span> &
+<span class="experience-link" data-experience="grandbazaar">Grand Bazaar</span> storytelling •
+<span class="experience-link" data-experience="courtyards">Hidden courtyards</span> &
+<span class="experience-link" data-experience="localinsights">local insights</span>
 `,
     "Bosphorus Shore Experience": `
       <strong>What you'll experience</strong><br>
@@ -136,7 +137,13 @@ const EXPERIENCE_DATA = {
     img: "assets/grandbazaar.jpg",
     desc:
       "Explore one of the world’s oldest covered markets with access to curated artisan workshops, including traditional carpet and kilim exhibitions guided by trusted local expertise."
-  }
+  },
+courtyards: {
+  title: "Hidden Courtyards",
+  img: "assets/courtyards.jpg",
+  desc:
+    "Step beyond the main routes into secluded courtyards, madrasas and passageways that reveal the city’s quieter, authentic soul."
+}
 };
 
 /* ==============================
