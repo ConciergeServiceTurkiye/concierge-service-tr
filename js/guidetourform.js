@@ -275,8 +275,8 @@ document.addEventListener("keydown", e => {
     const basePrice = 300;
     const extra = 100;
     const total = basePrice + (count - 1) * extra;
-
-    const priceEl = document.getElementById("tourPrice");
+    const priceEl = document.getElementById("totalPrice");
+priceEl.textContent = `€${total}`;
     if (priceEl) {
       priceEl.textContent = `$${total}`;
     }
