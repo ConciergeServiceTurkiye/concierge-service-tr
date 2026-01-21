@@ -256,9 +256,8 @@
 
 /* Clickable keywords */
 .experience-link {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
+  color: #d4af37;
+  font-weight: 500;
   pointer-events: auto;
   cursor: pointer;
   transition: color 0.25s ease, text-shadow 0.25s ease;
@@ -266,7 +265,8 @@
 
 .experience-link:hover {
   color: #f1d88a;
-  text-shadow: 0 0 6px rgba(212,175,55,0.45);
+  text-shadow: 0 0 6px rgba(212,175,55,0.6),
+														0 0 14px rgba(212,175,55,0.35);
 }
 
 /* ==============================
@@ -337,3 +337,22 @@
   line-height: 1.7;
   color: rgba(255,255,255,0.85);
 }
+
+
+/*Mobil uyum*/
+
+@media (max-width: 768px) {
+  .experience-content {
+    margin: 4vh 12px;
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  .experience-body {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-image {
+    max-height: 240px;
+  }
+} 
