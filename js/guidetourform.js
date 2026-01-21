@@ -160,6 +160,20 @@
             `${textarea.value.length} / ${counter.dataset.max}`;
         });
       });
+
+/* InlineAlert */
+        function showInlineAlert(message) {
+  const alertBox = document.getElementById("formInlineAlert");
+  alertBox.textContent = message;
+  alertBox.style.opacity = "1";
+  alertBox.style.visibility = "visible";
+
+  setTimeout(() => {
+    alertBox.style.opacity = "0";
+    alertBox.style.visibility = "hidden";
+  }, 4000);
+}
+
     
       /* MOBILITY */
       const mobilityToggle = document.getElementById("mobilityToggle");
