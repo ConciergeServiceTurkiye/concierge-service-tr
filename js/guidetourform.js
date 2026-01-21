@@ -58,11 +58,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const TOUR_EXPERIENCES = {
     "Old City Private Tour": `
-      <strong>What you'll experience</strong><br>
-      • Byzantine & Ottoman heritage with a licensed private guide<br>
-      • Hagia Sophia, Blue Mosque & Grand Bazaar storytelling<br>
-      • Hidden courtyards & local insights
-    `,
+  <strong>What you'll experience</strong>
+  <span class="experience-link" data-experience="byzantine">Byzantine</span> &
+  <span class="experience-link" data-experience="ottoman">Ottoman</span> heritage with a licensed private guide •
+  <span class="experience-link" data-experience="hagiaphia">Hagia Sophia</span>,
+  <span class="experience-link" data-experience="bluemosque">Blue Mosque</span>,
+  <span class="experience-link" data-experience="topkapi">Topkapı Palace</span>,
+  <span class="experience-link" data-experience="basilica">Basilica Cistern</span>,
+  <span class="experience-link" data-experience="hippodrome">Hippodrome</span> &
+  <span class="experience-link" data-experience="grandbazaar">Grand Bazaar</span> storytelling •
+  Hidden courtyards & local insights
+`,
     "Bosphorus Shore Experience": `
       <strong>What you'll experience</strong><br>
       • Scenic Bosphorus coastline narration<br>
@@ -77,6 +83,101 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("tourExperience").innerHTML =
     TOUR_EXPERIENCES[tourName] || "";
+
+
+/* ==============================
+   EXPERIENCE MODAL DATA
+============================== */
+const EXPERIENCE_DATA = {
+  byzantine: {
+    title: "Byzantine Heritage",
+    img: "assets/byzantine.jpg",
+    desc:
+      "Discover the layers of Constantinople’s imperial past, from ancient forums to monumental churches that shaped world history."
+  },
+  ottoman: {
+    title: "Ottoman Legacy",
+    img: "assets/ottoman.jpg",
+    desc:
+      "Walk through centuries of Ottoman grandeur, architecture and courtly life that defined Istanbul as a global capital."
+  },
+  hagiaphia: {
+    title: "Hagia Sophia",
+    img: "assets/hagiasophia.jpg",
+    desc:
+      "A timeless masterpiece bridging civilizations, faiths and empires under one magnificent dome."
+  },
+  bluemosque: {
+    title: "Blue Mosque",
+    img: "assets/bluemosque.jpg",
+    desc:
+      "An architectural harmony of faith and elegance, still alive with daily prayer and tradition."
+  },
+  topkapi: {
+    title: "Topkapı Palace",
+    img: "assets/topkapi.jpg",
+    desc:
+      "Enter the world of sultans, imperial treasures and palace life overlooking the Bosphorus."
+  },
+  basilica: {
+    title: "Basilica Cistern",
+    img: "assets/basilicacistern.jpg",
+    desc:
+      "An underground marvel of columns, silence and water, hidden beneath the Old City."
+  },
+  hippodrome: {
+    title: "Hippodrome",
+    img: "assets/hippodrome.jpg",
+    desc:
+      "Once the heart of Byzantine public life, where chariot races and ceremonies shaped the city."
+  },
+  grandbazaar: {
+    title: "Grand Bazaar & Artisan Workshops",
+    img: "assets/grandbazaar.jpg",
+    desc:
+      "Explore one of the world’s oldest covered markets with access to curated artisan workshops, including traditional carpet and kilim exhibitions guided by trusted local expertise."
+  }
+};
+
+/* ==============================
+   MODAL ENGINE
+============================== */
+const modal = document.getElementById("experienceModal");
+const modalImg = document.getElementById("experienceImg");
+const modalTitle = document.getElementById("experienceTitle");
+const modalDesc = document.getElementById("experienceDesc");
+
+function openExperience(key) {
+  const data = EXPERIENCE_DATA[key];
+  if (!data) return;
+
+  modalImg.src = data.img;
+  modalTitle.textContent = data.title;
+  modalDesc.textContent = data.desc;
+
+  modal.classList.add("active");
+}
+
+function closeExperience() {
+  modal.classList.remove("active");
+}
+
+document.addEventListener("click", e => {
+  if (e.target.classList.contains("experience-link")) {
+    openExperience(e.target.dataset.experience);
+  }
+
+  if (
+    e.target.classList.contains("experience-overlay") ||
+    e.target.classList.contains("experience-close")
+  ) {
+    closeExperience();
+  }
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeExperience();
+});
 
   /* ==============================
      NATIONALITY DROPDOWN
