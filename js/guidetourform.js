@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.classList.add("has-error");
   }
 
+  const COUNTRY_LIST = window.intlTelInputGlobals.getCountryData();
+
+
   function hideFieldError(el) {
     const wrapper = el.closest(".field-wrapper") || el.parentElement;
     const error = wrapper.querySelector(".field-error");
@@ -68,6 +71,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("tourExperience").innerHTML =
     TOUR_EXPERIENCES[tourName] || "";
+
+  function initNationalityDropdown(container) {
+  const trigger = container.querySelector(".nationality-trigger");
+  const dropdown = container.querySelector(".nationality-dropdown");
+  const hiddenInput = container.querySelector(".participant-nationality");
+
+  dropdown.innerHTML = "";
+
+/* Nationality Dropdown */
+  COUNTRY_LIST.forEach(c => {
+    const div = document.createElement("div");
+    div.className = "nationality-option";
+    div.innerHTML = `
+      <img src="https://flagcdn.com/w20/${c.iso2}.png">
+      ${c.name}
+    `;
+    div.onclick = () => {
+      trigger.textContent = c.name;
+      hiddenInput.value = c.iso2.toUpperCase();
+      container.classList.remove("open");
+    };
+    dropdown.appendChild(div);
+  });
+
+  trigger.onclick = () => container.classList.toggle("open");
+}
 
   /* ==============================
      PHONE
