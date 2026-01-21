@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.classList.add("has-error");
   }
 
+
+  
   const COUNTRY_LIST = window.intlTelInputGlobals.getCountryData();
 
 
@@ -218,6 +220,11 @@ document.addEventListener("DOMContentLoaded", () => {
   addBtn.addEventListener("click", () => {
     // existing HTML row assumed
   });
+
+  document
+  .querySelectorAll(".nationality-select")
+  .forEach(initNationalityDropdown);
+
 
   /* ==============================
      SUBMIT
