@@ -4,7 +4,8 @@
       const params = new URLSearchParams(window.location.search);
       document.getElementById("tourName").value =
         params.get("tour") || "Private Guide Tour";
-    
+
+      const tourName = params.get("tour") || "Private Guide Tour";
       const fullNameInput = document.querySelector('input[name="name"]');
       const participantsContainer = document.getElementById('participantsContainer');
       const addParticipantBtn = document.querySelector('.add-participant-btn');
