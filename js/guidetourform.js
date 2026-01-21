@@ -1,229 +1,250 @@
-    document.addEventListener("DOMContentLoaded", () => {
-    
-      /* URL → TOUR NAME */
-      const params = new URLSearchParams(window.location.search);
-      document.getElementById("tourName").value =
-        params.get("tour") || "Private Guide Tour";
+document.addEventListener("DOMContentLoaded", () => {
 
-      const tourName = params.get("tour") || "Private Guide Tour";
-      const fullNameInput = document.querySelector('input[name="name"]');
-      const participantsContainer = document.getElementById('participantsContainer');
-      const addParticipantBtn = document.querySelector('.add-participant-btn');
-    
-      const TOUR_EXPERIENCES = {
-      "Old City Private Tour": `
-        <strong>What you'll experience</strong>
-        • Byzantine & Ottoman heritage with a licensed private guide<br>
-        • Hagia Sophia, Blue Mosque & Grand Bazaar storytelling<br>
-        • Hidden courtyards & local insights<br>
-        • Walking or vehicle-assisted options
-      `,
-    
-      "Bosphorus Experience": `
-        <strong>What you'll experience</strong>
-        • Scenic Bosphorus coastline narration<br>
-        • Palaces, waterfront mansions & local life<br>
-        • Relaxed, non-rushed private experience
-      `,
-    
-      "Istanbul Food Tour": `
-        <strong>What you'll experience</strong>
-        • Authentic local flavors beyond tourist routes<br>
-        • Street food & traditional restaurants<br>
-        • Cultural stories behind Turkish cuisine
-      `
-    };
-  
-    document.getElementById("tourFormTitle").textContent = tourName;
-    document.getElementById("tourName").value = tourName;
-    
-    document.getElementById("tourExperience").innerHTML =
-      TOUR_EXPERIENCES[tourName] || "";
-    
-      /* PHONE */
-      const iti = intlTelInput(phone, {
-  initialCountry: "us",
-  separateDialCode: true,
-  utilsScript:
-    "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
-});
-    
-      /* DATE PICKER */
-      const dateInput = document.getElementById("date");
-      let lastInteractionWasKeyboard = false;
-    
-      const datePicker = flatpickr(dateInput, {
-        minDate: "today",
-        dateFormat: "Y-m-d",
-        disableMobile: true,
-        clickOpens: false
-      });
-    
-      document.addEventListener("keydown", e => {
-        if (e.key === "Tab") lastInteractionWasKeyboard = true;
-      });
-    
-      document.addEventListener("mousedown", () => {
-        lastInteractionWasKeyboard = false;
-      });
-    
-      dateInput.addEventListener("focus", () => {
-        if (lastInteractionWasKeyboard && !datePicker.isOpen) {
-          datePicker.open();
-        }
-      });
-    
-      dateInput.addEventListener("click", e => {
-        e.stopPropagation();
-        datePicker.isOpen ? datePicker.close() : datePicker.open();
-      });
-    
-      document.addEventListener("click", e => {
-        if (
-          datePicker.isOpen &&
-          !dateInput.contains(e.target) &&
-          !datePicker.calendarContainer.contains(e.target)
-        ) {
-          datePicker.close();
-        }
-      });
-    
-      /* BIRTH YEARS */
-      function populateBirthYears(selectEl) {
-        const currentYear = new Date().getFullYear();
-        for (let y = currentYear - 5; y >= 1900; y--) {
-          const opt = document.createElement("option");
-          opt.value = y;
-          opt.textContent = y;
-          selectEl.appendChild(opt);
-        }
-      }
-    
-      populateBirthYears(
-        document.querySelector(".participant-birthyear")
-      );
-    
-      /* PRIMARY PARTICIPANT NAME SYNC */
-      const primaryParticipantName =
-        document.querySelector(".participant-row.primary .participant-name");
-    
-      fullNameInput.addEventListener("input", () => {
-        primaryParticipantName.value = fullNameInput.value;
-      });
-    
-      /* ADD / REMOVE PARTICIPANT */
-      function createParticipantRow() {
-        const row = document.createElement("div");
-        row.className = "participant-row";
-    
-        row.innerHTML = `
-          <div class="participant-field">
-            <input type="text" class="participant-name" placeholder="Full name" required>
-          </div>
-          <div class="participant-field">
-            <select class="participant-nationality" required>
-              <option value="" disabled selected>Nationality</option>
-              <option value="TR">Turkey</option>
-              <option value="US">United States</option>
-              <option value="UK">United Kingdom</option>
-              <option value="DE">Germany</option>
-              <option value="FR">France</option>
-            </select>
-          </div>
-          <div class="participant-field">
-            <select class="participant-birthyear" required>
-              <option value="" disabled selected>Birth Year</option>
-            </select>
-          </div>
-          <button type="button" class="remove-participant">×</button>
-        `;
-    
-        populateBirthYears(
-          row.querySelector(".participant-birthyear")
+  /* ==============================
+     HELPERS – FIELD ERRORS
+  ============================== */
+  function showFieldError(el, message) {
+    const wrapper = el.closest(".field-wrapper") || el.parentElement;
+    let error = wrapper.querySelector(".field-error");
+
+    if (!error) {
+      error = document.createElement("div");
+      error.className = "field-error";
+      wrapper.prepend(error);
+    }
+
+    error.textContent = message;
+    wrapper.classList.add("has-error");
+  }
+
+  function hideFieldError(el) {
+    const wrapper = el.closest(".field-wrapper") || el.parentElement;
+    const error = wrapper.querySelector(".field-error");
+    if (error) error.remove();
+    wrapper.classList.remove("has-error");
+  }
+
+  function showInlineAlert(message) {
+    const alert = document.getElementById("formInlineAlert");
+    alert.textContent = message;
+    alert.style.opacity = "1";
+    alert.style.visibility = "visible";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function hideInlineAlert() {
+    const alert = document.getElementById("formInlineAlert");
+    alert.style.opacity = "0";
+    alert.style.visibility = "hidden";
+  }
+
+  /* ==============================
+     TOUR NAME & EXPERIENCE
+  ============================== */
+  const params = new URLSearchParams(window.location.search);
+  const tourName = params.get("tour") || "Private Guide Tour";
+
+  document.getElementById("tourName").value = tourName;
+  document.getElementById("tourFormTitle").textContent = tourName;
+
+  const TOUR_EXPERIENCES = {
+    "Old City Private Tour": `
+      <strong>What you'll experience</strong><br>
+      • Byzantine & Ottoman heritage with a licensed private guide<br>
+      • Hagia Sophia, Blue Mosque & Grand Bazaar storytelling<br>
+      • Hidden courtyards & local insights
+    `,
+    "Bosphorus Experience": `
+      <strong>What you'll experience</strong><br>
+      • Scenic Bosphorus coastline narration<br>
+      • Palaces, waterfront mansions & local life
+    `,
+    "Istanbul Food Tour": `
+      <strong>What you'll experience</strong><br>
+      • Authentic local flavors beyond tourist routes<br>
+      • Street food & traditional restaurants
+    `
+  };
+
+  document.getElementById("tourExperience").innerHTML =
+    TOUR_EXPERIENCES[tourName] || "";
+
+  /* ==============================
+     PHONE
+  ============================== */
+  const phoneInput = document.getElementById("phone");
+  const iti = intlTelInput(phoneInput, {
+    initialCountry: "us",
+    separateDialCode: true,
+    utilsScript:
+      "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
+  });
+
+  /* ==============================
+     DATE PICKER
+  ============================== */
+  flatpickr("#date", {
+    minDate: "today",
+    dateFormat: "Y-m-d",
+    disableMobile: true
+  });
+
+  /* ==============================
+     FIELD LEVEL VALIDATION
+  ============================== */
+  const fullName = document.querySelector('[name="name"]');
+  const email = document.querySelector('[name="email"]');
+  const date = document.getElementById("date");
+  const language = document.getElementById("language");
+  const hotel = document.querySelector('[name="hotel_name"]');
+  const mobilityToggle = document.getElementById("mobilityToggle");
+  const mobilityText = document.querySelector('[name="mobility_notes"]');
+
+  fullName.addEventListener("blur", () => {
+    fullName.value.trim()
+      ? hideFieldError(fullName)
+      : showFieldError(fullName, "Please enter your full name");
+  });
+
+  email.addEventListener("blur", () => {
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)
+      ? hideFieldError(email)
+      : showFieldError(email, "Please enter a valid email address.");
+  });
+
+  phoneInput.addEventListener("blur", () => {
+    iti.isValidNumber()
+      ? hideFieldError(phoneInput)
+      : showFieldError(phoneInput, "Please enter a valid phone number.");
+  });
+
+  date.addEventListener("blur", () => {
+    date.value
+      ? hideFieldError(date)
+      : showFieldError(date, "Please select your preferred tour date.");
+  });
+
+  language.addEventListener("change", () => {
+    language.value
+      ? hideFieldError(language)
+      : showFieldError(language, "Please select your preferred guide language.");
+  });
+
+  hotel.addEventListener("blur", () => {
+    hotel.value.trim()
+      ? hideFieldError(hotel)
+      : showFieldError(
+          hotel,
+          "Please enter your hotel name for pick-up coordination."
         );
-    
-        row.querySelector(".remove-participant")
-          .addEventListener("click", () => row.remove());
-    
-        return row;
+  });
+
+  mobilityText.addEventListener("blur", () => {
+    if (mobilityToggle.checked && !mobilityText.value.trim()) {
+      showFieldError(
+        mobilityText,
+        "Please describe the mobility assistance needed."
+      );
+    } else {
+      hideFieldError(mobilityText);
+    }
+  });
+
+  /* ==============================
+     PARTICIPANTS
+  ============================== */
+  const participantsContainer = document.getElementById("participantsContainer");
+  const addBtn = document.querySelector(".add-participant-btn");
+
+  function validateParticipantRow(row, isPrimary) {
+    const name = row.querySelector(".participant-name");
+    const nat = row.querySelector(".participant-nationality");
+    const year = row.querySelector(".participant-birthyear");
+
+    if (isPrimary) {
+      if (!nat.value || !year.value) {
+        showFieldError(
+          row,
+          "Please select nationality and birth year for the primary participant."
+        );
+        return false;
       }
-    
-      addParticipantBtn.addEventListener("click", () => {
-        participantsContainer.appendChild(createParticipantRow());
-      });
-    
-      /* TEXTAREA COUNTS */
-      document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
-        const counter = textarea.parentElement.querySelector(".char-count");
-        textarea.addEventListener("input", () => {
-          counter.textContent =
-            `${textarea.value.length} / ${counter.dataset.max}`;
-        });
-      });
+    } else {
+      const anyFilled =
+        name.value.trim() || nat.value || year.value;
 
-/* InlineAlert */
-        function showInlineAlert(message) {
-  const alertBox = document.getElementById("formInlineAlert");
-  alertBox.textContent = message;
-  alertBox.style.opacity = "1";
-  alertBox.style.visibility = "visible";
+      if (anyFilled && (!name.value.trim() || !nat.value || !year.value)) {
+        showFieldError(
+          row,
+          "Please complete all participant details, or remove unused participant rows using the × button."
+        );
+        return false;
+      }
+    }
 
-  setTimeout(() => {
-    alertBox.style.opacity = "0";
-    alertBox.style.visibility = "hidden";
-  }, 4000);
-}
+    hideFieldError(row);
+    return true;
+  }
 
-    
-      /* MOBILITY */
-      const mobilityToggle = document.getElementById("mobilityToggle");
-      const mobilityGroup = document.getElementById("mobilityGroup");
-    
-      mobilityToggle.addEventListener("change", () => {
-        mobilityGroup.classList.toggle("active", mobilityToggle.checked);
-      });
-    
-    document.getElementById("guideTourForm").addEventListener("submit", function (e) {
+  addBtn.addEventListener("click", () => {
+    // existing HTML row assumed
+  });
+
+  /* ==============================
+     SUBMIT
+  ============================== */
+  document
+    .getElementById("guideTourForm")
+    .addEventListener("submit", function (e) {
       e.preventDefault();
-    
-      const participants = [];
-      document.querySelectorAll(".participant-row").forEach(row => {
-        participants.push({
-          name: row.querySelector(".participant-name").value.trim(),
-          nationality: row.querySelector(".participant-nationality").value,
-          birthYear: row.querySelector(".participant-birthyear").value
-        });
-      });
-    
-      const payload = {
-        tour_name: document.getElementById("tourName").value,
-        full_name: document.querySelector('[name="name"]').value,
-        email: document.querySelector('[name="email"]').value,
-        phone: iti.getNumber(),
-        tour_date: document.querySelector('[name="date"]').value,
-        language: document.getElementById("language").value,
-        transportation: document.querySelector('input[name="transportation"]:checked')?.value || "",
-        hotel: document.querySelector('[name="hotel_name"]').value +
-               (document.querySelector('[name="room_number"]').value
-                 ? " / Room: " + document.querySelector('[name="room_number"]').value
-                 : ""),
-        mobility: document.getElementById("mobilityToggle").checked ? "Yes" : "No",
-        notes: document.querySelector('[name="notes"]').value,
-        participants: participants
-      };
-    
-      fetch("https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec", {
-        method: "POST",
-        body: JSON.stringify(payload)
-      })
-      .then(res => res.json())
-      .then(res => {
-        if (res.status === "success") {
-          document.getElementById("guideTourForm").style.display = "none";
-          document.getElementById("successScreen").style.display = "block";
-          document.querySelector(".reservation-id").textContent =
-            `Reservation ID: ${res.reservation_id}`;
-        }
-      });
+      hideInlineAlert();
+
+      if (!fullName.value.trim())
+        return showInlineAlert("Please enter your full name");
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value))
+        return showInlineAlert("Please enter a valid email address.");
+
+      if (!iti.isValidNumber())
+        return showInlineAlert("Please enter a valid phone number.");
+
+      if (!date.value)
+        return showInlineAlert("Please select your preferred tour date.");
+
+      if (!language.value)
+        return showInlineAlert(
+          "Please select your preferred guide language."
+        );
+
+      if (
+        !document.querySelector(
+          'input[name="transportation"]:checked'
+        )
+      )
+        return showInlineAlert(
+          "Please choose your preferred transportation option."
+        );
+
+      if (!hotel.value.trim())
+        return showInlineAlert(
+          "Please enter your hotel name for pick-up coordination."
+        );
+
+      const rows = document.querySelectorAll(".participant-row");
+      for (let i = 0; i < rows.length; i++) {
+        if (!validateParticipantRow(rows[i], i === 0))
+          return showInlineAlert(
+            i === 0
+              ? "Please select nationality and birth year for the primary participant."
+              : "Please complete all participant details, or remove unused participant rows using the × button."
+          );
+      }
+
+      if (mobilityToggle.checked && !mobilityText.value.trim())
+        return showInlineAlert(
+          "Please describe the mobility assistance needed."
+        );
+
+      this.submit();
     });
-    });
+});
