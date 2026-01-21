@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ==============================
      HELPERS – FIELD ERRORS
   ============================== */
+
   function showFieldError(el, message) {
     const wrapper = el.closest(".field-wrapper") || el.parentElement;
     let error = wrapper.querySelector(".field-error");
@@ -17,11 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.classList.add("has-error");
   }
 
-
-  
-  const COUNTRY_LIST = window.intlTelInputGlobals.getCountryData();
-
-
   function hideFieldError(el) {
     const wrapper = el.closest(".field-wrapper") || el.parentElement;
     const error = wrapper.querySelector(".field-error");
@@ -29,20 +25,19 @@ document.addEventListener("DOMContentLoaded", () => {
     wrapper.classList.remove("has-error");
   }
 
+  function scrollToFirstError() {
+    const firstError = document.querySelector(".has-error");
+    if (firstError) {
+      firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+
   function showInlineAlert(message) {
     const alert = document.getElementById("formInlineAlert");
     alert.textContent = message;
     alert.style.opacity = "1";
     alert.style.visibility = "visible";
-    scrollToFirstError() {
-  const firstError = document.querySelector(".has-error");
-  if (firstError) {
-    firstError.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-  }
-}
+    scrollToFirstError();
   }
 
   function hideInlineAlert() {
@@ -54,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ==============================
      TOUR NAME & EXPERIENCE
   ============================== */
+
   const params = new URLSearchParams(window.location.search);
   const tourName = params.get("tour") || "Private Guide Tour";
 
@@ -82,35 +78,47 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("tourExperience").innerHTML =
     TOUR_EXPERIENCES[tourName] || "";
 
+  /* ==============================
+     NATIONALITY DROPDOWN
+  ============================== */
+
+  const COUNTRY_LIST = window.intlTelInputGlobals.getCountryData();
+
   function initNationalityDropdown(container) {
-  const trigger = container.querySelector(".nationality-trigger");
-  const dropdown = container.querySelector(".nationality-dropdown");
-  const hiddenInput = container.querySelector(".participant-nationality");
+    const trigger = container.querySelector(".nationality-trigger");
+    const dropdown = container.querySelector(".nationality-dropdown");
+    const hiddenInput = container.querySelector(".participant-nationality");
 
-  dropdown.innerHTML = "";
+    dropdown.innerHTML = "";
 
-/* Nationality Dropdown */
-  COUNTRY_LIST.forEach(c => {
-    const div = document.createElement("div");
-    div.className = "nationality-option";
-    div.innerHTML = `
-      <img src="https://flagcdn.com/w20/${c.iso2}.png">
-      ${c.name}
-    `;
-    div.onclick = () => {
-      trigger.textContent = c.name;
-      hiddenInput.value = c.iso2.toUpperCase();
-      container.classList.remove("open");
-    };
-    dropdown.appendChild(div);
-  });
+    COUNTRY_LIST.forEach(c => {
+      const div = document.createElement("div");
+      div.className = "nationality-option";
+      div.innerHTML = `
+        <img src="https://flagcdn.com/w20/${c.iso2}.png">
+        ${c.name}
+      `;
+      div.addEventListener("click", () => {
+        trigger.textContent = c.name;
+        hiddenInput.value = c.iso2.toUpperCase();
+        container.classList.remove("open");
+      });
+      dropdown.appendChild(div);
+    });
 
-  trigger.onclick = () => container.classList.toggle("open");
-}
+    trigger.addEventListener("click", () => {
+      container.classList.toggle("open");
+    });
+  }
+
+  document
+    .querySelectorAll(".nationality-select")
+    .forEach(initNationalityDropdown);
 
   /* ==============================
      PHONE
   ============================== */
+
   const phoneInput = document.getElementById("phone");
   const iti = intlTelInput(phoneInput, {
     initialCountry: "us",
@@ -122,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ==============================
      DATE PICKER
   ============================== */
+
   flatpickr("#date", {
     minDate: "today",
     dateFormat: "Y-m-d",
@@ -129,8 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ==============================
-     FIELD LEVEL VALIDATION
+     FIELD REFERENCES
   ============================== */
+
   const fullName = document.querySelector('[name="name"]');
   const email = document.querySelector('[name="email"]');
   const date = document.getElementById("date");
@@ -139,61 +149,49 @@ document.addEventListener("DOMContentLoaded", () => {
   const mobilityToggle = document.getElementById("mobilityToggle");
   const mobilityText = document.querySelector('[name="mobility_notes"]');
 
-  fullName.addEventListener("blur", () => {
-    fullName.value.trim()
-      ? hideFieldError(fullName)
-      : showFieldError(fullName, "Please enter your full name");
-  });
+  /* ==============================
+     PARTICIPANTS + PRICE ENGINE
+  ============================== */
 
-  email.addEventListener("blur", () => {
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)
-      ? hideFieldError(email)
-      : showFieldError(email, "Please enter a valid email address.");
-  });
+  const participantsContainer = document.getElementById("participantsContainer");
 
-  phoneInput.addEventListener("blur", () => {
-    iti.isValidNumber()
-      ? hideFieldError(phoneInput)
-      : showFieldError(phoneInput, "Please enter a valid phone number.");
-  });
+  function getParticipantCount() {
+    let count = 0;
+    document.querySelectorAll(".participant-row").forEach(row => {
+      const name = row.querySelector(".participant-name");
+      const nat = row.querySelector(".participant-nationality");
+      const year = row.querySelector(".participant-birthyear");
 
-  date.addEventListener("blur", () => {
-    date.value
-      ? hideFieldError(date)
-      : showFieldError(date, "Please select your preferred tour date.");
-  });
+      if (name.value.trim() && nat.value && year.value) {
+        count++;
+      }
+    });
+    return count || 1;
+  }
 
-  language.addEventListener("change", () => {
-    language.value
-      ? hideFieldError(language)
-      : showFieldError(language, "Please select your preferred guide language.");
-  });
+  function updatePrice() {
+    const count = getParticipantCount();
+    const basePrice = 300;
+    const extra = 100;
+    const total = basePrice + (count - 1) * extra;
 
-  hotel.addEventListener("blur", () => {
-    hotel.value.trim()
-      ? hideFieldError(hotel)
-      : showFieldError(
-          hotel,
-          "Please enter your hotel name for pick-up coordination."
-        );
-  });
+    const priceEl = document.getElementById("tourPrice");
+    if (priceEl) {
+      priceEl.textContent = `$${total}`;
+    }
+  }
 
-  mobilityText.addEventListener("blur", () => {
-    if (mobilityToggle.checked && !mobilityText.value.trim()) {
-      showFieldError(
-        mobilityText,
-        "Please describe the mobility assistance needed."
-      );
-    } else {
-      hideFieldError(mobilityText);
+  participantsContainer.addEventListener("input", updatePrice);
+  participantsContainer.addEventListener("click", e => {
+    if (e.target.classList.contains("remove-participant")) {
+      e.target.closest(".participant-row").remove();
+      updatePrice();
     }
   });
 
   /* ==============================
-     PARTICIPANTS
+     PARTICIPANT VALIDATION
   ============================== */
-  const participantsContainer = document.getElementById("participantsContainer");
-  const addBtn = document.querySelector(".add-participant-btn");
 
   function validateParticipantRow(row, isPrimary) {
     const name = row.querySelector(".participant-name");
@@ -203,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isPrimary) {
       if (!nat.value || !year.value) {
         showFieldError(
-          row,
+          nat,
           "Please select nationality and birth year for the primary participant."
         );
         return false;
@@ -214,29 +212,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (anyFilled && (!name.value.trim() || !nat.value || !year.value)) {
         showFieldError(
-          row,
+          name,
           "Please complete all participant details, or remove unused participant rows using the × button."
         );
         return false;
       }
     }
-
-    hideFieldError(row);
     return true;
   }
-
-  addBtn.addEventListener("click", () => {
-    // existing HTML row assumed
-  });
-
-  document
-  .querySelectorAll(".nationality-select")
-  .forEach(initNationalityDropdown);
-
 
   /* ==============================
      SUBMIT
   ============================== */
+
   document
     .getElementById("guideTourForm")
     .addEventListener("submit", function (e) {
@@ -256,9 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return showInlineAlert("Please select your preferred tour date.");
 
       if (!language.value)
-        return showInlineAlert(
-          "Please select your preferred guide language."
-        );
+        return showInlineAlert("Please select your preferred guide language.");
 
       if (
         !document.querySelector(
@@ -291,4 +277,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
       this.submit();
     });
+
 });
