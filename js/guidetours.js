@@ -88,17 +88,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "Scenic views",
         "Half-day tour"
       ]
-    },
-    custom: {
-      title: "Tailor-Made City Tour",
-      img: "assets/customtour.jpg",
-      desc: "Fully customized private city tour designed around guest preferences.",
-      highlights: [
-        "100% personalized",
-        "Flexible timing",
-        "Luxury planning"
-      ]
-    }
   };
 
   /* =========================
@@ -162,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".tour-detail-overlay").onclick = closeModal;
 
 });
+
 
 
 
