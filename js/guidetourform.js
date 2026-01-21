@@ -8,7 +8,6 @@
       const fullNameInput = document.querySelector('input[name="name"]');
       const participantsContainer = document.getElementById('participantsContainer');
       const addParticipantBtn = document.querySelector('.add-participant-btn');
-      const participantsJsonInput = document.getElementById('participantsJson');
     
       const TOUR_EXPERIENCES = {
       "Old City Private Tour": `
