@@ -57,13 +57,12 @@
     
     
       /* PHONE */
-      const phone = document.getElementById("phone");
-      intlTelInput(phone, {
-        initialCountry: "us",
-        separateDialCode: true,
-        utilsScript:
-          "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
-      });
+      const iti = intlTelInput(phone, {
+  initialCountry: "us",
+  separateDialCode: true,
+  utilsScript:
+    "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
+});
     
       /* DATE PICKER */
       const dateInput = document.getElementById("date");
