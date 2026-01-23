@@ -123,26 +123,16 @@ form {display: flex;flex-direction: column;gap: 22px;}
 /* RESPONSIVE */
       @media (max-width: 768px) {.contact-form-wrapper {max-width: 94%;padding: 35px 25px;}}
 
-.contact-form-wrapper {
-  position: relative;
-  overflow: visible;
-}
-.iti__country-list {
+.contact-form-wrapper .iti__country-list {
   pointer-events: none;
 }
 
-.iti--allow-dropdown .iti__country-list {
+.contact-form-wrapper .iti--allow-dropdown .iti__country-list {
   pointer-events: auto;
 }
 .select-trigger.selected {
   color: #d4af37;
 }
-
-
-
-
-
-
 
 
 
