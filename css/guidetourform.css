@@ -2,16 +2,12 @@
                     display:flex;justify-content:center;}
     .guidetour-form-wrapper{max-width:760px;width:100%;background:rgba(10,10,10,.88);border:1.5px solid #d4af37;border-radius:14px;padding:45px 40px;}
     .guidetour-form-header{text-align:center;margin-bottom:30px;}
-    .guide-form-title{color:#d4af37;font-size:28px;user-select: none;
-  cursor: default;}
-    .guide-form-subline{font-size:12px;letter-spacing:2px;color:rgba(255,255,255,.75);text-transform:uppercase;user-select: none;
-  cursor: default;}
+    .guide-form-title{color:#d4af37;font-size:28px;user-select: none; cursor: default;}
+    .guide-form-subline{font-size:12px;letter-spacing:2px;color:rgba(255,255,255,.75);text-transform:uppercase;user-select: none; cursor: default;}
     .guidetour-form{display:flex;flex-direction:column;gap:22px;}
-
     .form-group{display:flex;flex-direction:column;} label{color:#d4af37;font-size:13px;margin-bottom:6px;}
     input, textarea{background:#111;border:1px solid #d4af37;border-radius:10px;color:#d4af37;padding:12px 14px;}
     textarea{resize:none;}
-
     .custom-select{position:relative;}
     .select-trigger{border:1px solid #d4af37;border-radius:10px;padding:12px 14px;cursor:pointer;}
     .select-options{display:none;position:absolute;top:100%;left:0;width:100%;background:#111;border:1px solid #d4af37;border-radius:10px;z-index:50;}
