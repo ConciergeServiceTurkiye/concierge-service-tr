@@ -212,6 +212,34 @@ if (transportGroup && !TRANSPORT_TOURS.includes(tourName)) {
         });
     });
   }
+  /* =========================
+   TOUR FILTERS
+========================= */
+const filterButtons = document.querySelectorAll(".filter-btn");
+const tourCards = document.querySelectorAll(".tour-card");
+
+filterButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+
+    // active class
+    filterButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const filter = btn.dataset.filter;
+
+    tourCards.forEach(card => {
+      if (filter === "all") {
+        card.style.display = "flex";
+      } else {
+        card.style.display = card.classList.contains(filter)
+          ? "flex"
+          : "none";
+      }
+    });
+  });
+});
+
 
 });
+
 
