@@ -2,8 +2,10 @@
       .guidetours-hero{min-height:45vh;padding-top:120px;background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.85)),url("../assets/guidetours.jpg") center/cover no-repeat;display:flex;
                        align-items:flex-start;justify-content:center;text-align:center;} /*hero alanının yüksekliğini, arka planını ve hizalamasını ayarlar*/
       .hero-inner{margin:0;padding:0;} /*hero iç container boşluklarını sıfırlar*/
-      .guide-cards-title{font-size:42px;color:var(--gold);margin-bottom:10px;} /*hero başlık boyutu ve rengini belirler*/
-      .guide-cards-subline{font-size:14px;letter-spacing:2px;color:rgba(255,255,255,.75);text-transform:uppercase;} /*hero alt metin stilini ayarlar*/
+      .guide-cards-title{font-size:42px;color:var(--gold);margin-bottom:10px;user-select: none;
+  cursor: default;} /*hero başlık boyutu ve rengini belirler*/
+      .guide-cards-subline{font-size:14px;letter-spacing:2px;color:rgba(255,255,255,.75);text-transform:uppercase;user-select: none;
+  cursor: default;} /*hero alt metin stilini ayarlar*/
 /* ========================= FILTERS ========================= */ 
       .tour-filters{display:flex;justify-content:center;gap:14px;padding:30px 20px;margin-top:20px;flex-wrap:wrap;} /*filtre butonlarını ortalar ve satır kırılmasını sağlar*/
       .filter-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:10px 22px;border-radius:30px;cursor:pointer;transition:background .25s,color .25s,transform .25s;} /*filtre butonlarının temel görünümü*/
@@ -132,6 +134,7 @@
   position: relative;
   z-index: 2;
 }
+
 
 
 
