@@ -44,7 +44,7 @@
 .restaurant-form-subline {
   font-size: 12px;
   letter-spacing: 2px;
-  color: rgba(212,175,55,.75);
+  color:rgba(255,255,255,.75);
   text-transform: uppercase;user-select: none;
   cursor: default;
 }
