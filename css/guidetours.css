@@ -133,6 +133,11 @@
   z-index: 2;
 }
 
+.tour-card::before,
+.tour-card::after {
+  pointer-events: none;
+}
+
 
 
 
