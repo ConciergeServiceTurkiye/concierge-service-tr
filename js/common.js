@@ -1,6 +1,4 @@
-/* =========================
-   HTML INCLUDE (NAVBAR & FOOTER)
-========================= */
+/* ========================= HTML INCLUDE (NAVBAR & FOOTER) ========================= */
 function includeHTML(targetId, file, callback) {
   const scrollY = window.scrollY;
 
@@ -29,9 +27,7 @@ function includeHTML(targetId, file, callback) {
     });
 }
 
-/* =========================
-   NAVBAR INIT (HAMBURGER + DROPDOWNS)
-========================= */
+/* ========================= NAVBAR INIT (HAMBURGER + DROPDOWNS) ========================= */
 function initNavbar() {
   const hamburger = document.getElementById("hamburger");
   const navMenu = document.getElementById("navMenu");
@@ -93,9 +89,7 @@ function initNavbar() {
   });
 }
 
-/* =========================
-   MODALS (PRIVACY / TERMS + GENEL)
-========================= */
+/* ========================= MODALS (PRIVACY / TERMS + GENEL) ========================= */
 function initModals() {
   const privacyLink = document.getElementById("privacyLink");
   const termsLink = document.getElementById("termsLink");
@@ -126,7 +120,7 @@ function initModals() {
     });
   }
 
-  // Modal arka planına tıklayınca kapat (GÜVENLİ YÖNTEM)
+  /* Modal arka planına tıklayınca kapat (GÜVENLİ YÖNTEM)*/
   document.querySelectorAll(".modal").forEach(modal => {
     modal.addEventListener("click", e => {
       if (e.target === modal) {
@@ -136,9 +130,7 @@ function initModals() {
   });
 }
 
-/* =========================
-   PAGE LOAD
-========================= */
+/* ========================= PAGE LOAD ========================= */
 document.addEventListener("DOMContentLoaded", () => {
   includeHTML("navbarInclude", "navbar.html", initNavbar);
   includeHTML("footerInclude", "footer.html", initModals);
