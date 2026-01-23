@@ -122,6 +122,11 @@ form {display: flex;flex-direction: column;gap: 22px;}
                   color: #d4af37; font-size: 13px; text-align: center; border-radius: 10px; opacity: 0; visibility: hidden; transition: opacity 0.3s ease;}
 /* RESPONSIVE */
       @media (max-width: 768px) {.contact-form-wrapper {max-width: 94%;padding: 35px 25px;}}
+
+.contact-form-wrapper {
+  position: relative;
+  overflow: visible;
+}
 .iti__country-list {
   pointer-events: none;
 }
@@ -132,6 +137,7 @@ form {display: flex;flex-direction: column;gap: 22px;}
 .select-trigger.selected {
   color: #d4af37;
 }
+
 
 
 
