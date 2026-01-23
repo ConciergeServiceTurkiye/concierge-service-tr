@@ -16,13 +16,14 @@
   padding: 0;
 }
 
-.hero-inner h1 {
+.restaurant-card-title {
   font-size: 42px;
   color: var(--gold);
-  margin-bottom: 10px;
+  margin-bottom: 10px;user-select: none;
+  cursor: default;
 }
 
-.hero-inner p {
+.restaurant-card-subline {
   font-size: 14px;
   letter-spacing: 2px;
   color: rgba(255,255,255,0.75);
@@ -95,6 +96,7 @@
 @media (max-width: 768px) {.restaurants-hero { padding-top: calc(var(--nav-h) + 40px); min-height: 45vh; }}
 
 @media (max-width: 768px) {.restaurants-section { padding-top: 30px; }}
+
 
 
 
