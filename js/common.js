@@ -5,18 +5,27 @@ function includeHTML(targetId, file, callback) {
   const scrollY = window.scrollY;
 
   fetch(file)
-    .then(res => res.text())
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(file + " yüklenemedi");
+      }
+      return res.text();
+    })
     .then(html => {
       const el = document.getElementById(targetId);
       if (!el) return;
 
       el.innerHTML = html;
 
-      requestAnimationFrame(() => {
+      // Scroll pozisyonunu güvenli şekilde geri al
+      setTimeout(() => {
         window.scrollTo(0, scrollY);
-      });
+      }, 0);
 
       if (typeof callback === "function") callback();
+    })
+    .catch(err => {
+      console.error("IncludeHTML Hatası:", err);
     });
 }
 
@@ -29,6 +38,10 @@ function initNavbar() {
 
   if (!hamburger || !navMenu) return;
 
+  // Aynı event'lerin tekrar eklenmesini önle
+  if (hamburger.dataset.init === "true") return;
+  hamburger.dataset.init = "true";
+
   // Hamburger toggle
   hamburger.addEventListener("click", () => {
     navMenu.classList.toggle("active");
@@ -40,7 +53,6 @@ function initNavbar() {
       if (window.innerWidth <= 992) {
         const parent = link.parentElement;
 
-        // submenu varsa → aç/kapat
         if (parent.querySelector(".dropdown-menu")) {
           e.preventDefault();
 
@@ -56,11 +68,10 @@ function initNavbar() {
 
   // Normal link tıklanınca menüyü kapat
   document.querySelectorAll(".nav-menu a").forEach(a => {
-    a.addEventListener("click", e => {
+    a.addEventListener("click", () => {
       if (window.innerWidth <= 992) {
         const parentLi = a.parentElement;
 
-        // dropdown parent ise kapatma
         if (parentLi.classList.contains("dropdown")) return;
 
         navMenu.classList.remove("active");
@@ -70,10 +81,20 @@ function initNavbar() {
       }
     });
   });
+
+  // Ekran büyüyünce mobil menüyü sıfırla
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 992) {
+      navMenu.classList.remove("active");
+      document
+        .querySelectorAll(".dropdown")
+        .forEach(d => d.classList.remove("open"));
+    }
+  });
 }
 
 /* =========================
-   MODALS (PRIVACY / TERMS)
+   MODALS (PRIVACY / TERMS + GENEL)
 ========================= */
 function initModals() {
   const privacyLink = document.getElementById("privacyLink");
@@ -81,12 +102,15 @@ function initModals() {
   const privacyModal = document.getElementById("privacyModal");
   const termsModal = document.getElementById("termsModal");
 
+  // Kapatma butonları
   document.querySelectorAll(".close-modal").forEach(btn => {
     btn.addEventListener("click", () => {
-      btn.closest(".modal").style.display = "none";
+      const modal = btn.closest(".modal");
+      if (modal) modal.style.display = "none";
     });
   });
 
+  // Privacy modal
   if (privacyLink && privacyModal) {
     privacyLink.addEventListener("click", e => {
       e.preventDefault();
@@ -94,6 +118,7 @@ function initModals() {
     });
   }
 
+  // Terms modal
   if (termsLink && termsModal) {
     termsLink.addEventListener("click", e => {
       e.preventDefault();
@@ -101,10 +126,13 @@ function initModals() {
     });
   }
 
-  window.addEventListener("click", e => {
-    if (e.target.classList.contains("modal")) {
-      e.target.style.display = "none";
-    }
+  // Modal arka planına tıklayınca kapat (GÜVENLİ YÖNTEM)
+  document.querySelectorAll(".modal").forEach(modal => {
+    modal.addEventListener("click", e => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
   });
 }
 
