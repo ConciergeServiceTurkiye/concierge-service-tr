@@ -34,17 +34,19 @@
   margin-bottom: 30px;
 }
 
-.restaurant-form-header h1 {
+.restaurant-form-title {
   font-size: 28px;
   color: #d4af37;
-  margin-bottom: 6px;
+  margin-bottom: 6px;user-select: none;
+  cursor: default;
 }
 
 .restaurant-form-subline {
   font-size: 12px;
   letter-spacing: 2px;
   color: rgba(212,175,55,.75);
-  text-transform: uppercase;
+  text-transform: uppercase;user-select: none;
+  cursor: default;
 }
 
 /* ================================
