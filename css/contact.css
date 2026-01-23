@@ -124,10 +124,6 @@
       .iti__country-list {background: #0b0b0b;border: 1px solid #d4af37;}
 /* RESPONSIVE */
       @media (max-width: 768px) {.contact-form-wrapper {max-width: 94%;padding: 35px 25px;}}
-.contact-form-wrapper .iti__country-list,
-.contact-form-wrapper .select-options {
-  pointer-events: auto;
-}
 .contact-form-wrapper * {
   pointer-events: auto;
 }
@@ -141,6 +137,7 @@
 .select-trigger.selected {
   color: #d4af37;
 }
+
 
 
 
