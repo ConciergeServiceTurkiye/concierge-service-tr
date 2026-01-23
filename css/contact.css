@@ -1,10 +1,11 @@
+:root { --form-h: 46px; }form {display: flex;flex-direction: column;gap: 22px;}
 /* CONTACT PAGE – HERO */ 
       .contact-hero {min-height: 100vh;padding-top: var(--nav-h);background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.75)),url("../assets/contact-bg.jpg") center / cover no-repeat;
                      display: flex;align-items: center;justify-content: center;position: relative;overflow: visible;}
 /* CONTACT FORM WRAPPER */
       .contact-form-wrapper {position: relative;max-width: 760px;width: 100%;margin: 0 auto;padding: 45px 40px 40px;background: rgba(10,10,10,.88);border: 1.5px solid #d4af37;
                              border-radius: 14px;z-index:1;}
-:root { --form-h: 46px; }form {display: flex;flex-direction: column;gap: 22px;}
+
 /* HEADER */ 
       .contact-form-header {text-align: center;margin-bottom: 30px;  user-select: none;
   cursor: default;}
@@ -122,9 +123,6 @@
       .iti__country-list {background: #0b0b0b;border: 1px solid #d4af37;}
 /* RESPONSIVE */
       @media (max-width: 768px) {.contact-form-wrapper {max-width: 94%;padding: 35px 25px;}}
-.contact-form-wrapper * {
-  pointer-events: auto;
-}
 .iti__country-list {
   pointer-events: none;
 }
@@ -135,6 +133,7 @@
 .select-trigger.selected {
   color: #d4af37;
 }
+
 
 
 
