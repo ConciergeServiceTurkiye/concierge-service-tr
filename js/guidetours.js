@@ -42,10 +42,16 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================
      TRANSPORTATION VISIBILITY
   ========================= */
-  const transportGroup = document.getElementById("transportationGroup");
-  if (transportGroup && tourName !== "Old City Private Tour") {
-    transportGroup.style.display = "none";
-  }
+  const TRANSPORT_TOURS = [
+  "Old City Private Tour",
+  "Istanbul Highlights Tour",
+  "Bosphorus Shore Experience"
+];
+
+if (transportGroup && !TRANSPORT_TOURS.includes(tourName)) {
+  transportGroup.style.display = "none";
+}
+
 
   /* =========================
      PHONE INPUT
@@ -208,3 +214,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
