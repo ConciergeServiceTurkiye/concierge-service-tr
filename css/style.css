@@ -33,6 +33,8 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff;padding-top: var(--
 .dropdown.open .dropdown-menu{display:block;}
 .dropdown-menu li a{font-size:16px;padding:12px 0;}}
 
+/*Hero1 Gizle*/
+.seo-headings {position: absolute;top: -9999px;left: -9999px;width: 1px;height: 1px;overflow: hidden;}
 
 /*==================================================
   FOOTER
@@ -106,6 +108,7 @@ body{font-family:Arial,sans-serif;background:#000;color:#fff;padding-top: var(--
   cursor: pointer;
   user-select: none;
 }
+
 
 
 
