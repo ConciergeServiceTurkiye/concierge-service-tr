@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const charCount = document.getElementById("charCount");
 
   const customSelect = document.getElementById("customSubject");
+  if (!customSelect) return;
+
   const trigger = customSelect.querySelector(".select-trigger");
   const options = Array.from(customSelect.querySelectorAll(".select-options li"));
 
@@ -33,25 +35,26 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ======================
      CHARACTER COUNTER
   ====================== */
-  charCount.textContent = "0 / 2000";
-  messageField.addEventListener("input", () => {
-    charCount.textContent = `${messageField.value.length} / 2000`;
-  });
+  if (charCount && messageField) {
+    charCount.textContent = "0 / 2000";
+    messageField.addEventListener("input", () => {
+      charCount.textContent = `${messageField.value.length} / 2000`;
+    });
+  }
 
   /* ======================
      PHONE INPUT – intl-tel-input
   ====================== */
- const iti = intlTelInput(phoneField, {
+  const iti = intlTelInput(phoneField, {
     initialCountry: "us",
-    separateDialCode: true,
-    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
-});
-  phoneField.addEventListener("focus", () => {
-  setTimeout(() => {
-    iti.setCountry(iti.getSelectedCountryData().iso2);
-  }, 50);
-});
+    separateDialCode: true
+  });
 
+  phoneField.addEventListener("focus", () => {
+    setTimeout(() => {
+      iti.setCountry(iti.getSelectedCountryData().iso2);
+    }, 50);
+  });
 
   phoneField.addEventListener("keydown", e => {
     if (
@@ -59,16 +62,29 @@ document.addEventListener("DOMContentLoaded", () => {
       e.metaKey ||
       ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(e.key)
     ) return;
+
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   });
 
+  // Paste / drag / autofill güvenliği
+  phoneField.addEventListener("input", () => {
+    phoneField.value = phoneField.value.replace(/\D/g, "");
+  });
+
   /* ======================
-     CUSTOM SELECT LOGIC
+     CUSTOM SELECT
   ====================== */
   let currentIndex = -1;
 
-  function openDropdown() { customSelect.classList.add("open"); }
-  function closeDropdown() { customSelect.classList.remove("open"); currentIndex = -1; clearActive();}
+  function openDropdown() {
+    customSelect.classList.add("open");
+  }
+
+  function closeDropdown() {
+    customSelect.classList.remove("open");
+    currentIndex = -1;
+    options.forEach(o => o.classList.remove("active"));
+  }
 
   function move(direction) {
     if (!customSelect.classList.contains("open")) {
@@ -83,38 +99,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function setActive() {
-    clearActive();
+    options.forEach(o => o.classList.remove("active"));
     const opt = options[currentIndex];
     opt.classList.add("active");
     opt.scrollIntoView({ block: "nearest" });
   }
 
-  function clearActive() { options.forEach(o => o.classList.remove("active")); }
-
   function select(index) {
-  const opt = options[index];
-  trigger.textContent = opt.textContent;
-  subjectHidden.value = opt.dataset.value;
-  trigger.classList.add("selected");
-  closeDropdown();
-}
+    const opt = options[index];
+    trigger.textContent = opt.textContent;
+    subjectHidden.value = opt.dataset.value;
+    trigger.classList.add("selected");
+    closeDropdown();
+  }
 
   trigger.addEventListener("click", () => {
     customSelect.classList.contains("open") ? closeDropdown() : openDropdown();
   });
-  
-  trigger.addEventListener("focus", () => {
-  openDropdown();
-});
-
-  // Trigger + dropdown içindeki tüm elementler için focus değişimini dinle
-customSelect.addEventListener("focusout", (e) => {
-  // Eğer focus customSelect içinde değilse, dropdown kapansın
-  if (!customSelect.contains(e.relatedTarget)) {
-    closeDropdown();
-  }
-});
-
 
   trigger.addEventListener("keydown", e => {
     if (["ArrowDown", "ArrowUp", "Enter", " ", "Escape"].includes(e.key)) e.preventDefault();
@@ -144,7 +145,6 @@ customSelect.addEventListener("focusout", (e) => {
   form.addEventListener("submit", e => {
     e.preventDefault();
 
-    // Zorunlu alan kontrolleri
     if (!nameField.value.trim()) return showInlineAlert("Please enter your full name.");
     if (!emailField.value.trim()) return showInlineAlert("Please enter your email address.");
     if (!emailField.checkValidity()) return showInlineAlert("Please enter a valid email address.");
@@ -159,24 +159,18 @@ customSelect.addEventListener("focusout", (e) => {
       .then(r => r.text())
       .then(t => {
         if (t.trim() === "success") {
-  showInlineAlert("Your private concierge request has been received.", true);
+          showInlineAlert("Your private concierge request has been received.", true);
 
-  form.reset();
-  charCount.textContent = "0 / 2000";
-
-  // SUBJECT RESET
-  subjectHidden.value = "";
-  trigger.textContent = "Select a subject";
-
-  trigger.classList.remove("selected"); // ← EKSİK OLAN BUYDU
-
-  options.forEach(o => o.classList.remove("active"));
-  currentIndex = -1;
-          iti.setCountry("us");   // veya default neyse
-phoneField.value = "";
-
+          form.reset();
+          charCount.textContent = "0 / 2000";
+          subjectHidden.value = "";
+          trigger.textContent = "Select a subject";
+          trigger.classList.remove("selected");
+          currentIndex = -1;
+          iti.setCountry("us");
+          phoneField.value = "";
           closeDropdown();
-} else {
+        } else {
           showInlineAlert("Something went wrong. Please try again.");
         }
       })
@@ -184,17 +178,3 @@ phoneField.value = "";
   });
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
