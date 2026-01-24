@@ -1,27 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =========================
-     TOUR NAME FROM URL
-  ========================= */
-  const params = new URLSearchParams(window.location.search);
+  const isFormPage = document.body.classList.contains("tour-form-page");
   const transportGroup = document.getElementById("transportationGroup");
-  const isFormPage = document.body.classList.contains("tour-form-page");
-      let tourName = "Private Guide Tour";
-      if (isFormPage) {
-          const params = new URLSearchParams(window.location.search);
-          const urlTour = params.get("tour");
-      if (urlTour) {
-          tourName = decodeURIComponent(urlTour.replace(/\+/g, " "));
-                   }
-                      }
-  
-  const isFormPage = document.body.classList.contains("tour-form-page");
+
+  let tourName = "Private Guide Tour";
+
+  if (isFormPage) {
+    const params = new URLSearchParams(window.location.search);
+    const urlTour = params.get("tour");
+
+    if (urlTour) {
+      tourName = decodeURIComponent(urlTour.replace(/\+/g, " "));
+    }
+  }
+
   const tourNameInput = document.getElementById("tourName");
   const tourFormTitle = document.querySelector(".guide-form-title");
   const tourExperienceBox = document.getElementById("tourExperience");
 
   if (tourNameInput) tourNameInput.value = tourName;
   if (tourFormTitle) tourFormTitle.textContent = tourName;
+
 
   const TOUR_EXPERIENCES = {
     "Old City Private Tour": `
@@ -257,6 +256,7 @@ filterButtons.forEach(btn => {
 
 
 });
+
 
 
 
