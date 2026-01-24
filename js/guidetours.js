@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
      TOUR NAME FROM URL
   ========================= */
   const params = new URLSearchParams(window.location.search);
+  const transportGroup = document.getElementById("transportGroup");
+
 let tourName = "Private Guide Tour";
 
 if (isFormPage) {
@@ -259,6 +261,7 @@ filterButtons.forEach(btn => {
 
 
 });
+
 
 
 
