@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const isFormPage = document.body.classList.contains("tour-form-page");
   const tourNameInput = document.getElementById("tourName");
-  const tourFormTitle = document.getElementById("tourFormTitle");
+  const tourFormTitle = document.querySelector(".guide-form-title");
   const tourExperienceBox = document.getElementById("tourExperience");
 
   if (tourNameInput) tourNameInput.value = tourName;
@@ -257,6 +257,7 @@ filterButtons.forEach(btn => {
 
 
 });
+
 
 
 
