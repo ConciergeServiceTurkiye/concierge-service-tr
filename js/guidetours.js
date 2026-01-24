@@ -5,21 +5,17 @@ document.addEventListener("DOMContentLoaded", () => {
   ========================= */
   const params = new URLSearchParams(window.location.search);
   const transportGroup = document.getElementById("transportGroup");
-
-let tourName = "Private Guide Tour";
-
-if (isFormPage) {
-  const params = new URLSearchParams(window.location.search);
-  const urlTour = params.get("tour");
-
-  if (urlTour) {
-    tourName = decodeURIComponent(urlTour.replace(/\+/g, " "));
-  }
-}
-
   const isFormPage = document.body.classList.contains("tour-form-page");
-
-
+      let tourName = "Private Guide Tour";
+      if (isFormPage) {
+          const params = new URLSearchParams(window.location.search);
+          const urlTour = params.get("tour");
+      if (urlTour) {
+          tourName = decodeURIComponent(urlTour.replace(/\+/g, " "));
+                   }
+                      }
+  
+  const isFormPage = document.body.classList.contains("tour-form-page");
   const tourNameInput = document.getElementById("tourName");
   const tourFormTitle = document.getElementById("tourFormTitle");
   const tourExperienceBox = document.getElementById("tourExperience");
@@ -261,6 +257,7 @@ filterButtons.forEach(btn => {
 
 
 });
+
 
 
 
