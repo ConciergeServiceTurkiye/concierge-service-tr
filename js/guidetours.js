@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", () => {
   ========================= */
   const params = new URLSearchParams(window.location.search);
   const tourName = params.get("tour") || "Private Guide Tour";
+  const isFormPage = document.body.classList.contains("tour-form-page");
+
 
   const tourNameInput = document.getElementById("tourName");
   const tourFormTitle = document.getElementById("tourFormTitle");
@@ -241,6 +243,7 @@ filterButtons.forEach(btn => {
 
 
 });
+
 
 
 
