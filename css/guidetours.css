@@ -33,13 +33,6 @@
       .tour-title { cursor: pointer; position: relative; display: inline-block; transition: all .35s ease; }/*kart başlığını interaktif yapar*/
       .tour-title::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px; background: var(--gold); transition: width .35s ease; }/*başlık altı çizgi animasyonu*/
       .tour-title:hover::after { width: 100%; }/*hoverda alt çizgiyi açar*/
-/* ========================= MODAL ========================= */
-      .tour-modal { position: fixed; inset: 0; background: rgba(0,0,0,.75); display: none; align-items: center; justify-content: center; z-index: 9999; }/*genel modal overlay*/
-      .tour-modal-content { position: relative; background: #0b0b0b; border: 1px solid var(--gold); border-radius: 20px; max-width: 520px; width: 90%;
-                           padding: 40px; box-shadow: 0 0 40px rgba(212,175,55,.25); animation: modalFade .35s ease;}/*modal iç kutu tasarımı*/
-      @keyframes modalFade { from { opacity: 0;transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }/*Modalın hafif hareketle fade-in açılması*/
-      .close-tour-modal { position: absolute; top: 18px; right: 22px;
-                           font-size: 22px; cursor: pointer; color: var(--gold); }/*modal kapatma butonu*/
 /* ========================= TOUR DETAIL MODAL ========================= */
       .tour-detail-modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 9999; }/*detay modal ana container*/
       .tour-detail-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.75); }/*detay modal arka karartma*/
@@ -136,6 +129,7 @@
 .tour-card::after {
   pointer-events: none;
 }
+
 
 
 
