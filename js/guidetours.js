@@ -4,7 +4,17 @@ document.addEventListener("DOMContentLoaded", () => {
      TOUR NAME FROM URL
   ========================= */
   const params = new URLSearchParams(window.location.search);
-  const tourName = params.get("tour") || "Private Guide Tour";
+let tourName = "Private Guide Tour";
+
+if (isFormPage) {
+  const params = new URLSearchParams(window.location.search);
+  const urlTour = params.get("tour");
+
+  if (urlTour) {
+    tourName = decodeURIComponent(urlTour.replace(/\+/g, " "));
+  }
+}
+
   const isFormPage = document.body.classList.contains("tour-form-page");
 
 
@@ -243,6 +253,7 @@ filterButtons.forEach(btn => {
 
 
 });
+
 
 
 
