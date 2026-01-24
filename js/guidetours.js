@@ -54,6 +54,121 @@ document.addEventListener("DOMContentLoaded", () => {
     tourExperienceBox.innerHTML = TOUR_EXPERIENCES[tourName] || "";
   }
 
+/* MODAL DATA */
+const TOUR_DETAILS = {
+  oldcity: {
+    title: "Old City Private Tour",
+    img: "assets/oldcityprivatetour.jpg",
+    desc: "Explore the historic heart of Istanbul with a licensed private guide.",
+    highlights: [
+      "Hagia Sophia & Blue Mosque",
+      "Topkapi Palace & Basilica Cistern",
+      "Flexible walking or chauffeured option"
+    ]
+  },
+  highlights: {
+    title: "Istanbul Highlights Tour",
+    img: "assets/istanbulhighlights.jpg",
+    desc: "A full-day panoramic experience covering the city's icons.",
+    highlights: [
+      "Old City landmarks",
+      "Bosphorus coastline",
+      "Panoramic viewpoints"
+    ]
+  },
+  bosphorus: {
+    title: "Bosphorus Shore Experience",
+    img: "assets/bosphorus.jpg",
+    desc: "Relaxed coastal drive along the Bosphorus with photo stops.",
+    highlights: [
+      "Ortakoy & Bebek",
+      "Waterfront mansions",
+      "Scenic viewpoints"
+    ]
+  },
+  streetfood: {
+    title: "Street Food Discovery",
+    img: "assets/streetfood.jpg",
+    desc: "Taste Istanbul like a local with a culinary expert.",
+    highlights: [
+      "Authentic street flavors",
+      "Local neighborhoods",
+      "Cultural food stories"
+    ]
+  },
+  cuisine: {
+    title: "Turkish Cuisine Experience",
+    img: "assets/turkishcuisine.jpg",
+    desc: "A refined journey through Turkish gastronomy.",
+    highlights: [
+      "Traditional meze culture",
+      "Handpicked restaurants",
+      "Local wine & rakı pairings"
+    ]
+  },
+  asian: {
+    title: "Asian Side Tour",
+    img: "assets/asianside.jpg",
+    desc: "Discover Istanbul’s Asian side with a local perspective.",
+    highlights: [
+      "Kadikoy & Moda",
+      "Camlica Hill",
+      "Uskudar waterfront"
+    ]
+  }
+};
+
+
+/*MODAL OPEN/CLOSE LOGIC*/
+const modal = document.getElementById("tourDetailModal");
+const modalImg = document.getElementById("tourDetailImg");
+const modalTitle = document.getElementById("tourDetailTitle");
+const modalDesc = document.getElementById("tourDetailDesc");
+const modalList = document.getElementById("tourDetailList");
+const modalClose = document.querySelector(".close-tour-detail");
+
+/*KART TIKLANINCA MODAL AÇ*/
+document.querySelectorAll(".tour-card").forEach(card => {
+  card.addEventListener("click", e => {
+
+    // Eğer butona basıldıysa modal açma
+    if (e.target.closest(".tour-btn")) return;
+
+    const key = card.dataset.tour;
+    const data = TOUR_DETAILS[key];
+    if (!data) return;
+
+    modalImg.src = data.img;
+    modalTitle.textContent = data.title;
+    modalDesc.textContent = data.desc;
+
+    modalList.innerHTML = "";
+    data.highlights.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      modalList.appendChild(li);
+    });
+
+    modal.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  });
+});
+
+
+/*MODAL KAPATMA*/
+modalClose.addEventListener("click", () => {
+  modal.style.display = "none";
+  document.body.style.overflow = "";
+});
+
+modal.addEventListener("click", e => {
+  if (e.target.classList.contains("tour-detail-overlay")) {
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+  }
+});
+
+
   /* =========================
      TRANSPORTATION VISIBILITY
   ========================= */
