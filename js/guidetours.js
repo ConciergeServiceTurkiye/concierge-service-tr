@@ -228,18 +228,19 @@ filterButtons.forEach(btn => {
     const filter = btn.dataset.filter;
 
     tourCards.forEach(card => {
-      if (filter === "all") {
-        card.style.display = "flex";
-      } else {
-        card.style.display = card.classList.contains(filter)
-          ? "flex"
-          : "none";
-      }
-    });
+  if (filter === "all") {
+    card.style.display = "";
+  } else {
+    card.style.display = card.classList.contains(filter)
+      ? ""
+      : "none";
+  }
+});
   });
 });
 
 
 });
+
 
 
