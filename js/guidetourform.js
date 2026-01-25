@@ -162,12 +162,6 @@ const modalImg = document.getElementById("experienceImg");
 const modalTitle = document.getElementById("experienceTitle");
 const modalDesc = document.getElementById("experienceDesc");
 
-let scrollY = 0;
-
-function openExperience(key) {
-  const data = EXPERIENCE_DATA[key];
-  if (!data) return;
-
   let scrollY = 0;
 
 function openExperience(key) {
