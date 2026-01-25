@@ -372,116 +372,92 @@ document.addEventListener("keydown", e => {
     });
   }
 
- /* =========================
-     FORM SUBMIT
-  ========================= */
-  const form = document.getElementById("guideTourForm");
+ const form = document.getElementById("guideTourForm");
 
-  if (form) {
-    form.addEventListener("submit", e => {
-      e.preventDefault();
+if (form) {
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-      const participants = [];
-      document.querySelectorAll(".participant-row").forEach(row => {
-        participants.push({
-          name: row.querySelector(".participant-name")?.value.trim() || "",
-          nationality: row.querySelector(".participant-nationality")?.value || "",
-          birthYear: row.querySelector(".participant-birthyear")?.value || ""
-        });
-      });
+    /* =========================
+       BASIC VALIDATION
+    ========================= */
+    const requiredFields = form.querySelectorAll("[required]");
+    let isValid = true;
 
-      const payload = {
-        tour_name: tourName,
-        full_name: document.querySelector('[name="name"]')?.value || "",
-        email: document.querySelector('[name="email"]')?.value || "",
-        phone: iti ? iti.getNumber() : "",
-        tour_date: document.querySelector('[name="date"]')?.value || "",
-        language: document.getElementById("language")?.value || "",
-        transportation:
-          document.querySelector('input[name="transportation"]:checked')?.value || "",
-        hotel:
-          (document.querySelector('[name="hotel_name"]')?.value || "") +
-          (document.querySelector('[name="room_number"]')?.value
-            ? " / Room: " + document.querySelector('[name="room_number"]').value
-            : ""),
-        mobility: mobilityToggle?.checked ? "Yes" : "No",
-        notes: document.querySelector('[name="notes"]')?.value || "",
-        participants: participants
-      };
-
-      fetch("https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec", {
-        method: "POST",
-        body: JSON.stringify(payload)
-      })
-        .then(res => res.json())
-        .then(res => {
-          if (res.status === "success") {
-            form.style.display = "none";
-            document.getElementById("successScreen").style.display = "block";
-            document.querySelector(".reservation-id").textContent =
-              `Reservation ID: ${res.reservation_id}`;
-          }
-        });
-    });
-  }
-
-
-  
-  /* ==============================
-     SUBMIT
-  ============================== */
-
-  document
-    .getElementById("guideTourForm")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-      hideInlineAlert();
-
-      if (!fullName.value.trim())
-        return showInlineAlert("Please enter your full name");
-
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value))
-        return showInlineAlert("Please enter a valid email address.");
-
-      if (!iti.isValidNumber())
-        return showInlineAlert("Please enter a valid phone number.");
-
-      if (!date.value)
-        return showInlineAlert("Please select your preferred tour date.");
-
-      if (!language.value)
-        return showInlineAlert("Please select your preferred guide language.");
-
-      if (
-        !document.querySelector(
-          'input[name="transportation"]:checked'
-        )
-      )
-        return showInlineAlert(
-          "Please choose your preferred transportation option."
-        );
-
-      if (!hotel.value.trim())
-        return showInlineAlert(
-          "Please enter your hotel name for pick-up coordination."
-        );
-
-      const rows = document.querySelectorAll(".participant-row");
-      for (let i = 0; i < rows.length; i++) {
-        if (!validateParticipantRow(rows[i], i === 0))
-          return showInlineAlert(
-            i === 0
-              ? "Please select nationality and birth year for the primary participant."
-              : "Please complete all participant details, or remove unused participant rows using the × button."
-          );
+    requiredFields.forEach(field => {
+      if (!field.value.trim()) {
+        field.classList.add("error");
+        isValid = false;
+      } else {
+        field.classList.remove("error");
       }
-
-      if (mobilityToggle.checked && !mobilityText.value.trim())
-        return showInlineAlert(
-          "Please describe the mobility assistance needed."
-        );
-
-      this.submit();
     });
+
+    if (!isValid) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    /* =========================
+       PARTICIPANTS
+    ========================= */
+    const participants = [];
+    document.querySelectorAll(".participant-row").forEach(row => {
+      participants.push({
+        name: row.querySelector(".participant-name")?.value.trim() || "",
+        nationality: row.querySelector(".participant-nationality")?.value || "",
+        birthYear: row.querySelector(".participant-birthyear")?.value || ""
+      });
+    });
+
+    /* =========================
+       PAYLOAD
+    ========================= */
+    const payload = {
+      tour_name: tourName,
+      full_name: document.querySelector('[name="name"]')?.value || "",
+      email: document.querySelector('[name="email"]')?.value || "",
+      phone: iti ? iti.getNumber() : "",
+      tour_date: document.querySelector('[name="date"]')?.value || "",
+      language: document.getElementById("language")?.value || "",
+      transportation:
+        document.querySelector('input[name="transportation"]:checked')?.value || "",
+      hotel:
+        (document.querySelector('[name="hotel_name"]')?.value || "") +
+        (document.querySelector('[name="room_number"]')?.value
+          ? " / Room: " + document.querySelector('[name="room_number"]').value
+          : ""),
+      notes: document.querySelector('[name="notes"]')?.value || "",
+      participants
+    };
+
+    /* =========================
+       SUBMIT
+    ========================= */
+    try {
+      const res = await fetch(
+        "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec",
+        {
+          method: "POST",
+          body: JSON.stringify(payload)
+        }
+      );
+
+      const data = await res.json();
+
+      if (data.status === "success") {
+        form.style.display = "none";
+        document.getElementById("successScreen").style.display = "block";
+        document.querySelector(".reservation-id").textContent =
+          `Reservation ID: ${data.reservation_id}`;
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Connection error. Please try again.");
+    }
+  });
+}
 
 });
