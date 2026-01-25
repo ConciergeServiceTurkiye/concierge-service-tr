@@ -248,19 +248,6 @@ document.addEventListener("keydown", e => {
     });
   }
 
-    /* =========================
-     TRANSPORTATION VISIBILITY
-  ========================= */
-  const TRANSPORT_TOURS = [
-  "Old City Private Tour",
-  "Istanbul Highlights Tour",
-  "Bosphorus Shore Experience"
-];
-
-if (transportGroup && !TRANSPORT_TOURS.includes(tourName)) {
-  transportGroup.style.display = "none";
-}
-
 
   /* ==============================
      FIELD REFERENCES
