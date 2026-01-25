@@ -54,7 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const tourName = params.get("tour") || "Private Guide Tour";
 
   document.getElementById("tourName").value = tourName;
-  document.getElementById("tourFormTitle").textContent = tourName;
+  const titleEl = document.querySelector(".guide-form-title");
+if (titleEl) titleEl.textContent = tourName;
+
 
   const TOUR_EXPERIENCES = {
     "Old City Private Tour": `
