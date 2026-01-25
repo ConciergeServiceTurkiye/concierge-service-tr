@@ -47,14 +47,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ==============================
-     TOUR NAME & EXPERIENCE
-  ============================== */
+   TOUR NAME & EXPERIENCE
+============================== */
 
-  const params = new URLSearchParams(window.location.search);
-  const tourName = params.get("tour") || "Private Guide Tour";
+const params = new URLSearchParams(window.location.search);
 
-  document.getElementById("tourName").value = tourName;
-  const titleEl = document.querySelector(".guide-form-title");
+const tourName = params.get("tour")
+  ? decodeURIComponent(params.get("tour").replace(/\+/g, " "))
+  : "Private Guide Tour";
+
+// hidden input (varsa)
+const tourNameInput = document.getElementById("tourName");
+if (tourNameInput) tourNameInput.value = tourName;
+
+// form title
+const titleEl = document.querySelector(".guide-form-title");
 if (titleEl) titleEl.textContent = tourName;
 
 
