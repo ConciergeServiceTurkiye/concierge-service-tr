@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       • Walking or vehicle-assisted options
     `,
 
-    "Istanbul Highlights Tour": '..1111.',
+    "Istanbul Highlights Tour": '<strong>What you'll experience</strong><br>',
     
     "Bosphorus Shore Experience": `
       <strong>What you'll experience</strong><br>
@@ -45,9 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
       • Street food & traditional restaurants<br>
       • Cultural stories behind Turkish cuisine
     `,
-    "Turkish Cuisine Experience": `..222.`,
+    "Turkish Cuisine Experience": `<strong>What you'll experience</strong><br>`,
 
-    "Asian Side Tour": '...333'
+    "Asian Side Tour": '<strong>What you'll experience</strong><br>'
   };
 
   if (tourExperienceBox) {
@@ -214,6 +214,29 @@ filterButtons.forEach(btn => {
     updateGridAlignment();
   });
 });
+
+// MODAL REQUEST TOUR BUTTON LINKING
+const modalRequestBtn = document.getElementById("requestTourBtn");
+
+let activeTourTitle = "";
+
+// Kartlara tıklanınca çalışacak (modal zaten açılıyor)
+document.querySelectorAll(".tour-card").forEach(card => {
+  card.addEventListener("click", () => {
+
+    // Kart başlığını al
+    const title = card.querySelector(".tour-title").innerText.trim();
+    activeTourTitle = title;
+
+    // URL formatı için encode
+    const encodedTitle = encodeURIComponent(title);
+
+    // Modal içindeki buton linkini ayarla
+    modalRequestBtn.href = `guidetourform.html?tour=${encodedTitle}`;
+  });
 });
+
+});
+
 
 
