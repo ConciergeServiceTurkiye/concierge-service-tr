@@ -10,7 +10,7 @@
       .filter-btn:hover{transform:translateY(-1px);} /*hoverda butonu hafif yukarı alır*/
       .filter-btn.active,.filter-btn:hover{background:var(--gold);color:#000;} /*aktif ve hover durumunda dolu stil verir*/
 /* ========================= TOURS GRID ========================= */ 
-      .tours-grid {max-width:1200px;margin:20px auto 80px;padding:0 20px;display: grid;grid-template-columns: repeat(3, 360px);gap: 30px;justify-content: center;}/*tur kartlarını responsive grid halinde dizer*/
+      .tours-grid {max-width:1200px;margin:20px auto 80px;padding:0 20px;display: grid;grid-template-columns: repeat(auto-fit, 360px);gap: 30px;justify-content: center;}/*tur kartlarını responsive grid halinde dizer*/
 /* ========================= TOUR CARD ========================= */
       .tour-card { background: rgba(10,10,10,0.9); border: 1px solid rgba(212,175,55,0.4); border-radius: 16px; padding: 28px; display: flex; flex-direction: column;
                   gap: 14px; box-shadow: 0 0 25px rgba(212,175,55,0.12); }/*tur kartının ana kutu tasarımı*/
@@ -87,6 +87,7 @@
 .tour-card > *{position: relative;z-index: 2;}
 .tour-card::before,
 .tour-card::after {pointer-events: none;}
+
 
 
 
