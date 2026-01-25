@@ -76,8 +76,7 @@ if (titleEl) titleEl.textContent = tourName;
 <span class="experience-link" data-experience="basilica">Basilica Cistern</span>,
 <span class="experience-link" data-experience="hippodrome">Hippodrome</span> &
 <span class="experience-link" data-experience="grandbazaar">Grand Bazaar</span> storytelling •
-<span class="experience-link" data-experience="courtyards">Hidden courtyards</span> &
-<span class="experience-link" data-experience="localinsights">local insights</span>
+<span class="experience-link" data-experience="courtyards">Hidden courtyards</span> & local insights
 `,
     "Bosphorus Shore Experience": `
       <strong>What you'll experience</strong><br>
