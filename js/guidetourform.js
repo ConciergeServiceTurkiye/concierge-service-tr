@@ -269,8 +269,6 @@ if (transportGroup && !TRANSPORT_TOURS.includes(tourName)) {
   const date = document.getElementById("date");
   const language = document.getElementById("language");
   const hotel = document.querySelector('[name="hotel_name"]');
-  const mobilityToggle = document.getElementById("mobilityToggle");
-  const mobilityText = document.querySelector('[name="mobility_notes"]');
 
   /* =========================
      PARTICIPANTS
