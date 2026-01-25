@@ -168,6 +168,12 @@ function openExperience(key) {
   const data = EXPERIENCE_DATA[key];
   if (!data) return;
 
+  let scrollY = 0;
+
+function openExperience(key) {
+  const data = EXPERIENCE_DATA[key];
+  if (!data) return;
+
   scrollY = window.scrollY;
 
   modalImg.src = data.img;
@@ -176,6 +182,7 @@ function openExperience(key) {
 
   document.body.style.top = `-${scrollY}px`;
   document.body.classList.add("modal-open");
+
   modal.classList.add("active");
 }
 
@@ -183,6 +190,7 @@ function closeExperience() {
   modal.classList.remove("active");
   document.body.classList.remove("modal-open");
   document.body.style.top = "";
+
   window.scrollTo(0, scrollY);
 }
 
