@@ -194,4 +194,23 @@ filterButtons.forEach(btn => {
       });
     });
   });
+
+  function updateGridAlignment() {
+  const grid = document.getElementById("tourGrid");
+  if (!grid) return;
+
+  const visibleCards = [...grid.children].filter(
+    card => card.style.display !== "none"
+  );
+
+  grid.classList.remove("center-1", "center-2");
+
+  if (visibleCards.length === 1) {
+    grid.classList.add("center-1");
+  } else if (visibleCards.length === 2) {
+    grid.classList.add("center-2");
+  }
+}
+
 });
+
