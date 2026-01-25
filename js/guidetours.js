@@ -168,11 +168,28 @@ modal.addEventListener("click", e => {
   }
 });
  
-  /* =========================
+/* =========================
    TOUR FILTERS
 ========================= */
 const filterButtons = document.querySelectorAll(".filter-btn");
 const tourCards = document.querySelectorAll(".tour-card");
+const tourGrid = document.getElementById("tourGrid");
+
+function updateGridAlignment() {
+  if (!tourGrid) return;
+
+  const visibleCards = [...tourCards].filter(
+    card => card.style.display !== "none"
+  );
+
+  tourGrid.classList.remove("center-1", "center-2");
+
+  if (visibleCards.length === 1) {
+    tourGrid.classList.add("center-1");
+  } else if (visibleCards.length === 2) {
+    tourGrid.classList.add("center-2");
+  }
+}
 
 filterButtons.forEach(btn => {
   btn.addEventListener("click", () => {
@@ -184,33 +201,19 @@ filterButtons.forEach(btn => {
     const filter = btn.dataset.filter;
 
     tourCards.forEach(card => {
-  if (filter === "all") {
-    card.style.display = "";
-  } else {
-    card.style.display = card.classList.contains(filter)
-      ? ""
-      : "none";
-  }
-      });
+      if (filter === "all") {
+        card.style.display = "";
+      } else {
+        card.style.display = card.classList.contains(filter)
+          ? ""
+          : "none";
+      }
     });
+
+    // 👇 KRİTİK SATIR (cerrahi nokta)
+    updateGridAlignment();
   });
-
-  function updateGridAlignment() {
-  const grid = document.getElementById("tourGrid");
-  if (!grid) return;
-
-  const visibleCards = [...grid.children].filter(
-    card => card.style.display !== "none"
-  );
-
-  grid.classList.remove("center-1", "center-2");
-
-  if (visibleCards.length === 1) {
-    grid.classList.add("center-1");
-  } else if (visibleCards.length === 2) {
-    grid.classList.add("center-2");
-  }
-}
-
 });
+});
+
 
