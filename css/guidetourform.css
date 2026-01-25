@@ -187,9 +187,11 @@
 	.experience-text {padding: 32px;}
 	.experience-text h3 {color: #d4af37;font-size: 20px;margin-bottom: 14px;}
 	.experience-text p {font-size: 14px;line-height: 1.7;color: rgba(255,255,255,0.85);}
-	body.modal-open {position: fixed;width: 100%;overflow: hidden;}
+	
 
 /*Mobil uyum*/
 @media (max-width: 768px) {.experience-content {margin: 4vh 12px;max-height: 92vh;overflow-y: auto;}
 	.experience-body {grid-template-columns: 1fr;}
 	.experience-image {max-height: 240px;}} 
+
+body.modal-open {position: fixed;width: 100%;overflow: hidden;}
