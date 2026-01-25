@@ -130,6 +130,39 @@
   pointer-events: none;
 }
 
+/* ==============================
+   SMART GRID CENTERING
+============================== */
+
+.tour-grid.center-1 {
+  justify-content: center;
+}
+
+.tour-grid.center-1 .tour-card {
+  grid-column: 2;
+}
+
+.tour-grid.center-2 {
+  justify-content: center;
+}
+
+.tour-grid.center-2 .tour-card:first-child {
+  grid-column: 1;
+}
+
+.tour-grid.center-2 .tour-card:last-child {
+  grid-column: 2;
+}
+
+/* Mobile safety */
+@media (max-width: 768px) {
+  .tour-grid.center-1 .tour-card,
+  .tour-grid.center-2 .tour-card {
+    grid-column: auto;
+  }
+}
+
+
 @media (max-width: 1024px){
   .tours-grid{
     grid-template-columns: repeat(2, 1fr);
@@ -141,6 +174,7 @@
     grid-template-columns: 1fr;
   }
 }
+
 
 
 
