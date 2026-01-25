@@ -130,30 +130,6 @@
   pointer-events: none;
 }
 
-/* ==============================
-   SMART GRID CENTERING
-============================== */
-
-.tours-grid.center-1 {
-  justify-content: center;
-}
-
-.tours-grid.center-1 .tour-card {
-  grid-column: 2;
-}
-
-.tours-grid.center-2 {
-  justify-content: center;
-}
-
-.tours-grid.center-2 .tour-card:first-child {
-  grid-column: 1;
-}
-
-.tours-grid.center-2 .tour-card:last-child {
-  grid-column: 2;
-}
-
 /* Mobile safety */
 @media (max-width: 768px) {
   .tours-grid.center-1 .tour-card,
@@ -174,6 +150,7 @@
     grid-template-columns: 1fr;
   }
 }
+
 
 
 
