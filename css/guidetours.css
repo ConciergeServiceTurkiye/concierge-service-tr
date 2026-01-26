@@ -101,7 +101,7 @@
   background-position: center, center;
   background-size: 95%, auto;
 
-  opacity: 0.3;              /* GÖRÜNÜR */
+  opacity: 0.2;              /* GÖRÜNÜR */
   filter: blur(0.4px);
   mix-blend-mode: normal;
 
@@ -152,6 +152,7 @@
 .tour-card:hover::before {
   transform: translateX(100%);
 }
+
 
 
 
