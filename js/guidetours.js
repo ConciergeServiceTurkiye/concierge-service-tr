@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `,
     "Turkish Cuisine Experience": `<strong>What you'll experience</strong><br>`,
 
-    "Asian Side Tour": '<strong>What you'll experience</strong><br>'
+    "Asian Side Tour": '<strong>What you'll experience</strong><br>',
   };
 
   if (tourExperienceBox) {
@@ -130,7 +130,7 @@ const modalClose = document.querySelector(".close-tour-detail");
 /*KART TIKLANINCA MODAL AÇ*/
 document.querySelectorAll(".tour-card").forEach(card => {
   card.addEventListener("click", e => {
-    e.preventDefault(); // 👈 ÇOK KRİTİK
+    e.preventDefault();
 
     const key = card.dataset.tour;
     const data = TOUR_DETAILS[key];
@@ -146,6 +146,10 @@ document.querySelectorAll(".tour-card").forEach(card => {
       li.textContent = item;
       modalList.appendChild(li);
     });
+
+      // 👉 Modal içindeki Request butonunu ayarla
+const modalRequestBtn = document.getElementById("requestTourBtn");
+modalRequestBtn.href = `guidetourform.html?tour=${encodeURIComponent(data.title)}`;
 
     modal.style.display = "flex";
     document.body.style.overflow = "hidden";
@@ -217,28 +221,6 @@ filterButtons.forEach(btn => {
     updateGridAlignment();
   });
 });
-
-// MODAL REQUEST TOUR BUTTON LINKING
-const modalRequestBtn = document.getElementById("requestTourBtn");
-
-let activeTourTitle = "";
-
-// Kartlara tıklanınca çalışacak (modal zaten açılıyor)
-document.querySelectorAll(".tour-card").forEach(card => {
-  card.addEventListener("click", () => {
-
-    // Kart başlığını al
-    const title = card.querySelector(".tour-title").innerText.trim();
-    activeTourTitle = title;
-
-    // URL formatı için encode
-    const encodedTitle = encodeURIComponent(title);
-
-    // Modal içindeki buton linkini ayarla
-    modalRequestBtn.href = `guidetourform.html?tour=${encodedTitle}`;
-  });
-});
-
 });
 
 
