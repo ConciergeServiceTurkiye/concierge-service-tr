@@ -1,23 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-
-  // TOUR NAME FROM URL
-const params = new URLSearchParams(window.location.search);
-const tourName = params.get("tour");
-
-if (tourName) {
-  const decodedTour = decodeURIComponent(tourName);
-
-  // Başlığı değiştir
-  const titleEl = document.getElementById("formTourTitle");
-  if (titleEl) titleEl.textContent = decodedTour;
-
-  // Hidden input varsa doldur
-  const hiddenInput = document.getElementById("tourName");
-  if (hiddenInput) hiddenInput.value = decodedTour;
-}
-
-
   /* ==============================
      HELPERS – FIELD ERRORS
   ============================== */
