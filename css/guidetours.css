@@ -46,8 +46,9 @@
       .tour-detail-highlights { list-style: none; padding: 0; }/*highlight listesinin default stilini kaldırır*/
       .tour-detail-highlights li { padding-left: 18px; position: relative; margin-bottom: 10px; }/*highlight maddeleri hizalar*/
       .tour-detail-highlights li::before { content: "✦"; position: absolute; left: 0; color: var(--gold); }/*highlight ikonunu ekler*/
-      .tour-detail-btn { margin-top: auto; text-align: center; padding: 14px; border-radius: 30px; background: linear-gradient(135deg, var(--gold), #b89632);
-                        color: #000; text-decoration: none; font-weight: 500; }/*detay modal CTA butonu*/
+      .tour-detail-btn {margin-top: auto;text-align: center;padding: 12px;border-radius: 28px;background: #000;color: var(--gold);border: 1px solid var(--gold);text-decoration: none;
+                        font-weight: 500;transition: background .25s ease, color .25s ease;}
+      .tour-detail-btn:hover {background: var(--gold);color: #000;}
       .close-tour-detail { position: absolute; top: 18px; right: 22px; font-size: 24px; color: var(--gold); cursor: pointer; }/*detay modal kapatma ikonu*/
       .tour-card { position: relative;cursor: pointer; transition: transform 0.35s ease, box-shadow 0.35s ease; transform-origin: center; }/*kart hover animasyonu için konum ve geçiş*/
       .tour-card:hover { transform: scale(1.03); box-shadow: 0 25px 60px rgba(0,0,0,0.35); }/*hoverda kartı büyütür ve gölge verir*/
@@ -87,6 +88,7 @@
 .tour-card > *{position: relative;z-index: 2;}
 .tour-card::before,
 .tour-card::after {pointer-events: none;}
+
 
 
 
