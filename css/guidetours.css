@@ -93,6 +93,8 @@
 
 .tour-card {
   background: rgba(10,10,10,0.92);
+      transform-origin: center center;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
   border-radius: 16px;
   padding: 28px;
   display: flex;
@@ -106,6 +108,7 @@
 }
 
 .tour-card:hover {
+      transform: scale(1.035);
   border-color: rgba(212,175,55,0.6);
   box-shadow:
     0 0 30px rgba(212,175,55,0.24),
@@ -131,6 +134,7 @@
 .tour-card:hover::before {
   transform: translateX(100%);
 }
+
 
 
 
