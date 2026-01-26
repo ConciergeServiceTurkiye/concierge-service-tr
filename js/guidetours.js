@@ -5,14 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let tourName = "Private Guide Tour";
 
-  if (isFormPage) {
-    const params = new URLSearchParams(window.location.search);
-    const urlTour = params.get("tour");
+ const params = new URLSearchParams(window.location.search);
+const urlTour = params.get("tour");
 
-    if (urlTour) {
-      tourName = decodeURIComponent(urlTour.replace(/\+/g, " "));
-    }
-  }
+if (urlTour) {
+  tourName = decodeURIComponent(urlTour.replace(/\+/g, " "));
+}
 
   const tourNameInput = document.getElementById("tourName");
   const tourFormTitle = document.querySelector(".guide-form-title");
@@ -222,6 +220,7 @@ filterButtons.forEach(btn => {
   });
 });
 });
+
 
 
 
