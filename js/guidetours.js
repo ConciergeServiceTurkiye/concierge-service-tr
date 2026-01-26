@@ -130,9 +130,7 @@ const modalClose = document.querySelector(".close-tour-detail");
 /*KART TIKLANINCA MODAL AÇ*/
 document.querySelectorAll(".tour-card").forEach(card => {
   card.addEventListener("click", e => {
-
-    // Eğer butona basıldıysa modal açma
-    if (e.target.closest(".tour-btn")) return;
+    e.preventDefault(); // 👈 ÇOK KRİTİK
 
     const key = card.dataset.tour;
     const data = TOUR_DETAILS[key];
@@ -154,6 +152,11 @@ document.querySelectorAll(".tour-card").forEach(card => {
   });
 });
 
+document.querySelectorAll(".tour-btn").forEach(btn => {
+  btn.addEventListener("click", e => {
+    e.stopPropagation(); // 👈 kart click’ini öldür
+  });
+});
 
 /*MODAL KAPATMA*/
 modalClose.addEventListener("click", () => {
@@ -237,6 +240,7 @@ document.querySelectorAll(".tour-card").forEach(card => {
 });
 
 });
+
 
 
 
