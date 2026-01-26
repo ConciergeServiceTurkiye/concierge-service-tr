@@ -32,6 +32,14 @@
   transform-origin: left;
   transition: transform 0.35s ease;
 }
+.tour-card:hover .tour-title::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.tour-card .tour-title::after {
+  transform-origin: right;
+}
+
 
 
 /* ========================= TOUR DETAIL MODAL ========================= */
@@ -133,6 +141,7 @@
 .tour-card:hover::before {
   transform: translateX(100%);
 }
+
 
 
 
