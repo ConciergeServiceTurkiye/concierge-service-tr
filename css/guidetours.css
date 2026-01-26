@@ -81,11 +81,11 @@
     url("../assets/grain.png");
   background-repeat: no-repeat, repeat;
   background-position: center, center;
-  background-size: 80%, auto;
+  background-size: 95%, auto;
 
-  opacity: 0.085;              /* GÖRÜNÜR */
+  opacity: 0.14;              /* GÖRÜNÜR */
   filter: blur(0.4px);
-  mix-blend-mode: overlay;
+  mix-blend-mode: soft-light;
 
   pointer-events: none;
   z-index: 0;
@@ -131,6 +131,7 @@
 .tour-card:hover::before {
   transform: translateX(100%);
 }
+
 
 
 
