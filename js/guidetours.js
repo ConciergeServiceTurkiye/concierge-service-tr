@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       • Walking or vehicle-assisted options
     `,
 
-    "Istanbul Highlights Tour": '<strong>What you'll experience</strong><br>',
+    "Istanbul Highlights Tour": `<strong>What you'll experience</strong><br>`,
     
     "Bosphorus Shore Experience": `
       <strong>What you'll experience</strong><br>
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `,
     "Turkish Cuisine Experience": `<strong>What you'll experience</strong><br>`,
 
-    "Asian Side Tour": '<strong>What you'll experience</strong><br>',
+    "Asian Side Tour": `<strong>What you'll experience</strong><br>`,
   };
 
   if (tourExperienceBox) {
@@ -222,6 +222,7 @@ filterButtons.forEach(btn => {
   });
 });
 });
+
 
 
 
