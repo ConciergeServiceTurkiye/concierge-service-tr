@@ -61,28 +61,6 @@
                           transform: translateX(-100%); transition: transform 1.1s ease; pointer-events: none; }/*altın ışık sweep efekti*/
       .tour-card:hover::before { transform: translateX(100%); }/*hoverda ışık sweep animasyonu*/
 
-/* ========================= TOUR CARD – FINAL LAYERS ========================= */
-
-.tour-card{position: relative;overflow: hidden;border: 1px solid rgba(212, 175, 55, 0.35);
-  box-shadow:
-    0 0 22px rgba(212, 175, 55, 0.16),
-    0 10px 26px rgba(0, 0, 0, 0.38);}
-
-/* --- STATIC BACKGROUND: MAP + GRAIN --- */
-.tour-card::after{ content: "";position: absolute;inset: -1px;border-radius: inherit;
-  /* Istanbul Map */ background-image: url("../assets/istanbul-map-line.svg"), url("../assets/grain.png");
-  background-repeat: no-repeat, repeat; background-position: center, center; background-size: 80%, auto;
-  /* Bilinçaltı ama görünür seviye */ opacity: 0.075; filter: blur(0.6px);box-shadow: 0 0 40px rgba(212, 175, 55, 0.18);
- pointer-events: none;z-index: 0; mix-blend-mode: overlay;}
-
-/* --- LIGHT SWEEP EFFECT --- */
-.tour-card::before{content: "";position: absolute;inset: -40%;background: linear-gradient(120deg,transparent 42%,rgba(212,175,55,0.12),transparent 58%); 
-                   transform: translateX(-100%);transition: transform 1.1s ease;pointer-events: none;z-index: 1;}
-.tour-card:hover::before{transform: translateX(100%);border-color: rgba(212, 175, 55, 0.6);
-  box-shadow:
-    0 0 28px rgba(212, 175, 55, 0.22),
-    0 12px 30px rgba(0, 0, 0, 0.45);}
-
 /* --- CONTENT ABOVE EFFECTS --- */
 .tour-card > *{position: relative;z-index: 2;}
 .tour-card::before,
@@ -150,6 +128,7 @@
 .tour-card:hover::before {
   transform: translateX(100%);
 }
+
 
 
 
