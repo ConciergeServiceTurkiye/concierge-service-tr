@@ -205,3 +205,6 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 		.lux-check input {display: none;}
 		.lux-check span {width: 18px;height: 18px;border: 1px solid #d4af37;border-radius: 4px;}
 		.lux-check input:checked + span {background: #d4af37;}
+
+/* ============================== HOTEL INFO ============================== */
+.hotel-row {display: grid;grid-template-columns: 3fr 1fr;gap: 12px;}
