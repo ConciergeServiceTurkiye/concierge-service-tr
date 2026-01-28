@@ -362,6 +362,10 @@ document.querySelectorAll(".custom-select").forEach(select => {
     });
   }
 
+  const primaryParticipant = document.querySelector(".participant-row");
+  if (primaryParticipant) {
+    initNationalityDropdown(primaryParticipant);
+  }
 
   /* ==============================
      PARTICIPANT VALIDATION
