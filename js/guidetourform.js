@@ -469,6 +469,22 @@ if (!isValid) {
       });
     });
 
+    const mobilityTextarea = document.querySelector(
+  'textarea[name="mobility_details"]'
+);
+
+if (mobilityToggle.checked && !mobilityTextarea.value.trim()) {
+  showFieldError(
+    mobilityTextarea,
+    "Please describe mobility assistance needs"
+  );
+  mobilityTextarea.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+  return;
+}
+
     /* =========================
        PAYLOAD
     ========================= */
