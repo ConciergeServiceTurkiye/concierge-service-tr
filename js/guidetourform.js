@@ -369,7 +369,8 @@ document.querySelectorAll(".custom-select").forEach(select => {
 
   function validateParticipantRow(row, isPrimary) {
     const name = row.querySelector(".participant-name");
-    const nat = row.querySelector(".participant-nationality");
+    const nat = row.querySelector(".nationality-trigger");
+    const natValue = row.querySelector(".participant-nationality")?.value;
     const year = row.querySelector(".participant-birthyear");
 
     if (isPrimary) {
@@ -440,6 +441,14 @@ if (!isValid) {
     });
   }
   return;
+}
+    
+if (!natValue || !year.value) {
+  showFieldError(
+    nat,
+    "Please select nationality and birth year for the primary participant."
+  );
+  return false;
 }
 
     /* =========================
