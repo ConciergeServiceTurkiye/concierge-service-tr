@@ -219,3 +219,6 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 /* ============================== Participant Remove Button ============================== */
 .remove-participant {background: #ff6b6b;color: #000;border-radius: 50%;}
 
+/* ============================== Mobility → Checkbox seçiliyse textarea zorunlu ============================== */ 	
+textarea::-webkit-scrollbar-thumb {background: #d4af37;}
+
