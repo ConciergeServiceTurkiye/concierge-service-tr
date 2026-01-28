@@ -214,7 +214,7 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 .participant-birthyear::-webkit-scrollbar {width: 6px;}
 .participant-birthyear::-webkit-scrollbar-thumb {background: #d4af37;border-radius: 6px;}
 .participant-row {display: grid;grid-template-columns: 1fr auto auto;gap: 12px;} /* Konum */
-.add-participant-btn {width: 240px;align-self: center;background: #d4af37;color: #000;border-radius: 28px;} /*Ortada - Küçük - Submit ile aynı stil*/
+.add-participant-btn {width: 260px;align-self: center;background: #d4af37;color: #000;border-radius: 28px;} /*Ortada - Küçük - Submit ile aynı stil*/
 
 /* ============================== Participant Remove Button ============================== */
 .remove-participant {background: #ff6b6b;color: #000;border-radius: 50%;}
