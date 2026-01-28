@@ -419,19 +419,28 @@ if (form) {
     const requiredFields = form.querySelectorAll("[required]");
     let isValid = true;
 
-    requiredFields.forEach(field => {
-      if (!field.value.trim()) {
-        field.classList.add("error");
-        isValid = false;
-      } else {
-        field.classList.remove("error");
-      }
-    });
+    let firstErrorField = null;
+hideInlineAlert();
 
-    if (!isValid) {
-      alert("Please fill in all required fields.");
-      return;
-    }
+requiredFields.forEach(field => {
+  if (!field.value.trim()) {
+    showFieldError(field, "This field is required");
+    if (!firstErrorField) firstErrorField = field;
+    isValid = false;
+  } else {
+    hideFieldError(field);
+  }
+});
+
+if (!isValid) {
+  if (firstErrorField) {
+    firstErrorField.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+  return;
+}
 
     /* =========================
        PARTICIPANTS
