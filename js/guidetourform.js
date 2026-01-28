@@ -46,21 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
     alert.style.visibility = "hidden";
   }
 
-  const searchInput = document.createElement("input");
-searchInput.className = "nationality-search";
-searchInput.placeholder = "Type to search";
-dropdown.appendChild(searchInput);
-
-  searchInput.addEventListener("input", e => {
-  const q = e.target.value.toLowerCase();
-  dropdown.querySelectorAll(".nationality-option").forEach(opt => {
-    opt.style.display = opt.textContent.toLowerCase().includes(q)
-      ? "flex"
-      : "none";
-  });
-});
-
-
   /* ==============================
    TOUR NAME & EXPERIENCE
 ============================== */
