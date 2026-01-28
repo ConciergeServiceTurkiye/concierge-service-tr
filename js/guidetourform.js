@@ -489,7 +489,7 @@ if (mobilityToggle.checked && !mobilityTextarea.value.trim()) {
       email: document.querySelector('[name="email"]')?.value || "",
       phone: iti ? iti.getNumber() : "",
       tour_date: document.querySelector('[name="date"]')?.value || "",
-      language: document.getElementById("language")?.value || "",
+      language: document.querySelector('[name="language"]')?.value || "",
       transportation:
         document.querySelector('input[name="transportation"]:checked')?.value || "",
       hotel:
