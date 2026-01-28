@@ -265,7 +265,25 @@ document.addEventListener("keydown", e => {
     });
   }
 
+/* ========================= Language ========================= */
+document.querySelectorAll(".custom-select").forEach(select => {
+  const trigger = select.querySelector(".select-trigger");
+  const options = select.querySelectorAll("li");
+  const hidden = select.querySelector("input[type=hidden]");
 
+  trigger.addEventListener("click", () => select.classList.toggle("open"));
+
+  options.forEach(opt => {
+    opt.addEventListener("click", () => {
+      trigger.textContent = opt.textContent;
+      hidden.value = opt.textContent;
+      select.classList.add("has-value");
+      select.classList.remove("open");
+    });
+  });
+});
+
+  
   /* ==============================
      FIELD REFERENCES
   ============================== */
