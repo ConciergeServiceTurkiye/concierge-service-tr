@@ -531,3 +531,41 @@ if (mobilityToggle.checked && !mobilityTextarea.value.trim()) {
 }
 
 });
+function initNationalityDropdown(container) {
+  const trigger = container.querySelector(".nationality-trigger");
+  const dropdown = container.querySelector(".nationality-dropdown");
+  const hiddenInput = container.querySelector(".participant-nationality");
+  const searchInput = container.querySelector(".nationality-search");
+
+  if (!trigger || !dropdown || !hiddenInput) return;
+
+  // Aç / kapa
+  trigger.addEventListener("click", () => {
+    dropdown.classList.toggle("open");
+  });
+
+  // Seçim
+  dropdown.querySelectorAll(".nationality-option").forEach(option => {
+    option.addEventListener("click", () => {
+      const code = option.dataset.value;
+      const label = option.querySelector("span").innerText;
+
+      trigger.querySelector("span").innerText = label;
+      hiddenInput.value = code;
+
+      dropdown.classList.remove("open");
+    });
+  });
+
+  // Search
+  if (searchInput) {
+    searchInput.addEventListener("input", e => {
+      const q = e.target.value.toLowerCase();
+      dropdown.querySelectorAll(".nationality-option").forEach(opt => {
+        opt.style.display = opt.textContent.toLowerCase().includes(q)
+          ? "flex"
+          : "none";
+      });
+    });
+  }
+}
