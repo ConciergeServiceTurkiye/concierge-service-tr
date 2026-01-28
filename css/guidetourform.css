@@ -199,25 +199,9 @@
 
 body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 
-.lux-check {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
 
-.lux-check input {
-  display: none;
-}
-
-.lux-check span {
-  width: 18px;
-  height: 18px;
-  border: 1px solid #d4af37;
-  border-radius: 4px;
-}
-
-.lux-check input:checked + span {
-  background: #d4af37;
-}
-
+/* ============================== TRANSPORTATION ============================== */
+		.lux-check {display: flex;align-items: center;gap: 10px;cursor: pointer;}
+		.lux-check input {display: none;}
+		.lux-check span {width: 18px;height: 18px;border: 1px solid #d4af37;border-radius: 4px;}
+		.lux-check input:checked + span {background: #d4af37;}
