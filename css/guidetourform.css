@@ -222,3 +222,7 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 /* ============================== Mobility → Checkbox seçiliyse textarea zorunlu ============================== */ 	
 textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 
+/* ============================== Participants Primary Fullname Readonly ============================== */ 	
+.participant-name[readonly] {pointer-events: none;opacity: 0.85;}
+
+
