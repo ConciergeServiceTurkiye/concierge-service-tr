@@ -208,3 +208,10 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 
 /* ============================== HOTEL INFO ============================== */
 .hotel-row {display: grid;grid-template-columns: 3fr 1fr;gap: 12px;}
+
+/* ============================== BirthYear → Luxury dropdown + scrollbar ============================== */
+.participant-birthyear {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.1);}
+.participant-birthyear::-webkit-scrollbar {width: 6px;}
+.participant-birthyear::-webkit-scrollbar-thumb {background: #d4af37;border-radius: 6px;}
+.participant-row {display: grid;grid-template-columns: 1fr auto auto;gap: 12px;} /* Konum */
+.add-participant-btn {width: 240px;align-self: center;background: #d4af37;color: #000;border-radius: 28px;} /*Ortada - Küçük - Submit ile aynı stil*/
