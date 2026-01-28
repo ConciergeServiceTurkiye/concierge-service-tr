@@ -358,7 +358,9 @@ document.querySelectorAll(".custom-select").forEach(select => {
 
   if (addParticipantBtn && participantsContainer) {
     addParticipantBtn.addEventListener("click", () => {
-      participantsContainer.appendChild(createParticipantRow());
+      const newRow = createParticipantRow();
+participantsContainer.appendChild(newRow);
+initNationalityDropdown(newRow);
     });
   }
 
