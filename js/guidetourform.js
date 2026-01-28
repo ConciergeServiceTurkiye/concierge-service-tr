@@ -535,13 +535,6 @@ if (mobilityToggle.checked && !mobilityTextarea.value.trim()) {
 }
 
 });
-function initNationalityDropdown(container) {
-  const trigger = container.querySelector(".nationality-trigger");
-  const dropdown = container.querySelector(".nationality-dropdown");
-  const hiddenInput = container.querySelector(".participant-nationality");
-  const searchInput = container.querySelector(".nationality-search");
-
-  if (!trigger || !dropdown || !hiddenInput) return;
 
   // Aç / kapa
   trigger.addEventListener("click", () => {
