@@ -434,6 +434,7 @@ requiredFields.forEach(field => {
 });
 
 if (!isValid) {
+  showInlineAlert("Please review the highlighted fields below.");
   if (firstErrorField) {
     firstErrorField.scrollIntoView({
       behavior: "smooth",
