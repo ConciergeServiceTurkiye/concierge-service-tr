@@ -47,6 +47,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ==============================
+   LIVE ERROR CLEARING
+============================== */
+
+function bindLiveValidation(form) {
+  const fields = form.querySelectorAll("input, textarea, select");
+
+  fields.forEach(field => {
+    field.addEventListener("input", () => {
+      if (field.value.trim()) {
+        hideFieldError(field);
+      }
+    });
+
+    field.addEventListener("change", () => {
+      if (field.value.trim()) {
+        hideFieldError(field);
+      }
+    });
+  });
+}
+
+  /* ==============================
    TOUR NAME & EXPERIENCE
 ============================== */
 
