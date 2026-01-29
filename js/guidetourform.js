@@ -68,6 +68,10 @@ function bindLiveValidation(form) {
   });
 }
 
+  const EMAIL_REGEX =
+  /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  
   /* ==============================
    TOUR NAME & EXPERIENCE
 ============================== */
