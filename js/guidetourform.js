@@ -438,6 +438,10 @@ initNationalityDropdown(newRow);
 
  const form = document.getElementById("guideTourForm");
 
+  if (form) {
+  bindLiveValidation(form);
+}
+
 if (form) {
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
