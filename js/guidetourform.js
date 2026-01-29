@@ -488,6 +488,15 @@ if (!natValue || !year.value) {
   return false;
 }
 
+    const emailField = form.querySelector('[name="email"]');
+
+if (emailField && !EMAIL_REGEX.test(emailField.value.trim())) {
+  showFieldError(emailField, "Please enter a valid email address");
+  emailField.scrollIntoView({ behavior: "smooth", block: "center" });
+  return;
+}
+
+
     /* =========================
        PARTICIPANTS
     ========================= */
