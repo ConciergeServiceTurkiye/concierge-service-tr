@@ -464,8 +464,6 @@ requiredFields.forEach(field => {
     showFieldError(field, "This field is required");
     if (!firstErrorField) firstErrorField = field;
     isValid = false;
-  } else {
-    hideFieldError(field);
   }
 });
 
