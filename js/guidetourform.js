@@ -490,9 +490,10 @@ if (!natValue || !year.value) {
 
 if (emailField && emailField.value.trim() && !EMAIL_REGEX.test(emailField.value.trim())) {
   showFieldError(emailField, "Please enter a valid email address");
-  emailField.scrollIntoView({ behavior: "smooth", block: "center" });
-  return;
+  if (!firstErrorField) firstErrorField = emailField;
+  isValid = false;
 }
+
 
 
     /* =========================
