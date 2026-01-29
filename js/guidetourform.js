@@ -535,36 +535,4 @@ if (mobilityToggle.checked && !mobilityTextarea.value.trim()) {
     }
   });
 }
-
 });
-
-  // Aç / kapa
-  trigger.addEventListener("click", () => {
-    dropdown.classList.toggle("open");
-  });
-
-  // Seçim
-  dropdown.querySelectorAll(".nationality-option").forEach(option => {
-    option.addEventListener("click", () => {
-      const code = option.dataset.value;
-      const label = option.querySelector("span").innerText;
-
-      trigger.querySelector("span").innerText = label;
-      hiddenInput.value = code;
-
-      dropdown.classList.remove("open");
-    });
-  });
-
-  // Search
-  if (searchInput) {
-    searchInput.addEventListener("input", e => {
-      const q = e.target.value.toLowerCase();
-      dropdown.querySelectorAll(".nationality-option").forEach(opt => {
-        opt.style.display = opt.textContent.toLowerCase().includes(q)
-          ? "flex"
-          : "none";
-      });
-    });
-  }
-}
