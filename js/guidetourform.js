@@ -449,16 +449,11 @@ initNationalityDropdown(newRow);
 if (form) {
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
-
-    /* =========================
-       BASIC VALIDATION
-    ========================= */
-    const requiredFields = form.querySelectorAll("[required]");
     let isValid = true;
-
     let firstErrorField = null;
 hideInlineAlert();
 
+    const requiredFields = form.querySelectorAll("[required]");
 requiredFields.forEach(field => {
   if (!field.value.trim()) {
     showFieldError(field, "This field is required");
@@ -467,25 +462,6 @@ requiredFields.forEach(field => {
   }
 });
 
-if (!isValid) {
-  showInlineAlert("Please review the highlighted fields below.");
-  if (firstErrorField) {
-    firstErrorField.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-  }
-  return;
-}
-    
-if (!natValue || !year.value) {
-  showFieldError(
-    nat,
-    "Please select nationality and birth year for the primary participant."
-  );
-  return false;
-}
-
     const emailField = form.querySelector('[name="email"]');
 
 if (emailField && emailField.value.trim() && !EMAIL_REGEX.test(emailField.value.trim())) {
@@ -493,8 +469,6 @@ if (emailField && emailField.value.trim() && !EMAIL_REGEX.test(emailField.value.
   if (!firstErrorField) firstErrorField = emailField;
   isValid = false;
 }
-
-
 
     /* =========================
        PARTICIPANTS
@@ -508,6 +482,17 @@ if (emailField && emailField.value.trim() && !EMAIL_REGEX.test(emailField.value.
       });
     });
 
+
+        if (!natValue || !year.value) {
+  showFieldError(
+    nat,
+    "Please select nationality and birth year for the primary participant."
+  );
+      if (!firstErrorField) firstErrorField = nat;
+  isValid = false;
+}
+
+    
     const mobilityTextarea = document.querySelector(
   'textarea[name="mobility_details"]'
 );
@@ -517,12 +502,17 @@ if (mobilityToggle.checked && !mobilityTextarea.value.trim()) {
     mobilityTextarea,
     "Please describe mobility assistance needs"
   );
-  mobilityTextarea.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
-  });
-  return;
-}
+
+if (!isValid) {
+    showInlineAlert("Please review the highlighted fields below.");
+    if (firstErrorField) {
+      firstErrorField.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+    return;
+  }
 
     /* =========================
        PAYLOAD
@@ -545,6 +535,18 @@ if (mobilityToggle.checked && !mobilityTextarea.value.trim()) {
       participants
     };
 
+
+    if (!isValid) {
+  showInlineAlert("Please review the highlighted fields below.");
+  if (firstErrorField) {
+    firstErrorField.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+  return;
+}
+    
     /* =========================
        SUBMIT
     ========================= */
