@@ -488,7 +488,7 @@ if (!natValue || !year.value) {
 
     const emailField = form.querySelector('[name="email"]');
 
-if (emailField && !EMAIL_REGEX.test(emailField.value.trim())) {
+if (emailField && emailField.value.trim() && !EMAIL_REGEX.test(emailField.value.trim())) {
   showFieldError(emailField, "Please enter a valid email address");
   emailField.scrollIntoView({ behavior: "smooth", block: "center" });
   return;
