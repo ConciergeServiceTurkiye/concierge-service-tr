@@ -534,6 +534,13 @@ form.addEventListener("submit", async function (e) {
     notes: document.querySelector('[name="notes"]')?.value || ""
   };
 
+
+  form.querySelectorAll(".has-error").forEach(el => {
+  el.classList.remove("has-error");
+  el.querySelector(".field-error")?.remove();
+});
+
+  
   /* FETCH — SENİN URL */
   try {
     const res = await fetch(
@@ -543,7 +550,6 @@ form.addEventListener("submit", async function (e) {
         body: JSON.stringify(payload)
       }
     );
-
     const data = await res.json();
 
     if (data.status === "success") {
