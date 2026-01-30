@@ -455,11 +455,8 @@ form.addEventListener("submit", async function (e) {
 
   hideInlineAlert();
 
-  /* =========================
-     REQUIRED FIELDS
-  ========================= */
+  /* REQUIRED */
   const requiredFields = form.querySelectorAll("[required]");
-
   requiredFields.forEach(field => {
     if (!field.value.trim()) {
       showFieldError(field, "This field is required");
@@ -468,11 +465,8 @@ form.addEventListener("submit", async function (e) {
     }
   });
 
-  /* =========================
-     EMAIL
-  ========================= */
+  /* EMAIL */
   const emailField = form.querySelector('[name="email"]');
-
   if (
     emailField &&
     emailField.value.trim() &&
@@ -483,9 +477,7 @@ form.addEventListener("submit", async function (e) {
     isValid = false;
   }
 
-  /* =========================
-     PRIMARY PARTICIPANT
-  ========================= */
+  /* PRIMARY PARTICIPANT */
   const primaryRow = document.querySelector(".participant-row.primary");
   const nat = primaryRow?.querySelector(".nationality-trigger");
   const natValue = primaryRow?.querySelector(".participant-nationality")?.value;
@@ -500,13 +492,10 @@ form.addEventListener("submit", async function (e) {
     isValid = false;
   }
 
-  /* =========================
-     MOBILITY
-  ========================= */
+  /* MOBILITY */
   const mobilityTextarea = document.querySelector(
     'textarea[name="mobility_details"]'
   );
-
   if (mobilityToggle?.checked && !mobilityTextarea.value.trim()) {
     showFieldError(
       mobilityTextarea,
@@ -516,55 +505,51 @@ form.addEventListener("submit", async function (e) {
     isValid = false;
   }
 
-  /* =========================
-     FINAL DECISION (TEK YER)
-  ========================= */
+  /* FINAL DECISION */
   if (!isValid) {
     showInlineAlert("Please review the highlighted fields below.");
     if (firstErrorField) {
-      firstErrorField.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
+      firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
     }
     return;
   }
 
-  /* =========================
-     SUBMIT
-  ========================= */
-  // fetch kısmın AYNEN KALSIN
-});
+  /* PAYLOAD (BEN KOYDUM) */
+  const payload = {
+    tour_name: tourName,
+    full_name: document.querySelector('[name="name"]')?.value || "",
+    email: document.querySelector('[name="email"]')?.value || "",
+    phone: iti ? iti.getNumber() : "",
+    tour_date: document.querySelector('[name="date"]')?.value || "",
+    language: document.querySelector('[name="language"]')?.value || "",
+    hotel: document.querySelector('[name="hotel_name"]')?.value || "",
+    notes: document.querySelector('[name="notes"]')?.value || ""
+  };
 
-
-  
-    
-    /* =========================
-       SUBMIT
-    ========================= */
-    try {
-      const res = await fetch(
-        "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec",
-        {
-          method: "POST",
-          body: JSON.stringify(payload)
-        }
-      );
-
-      const data = await res.json();
-
-      if (data.status === "success") {
-        form.style.display = "none";
-        document.getElementById("successScreen").style.display = "block";
-        document.querySelector(".reservation-id").textContent =
-          `Reservation ID: ${data.reservation_id}`;
-      } else {
-        alert("Something went wrong. Please try again.");
+  /* FETCH — SENİN URL */
+  try {
+    const res = await fetch(
+      "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec",
+      {
+        method: "POST",
+        body: JSON.stringify(payload)
       }
-    } catch (err) {
-      console.error(err);
-      alert("Connection error. Please try again.");
+    );
+
+    const data = await res.json();
+
+    if (data.status === "success") {
+      form.style.display = "none";
+      document.getElementById("successScreen").style.display = "block";
+      document.querySelector(".reservation-id").textContent =
+        `Reservation ID: ${data.reservation_id}`;
+    } else {
+      alert("Something went wrong. Please try again.");
     }
-  });
-}
+  } catch (err) {
+    console.error(err);
+    alert("Connection error. Please try again.");
+  }
+});
+});
 });
