@@ -447,63 +447,79 @@ initNationalityDropdown(newRow);
 }
 
 if (form) {
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-    let isValid = true;
-    let firstErrorField = null;
-hideInlineAlert();
+form.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    const requiredFields = form.querySelectorAll("[required]");
-requiredFields.forEach(field => {
-  if (!field.value.trim()) {
-    showFieldError(field, "This field is required");
-    if (!firstErrorField) firstErrorField = field;
+  let isValid = true;
+  let firstErrorField = null;
+
+  hideInlineAlert();
+
+  /* =========================
+     REQUIRED FIELDS
+  ========================= */
+  const requiredFields = form.querySelectorAll("[required]");
+
+  requiredFields.forEach(field => {
+    if (!field.value.trim()) {
+      showFieldError(field, "This field is required");
+      if (!firstErrorField) firstErrorField = field;
+      isValid = false;
+    }
+  });
+
+  /* =========================
+     EMAIL
+  ========================= */
+  const emailField = form.querySelector('[name="email"]');
+
+  if (
+    emailField &&
+    emailField.value.trim() &&
+    !EMAIL_REGEX.test(emailField.value.trim())
+  ) {
+    showFieldError(emailField, "Please enter a valid email address");
+    if (!firstErrorField) firstErrorField = emailField;
     isValid = false;
   }
-});
 
-    const emailField = form.querySelector('[name="email"]');
+  /* =========================
+     PRIMARY PARTICIPANT
+  ========================= */
+  const primaryRow = document.querySelector(".participant-row.primary");
+  const nat = primaryRow?.querySelector(".nationality-trigger");
+  const natValue = primaryRow?.querySelector(".participant-nationality")?.value;
+  const year = primaryRow?.querySelector(".participant-birthyear");
 
-if (emailField && emailField.value.trim() && !EMAIL_REGEX.test(emailField.value.trim())) {
-  showFieldError(emailField, "Please enter a valid email address");
-  if (!firstErrorField) firstErrorField = emailField;
-  isValid = false;
-}
+  if (!natValue || !year?.value) {
+    showFieldError(
+      nat,
+      "Please select nationality and birth year for the primary participant."
+    );
+    if (!firstErrorField) firstErrorField = nat;
+    isValid = false;
+  }
 
-    /* =========================
-       PARTICIPANTS
-    ========================= */
-    const participants = [];
-    document.querySelectorAll(".participant-row").forEach(row => {
-      participants.push({
-        name: row.querySelector(".participant-name")?.value.trim() || "",
-        nationality: row.querySelector(".participant-nationality")?.value || "",
-        birthYear: row.querySelector(".participant-birthyear")?.value || ""
-      });
-    });
-
-
-        if (!natValue || !year.value) {
-  showFieldError(
-    nat,
-    "Please select nationality and birth year for the primary participant."
-  );
-      if (!firstErrorField) firstErrorField = nat;
-  isValid = false;
-}
-
-    
-    const mobilityTextarea = document.querySelector(
-  'textarea[name="mobility_details"]'
-);
-
-if (mobilityToggle.checked && !mobilityTextarea.value.trim()) {
-  showFieldError(
-    mobilityTextarea,
-    "Please describe mobility assistance needs"
+  /* =========================
+     MOBILITY
+  ========================= */
+  const mobilityTextarea = document.querySelector(
+    'textarea[name="mobility_details"]'
   );
 
-if (!isValid) {
+  if (mobilityToggle?.checked && !mobilityTextarea.value.trim()) {
+    showFieldError(
+      mobilityTextarea,
+      "Please describe mobility assistance needs"
+    );
+    if (!firstErrorField) firstErrorField = mobilityTextarea;
+    isValid = false;
+  }
+
+  /* =========================
+     FINAL DECISION (TEK YER)
+  ========================= */
+  if (!isValid) {
     showInlineAlert("Please review the highlighted fields below.");
     if (firstErrorField) {
       firstErrorField.scrollIntoView({
@@ -514,38 +530,14 @@ if (!isValid) {
     return;
   }
 
-    /* =========================
-       PAYLOAD
-    ========================= */
-    const payload = {
-      tour_name: tourName,
-      full_name: document.querySelector('[name="name"]')?.value || "",
-      email: document.querySelector('[name="email"]')?.value || "",
-      phone: iti ? iti.getNumber() : "",
-      tour_date: document.querySelector('[name="date"]')?.value || "",
-      language: document.querySelector('[name="language"]')?.value || "",
-      transportation:
-        document.querySelector('input[name="transportation"]:checked')?.value || "",
-      hotel:
-        (document.querySelector('[name="hotel_name"]')?.value || "") +
-        (document.querySelector('[name="room_number"]')?.value
-          ? " / Room: " + document.querySelector('[name="room_number"]').value
-          : ""),
-      notes: document.querySelector('[name="notes"]')?.value || "",
-      participants
-    };
+  /* =========================
+     SUBMIT
+  ========================= */
+  // fetch kısmın AYNEN KALSIN
+});
 
 
-    if (!isValid) {
-  showInlineAlert("Please review the highlighted fields below.");
-  if (firstErrorField) {
-    firstErrorField.scrollIntoView({
-      behavior: "smooth",
-      block: "center"
-    });
-  }
-  return;
-}
+  
     
     /* =========================
        SUBMIT
