@@ -467,11 +467,19 @@ form.addEventListener("submit", async function (e) {
 
   /* EMAIL */
   const emailField = form.querySelector('[name="email"]');
-  if (
-    emailField &&
-    emailField.value.trim() &&
-    !EMAIL_REGEX.test(emailField.value.trim())
-  ) {
+  if (emailField) {
+  const emailValue = emailField.value.trim();
+
+  if (!emailValue) {
+    showFieldError(emailField, "This field is required");
+    if (!firstErrorField) firstErrorField = emailField;
+    isValid = false;
+  } else if (!EMAIL_REGEX.test(emailValue)) {
+    showFieldError(emailField, "Please enter a valid email address");
+    if (!firstErrorField) firstErrorField = emailField;
+    isValid = false;
+  }
+}
     showFieldError(emailField, "Please enter a valid email address");
     if (!firstErrorField) firstErrorField = emailField;
     isValid = false;
