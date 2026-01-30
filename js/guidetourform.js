@@ -472,9 +472,6 @@ form.addEventListener("submit", async function (e) {
     }
   });
 
-  /* EMAIL */
-  const emailField = form.querySelector('[name="email"]');
-  if (emailField) {
  /* EMAIL */
 const emailField = form.querySelector('[name="email"]');
 if (emailField) {
@@ -582,7 +579,8 @@ document.querySelectorAll(".participant-row").forEach((row, index) => {
   } catch (err) {
     console.error(err);
     alert("Connection error. Please try again.");
-  }
+  };
 });
+  });
 });
-});
+  
