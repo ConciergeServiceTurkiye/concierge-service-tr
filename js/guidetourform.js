@@ -450,6 +450,11 @@ if (form) {
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
 
+  form.querySelectorAll(".has-error").forEach(el => {
+  el.classList.remove("has-error");
+  el.querySelector(".field-error")?.remove();
+});
+
   let isValid = true;
   let firstErrorField = null;
 
@@ -468,6 +473,9 @@ form.addEventListener("submit", async function (e) {
   /* EMAIL */
   const emailField = form.querySelector('[name="email"]');
   if (emailField) {
+ /* EMAIL */
+const emailField = form.querySelector('[name="email"]');
+if (emailField) {
   const emailValue = emailField.value.trim();
 
   if (!emailValue) {
@@ -480,10 +488,6 @@ form.addEventListener("submit", async function (e) {
     isValid = false;
   }
 }
-    showFieldError(emailField, "Please enter a valid email address");
-    if (!firstErrorField) firstErrorField = emailField;
-    isValid = false;
-  }
 
   /* PRIMARY PARTICIPANT */
   const primaryRow = document.querySelector(".participant-row.primary");
@@ -535,10 +539,6 @@ form.addEventListener("submit", async function (e) {
   };
 
 
-  form.querySelectorAll(".has-error").forEach(el => {
-  el.classList.remove("has-error");
-  el.querySelector(".field-error")?.remove();
-});
 
   
   /* FETCH — SENİN URL */
