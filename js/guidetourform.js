@@ -461,7 +461,9 @@ form.addEventListener("submit", async function (e) {
   hideInlineAlert();
 
   /* REQUIRED */
-  const requiredFields = form.querySelectorAll("[required]");
+  const requiredFields = form.querySelectorAll(
+  "input[required], textarea[required], select[required]"
+);
   requiredFields.forEach(field => {
     if (!field.value.trim()) {
       showFieldError(field, "This field is required");
@@ -503,6 +505,23 @@ if (emailField) {
     if (!firstErrorField) firstErrorField = nat;
     isValid = false;
   }
+
+    /* PARTICIPANTS */
+document.querySelectorAll(".participant-row").forEach((row, index) => {
+  const isPrimary = index === 0;
+  const rowValid = validateParticipantRow(row, isPrimary);
+
+  if (!rowValid) {
+    isValid = false;
+
+    if (!firstErrorField) {
+      firstErrorField =
+        row.querySelector(".has-error") ||
+        row.querySelector("input, select");
+    }
+  }
+});
+
 
   /* MOBILITY */
   const mobilityTextarea = document.querySelector(
