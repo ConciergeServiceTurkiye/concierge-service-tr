@@ -269,17 +269,31 @@ document.addEventListener("keydown", e => {
     .forEach(initNationalityDropdown);
 
  /* ========================= PHONE INPUT ========================= */
-  const phoneInput = document.getElementById("phone");
-  let iti = null;
+ const phoneInput = document.getElementById("phone");
+let iti = null;
 
-  if (phoneInput) {
-    iti = intlTelInput(phoneInput, {
-      initialCountry: "us",
-      separateDialCode: true,
-      utilsScript:
-        "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
-    });
-  }
+if (phoneInput) {
+
+  // SADECE RAKAM VE +
+  phoneInput.addEventListener("input", () => {
+    phoneInput.value = phoneInput.value.replace(/[^\d]/g, "");
+  });
+
+  // PASTE ENGELİ
+  phoneInput.addEventListener("paste", e => {
+    e.preventDefault();
+    const text = (e.clipboardData || window.clipboardData).getData("text");
+    phoneInput.value += text.replace(/[^\d]/g, "");
+  });
+
+  iti = intlTelInput(phoneInput, {
+    initialCountry: "us",
+    separateDialCode: true,
+    nationalMode: false,
+    utilsScript:
+      "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
+  });
+}
 
 /* ========================= DATE PICKER ========================= */
   const dateInput = document.getElementById("date");
