@@ -308,6 +308,10 @@ if (phoneInput) {
 /* ========================= Language ========================= */
 document.querySelectorAll(".custom-select").forEach(select => {
   const trigger = select.querySelector(".select-trigger");
+  const sortedOptions = Array.from(options).sort((a, b) =>
+  a.textContent.localeCompare(b.textContent)
+);
+
   const options = select.querySelectorAll("li");
   const hidden = select.querySelector("input[type=hidden]");
 
@@ -317,7 +321,7 @@ document.querySelectorAll(".custom-select").forEach(select => {
 });
 
 
-  options.forEach(opt => {
+  sortedOptions.forEach(opt => {
     opt.addEventListener("click", () => {
       trigger.textContent = opt.textContent;
       hidden.value = opt.textContent;
