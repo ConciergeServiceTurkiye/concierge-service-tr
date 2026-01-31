@@ -239,4 +239,13 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
   color: #222;
 }
 
+.select-options {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.select-options li {
+  list-style: none;
+}
 
