@@ -228,16 +228,6 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 /* ============================== Participants Primary Fullname Readonly ============================== */ 	
 .participant-name[readonly] {pointer-events: none;opacity: 0.85;}
 
-.custom-select .select-trigger {
-  font-size: 16px;            /* diğer input’larla aynı */
-  color: #999;                /* placeholder rengi */
-  font-weight: 400;
-  line-height: 1.2;
-}
-
-.custom-select.has-value .select-trigger {
-  color: #222;
-}
 
 .select-options {
   list-style: none;
