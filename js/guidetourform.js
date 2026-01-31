@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!error) {
       error = document.createElement("div");
       error.className = "field-error";
-      wrapper.prepend(error);
+      wrapper.appendChild(error);
     }
 
     error.textContent = message;
@@ -476,7 +476,7 @@ form.addEventListener("submit", async function (e) {
 
   /* REQUIRED */
   const requiredFields = form.querySelectorAll(
-  "input[required], textarea[required], select[required]"
+  "input[required]:not(#phone), textarea[required], select[required]"
 );
   requiredFields.forEach(field => {
     if (!field.value.trim()) {
@@ -502,6 +502,18 @@ if (emailField) {
   }
 }
 
+  /* PHONE */
+if (phoneInput) {
+  if (!iti || !iti.getNumber()) {
+    showFieldError(phoneInput, "This field is required");
+    if (!firstErrorField) firstErrorField = phoneInput;
+    isValid = false;
+  } else if (!iti.isValidNumber()) {
+    showFieldError(phoneInput, "Please enter a valid phone number");
+    if (!firstErrorField) firstErrorField = phoneInput;
+    isValid = false;
+  }
+}
   /* PRIMARY PARTICIPANT */
   const primaryRow = document.querySelector(".participant-row.primary");
   const nat = primaryRow?.querySelector(".nationality-trigger");
