@@ -99,6 +99,7 @@
 /* INTL TEL INPUT – CONTACT */
       .iti {width: 100%;position: relative;}
       .iti__country-list {background: #0b0b0b;border: 1px solid #d4af37;}
+		.phone-wrapper {position: relative;}
 
 /* ============================== CUSTOM SELECT – PLACEHOLDER ============================== */
     .guidetour-form-wrapper .custom-select .select-trigger {color: rgba(255,255,255,0.60);font-size: 14px;line-height: 1.4;}
