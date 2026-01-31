@@ -312,40 +312,90 @@ document.querySelectorAll(".custom-select").forEach(select => {
   const optionsList = select.querySelector(".select-options");
   const options = Array.from(optionsList.querySelectorAll("li"));
 
+  let currentIndex = -1;
+
   // 🔤 alfabetik sırala
   options.sort((a, b) =>
     a.textContent.trim().localeCompare(b.textContent.trim())
   );
-
-  // DOM’u temizle ve tekrar ekle
   optionsList.innerHTML = "";
   options.forEach(opt => optionsList.appendChild(opt));
 
-  // CLICK → aç / kapa
+  // Aç / kapa
+  function open() {
+    select.classList.add("open");
+  }
+  function close() {
+    select.classList.remove("open");
+    currentIndex = -1;
+    options.forEach(o => o.classList.remove("active"));
+  }
+
+  // CLICK trigger
   trigger.addEventListener("click", e => {
     e.stopPropagation();
-    select.classList.toggle("open");
+    select.classList.contains("open") ? close() : open();
   });
 
-  // TAB ile gelince aç
-  trigger.addEventListener("focus", () => {
-    select.classList.add("open");
+  // KEYBOARD CONTROL
+  trigger.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      open();
+    }
   });
 
-  // OPTION seçimi
+  optionsList.addEventListener("keydown", e => {
+    if (!select.classList.contains("open")) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      currentIndex = (currentIndex + 1) % options.length;
+    }
+
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      currentIndex =
+        (currentIndex - 1 + options.length) % options.length;
+    }
+
+    if (e.key === "Enter") {
+      e.preventDefault();
+      options[currentIndex]?.click();
+      close();
+      trigger.focus();
+    }
+
+    options.forEach(o => o.classList.remove("active"));
+    if (currentIndex >= 0) {
+      options[currentIndex].classList.add("active");
+      options[currentIndex].scrollIntoView({ block: "nearest" });
+    }
+  });
+
+  // OPTION CLICK
   options.forEach(opt => {
     opt.addEventListener("click", () => {
       trigger.textContent = opt.textContent;
       hidden.value = opt.textContent;
       select.classList.add("has-value");
-      select.classList.remove("open");
+      close();
     });
   });
 
-  // Dışarı tıklanınca kapat
+  // TAB / SHIFT+TAB → kapat
+  trigger.addEventListener("blur", () => {
+    setTimeout(() => {
+      if (!select.contains(document.activeElement)) {
+        close();
+      }
+    }, 10);
+  });
+
+  // DIŞARI TIK
   document.addEventListener("click", e => {
     if (!select.contains(e.target)) {
-      select.classList.remove("open");
+      close();
     }
   });
 });
