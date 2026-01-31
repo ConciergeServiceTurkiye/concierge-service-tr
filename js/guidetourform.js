@@ -581,6 +581,6 @@ document.querySelectorAll(".participant-row").forEach((row, index) => {
     alert("Connection error. Please try again.");
   };
 });
-  });
+  }
 });
   
