@@ -312,6 +312,10 @@ document.querySelectorAll(".custom-select").forEach(select => {
   const hidden = select.querySelector("input[type=hidden]");
 
   trigger.addEventListener("click", () => select.classList.toggle("open"));
+  trigger.addEventListener("focus", () => {
+  select.classList.add("open");
+});
+
 
   options.forEach(opt => {
     opt.addEventListener("click", () => {
