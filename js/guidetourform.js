@@ -308,20 +308,32 @@ if (phoneInput) {
 /* ========================= Language ========================= */
 document.querySelectorAll(".custom-select").forEach(select => {
   const trigger = select.querySelector(".select-trigger");
-  const sortedOptions = Array.from(options).sort((a, b) =>
-  a.textContent.localeCompare(b.textContent)
-);
-
-  const options = select.querySelectorAll("li");
   const hidden = select.querySelector("input[type=hidden]");
+  const optionsList = select.querySelector(".select-options");
+  const options = Array.from(optionsList.querySelectorAll("li"));
 
-  trigger.addEventListener("click", () => select.classList.toggle("open"));
+  // 🔤 alfabetik sırala
+  options.sort((a, b) =>
+    a.textContent.trim().localeCompare(b.textContent.trim())
+  );
+
+  // DOM’u temizle ve tekrar ekle
+  optionsList.innerHTML = "";
+  options.forEach(opt => optionsList.appendChild(opt));
+
+  // CLICK → aç / kapa
+  trigger.addEventListener("click", e => {
+    e.stopPropagation();
+    select.classList.toggle("open");
+  });
+
+  // TAB ile gelince aç
   trigger.addEventListener("focus", () => {
-  select.classList.add("open");
-});
+    select.classList.add("open");
+  });
 
-
-  sortedOptions.forEach(opt => {
+  // OPTION seçimi
+  options.forEach(opt => {
     opt.addEventListener("click", () => {
       trigger.textContent = opt.textContent;
       hidden.value = opt.textContent;
@@ -329,8 +341,14 @@ document.querySelectorAll(".custom-select").forEach(select => {
       select.classList.remove("open");
     });
   });
-});
 
+  // Dışarı tıklanınca kapat
+  document.addEventListener("click", e => {
+    if (!select.contains(e.target)) {
+      select.classList.remove("open");
+    }
+  });
+});
   
   /* ==============================
      FIELD REFERENCES
