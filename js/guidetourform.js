@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!error) {
       error = document.createElement("div");
       error.className = "field-error";
-      wrapper.appendChild(error);
+      wrapper.prepend(error);
     }
 
     error.textContent = message;
