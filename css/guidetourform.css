@@ -51,7 +51,9 @@
 /* Telefon inputu */
       .guidetour-form-wrapper .iti input {width: 100% !important;box-sizing: border-box;padding-left: 56px !important;background: #111;color: #d4af37;border: 1px solid #d4af37;}
 /* Bayrak alanı */
-      .contact-form-wrapper .iti__flag-container {height: 100%;}
+      .guidetour-form-wrapper .iti {display: flex;align-items: center;}
+	  .guidetour-form-wrapper .iti__flag-container {position: absolute;top: 0;bottom: 0;display: flex;align-items: center;}
+	  .guidetour-form-wrapper .iti__selected-flag {display: flex;align-items: center;}
       .guidetour-form-wrapper .iti__selected-flag {height: 100%;display: flex;align-items: center;}
 /* COUNTRY LIST (DROPDOWN) */
       .guidetour-form-wrapper .iti__country-list {position: absolute;width: 100%;min-width: 320px;max-width: 420px;max-height: 440px;
