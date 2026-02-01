@@ -386,11 +386,13 @@ trigger.focus();
     }
 
     if (e.key === "Escape") {
-    e.preventDefault();
-    close();
-    trigger.focus();
-    return;
-  }
+  e.preventDefault();
+  e.stopPropagation();
+  close();
+  trigger.focus();
+  return;
+}
+
 
     options.forEach(o => o.classList.remove("active"));
     if (currentIndex >= 0) {
@@ -403,13 +405,16 @@ trigger.focus();
   options.forEach((opt, index) => {
     opt.addEventListener("mousedown", e => {
   e.preventDefault();
+  e.stopPropagation();
 
   trigger.textContent = opt.textContent;
   hidden.value = opt.textContent;
   select.classList.add("has-value");
+
   close();
   trigger.focus();
 });
+
   });
 
   // dışarı tık
