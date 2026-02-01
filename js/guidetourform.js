@@ -337,11 +337,17 @@ document.querySelectorAll(".custom-select").forEach(select => {
     open();
   });
 
-  // click toggle
-  trigger.addEventListener("click", e => {
-    e.stopPropagation();
-    select.classList.contains("open") ? close() : open();
-  });
+  // mouse toggle (BLINK FIX)
+trigger.addEventListener("mousedown", e => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  if (select.classList.contains("open")) {
+    close();
+  } else {
+    open();
+  }
+});
 
   // trigger keyboard
   trigger.addEventListener("keydown", e => {
@@ -391,13 +397,15 @@ document.querySelectorAll(".custom-select").forEach(select => {
 
   // option click
   options.forEach((opt, index) => {
-    opt.addEventListener("click", () => {
-      trigger.textContent = opt.textContent;
-      hidden.value = opt.textContent;
-      select.classList.add("has-value");
-      close();
-      trigger.focus();
-    });
+    opt.addEventListener("mousedown", e => {
+  e.preventDefault();
+
+  trigger.textContent = opt.textContent;
+  hidden.value = opt.textContent;
+  select.classList.add("has-value");
+  close();
+  trigger.focus();
+});
   });
 
   // dışarı tık
