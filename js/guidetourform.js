@@ -688,5 +688,20 @@ document.querySelectorAll(".participant-row").forEach((row, index) => {
   };
 });
   }
+ /* ================= TRANSPORTATION – SINGLE SELECTION ================= */
+
+const transportCheckboxes = document.querySelectorAll(
+  'input[name="transportation"]'
+);
+
+transportCheckboxes.forEach(cb => {
+  cb.addEventListener("change", () => {
+    if (cb.checked) {
+      transportCheckboxes.forEach(other => {
+        if (other !== cb) other.checked = false;
+      });
+    }
+  });
+});
 });
   
