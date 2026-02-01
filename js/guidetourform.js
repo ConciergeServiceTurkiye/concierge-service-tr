@@ -363,6 +363,48 @@ trigger.addEventListener("mousedown", e => {
   }
 });
 
+  trigger.addEventListener("keydown", e => {
+  if (!select.classList.contains("open")) return;
+
+  if (e.key === "ArrowDown") {
+    e.preventDefault();
+    currentIndex = (currentIndex + 1) % options.length;
+  }
+
+  if (e.key === "ArrowUp") {
+    e.preventDefault();
+    currentIndex =
+      (currentIndex - 1 + options.length) % options.length;
+  }
+
+  if (e.key === "Enter") {
+    e.preventDefault();
+    const opt = options[currentIndex];
+    if (!opt) return;
+
+    trigger.textContent = opt.textContent;
+    hidden.value = opt.textContent;
+    select.classList.add("has-value");
+
+    close();
+    trigger.focus();
+    return;
+  }
+
+  if (e.key === "Escape") {
+    e.preventDefault();
+    close();
+    trigger.focus();
+    return;
+  }
+
+  options.forEach(o => o.classList.remove("active"));
+  if (currentIndex >= 0) {
+    options[currentIndex].classList.add("active");
+    options[currentIndex].scrollIntoView({ block: "nearest" });
+  }
+});
+
     options.forEach(o => o.classList.remove("active"));
     if (currentIndex >= 0) {
       options[currentIndex].classList.add("active");
