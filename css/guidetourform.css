@@ -239,3 +239,14 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
   list-style: none;
 }
 
+.select-options li {
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.select-options li:hover,
+.select-options li.active {
+  background: #f2f2f2;
+  color: #111;
+}
+
