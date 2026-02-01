@@ -254,3 +254,11 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 .field-wrapper.has-error .custom-select .select-trigger {
   border-color: #ff6b6b
 }
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
