@@ -252,5 +252,5 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 }
 
 .field-wrapper.has-error .custom-select .select-trigger {
-  border-color: #e53935;
+  border-color: #ff6b6b
 }
