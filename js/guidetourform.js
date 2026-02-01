@@ -396,8 +396,13 @@ trigger.addEventListener("focus", e => {
 
   // dışarı tık
   document.addEventListener("click", e => {
-    if (!select.contains(e.target)) close();
-  });
+  if (
+    !select.contains(e.target) &&
+    !e.target.closest(".select-options")
+  ) {
+    close();
+  }
+});
 
   // tab ile çıkınca kapat
   select.addEventListener("focusout", () => {
