@@ -322,15 +322,14 @@ document.querySelectorAll(".custom-select").forEach(select => {
   options.forEach(opt => optionsList.appendChild(opt));
 
   function open() {
-    select.classList.add("open");
-    optionsList.focus();
-  }
+  select.classList.add("open");
+}
 
-  function close() {
-    select.classList.remove("open");
-    currentIndex = -1;
-    options.forEach(o => o.classList.remove("active"));
-  }
+function close() {
+  select.classList.remove("open");
+  currentIndex = -1;
+  options.forEach(o => o.classList.remove("active"));
+}
 
   // TAB ile gelince otomatik aç
   trigger.addEventListener("focus", () => {
@@ -351,48 +350,18 @@ trigger.addEventListener("mousedown", e => {
 
   // trigger keyboard
   trigger.addEventListener("keydown", e => {
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      open();
-    }
-  });
+  if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
+    e.preventDefault();
+    open();
+    currentIndex = 0;
+    options[0].classList.add("active");
+  }
 
-  // options keyboard
-  optionsList.setAttribute("tabindex", "-1");
-  optionsList.addEventListener("keydown", e => {
-    if (!select.classList.contains("open")) return;
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      currentIndex = (currentIndex + 1) % options.length;
-    }
-
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      currentIndex =
-        (currentIndex - 1 + options.length) % options.length;
-    }
-
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const opt = options[currentIndex];
-if (!opt) return;
-trigger.textContent = opt.textContent;
-hidden.value = opt.textContent;
-select.classList.add("has-value");
-close();
-trigger.focus();
-    return;
-    }
-
-    if (e.key === "Escape") {
-  e.preventDefault();
-  e.stopPropagation();
-  close();
-  trigger.focus();
-  return;
-}
-
+  if (e.key === "Escape") {
+    e.preventDefault();
+    close();
+  }
+});
 
     options.forEach(o => o.classList.remove("active"));
     if (currentIndex >= 0) {
