@@ -236,3 +236,6 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
   color: #111;
 }
 
+.guidetour-form-wrapper .select-trigger::placeholder {
+  color: rgba(255,255,255,0.65) !important;
+}
