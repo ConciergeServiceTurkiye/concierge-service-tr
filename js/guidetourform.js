@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ==============================
-     HELPERS – FIELD ERRORS
-  ============================== */
+  /* ============================== HELPERS – FIELD ERRORS ============================== */
 
   function showFieldError(el, message) {
     const wrapper = el.closest(".field-wrapper") || el.parentElement;
@@ -46,9 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     alert.style.visibility = "hidden";
   }
 
-  /* ==============================
-   LIVE ERROR CLEARING
-============================== */
+  /* ============================== LIVE ERROR CLEARING ============================== */
 
 function bindLiveValidation(form) {
   const fields = form.querySelectorAll("input, textarea, select");
@@ -72,9 +68,7 @@ function bindLiveValidation(form) {
   /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
   
-  /* ==============================
-   TOUR NAME & EXPERIENCE
-============================== */
+  /* ============================== TOUR NAME & EXPERIENCE ============================== */
 
 const params = new URLSearchParams(window.location.search);
 
@@ -120,9 +114,7 @@ if (titleEl) titleEl.textContent = tourName;
     TOUR_EXPERIENCES[tourName] || "";
 
 
-/* ==============================
-   EXPERIENCE MODAL DATA
-============================== */
+/* ============================== EXPERIENCE MODAL DATA ============================== */
 const EXPERIENCE_DATA = {
   byzantine: {
     title: "Byzantine Heritage",
@@ -180,9 +172,7 @@ courtyards: {
 }
 };
 
-/* ==============================
-   MODAL ENGINE
-============================== */
+/* ============================== MODAL ENGINE ============================== */
 const modal = document.getElementById("experienceModal");
 const modalImg = document.getElementById("experienceImg");
 const modalTitle = document.getElementById("experienceTitle");
@@ -231,9 +221,7 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") closeExperience();
 });
 
-  /* ==============================
-     NATIONALITY DROPDOWN
-  ============================== */
+  /* ============================== NATIONALITY DROPDOWN ============================== */
 
   const COUNTRY_LIST = window.intlTelInputGlobals.getCountryData();
 
@@ -413,9 +401,7 @@ document.querySelectorAll(".custom-select").forEach(select => {
   });
 });
   
-  /* ==============================
-     FIELD REFERENCES
-  ============================== */
+  /* ============================== FIELD REFERENCES ============================== */
 
   const fullName = document.querySelector('[name="name"]');
   const email = document.querySelector('[name="email"]');
@@ -423,9 +409,7 @@ document.querySelectorAll(".custom-select").forEach(select => {
   const language = document.getElementById("language");
   const hotel = document.querySelector('[name="hotel_name"]');
 
-  /* =========================
-     PARTICIPANTS
-  ========================= */
+  /* ========================= PARTICIPANTS ========================= */
   const fullNameInput = document.querySelector('input[name="name"]');
   const participantsContainer = document.getElementById("participantsContainer");
   const addParticipantBtn = document.querySelector(".add-participant-btn");
@@ -498,9 +482,7 @@ initNationalityDropdown(newRow);
     initNationalityDropdown(primaryParticipant);
   }
 
-  /* ==============================
-     PARTICIPANT VALIDATION
-  ============================== */
+  /* ============================== PARTICIPANT VALIDATION ============================== */
 
   function validateParticipantRow(row, isPrimary) {
     const name = row.querySelector(".participant-name");
@@ -531,9 +513,7 @@ initNationalityDropdown(newRow);
     return true;
   }
 
-  /* =========================
-     MOBILITY
-  ========================= */
+  /* ========================= MOBILITY ========================= */
   const mobilityToggle = document.getElementById("mobilityToggle");
   const mobilityGroup = document.getElementById("mobilityGroup");
 
