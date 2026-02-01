@@ -305,7 +305,7 @@ if (phoneInput) {
     });
   }
 
-/* ========================= Language ========================= */
+/* ========================= LANGUAGE ========================= */
 document.querySelectorAll(".custom-select").forEach(select => {
   const trigger = select.querySelector(".select-trigger");
   const hidden = select.querySelector("input[type=hidden]");
@@ -370,7 +370,17 @@ document.querySelectorAll(".custom-select").forEach(select => {
     if (e.key === "Enter") {
       e.preventDefault();
       options[currentIndex]?.click();
+      close();
+    trigger.focus();
+    return;
     }
+
+    if (e.key === "Escape") {
+    e.preventDefault();
+    close();
+    trigger.focus();
+    return;
+  }
 
     options.forEach(o => o.classList.remove("active"));
     if (currentIndex >= 0) {
