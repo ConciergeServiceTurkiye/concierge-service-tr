@@ -337,7 +337,7 @@ function close() {
   });
 
   // mouse toggle (BLINK FIX)
-trigger.addEventListener("mousedown", e => {
+trigger.addEventListener("click", function (e) {
   e.preventDefault();
   e.stopPropagation();
 
@@ -347,6 +347,7 @@ trigger.addEventListener("mousedown", e => {
     open();
   }
 });
+
 
   // trigger keyboard
   trigger.addEventListener("keydown", e => {
@@ -413,20 +414,19 @@ trigger.addEventListener("mousedown", e => {
   });
 
   // option click
-  options.forEach((opt, index) => {
-    opt.addEventListener("mousedown", e => {
-  e.preventDefault();
-  e.stopPropagation();
+  options.forEach(option => {
+  option.addEventListener("click", function (e) {
+    e.stopPropagation();
 
-  trigger.textContent = opt.textContent;
-  hidden.value = opt.textContent;
-  select.classList.add("has-value");
+    trigger.textContent = this.textContent;
+    hiddenInput.value = this.textContent;
 
-  close();
-  trigger.focus();
-});
+    select.classList.add("has-value");
 
+    close();
+    trigger.focus();
   });
+});
 
   // dışarı tık
   document.addEventListener("click", e => {
