@@ -375,9 +375,13 @@ trigger.addEventListener("mousedown", e => {
 
     if (e.key === "Enter") {
       e.preventDefault();
-      options[currentIndex]?.click();
-      close();
-    trigger.focus();
+      const opt = options[currentIndex];
+if (!opt) return;
+trigger.textContent = opt.textContent;
+hidden.value = opt.textContent;
+select.classList.add("has-value");
+close();
+trigger.focus();
     return;
     }
 
