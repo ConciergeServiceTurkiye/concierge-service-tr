@@ -239,3 +239,8 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 .guidetour-form-wrapper .select-trigger::placeholder {
   color: rgba(255,255,255,0.55) !important;
 }
+
+/* Custom select error border */
+.custom-select.has-error .select-trigger {
+  border-color: #e53935; /* diğer inputlarla aynı kırmızı */
+}
