@@ -638,6 +638,21 @@ document.querySelectorAll(".participant-row").forEach((row, index) => {
     if (!firstErrorField) firstErrorField = mobilityTextarea;
     isValid = false;
   }
+ /* ================= TRANSPORTATION REQUIRED ================= */
+
+const transportationChecked = Array.from(
+  document.querySelectorAll('input[name="transportation"]')
+).some(cb => cb.checked);
+
+if (!transportationChecked) {
+  const transportGroup = document.getElementById("transportationGroup");
+  showFieldError(
+    transportGroup.querySelector(".lux-check"),
+    "Please select a transportation option"
+  );
+  isValid = false;
+}
+
 
   /* FINAL DECISION */
   if (!isValid) {
