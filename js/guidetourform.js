@@ -320,7 +320,10 @@ document.querySelectorAll(".custom-select").forEach(select => {
   }
 
   // focus ile aç
-  trigger.addEventListener("focus", open);
+  // focus ile aç (SADECE keyboard için)
+trigger.addEventListener("focus", e => {
+  if (e.relatedTarget && e.relatedTarget.tagName === "LI") return;
+});
 
   // mouse click (blink fix)
   trigger.addEventListener("click", e => {
