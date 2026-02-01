@@ -1,48 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ============================== HELPERS – FIELD ERRORS ============================== */
+ /* ============================== HELPERS – FIELD ERRORS ============================== */
 
-  function showFieldError(el, message) {
-    const wrapper = el.closest(".field-wrapper") || el.parentElement;
-    let error = wrapper.querySelector(".field-error");
+function showFieldError(el, message) {
+  let wrapper;
 
-    if (!error) {
-      error = document.createElement("div");
-      error.className = "field-error";
-      wrapper.prepend(error);
-    }
-
-    error.textContent = message;
-    wrapper.classList.add("has-error");
+  // Custom select (Preferred Language gibi) için doğru wrapper'ı bul
+  if (el.closest(".custom-select")) {
+    wrapper = el.closest(".field-wrapper");
+  } else {
+    wrapper = el.closest(".field-wrapper") || el.parentElement;
   }
 
-  function hideFieldError(el) {
-    const wrapper = el.closest(".field-wrapper") || el.parentElement;
-    const error = wrapper.querySelector(".field-error");
-    if (error) error.remove();
-    wrapper.classList.remove("has-error");
+  let error = wrapper.querySelector(".field-error");
+
+  if (!error) {
+    error = document.createElement("div");
+    error.className = "field-error";
+    wrapper.prepend(error); // label'ın ÜSTÜNE koyar
   }
 
-  function scrollToFirstError() {
-    const firstError = document.querySelector(".has-error");
-    if (firstError) {
-      firstError.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }
+  error.textContent = message;
+  wrapper.classList.add("has-error");
 
-  function showInlineAlert(message) {
-    const alert = document.getElementById("formInlineAlert");
-    alert.textContent = message;
-    alert.style.opacity = "1";
-    alert.style.visibility = "visible";
-    scrollToFirstError();
+  // custom select varsa ayrıca işaretle (border kırmızı olsun diye)
+  const customSelect = wrapper.querySelector(".custom-select");
+  if (customSelect) {
+    customSelect.classList.add("has-error");
   }
+}
 
-  function hideInlineAlert() {
-    const alert = document.getElementById("formInlineAlert");
-    alert.style.opacity = "0";
-    alert.style.visibility = "hidden";
+function hideFieldError(el) {
+  const wrapper = el.closest(".field-wrapper") || el.parentElement;
+  const error = wrapper.querySelector(".field-error");
+
+  if (error) error.remove();
+  wrapper.classList.remove("has-error");
+
+  // custom select temizliği
+  wrapper.querySelector(".custom-select")?.classList.remove("has-error");
+}
+
+function scrollToFirstError() {
+  const firstError = document.querySelector(".has-error");
+  if (firstError) {
+    firstError.scrollIntoView({ behavior: "smooth", block: "center" });
   }
+}
+
+function showInlineAlert(message) {
+  const alert = document.getElementById("formInlineAlert");
+  alert.textContent = message;
+  alert.style.opacity = "1";
+  alert.style.visibility = "visible";
+  scrollToFirstError();
+}
+
+function hideInlineAlert() {
+  const alert = document.getElementById("formInlineAlert");
+  alert.style.opacity = "0";
+  alert.style.visibility = "hidden";
+}
+
 
   /* ============================== LIVE ERROR CLEARING ============================== */
 
