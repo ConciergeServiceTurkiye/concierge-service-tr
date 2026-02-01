@@ -3,46 +3,31 @@ document.addEventListener("DOMContentLoaded", () => {
  /* ============================== HELPERS – FIELD ERRORS ============================== */
 
 function showFieldError(el, message) {
-  let wrapper;
-
-  // Custom select (Preferred Language gibi) için doğru wrapper'ı bul
-  if (el.closest(".custom-select")) {
-    wrapper = el.closest(".field-wrapper");
-  } else {
-    wrapper = el.closest(".field-wrapper") || el.parentElement;
-  }
+  const wrapper = el.closest(".field-wrapper");
+  if (!wrapper) return;
 
   let error = wrapper.querySelector(".field-error");
 
   if (!error) {
     error = document.createElement("div");
     error.className = "field-error";
-    wrapper.prepend(error); // label'ın ÜSTÜNE koyar
+    wrapper.prepend(error); // her zaman label'ın üstüne
   }
 
   error.textContent = message;
   wrapper.classList.add("has-error");
-
-  // custom select varsa ayrıca işaretle (border kırmızı olsun diye)
-  const customSelect = wrapper.querySelector(".custom-select");
-  if (customSelect) {
-    customSelect.classList.add("has-error");
-  }
 }
 
 function hideFieldError(el) {
-  const wrapper = el.closest(".field-wrapper") || el.parentElement;
-  const error = wrapper.querySelector(".field-error");
+  const wrapper = el.closest(".field-wrapper");
+  if (!wrapper) return;
 
-  if (error) error.remove();
+  wrapper.querySelector(".field-error")?.remove();
   wrapper.classList.remove("has-error");
-
-  // custom select temizliği
-  wrapper.querySelector(".custom-select")?.classList.remove("has-error");
 }
 
 function scrollToFirstError() {
-  const firstError = document.querySelector(".has-error");
+  const firstError = document.querySelector(".field-wrapper.has-error");
   if (firstError) {
     firstError.scrollIntoView({ behavior: "smooth", block: "center" });
   }
@@ -61,7 +46,6 @@ function hideInlineAlert() {
   alert.style.opacity = "0";
   alert.style.visibility = "hidden";
 }
-
 
   /* ============================== LIVE ERROR CLEARING ============================== */
 
