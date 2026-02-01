@@ -322,89 +322,64 @@ document.querySelectorAll(".custom-select").forEach(select => {
   options.forEach(opt => optionsList.appendChild(opt));
 
   function open() {
-  select.classList.add("open");
-}
+    select.classList.add("open");
+  }
 
-function close() {
-  select.classList.remove("open");
-  currentIndex = -1;
-  options.forEach(o => o.classList.remove("active"));
-}
+  function close() {
+    select.classList.remove("open");
+    currentIndex = -1;
+    options.forEach(o => o.classList.remove("active"));
+  }
 
-  // TAB ile gelince otomatik aç
-  trigger.addEventListener("focus", () => {
-    open();
+  // focus ile aç
+  trigger.addEventListener("focus", open);
+
+  // mouse click (blink fix)
+  trigger.addEventListener("click", e => {
+    e.preventDefault();
+    e.stopPropagation();
+    select.classList.contains("open") ? close() : open();
   });
 
-  // mouse toggle (BLINK FIX)
-trigger.addEventListener("click", function (e) {
-  e.preventDefault();
-  e.stopPropagation();
-
-  if (select.classList.contains("open")) {
-    close();
-  } else {
-    open();
-  }
-});
-
-
-  // trigger keyboard
+  // keyboard navigation
   trigger.addEventListener("keydown", e => {
-  if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
-    e.preventDefault();
-    open();
-    currentIndex = 0;
-    options[0].classList.add("active");
-  }
+    if (!select.classList.contains("open") && ["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
+      e.preventDefault();
+      open();
+      currentIndex = 0;
+    }
 
-  if (e.key === "Escape") {
-    e.preventDefault();
-    close();
-  }
-});
+    if (!select.classList.contains("open")) return;
 
-  trigger.addEventListener("keydown", e => {
-  if (!select.classList.contains("open")) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      currentIndex = (currentIndex + 1) % options.length;
+    }
 
-  if (e.key === "ArrowDown") {
-    e.preventDefault();
-    currentIndex = (currentIndex + 1) % options.length;
-  }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      currentIndex = (currentIndex - 1 + options.length) % options.length;
+    }
 
-  if (e.key === "ArrowUp") {
-    e.preventDefault();
-    currentIndex =
-      (currentIndex - 1 + options.length) % options.length;
-  }
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const opt = options[currentIndex];
+      if (!opt) return;
 
-  if (e.key === "Enter") {
-    e.preventDefault();
-    const opt = options[currentIndex];
-    if (!opt) return;
+      trigger.textContent = opt.textContent;
+      hidden.value = opt.textContent;
+      select.classList.add("has-value");
+      close();
+      trigger.focus();
+      return;
+    }
 
-    trigger.textContent = opt.textContent;
-    hidden.value = opt.textContent;
-    select.classList.add("has-value");
-
-    close();
-    trigger.focus();
-    return;
-  }
-
-  if (e.key === "Escape") {
-    e.preventDefault();
-    close();
-    trigger.focus();
-    return;
-  }
-
-  options.forEach(o => o.classList.remove("active"));
-  if (currentIndex >= 0) {
-    options[currentIndex].classList.add("active");
-    options[currentIndex].scrollIntoView({ block: "nearest" });
-  }
-});
+    if (e.key === "Escape") {
+      e.preventDefault();
+      close();
+      trigger.focus();
+      return;
+    }
 
     options.forEach(o => o.classList.remove("active"));
     if (currentIndex >= 0) {
@@ -415,36 +390,28 @@ trigger.addEventListener("click", function (e) {
 
   // option click
   options.forEach(option => {
-  option.addEventListener("click", function (e) {
-    e.stopPropagation();
-
-    trigger.textContent = this.textContent;
-    hiddenInput.value = this.textContent;
-
-    select.classList.add("has-value");
-
-    close();
-    trigger.focus();
+    option.addEventListener("click", e => {
+      e.stopPropagation();
+      trigger.textContent = option.textContent;
+      hidden.value = option.textContent;
+      select.classList.add("has-value");
+      close();
+      trigger.focus();
+    });
   });
-});
 
   // dışarı tık
   document.addEventListener("click", e => {
-    if (!select.contains(e.target)) {
-      close();
-    }
+    if (!select.contains(e.target)) close();
   });
 
   // tab ile çıkınca kapat
   select.addEventListener("focusout", () => {
     setTimeout(() => {
-      if (!select.contains(document.activeElement)) {
-        close();
-      }
+      if (!select.contains(document.activeElement)) close();
     }, 10);
   });
 });
-
   
   /* ==============================
      FIELD REFERENCES
