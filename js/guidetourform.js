@@ -314,37 +314,45 @@ document.querySelectorAll(".custom-select").forEach(select => {
 
   let currentIndex = -1;
 
-  // 🔤 alfabetik sırala
+  // alfabetik sırala
   options.sort((a, b) =>
     a.textContent.trim().localeCompare(b.textContent.trim())
   );
   optionsList.innerHTML = "";
   options.forEach(opt => optionsList.appendChild(opt));
 
-  // Aç / kapa
   function open() {
     select.classList.add("open");
+    optionsList.focus();
   }
+
   function close() {
     select.classList.remove("open");
     currentIndex = -1;
     options.forEach(o => o.classList.remove("active"));
   }
 
-  // CLICK trigger
+  // TAB ile gelince otomatik aç
+  trigger.addEventListener("focus", () => {
+    open();
+  });
+
+  // click toggle
   trigger.addEventListener("click", e => {
     e.stopPropagation();
     select.classList.contains("open") ? close() : open();
   });
 
-  // KEYBOARD CONTROL
+  // trigger keyboard
   trigger.addEventListener("keydown", e => {
-    if (e.key === "Enter" || e.key === " ") {
+    if (e.key === "ArrowDown") {
       e.preventDefault();
       open();
     }
   });
 
+  // options keyboard
+  optionsList.setAttribute("tabindex", "-1");
   optionsList.addEventListener("keydown", e => {
     if (!select.classList.contains("open")) return;
 
@@ -362,8 +370,6 @@ document.querySelectorAll(".custom-select").forEach(select => {
     if (e.key === "Enter") {
       e.preventDefault();
       options[currentIndex]?.click();
-      close();
-      trigger.focus();
     }
 
     options.forEach(o => o.classList.remove("active"));
@@ -373,32 +379,34 @@ document.querySelectorAll(".custom-select").forEach(select => {
     }
   });
 
-  // OPTION CLICK
-  options.forEach(opt => {
+  // option click
+  options.forEach((opt, index) => {
     opt.addEventListener("click", () => {
       trigger.textContent = opt.textContent;
       hidden.value = opt.textContent;
       select.classList.add("has-value");
       close();
+      trigger.focus();
     });
   });
 
-  // TAB / SHIFT+TAB → kapat
-  trigger.addEventListener("blur", () => {
+  // dışarı tık
+  document.addEventListener("click", e => {
+    if (!select.contains(e.target)) {
+      close();
+    }
+  });
+
+  // tab ile çıkınca kapat
+  select.addEventListener("focusout", () => {
     setTimeout(() => {
       if (!select.contains(document.activeElement)) {
         close();
       }
     }, 10);
   });
-
-  // DIŞARI TIK
-  document.addEventListener("click", e => {
-    if (!select.contains(e.target)) {
-      close();
-    }
-  });
 });
+
   
   /* ==============================
      FIELD REFERENCES
