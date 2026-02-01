@@ -41,17 +41,20 @@
 
       <div class="form-group">
         <label>Full Name</label>
+        <div class="field-wrapper">
         <input type="text" name="name" required placeholder="Your full name">
       </div>
-
+      </div>
+      
       <div class="form-group">
         <label>Email</label>
+        <div class="field-wrapper">
         <input type="email" name="email" placeholder="your@email.com">
       </div>
-
+      </div>
+      
       <div class="form-group">
   <label>Phone / WhatsApp</label>
-
   <div class="field-wrapper phone-wrapper">
     <input type="tel" id="phone" name="phone" required>
   </div>
@@ -59,10 +62,14 @@
 
       <div class="form-group">
         <label>Preferred Tour Date</label>
+        <div class="field-wrapper">
         <input type="text" id="date" name="date" placeholder="Select date" required>
       </div>
+      </div>
+      
       <div class="form-group">
         <label>Preferred Language</label>
+        <div class="field-wrapper">
   <div class="custom-select language-select">
   <div class="select-trigger" tabindex="0">Select language</div>
   <ul class="select-options">
@@ -81,10 +88,12 @@
   <input type="hidden" name="language" required>
 </div>
 </div>
+      </div>
 
       <!-- TRANSPORTATION -->
 <div class="form-group" id="transportationGroup">
   <label>Transportation</label>
+  <div class="field-wrapper">
 
   <div class="checkbox-grid luxury-checkbox">
   <label class="lux-check">
@@ -98,13 +107,16 @@
   </label>
 </div>
 </div>
+</div>
+      
 <!-- HOTEL INFORMATION -->
 <div class="form-group">
   <label>Hotel Information</label>
-
+<div class="field-wrapper">
   <div class="form-row hotel-row">
   <input type="text" name="hotel_name" placeholder="Hotel name" required>
   <input type="text" name="room_number" placeholder="Room number (optional)">
+</div>
 </div>
 </div>
 
@@ -113,7 +125,7 @@
 <div class="form-group participants-group">
 
   <label>Participants Details</label>
-
+<div class="field-wrapper">
   <div id="participantsContainer">
 
     <!-- PARTICIPANT ROW (1 - PRIMARY) -->
@@ -148,11 +160,9 @@
           <!-- JS ile doldurulacak -->
         </select>
       </div>
-
     </div>
-    <!-- /PARTICIPANT ROW 1 -->
-
   </div>
+</div>
 
   <!-- ADD PARTICIPANT -->
   <button type="button" class="add-participant-btn">
@@ -168,11 +178,12 @@
         <label>
           <input type="checkbox" id="mobilityToggle"> Mobility Assistance Needed
         </label>
-
+<div class="field-wrapper">
         <div class="textarea-group" id="mobilityGroup">
           <div class="char-count" data-max="500">0 / 500</div>
           <textarea name="mobility_details" placeholder="Wheelchair, walking limitations, etc." maxlength="500"></textarea>
         </div>
+      </div>
       </div>
 
       <!-- NOTES -->
