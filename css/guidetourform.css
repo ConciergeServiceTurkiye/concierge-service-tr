@@ -244,3 +244,13 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 .custom-select.has-error .select-trigger {
   border-color: #e53935; /* diğer inputlarla aynı kırmızı */
 }
+
+.field-wrapper.has-error input,
+.field-wrapper.has-error textarea,
+.field-wrapper.has-error select {
+  border-color: #e53935;
+}
+
+.field-wrapper.has-error .custom-select .select-trigger {
+  border-color: #e53935;
+}
