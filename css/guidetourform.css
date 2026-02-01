@@ -246,7 +246,7 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 
 .select-options li:hover,
 .select-options li.active {
-  background: #f2f2f2;
+  background: rgba(212,175,55,0.2);
   color: #111;
 }
 
