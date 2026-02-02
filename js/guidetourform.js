@@ -455,15 +455,18 @@ trigger.addEventListener("focus", e => {
         <input type="text" class="participant-name" placeholder="Full name" required>
       </div>
       <div class="participant-field">
-        <select class="participant-nationality" required>
-          <option value="" disabled selected>Nationality</option>
-          <option value="TR">Turkey</option>
-          <option value="US">United States</option>
-          <option value="UK">United Kingdom</option>
-          <option value="DE">Germany</option>
-          <option value="FR">France</option>
-        </select>
-      </div>
+  <div class="nationality-select">
+    <input type="hidden" class="participant-nationality" required>
+    <div class="nationality-trigger">Select nationality</div>
+    <div class="nationality-dropdown">
+      <input
+        type="text"
+        class="nationality-search"
+        placeholder="Type to search"
+      >
+    </div>
+  </div>
+</div>
       <div class="participant-field">
         <select class="participant-birthyear" required>
           <option value="" disabled selected>Birth Year</option>
