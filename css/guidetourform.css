@@ -317,7 +317,7 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 }
 
 
-.participant-fields {
+.participant-input-row {
   display: flex;
   align-items: flex-end;
   gap: 10px;
