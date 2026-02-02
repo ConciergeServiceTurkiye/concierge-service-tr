@@ -50,33 +50,32 @@ function hideInlineAlert() {
   /* ============================== LIVE ERROR CLEARING ============================== */
 
 function bindLiveValidation(form) {
-  const fields = form.querySelectorAll(
-    "input, select, textarea"
-  );
+  const fields = form.querySelectorAll("input, select, textarea");
 
   fields.forEach(field => {
+    // Yazmaya başladığında hata temizle
     field.addEventListener("input", () => {
-      clearFieldError(field);
+      hideFieldError(field);
     });
-  });
 
-  // ✅ CUSTOM NATIONALITY SELECT FIX
-  const nationalitySelects = form.querySelectorAll(".nationality-select");
-
-  nationalitySelects.forEach(select => {
-    select.addEventListener("click", () => {
-      clearFieldError(select);
-    });
-  });
-}
-
+    // Select / date gibi alanlar için change desteği
     field.addEventListener("change", () => {
-      if (field.value.trim()) {
+      if (field.value && field.value.trim()) {
         hideFieldError(field);
       }
     });
   });
+
+  // ✅ CUSTOM NATIONALITY SELECT
+  const nationalitySelects = form.querySelectorAll(".nationality-select");
+
+  nationalitySelects.forEach(select => {
+    select.addEventListener("click", () => {
+      hideFieldError(select);
+    });
+  });
 }
+
 
   const EMAIL_REGEX =
   /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
