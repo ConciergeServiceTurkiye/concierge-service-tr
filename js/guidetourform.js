@@ -245,6 +245,22 @@ document.addEventListener("keydown", e => {
   const hiddenInput = container.querySelector(".participant-nationality");
 
   dropdown.innerHTML = "";
+   const searchInput = container.querySelector(".nationality-search");
+
+if (searchInput) {
+  searchInput.value = ""; // her açılışta temiz başla
+
+  searchInput.addEventListener("input", e => {
+    const term = e.target.value.toLowerCase().trim();
+
+    dropdown.querySelectorAll(".nationality-option").forEach(opt => {
+      opt.style.display =
+        opt.textContent.toLowerCase().includes(term)
+          ? "flex"
+          : "none";
+    });
+  });
+}
 
   COUNTRY_LIST.forEach(c => {
     const div = document.createElement("div");
@@ -265,8 +281,13 @@ document.addEventListener("keydown", e => {
   });
 
   trigger.addEventListener("click", () => {
-    container.classList.toggle("open");
-  });
+  container.classList.toggle("open");
+
+  const searchInput = container.querySelector(".nationality-search");
+  if (container.classList.contains("open") && searchInput) {
+    searchInput.focus();
+  }
+});
 }
 
   document
@@ -278,18 +299,6 @@ document.addEventListener("keydown", e => {
 let iti = null;
 
 if (phoneInput) {
-
-  // SADECE RAKAM VE +
-  phoneInput.addEventListener("input", () => {
-    phoneInput.value = phoneInput.value.replace(/[^\d]/g, "");
-  });
-
-  // PASTE ENGELİ
-  phoneInput.addEventListener("paste", e => {
-    e.preventDefault();
-    const text = (e.clipboardData || window.clipboardData).getData("text");
-    phoneInput.value += text.replace(/[^\d]/g, "");
-  });
 
   iti = intlTelInput(phoneInput, {
     initialCountry: "us",
