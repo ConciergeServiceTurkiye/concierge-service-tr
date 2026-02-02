@@ -682,9 +682,11 @@ const transportationChecked = Array.from(
 ).some(cb => cb.checked);
 
 if (!transportationChecked) {
-  const transportGroup = document.getElementById("transportationGroup");
-  showFieldError(
-  transportGroup,
+  const transportWrapper =
+  document.querySelector("#transportationGroup .field-wrapper");
+
+showFieldError(
+  transportWrapper,
   "Please select a transportation option"
 );
   isValid = false;
