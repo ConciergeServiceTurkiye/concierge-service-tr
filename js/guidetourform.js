@@ -65,18 +65,6 @@ function bindLiveValidation(form) {
       }
     });
   });
-
-  // ✅ CUSTOM NATIONALITY SELECT
-  const nationalitySelects = form.querySelectorAll(".nationality-select");
-
-  nationalitySelects.forEach(select => {
-    select.addEventListener("click", () => {
-      const realInput = select.querySelector(".participant-nationality");
-if (realInput) {
-  hideFieldError(realInput);
-}
-    });
-  });
 }
 
 
@@ -237,66 +225,7 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") closeExperience();
 });
 
-  /* ============================== NATIONALITY DROPDOWN ============================== */
-
-  const COUNTRY_LIST = window.intlTelInputGlobals.getCountryData();
-
-  function initNationalityDropdown(container) {
-  const trigger = container.querySelector(".nationality-trigger");
-  const dropdown = container.querySelector(".nationality-dropdown");
-  const hiddenInput = container.querySelector(".participant-nationality");
-
-  dropdown.innerHTML = "";
-   const searchInput = container.querySelector(".nationality-search");
-
-if (searchInput) {
-  searchInput.value = ""; // her açılışta temiz başla
-
-  searchInput.addEventListener("input", e => {
-    const term = e.target.value.toLowerCase().trim();
-
-    dropdown.querySelectorAll(".nationality-option").forEach(opt => {
-      opt.style.display =
-        opt.textContent.toLowerCase().includes(term)
-          ? "flex"
-          : "none";
-    });
-  });
-}
-
-  COUNTRY_LIST.forEach(c => {
-    const div = document.createElement("div");
-    div.className = "nationality-option";
-    div.innerHTML = `
-      <img src="https://flagcdn.com/w20/${c.iso2}.png">
-      ${c.name}
-    `;
-    div.addEventListener("click", () => {
-  trigger.textContent = c.name;
-  hiddenInput.value = c.iso2.toUpperCase();
-  container.classList.remove("open");
-
-  // ✅ DOĞRU HATA TEMİZLEME
-  hideFieldError(hiddenInput);
-});
-
-    dropdown.appendChild(div);
-  });
-
-  trigger.addEventListener("click", () => {
-  container.classList.toggle("open");
-
-  const searchInput = container.querySelector(".nationality-search");
-  if (container.classList.contains("open") && searchInput) {
-    searchInput.focus();
-  }
-});
-}
-
-  document
-    .querySelectorAll(".nationality-select")
-    .forEach(initNationalityDropdown);
-
+  
  /* ========================= PHONE INPUT ========================= */
  const phoneInput = document.getElementById("phone");
 let iti = null;
@@ -445,127 +374,7 @@ trigger.addEventListener("focus", e => {
   const date = document.getElementById("date");
   const hotel = document.querySelector('[name="hotel_name"]');
 
-  /* ========================= PARTICIPANTS ========================= */
-  const fullNameInput = document.querySelector('input[name="name"]');
-  const participantsContainer = document.getElementById("participantsContainer");
-  const addParticipantBtn = document.querySelector(".add-participant-btn");
-
-  function populateBirthYears(selectEl) {
-    const currentYear = new Date().getFullYear();
-    for (let y = currentYear - 5; y >= 1900; y--) {
-      const opt = document.createElement("option");
-      opt.value = y;
-      opt.textContent = y;
-      selectEl.appendChild(opt);
-    }
-  }
-
-  document.querySelectorAll(".participant-birthyear").forEach(populateBirthYears);
-
-  const primaryParticipantName =
-    document.querySelector(".participant-row.primary .participant-name");
-
-  if (fullNameInput && primaryParticipantName) {
-    fullNameInput.addEventListener("input", () => {
-      primaryParticipantName.value = fullNameInput.value;
-    });
-  }
-
-  function createParticipantRow() {
-    const row = document.createElement("div");
-    row.className = "participant-row";
-
-    row.innerHTML = `
-      <div class="participant-field">
-        <input type="text" class="participant-name" placeholder="Full name" required>
-      </div>
-      <div class="participant-field">
-  <div class="nationality-select">
-    <input type="hidden" class="participant-nationality" required>
-    <div class="nationality-trigger">Select nationality</div>
-    <div class="nationality-dropdown">
-      <input
-        type="text"
-        class="nationality-search"
-        placeholder="Type to search"
-      >
-    </div>
-  </div>
-</div>
-      <div class="participant-field">
-        <select class="participant-birthyear" required>
-          <option value="" disabled selected>Birth Year</option>
-        </select>
-      </div>
-      <button type="button" class="remove-participant">×</button>
-    `;
-
-    populateBirthYears(row.querySelector(".participant-birthyear"));
-
-    row.querySelector(".remove-participant")
-  .addEventListener("click", () => {
-    if (!row.classList.contains("primary")) {
-      row.remove();
-    }
-  });
-
-    return row;
-  }
-
-  if (addParticipantBtn && participantsContainer) {
-    addParticipantBtn.addEventListener("click", () => {
-      const newRow = createParticipantRow();
-participantsContainer.appendChild(newRow);
-initNationalityDropdown(newRow);
-     bindLiveValidation(newRow);
-    });
-  }
-
-  const primaryParticipant = document.querySelector(".participant-row");
-  if (primaryParticipant) {
-    initNationalityDropdown(primaryParticipant);
-  }
-
-  /* ============================== PARTICIPANT VALIDATION ============================== */
-
-  function validateParticipantRow(row, isPrimary) {
-  const name = row.querySelector(".participant-name");
-  const natInput = row.querySelector(".participant-nationality");
-  const natSelect = row.querySelector(".nationality-select");
-  const year = row.querySelector(".participant-birthyear");
-
-  const hasAnyValue =
-    name?.value.trim() ||
-    natInput?.value ||
-    year?.value;
-
-  // PRIMARY participant → her şey zorunlu
-  if (isPrimary) {
-    if (!natInput.value || !year.value) {
-      showFieldError(
-        natSelect,
-        "Please select nationality and birth year for the primary participant."
-      );
-      return false;
-    }
-    return true;
-  }
-
-  // Secondary participant
-  if (hasAnyValue) {
-    if (!name.value.trim() || !natInput.value || !year.value) {
-      showFieldError(
-        name,
-        "Please complete all participant details, or remove unused participant rows using the × button."
-      );
-      return false;
-    }
-  }
-
-  return true;
-}
-
-
+  
   /* ========================= MOBILITY ========================= */
   const mobilityToggle = document.getElementById("mobilityToggle");
   const mobilityGroup = document.getElementById("mobilityGroup");
@@ -636,38 +445,7 @@ if (phoneInput) {
     isValid = false;
   }
 }
-  /* PRIMARY PARTICIPANT */
-  const primaryRow = document.querySelector(".participant-row.primary");
-  const nat = primaryRow?.querySelector(".nationality-trigger");
-  const natValue = primaryRow?.querySelector(".participant-nationality")?.value;
-  const year = primaryRow?.querySelector(".participant-birthyear");
-
-  if (!natValue || !year?.value) {
-    showFieldError(
-      nat,
-      "Please select nationality and birth year for the primary participant."
-    );
-    if (!firstErrorField) firstErrorField = nat;
-    isValid = false;
-  }
-
-    /* PARTICIPANTS */
-document.querySelectorAll(".participant-row").forEach((row, index) => {
-  const isPrimary = index === 0;
-  const rowValid = validateParticipantRow(row, isPrimary);
-
-  if (!rowValid) {
-    isValid = false;
-
-    if (!firstErrorField) {
-      firstErrorField =
-        row.querySelector(".has-error") ||
-        row.querySelector("input, select");
-    }
-  }
-});
-
-
+ 
   /* MOBILITY */
   const mobilityTextarea = document.querySelector(
     'textarea[name="mobility_details"]'
