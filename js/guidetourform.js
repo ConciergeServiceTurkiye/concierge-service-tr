@@ -620,10 +620,9 @@ if (!transportationChecked) {
     language: document.querySelector('[name="language"]')?.value || "",
     hotel: document.querySelector('[name="hotel_name"]')?.value || "",
     notes: document.querySelector('[name="notes"]')?.value || ""
-   payload.participants = participants;
   };
 
-
+ payload.participants = participants;
 
 
   
