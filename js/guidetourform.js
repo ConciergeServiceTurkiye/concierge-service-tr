@@ -47,6 +47,126 @@ function hideInlineAlert() {
   alert.style.visibility = "hidden";
 }
 
+ /* ===================== PARTICIPANTS STATE ===================== */
+
+const participants = [];
+const MAX_VISIBLE_PARTICIPANTS = 4;
+
+const nameInput = document.getElementById("participantNameInput");
+const natInput = document.getElementById("participantNationalityInput");
+const natTrigger = document.querySelector(".nationality-trigger");
+const yearInput = document.getElementById("participantBirthYearInput");
+
+const addBtn = document.getElementById("addParticipantBtn");
+const listContainer = document.getElementById("participantsList");
+const showAllBtn = document.getElementById("showAllParticipants");
+
+
+ (function populateBirthYears() {
+  const currentYear = new Date().getFullYear();
+  for (let y = currentYear - 5; y >= 1900; y--) {
+    const opt = document.createElement("option");
+    opt.value = y;
+    opt.textContent = y;
+    yearInput.appendChild(opt);
+  }
+})();
+
+ addBtn.addEventListener("click", () => {
+  const name = nameInput.value.trim();
+  const nationality = natTrigger.textContent;
+  const nationalityCode = natInput.value;
+  const year = yearInput.value;
+
+  if (!name || !nationalityCode || !year) {
+    alert("Please fill full name, nationality and birth year");
+    return;
+  }
+
+  participants.push({
+    name,
+    nationality,
+    year
+  });
+
+  nameInput.value = "";
+  natInput.value = "";
+  natTrigger.textContent = "Select nationality";
+  yearInput.value = "";
+
+  renderParticipants();
+});
+
+
+ function renderParticipants() {
+  listContainer.innerHTML = "";
+
+  participants.slice(0, MAX_VISIBLE_PARTICIPANTS).forEach((p, index) => {
+    listContainer.appendChild(createParticipantItem(p, index));
+  });
+
+  showAllBtn.style.display =
+    participants.length > MAX_VISIBLE_PARTICIPANTS
+      ? "block"
+      : "none";
+}
+
+
+ function createParticipantItem(p, index) {
+  const div = document.createElement("div");
+  div.className = "participant-item";
+
+  div.innerHTML = `
+    <span>${index + 1}- ${p.name} ${p.nationality} ${p.year}</span>
+    <div class="participant-actions">
+      <button class="edit">✏️</button>
+      <button class="delete">❌</button>
+    </div>
+  `;
+
+  div.querySelector(".delete").addEventListener("click", () => {
+    participants.splice(index, 1);
+    renderParticipants();
+    renderModalParticipants();
+  });
+
+  return div;
+}
+
+
+ const modal = document.getElementById("participantsModal");
+const modalList = document.getElementById("modalParticipantsList");
+const modalClose = modal.querySelector(".modal-close");
+
+
+ showAllBtn.addEventListener("click", () => {
+  modal.classList.add("active");
+  renderModalParticipants();
+});
+
+ modalClose.addEventListener("click", () => {
+  modal.classList.remove("active");
+});
+
+
+ function renderModalParticipants() {
+  modalList.innerHTML = "";
+
+  participants.forEach((p, index) => {
+    modalList.appendChild(createParticipantItem(p, index));
+  });
+}
+
+const payload = {
+  tour_name: tourName,
+  email: emailField.value,
+  phone: iti.getNumber(),
+  participants: participants
+};
+
+
+ 
+
   /* ============================== LIVE ERROR CLEARING ============================== */
 
 function bindLiveValidation(form) {
