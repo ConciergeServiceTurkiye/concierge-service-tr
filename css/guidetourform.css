@@ -265,13 +265,17 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 
 /* PARTİCİPANT YENİ*/
 .add-participant-btn {
-  background: #b00020;
-  color: #fff;
-  border-radius: 50%;
+  background: #2ecc71; /* yeşil */
+  color: white;
+  border: none;
   width: 42px;
   height: 42px;
-  font-size: 22px;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
 }
+
+.add-participant-btn:hover{background: #27ae60;}
 
 .participant-actions .edit {
   color: #d4af37; /* sarı */
