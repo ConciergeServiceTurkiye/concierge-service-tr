@@ -50,14 +50,25 @@ function hideInlineAlert() {
   /* ============================== LIVE ERROR CLEARING ============================== */
 
 function bindLiveValidation(form) {
-  const fields = form.querySelectorAll("input, textarea, select");
+  const fields = form.querySelectorAll(
+    "input, select, textarea"
+  );
 
   fields.forEach(field => {
     field.addEventListener("input", () => {
-      if (field.value.trim()) {
-        hideFieldError(field);
-      }
+      clearFieldError(field);
     });
+  });
+
+  // ✅ CUSTOM NATIONALITY SELECT FIX
+  const nationalitySelects = form.querySelectorAll(".nationality-select");
+
+  nationalitySelects.forEach(select => {
+    select.addEventListener("click", () => {
+      clearFieldError(select);
+    });
+  });
+}
 
     field.addEventListener("change", () => {
       if (field.value.trim()) {
@@ -499,33 +510,42 @@ initNationalityDropdown(newRow);
   /* ============================== PARTICIPANT VALIDATION ============================== */
 
   function validateParticipantRow(row, isPrimary) {
-    const name = row.querySelector(".participant-name");
-    const nat = row.querySelector(".nationality-trigger");
-    const natValue = row.querySelector(".participant-nationality")?.value;
-    const year = row.querySelector(".participant-birthyear");
+  const name = row.querySelector(".participant-name");
+  const natInput = row.querySelector(".participant-nationality");
+  const natSelect = row.querySelector(".nationality-select");
+  const year = row.querySelector(".participant-birthyear");
 
-    if (isPrimary) {
-      if (!nat.value || !year.value) {
-        showFieldError(
-          nat,
-          "Please select nationality and birth year for the primary participant."
-        );
-        return false;
-      }
-    } else {
-      const anyFilled =
-        name.value.trim() || nat.value || year.value;
+  const hasAnyValue =
+    name?.value.trim() ||
+    natInput?.value ||
+    year?.value;
 
-      if (anyFilled && (!name.value.trim() || !nat.value || !year.value)) {
-        showFieldError(
-          name,
-          "Please complete all participant details, or remove unused participant rows using the × button."
-        );
-        return false;
-      }
+  // PRIMARY participant → her şey zorunlu
+  if (isPrimary) {
+    if (!natInput.value || !year.value) {
+      showFieldError(
+        natSelect,
+        "Please select nationality and birth year for the primary participant."
+      );
+      return false;
     }
     return true;
   }
+
+  // Secondary participant
+  if (hasAnyValue) {
+    if (!name.value.trim() || !natInput.value || !year.value) {
+      showFieldError(
+        name,
+        "Please complete all participant details, or remove unused participant rows using the × button."
+      );
+      return false;
+    }
+  }
+
+  return true;
+}
+
 
   /* ========================= MOBILITY ========================= */
   const mobilityToggle = document.getElementById("mobilityToggle");
