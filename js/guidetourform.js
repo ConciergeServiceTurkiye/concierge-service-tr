@@ -240,31 +240,34 @@ document.addEventListener("keydown", e => {
   const COUNTRY_LIST = window.intlTelInputGlobals.getCountryData();
 
   function initNationalityDropdown(container) {
-    const trigger = container.querySelector(".nationality-trigger");
-    const dropdown = container.querySelector(".nationality-dropdown");
-    const hiddenInput = container.querySelector(".participant-nationality");
+  const trigger = container.querySelector(".nationality-trigger");
+  const dropdown = container.querySelector(".nationality-dropdown");
+  const hiddenInput = container.querySelector(".participant-nationality");
 
-    dropdown.innerHTML = "";
+  dropdown.innerHTML = "";
 
-    COUNTRY_LIST.forEach(c => {
-      const div = document.createElement("div");
-      div.className = "nationality-option";
-      div.innerHTML = `
-        <img src="https://flagcdn.com/w20/${c.iso2}.png">
-        ${c.name}
-      `;
-      div.addEventListener("click", () => {
-        trigger.textContent = c.name;
-        hiddenInput.value = c.iso2.toUpperCase();
-        container.classList.remove("open");
-      });
-      dropdown.appendChild(div);
+  COUNTRY_LIST.forEach(c => {
+    const div = document.createElement("div");
+    div.className = "nationality-option";
+    div.innerHTML = `
+      <img src="https://flagcdn.com/w20/${c.iso2}.png">
+      ${c.name}
+    `;
+    div.addEventListener("click", () => {
+      trigger.textContent = c.name;
+      hiddenInput.value = c.iso2.toUpperCase();
+      container.classList.remove("open");
+
+      // ✅ ADIM 3 — HATA TEMİZLEME (TAM YERİ)
+      hideFieldError(container);
     });
+    dropdown.appendChild(div);
+  });
 
-    trigger.addEventListener("click", () => {
-      container.classList.toggle("open");
-    });
-  }
+  trigger.addEventListener("click", () => {
+    container.classList.toggle("open");
+  });
+}
 
   document
     .querySelectorAll(".nationality-select")
