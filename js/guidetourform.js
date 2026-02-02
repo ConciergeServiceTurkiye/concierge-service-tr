@@ -127,7 +127,9 @@ const showAllBtn = document.getElementById("showAllParticipants");
   div.querySelector(".delete").addEventListener("click", () => {
     participants.splice(index, 1);
     renderParticipants();
-    renderModalParticipants();
+    if (participantsModal.classList.contains("active")) {
+  renderModalParticipants();
+}
   });
 
   return div;
@@ -136,8 +138,14 @@ const showAllBtn = document.getElementById("showAllParticipants");
 
 const participantsModal = document.getElementById("participantsModal");
 const participantsModalList = document.getElementById("modalParticipantsList");
-const participantsModalClose = participantsModal.querySelector(".modal-close");
+const participantsModalClose =
+  participantsModal.querySelector(".modal-close");
 
+if (participantsModalClose) {
+  participantsModalClose.addEventListener("click", () => {
+    participantsModal.classList.remove("active");
+  });
+}
 
 
 showAllBtn.addEventListener("click", () => {
@@ -160,15 +168,6 @@ showAllBtn.addEventListener("click", () => {
     participantsModalList.appendChild(createParticipantItem(p, index));
   });
 }
-
-const payload = {
-  tour_name: tourName,
-  email: emailField.value,
-  phone: iti.getNumber(),
-  participants: participants
-};
-
-
  
 
   /* ============================== LIVE ERROR CLEARING ============================== */
@@ -621,7 +620,9 @@ if (!transportationChecked) {
     language: document.querySelector('[name="language"]')?.value || "",
     hotel: document.querySelector('[name="hotel_name"]')?.value || "",
     notes: document.querySelector('[name="notes"]')?.value || ""
+   payload.participants = participants;
   };
+
 
 
 
