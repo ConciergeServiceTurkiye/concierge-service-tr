@@ -125,50 +125,55 @@
 <div class="form-group participants-group">
 
   <label>Participants Details</label>
-<div class="field-wrapper">
-  <div id="participantsContainer">
+<!-- PARTICIPANT INPUT (TEMP) -->
+<div class="participant-input-row">
 
-    <!-- PARTICIPANT ROW (1 - PRIMARY) -->
-    <div class="participant-row primary">
+  <input
+    type="text"
+    id="participantNameInput"
+    placeholder="Full name"
+  />
 
-      <div class="participant-field">
-        <input
-          type="text"
-          name="participant_name"
-          class="participant-name"
-          placeholder="Full name"
-          readonly
-          tabindex="-1"
-        >
-      </div>
-
-      <div class="participant-field">
-        <div class="nationality-select">
-  <input type="hidden" class="participant-nationality" required>
-  <div class="nationality-trigger">Select nationality</div>
-  <div class="nationality-dropdown"><input
-      type="text"
-      class="nationality-search"
-      placeholder="Type to search"
-    ></div>
-</div>
-      </div>
-
-      <div class="participant-field">
-        <select class="participant-birthyear" required>
-          <option value="" disabled selected>Birth Year</option>
-          <!-- JS ile doldurulacak -->
-        </select>
-      </div>
+  <div class="nationality-select">
+    <input type="hidden" id="participantNationalityInput">
+    <div class="nationality-trigger">Select nationality</div>
+    <div class="nationality-dropdown">
+      <input
+        type="text"
+        class="nationality-search"
+        placeholder="Type to search"
+      >
     </div>
   </div>
+
+  <select id="participantBirthYearInput">
+    <option value="" disabled selected>Birth Year</option>
+  </select>
+
+  <button type="button" class="add-participant-btn">
+    <span class="plus">+</span>
+    <span class="text">Add Participant</span>
+  </button>
+
 </div>
 
-  <!-- ADD PARTICIPANT -->
-  <button type="button" class="add-participant-btn">
-    + Add Participant
+<!-- PARTICIPANTS LIST -->
+<div class="participants-list-wrapper">
+
+  <h4 class="participants-title">Participants</h4>
+
+  <div id="participantsList"></div>
+
+  <button
+    type="button"
+    id="showMoreParticipants"
+    class="show-more-participants"
+    style="display:none"
+  >
+    View more participants
   </button>
-  
+
+</div>
 </div>
 
       <!-- MOBILITY -->
