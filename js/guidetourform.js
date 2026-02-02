@@ -491,7 +491,11 @@ trigger.addEventListener("focus", e => {
     populateBirthYears(row.querySelector(".participant-birthyear"));
 
     row.querySelector(".remove-participant")
-      .addEventListener("click", () => row.remove());
+  .addEventListener("click", () => {
+    if (!row.classList.contains("primary")) {
+      row.remove();
+    }
+  });
 
     return row;
   }
