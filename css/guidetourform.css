@@ -312,3 +312,10 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
   color: #fff;
 }
 
+
+.participant-fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
