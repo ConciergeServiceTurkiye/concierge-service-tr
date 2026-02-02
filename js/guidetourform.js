@@ -71,7 +71,10 @@ function bindLiveValidation(form) {
 
   nationalitySelects.forEach(select => {
     select.addEventListener("click", () => {
-      hideFieldError(select);
+      const realInput = select.querySelector(".participant-nationality");
+if (realInput) {
+  hideFieldError(realInput);
+}
     });
   });
 }
@@ -513,6 +516,7 @@ trigger.addEventListener("focus", e => {
       const newRow = createParticipantRow();
 participantsContainer.appendChild(newRow);
 initNationalityDropdown(newRow);
+     bindLiveValidation(newRow);
     });
   }
 
