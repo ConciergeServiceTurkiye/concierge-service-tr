@@ -431,7 +431,6 @@ trigger.addEventListener("focus", e => {
   const fullName = document.querySelector('[name="name"]');
   const email = document.querySelector('[name="email"]');
   const date = document.getElementById("date");
-  const language = document.getElementById("language");
   const hotel = document.querySelector('[name="hotel_name"]');
 
   /* ========================= PARTICIPANTS ========================= */
@@ -582,7 +581,7 @@ form.addEventListener("submit", async function (e) {
 
   /* REQUIRED */
   const requiredFields = form.querySelectorAll(
-  "input[required]:not(#phone), textarea[required], select[required]"
+  "input[required]:not(#phone):not([name='email']), textarea[required], select[required]"
 );
   requiredFields.forEach(field => {
     if (!field.value.trim()) {
