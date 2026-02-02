@@ -134,26 +134,30 @@ const showAllBtn = document.getElementById("showAllParticipants");
 }
 
 
- const modal = document.getElementById("participantsModal");
-const modalList = document.getElementById("modalParticipantsList");
-const modalClose = modal.querySelector(".modal-close");
+const participantsModal = document.getElementById("participantsModal");
+const participantsModalList = document.getElementById("modalParticipantsList");
+const participantsModalClose = participantsModal.querySelector(".modal-close");
 
 
- showAllBtn.addEventListener("click", () => {
-  modal.classList.add("active");
+
+showAllBtn.addEventListener("click", () => {
+  participantsModal.classList.add("active");
   renderModalParticipants();
 });
 
- modalClose.addEventListener("click", () => {
-  modal.classList.remove("active");
+
+ participantsModalClose.addEventListener("click", () => {
+  participantsModal.classList.remove("active");
 });
 
 
+
  function renderModalParticipants() {
-  modalList.innerHTML = "";
+  participantsModalList.innerHTML = "";
+
 
   participants.forEach((p, index) => {
-    modalList.appendChild(createParticipantItem(p, index));
+    participantsModalList.appendChild(createParticipantItem(p, index));
   });
 }
 
