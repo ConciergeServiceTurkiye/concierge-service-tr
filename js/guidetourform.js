@@ -673,9 +673,9 @@ const transportationChecked = Array.from(
 if (!transportationChecked) {
   const transportGroup = document.getElementById("transportationGroup");
   showFieldError(
-    transportGroup.querySelector(".lux-check"),
-    "Please select a transportation option"
-  );
+  transportGroup,
+  "Please select a transportation option"
+);
   isValid = false;
 }
 
