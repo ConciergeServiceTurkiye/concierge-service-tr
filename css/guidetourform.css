@@ -262,3 +262,53 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
   box-sizing: border-box;
 }
 
+
+/* PARTİCİPANT YENİ*/
+.add-participant-btn {
+  background: #b00020;
+  color: #fff;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 22px;
+}
+
+.participant-actions .edit {
+  color: #d4af37; /* sarı */
+}
+
+.participant-actions .delete {
+  color: #c62828; /* kırmızı */
+}
+
+/* MODAL */
+.participants-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.participants-modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: #0b0b0b;
+  border-radius: 18px;
+  padding: 30px;
+  width: 90%;
+  max-width: 520px;
+}
+
+.modal-close {
+  position: absolute;
+  right: 20px;
+  top: 14px;
+  font-size: 28px;
+  color: #fff;
+}
+
