@@ -272,13 +272,14 @@ if (searchInput) {
       ${c.name}
     `;
     div.addEventListener("click", () => {
-      trigger.textContent = c.name;
-      hiddenInput.value = c.iso2.toUpperCase();
-      container.classList.remove("open");
+  trigger.textContent = c.name;
+  hiddenInput.value = c.iso2.toUpperCase();
+  container.classList.remove("open");
 
-      // ✅ ADIM 3 — HATA TEMİZLEME (TAM YERİ)
-      hideFieldError(container);
-    });
+  // ✅ DOĞRU HATA TEMİZLEME
+  hideFieldError(hiddenInput);
+});
+
     dropdown.appendChild(div);
   });
 
@@ -688,11 +689,13 @@ const transportationChecked = Array.from(
 if (!transportationChecked) {
   const transportWrapper =
   document.querySelector("#transportationGroup .field-wrapper");
+ const fakeInput = transportWrapper.querySelector("input");
 
-showFieldError(
-  transportWrapper,
+ showFieldError(
+  fakeInput,
   "Please select a transportation option"
 );
+
   isValid = false;
 }
 
