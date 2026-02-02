@@ -46,22 +46,13 @@
   <label>Participants Details</label>
 <!-- PARTICIPANT INPUT (TEMP) -->
 <div class="participant-input-row">
-
-  <input
-    type="text"
-    id="participantNameInput"
-    placeholder="Full name"
-  />
+  <input type="text" id="participantNameInput" placeholder="Full name" />
 
   <div class="nationality-select">
     <input type="hidden" id="participantNationalityInput">
     <div class="nationality-trigger">Select nationality</div>
     <div class="nationality-dropdown">
-      <input
-        type="text"
-        class="nationality-search"
-        placeholder="Type to search"
-      >
+      <input type="text" class="nationality-search" placeholder="Type to search">
     </div>
   </div>
 
@@ -69,30 +60,34 @@
     <option value="" disabled selected>Birth Year</option>
   </select>
 
-  <button type="button" class="add-participant-btn">
-    <span class="plus">+</span>
-    <span class="text">Add Participant</span>
-  </button>
-
+  <button type="button" id="addParticipantBtn" class="add-participant-btn">+</button>
 </div>
+
 
 <!-- PARTICIPANTS LIST -->
 <div class="participants-list-wrapper">
-
-  <h4 class="participants-title">Participants</h4>
+  <h4 class="participants-title">Katılımcılar</h4>
 
   <div id="participantsList"></div>
 
   <button
     type="button"
-    id="showMoreParticipants"
+    id="showAllParticipants"
     class="show-more-participants"
     style="display:none"
   >
-    View more participants
+    Diğer katılımcıları görmek için tıkla
   </button>
-
 </div>
+
+  <div id="participantsModal" class="participants-modal">
+  <div class="modal-content">
+    <button class="modal-close">×</button>
+    <h3>Katılımcılar</h3>
+    <div id="modalParticipantsList"></div>
+  </div>
+</div>
+
 </div>
       </div>
       
