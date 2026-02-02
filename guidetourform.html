@@ -40,10 +40,60 @@
       <input type="hidden" name="tour_name" id="tourName">
 
       <div class="form-group">
-        <label>Full Name</label>
-        <div class="field-wrapper">
-        <input type="text" name="name" required placeholder="Your full name">
-      </div>
+         <!-- PARTICIPANTS -->
+<div class="form-group participants-group">
+
+  <label>Participants Details</label>
+<!-- PARTICIPANT INPUT (TEMP) -->
+<div class="participant-input-row">
+
+  <input
+    type="text"
+    id="participantNameInput"
+    placeholder="Full name"
+  />
+
+  <div class="nationality-select">
+    <input type="hidden" id="participantNationalityInput">
+    <div class="nationality-trigger">Select nationality</div>
+    <div class="nationality-dropdown">
+      <input
+        type="text"
+        class="nationality-search"
+        placeholder="Type to search"
+      >
+    </div>
+  </div>
+
+  <select id="participantBirthYearInput">
+    <option value="" disabled selected>Birth Year</option>
+  </select>
+
+  <button type="button" class="add-participant-btn">
+    <span class="plus">+</span>
+    <span class="text">Add Participant</span>
+  </button>
+
+</div>
+
+<!-- PARTICIPANTS LIST -->
+<div class="participants-list-wrapper">
+
+  <h4 class="participants-title">Participants</h4>
+
+  <div id="participantsList"></div>
+
+  <button
+    type="button"
+    id="showMoreParticipants"
+    class="show-more-participants"
+    style="display:none"
+  >
+    View more participants
+  </button>
+
+</div>
+</div>
       </div>
       
       <div class="form-group">
@@ -121,60 +171,7 @@
 </div>
 
 
-      <!-- PARTICIPANTS -->
-<div class="form-group participants-group">
-
-  <label>Participants Details</label>
-<!-- PARTICIPANT INPUT (TEMP) -->
-<div class="participant-input-row">
-
-  <input
-    type="text"
-    id="participantNameInput"
-    placeholder="Full name"
-  />
-
-  <div class="nationality-select">
-    <input type="hidden" id="participantNationalityInput">
-    <div class="nationality-trigger">Select nationality</div>
-    <div class="nationality-dropdown">
-      <input
-        type="text"
-        class="nationality-search"
-        placeholder="Type to search"
-      >
-    </div>
-  </div>
-
-  <select id="participantBirthYearInput">
-    <option value="" disabled selected>Birth Year</option>
-  </select>
-
-  <button type="button" class="add-participant-btn">
-    <span class="plus">+</span>
-    <span class="text">Add Participant</span>
-  </button>
-
-</div>
-
-<!-- PARTICIPANTS LIST -->
-<div class="participants-list-wrapper">
-
-  <h4 class="participants-title">Participants</h4>
-
-  <div id="participantsList"></div>
-
-  <button
-    type="button"
-    id="showMoreParticipants"
-    class="show-more-participants"
-    style="display:none"
-  >
-    View more participants
-  </button>
-
-</div>
-</div>
+     
 
       <!-- MOBILITY -->
       <div class="form-group">
