@@ -439,7 +439,55 @@ document.addEventListener("click", () => {
 document.querySelectorAll(".nationality-select")
   .forEach(initNationalityDropdown);
 
-  
+/* ============================== BIRTH YEAR DROPDOWN ============================== */
+function initBirthYearDropdown(container) {
+  const trigger = container.querySelector(".birthyear-trigger");
+  const dropdown = container.querySelector(".birthyear-dropdown");
+  const hiddenInput = container.querySelector("#participantBirthYearInput");
+
+  const currentYear = new Date().getFullYear();
+  const minYear = currentYear - 100;
+
+  dropdown.innerHTML = "";
+
+  for (let y = currentYear; y >= minYear; y--) {
+    const div = document.createElement("div");
+    div.className = "birthyear-option";
+    div.textContent = y;
+
+    div.addEventListener("click", () => {
+      trigger.textContent = y;
+      trigger.classList.add("has-value");
+      hiddenInput.value = y;
+      container.classList.remove("open");
+    });
+
+    dropdown.appendChild(div);
+  }
+
+  trigger.addEventListener("click", () => {
+    container.classList.toggle("open");
+  });
+
+  trigger.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      container.classList.toggle("open");
+    }
+  });
+
+  document.addEventListener("click", e => {
+    if (!container.contains(e.target)) {
+      container.classList.remove("open");
+    }
+  });
+}
+
+document
+  .querySelectorAll(".birthyear-select")
+  .forEach(initBirthYearDropdown);
+
+ 
  /* ========================= PHONE INPUT ========================= */
  const phoneInput = document.getElementById("phone");
 let iti = null;
