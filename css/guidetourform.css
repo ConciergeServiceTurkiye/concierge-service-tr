@@ -182,6 +182,40 @@
 	padding: 12px;
 }
 
+.nationality-select {
+  position: relative;
+}
+
+.nationality-dropdown {
+  display: none;
+  position: absolute;
+  top: 105%;
+  left: 0;
+  width: 100%;
+  max-height: 260px;
+  overflow-y: auto;
+  background: #111;
+  border: 1px solid #d4af37;
+  border-radius: 10px;
+  z-index: 50;
+}
+
+.nationality-select.open .nationality-dropdown {
+  display: block;
+}
+
+.nationality-option {
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.nationality-option:hover {
+  background: rgba(212,175,55,0.2);
+}
+
 
 	.has-error {animation: shake 0.3s ease;}
 	.has-error input,
