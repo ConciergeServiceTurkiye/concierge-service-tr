@@ -566,4 +566,9 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 .birthyear-dropdown::-webkit-scrollbar-thumb:hover {
   background: #f1d97a;
 }
+.birthyear-trigger:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(212,175,55,0.4);
+}
+
 
