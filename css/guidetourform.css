@@ -268,13 +268,13 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
   background: #2ecc71; /* yeşil */
   color: white;
   border: none;
-  width: 46px;
-  height: 46px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   font-size: 22px;
   cursor: pointer;
-	margin-top: 10px;
-	 grid-area: add;
+  margin-top: 10px;
+  grid-area: add;
   justify-self: center;
 }
 
