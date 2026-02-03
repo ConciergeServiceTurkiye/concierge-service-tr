@@ -268,11 +268,14 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
   background: #2ecc71; /* yeşil */
   color: white;
   border: none;
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
-  font-size: 20px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  font-size: 22px;
   cursor: pointer;
+	margin-top: 10px;
+	 grid-area: add;
+  justify-self: center;
 }
 
 .add-participant-btn:hover{background: #27ae60;}
@@ -322,4 +325,74 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
   align-items: flex-end;
   gap: 10px;
 }
+
+.participant-input-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 110px;
+  gap: 12px;
+  align-items: center;
+}
+
+#participantNameInput {
+  min-width: 0;
+}
+
+.nationality-trigger {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+/* Klavye ile odak */
+.nationality-trigger:focus {
+  outline: 2px solid rgba(0,0,0,0.15);
+  outline-offset: 2px;
+}
+
+#participantBirthYearInput {
+  width: 110px;
+  height: 44px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  padding: 0 10px;
+  border-radius: 8px;
+}
+
+#participantBirthYearInput::-webkit-scrollbar {
+  width: 6px;
+}
+
+#participantBirthYearInput::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.25);
+  border-radius: 6px;
+}
+
+#participantBirthYearInput::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.participant-input-row {
+  grid-template-areas:
+    "name nationality birth"
+    "add add add";
+}
+
+#participantNameInput {
+  grid-area: name;
+}
+
+.nationality-select {
+  grid-area: nationality;
+}
+
+#participantBirthYearInput {
+  grid-area: birth;
+}
+
+
+
+
 
