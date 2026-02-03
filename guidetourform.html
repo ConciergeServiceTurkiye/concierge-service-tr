@@ -55,9 +55,15 @@
     </div>
   </div>
 
-  <select id="participantBirthYearInput">
-    <option value="" disabled selected>Birth Year</option>
-  </select>
+  <div class="birthyear-select">
+  <input type="hidden" id="participantBirthYearInput">
+
+  <div class="birthyear-trigger" tabindex="0">
+    Birth Year
+  </div>
+
+  <div class="birthyear-dropdown"></div>
+</div>
 
   <button type="button" id="addParticipantBtn" class="add-participant-btn">+</button>
 </div>
