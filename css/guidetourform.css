@@ -431,13 +431,61 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 }
 
 #participantBirthYearInput {
-  grid-area: birth;
-  width: 110px;
   height: 44px;
-  background: #fff;
-  color: inherit;
-  font: inherit;
+  width: 110px;
+
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+
+  border: 1px solid #d4af37;
+  border-radius: 10px;
+
   padding: 0 10px;
-  border-radius: 8px;
+  font: inherit;
+
+  appearance: none;
+  cursor: pointer;
 }
+
+#participantBirthYearInput option[value=""] {
+  color: rgba(255,255,255,0.6);
+}
+
+#participantBirthYearInput:hover,
+#participantBirthYearInput:focus {
+  background: rgba(212,175,55,0.08);
+  outline: none;
+}
+.nationality-trigger {
+  height: 44px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  color: rgba(255,255,255,0.7);
+}
+
+.nationality-trigger:hover,
+.nationality-select.open .nationality-trigger {
+  background: rgba(212,175,55,0.08);
+}
+
+.nationality-dropdown::-webkit-scrollbar,
+#participantBirthYearInput::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nationality-dropdown::-webkit-scrollbar-thumb,
+#participantBirthYearInput::-webkit-scrollbar-thumb {
+  background: rgba(212,175,55,0.4);
+  border-radius: 6px;
+}
+
+.nationality-dropdown::-webkit-scrollbar-track,
+#participantBirthYearInput::-webkit-scrollbar-track {
+  background: transparent;
+}
+#participantBirthYearInput option {
+  background: #111;
+  color: #fff;
+}
+
 
