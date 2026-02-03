@@ -134,96 +134,31 @@
         .success-screen p {color: rgba(255,255,255,0.7);font-size: 16px;}
         .success-screen .reservation-id {display: block;margin-top: 25px;color: #d4af37;font-size: 14px;letter-spacing: 2px;}
 
-	.nationality-select {
-  position: relative;
-}
-
-.nationality-dropdown {
-  display: none;
-  position: absolute;
-  top: 105%;
-  left: 0;
-  width: 100%;
-  max-height: 260px;
-  overflow-y: auto;
-  background: #111;
-  border: 1px solid #d4af37;
-  border-radius: 10px;
-  z-index: 50;
-}
-
-.nationality-select.open .nationality-dropdown {
-  display: block;
-}
-
-.nationality-option {
-  padding: 10px 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-
-.nationality-option:hover {
-  background: rgba(212,175,55,0.2);
-}
-.nationality-trigger {
-  height: 44px;
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  cursor: pointer;
-  color: rgba(255,255,255,0.6);
-	border: 1px solid #d4af37;
-	padding: 12px;
-}
-
-.nationality-select {
-  position: relative;
-}
-
-.nationality-dropdown {
-  display: none;
-  position: absolute;
-  top: 105%;
-  left: 0;
-  width: 100%;
-  max-height: 260px;
-  overflow-y: auto;
-  background: #111;
-  border: 1px solid #d4af37;
-  border-radius: 10px;
-  z-index: 50;
-}
-
-.nationality-select.open .nationality-dropdown {
-  display: block;
-}
-
-.nationality-option {
-  padding: 10px 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-
-.nationality-option:hover {
-  background: rgba(212,175,55,0.2);
-}
+		.nationality-select {position: relative;}
+		.nationality-dropdown {display: none;position: absolute;top: 105%;left: 0;width: 100%;max-height: 260px;overflow-y: auto;background: #111;
+							   border: 1px solid #d4af37;border-radius: 10px;z-index: 50;}
+		.nationality-select.open .nationality-dropdown {display: block;}
+		.nationality-option {padding: 10px 12px;display: flex;align-items: center;gap: 10px;cursor: pointer;}
+		.nationality-option:hover {background: rgba(212,175,55,0.2);}
+		.nationality-trigger {height: 44px;display: flex;align-items: center;padding: 0 12px;cursor: pointer;color: rgba(255,255,255,0.6);border: 1px solid #d4af37;
+					  padding: 12px;}
+		.nationality-select {position: relative;}
+		.nationality-dropdown {display: none;position: absolute;top: 105%;left: 0;width: 100%;max-height: 260px;overflow-y: auto;background: #111;
+					   border: 1px solid #d4af37;border-radius: 10px;z-index: 50;}
+		.nationality-select.open .nationality-dropdown {display: block;}
+		.nationality-option {padding: 10px 12px;display: flex;align-items: center;gap: 10px;cursor: pointer;}
+		.nationality-option:hover {background: rgba(212,175,55,0.2);}
 
 
-	.has-error {animation: shake 0.3s ease;}
-	.has-error input,
-	.has-error textarea,
-	.has-error .nationality-trigger {border-color: #ff6b6b !important;box-shadow: 0 0 0 2px rgba(255,107,107,0.3);}
-	@keyframes shake {0% { transform: translateX(0); }25% { transform: translateX(-4px); }50% { transform: translateX(4px); }75% { transform: translateX(-4px); }100% { transform: translateX(0); }}
-	.field-error {font-size: 12px;color: #ff6b6b;margin-bottom: 6px;}
+		.has-error {animation: shake 0.3s ease;}
+		.has-error input,
+		.has-error textarea,
+		.has-error .nationality-trigger {border-color: #ff6b6b !important;box-shadow: 0 0 0 2px rgba(255,107,107,0.3);}
+		@keyframes shake {0% { transform: translateX(0); }25% { transform: translateX(-4px); }50% { transform: translateX(4px); }75% { transform: translateX(-4px); }100% { transform: translateX(0); }}
+		.field-error {font-size: 12px;color: #ff6b6b;margin-bottom: 6px;}
 
 /*Modal düzeni */
-/* ==============================
-   EXPERIENCE CARD
-============================== */
+/* ============================== EXPERIENCE CARD ============================== */
 	.tour-experience {margin-top: 18px;padding: 20px 24px;border: 1px solid rgba(212,175,55,0.35);border-radius: 16px;background: rgba(10,10,10,0.6);
 					  color: rgba(255,255,255,0.8);font-size: 14px;line-height: 1.7;user-select: none;}
 
@@ -273,302 +208,99 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 /* ============================== Mobility → Checkbox seçiliyse textarea zorunlu ============================== */ 	
 textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 
-.select-options {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
 
-.select-options li {
-  list-style: none;
-}
-
-.select-options li {
-  padding: 10px 14px;
-  cursor: pointer;
-}
-
+.select-options {list-style: none;padding-left: 0;margin: 0;}
+.select-options li {list-style: none;}
+.select-options li {padding: 10px 14px;cursor: pointer;}
 .select-options li:hover,
-.select-options li.active {
-  background: rgba(212,175,55,0.2);
-  color: #111;
-}
+.select-options li.active {background: rgba(212,175,55,0.2);color: #111;}
 
 /* Custom select error border */
-.custom-select.has-error .select-trigger {
-  border-color: #e53935; /* diğer inputlarla aynı kırmızı */
-}
-
+.custom-select.has-error .select-trigger {border-color: #e53935; /* diğer inputlarla aynı kırmızı */}
 .field-wrapper.has-error input,
 .field-wrapper.has-error textarea,
-.field-wrapper.has-error select {
-  border-color: #e53935;
-}
-
-.field-wrapper.has-error .custom-select .select-trigger {
-  border-color: #ff6b6b
-}
-
+.field-wrapper.has-error select {border-color: #e53935;}
+.field-wrapper.has-error .custom-select .select-trigger {border-color: #ff6b6b}
 .form-group input,
 .form-group textarea,
-.form-group select {
-  width: 100%;
-  box-sizing: border-box;
-}
-
+.form-group select {width: 100%;box-sizing: border-box;}
 
 /* PARTİCİPANT YENİ*/
-.add-participant-btn {
-  background: #2ecc71;
-  color: white;
-  border: none;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  font-size: 22px;
-  cursor: pointer;
-  margin-top: 10px;
-  grid-area: add;
-  justify-self: center;
-}
-
+.add-participant-btn {background: #2ecc71;color: white;border: none;width: 42px;height: 42px;border-radius: 50%;font-size: 22px;cursor: pointer;margin-top: 10px;grid-area: add;justify-self: center;}
 .add-participant-btn:hover{background: #27ae60;}
-
-.participant-actions .edit {
-  color: #d4af37; /* sarı */
-}
-
-.participant-actions .delete {
-  color: #c62828; /* kırmızı */
-}
+.participant-actions .edit {color: #d4af37; /* sarı */}
+.participant-actions .delete {color: #c62828; /* kırmızı */}
 
 /* MODAL */
-.participants-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.75);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-.participants-modal.active {
-  display: flex;
-}
-
-.modal-content {
-  background: #0b0b0b;
-  border-radius: 18px;
-  padding: 30px;
-  width: 90%;
-  max-width: 520px;
-}
-
-.modal-close {
-  position: absolute;
-  right: 20px;
-  top: 14px;
-  font-size: 28px;
-  color: #fff;
-}
-
-
-.participant-input-row {
-  gap: 12px;
-  align-items: center;
-}
-
-#participantNameInput {
-  min-width: 0;
-}
-
-
+.participants-modal {position: fixed;inset: 0;background: rgba(0,0,0,.75);display: none;align-items: center;justify-content: center;z-index: 9999;}
+.participants-modal.active {display: flex;}
+.modal-content {background: #0b0b0b;border-radius: 18px;padding: 30px;width: 90%;max-width: 520px;}
+.modal-close {position: absolute;right: 20px;top: 14px;font-size: 28px;color: #fff;}
+.participant-input-row {gap: 12px;align-items: center;}
+#participantNameInput {min-width: 0;}
 
 /* Klavye ile odak */
-.nationality-trigger:focus {
-  outline: 2px solid rgba(0,0,0,0.15);
-  outline-offset: 2px;
-}
-
-.participant-input-row {
-  grid-template-areas:
-    "name nationality birth"
-    "add add add";
-}
-
-#participantNameInput {
-  grid-area: name;
-	min-width: 0;
-}
-
-.nationality-select {
-  grid-area: nationality;
-}
-
-.nationality-trigger {
-  height: 44px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 10px;
-  color: rgba(255,255,255,0.7);
-}
-
+.nationality-trigger:focus {outline: 2px solid rgba(0,0,0,0.15);outline-offset: 2px;}
+.participant-input-row {grid-template-areas:"name nationality birth""add add add";}
+#participantNameInput {grid-area: name;min-width: 0;}
+.nationality-select {grid-area: nationality;}
+.nationality-trigger {height: 44px;background: rgba(255,255,255,0.05);border-radius: 10px;color: rgba(255,255,255,0.7);}
 .nationality-trigger:hover,
-.nationality-select.open .nationality-trigger {
-  background: rgba(212,175,55,0.08);
-}
-
+.nationality-select.open .nationality-trigger {background: rgba(212,175,55,0.08);}
 .nationality-dropdown::-webkit-scrollbar {width: 6px;}
-
 .nationality-dropdown::-webkit-scrollbar-thumb{background: rgba(212,175,55,0.4);border-radius: 6px;}
-
 .nationality-dropdown::-webkit-scrollbar-track{background: transparent;}
 
 /* ================== LUXURY INPUT BASE ================== */
 .participant-input-row input,
 .participant-input-row select,
-.participant-input-row .nationality-trigger {
-  height: 44px;
-  padding: 12px 14px;
-
-  background: #111;
-  color: #d4af37;
-
-  border: 1px solid #d4af37;
-  border-radius: 10px;
-
-  font-size: 14px;
-  line-height: 1.4;
-  font-family: inherit;
-
-  box-sizing: border-box;
-}
+.participant-input-row .nationality-trigger {height: 44px;padding: 12px 14px;background: #111;color: #d4af37;border: 1px solid #d4af37;border-radius: 10px;
+											 font-size: 14px;line-height: 1.4;font-family: inherit;box-sizing: border-box;}
 
 /*HOVER & FOCUS – ÜÇÜ BİREBİR*/
 .participant-input-row input:hover,
 .participant-input-row select:hover,
-.nationality-trigger:hover {
-  background: rgba(212,175,55,0.08);
-}
-
+.nationality-trigger:hover {background: rgba(212,175,55,0.08);}
 .participant-input-row input:focus,
 .participant-input-row select:focus,
-.nationality-select.open .nationality-trigger {
-  outline: none;
-  background: rgba(212,175,55,0.08);
-  box-shadow: 0 0 0 1px rgba(212,175,55,0.35);
-}
+.nationality-select.open .nationality-trigger {outline: none;background: rgba(212,175,55,0.08);box-shadow: 0 0 0 1px rgba(212,175,55,0.35);}
 
 /*SCROLLBAR = TELEFON COUNTRY CODE KOPYASI (AYNI!)*/
 /* ================== LUXURY SCROLL ================== */
-.nationality-dropdown{
-  scrollbar-width: thin;
-  scrollbar-color: #d4af37 rgba(255,255,255,0.05);
-}
-
+.nationality-dropdown{scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
 .nationality-dropdown::-webkit-scrollbar{width: 8px;}
 .nationality-dropdown::-webkit-scrollbar-track{background: rgba(255,255,255,0.05);}
-
 .nationality-dropdown::-webkit-scrollbar-thumb{background: #d4af37;border-radius: 8px;}
-
 .nationality-dropdown::-webkit-scrollbar-thumb:hover{background: #f1d97a;}
 
 /*TAB / KLAVYE ODAK (Accessibility FIX)*/
-.nationality-trigger:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(212,175,55,0.4);
-}
+.nationality-trigger:focus {outline: none;box-shadow: 0 0 0 2px rgba(212,175,55,0.4);}
 
 /*NATIONALITY’DEN %100 KOPYA (AMA İSİM FARKLI)*/
-.birthyear-select {
-  position: relative;
-}
+.birthyear-select {position: relative;}
 
 /*Trigger (fake input)*/
-.birthyear-trigger {
-  height: 44px;
-  padding: 12px 14px;
-
-  background: #111;
-  border: 1px solid #d4af37;
-  border-radius: 10px;
-
-  color: rgba(255,255,255,0.6);
-  font-size: 14px;
-  line-height: 1.4;
-
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.birthyear-trigger.has-value {
-  color: #d4af37;
-}
-
+.birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;border: 1px solid #d4af37;border-radius: 10px;color: rgba(255,255,255,0.6);font-size: 14px;line-height: 1.4;display: flex;align-items: center;cursor: pointer;}
+.birthyear-trigger.has-value {color: #d4af37;}
 .birthyear-trigger:hover,
-.birthyear-select.open .birthyear-trigger {
-  background: rgba(212,175,55,0.08);
-}
+.birthyear-select.open .birthyear-trigger {background: rgba(212,175,55,0.08);}
 
 /*Dropdown*/
-.birthyear-dropdown {
-  display: none;
-  position: absolute;
-  top: 105%;
-  left: 0;
-  width: 100%;
-  max-height: 260px;
+.birthyear-dropdown {display: none;position: absolute;top: 105%;left: 0;width: 100%;max-height: 260px;background: rgba(10,10,10,0.97);border: 1px solid #d4af37;
+					 border-radius: 12px;overflow-y: auto;z-index: 60;}
+.birthyear-select.open .birthyear-dropdown {display: block;}
 
-  background: rgba(10,10,10,0.97);
-  border: 1px solid #d4af37;
-  border-radius: 12px;
 
-  overflow-y: auto;
-  z-index: 60;
-}
-
-.birthyear-select.open .birthyear-dropdown {
-  display: block;
-}
 /*Options*/
-.birthyear-option {
-  padding: 10px 14px;
-  cursor: pointer;
-  color: rgba(255,255,255,0.7);
-}
-
-.birthyear-option:hover {
-  background: rgba(212,175,55,0.18);
-  color: #d4af37;
-}
-
+.birthyear-option {padding: 10px 14px;cursor: pointer;color: rgba(255,255,255,0.7);}
+.birthyear-option:hover {background: rgba(212,175,55,0.18);color: #d4af37;}
 
 /*LUXURY SCROLL — TELEFON COUNTRY CODE İLE AYNI*/
-.birthyear-dropdown {
-  scrollbar-width: thin;
-  scrollbar-color: #d4af37 rgba(255,255,255,0.05);
-}
-
-.birthyear-dropdown::-webkit-scrollbar {
-  width: 8px;
-}
-
-.birthyear-dropdown::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.05);
-}
-
-.birthyear-dropdown::-webkit-scrollbar-thumb {
-  background: #d4af37;
-  border-radius: 8px;
-}
-
-.birthyear-dropdown::-webkit-scrollbar-thumb:hover {
-  background: #f1d97a;
-}
-.birthyear-trigger:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(212,175,55,0.4);
-}
+.birthyear-dropdown {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
+.birthyear-dropdown::-webkit-scrollbar {width: 8px;}
+.birthyear-dropdown::-webkit-scrollbar-track {background: rgba(255,255,255,0.05);}
+.birthyear-dropdown::-webkit-scrollbar-thumb {background: #d4af37;border-radius: 8px;}
+.birthyear-dropdown::-webkit-scrollbar-thumb:hover {background: #f1d97a;}
+.birthyear-trigger:focus {outline: none;box-shadow: 0 0 0 2px rgba(212,175,55,0.4);}
 
 
