@@ -360,6 +360,85 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") closeExperience();
 });
 
+/* ============================== NATIONALITY DROPDOWN ============================== */
+
+const COUNTRY_LIST = window.intlTelInputGlobals.getCountryData();
+
+function initNationalityDropdown(container) {
+  const trigger = container.querySelector(".nationality-trigger");
+  const dropdown = container.querySelector(".nationality-dropdown");
+  const searchInput = container.querySelector(".nationality-search");
+  const hiddenInput = container.querySelector("#participantNationalityInput");
+
+  if (!trigger || !dropdown || !hiddenInput) return;
+
+  // Temizle (yeniden init için)
+  dropdown.querySelectorAll(".nationality-option").forEach(el => el.remove());
+
+  // Search reset + filter
+  if (searchInput) {
+    searchInput.value = "";
+
+    searchInput.addEventListener("input", e => {
+      const term = e.target.value.toLowerCase().trim();
+      dropdown.querySelectorAll(".nationality-option").forEach(opt => {
+        opt.style.display = opt.textContent.toLowerCase().includes(term)
+          ? "flex"
+          : "none";
+      });
+    });
+  }
+
+  // Country list oluştur
+  COUNTRY_LIST.forEach(c => {
+    const option = document.createElement("div");
+    option.className = "nationality-option";
+    option.innerHTML = `
+      <img src="https://flagcdn.com/w20/${c.iso2}.png" alt="">
+      <span>${c.name}</span>
+    `;
+
+    option.addEventListener("click", () => {
+      trigger.textContent = c.name;
+      hiddenInput.value = c.iso2.toUpperCase();
+      container.classList.remove("open");
+    });
+
+    dropdown.appendChild(option);
+  });
+
+  // Aç / kapa (mouse)
+  trigger.addEventListener("click", e => {
+    e.stopPropagation();
+    container.classList.toggle("open");
+
+    if (container.classList.contains("open") && searchInput) {
+      searchInput.focus();
+    }
+  });
+
+  // Aç (keyboard – Enter / Space)
+  trigger.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      container.classList.toggle("open");
+
+      if (container.classList.contains("open") && searchInput) {
+        searchInput.focus();
+      }
+    }
+  });
+}
+
+/* INIT */
+document.addEventListener("click", () => {
+  document.querySelectorAll(".nationality-select.open")
+    .forEach(el => el.classList.remove("open"));
+});
+
+document.querySelectorAll(".nationality-select")
+  .forEach(initNationalityDropdown);
+
   
  /* ========================= PHONE INPUT ========================= */
  const phoneInput = document.getElementById("phone");
