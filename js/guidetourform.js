@@ -56,7 +56,7 @@ const nameInput = document.getElementById("participantNameInput");
 const natInput = document.getElementById("participantNationalityInput");
 const natTrigger = document.querySelector(".nationality-trigger");
 const yearInput = document.getElementById("participantBirthYearInput");
-
+const participantsSection = document.getElementById("participantsSection");
 const addBtn = document.getElementById("addParticipantBtn");
 const listContainer = document.getElementById("participantsList");
 const showAllBtn = document.getElementById("showAllParticipants");
@@ -101,9 +101,21 @@ const showAllBtn = document.getElementById("showAllParticipants");
  function renderParticipants() {
   listContainer.innerHTML = "";
 
-  participants.slice(0, MAX_VISIBLE_PARTICIPANTS).forEach((p, index) => {
-    listContainer.appendChild(createParticipantItem(p, index));
-  });
+  // 2 kişiden azsa hiçbir şey gösterme
+  if (participants.length < 2) {
+    participantsSection.style.display = "none";
+    showAllBtn.style.display = "none";
+    return;
+  }
+
+  // 2 ve üzeri → göster
+  participantsSection.style.display = "block";
+
+  participants
+    .slice(0, MAX_VISIBLE_PARTICIPANTS)
+    .forEach((p, index) => {
+      listContainer.appendChild(createParticipantItem(p, index));
+    });
 
   showAllBtn.style.display =
     participants.length > MAX_VISIBLE_PARTICIPANTS
