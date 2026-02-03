@@ -36,15 +36,13 @@ function scrollToFirstError() {
 function showInlineAlert(message) {
   const alert = document.getElementById("formInlineAlert");
   alert.textContent = message;
-  alert.style.opacity = "1";
-  alert.style.visibility = "visible";
+  alert.style.display = "block"; // Kutuyu görünür yapar ve boşluğu açar
   scrollToFirstError();
 }
 
 function hideInlineAlert() {
   const alert = document.getElementById("formInlineAlert");
-  alert.style.opacity = "0";
-  alert.style.visibility = "hidden";
+  alert.style.display = "none"; // Kutuyu ve boşluğu tamamen gizler
 }
 
  /* ===================== PARTICIPANTS STATE ===================== */
