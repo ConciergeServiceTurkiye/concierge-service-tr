@@ -489,3 +489,99 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 }
 
 
+/* ================== LUXURY INPUT BASE ================== */
+.participant-input-row input,
+.participant-input-row select,
+.participant-input-row .nationality-trigger {
+  height: 44px;
+  padding: 12px 14px;
+
+  background: #111;
+  color: #d4af37;
+
+  border: 1px solid #d4af37;
+  border-radius: 10px;
+
+  font-size: 14px;
+  line-height: 1.4;
+  font-family: inherit;
+
+  box-sizing: border-box;
+}
+
+/*PLACEHOLDER / FAKE PLACEHOLDER RENKLERİ EŞİTLE*/
+#participantNameInput::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+/* Nationality fake placeholder */
+.nationality-trigger {
+  color: rgba(255,255,255,0.6);
+}
+
+/* Birth year placeholder */
+#participantBirthYearInput option[value=""] {
+  color: rgba(255,255,255,0.6);
+}
+
+/*HOVER & FOCUS – ÜÇÜ BİREBİR*/
+.participant-input-row input:hover,
+.participant-input-row select:hover,
+.nationality-trigger:hover {
+  background: rgba(212,175,55,0.08);
+}
+
+.participant-input-row input:focus,
+.participant-input-row select:focus,
+.nationality-select.open .nationality-trigger {
+  outline: none;
+  background: rgba(212,175,55,0.08);
+  box-shadow: 0 0 0 1px rgba(212,175,55,0.35);
+}
+
+/*SCROLLBAR = TELEFON COUNTRY CODE KOPYASI (AYNI!)*/
+/* ================== LUXURY SCROLL ================== */
+.nationality-dropdown,
+#participantBirthYearInput {
+  scrollbar-width: thin;
+  scrollbar-color: #d4af37 rgba(255,255,255,0.05);
+}
+
+.nationality-dropdown::-webkit-scrollbar,
+#participantBirthYearInput::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nationality-dropdown::-webkit-scrollbar-track,
+#participantBirthYearInput::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+}
+
+.nationality-dropdown::-webkit-scrollbar-thumb,
+#participantBirthYearInput::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 8px;
+}
+
+.nationality-dropdown::-webkit-scrollbar-thumb:hover,
+#participantBirthYearInput::-webkit-scrollbar-thumb:hover {
+  background: #f1d97a;
+}
+
+/*BIRTH YEAR DROPDOWN OPTION STİLİ (KARANLIK)*/
+#participantBirthYearInput option {
+  background: #0b0b0b;
+  color: #d4af37;
+}
+
+#participantBirthYearInput option:hover {
+  background: rgba(212,175,55,0.2);
+  color: #000;
+}
+
+/*TAB / KLAVYE ODAK (Accessibility FIX)*/
+.nationality-trigger:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(212,175,55,0.4);
+}
+
