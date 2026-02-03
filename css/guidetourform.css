@@ -294,10 +294,6 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
   color: #111;
 }
 
-.guidetour-form-wrapper .select-trigger::placeholder {
-  color: rgba(255,255,255,0.55) !important;
-}
-
 /* Custom select error border */
 .custom-select.has-error .select-trigger {
   border-color: #e53935; /* diğer inputlarla aynı kırmızı */
@@ -422,21 +418,11 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
   background: rgba(212,175,55,0.08);
 }
 
-.nationality-dropdown::-webkit-scrollbar,
-#participantBirthYearInput::-webkit-scrollbar {
-  width: 6px;
-}
+.nationality-dropdown::-webkit-scrollbar {width: 6px;}
 
-.nationality-dropdown::-webkit-scrollbar-thumb,
-#participantBirthYearInput::-webkit-scrollbar-thumb {
-  background: rgba(212,175,55,0.4);
-  border-radius: 6px;
-}
+.nationality-dropdown::-webkit-scrollbar-thumb{background: rgba(212,175,55,0.4);border-radius: 6px;}
 
-.nationality-dropdown::-webkit-scrollbar-track,
-#participantBirthYearInput::-webkit-scrollbar-track {
-  background: transparent;
-}
+.nationality-dropdown::-webkit-scrollbar-track{background: transparent;}
 
 /* ================== LUXURY INPUT BASE ================== */
 .participant-input-row input,
@@ -475,32 +461,17 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 
 /*SCROLLBAR = TELEFON COUNTRY CODE KOPYASI (AYNI!)*/
 /* ================== LUXURY SCROLL ================== */
-.nationality-dropdown,
-#participantBirthYearInput {
+.nationality-dropdown{
   scrollbar-width: thin;
   scrollbar-color: #d4af37 rgba(255,255,255,0.05);
 }
 
-.nationality-dropdown::-webkit-scrollbar,
-#participantBirthYearInput::-webkit-scrollbar {
-  width: 8px;
-}
+.nationality-dropdown::-webkit-scrollbar{width: 8px;}
+.nationality-dropdown::-webkit-scrollbar-track{background: rgba(255,255,255,0.05);}
 
-.nationality-dropdown::-webkit-scrollbar-track,
-#participantBirthYearInput::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.05);
-}
+.nationality-dropdown::-webkit-scrollbar-thumb{background: #d4af37;border-radius: 8px;}
 
-.nationality-dropdown::-webkit-scrollbar-thumb,
-#participantBirthYearInput::-webkit-scrollbar-thumb {
-  background: #d4af37;
-  border-radius: 8px;
-}
-
-.nationality-dropdown::-webkit-scrollbar-thumb:hover,
-#participantBirthYearInput::-webkit-scrollbar-thumb:hover {
-  background: #f1d97a;
-}
+.nationality-dropdown::-webkit-scrollbar-thumb:hover{background: #f1d97a;}
 
 /*TAB / KLAVYE ODAK (Accessibility FIX)*/
 .nationality-trigger:focus {
@@ -595,10 +566,4 @@ textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 .birthyear-dropdown::-webkit-scrollbar-thumb:hover {
   background: #f1d97a;
 }
-
-/*GRID’DE YERİ (DEĞİŞTİRMEYE GEREK YOK)*/
-.participant-input-row {
-  grid-template-columns: 1.4fr 1fr 110px;
-}
-
 
