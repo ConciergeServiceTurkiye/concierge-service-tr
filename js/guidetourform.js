@@ -399,6 +399,7 @@ function initNationalityDropdown(container) {
     option.addEventListener("click", () => {
       trigger.textContent = c.name;
       hiddenInput.value = c.iso2.toUpperCase();
+      container.classList.add("has-value");
       container.classList.remove("open");
     });
 
