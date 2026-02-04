@@ -189,33 +189,31 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 
 
 /* ============================== TRANSPORTATION ============================== */
-		.lux-check {display: flex;align-items: center;gap: 10px;cursor: pointer;}
-		.lux-check input {display: none;}
-		.lux-check span {width: 18px;height: 18px;border: 1px solid #d4af37;border-radius: 4px;}
-		.lux-check input:checked + span {background: #d4af37;}
+	.lux-check span {width: 18px;height: 18px;border: 1px solid #d4af37;border-radius: 4px;display: inline-flex;align-items: center;justify-content: center;transition: background .2s ease, box-shadow .2s ease;}
+	.lux-check:hover span {background: rgba(212,175,55,0.12);}
+	.lux-check input:checked + span {background: #d4af37;}
+	.lux-check input:checked + span::after {content: "✓";font-size: 12px;color: #000;font-weight: 700;}
 
 /* ============================== HOTEL INFO ============================== */
-.hotel-row {display: grid;grid-template-columns: 3fr 1fr;gap: 12px;}
+	.hotel-row {display: grid;grid-template-columns: 3fr 1fr;gap: 12px;}
 
 /* ============================== Participant Remove Button ============================== */
-.remove-participant {background: #ff6b6b;color: #000;border-radius: 50%;}
+	.remove-participant {background: #ff6b6b;color: #fff;border-radius: 50%;}
 
 /* ============================== Mobility → Checkbox seçiliyse textarea zorunlu ============================== */ 	
-textarea::-webkit-scrollbar-thumb {background: #d4af37;}
+	.guidetour-form textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 
 
-.select-options {list-style: none;padding-left: 0;margin: 0;}
-.select-options li {list-style: none;}
-.select-options li {padding: 10px 14px;cursor: pointer;}
-.select-options li:hover,
-.select-options li.active {background: rgba(212,175,55,0.2);color: #111;}
+	.select-options {list-style: none;padding: 0;margin: 0;}
+	.select-options li {padding: 10px 14px;cursor: pointer;}
+	.select-options li:hover,
+	.select-options li.active {background: rgba(212,175,55,0.2);color: #111;}
 
 /* Custom select error border */
-.custom-select.has-error .select-trigger {border-color: #e53935; /* diğer inputlarla aynı kırmızı */}
 .field-wrapper.has-error input,
 .field-wrapper.has-error textarea,
-.field-wrapper.has-error select {border-color: #e53935;}
-.field-wrapper.has-error .custom-select .select-trigger {border-color: #ff6b6b}
+.field-wrapper.has-error select,
+.field-wrapper.has-error .select-trigger {border-color: #ff6b6b;}
 .form-group input,
 .form-group textarea,
 .form-group select {width: 100%;box-sizing: border-box;}
