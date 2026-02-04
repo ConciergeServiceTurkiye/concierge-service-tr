@@ -320,6 +320,19 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 	.form-group textarea,
 	.form-group select {width: 100%;box-sizing: border-box;}
 
+/* NATIONALITY PLACEHOLDER – GERÇEK FIX */
+.participant-input-row 
+.nationality-select:not(.has-value) 
+.nationality-trigger .current {
+    color: rgba(255,255,255,0.65);
+}
+
+/* NATIONALITY SELECTED VALUE */
+.participant-input-row 
+.nationality-select.has-value 
+.nationality-trigger .current {
+    color: #d4af37;
+}
 
 
 
