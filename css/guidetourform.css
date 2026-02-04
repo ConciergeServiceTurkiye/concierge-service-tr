@@ -19,66 +19,66 @@
     .textarea-group.active{display:flex;}
     .char-count{font-size:11px;text-align:right;color:rgba(255,255,255,.45);}
 /* ============================== INLINE ALERT ============================== */
-#formInlineAlert {display: none; height: 48px;margin-bottom: 18px;padding: 12px 16px;border: 1px solid rgba(212,175,55,0.6);background: rgba(212,175,55,0.08);color: #d4af37;font-size: 13px;
+	#formInlineAlert {display: none; height: 48px;margin-bottom: 18px;padding: 12px 16px;border: 1px solid rgba(212,175,55,0.6);background: rgba(212,175,55,0.08);color: #d4af37;font-size: 13px;
 				  text-align: center;border-radius: 10px;opacity: 0;visibility: hidden;transition: opacity 0.3s ease;}
 /* <- SUBMIT BUTTON -> */
-      .submit-btn {margin-top: 15px;background: #d4af37;color: #000;border: none;border-radius: 28px;height: 50px;width: 100%;display: flex;align-items: center;
+    .submit-btn {margin-top: 15px;background: #d4af37;color: #000;border: none;border-radius: 28px;height: 50px;width: 100%;display: flex;align-items: center;
 				   justify-content: center;font-size: 14px;font-weight: 600;letter-spacing: 1px;cursor: pointer;position: relative;overflow: hidden;
 				   transition: all 0.3s ease;}
-      .submit-btn::after {content: ""; position: absolute; top: 0; left: -120%; width: 120%; height: 100%; background: linear-gradient(
+    .submit-btn::after {content: ""; position: absolute; top: 0; left: -120%; width: 120%; height: 100%; background: linear-gradient(
              120deg, transparent, rgba(255,255,255,0.5), transparent); transition: all 0.6s ease;}
-      .submit-btn:hover::after {left: 120%;}
-      .submit-btn:active { transform: scale(0.97);}
+    .submit-btn:hover::after {left: 120%;}
+    .submit-btn:active { transform: scale(0.97);}
 /* ============================== PHONE INPUT – FULL WIDTH FIX ============================== */
     /* Ana container */
     .guidetour-form-wrapper .iti {width: 100%;position: relative;z-index: 30;display: flex;align-items: center;}
     /* Telefon inputu */
     .guidetour-form-wrapper .iti input {width: 100% !important;box-sizing: border-box;padding-left: 56px !important;background: #111;color: #d4af37;border: 1px solid #d4af37;}
 /* Bayrak alanı */
-	  .guidetour-form-wrapper .iti__flag-container {position: absolute;top: 0;bottom: 0;display: flex;align-items: center;}
-	  .guidetour-form-wrapper .iti__selected-flag {height: 100%;display: flex;align-items: center;}
+	.guidetour-form-wrapper .iti__flag-container {position: absolute;top: 0;bottom: 0;display: flex;align-items: center;}
+	.guidetour-form-wrapper .iti__selected-flag {height: 100%;display: flex;align-items: center;}
 /* COUNTRY LIST (DROPDOWN) */
-      .guidetour-form-wrapper .iti__country-list {position: absolute;width: 100%;min-width: 320px;max-width: 420px;max-height: 440px;
+    .guidetour-form-wrapper .iti__country-list {position: absolute;width: 100%;min-width: 320px;max-width: 420px;max-height: 440px;
                                                 background: rgba(10,10,10,0.97);border: 1px solid #d4af37;border-radius: 12px;
                                                 box-shadow: 0 12px 30px rgba(212,175,55,0.25);overflow-x: hidden;top: 100%;left: 0;z-index: 50;}
 /* Scrollbar – Webkit */
-      .guidetour-form-wrapper .iti__country-list::-webkit-scrollbar {width: 8px;} 
-      .guidetour-form-wrapper .iti__country-list::-webkit-scrollbar-track {background: rgba(255,255,255,0.05);}
-      .guidetour-form-wrapper .iti__country-list::-webkit-scrollbar-thumb {background: #d4af37;border-radius: 8px;}
-      .guidetour-form-wrapper .iti__country-list::-webkit-scrollbar-thumb:hover {background: #f1d97a;}
+    .guidetour-form-wrapper .iti__country-list::-webkit-scrollbar {width: 8px;} 
+    .guidetour-form-wrapper .iti__country-list::-webkit-scrollbar-track {background: rgba(255,255,255,0.05);}
+	.guidetour-form-wrapper .iti__country-list::-webkit-scrollbar-thumb {background: #d4af37;border-radius: 8px;}
+    .guidetour-form-wrapper .iti__country-list::-webkit-scrollbar-thumb:hover {background: #f1d97a;}
 /* Scrollbar – Firefox */
-      .guidetour-form-wrapper .iti__country-list {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
+    .guidetour-form-wrapper .iti__country-list {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
 /* INTL TEL INPUT – SEARCH BOX FIX */
 /* Search container */
-      .guidetour-form-wrapper .iti__search {width: 100%;min-width: 260px;background: #111;border-bottom: 1px solid rgba(212,175,55,0.6);}
+    .guidetour-form-wrapper .iti__search {width: 100%;min-width: 260px;background: #111;border-bottom: 1px solid rgba(212,175,55,0.6);}
 /* Search input – temel */
-      .guidetour-form-wrapper .iti__search-input {position: sticky;top: 0;z-index: 10;width: 100%;min-width: 260px;
+    .guidetour-form-wrapper .iti__search-input {position: sticky;top: 0;z-index: 10;width: 100%;min-width: 260px;
                                                 box-sizing: border-box;background: #111 !important;border: 1px solid rgba(212,175,55,0.6) !important;
                                                 border-radius: 8px; padding: 9px 12px;font-size: 14px;line-height: 1.4;color: #d4af37 !important;
                                                 -webkit-text-fill-color: #d4af37 !important;caret-color: #d4af37 !important;opacity: 1 !important;}
 /* Placeholder – "Search" yazısı */
-      .guidetour-form-wrapper .iti__search-input::placeholder {color: rgba(255,255,255,0.65) !important;-webkit-text-fill-color: rgba(255,255,255,0.65) !important;}
+    .guidetour-form-wrapper .iti__search-input::placeholder {color: rgba(255,255,255,0.65) !important;-webkit-text-fill-color: rgba(255,255,255,0.65) !important;}
 /* Selection (mouse drag / shift + ok) */
-      .guidetour-form-wrapper .iti__search-input::selection {background: rgba(212,175,55,0.35);color: #000;}
-      .guidetour-form-wrapper .iti__search-input::-moz-selection {background: rgba(212,175,55,0.35);color: #000;}
+    .guidetour-form-wrapper .iti__search-input::selection {background: rgba(212,175,55,0.35);color: #000;}
+    .guidetour-form-wrapper .iti__search-input::-moz-selection {background: rgba(212,175,55,0.35);color: #000;}
 /* Focus state – ekstra güvenlik */
-      .guidetour-form-wrapper .iti__search-input:focus {outline: none;background: #111;color: #d4af37;
+    .guidetour-form-wrapper .iti__search-input:focus {outline: none;background: #111;color: #d4af37;
                                                       border-color: #d4af37 !important;box-shadow: 0 0 0 1px rgba(212,175,55,0.25);}
 /* COUNTRY ROWS */
-      .guidetour-form-wrapper .iti__country {display: flex;align-items: center;gap: 10px;padding: 10px 14px;cursor: pointer;}
-      .guidetour-form-wrapper .iti__country-name {color: #d4af37;flex: 1;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-      .guidetour-form-wrapper .iti__dial-code {color: rgba(255,255,255,0.65);white-space: nowrap;}
+    .guidetour-form-wrapper .iti__country {display: flex;align-items: center;gap: 10px;padding: 10px 14px;cursor: pointer;}
+    .guidetour-form-wrapper .iti__country-name {color: #d4af37;flex: 1;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .guidetour-form-wrapper .iti__dial-code {color: rgba(255,255,255,0.65);white-space: nowrap;}
 /* Hover + Mouse */
-      .guidetour-form-wrapper .iti__country:hover {background: rgba(212,175,55,0.18);}
-      .guidetour-form-wrapper .iti__country:hover .iti__dial-code,
-      .guidetour-form-wrapper .iti__country:hover .iti__country-name {color: #d4af37;}
+    .guidetour-form-wrapper .iti__country:hover {background: rgba(212,175,55,0.18);}
+    .guidetour-form-wrapper .iti__country:hover .iti__dial-code,
+    .guidetour-form-wrapper .iti__country:hover .iti__country-name {color: #d4af37;}
 /* Klavye / Active / Tab */
-      .guidetour-form-wrapper .iti__country.iti__highlight,
-      .guidetour-form-wrapper .iti__country[aria-selected="true"],
-      .guidetour-form-wrapper .iti__country.active {background: rgba(212,175,55,0.28);outline: none;}
-      .guidetour-form-wrapper .iti__country.active .iti__country-name,
-      .guidetour-form-wrapper .iti__country.active .iti__dial-code {color: #d4af37;}
-	  .guidetour-form-wrapper .iti__country:focus-visible {outline: none;box-shadow: inset 0 0 0 2px rgba(212,175,55,0.35);}
+    .guidetour-form-wrapper .iti__country.iti__highlight,
+	.guidetour-form-wrapper .iti__country[aria-selected="true"],
+    .guidetour-form-wrapper .iti__country.active {background: rgba(212,175,55,0.28);outline: none;}
+    .guidetour-form-wrapper .iti__country.active .iti__country-name,
+	.guidetour-form-wrapper .iti__country.active .iti__dial-code {color: #d4af37;}
+	.guidetour-form-wrapper .iti__country:focus-visible {outline: none;box-shadow: inset 0 0 0 2px rgba(212,175,55,0.35);}
 
 /* ============================== CUSTOM SELECT – PLACEHOLDER ============================== */
     .guidetour-form-wrapper .custom-select .select-trigger {color: rgba(255,255,255,0.60);font-size: 13px;line-height: 1.4;}
@@ -89,35 +89,35 @@
     .guidetour-form-wrapper .custom-select .select-options li:hover,
     .guidetour-form-wrapper .custom-select .select-options li.active {color: #d4af37;}
 /* Hover + active background (luxury uyum) */
-.guidetour-form-wrapper .custom-select .select-options li:hover,
-.guidetour-form-wrapper .custom-select .select-options li.active {background: rgba(212,175,55,0.18);color: #d4af37;}
+	.guidetour-form-wrapper .custom-select .select-options li:hover,
+	.guidetour-form-wrapper .custom-select .select-options li.active {background: rgba(212,175,55,0.18);color: #d4af37;}
 /* Klavye odak */
-.guidetour-form-wrapper .custom-select .select-options li:focus-visible {outline: none;background: rgba(212,175,55,0.25);box-shadow: inset 0 0 0 1px rgba(212,175,55,0.35);color: #d4af37;}
+	.guidetour-form-wrapper .custom-select .select-options li:focus-visible {outline: none;background: rgba(212,175,55,0.25);box-shadow: inset 0 0 0 1px rgba(212,175,55,0.35);color: #d4af37;}
 
 /* <- FLATPICKR TAKVİM STİLİ – RENKLER VE GÖRÜNÜM -> */
-      .flatpickr-calendar { background: #2b2b2b; border-radius: 14px; border: none; box-shadow: 0 12px 30px rgba(0,0,0,.4);} /* Takvim arka planı ve gölgesi */
-      .flatpickr-prev-month:hover svg,
-      .flatpickr-next-month:hover svg {fill: #d4af37;} /* Hover altın rengi */
-      .flatpickr-current-month,
-      .flatpickr-current-month span.cur-month,
-      .flatpickr-current-month input.cur-year {color: #d4af37; font-weight: 500;} /* Ay ve yıl rengi */
-      .flatpickr-day {color: #d4af37; border-radius: 8px;} /* Günler rengi ve köşe yuvarlama */
-      .flatpickr-day.prevMonthDay,
-      .flatpickr-day.nextMonthDay,
-      .flatpickr-day.flatpickr-disabled {color: #ffffff; opacity: 0.35; cursor: not-allowed;} /* Geçmiş veya seçilemez günler */
-      .flatpickr-day:not(.flatpickr-disabled):hover {background: rgba(212,175,55,0.25); color: #000;} /* Hover günü */
-      .flatpickr-day.selected,
-      .flatpickr-day.startRange,
-      .flatpickr-day.endRange {background: #d4af37; color: #000; font-weight: 600;} /* Seçili günler */
-      .flatpickr-day.today {border: 1px solid #d4af37;} /* Bugünün günü */
-      .flatpickr-day:focus {outline: none;} /* Focus mavi çizgiyi kaldır */
-      .flatpickr-prev-month svg,
-      .flatpickr-next-month svg {fill: #ffffff !important; stroke: #ffffff !important;} /* Nav okları beyaz */
-      .flatpickr-prev-month:hover svg,
-      .flatpickr-next-month:hover svg {fill: #d4af37 !important; stroke: #d4af37 !important;} /* Hover altın */
-      .flatpickr-current-month .numInputWrapper span::after {border-top-color: #ffffff !important; border-bottom-color: #ffffff !important;} /* Yıl okları beyaz */
-      .flatpickr-current-month .numInputWrapper span:hover::after {border-top-color: #d4af37 !important; border-bottom-color: #d4af37 !important;} /* Hover altın */
-      .flatpickr-weekday {color: #d4af37 !important; font-weight: 500;} /* Gün isimleri rengi */
+	.flatpickr-calendar { background: #2b2b2b; border-radius: 14px; border: none; box-shadow: 0 12px 30px rgba(0,0,0,.4);} /* Takvim arka planı ve gölgesi */
+	.flatpickr-prev-month:hover svg,
+	.flatpickr-next-month:hover svg {fill: #d4af37;} /* Hover altın rengi */
+	.flatpickr-current-month,
+	.flatpickr-current-month span.cur-month,
+	.flatpickr-current-month input.cur-year {color: #d4af37; font-weight: 500;} /* Ay ve yıl rengi */
+	.flatpickr-day {color: #d4af37; border-radius: 8px;} /* Günler rengi ve köşe yuvarlama */
+	.flatpickr-day.prevMonthDay,
+	.flatpickr-day.nextMonthDay,
+	.flatpickr-day.flatpickr-disabled {color: #ffffff; opacity: 0.35; cursor: not-allowed;} /* Geçmiş veya seçilemez günler */
+	.flatpickr-day:not(.flatpickr-disabled):hover {background: rgba(212,175,55,0.25); color: #000;} /* Hover günü */
+	.flatpickr-day.selected,
+	.flatpickr-day.startRange,
+	.flatpickr-day.endRange {background: #d4af37; color: #000; font-weight: 600;} /* Seçili günler */
+	.flatpickr-day.today {border: 1px solid #d4af37;} /* Bugünün günü */
+	.flatpickr-day:focus {outline: none;} /* Focus mavi çizgiyi kaldır */
+	.flatpickr-prev-month svg,
+	.flatpickr-next-month svg {fill: #ffffff !important; stroke: #ffffff !important;} /* Nav okları beyaz */
+	.flatpickr-prev-month:hover svg,
+	.flatpickr-next-month:hover svg {fill: #d4af37 !important; stroke: #d4af37 !important;} /* Hover altın */
+	.flatpickr-current-month .numInputWrapper span::after {border-top-color: #ffffff !important; border-bottom-color: #ffffff !important;} /* Yıl okları beyaz */
+	.flatpickr-current-month .numInputWrapper span:hover::after {border-top-color: #d4af37 !important; border-bottom-color: #d4af37 !important;} /* Hover altın */
+	.flatpickr-weekday {color: #d4af37 !important; font-weight: 500;} /* Gün isimleri rengi */
       /* AY DROPDOWN – GENEL */
 	.flatpickr-monthDropdown-months {background-color: #2b2b2b !important;color: rgba(255,255,255,0.60) !important;border-radius: 8px;}
 	.flatpickr-monthDropdown-months option {background-color: #2b2b2b !important;color: rgba(255,255,255,0.60) !important;} /* AY SEÇENEKLERİ – NORMAL */
@@ -128,29 +128,30 @@
 /* GLOBAL OVERRIDE – BEYAZLARI TEMİZLE */
 	.flatpickr-monthDropdown-months,
 	.flatpickr-monthDropdown-months * {background-color: #2b2b2b !important;color: rgba(255,255,255,0.60) !important;}
-	  .flatpickr-day:focus-visible {background: rgba(212,175,55,0.35);box-shadow: inset 0 0 0 1px rgba(212,175,55,0.45);color: #000;}
+	.flatpickr-day:focus-visible {background: rgba(212,175,55,0.35);box-shadow: inset 0 0 0 1px rgba(212,175,55,0.45);color: #000;}
 
 
-        .tour-experience strong {display: block;margin-bottom: 10px;color: #d4af37;font-weight: 500;}
+    .tour-experience strong {display: block;margin-bottom: 10px;color: #d4af37;font-weight: 500;}
 
-        .success-screen {display: none;text-align: center;padding: 80px 40px;}
-        .success-screen h2 {color: #d4af37;font-size: 32px;margin-bottom: 15px;}
-        .success-screen p {color: rgba(255,255,255,0.7);font-size: 16px;}
-        .success-screen .reservation-id {display: block;margin-top: 25px;color: #d4af37;font-size: 14px;letter-spacing: 2px;}
+    .success-screen {display: none;text-align: center;padding: 80px 40px;}
+    .success-screen h2 {color: #d4af37;font-size: 32px;margin-bottom: 15px;}
+    .success-screen p {color: rgba(255,255,255,0.7);font-size: 16px;}
+    .success-screen .reservation-id {display: block;margin-top: 25px;color: #d4af37;font-size: 14px;letter-spacing: 2px;}
 
-		.nationality-select {position: relative;}
-		.nationality-dropdown {display: none;position: absolute;top: 105%;left: 0;width: 100%;max-height: 260px;overflow-y: auto;background: #111;
+	.nationality-select {position: relative;}
+	.nationality-dropdown {display: none;position: absolute;top: 105%;left: 0;width: 100%;max-height: 260px;overflow-y: auto;background: #111;
 							   border: 1px solid #d4af37;border-radius: 10px;z-index: 50;}
-		.nationality-select.open .nationality-dropdown {display: block;}
-		.nationality-option {padding: 10px 12px;display: flex;align-items: center;gap: 10px;cursor: pointer;}
-		.nationality-option:hover {background: rgba(212,175,55,0.2);}
+	.nationality-select.open .nationality-dropdown {display: block;}
+	.nationality-option {padding: 10px 12px;display: flex;align-items: center;gap: 10px;cursor: pointer;}
+	.nationality-option:hover {background: rgba(212,175,55,0.2);}
 
-		.has-error {animation: shake 0.3s ease;}
-		.has-error input,
-		.has-error textarea,
-		.has-error .nationality-trigger {border-color: #ff6b6b !important;box-shadow: 0 0 0 2px rgba(255,107,107,0.3);}
-		@keyframes shake {0% { transform: translateX(0); }25% { transform: translateX(-4px); }50% { transform: translateX(4px); }75% { transform: translateX(-4px); }100% { transform: translateX(0); }}
-		.field-error {font-size: 12px;color: #ff6b6b;margin-bottom: 6px;}
+
+	.has-error {animation: shake 0.3s ease;}
+	.has-error input,
+	.has-error textarea,
+	.has-error .nationality-trigger {border-color: #ff6b6b !important;box-shadow: 0 0 0 2px rgba(255,107,107,0.3);}
+	@keyframes shake {0% { transform: translateX(0); }25% { transform: translateX(-4px); }50% { transform: translateX(4px); }75% { transform: translateX(-4px); }100% { transform: translateX(0); }}
+	.field-error {font-size: 12px;color: #ff6b6b;margin-bottom: 6px;}
 
 /*Modal düzeni */
 /* ============================== EXPERIENCE CARD ============================== */
@@ -210,89 +211,88 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 	.select-options li.active {background: rgba(212,175,55,0.2);color: #111;}
 
 /* Custom select error border */
-.field-wrapper.has-error input,
-.field-wrapper.has-error textarea,
-.field-wrapper.has-error select,
-.field-wrapper.has-error .select-trigger {border-color: #ff6b6b;}
-.form-group input,
-.form-group textarea,
-.form-group select {width: 100%;box-sizing: border-box;}
+	.field-wrapper.has-error input,
+	.field-wrapper.has-error textarea,
+	.field-wrapper.has-error select,
+	.field-wrapper.has-error .select-trigger {border-color: #ff6b6b;}
+	.form-group input,
+	.form-group textarea,
+	.form-group select {width: 100%;box-sizing: border-box;}
 
 /* PARTİCİPANT YENİ*/
-.add-participant-btn {background: #2ecc71;color: white;border: none;width: 42px;height: 42px;border-radius: 50%;font-size: 22px;cursor: pointer;margin-top: 10px;grid-area: add;justify-self: center;}
-.add-participant-btn:hover{background: #27ae60;}
-.participant-actions .edit {color: #d4af37; /* sarı */}
-.participant-actions .delete {color: #c62828; /* kırmızı */}
+	.add-participant-btn {background: #2ecc71;color: white;border: none;width: 42px;height: 42px;border-radius: 50%;font-size: 22px;cursor: pointer;margin-top: 10px;grid-area: add;justify-self: center;}
+	.add-participant-btn:hover{background: #27ae60;}
+	.participant-actions .edit {color: #d4af37; /* sarı */}
+	.participant-actions .delete {color: #c62828; /* kırmızı */}
 
 /* MODAL */
-.participants-modal {position: fixed;inset: 0;background: rgba(0,0,0,.75);display: none;align-items: center;justify-content: center;z-index: 9999;}
-.participants-modal.active {display: flex;}
-.modal-content {background: #0b0b0b;border-radius: 18px;padding: 30px;width: 90%;max-width: 520px;}
-.modal-close {position: absolute;right: 20px;top: 14px;font-size: 28px;color: #fff;}
-.participant-input-row {gap: 12px;align-items: center;}
-#participantNameInput {min-width: 0;}
+	.participants-modal {position: fixed;inset: 0;background: rgba(0,0,0,.75);display: none;align-items: center;justify-content: center;z-index: 9999;}
+	.participants-modal.active {display: flex;}
+	.modal-content {background: #0b0b0b;border-radius: 18px;padding: 30px;width: 90%;max-width: 520px;}
+	.modal-close {position: absolute;right: 20px;top: 14px;font-size: 28px;color: #fff;}
+	.participant-input-row {gap: 12px;align-items: center;}
+	#participantNameInput {min-width: 0;}
 
 /* Klavye ile odak */
-.participant-input-row {grid-template-areas:"name nationality birth""add add add";}
-#participantNameInput {grid-area: name;min-width: 0;}
-.nationality-select {grid-area: nationality;}
-.nationality-trigger {height: 44px;background: rgba(255,255,255,0.05);border-radius: 10px;color: rgba(255,255,255,0.7);}
-.nationality-trigger:hover,
-.nationality-select.open .nationality-trigger {background: rgba(212,175,55,0.08);}
-.nationality-dropdown::-webkit-scrollbar {width: 6px;}
-.nationality-dropdown::-webkit-scrollbar-thumb{background: rgba(212,175,55,0.4);border-radius: 6px;}
-.nationality-dropdown::-webkit-scrollbar-track{background: transparent;}
+	.participant-input-row {grid-template-areas:"name nationality birth""add add add";}
+	#participantNameInput {grid-area: name;min-width: 0;}
+	.nationality-select {grid-area: nationality;}
+	.nationality-trigger {height: 44px;background: rgba(255,255,255,0.05);border-radius: 10px;color: rgba(255,255,255,0.7);}
+	.nationality-trigger:hover,
+	.nationality-select.open .nationality-trigger {background: rgba(212,175,55,0.08);}
+	.nationality-dropdown::-webkit-scrollbar {width: 6px;}
+	.nationality-dropdown::-webkit-scrollbar-thumb{background: rgba(212,175,55,0.4);border-radius: 6px;}
+	.nationality-dropdown::-webkit-scrollbar-track{background: transparent;}
 
 /* ================== LUXURY INPUT BASE ================== */
-.participant-input-row input,
-.participant-input-row select,
-.participant-input-row .nationality-trigger {height: 44px;padding: 12px 14px;background: #111;color: #d4af37;border: 1px solid #d4af37;border-radius: 10px;
-											 font-size: 14px;line-height: 1.4;font-family: inherit;box-sizing: border-box;}
+	.participant-input-row input,
+	.participant-input-row .nationality-trigger,
+	.participant-input-row .birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;color: #d4af37;border: 1px solid #d4af37;border-radius: 10px;font-size: 14px;line-height: 1.4;
+										   font-family: inherit;box-sizing: border-box;}
 
 /*HOVER & FOCUS – ÜÇÜ BİREBİR*/
-.participant-input-row input:hover,
-.participant-input-row select:hover,
-.nationality-trigger:hover {background: rgba(212,175,55,0.08);}
-.participant-input-row input:focus,
-.participant-input-row select:focus,
-.nationality-select.open .nationality-trigger {outline: none;background: rgba(212,175,55,0.08);box-shadow: 0 0 0 1px rgba(212,175,55,0.35);}
+	.participant-input-row input:hover,
+	.nationality-trigger:hover,
+	.birthyear-trigger:hover {background: rgba(212,175,55,0.08);}
+	.participant-input-row input:focus,
+	.nationality-select.open .nationality-trigger,
+	.birthyear-select.open .birthyear-trigger {outline: none;background: rgba(212,175,55,0.08);box-shadow: 0 0 0 1px rgba(212,175,55,0.35);}
 
 /*SCROLLBAR = TELEFON COUNTRY CODE KOPYASI (AYNI!)*/
 /* ================== LUXURY SCROLL ================== */
-.nationality-dropdown{scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
-.nationality-dropdown::-webkit-scrollbar{width: 8px;}
-.nationality-dropdown::-webkit-scrollbar-track{background: rgba(255,255,255,0.05);}
-.nationality-dropdown::-webkit-scrollbar-thumb{background: #d4af37;border-radius: 8px;}
-.nationality-dropdown::-webkit-scrollbar-thumb:hover{background: #f1d97a;}
+	.nationality-dropdown{scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
+	.nationality-dropdown::-webkit-scrollbar{width: 8px;}
+	.nationality-dropdown::-webkit-scrollbar-track{background: rgba(255,255,255,0.05);}
+	.nationality-dropdown::-webkit-scrollbar-thumb{background: #d4af37;border-radius: 8px;}
+	.nationality-dropdown::-webkit-scrollbar-thumb:hover{background: #f1d97a;}
 
 /*TAB / KLAVYE ODAK (Accessibility FIX)*/
-.nationality-trigger:focus {outline: none;box-shadow: 0 0 0 2px rgba(212,175,55,0.4);}
+	.nationality-trigger:focus {outline: none;box-shadow: 0 0 0 2px rgba(212,175,55,0.4);}
 
 /*NATIONALITY’DEN %100 KOPYA (AMA İSİM FARKLI)*/
-.birthyear-select {position: relative;}
+	.birthyear-select {position: relative;}
 
 /*Trigger (fake input)*/
-.birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;border: 1px solid #d4af37;border-radius: 10px;color: rgba(255,255,255,0.6);font-size: 14px;line-height: 1.4;display: flex;align-items: center;cursor: pointer;}
-.birthyear-trigger.has-value {color: #d4af37;}
-.birthyear-trigger:hover,
-.birthyear-select.open .birthyear-trigger {background: rgba(212,175,55,0.08);}
+	.birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;border: 1px solid #d4af37;border-radius: 10px;color: rgba(255,255,255,0.6);font-size: 14px;line-height: 1.4;display: flex;align-items: center;cursor: pointer;}
+	.birthyear-trigger.has-value {color: #d4af37;}
+	.birthyear-trigger:hover,
+	.birthyear-select.open .birthyear-trigger {background: rgba(212,175,55,0.08);}
 
 /*Dropdown*/
-.birthyear-dropdown {display: none;position: absolute;top: 105%;left: 0;width: 100%;max-height: 260px;background: rgba(10,10,10,0.97);border: 1px solid #d4af37;
+	.birthyear-dropdown {display: none;position: absolute;top: 105%;left: 0;width: 100%;max-height: 260px;background: rgba(10,10,10,0.97);border: 1px solid #d4af37;
 					 border-radius: 12px;overflow-y: auto;z-index: 60;}
-.birthyear-select.open .birthyear-dropdown {display: block;}
-
+	.birthyear-select.open .birthyear-dropdown {display: block;}
 
 /*Options*/
-.birthyear-option {padding: 10px 14px;cursor: pointer;color: rgba(255,255,255,0.7);}
-.birthyear-option:hover {background: rgba(212,175,55,0.18);color: #d4af37;}
+	.birthyear-option {padding: 10px 14px;cursor: pointer;color: rgba(255,255,255,0.7);}
+	.birthyear-option:hover {background: rgba(212,175,55,0.18);color: #d4af37;}
 
 /*LUXURY SCROLL — TELEFON COUNTRY CODE İLE AYNI*/
-.birthyear-dropdown {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
-.birthyear-dropdown::-webkit-scrollbar {width: 8px;}
-.birthyear-dropdown::-webkit-scrollbar-track {background: rgba(255,255,255,0.05);}
-.birthyear-dropdown::-webkit-scrollbar-thumb {background: #d4af37;border-radius: 8px;}
-.birthyear-dropdown::-webkit-scrollbar-thumb:hover {background: #f1d97a;}
-.birthyear-trigger:focus {outline: none;box-shadow: 0 0 0 2px rgba(212,175,55,0.4);}
+	.birthyear-dropdown {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
+	.birthyear-dropdown::-webkit-scrollbar {width: 8px;}
+	.birthyear-dropdown::-webkit-scrollbar-track {background: rgba(255,255,255,0.05);}
+	.birthyear-dropdown::-webkit-scrollbar-thumb {background: #d4af37;border-radius: 8px;}
+	.birthyear-dropdown::-webkit-scrollbar-thumb:hover {background: #f1d97a;}
+	.birthyear-trigger:focus {outline: none;box-shadow: 0 0 0 2px rgba(212,175,55,0.4);}
 
 
