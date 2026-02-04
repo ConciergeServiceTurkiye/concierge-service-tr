@@ -33,7 +33,7 @@
 	.participants-modal.active {display: flex;}
 	.modal-content {background: #0b0b0b;border-radius: 18px;padding: 30px;width: 90%;max-width: 520px;}
 	.modal-close {position: absolute;right: 20px;top: 14px;font-size: 28px;color: #fff;}
-	.participant-input-row {gap: 12px;align-items: center;}
+	.participant-input-row {display: grid;grid-template-areas:"name nationality birth""add add add";gap: 12px;align-items: stretch;}
 	#participantNameInput {min-width: 0;}
 
 /* Klavye ile odak */
@@ -51,18 +51,20 @@
 	.participant-input-row .nationality-trigger,
 	.participant-input-row .birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;color: #d4af37;border: 1px solid #d4af37;border-radius: 10px;font-size: 14px;line-height: 1.4;
 										   font-family: inherit;box-sizing: border-box;}
+
+/* Hover tamamen kapalı */
+	.participant-input-row input:hover,
+	.nationality-trigger:hover,
+	.birthyear-trigger:hover {background: #111;border-color: #d4af37;}
+
+/* Nationality asla küçülmez */
+	.nationality-trigger,
+	.birthyear-trigger {height: 44px;box-sizing: border-box;}
+
 /* Focus / Click = beyaz border */
 	.participant-input-row input:focus,
 	.nationality-select.open .nationality-trigger,
 	.birthyear-select.open .birthyear-trigger {outline: none;border-color: rgba(255,255,255,0.9);box-shadow: 0 0 0 1px rgba(255,255,255,0.35);background: #111;}
-
-/*HOVER & FOCUS – ÜÇÜ BİREBİR*/
-	.participant-input-row input:hover,
-	.nationality-trigger:hover,
-	.birthyear-trigger:hover {background: rgba(212,175,55,0.08);}
-	.participant-input-row input:focus,
-	.nationality-select.open .nationality-trigger,
-	.birthyear-select.open .birthyear-trigger {outline: none;background: rgba(212,175,55,0.08);box-shadow: 0 0 0 1px rgba(212,175,55,0.35);}
 
 /*SCROLLBAR = TELEFON COUNTRY CODE KOPYASI (AYNI!)*/
 /* ================== LUXURY SCROLL ================== */
