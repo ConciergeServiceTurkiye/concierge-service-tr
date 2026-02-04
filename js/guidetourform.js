@@ -91,6 +91,8 @@ const showAllBtn = document.getElementById("showAllParticipants");
   natInput.value = "";
   natTrigger.textContent = "Select nationality";
   yearInput.value = "";
+  natTrigger.closest(".nationality-select")
+  ?.classList.remove("has-value");
 
   renderParticipants();
 });
