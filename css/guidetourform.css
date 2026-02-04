@@ -332,4 +332,13 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 }
 
 
+/* KLAVYE HOVER = MOUSE HOVER (ÇOK ÖNEMLİ)*/
+.nationality-option:hover,
+.nationality-option.active,
+.birthyear-option:hover,
+.birthyear-option.active {
+  background: rgba(255, 215, 0, 0.15);
+  color: #ffd700;
+}
+
 
