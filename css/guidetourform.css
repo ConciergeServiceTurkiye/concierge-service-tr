@@ -75,9 +75,10 @@
 /* Klavye / Active / Tab */
       .guidetour-form-wrapper .iti__country.iti__highlight,
       .guidetour-form-wrapper .iti__country[aria-selected="true"],
-      .guidetour-form-wrapper .iti__country.active {background: rgba(212,175,55,0.18);outline: none;}
+      .guidetour-form-wrapper .iti__country.active {background: rgba(212,175,55,0.28);outline: none;}
       .guidetour-form-wrapper .iti__country.active .iti__country-name,
       .guidetour-form-wrapper .iti__country.active .iti__dial-code {color: #d4af37;}
+	  .guidetour-form-wrapper .iti__country:focus-visible {outline: none;box-shadow: inset 0 0 0 2px rgba(212,175,55,0.35);}
 
 /* ============================== CUSTOM SELECT – PLACEHOLDER ============================== */
     .guidetour-form-wrapper .custom-select .select-trigger {color: rgba(255,255,255,0.60);font-size: 13px;line-height: 1.4;}
