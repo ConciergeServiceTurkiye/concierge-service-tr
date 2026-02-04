@@ -40,7 +40,7 @@
 	.participant-input-row {grid-template-areas:"name nationality birth""add add add";}
 	#participantNameInput {grid-area: name;min-width: 0;}
 	.nationality-select {grid-area: nationality;}
-	.nationality-trigger {height: 44px;background: rgba(255,255,255,0.05);border-radius: 10px;color: rgba(255,255,255,0.7);}
+	.nationality-trigger {height: 44px;background: rgba(255,255,255,0.05);border-radius: 10px;color: rgba(255,255,255,0.65);}
 	.nationality-dropdown::-webkit-scrollbar {width: 6px;}
 	.nationality-dropdown::-webkit-scrollbar-thumb{background: rgba(212,175,55,0.4);border-radius: 6px;}
 	.nationality-dropdown::-webkit-scrollbar-track{background: transparent;}
@@ -95,6 +95,7 @@
 /*Trigger (fake input)*/
 	.birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;border: 1px solid #d4af37;border-radius: 10px;color: rgba(255,255,255,0.6);font-size: 14px;line-height: 1.4;display: flex;align-items: center;cursor: pointer;}
 	.birthyear-trigger.has-value {color: #d4af37;}
+	.birthyear-trigger:not(.has-value) {color: rgba(255,255,255,0.65);}
 	.birthyear-trigger:hover {background: #111;}
 
 /*Dropdown*/
@@ -174,7 +175,7 @@
 	.guidetour-form-wrapper .iti__country:focus-visible {outline: none;box-shadow: inset 0 0 0 2px rgba(212,175,55,0.35);}
 
 /* ============================== CUSTOM SELECT – PLACEHOLDER ============================== */
-    .guidetour-form-wrapper .custom-select .select-trigger {color: rgba(255,255,255,0.60);font-size: 13px;line-height: 1.4;}
+    .guidetour-form-wrapper .custom-select:not(.has-value) .select-trigger {color: rgba(255,255,255,0.65);}
 
 /* Selected value */
     .guidetour-form-wrapper .custom-select.has-value .select-trigger {color: #d4af37;}
