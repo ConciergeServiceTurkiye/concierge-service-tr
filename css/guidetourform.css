@@ -41,7 +41,6 @@
 	#participantNameInput {grid-area: name;min-width: 0;}
 	.nationality-select {grid-area: nationality;}
 	.nationality-trigger {height: 44px;background: rgba(255,255,255,0.05);border-radius: 10px;color: rgba(255,255,255,0.7);}
-	.nationality-trigger:hover,
 	.nationality-dropdown::-webkit-scrollbar {width: 6px;}
 	.nationality-dropdown::-webkit-scrollbar-thumb{background: rgba(212,175,55,0.4);border-radius: 6px;}
 	.nationality-dropdown::-webkit-scrollbar-track{background: transparent;}
@@ -60,6 +59,7 @@
 /* Nationality asla küçülmez */
 	.nationality-trigger,
 	.birthyear-trigger {height: 44px;box-sizing: border-box;}
+	.nationality-trigger {width: 100%;min-width: 0;box-sizing: border-box;}
 
 /* Trigger’lar ASLA auto-width olmayacak */
 	.nationality-trigger,
