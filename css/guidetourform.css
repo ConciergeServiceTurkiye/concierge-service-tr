@@ -55,7 +55,7 @@
 /* ================== LUXURY INPUT BASE ================== */
 	.participant-input-row input,
 	.participant-input-row .nationality-trigger,
-	.participant-input-row .birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;color: #d4af37;border: 1px solid #d4af37;border-radius: 10px;font-size: 14px;line-height: 1.4;
+	.participant-input-row .birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;border: 1px solid #d4af37;border-radius: 10px;font-size: 14px;line-height: 1.4;
 										   font-family: inherit;box-sizing: border-box;}
 
 /* Hover tamamen kapalı */
