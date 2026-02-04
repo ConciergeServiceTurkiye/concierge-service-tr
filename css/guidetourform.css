@@ -30,18 +30,13 @@
       .submit-btn:hover::after {left: 120%;}
       .submit-btn:active { transform: scale(0.97);}
 /* ============================== PHONE INPUT – FULL WIDTH FIX ============================== */
-    .guidetour-form-wrapper .iti {width: 100%;}
-    .guidetour-form-wrapper .iti input {width: 100% !important;box-sizing: border-box;}
-/* INTL TEL INPUT – CONTACT FORM */
-/* Ana container */
-      .guidetour-form-wrapper .iti {width: 100%;position: relative;z-index: 30;}
-/* Telefon inputu */
-      .guidetour-form-wrapper .iti input {width: 100% !important;box-sizing: border-box;padding-left: 56px !important;background: #111;color: #d4af37;border: 1px solid #d4af37;}
+    /* Ana container */
+    .guidetour-form-wrapper .iti {width: 100%;position: relative;z-index: 30;display: flex;align-items: center;}
+    /* Telefon inputu */
+    .guidetour-form-wrapper .iti input {width: 100% !important;box-sizing: border-box;padding-left: 56px !important;background: #111;color: #d4af37;border: 1px solid #d4af37;}
 /* Bayrak alanı */
-      .guidetour-form-wrapper .iti {display: flex;align-items: center;}
 	  .guidetour-form-wrapper .iti__flag-container {position: absolute;top: 0;bottom: 0;display: flex;align-items: center;}
-	  .guidetour-form-wrapper .iti__selected-flag {display: flex;align-items: center;}
-      .guidetour-form-wrapper .iti__selected-flag {height: 100%;display: flex;align-items: center;}
+	  .guidetour-form-wrapper .iti__selected-flag {height: 100%;display: flex;align-items: center;}
 /* COUNTRY LIST (DROPDOWN) */
       .guidetour-form-wrapper .iti__country-list {position: absolute;width: 100%;min-width: 320px;max-width: 420px;max-height: 440px;
                                                 background: rgba(10,10,10,0.97);border: 1px solid #d4af37;border-radius: 12px;
@@ -83,10 +78,6 @@
       .guidetour-form-wrapper .iti__country.active {background: rgba(212,175,55,0.18);outline: none;}
       .guidetour-form-wrapper .iti__country.active .iti__country-name,
       .guidetour-form-wrapper .iti__country.active .iti__dial-code {color: #d4af37;}
-/* INTL TEL INPUT – CONTACT */
-      .iti {width: 100%;position: relative;}
-      .iti__country-list {background: #0b0b0b;border: 1px solid #d4af37;}
-		.phone-wrapper {position: relative;}
 
 /* ============================== CUSTOM SELECT – PLACEHOLDER ============================== */
     .guidetour-form-wrapper .custom-select .select-trigger {color: rgba(255,255,255,0.60);font-size: 13px;line-height: 1.4;}
