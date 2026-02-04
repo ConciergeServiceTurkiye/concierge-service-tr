@@ -371,6 +371,11 @@ function initNationalityDropdown(container) {
   const searchInput = container.querySelector(".nationality-search");
   const hiddenInput = container.querySelector("#participantNationalityInput");
 
+ let activeIndex = -1;
+const options = () =>
+  Array.from(dropdown.querySelectorAll(".nationality-option"));
+
+
   if (!trigger || !dropdown || !hiddenInput) return;
 
   // Temizle (yeniden init için)
@@ -420,19 +425,37 @@ function initNationalityDropdown(container) {
   });
 
   // Aç (keyboard – Enter / Space)
-  trigger.addEventListener("keydown", e => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      container.classList.toggle("open");
+  trigger.addEventListener("focus", () => {
+  container.classList.add("open");
+});
 
-      if (container.classList.contains("open") && searchInput) {
-        searchInput.focus();
-      }
-    }
-  });
+trigger.addEventListener("keydown", e => {
+  const opts = options();
+  if (!container.classList.contains("open")) container.classList.add("open");
+
+  if (["ArrowDown", "ArrowUp"].includes(e.key)) {
+    e.preventDefault();
+
+    activeIndex =
+      e.key === "ArrowDown"
+        ? (activeIndex + 1) % opts.length
+        : (activeIndex - 1 + opts.length) % opts.length;
+
+    opts.forEach(o => o.classList.remove("active"));
+    opts[activeIndex].classList.add("active");
+    opts[activeIndex].scrollIntoView({ block: "nearest" });
+  }
+
+  if (e.key === "Enter" && activeIndex >= 0) {
+    e.preventDefault();
+    opts[activeIndex].click();
+  }
+
+  if (e.key === "Escape") {
+    container.classList.remove("open");
+  }
+});
 }
-
- 
 
 /* INIT */
 document.addEventListener("click", () => {
@@ -455,6 +478,9 @@ function initBirthYearDropdown(container) {
   const dropdown = container.querySelector(".birthyear-dropdown");
   const hiddenInput = container.querySelector("#participantBirthYearInput");
 
+  let options = [];
+  let activeIndex = -1;
+
   const currentYear = new Date().getFullYear();
   const minYear = currentYear - 100;
 
@@ -465,38 +491,86 @@ function initBirthYearDropdown(container) {
     div.className = "birthyear-option";
     div.textContent = y;
 
-    div.addEventListener("click", () => {
-      trigger.textContent = y;
-      trigger.classList.add("has-value");
-      hiddenInput.value = y;
-      container.classList.remove("open");
-    });
-
+    div.addEventListener("click", () => selectOption(y));
     dropdown.appendChild(div);
   }
 
-  trigger.addEventListener("click", () => {
-    container.classList.toggle("open");
+  options = Array.from(dropdown.children);
+
+  function open() {
+    container.classList.add("open");
+    activeIndex = -1;
+    clearActive();
+  }
+
+  function close() {
+    container.classList.remove("open");
+    activeIndex = -1;
+    clearActive();
+  }
+
+  function clearActive() {
+    options.forEach(o => o.classList.remove("active"));
+  }
+
+  function setActive(index) {
+    clearActive();
+    activeIndex = index;
+    options[activeIndex].classList.add("active");
+    options[activeIndex].scrollIntoView({ block: "nearest" });
+  }
+
+  function selectOption(value) {
+    trigger.textContent = value;
+    trigger.classList.add("has-value");
+    hiddenInput.value = value;
+    close();
+    trigger.focus();
+  }
+
+  /* TAB ile gelince AÇ */
+  trigger.addEventListener("focus", open);
+
+  trigger.addEventListener("click", e => {
+    e.preventDefault();
+    e.stopPropagation();
+    container.classList.contains("open") ? close() : open();
   });
 
   trigger.addEventListener("keydown", e => {
-    if (e.key === "Enter" || e.key === " ") {
+    if (!container.classList.contains("open")) open();
+
+    if (["ArrowDown", "ArrowUp"].includes(e.key)) {
       e.preventDefault();
-      container.classList.toggle("open");
+
+      if (e.key === "ArrowDown") {
+        setActive(
+          activeIndex < options.length - 1 ? activeIndex + 1 : 0
+        );
+      }
+
+      if (e.key === "ArrowUp") {
+        setActive(
+          activeIndex > 0 ? activeIndex - 1 : options.length - 1
+        );
+      }
+    }
+
+    if (e.key === "Enter" && activeIndex >= 0) {
+      e.preventDefault();
+      selectOption(options[activeIndex].textContent);
+    }
+
+    if (e.key === "Escape") {
+      e.preventDefault();
+      close();
     }
   });
 
   document.addEventListener("click", e => {
-    if (!container.contains(e.target)) {
-      container.classList.remove("open");
-    }
+    if (!container.contains(e.target)) close();
   });
 }
-
-document
-  .querySelectorAll(".birthyear-select")
-  .forEach(initBirthYearDropdown);
-
  
  /* ========================= PHONE INPUT ========================= */
  const phoneInput = document.getElementById("phone");
