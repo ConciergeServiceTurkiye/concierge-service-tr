@@ -233,7 +233,6 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 #participantNameInput {min-width: 0;}
 
 /* Klavye ile odak */
-.nationality-trigger:focus {outline: 2px solid rgba(0,0,0,0.15);outline-offset: 2px;}
 .participant-input-row {grid-template-areas:"name nationality birth""add add add";}
 #participantNameInput {grid-area: name;min-width: 0;}
 .nationality-select {grid-area: nationality;}
