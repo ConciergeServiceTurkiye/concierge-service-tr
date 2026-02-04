@@ -443,9 +443,11 @@ document.addEventListener("click", () => {
 document.querySelectorAll(".nationality-select")
   .forEach(initNationalityDropdown);
 
- if (!trigger.querySelector(".current")) {
-  trigger.innerHTML = `<span class="current">Select nationality</span>`;
-}
+ document.querySelectorAll(".nationality-trigger").forEach(trigger => {
+  if (!trigger.querySelector(".current")) {
+    trigger.innerHTML = `<span class="current">Select nationality</span>`;
+  }
+});
 
 /* ============================== BIRTH YEAR DROPDOWN ============================== */
 function initBirthYearDropdown(container) {
