@@ -21,6 +21,86 @@
 /* ============================== INLINE ALERT ============================== */
 	#formInlineAlert {display: none; height: 48px;margin-bottom: 18px;padding: 12px 16px;border: 1px solid rgba(212,175,55,0.6);background: rgba(212,175,55,0.08);color: #d4af37;font-size: 13px;
 				  text-align: center;border-radius: 10px;opacity: 0;visibility: hidden;transition: opacity 0.3s ease;}
+
+/* PARTİCİPANT YENİ*/
+	.add-participant-btn {background: #2ecc71;color: white;border: none;width: 42px;height: 42px;border-radius: 50%;font-size: 22px;cursor: pointer;margin-top: 10px;grid-area: add;justify-self: center;}
+	.add-participant-btn:hover{background: #27ae60;}
+	.participant-actions .edit {color: #d4af37; /* sarı */}
+	.participant-actions .delete {color: #c62828; /* kırmızı */}
+
+/* MODAL */
+	.participants-modal {position: fixed;inset: 0;background: rgba(0,0,0,.75);display: none;align-items: center;justify-content: center;z-index: 9999;}
+	.participants-modal.active {display: flex;}
+	.modal-content {background: #0b0b0b;border-radius: 18px;padding: 30px;width: 90%;max-width: 520px;}
+	.modal-close {position: absolute;right: 20px;top: 14px;font-size: 28px;color: #fff;}
+	.participant-input-row {gap: 12px;align-items: center;}
+	#participantNameInput {min-width: 0;}
+
+/* Klavye ile odak */
+	.participant-input-row {grid-template-areas:"name nationality birth""add add add";}
+	#participantNameInput {grid-area: name;min-width: 0;}
+	.nationality-select {grid-area: nationality;}
+	.nationality-trigger {height: 44px;background: rgba(255,255,255,0.05);border-radius: 10px;color: rgba(255,255,255,0.7);}
+	.nationality-trigger:hover,
+	.nationality-dropdown::-webkit-scrollbar {width: 6px;}
+	.nationality-dropdown::-webkit-scrollbar-thumb{background: rgba(212,175,55,0.4);border-radius: 6px;}
+	.nationality-dropdown::-webkit-scrollbar-track{background: transparent;}
+
+/* ================== LUXURY INPUT BASE ================== */
+	.participant-input-row input,
+	.participant-input-row .nationality-trigger,
+	.participant-input-row .birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;color: #d4af37;border: 1px solid #d4af37;border-radius: 10px;font-size: 14px;line-height: 1.4;
+										   font-family: inherit;box-sizing: border-box;}
+/* Focus / Click = beyaz border */
+	.participant-input-row input:focus,
+	.nationality-select.open .nationality-trigger,
+	.birthyear-select.open .birthyear-trigger {outline: none;border-color: rgba(255,255,255,0.9);box-shadow: 0 0 0 1px rgba(255,255,255,0.35);background: #111;}
+
+/*HOVER & FOCUS – ÜÇÜ BİREBİR*/
+	.participant-input-row input:hover,
+	.nationality-trigger:hover,
+	.birthyear-trigger:hover {background: rgba(212,175,55,0.08);}
+	.participant-input-row input:focus,
+	.nationality-select.open .nationality-trigger,
+	.birthyear-select.open .birthyear-trigger {outline: none;background: rgba(212,175,55,0.08);box-shadow: 0 0 0 1px rgba(212,175,55,0.35);}
+
+/*SCROLLBAR = TELEFON COUNTRY CODE KOPYASI (AYNI!)*/
+/* ================== LUXURY SCROLL ================== */
+	.nationality-dropdown{scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
+	.nationality-dropdown::-webkit-scrollbar{width: 8px;}
+	.nationality-dropdown::-webkit-scrollbar-track{background: rgba(255,255,255,0.05);}
+	.nationality-dropdown::-webkit-scrollbar-thumb{background: #d4af37;border-radius: 8px;}
+	.nationality-dropdown::-webkit-scrollbar-thumb:hover{background: #f1d97a;}
+
+/*TAB / KLAVYE ODAK (Accessibility FIX)*/
+	.nationality-trigger:focus {outline: none;box-shadow: 0 0 0 2px rgba(212,175,55,0.4);}
+
+/*NATIONALITY’DEN %100 KOPYA (AMA İSİM FARKLI)*/
+	.birthyear-select {position: relative;}
+
+/*Trigger (fake input)*/
+	.birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;border: 1px solid #d4af37;border-radius: 10px;color: rgba(255,255,255,0.6);font-size: 14px;line-height: 1.4;display: flex;align-items: center;cursor: pointer;}
+	.birthyear-trigger.has-value {color: #d4af37;}
+	.birthyear-trigger:hover,
+	.birthyear-select.open .birthyear-trigger {background: rgba(212,175,55,0.08);}
+
+/*Dropdown*/
+	.birthyear-dropdown {display: none;position: absolute;top: 105%;left: 0;width: 100%;max-height: 260px;background: rgba(10,10,10,0.97);border: 1px solid #d4af37;
+					 border-radius: 12px;overflow-y: auto;z-index: 60;}
+	.birthyear-select.open .birthyear-dropdown {display: block;}
+
+/*Options*/
+	.birthyear-option {padding: 10px 14px;cursor: pointer;color: rgba(255,255,255,0.7);}
+	.birthyear-option:hover {background: rgba(212,175,55,0.18);color: #d4af37;}
+
+/*LUXURY SCROLL — TELEFON COUNTRY CODE İLE AYNI*/
+	.birthyear-dropdown {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
+	.birthyear-dropdown::-webkit-scrollbar {width: 8px;}
+	.birthyear-dropdown::-webkit-scrollbar-track {background: rgba(255,255,255,0.05);}
+	.birthyear-dropdown::-webkit-scrollbar-thumb {background: #d4af37;border-radius: 8px;}
+	.birthyear-dropdown::-webkit-scrollbar-thumb:hover {background: #f1d97a;}
+	.birthyear-trigger:focus {outline: none;box-shadow: 0 0 0 2px rgba(212,175,55,0.4);}
+
 /* <- SUBMIT BUTTON -> */
     .submit-btn {margin-top: 15px;background: #d4af37;color: #000;border: none;border-radius: 28px;height: 50px;width: 100%;display: flex;align-items: center;
 				   justify-content: center;font-size: 14px;font-weight: 600;letter-spacing: 1px;cursor: pointer;position: relative;overflow: hidden;
@@ -219,79 +299,6 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 	.form-group textarea,
 	.form-group select {width: 100%;box-sizing: border-box;}
 
-/* PARTİCİPANT YENİ*/
-	.add-participant-btn {background: #2ecc71;color: white;border: none;width: 42px;height: 42px;border-radius: 50%;font-size: 22px;cursor: pointer;margin-top: 10px;grid-area: add;justify-self: center;}
-	.add-participant-btn:hover{background: #27ae60;}
-	.participant-actions .edit {color: #d4af37; /* sarı */}
-	.participant-actions .delete {color: #c62828; /* kırmızı */}
 
-/* MODAL */
-	.participants-modal {position: fixed;inset: 0;background: rgba(0,0,0,.75);display: none;align-items: center;justify-content: center;z-index: 9999;}
-	.participants-modal.active {display: flex;}
-	.modal-content {background: #0b0b0b;border-radius: 18px;padding: 30px;width: 90%;max-width: 520px;}
-	.modal-close {position: absolute;right: 20px;top: 14px;font-size: 28px;color: #fff;}
-	.participant-input-row {gap: 12px;align-items: center;}
-	#participantNameInput {min-width: 0;}
-
-/* Klavye ile odak */
-	.participant-input-row {grid-template-areas:"name nationality birth""add add add";}
-	#participantNameInput {grid-area: name;min-width: 0;}
-	.nationality-select {grid-area: nationality;}
-	.nationality-trigger {height: 44px;background: rgba(255,255,255,0.05);border-radius: 10px;color: rgba(255,255,255,0.7);}
-	.nationality-trigger:hover,
-	.nationality-dropdown::-webkit-scrollbar {width: 6px;}
-	.nationality-dropdown::-webkit-scrollbar-thumb{background: rgba(212,175,55,0.4);border-radius: 6px;}
-	.nationality-dropdown::-webkit-scrollbar-track{background: transparent;}
-
-/* ================== LUXURY INPUT BASE ================== */
-	.participant-input-row input,
-	.participant-input-row .nationality-trigger,
-	.participant-input-row .birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;color: #d4af37;border: 1px solid #d4af37;border-radius: 10px;font-size: 14px;line-height: 1.4;
-										   font-family: inherit;box-sizing: border-box;}
-
-/*HOVER & FOCUS – ÜÇÜ BİREBİR*/
-	.participant-input-row input:hover,
-	.nationality-trigger:hover,
-	.birthyear-trigger:hover {background: rgba(212,175,55,0.08);}
-	.participant-input-row input:focus,
-	.nationality-select.open .nationality-trigger,
-	.birthyear-select.open .birthyear-trigger {outline: none;background: rgba(212,175,55,0.08);box-shadow: 0 0 0 1px rgba(212,175,55,0.35);}
-
-/*SCROLLBAR = TELEFON COUNTRY CODE KOPYASI (AYNI!)*/
-/* ================== LUXURY SCROLL ================== */
-	.nationality-dropdown{scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
-	.nationality-dropdown::-webkit-scrollbar{width: 8px;}
-	.nationality-dropdown::-webkit-scrollbar-track{background: rgba(255,255,255,0.05);}
-	.nationality-dropdown::-webkit-scrollbar-thumb{background: #d4af37;border-radius: 8px;}
-	.nationality-dropdown::-webkit-scrollbar-thumb:hover{background: #f1d97a;}
-
-/*TAB / KLAVYE ODAK (Accessibility FIX)*/
-	.nationality-trigger:focus {outline: none;box-shadow: 0 0 0 2px rgba(212,175,55,0.4);}
-
-/*NATIONALITY’DEN %100 KOPYA (AMA İSİM FARKLI)*/
-	.birthyear-select {position: relative;}
-
-/*Trigger (fake input)*/
-	.birthyear-trigger {height: 44px;padding: 12px 14px;background: #111;border: 1px solid #d4af37;border-radius: 10px;color: rgba(255,255,255,0.6);font-size: 14px;line-height: 1.4;display: flex;align-items: center;cursor: pointer;}
-	.birthyear-trigger.has-value {color: #d4af37;}
-	.birthyear-trigger:hover,
-	.birthyear-select.open .birthyear-trigger {background: rgba(212,175,55,0.08);}
-
-/*Dropdown*/
-	.birthyear-dropdown {display: none;position: absolute;top: 105%;left: 0;width: 100%;max-height: 260px;background: rgba(10,10,10,0.97);border: 1px solid #d4af37;
-					 border-radius: 12px;overflow-y: auto;z-index: 60;}
-	.birthyear-select.open .birthyear-dropdown {display: block;}
-
-/*Options*/
-	.birthyear-option {padding: 10px 14px;cursor: pointer;color: rgba(255,255,255,0.7);}
-	.birthyear-option:hover {background: rgba(212,175,55,0.18);color: #d4af37;}
-
-/*LUXURY SCROLL — TELEFON COUNTRY CODE İLE AYNI*/
-	.birthyear-dropdown {scrollbar-width: thin;scrollbar-color: #d4af37 rgba(255,255,255,0.05);}
-	.birthyear-dropdown::-webkit-scrollbar {width: 8px;}
-	.birthyear-dropdown::-webkit-scrollbar-track {background: rgba(255,255,255,0.05);}
-	.birthyear-dropdown::-webkit-scrollbar-thumb {background: #d4af37;border-radius: 8px;}
-	.birthyear-dropdown::-webkit-scrollbar-thumb:hover {background: #f1d97a;}
-	.birthyear-trigger:focus {outline: none;box-shadow: 0 0 0 2px rgba(212,175,55,0.4);}
 
 
