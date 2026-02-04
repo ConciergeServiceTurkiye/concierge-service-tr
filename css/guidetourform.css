@@ -22,6 +22,13 @@
 	#formInlineAlert {display: none; height: 48px;margin-bottom: 18px;padding: 12px 16px;border: 1px solid rgba(212,175,55,0.6);background: rgba(212,175,55,0.08);color: #d4af37;font-size: 13px;
 				  text-align: center;border-radius: 10px;opacity: 0;visibility: hidden;transition: opacity 0.3s ease;}
 
+/*FULLNAME İLE %100 AYNI GÖRÜNÜM İÇİN*/
+	input::placeholder,
+	.guidetour-form-wrapper 
+	.custom-select:not(.has-value) 
+	.select-trigger .current,
+	.birthyear-trigger:not(.has-value) {color: rgba(255,255,255,0.65);}
+
 /* PARTİCİPANT YENİ*/
 	.add-participant-btn {background: #2ecc71;color: white;border: none;width: 42px;height: 42px;border-radius: 50%;font-size: 22px;cursor: pointer;margin-top: 10px;grid-area: add;justify-self: center;}
 	.add-participant-btn:hover{background: #27ae60;}
