@@ -88,13 +88,13 @@ const showAllBtn = document.getElementById("showAllParticipants");
   });
 
   nameInput.value = "";
-  natInput.value = "";
-  natTrigger.innerHTML = `<span class="current">Select nationality</span>`;
-  natTrigger.closest(".nationality-select")
-  ?.classList.remove("has-value");
+  // nationality reset (DOĞRU)
+natInput.value = "";
+natTrigger.innerHTML = `<span class="current">Select nationality</span>`;
+
+const natSelect = natTrigger.closest(".nationality-select");
+natSelect.classList.remove("has-value", "open");
   yearInput.value = "";
-  natTrigger.closest(".nationality-select")
-  ?.classList.remove("has-value");
 
   renderParticipants();
 });
@@ -432,9 +432,7 @@ function initNationalityDropdown(container) {
   });
 }
 
- if (!trigger.querySelector(".current")) {
-  trigger.innerHTML = `<span class="current">Select nationality</span>`;
-}
+ 
 
 /* INIT */
 document.addEventListener("click", () => {
@@ -444,6 +442,10 @@ document.addEventListener("click", () => {
 
 document.querySelectorAll(".nationality-select")
   .forEach(initNationalityDropdown);
+
+ if (!trigger.querySelector(".current")) {
+  trigger.innerHTML = `<span class="current">Select nationality</span>`;
+}
 
 /* ============================== BIRTH YEAR DROPDOWN ============================== */
 function initBirthYearDropdown(container) {
