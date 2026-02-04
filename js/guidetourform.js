@@ -89,14 +89,15 @@ const showAllBtn = document.getElementById("showAllParticipants");
 
   nameInput.value = "";
   natInput.value = "";
-  natTrigger.textContent = "Select nationality";
+  natTrigger.innerHTML = `<span class="current">Select nationality</span>`;
+  natTrigger.closest(".nationality-select")
+  ?.classList.remove("has-value");
   yearInput.value = "";
   natTrigger.closest(".nationality-select")
   ?.classList.remove("has-value");
 
   renderParticipants();
 });
-
 
  function renderParticipants() {
   listContainer.innerHTML = "";
@@ -399,7 +400,7 @@ function initNationalityDropdown(container) {
     `;
 
     option.addEventListener("click", () => {
-      trigger.textContent = c.name;
+      trigger.innerHTML = `<span class="current">${c.name}</span>`;
       hiddenInput.value = c.iso2.toUpperCase();
       container.classList.add("has-value");
       container.classList.remove("open");
@@ -429,6 +430,10 @@ function initNationalityDropdown(container) {
       }
     }
   });
+}
+
+ if (!trigger.querySelector(".current")) {
+  trigger.innerHTML = `<span class="current">Select nationality</span>`;
 }
 
 /* INIT */
