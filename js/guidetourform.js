@@ -371,17 +371,21 @@ function initNationalityDropdown(container) {
   const searchInput = container.querySelector(".nationality-search");
   const hiddenInput = container.querySelector("#participantNationalityInput");
 
- let activeIndex = -1;
-const options = () =>
-  Array.from(dropdown.querySelectorAll(".nationality-option"));
-
+  let activeIndex = -1;
+  const options = () =>
+    Array.from(dropdown.querySelectorAll(".nationality-option"));
 
   if (!trigger || !dropdown || !hiddenInput) return;
 
-  // Temizle (yeniden init için)
+  /* 🔒 SEARCH TAB ZİNCİRİNDEN ÇIKAR */
+  if (searchInput) {
+    searchInput.setAttribute("tabindex", "-1");
+  }
+
+  // Temizle
   dropdown.querySelectorAll(".nationality-option").forEach(el => el.remove());
 
-  // Search reset + filter
+  // Search filter
   if (searchInput) {
     searchInput.value = "";
 
@@ -395,7 +399,7 @@ const options = () =>
     });
   }
 
-  // Country list oluştur
+  // Country list
   COUNTRY_LIST.forEach(c => {
     const option = document.createElement("div");
     option.className = "nationality-option";
@@ -409,68 +413,76 @@ const options = () =>
       hiddenInput.value = c.iso2.toUpperCase();
       container.classList.add("has-value");
       container.classList.remove("open");
+      trigger.focus();
     });
 
     dropdown.appendChild(option);
   });
 
-  // Aç / kapa (mouse)
+  // Mouse click
   trigger.addEventListener("click", e => {
     e.stopPropagation();
     container.classList.toggle("open");
-
-    if (container.classList.contains("open") && searchInput) {
-      searchInput.focus();
-    }
   });
 
-  // Aç (keyboard – Enter / Space)
+  // TAB ile gelince aç
   trigger.addEventListener("focus", () => {
-  container.classList.add("open");
-});
+    container.classList.add("open");
+  });
 
-trigger.addEventListener("keydown", e => {
-  const opts = options();
-  if (!container.classList.contains("open")) container.classList.add("open");
+  trigger.addEventListener("keydown", e => {
+    const opts = options();
 
-  if (["ArrowDown", "ArrowUp"].includes(e.key)) {
-    e.preventDefault();
+    /* ✅ TAB → dropdown kapat, focus browser’a bırak */
+    if (e.key === "Tab") {
+      container.classList.remove("open");
+      return;
+    }
 
-    activeIndex =
-      e.key === "ArrowDown"
-        ? (activeIndex + 1) % opts.length
-        : (activeIndex - 1 + opts.length) % opts.length;
+    if (!container.classList.contains("open")) {
+      container.classList.add("open");
+    }
 
-    opts.forEach(o => o.classList.remove("active"));
-    opts[activeIndex].classList.add("active");
-    opts[activeIndex].scrollIntoView({ block: "nearest" });
-  }
+    if (["ArrowDown", "ArrowUp"].includes(e.key)) {
+      e.preventDefault();
 
-  if (e.key === "Enter" && activeIndex >= 0) {
-    e.preventDefault();
-    opts[activeIndex].click();
-  }
+      activeIndex =
+        e.key === "ArrowDown"
+          ? (activeIndex + 1) % opts.length
+          : (activeIndex - 1 + opts.length) % opts.length;
 
-  if (e.key === "Escape") {
-    container.classList.remove("open");
-  }
-});
+      opts.forEach(o => o.classList.remove("active"));
+      opts[activeIndex].classList.add("active");
+      opts[activeIndex].scrollIntoView({ block: "nearest" });
+    }
+
+    if (e.key === "Enter" && activeIndex >= 0) {
+      e.preventDefault();
+      opts[activeIndex].click();
+    }
+
+    if (e.key === "Escape") {
+      container.classList.remove("open");
+    }
+  });
 }
 
-/* INIT */
+/* DIŞ TIKLAMA */
 document.addEventListener("click", () => {
   document.querySelectorAll(".nationality-select.open")
     .forEach(el => el.classList.remove("open"));
 });
 
+/* INIT */
 document.querySelectorAll(".nationality-select")
   .forEach(initNationalityDropdown);
 
- document.querySelectorAll(".nationality-trigger").forEach(trigger => {
+document.querySelectorAll(".nationality-trigger").forEach(trigger => {
   if (!trigger.querySelector(".current")) {
     trigger.innerHTML = `<span class="current">Select nationality</span>`;
   }
 });
+
 
 /* ============================== BIRTH YEAR DROPDOWN ============================== */
 function initBirthYearDropdown(container) {
