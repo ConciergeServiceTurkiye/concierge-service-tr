@@ -572,6 +572,9 @@ function initBirthYearDropdown(container) {
   });
 }
 
+ document.querySelectorAll(".birthyear-select")
+  .forEach(initBirthYearDropdown);
+
  
  /* ========================= PHONE INPUT ========================= */
  const phoneInput = document.getElementById("phone");
