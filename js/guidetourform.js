@@ -572,11 +572,6 @@ function initBirthYearDropdown(container) {
   });
 }
 
-   document.addEventListener("click", e => {
-    if (!container.contains(e.target)) close();
-  });
-}
-
  
  /* ========================= PHONE INPUT ========================= */
  const phoneInput = document.getElementById("phone");
