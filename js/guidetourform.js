@@ -372,6 +372,7 @@ function initNationalityDropdown(container) {
   const hiddenInput = container.querySelector("#participantNationalityInput");
 
   let activeIndex = -1;
+
   const options = () =>
     Array.from(dropdown.querySelectorAll(".nationality-option"));
 
@@ -382,24 +383,27 @@ function initNationalityDropdown(container) {
     searchInput.setAttribute("tabindex", "-1");
   }
 
-  // Temizle
-  dropdown.querySelectorAll(".nationality-option").forEach(el => el.remove());
+  /* TEMİZLE */
+  dropdown.innerHTML = "";
 
-  // Search filter
+  /* SEARCH FILTER */
   if (searchInput) {
     searchInput.value = "";
 
     searchInput.addEventListener("input", e => {
       const term = e.target.value.toLowerCase().trim();
-      dropdown.querySelectorAll(".nationality-option").forEach(opt => {
+      activeIndex = -1;
+
+      options().forEach(opt => {
         opt.style.display = opt.textContent.toLowerCase().includes(term)
           ? "flex"
           : "none";
+        opt.classList.remove("active");
       });
     });
   }
 
-  // Country list
+  /* COUNTRY LIST */
   COUNTRY_LIST.forEach(c => {
     const option = document.createElement("div");
     option.className = "nationality-option";
@@ -419,39 +423,36 @@ function initNationalityDropdown(container) {
     dropdown.appendChild(option);
   });
 
-  // Mouse click
+  /* MOUSE CLICK */
   trigger.addEventListener("click", e => {
     e.stopPropagation();
     container.classList.toggle("open");
   });
 
-  // TAB ile gelince aç
+  /* TAB İLE GELİNCE AÇ */
   trigger.addEventListener("focus", () => {
     container.classList.add("open");
   });
 
+  /* TRIGGER KEYBOARD */
   trigger.addEventListener("keydown", e => {
-    const opts = options();
+    const opts = options().filter(o => o.style.display !== "none");
 
-    /* ✅ TAB → dropdown kapat, focus browser’a bırak */
+    /* TAB → KAPAT, SONRAKİ ALANA GEÇ */
     if (e.key === "Tab") {
       container.classList.remove("open");
       return;
     }
-   
-   // HARF YAZILINCA SEARCH'E GEÇ
-if (/^[a-zA-Z]$/.test(e.key) && searchInput) {
-  e.preventDefault();
 
-  container.classList.add("open");
-  searchInput.focus();
-  searchInput.value = e.key;
-
-  // manuel input tetikle
-  searchInput.dispatchEvent(new Event("input"));
-
-  return;
-}
+    /* HARF YAZILINCA SEARCH’E GEÇ */
+    if (/^[a-zA-Z]$/.test(e.key) && searchInput) {
+      e.preventDefault();
+      container.classList.add("open");
+      searchInput.focus();
+      searchInput.value = e.key;
+      searchInput.dispatchEvent(new Event("input"));
+      return;
+    }
 
     if (!container.classList.contains("open")) {
       container.classList.add("open");
@@ -459,6 +460,7 @@ if (/^[a-zA-Z]$/.test(e.key) && searchInput) {
 
     if (["ArrowDown", "ArrowUp"].includes(e.key)) {
       e.preventDefault();
+      if (!opts.length) return;
 
       activeIndex =
         e.key === "ArrowDown"
@@ -479,16 +481,57 @@ if (/^[a-zA-Z]$/.test(e.key) && searchInput) {
       container.classList.remove("open");
     }
   });
+
+  /* SEARCH KEYBOARD NAV */
+  if (searchInput) {
+    searchInput.addEventListener("keydown", e => {
+      const visibleOptions = options().filter(
+        o => o.style.display !== "none"
+      );
+
+      if (!visibleOptions.length) return;
+
+      if (["ArrowDown", "ArrowUp"].includes(e.key)) {
+        e.preventDefault();
+
+        activeIndex =
+          e.key === "ArrowDown"
+            ? (activeIndex + 1) % visibleOptions.length
+            : (activeIndex - 1 + visibleOptions.length) % visibleOptions.length;
+
+        visibleOptions.forEach(o => o.classList.remove("active"));
+        visibleOptions[activeIndex].classList.add("active");
+        visibleOptions[activeIndex].scrollIntoView({ block: "nearest" });
+      }
+
+      if (e.key === "Enter" && activeIndex >= 0) {
+        e.preventDefault();
+        visibleOptions[activeIndex].click();
+      }
+
+      if (e.key === "Escape") {
+        e.preventDefault();
+        container.classList.remove("open");
+        trigger.focus();
+      }
+
+      if (e.key === "Tab") {
+        container.classList.remove("open");
+      }
+    });
+  }
 }
 
 /* DIŞ TIKLAMA */
 document.addEventListener("click", () => {
-  document.querySelectorAll(".nationality-select.open")
+  document
+    .querySelectorAll(".nationality-select.open")
     .forEach(el => el.classList.remove("open"));
 });
 
 /* INIT */
-document.querySelectorAll(".nationality-select")
+document
+  .querySelectorAll(".nationality-select")
   .forEach(initNationalityDropdown);
 
 document.querySelectorAll(".nationality-trigger").forEach(trigger => {
