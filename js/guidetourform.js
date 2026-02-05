@@ -383,8 +383,10 @@ function initNationalityDropdown(container) {
     searchInput.setAttribute("tabindex", "-1");
   }
 
-  /* TEMİZLE */
-  dropdown.innerHTML = "";
+ /* TEMİZLE – SADECE OPTIONLARI */
+dropdown
+  .querySelectorAll(".nationality-option")
+  .forEach(el => el.remove());
 
   /* SEARCH FILTER */
   if (searchInput) {
