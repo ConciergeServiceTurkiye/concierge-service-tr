@@ -438,6 +438,20 @@ function initNationalityDropdown(container) {
       container.classList.remove("open");
       return;
     }
+   
+   // HARF YAZILINCA SEARCH'E GEÇ
+if (/^[a-zA-Z]$/.test(e.key) && searchInput) {
+  e.preventDefault();
+
+  container.classList.add("open");
+  searchInput.focus();
+  searchInput.value = e.key;
+
+  // manuel input tetikle
+  searchInput.dispatchEvent(new Event("input"));
+
+  return;
+}
 
     if (!container.classList.contains("open")) {
       container.classList.add("open");
