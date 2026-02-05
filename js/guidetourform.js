@@ -480,6 +480,7 @@ function initBirthYearDropdown(container) {
 
   let options = [];
   let activeIndex = -1;
+  let typedYear = ""; // 👈 EKLENDİ
 
   const currentYear = new Date().getFullYear();
   const minYear = currentYear - 100;
@@ -538,6 +539,34 @@ function initBirthYearDropdown(container) {
   });
 
   trigger.addEventListener("keydown", e => {
+
+    /* ====== YIL YAZARAK ATLAMA (1990 vb.) ====== */
+    if (/^\d$/.test(e.key)) {
+      e.preventDefault();
+      typedYear += e.key;
+
+      if (typedYear.length === 4) {
+        const index = options.findIndex(
+          opt => opt.textContent === typedYear
+        );
+
+        if (index !== -1) {
+          if (!container.classList.contains("open")) open();
+          setActive(index);
+        }
+
+        typedYear = "";
+      }
+
+      clearTimeout(trigger._yearTimeout);
+      trigger._yearTimeout = setTimeout(() => {
+        typedYear = "";
+      }, 1000);
+
+      return;
+    }
+    /* ========================================= */
+
     if (!container.classList.contains("open")) open();
 
     if (["ArrowDown", "ArrowUp"].includes(e.key)) {
@@ -572,8 +601,9 @@ function initBirthYearDropdown(container) {
   });
 }
 
- document.querySelectorAll(".birthyear-select")
+document.querySelectorAll(".birthyear-select")
   .forEach(initBirthYearDropdown);
+
 
  
  /* ========================= PHONE INPUT ========================= */
