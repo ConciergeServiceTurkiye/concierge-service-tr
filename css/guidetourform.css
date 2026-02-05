@@ -342,3 +342,36 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 }
 
 
+/* ================== NATIONALITY SEARCH FIX ================== */
+
+/* Search input her zaman görünür */
+.nationality-search {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  background: #111;
+  color: #d4af37;
+  border: none;
+  border-bottom: 1px solid rgba(212,175,55,0.5);
+  font-size: 14px;
+}
+
+/* Placeholder rengi */
+.nationality-search::placeholder {
+  color: rgba(255,255,255,0.65);
+}
+
+/* Dropdown açıkken search sticky kalsın */
+.nationality-select.open .nationality-search {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #111;
+}
+
+/* Focus görünümü */
+.nationality-search:focus {
+  outline: none;
+  border-bottom-color: #d4af37;
+}
