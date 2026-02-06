@@ -140,11 +140,21 @@ addBtn.addEventListener("click", addParticipant);
 document
   .querySelector(".participant-input-row")
   .addEventListener("keydown", e => {
+
+    // ⛔ dropdown içindeysek ADD ÇALIŞMASIN
+    if (
+      e.target.closest(".nationality-select") ||
+      e.target.closest(".birthyear-select")
+    ) {
+      return;
+    }
+
     if (e.key === "Enter") {
       e.preventDefault();
       addParticipant();
     }
   });
+
 
 
  function renderParticipants() {
@@ -714,9 +724,10 @@ function initBirthYearDropdown(container) {
     }
 
     if (e.key === "Enter" && activeIndex >= 0) {
-      e.preventDefault();
-      selectOption(options[activeIndex].textContent);
-    }
+  e.preventDefault();
+  e.stopPropagation(); // 🔥 EKLE
+  selectOption(options[activeIndex].textContent);
+}
 
     if (e.key === "Escape") {
       e.preventDefault();
