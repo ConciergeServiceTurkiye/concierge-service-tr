@@ -157,17 +157,17 @@ document
 
 
 
- function renderParticipants() {
+function renderParticipants() {
   listContainer.innerHTML = "";
 
-  // 2 kişiden azsa hiçbir şey gösterme
-  if (participants.length < 2) {
+  // ❗ hiç participant yoksa gizle
+  if (participants.length === 0) {
     participantsSection.style.display = "none";
     showAllBtn.style.display = "none";
     return;
   }
 
-  // 2 ve üzeri → göster
+  // ✅ 1 ve üzeri → göster
   participantsSection.style.display = "block";
 
   participants
@@ -176,11 +176,13 @@ document
       listContainer.appendChild(createParticipantItem(p, index));
     });
 
+  // Show all sadece gerekiyorsa
   showAllBtn.style.display =
     participants.length > MAX_VISIBLE_PARTICIPANTS
       ? "block"
       : "none";
 }
+
 
 
  function createParticipantItem(p, index) {
