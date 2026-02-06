@@ -120,18 +120,29 @@ function validateParticipantInputs() {
   return valid;
 }
 
-function addParticipant() {
-  if (!validateParticipantInputs()) return;
+function renderParticipants() {
+  listContainer.innerHTML = "";
 
-  participants.push({
-    name: nameInput.value.trim(),
-    nationality: natTrigger.textContent,
-    year: yearInput.value
+  // ❗ hiç participant yoksa gizle
+  if (participants.length === 0) {
+    participantsSection.style.display = "none";
+    showAllBtn.style.display = "none";
+    return;
+  }
+
+  // ✅ 1 kişi bile varsa GÖSTER
+  participantsSection.style.display = "block";
+
+  participants.forEach((p, index) => {
+    listContainer.appendChild(createParticipantItem(p, index));
   });
 
-  resetParticipantInputs();
-  renderParticipants();
+  showAllBtn.style.display =
+    participants.length > MAX_VISIBLE_PARTICIPANTS
+      ? "block"
+      : "none";
 }
+
 
 /* CLICK */
 addBtn.addEventListener("click", addParticipant);
