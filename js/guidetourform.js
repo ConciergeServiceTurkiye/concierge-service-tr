@@ -70,34 +70,82 @@ const showAllBtn = document.getElementById("showAllParticipants");
   }
 })();
 
- addBtn.addEventListener("click", () => {
-  const name = nameInput.value.trim();
-  const nationality = natTrigger.textContent;
-  const nationalityCode = natInput.value;
-  const year = yearInput.value;
+ /* DÜZENLENMİŞ addBtn KODU (DROP-IN) */
+ function resetParticipantInputs() {
+  // Name
+  nameInput.value = "";
 
-  if (!name || !nationalityCode || !year) {
-    alert("Please fill full name, nationality and birth year");
-    return;
+  // Nationality
+  natInput.value = "";
+  natTrigger.innerHTML = `<span class="current">Select nationality</span>`;
+  const natSelect = natTrigger.closest(".nationality-select");
+  natSelect.classList.remove("has-value", "open");
+
+  // Birth year
+  yearInput.value = "";
+  const birthTrigger = document.querySelector(".birthyear-trigger");
+  birthTrigger.textContent = "Birth Year";
+  birthTrigger.classList.remove("has-value");
+
+  // Focus geri ver
+  nameInput.focus();
+}
+
+function validateParticipantInputs() {
+  let valid = true;
+
+  if (!nameInput.value.trim()) {
+    nameInput.classList.add("has-error");
+    valid = false;
   }
 
+  if (!natInput.value) {
+    natTrigger.classList.add("has-error");
+    valid = false;
+  }
+
+  if (!yearInput.value) {
+    document
+      .querySelector(".birthyear-trigger")
+      .classList.add("has-error");
+    valid = false;
+  }
+
+  if (!valid) {
+    showInlineAlert("Please fill full name, nationality and birth year");
+  } else {
+    hideInlineAlert();
+  }
+
+  return valid;
+}
+
+function addParticipant() {
+  if (!validateParticipantInputs()) return;
+
   participants.push({
-    name,
-    nationality,
-    year
+    name: nameInput.value.trim(),
+    nationality: natTrigger.textContent,
+    year: yearInput.value
   });
 
-  nameInput.value = "";
-  // nationality reset (DOĞRU)
-natInput.value = "";
-natTrigger.innerHTML = `<span class="current">Select nationality</span>`;
-
-const natSelect = natTrigger.closest(".nationality-select");
-natSelect.classList.remove("has-value", "open");
-  yearInput.value = "";
-
+  resetParticipantInputs();
   renderParticipants();
-});
+}
+
+/* CLICK */
+addBtn.addEventListener("click", addParticipant);
+
+/* ENTER = ADD (UX bonus) */
+document
+  .querySelector(".participant-input-row")
+  .addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      addParticipant();
+    }
+  });
+
 
  function renderParticipants() {
   listContainer.innerHTML = "";
