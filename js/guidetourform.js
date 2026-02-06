@@ -371,95 +371,135 @@ function initNationalityDropdown(container) {
   const searchInput = container.querySelector(".nationality-search");
   const hiddenInput = container.querySelector("#participantNationalityInput");
 
-  let activeIndex = -1;
-
-  const options = () =>
-    Array.from(dropdown.querySelectorAll(".nationality-option"));
-
   if (!trigger || !dropdown || !hiddenInput) return;
 
-  /* 🔒 SEARCH TAB ZİNCİRİNDEN ÇIKAR */
+  let activeIndex = -1;
+
+  /* 🔒 search TAB zincirine girmesin */
   if (searchInput) {
     searchInput.setAttribute("tabindex", "-1");
   }
 
- /* TEMİZLE – SADECE OPTIONLARI */
-dropdown
-  .querySelectorAll(".nationality-option")
-  .forEach(el => el.remove());
+  /* ---------- OPTIONS ---------- */
 
-  /* SEARCH FILTER */
-  if (searchInput) {
-    searchInput.value = "";
+  dropdown.innerHTML = "";
 
-    searchInput.addEventListener("input", e => {
-      const term = e.target.value.toLowerCase().trim();
-      activeIndex = -1;
-
-      options().forEach(opt => {
-        opt.style.display = opt.textContent.toLowerCase().includes(term)
-          ? "flex"
-          : "none";
-        opt.classList.remove("active");
-      });
-    });
-  }
-
-  /* COUNTRY LIST */
   COUNTRY_LIST.forEach(c => {
     const option = document.createElement("div");
     option.className = "nationality-option";
+    option.dataset.value = c.iso2.toUpperCase();
     option.innerHTML = `
       <img src="https://flagcdn.com/w20/${c.iso2}.png" alt="">
       <span>${c.name}</span>
     `;
 
-    option.addEventListener("click", () => {
-      trigger.innerHTML = `<span class="current">${c.name}</span>`;
-      hiddenInput.value = c.iso2.toUpperCase();
-      container.classList.add("has-value");
-      container.classList.remove("open");
-      trigger.focus();
-    });
-
+    option.addEventListener("click", () => selectOption(option));
     dropdown.appendChild(option);
   });
 
-  /* MOUSE CLICK */
+  function getVisibleOptions() {
+    return Array.from(
+      dropdown.querySelectorAll(".nationality-option")
+    ).filter(opt => opt.style.display !== "none");
+  }
+
+  function clearActive() {
+    dropdown
+      .querySelectorAll(".nationality-option.active")
+      .forEach(o => o.classList.remove("active"));
+  }
+
+  function setActive(index) {
+    const opts = getVisibleOptions();
+    if (!opts.length) return;
+
+    clearActive();
+    activeIndex = index;
+    opts[activeIndex].classList.add("active");
+    opts[activeIndex].scrollIntoView({ block: "nearest" });
+  }
+
+  function open() {
+    container.classList.add("open");
+    activeIndex = -1;
+    clearActive();
+  }
+
+  function close() {
+    container.classList.remove("open");
+    activeIndex = -1;
+    clearActive();
+    if (searchInput) searchInput.value = "";
+    filterOptions("");
+  }
+
+  function selectOption(option) {
+    trigger.innerHTML = `<span class="current">${option.innerText}</span>`;
+    hiddenInput.value = option.dataset.value;
+    container.classList.add("has-value");
+    close();
+    trigger.focus();
+  }
+
+  /* ---------- SEARCH ---------- */
+
+  function filterOptions(term) {
+    dropdown.querySelectorAll(".nationality-option").forEach(opt => {
+      opt.style.display = opt.innerText
+        .toLowerCase()
+        .includes(term.toLowerCase())
+        ? "flex"
+        : "none";
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", e => {
+      filterOptions(e.target.value);
+      activeIndex = -1;
+      clearActive();
+    });
+  }
+
+  /* ---------- EVENTS ---------- */
+
+  // Mouse
   trigger.addEventListener("click", e => {
     e.stopPropagation();
-    container.classList.toggle("open");
+    container.classList.contains("open") ? close() : open();
   });
 
-  /* TAB İLE GELİNCE AÇ */
-  trigger.addEventListener("focus", () => {
-    container.classList.add("open");
-  });
+  // TAB ile gelince aç
+  trigger.addEventListener("focus", open);
 
-  /* TRIGGER KEYBOARD */
   trigger.addEventListener("keydown", e => {
-    const opts = options().filter(o => o.style.display !== "none");
+    const opts = getVisibleOptions();
 
-    /* TAB → KAPAT, SONRAKİ ALANA GEÇ */
+    /* TAB / SHIFT+TAB → çık ve kapat */
     if (e.key === "Tab") {
-      container.classList.remove("open");
+      close();
       return;
     }
 
-    /* HARF YAZILINCA SEARCH’E GEÇ */
+    /* ESC */
+    if (e.key === "Escape") {
+      e.preventDefault();
+      close();
+      return;
+    }
+
+    /* Harf yazınca search devreye girsin */
     if (/^[a-zA-Z]$/.test(e.key) && searchInput) {
       e.preventDefault();
-      container.classList.add("open");
-      searchInput.focus();
-      searchInput.value = e.key;
-      searchInput.dispatchEvent(new Event("input"));
+      open();
+      searchInput.value += e.key;
+      filterOptions(searchInput.value);
       return;
     }
 
-    if (!container.classList.contains("open")) {
-      container.classList.add("open");
-    }
+    if (!container.classList.contains("open")) open();
 
+    /* OK TUŞLARI */
     if (["ArrowDown", "ArrowUp"].includes(e.key)) {
       e.preventDefault();
       if (!opts.length) return;
@@ -469,79 +509,34 @@ dropdown
           ? (activeIndex + 1) % opts.length
           : (activeIndex - 1 + opts.length) % opts.length;
 
-      opts.forEach(o => o.classList.remove("active"));
-      opts[activeIndex].classList.add("active");
-      opts[activeIndex].scrollIntoView({ block: "nearest" });
+      setActive(activeIndex);
     }
 
+    /* ENTER */
     if (e.key === "Enter" && activeIndex >= 0) {
       e.preventDefault();
-      opts[activeIndex].click();
-    }
-
-    if (e.key === "Escape") {
-      container.classList.remove("open");
+      selectOption(opts[activeIndex]);
     }
   });
-
-  /* SEARCH KEYBOARD NAV */
-  if (searchInput) {
-    searchInput.addEventListener("keydown", e => {
-      const visibleOptions = options().filter(
-        o => o.style.display !== "none"
-      );
-
-      if (!visibleOptions.length) return;
-
-      if (["ArrowDown", "ArrowUp"].includes(e.key)) {
-        e.preventDefault();
-
-        activeIndex =
-          e.key === "ArrowDown"
-            ? (activeIndex + 1) % visibleOptions.length
-            : (activeIndex - 1 + visibleOptions.length) % visibleOptions.length;
-
-        visibleOptions.forEach(o => o.classList.remove("active"));
-        visibleOptions[activeIndex].classList.add("active");
-        visibleOptions[activeIndex].scrollIntoView({ block: "nearest" });
-      }
-
-      if (e.key === "Enter" && activeIndex >= 0) {
-        e.preventDefault();
-        visibleOptions[activeIndex].click();
-      }
-
-      if (e.key === "Escape") {
-        e.preventDefault();
-        container.classList.remove("open");
-        trigger.focus();
-      }
-
-      if (e.key === "Tab") {
-        container.classList.remove("open");
-      }
-    });
-  }
 }
 
-/* DIŞ TIKLAMA */
-document.addEventListener("click", () => {
-  document
-    .querySelectorAll(".nationality-select.open")
-    .forEach(el => el.classList.remove("open"));
+/* DIŞARI TIKLANIRSA KAPAT */
+document.addEventListener("click", e => {
+  document.querySelectorAll(".nationality-select.open").forEach(el => {
+    if (!el.contains(e.target)) el.classList.remove("open");
+  });
 });
 
 /* INIT */
-document
-  .querySelectorAll(".nationality-select")
+document.querySelectorAll(".nationality-select")
   .forEach(initNationalityDropdown);
 
+/* Placeholder garanti */
 document.querySelectorAll(".nationality-trigger").forEach(trigger => {
   if (!trigger.querySelector(".current")) {
     trigger.innerHTML = `<span class="current">Select nationality</span>`;
   }
 });
-
 
 /* ============================== BIRTH YEAR DROPDOWN ============================== */
 function initBirthYearDropdown(container) {
