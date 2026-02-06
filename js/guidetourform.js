@@ -562,7 +562,11 @@ function initBirthYearDropdown(container) {
     div.className = "birthyear-option";
     div.textContent = y;
 
-    div.addEventListener("click", () => selectOption(y));
+    div.addEventListener("mousedown", e => {
+  e.preventDefault();
+  e.stopPropagation();
+  selectOption(y);
+});
     dropdown.appendChild(div);
   }
 
@@ -600,7 +604,11 @@ function initBirthYearDropdown(container) {
   }
 
   /* TAB ile gelince AÇ */
-  trigger.addEventListener("focus", open);
+  trigger.addEventListener("focus", e => {
+  if (e.relatedTarget && container.contains(e.relatedTarget)) return;
+  open();
+});
+
 
   trigger.addEventListener("click", e => {
     e.preventDefault();
@@ -616,17 +624,16 @@ function initBirthYearDropdown(container) {
       typedYear += e.key;
 
       if (typedYear.length === 4) {
-        const index = options.findIndex(
-          opt => opt.textContent === typedYear
-        );
+  const index = options.findIndex(
+    opt => opt.textContent === typedYear
+  );
 
-        if (index !== -1) {
-          if (!container.classList.contains("open")) open();
-          setActive(index);
-        }
+  if (index !== -1) {
+    selectOption(typedYear); // 👈 direkt seç
+  }
 
-        typedYear = "";
-      }
+  typedYear = "";
+}
 
       clearTimeout(trigger._yearTimeout);
       trigger._yearTimeout = setTimeout(() => {
@@ -674,8 +681,6 @@ function initBirthYearDropdown(container) {
 document.querySelectorAll(".birthyear-select")
   .forEach(initBirthYearDropdown);
 
-
- 
  /* ========================= PHONE INPUT ========================= */
  const phoneInput = document.getElementById("phone");
 let iti = null;
