@@ -393,10 +393,11 @@ function initNationalityDropdown(container) {
       <span>${c.name}</span>
     `;
 
-    option.addEventListener("click", e => {
-      e.stopPropagation();
-      selectOption(option);
-    });
+    option.addEventListener("mousedown", e => {
+  e.preventDefault();
+  e.stopPropagation();
+  selectOption(option);
+});
 
     dropdown.appendChild(option);
   });
