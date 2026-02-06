@@ -375,37 +375,39 @@ function initNationalityDropdown(container) {
 
   let activeIndex = -1;
 
-  /* 🔒 search TAB zincirine girmesin */
-  if (searchInput) {
-    searchInput.setAttribute("tabindex", "-1");
-  }
-
-  /* ---------- OPTIONS ---------- */
+  /* 🔒 search TAB zincirine girmez */
+  if (searchInput) searchInput.setAttribute("tabindex", "-1");
 
   dropdown.innerHTML = "";
+
+  /* ---------- OPTIONS ---------- */
 
   COUNTRY_LIST.forEach(c => {
     const option = document.createElement("div");
     option.className = "nationality-option";
     option.dataset.value = c.iso2.toUpperCase();
+    option.dataset.label = c.name;
+
     option.innerHTML = `
       <img src="https://flagcdn.com/w20/${c.iso2}.png" alt="">
       <span>${c.name}</span>
     `;
 
-    option.addEventListener("click", () => selectOption(option));
+    option.addEventListener("click", e => {
+      e.stopPropagation();
+      selectOption(option);
+    });
+
     dropdown.appendChild(option);
   });
 
   function getVisibleOptions() {
-    return Array.from(
-      dropdown.querySelectorAll(".nationality-option")
-    ).filter(opt => opt.style.display !== "none");
+    return Array.from(dropdown.querySelectorAll(".nationality-option"))
+      .filter(o => o.style.display !== "none");
   }
 
   function clearActive() {
-    dropdown
-      .querySelectorAll(".nationality-option.active")
+    dropdown.querySelectorAll(".active")
       .forEach(o => o.classList.remove("active"));
   }
 
@@ -430,11 +432,11 @@ function initNationalityDropdown(container) {
     activeIndex = -1;
     clearActive();
     if (searchInput) searchInput.value = "";
-    filterOptions("");
+    filter("");
   }
 
   function selectOption(option) {
-    trigger.innerHTML = `<span class="current">${option.innerText}</span>`;
+    trigger.innerHTML = `<span class="current">${option.dataset.label}</span>`;
     hiddenInput.value = option.dataset.value;
     container.classList.add("has-value");
     close();
@@ -443,9 +445,9 @@ function initNationalityDropdown(container) {
 
   /* ---------- SEARCH ---------- */
 
-  function filterOptions(term) {
+  function filter(term) {
     dropdown.querySelectorAll(".nationality-option").forEach(opt => {
-      opt.style.display = opt.innerText
+      opt.style.display = opt.dataset.label
         .toLowerCase()
         .includes(term.toLowerCase())
         ? "flex"
@@ -455,7 +457,7 @@ function initNationalityDropdown(container) {
 
   if (searchInput) {
     searchInput.addEventListener("input", e => {
-      filterOptions(e.target.value);
+      filter(e.target.value);
       activeIndex = -1;
       clearActive();
     });
@@ -463,7 +465,7 @@ function initNationalityDropdown(container) {
 
   /* ---------- EVENTS ---------- */
 
-  // Mouse
+  // Mouse trigger
   trigger.addEventListener("click", e => {
     e.stopPropagation();
     container.classList.contains("open") ? close() : open();
@@ -475,7 +477,7 @@ function initNationalityDropdown(container) {
   trigger.addEventListener("keydown", e => {
     const opts = getVisibleOptions();
 
-    /* TAB / SHIFT+TAB → çık ve kapat */
+    /* TAB / SHIFT+TAB */
     if (e.key === "Tab") {
       close();
       return;
@@ -488,12 +490,12 @@ function initNationalityDropdown(container) {
       return;
     }
 
-    /* Harf yazınca search devreye girsin */
+    /* Harf → search */
     if (/^[a-zA-Z]$/.test(e.key) && searchInput) {
       e.preventDefault();
       open();
       searchInput.value += e.key;
-      filterOptions(searchInput.value);
+      filter(searchInput.value);
       return;
     }
 
@@ -520,18 +522,19 @@ function initNationalityDropdown(container) {
   });
 }
 
-/* DIŞARI TIKLANIRSA KAPAT */
+/* FORM DIŞI TIK */
 document.addEventListener("click", e => {
-  document.querySelectorAll(".nationality-select.open").forEach(el => {
-    if (!el.contains(e.target)) el.classList.remove("open");
-  });
+  document.querySelectorAll(".nationality-select.open")
+    .forEach(el => {
+      if (!el.contains(e.target)) el.classList.remove("open");
+    });
 });
 
 /* INIT */
 document.querySelectorAll(".nationality-select")
   .forEach(initNationalityDropdown);
 
-/* Placeholder garanti */
+/* Placeholder */
 document.querySelectorAll(".nationality-trigger").forEach(trigger => {
   if (!trigger.querySelector(".current")) {
     trigger.innerHTML = `<span class="current">Select nationality</span>`;
