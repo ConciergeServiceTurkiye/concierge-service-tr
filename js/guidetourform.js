@@ -574,10 +574,12 @@ function initNationalityDropdown(container) {
     }
 
     /* ENTER */
-    if (e.key === "Enter" && activeIndex >= 0) {
-      e.preventDefault();
-      selectOption(opts[activeIndex]);
-    }
+    /* ENTER */
+if (e.key === "Enter" && activeIndex >= 0) {
+  e.preventDefault();
+  e.stopPropagation(); // 🔥 ADD BTN’A GİTMESİN
+  selectOption(opts[activeIndex]);
+}
   });
 }
 
