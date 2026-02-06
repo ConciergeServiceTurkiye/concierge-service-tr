@@ -596,12 +596,13 @@ function initBirthYearDropdown(container) {
   }
 
   function selectOption(value) {
-    trigger.textContent = value;
-    trigger.classList.add("has-value");
-    hiddenInput.value = value;
-    close();
-    trigger.focus();
-  }
+  trigger.textContent = value;
+  trigger.classList.add("has-value");
+  hiddenInput.value = value;
+  close();
+
+  setTimeout(() => trigger.focus(), 0);
+}
 
   /* TAB ile gelince AÇ */
   trigger.addEventListener("focus", e => {
@@ -617,6 +618,11 @@ function initBirthYearDropdown(container) {
   });
 
   trigger.addEventListener("keydown", e => {
+
+   if (e.key === "Tab") {
+  close();
+  return; // Tab doğal şekilde devam etsin
+}
 
     /* ====== YIL YAZARAK ATLAMA (1990 vb.) ====== */
     if (/^\d$/.test(e.key)) {
@@ -647,20 +653,26 @@ function initBirthYearDropdown(container) {
     if (!container.classList.contains("open")) open();
 
     if (["ArrowDown", "ArrowUp"].includes(e.key)) {
-      e.preventDefault();
+  e.preventDefault();
 
-      if (e.key === "ArrowDown") {
-        setActive(
-          activeIndex < options.length - 1 ? activeIndex + 1 : 0
-        );
-      }
+  if (activeIndex === -1) {
+    setActive(0);
+    return;
+  }
 
-      if (e.key === "ArrowUp") {
-        setActive(
-          activeIndex > 0 ? activeIndex - 1 : options.length - 1
-        );
-      }
-    }
+  if (e.key === "ArrowDown") {
+    setActive(
+      activeIndex < options.length - 1 ? activeIndex + 1 : 0
+    );
+  }
+
+  if (e.key === "ArrowUp") {
+    setActive(
+      activeIndex > 0 ? activeIndex - 1 : options.length - 1
+    );
+  }
+}
+
 
     if (e.key === "Enter" && activeIndex >= 0) {
       e.preventDefault();
