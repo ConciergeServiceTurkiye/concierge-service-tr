@@ -375,7 +375,7 @@ function initNationalityDropdown(container) {
 
   let activeIndex = -1;
 
-  /* 🔒 search TAB zincirine girmez */
+  /* 🔒 search TAB zincirinden çık */
   if (searchInput) searchInput.setAttribute("tabindex", "-1");
 
   dropdown.innerHTML = "";
@@ -401,7 +401,7 @@ function initNationalityDropdown(container) {
     dropdown.appendChild(option);
   });
 
-  function getVisibleOptions() {
+  function visibleOptions() {
     return Array.from(dropdown.querySelectorAll(".nationality-option"))
       .filter(o => o.style.display !== "none");
   }
@@ -412,7 +412,7 @@ function initNationalityDropdown(container) {
   }
 
   function setActive(index) {
-    const opts = getVisibleOptions();
+    const opts = visibleOptions();
     if (!opts.length) return;
 
     clearActive();
@@ -465,19 +465,19 @@ function initNationalityDropdown(container) {
 
   /* ---------- EVENTS ---------- */
 
-  // Mouse trigger
+  /* MOUSE – SADECE AÇ */
   trigger.addEventListener("click", e => {
     e.stopPropagation();
-    container.classList.contains("open") ? close() : open();
+    open();
   });
 
-  // TAB ile gelince aç
+  /* TAB ile gelince AÇ */
   trigger.addEventListener("focus", open);
 
   trigger.addEventListener("keydown", e => {
-    const opts = getVisibleOptions();
+    const opts = visibleOptions();
 
-    /* TAB / SHIFT+TAB */
+    /* TAB / SHIFT+TAB → KAPAT */
     if (e.key === "Tab") {
       close();
       return;
@@ -490,7 +490,7 @@ function initNationalityDropdown(container) {
       return;
     }
 
-    /* Harf → search */
+    /* HARF → SEARCH */
     if (/^[a-zA-Z]$/.test(e.key) && searchInput) {
       e.preventDefault();
       open();
@@ -522,7 +522,7 @@ function initNationalityDropdown(container) {
   });
 }
 
-/* FORM DIŞI TIK */
+/* FORM DIŞI TIK → KAPAT */
 document.addEventListener("click", e => {
   document.querySelectorAll(".nationality-select.open")
     .forEach(el => {
