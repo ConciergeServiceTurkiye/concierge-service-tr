@@ -551,7 +551,7 @@ function initBirthYearDropdown(container) {
   let options = [];
   let activeIndex = -1;
   let typedYear = "";
-  let openedByClick = false; // 👈 GÖZ KIRPMA FIX
+  let openedByMouse = false; // 👈 KRİTİK
 
   const currentYear = new Date().getFullYear();
   const minYear = currentYear - 100;
@@ -582,7 +582,6 @@ function initBirthYearDropdown(container) {
   }
 
   function close() {
-    if (!container.classList.contains("open")) return;
     container.classList.remove("open");
     activeIndex = -1;
     clearActive();
@@ -605,62 +604,49 @@ function initBirthYearDropdown(container) {
     hiddenInput.value = value;
     close();
 
-    // focus geri gelsin ama click/focus loop olmasın
     setTimeout(() => trigger.focus(), 0);
   }
 
-  /* TAB ile gelince AÇ (ama click sonrası değil) */
+  /* ================= KEYBOARD FOCUS (TAB) ================= */
   trigger.addEventListener("focus", e => {
-    if (openedByClick) {
-      openedByClick = false;
+    if (openedByMouse) {
+      openedByMouse = false;
       return;
     }
-
-    if (e.relatedTarget && container.contains(e.relatedTarget)) return;
     open();
   });
 
-  trigger.addEventListener("click", e => {
+  /* ================= MOUSE ================= */
+  trigger.addEventListener("mousedown", e => {
     e.preventDefault();
-    e.stopPropagation();
+    openedByMouse = true;
 
-    openedByClick = true;
     container.classList.contains("open") ? close() : open();
+    trigger.focus();
   });
 
+  /* ================= KEYBOARD ================= */
   trigger.addEventListener("keydown", e => {
 
-    /* TAB ile ÇIKINCA KAPAT */
     if (e.key === "Tab") {
       close();
-      return; // doğal tab akışı
+      return;
     }
 
-    /* ====== YIL YAZARAK ATLAMA (1990 vb.) ====== */
     if (/^\d$/.test(e.key)) {
       e.preventDefault();
       typedYear += e.key;
 
       if (typedYear.length === 4) {
-        const index = options.findIndex(
-          opt => opt.textContent === typedYear
-        );
-
-        if (index !== -1) {
-          selectOption(typedYear);
-        }
-
+        const index = options.findIndex(o => o.textContent === typedYear);
+        if (index !== -1) selectOption(typedYear);
         typedYear = "";
       }
 
       clearTimeout(trigger._yearTimeout);
-      trigger._yearTimeout = setTimeout(() => {
-        typedYear = "";
-      }, 1000);
-
+      trigger._yearTimeout = setTimeout(() => typedYear = "", 1000);
       return;
     }
-    /* ========================================= */
 
     if (!container.classList.contains("open")) open();
 
@@ -672,17 +658,11 @@ function initBirthYearDropdown(container) {
         return;
       }
 
-      if (e.key === "ArrowDown") {
-        setActive(
-          activeIndex < options.length - 1 ? activeIndex + 1 : 0
-        );
-      }
-
-      if (e.key === "ArrowUp") {
-        setActive(
-          activeIndex > 0 ? activeIndex - 1 : options.length - 1
-        );
-      }
+      setActive(
+        e.key === "ArrowDown"
+          ? (activeIndex + 1) % options.length
+          : (activeIndex - 1 + options.length) % options.length
+      );
     }
 
     if (e.key === "Enter" && activeIndex >= 0) {
@@ -696,14 +676,13 @@ function initBirthYearDropdown(container) {
     }
   });
 
-  /* FORM DIŞINA TIKLANINCA KAPAT */
-  document.addEventListener("click", e => {
+  /* ================= OUTSIDE CLICK ================= */
+  document.addEventListener("mousedown", e => {
     if (!container.contains(e.target)) close();
   });
 }
 
-document
-  .querySelectorAll(".birthyear-select")
+document.querySelectorAll(".birthyear-select")
   .forEach(initBirthYearDropdown);
 
  /* ========================= PHONE INPUT ========================= */
