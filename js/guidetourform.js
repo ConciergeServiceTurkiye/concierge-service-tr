@@ -63,10 +63,11 @@ const showAllBtn = document.getElementById("showAllParticipants");
   if (!validateParticipantInputs()) return;
 
   participants.push({
-    name: nameInput.value.trim(),
-    nationality: natTrigger.textContent.trim(),
-    year: yearInput.value
-  });
+  id: crypto.randomUUID(), // 🔥 EKLENDİ
+  name: nameInput.value.trim(),
+  nationality: natTrigger.textContent.trim(),
+  year: yearInput.value
+});
 
   renderParticipants();
   resetParticipantInputs();
@@ -95,6 +96,13 @@ const showAllBtn = document.getElementById("showAllParticipants");
 
 function validateParticipantInputs() {
   let valid = true;
+
+  // 🔹 ESKİ HATALARI TEMİZLE
+  nameInput.classList.remove("has-error");
+  natTrigger.classList.remove("has-error");
+  document
+    .querySelector(".birthyear-trigger")
+    .classList.remove("has-error");
 
   if (!nameInput.value.trim()) {
     nameInput.classList.add("has-error");
@@ -186,8 +194,11 @@ function renderParticipants() {
   `;
 
   div.querySelector(".delete").addEventListener("click", () => {
-    participants.splice(index, 1);
-    renderParticipants();
+    const idx = participants.findIndex(x => x.id === p.id);
+if (idx !== -1) {
+  participants.splice(idx, 1);
+  renderParticipants();
+}
     if (participantsModal.classList.contains("active")) {
   renderModalParticipants();
 }
