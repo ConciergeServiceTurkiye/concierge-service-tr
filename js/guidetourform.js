@@ -138,7 +138,7 @@ document
   .querySelector(".participant-input-row")
   .addEventListener("keydown", e => {
 
-    // ⛔ dropdown içindeysek ADD ÇALIŞMASIN
+    // ⛔ dropdown içindeysek ASLA add çalışmasın
     if (
       e.target.closest(".nationality-select") ||
       e.target.closest(".birthyear-select")
@@ -148,6 +148,7 @@ document
 
     if (e.key === "Enter") {
       e.preventDefault();
+      e.stopPropagation(); // 🔥 KRİTİK
       addParticipant();
     }
   });
@@ -570,8 +571,9 @@ function initNationalityDropdown(container) {
     /* ENTER */
 if (e.key === "Enter" && activeIndex >= 0) {
   e.preventDefault();
-  e.stopPropagation(); // 🔥 ADD BTN’A GİTMESİN
+  e.stopPropagation();
   selectOption(opts[activeIndex]);
+  return; // 🔥 FORM TARAFINA ASLA GEÇMESİN
 }
   });
 }
@@ -720,8 +722,9 @@ function initBirthYearDropdown(container) {
 
     if (e.key === "Enter" && activeIndex >= 0) {
   e.preventDefault();
-  e.stopPropagation(); // 🔥 EKLE
+  e.stopPropagation();
   selectOption(options[activeIndex].textContent);
+  return; // 🔥 ÇOK KRİTİK
 }
 
     if (e.key === "Escape") {
