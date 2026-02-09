@@ -580,11 +580,15 @@ if (e.key === "Enter" && activeIndex >= 0) {
 
 /* FORM DIŞI TIK → KAPAT */
 document.addEventListener("click", e => {
+  // başka handler'lar zaten yönettiyse dokunma
+  if (e.defaultPrevented) return;
+
   document.querySelectorAll(".nationality-select.open")
     .forEach(el => {
       if (!el.contains(e.target)) el.classList.remove("open");
     });
 });
+
 
 /* INIT */
 document.querySelectorAll(".nationality-select")
@@ -723,8 +727,9 @@ function initBirthYearDropdown(container) {
     if (e.key === "Enter" && activeIndex >= 0) {
   e.preventDefault();
   e.stopPropagation();
+  e.stopImmediatePropagation(); // 🔒 ekstra sigorta
   selectOption(options[activeIndex].textContent);
-  return; // 🔥 ÇOK KRİTİK
+  return;
 }
 
     if (e.key === "Escape") {
