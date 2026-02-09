@@ -59,16 +59,18 @@ const addBtn = document.getElementById("addParticipantBtn");
 const listContainer = document.getElementById("participantsList");
 const showAllBtn = document.getElementById("showAllParticipants");
 
+ function addParticipant() {
+  if (!validateParticipantInputs()) return;
 
- (function populateBirthYears() {
-  const currentYear = new Date().getFullYear();
-  for (let y = currentYear - 5; y >= 1900; y--) {
-    const opt = document.createElement("option");
-    opt.value = y;
-    opt.textContent = y;
-    yearInput.appendChild(opt);
-  }
-})();
+  participants.push({
+    name: nameInput.value.trim(),
+    nationality: natTrigger.textContent.trim(),
+    year: yearInput.value
+  });
+
+  renderParticipants();
+  resetParticipantInputs();
+}
 
  /* DÜZENLENMİŞ addBtn KODU (DROP-IN) */
  function resetParticipantInputs() {
@@ -120,30 +122,6 @@ function validateParticipantInputs() {
   return valid;
 }
 
-function renderParticipants() {
-  listContainer.innerHTML = "";
-
-  // ❗ hiç participant yoksa gizle
-  if (participants.length === 0) {
-    participantsSection.style.display = "none";
-    showAllBtn.style.display = "none";
-    return;
-  }
-
-  // ✅ 1 kişi bile varsa GÖSTER
-  participantsSection.style.display = "block";
-
-  participants.forEach((p, index) => {
-    listContainer.appendChild(createParticipantItem(p, index));
-  });
-
-  showAllBtn.style.display =
-    participants.length > MAX_VISIBLE_PARTICIPANTS
-      ? "block"
-      : "none";
-}
-
-
 /* CLICK */
 addBtn.addEventListener("click", addParticipant);
 
@@ -165,7 +143,6 @@ document
       addParticipant();
     }
   });
-
 
 
 function renderParticipants() {
@@ -237,13 +214,6 @@ showAllBtn.addEventListener("click", () => {
   renderModalParticipants();
 });
 
-
- participantsModalClose.addEventListener("click", () => {
-  participantsModal.classList.remove("active");
-});
-
-
-
  function renderModalParticipants() {
   participantsModalList.innerHTML = "";
 
@@ -253,7 +223,6 @@ showAllBtn.addEventListener("click", () => {
   });
 }
  
-
   /* ============================== LIVE ERROR CLEARING ============================== */
 
 function bindLiveValidation(form) {
