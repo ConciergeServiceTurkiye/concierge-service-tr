@@ -75,7 +75,10 @@ function addParticipant() {
   });
 
   renderParticipants();
-  function resetParticipantInputs() {
+  resetParticipantInputs();
+}
+ 
+ function resetParticipantInputs() {
   nameInput.value = "";
   natInput.value = "";
   yearInput.value = "";
@@ -87,7 +90,6 @@ function addParticipant() {
   const yearTrigger = document.querySelector(".birthyear-trigger");
   yearTrigger.textContent = "Birth year";
   yearTrigger.classList.remove("has-value");
-}
 }
 
 /* RENDER */
