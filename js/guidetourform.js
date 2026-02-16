@@ -75,7 +75,19 @@ function addParticipant() {
   });
 
   renderParticipants();
-  resetParticipantInputs();
+  function resetParticipantInputs() {
+  nameInput.value = "";
+  natInput.value = "";
+  yearInput.value = "";
+
+  const natTriggerEl = document.querySelector(".nationality-trigger");
+  natTriggerEl.innerHTML = `<span class="current">Select nationality</span>`;
+  natTriggerEl.closest(".nationality-select")?.classList.remove("has-value");
+
+  const yearTrigger = document.querySelector(".birthyear-trigger");
+  yearTrigger.textContent = "Birth year";
+  yearTrigger.classList.remove("has-value");
+}
 }
 
 /* RENDER */
