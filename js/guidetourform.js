@@ -63,6 +63,14 @@ const addBtn = document.getElementById("addParticipantBtn");
 let confirmBtn = null;
 let cancelBtn = null;
 
+const addParticipantBtn = document.getElementById("addParticipantBtn");
+
+addParticipantBtn.addEventListener("click", function(e) {
+  e.preventDefault();
+  addParticipant();
+});
+
+ 
 /* ADD */
 function addParticipant() {
   if (!validateParticipantInputs()) return;
