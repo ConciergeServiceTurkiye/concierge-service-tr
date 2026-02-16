@@ -73,7 +73,7 @@ addParticipantBtn.addEventListener("click", function(e) {
  
 /* ADD */
 function addParticipant() {
-  if (!validateParticipantInputs()) return;
+  //if (!validateParticipantInputs()) return;
 
   participants.push({
     id: crypto.randomUUID(),
