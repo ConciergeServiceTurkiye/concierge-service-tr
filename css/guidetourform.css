@@ -32,14 +32,9 @@
 /* PARTİCİPANT YENİ*/
 	.add-participant-btn {background: #2ecc71;color: white;border: none;width: 42px;height: 42px;border-radius: 50%;font-size: 22px;cursor: pointer;margin-top: 10px;grid-area: add;justify-self: center;}
 	.add-participant-btn:hover{background: #27ae60;}
-	.participant-actions .edit {color: #d4af37; /* sarı */}
-	.participant-actions .delete {color: #c62828; /* kırmızı */}
 
 /* MODAL */
-	.participants-modal {position: fixed;inset: 0;background: rgba(0,0,0,.75);display: none;align-items: center;justify-content: center;z-index: 9999;}
 	.participants-modal.active {display: flex;}
-	.modal-content {background: #0b0b0b;border-radius: 18px;padding: 30px;width: 90%;max-width: 520px;}
-	.modal-close {position: absolute;right: 20px;top: 14px;font-size: 28px;color: #fff;}
 	.participant-input-row {display: grid;grid-template-columns: 1.4fr 1fr 1fr;grid-template-areas:"name nationality birth""add add add";gap: 12px;align-items: stretch;}
 	#participantNameInput {min-width: 0;}
 
@@ -375,3 +370,80 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
   outline: none;
   border-bottom-color: #d4af37;
 }
+
+/* ================= PARTICIPANTS NEW SYSTEM ================= */
+
+#participantsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 40px;
+  margin-top: 10px;
+}
+
+.participant-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.participant-link {
+  color: #d4af37;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.participant-link:hover {
+  text-decoration: underline;
+}
+
+.participant-remove {
+  font-size: 14px;
+  cursor: pointer;
+  color: #c62828;
+}
+
+.participant-remove:hover {
+  opacity: 0.7;
+}
+
+/* Edit mode disable */
+.participants-disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* Edit buttons */
+.edit-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.confirm-btn,
+.cancel-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.confirm-btn {
+  background: #2ecc71;
+  color: white;
+}
+
+.confirm-btn:disabled {
+  background: #1e7e4f;
+  opacity: 0.4;
+  cursor: default;
+}
+
+.cancel-btn {
+  background: #c62828;
+  color: white;
+}
+
