@@ -45,195 +45,196 @@ function hideInlineAlert() {
   alert.style.display = "none"; // Kutuyu ve boşluğu tamamen gizler
 }
 
- /* ===================== PARTICIPANTS STATE ===================== */
+/* ===================== PARTICIPANTS STATE (NEW SYSTEM) ===================== */
 
 const participants = [];
-const MAX_VISIBLE_PARTICIPANTS = 4;
+let editMode = false;
+let editingId = null;
+let originalData = null;
 
 const nameInput = document.getElementById("participantNameInput");
 const natInput = document.getElementById("participantNationalityInput");
 const natTrigger = document.querySelector(".nationality-trigger");
 const yearInput = document.getElementById("participantBirthYearInput");
 const participantsSection = document.getElementById("participantsSection");
-const addBtn = document.getElementById("addParticipantBtn");
 const listContainer = document.getElementById("participantsList");
-const showAllBtn = document.getElementById("showAllParticipants");
+const addBtn = document.getElementById("addParticipantBtn");
 
- function addParticipant() {
+let confirmBtn = null;
+let cancelBtn = null;
+
+/* ADD */
+function addParticipant() {
   if (!validateParticipantInputs()) return;
 
   participants.push({
-  id: crypto.randomUUID(), // 🔥 EKLENDİ
-  name: nameInput.value.trim(),
-  nationality: natTrigger.textContent.trim(),
-  year: yearInput.value
-});
+    id: crypto.randomUUID(),
+    name: nameInput.value.trim(),
+    nationality: natTrigger.textContent.trim(),
+    year: yearInput.value
+  });
 
   renderParticipants();
   resetParticipantInputs();
 }
 
- /* DÜZENLENMİŞ addBtn KODU (DROP-IN) */
- function resetParticipantInputs() {
-  // Name
-  nameInput.value = "";
-
-  // Nationality
-  natInput.value = "";
-  natTrigger.innerHTML = `<span class="current">Select nationality</span>`;
-  const natSelect = natTrigger.closest(".nationality-select");
-  natSelect.classList.remove("has-value", "open");
-
-  // Birth year
-  yearInput.value = "";
-  const birthTrigger = document.querySelector(".birthyear-trigger");
-  birthTrigger.textContent = "Birth Year";
-  birthTrigger.classList.remove("has-value");
-
-  // Focus geri ver
-  nameInput.focus();
-}
-
-function validateParticipantInputs() {
-  let valid = true;
-
-  // 🔹 ESKİ HATALARI TEMİZLE
-  nameInput.classList.remove("has-error");
-  natTrigger.classList.remove("has-error");
-  document
-    .querySelector(".birthyear-trigger")
-    .classList.remove("has-error");
-
-  if (!nameInput.value.trim()) {
-    nameInput.classList.add("has-error");
-    valid = false;
-  }
-
-  if (!natInput.value) {
-    natTrigger.classList.add("has-error");
-    valid = false;
-  }
-
-  if (!yearInput.value) {
-    document
-      .querySelector(".birthyear-trigger")
-      .classList.add("has-error");
-    valid = false;
-  }
-
-  if (!valid) {
-    showInlineAlert("Please fill full name, nationality and birth year");
-  } else {
-    hideInlineAlert();
-  }
-
-  return valid;
-}
-
-/* CLICK */
-addBtn.addEventListener("click", addParticipant);
-
-/* ENTER = ADD (UX bonus) */
-document
-  .querySelector(".participant-input-row")
-  .addEventListener("keydown", e => {
-
-    // ⛔ dropdown içindeysek ASLA add çalışmasın
-    if (
-      e.target.closest(".nationality-select") ||
-      e.target.closest(".birthyear-select")
-    ) {
-      return;
-    }
-
-    if (e.key === "Enter") {
-      e.preventDefault();
-      e.stopPropagation(); // 🔥 KRİTİK
-      addParticipant();
-    }
-  });
-
-
+/* RENDER */
 function renderParticipants() {
   listContainer.innerHTML = "";
 
-  // ❗ hiç participant yoksa gizle
   if (participants.length === 0) {
     participantsSection.style.display = "none";
-    showAllBtn.style.display = "none";
     return;
   }
 
-  // ✅ 1 ve üzeri → göster
   participantsSection.style.display = "block";
 
-  participants
-    .slice(0, MAX_VISIBLE_PARTICIPANTS)
-    .forEach((p, index) => {
-      listContainer.appendChild(createParticipantItem(p, index));
+  participants.forEach(p => {
+    const chip = document.createElement("div");
+    chip.className = "participant-chip";
+
+    const link = document.createElement("span");
+    link.className = "participant-link";
+    link.textContent = p.name;
+    link.title = "Edit participant";
+
+    const remove = document.createElement("span");
+    remove.className = "participant-remove";
+    remove.textContent = "×";
+    remove.title = "Remove participant";
+
+    /* REMOVE */
+    remove.addEventListener("click", () => {
+      if (editMode) return;
+      if (participants.length === 1) return;
+
+      const index = participants.findIndex(x => x.id === p.id);
+      participants.splice(index, 1);
+      renderParticipants();
     });
 
-  // Show all sadece gerekiyorsa
-  showAllBtn.style.display =
-    participants.length > MAX_VISIBLE_PARTICIPANTS
-      ? "block"
-      : "none";
-}
+    /* EDIT */
+    link.addEventListener("click", () => {
+      if (editMode) return;
 
+      editMode = true;
+      editingId = p.id;
+      originalData = { ...p };
 
+      nameInput.value = p.name;
+      natTrigger.innerHTML = `<span class="current">${p.nationality}</span>`;
+      natInput.value = p.nationality;
+      yearInput.value = p.year;
 
- function createParticipantItem(p, index) {
-  const div = document.createElement("div");
-  div.className = "participant-item";
+      document.querySelector(".birthyear-trigger").textContent = p.year;
 
-  div.innerHTML = `
-    <span>${index + 1}- ${p.name} ${p.nationality} ${p.year}</span>
-    <div class="participant-actions">
-      <button class="edit">✏️</button>
-      <button class="delete">❌</button>
-    </div>
-  `;
+      addBtn.style.display = "none";
 
-  div.querySelector(".delete").addEventListener("click", () => {
-    const idx = participants.findIndex(x => x.id === p.id);
-if (idx !== -1) {
-  participants.splice(idx, 1);
-  renderParticipants();
-}
-    if (participantsModal.classList.contains("active")) {
-  renderModalParticipants();
-}
-  });
+      createEditControls();
+      disableParticipantsUI();
+      checkForChanges();
+    });
 
-  return div;
-}
-
-
-const participantsModal = document.getElementById("participantsModal");
-const participantsModalList = document.getElementById("modalParticipantsList");
-const participantsModalClose =
-  participantsModal.querySelector(".modal-close");
-
-if (participantsModalClose) {
-  participantsModalClose.addEventListener("click", () => {
-    participantsModal.classList.remove("active");
+    chip.appendChild(link);
+    chip.appendChild(remove);
+    listContainer.appendChild(chip);
   });
 }
 
+/* DISABLE LIST */
+function disableParticipantsUI() {
+  listContainer.classList.add("participants-disabled");
+}
 
-showAllBtn.addEventListener("click", () => {
-  participantsModal.classList.add("active");
-  renderModalParticipants();
+function enableParticipantsUI() {
+  listContainer.classList.remove("participants-disabled");
+}
+
+/* EDIT CONTROLS */
+function createEditControls() {
+  const container = document.querySelector(".participant-input-row");
+
+  const controls = document.createElement("div");
+  controls.className = "edit-controls";
+
+  confirmBtn = document.createElement("button");
+  confirmBtn.className = "confirm-btn";
+  confirmBtn.innerHTML = "✓";
+  confirmBtn.title = "Confirm";
+  confirmBtn.disabled = true;
+
+  cancelBtn = document.createElement("button");
+  cancelBtn.className = "cancel-btn";
+  cancelBtn.innerHTML = "×";
+  cancelBtn.title = "Cancel";
+
+  controls.appendChild(confirmBtn);
+  controls.appendChild(cancelBtn);
+
+  container.appendChild(controls);
+
+  confirmBtn.addEventListener("click", confirmEdit);
+  cancelBtn.addEventListener("click", cancelEdit);
+}
+
+/* CHECK CHANGES */
+function checkForChanges() {
+  const current = {
+    name: nameInput.value.trim(),
+    nationality: natTrigger.textContent.trim(),
+    year: yearInput.value
+  };
+
+  const changed =
+    current.name !== originalData.name ||
+    current.nationality !== originalData.nationality ||
+    current.year !== originalData.year;
+
+  confirmBtn.disabled = !changed;
+}
+
+[nameInput, natTrigger, yearInput].forEach(el => {
+  el.addEventListener("input", checkForChanges);
+  el.addEventListener("click", checkForChanges);
 });
 
- function renderModalParticipants() {
-  participantsModalList.innerHTML = "";
+/* CONFIRM */
+function confirmEdit() {
+  const index = participants.findIndex(x => x.id === editingId);
+  if (index === -1) return;
 
+  participants[index] = {
+    id: editingId,
+    name: nameInput.value.trim(),
+    nationality: natTrigger.textContent.trim(),
+    year: yearInput.value
+  };
 
-  participants.forEach((p, index) => {
-    participantsModalList.appendChild(createParticipantItem(p, index));
-  });
+  exitEditMode();
+  renderParticipants();
+  resetParticipantInputs();
 }
+
+/* CANCEL */
+function cancelEdit() {
+  exitEditMode();
+  resetParticipantInputs();
+}
+
+/* EXIT */
+function exitEditMode() {
+  editMode = false;
+  editingId = null;
+  originalData = null;
+
+  document.querySelector(".edit-controls")?.remove();
+  addBtn.style.display = "block";
+  enableParticipantsUI();
+}
+
+/* ADD CLICK */
+addBtn.addEventListener("click", addParticipant);
+
  
   /* ============================== LIVE ERROR CLEARING ============================== */
 
