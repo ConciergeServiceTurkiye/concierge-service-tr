@@ -451,15 +451,18 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
   color: rgba(255, 255, 255, 0.65);
 }
 
-/* ================= ERROR STATE FIX ================= */
+/* ================= ERROR STATE UNIFIED ================= */
 
 .field-wrapper.has-error input,
 .field-wrapper.has-error textarea,
 .field-wrapper.has-error select,
 .field-wrapper.has-error .nationality-trigger,
 .field-wrapper.has-error .birthyear-trigger {
+
   border: 1px solid #dc3545 !important;
-  box-shadow: 0 0 0 2px rgba(220,53,69,0.15);
+  box-shadow: 0 0 0 2px rgba(220,53,69,0.15) !important;
+  outline: none !important;
 }
+
 
 
