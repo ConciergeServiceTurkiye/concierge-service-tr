@@ -4,7 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function showFieldError(el, message) {
   const wrapper = el.closest(".field-wrapper");
-  if (!wrapper) return;
+  if (!wrapper) {
+  el.classList.add("has-error");
+  return;
+}
 
   let error = wrapper.querySelector(".field-error");
 
