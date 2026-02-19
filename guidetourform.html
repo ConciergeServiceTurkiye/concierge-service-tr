@@ -45,27 +45,31 @@
   <label>Participants Details</label>
 <!-- PARTICIPANT INPUT (TEMP) -->
 <div class="participant-input-row">
-  <input type="text" id="participantNameInput" placeholder="Full name" />
 
-  <div class="nationality-select">
-    <input type="hidden" id="participantNationalityInput">
-    <div class="nationality-trigger" tabindex="0">Select nationality</div>
-    <div class="nationality-dropdown">
-      <input type="text" class="nationality-search" placeholder="Type to search">
+  <div class="field-wrapper">
+    <input type="text" id="participantNameInput" placeholder="Full name" />
+  </div>
+
+  <div class="field-wrapper">
+    <div class="nationality-select">
+      <input type="hidden" id="participantNationalityInput">
+      <div class="nationality-trigger" tabindex="0">Select nationality</div>
+      <div class="nationality-dropdown">
+        <input type="text" class="nationality-search" placeholder="Type to search">
+      </div>
     </div>
   </div>
 
-  <div class="birthyear-select">
-  <input type="hidden" id="participantBirthYearInput">
-
-  <div class="birthyear-trigger" tabindex="0">
-    Birth Year
+  <div class="field-wrapper">
+    <div class="birthyear-select">
+      <input type="hidden" id="participantBirthYearInput">
+      <div class="birthyear-trigger" tabindex="0">Birth Year</div>
+      <div class="birthyear-dropdown"></div>
+    </div>
   </div>
 
-  <div class="birthyear-dropdown"></div>
-</div>
-
   <button type="button" id="addParticipantBtn" class="add-participant-btn">+</button>
+
 </div>
 
 
