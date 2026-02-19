@@ -529,12 +529,17 @@ function initNationalityDropdown(container) {
   }
 
   function selectOption(option) {
-    trigger.innerHTML = `<span class="current">${option.dataset.label}</span>`;
-    hiddenInput.value = option.dataset.value;
-    container.classList.add("has-value");
-    close();
-    trigger.focus();
+  trigger.innerHTML = `<span class="current">${option.dataset.label}</span>`;
+  hiddenInput.value = option.dataset.value;
+  container.classList.add("has-value");
+  close();
+  trigger.focus();
+
+  // 🔥 EDIT MODE için değişim kontrolü
+  if (editMode) {
+    checkForChanges();
   }
+}
 
   /* ---------- SEARCH ---------- */
 
