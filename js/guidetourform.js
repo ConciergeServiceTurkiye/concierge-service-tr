@@ -73,13 +73,13 @@ addParticipantBtn.addEventListener("click", function(e) {
  
 /* ADD */
 function addParticipant() {
-  //if (!validateParticipantInputs()) return;
- if (!nameInput.value.trim()) return;
+
+  if (!nameInput.value.trim()) return;
 
   participants.push({
     id: crypto.randomUUID(),
     name: nameInput.value.trim(),
-    nationality: natTrigger.textContent.trim(),
+    nationality: natTrigger.querySelector(".current")?.textContent.trim() || "",
     year: yearInput.value
   });
 
@@ -128,13 +128,17 @@ function renderParticipants() {
 
     /* REMOVE */
     remove.addEventListener("click", () => {
-      if (editMode) return;
-      if (participants.length === 1) return;
 
-      const index = participants.findIndex(x => x.id === p.id);
-      participants.splice(index, 1);
-      renderParticipants();
-    });
+  if (editMode) return;
+  if (participants.length <= 1) return;
+
+  const index = participants.findIndex(x => x.id === p.id);
+  if (index === -1) return;
+
+  participants.splice(index, 1);
+
+  renderParticipants();
+});
 
     /* EDIT */
     link.addEventListener("click", () => {
@@ -202,9 +206,13 @@ function createEditControls() {
 
 /* CHECK CHANGES */
 function checkForChanges() {
+
+  // 🔒 Edit modda değilsek hiçbir şey yapma
+  if (!editMode || !originalData || !confirmBtn) return;
+
   const current = {
     name: nameInput.value.trim(),
-    nationality: natTrigger.textContent.trim(),
+    nationality: natTrigger.querySelector(".current")?.textContent.trim() || "",
     year: yearInput.value
   };
 
@@ -216,10 +224,14 @@ function checkForChanges() {
   confirmBtn.disabled = !changed;
 }
 
-[nameInput, natTrigger, yearInput].forEach(el => {
+[nameInput, yearInput].forEach(el => {
   el.addEventListener("input", checkForChanges);
-  el.addEventListener("click", checkForChanges);
 });
+
+natTrigger.addEventListener("click", () => {
+  setTimeout(checkForChanges, 50);
+});
+
 
 /* CONFIRM */
 function confirmEdit() {
