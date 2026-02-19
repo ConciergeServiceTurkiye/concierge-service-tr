@@ -450,3 +450,14 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 #participantsTitle {
   color: rgba(255, 255, 255, 0.65);
 }
+
+/* ================= ERROR STATE FIX ================= */
+
+.field-wrapper.has-error input,
+.field-wrapper.has-error textarea,
+.field-wrapper.has-error .nationality-trigger,
+.field-wrapper.has-error .birthyear-trigger {
+  border: 1px solid #e53935 !important;
+  box-shadow: 0 0 0 1px rgba(229,57,53,0.35);
+}
+
