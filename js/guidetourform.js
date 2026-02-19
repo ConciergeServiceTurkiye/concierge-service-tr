@@ -224,9 +224,13 @@ function checkForChanges() {
   confirmBtn.disabled = !changed;
 }
 
-[nameInput, yearInput].forEach(el => {
-  el.addEventListener("input", checkForChanges);
-});
+// Name
+nameInput.addEventListener("input", checkForChanges);
+
+// Year
+yearInput.addEventListener("input", checkForChanges);
+yearInput.addEventListener("change", checkForChanges);
+
 
 natTrigger.addEventListener("click", () => {
   setTimeout(checkForChanges, 50);
