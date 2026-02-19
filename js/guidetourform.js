@@ -703,13 +703,18 @@ function initBirthYearDropdown(container) {
   }
 
   function selectOption(value) {
-    trigger.textContent = value;
-    trigger.classList.add("has-value");
-    hiddenInput.value = value;
-    close();
+  trigger.textContent = value;
+  trigger.classList.add("has-value");
+  hiddenInput.value = value;
+  close();
 
-    setTimeout(() => trigger.focus(), 0);
+  setTimeout(() => trigger.focus(), 0);
+
+  // 🔥 EDIT MODE değişim kontrolü
+  if (editMode) {
+    checkForChanges();
   }
+}
 
   /* ================= KEYBOARD FOCUS (TAB) ================= */
   trigger.addEventListener("focus", e => {
