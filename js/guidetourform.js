@@ -975,9 +975,9 @@ if (form) {
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  form.querySelectorAll(".has-error").forEach(el => {
-  el.classList.remove("has-error");
-  el.querySelector(".field-error")?.remove();
+  form.querySelectorAll(".field-wrapper.has-error").forEach(wrapper => {
+  wrapper.classList.remove("has-error");
+  wrapper.querySelector(".field-error")?.remove();
 });
 
   let isValid = true;
