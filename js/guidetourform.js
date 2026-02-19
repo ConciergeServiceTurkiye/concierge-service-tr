@@ -1035,7 +1035,6 @@ if (!hasParticipants) {
     if (!firstErrorField) firstErrorField = primaryBirthYear;
     isValid = false;
   }
-}
 
   /* REQUIRED */
   const requiredFields = form.querySelectorAll(
