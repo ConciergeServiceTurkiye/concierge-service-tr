@@ -812,9 +812,11 @@ if (phoneInput) {
   });
 }
  // 🔥 Sadece rakam girişine izin ver
-phoneInput.addEventListener("input", function () {
-  this.value = this.value.replace(/[^0-9]/g, "");
-});
+if (phoneInput) {
+  phoneInput.addEventListener("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, "");
+  });
+}
 
 /* ========================= DATE PICKER ========================= */
   const dateInput = document.getElementById("date");
