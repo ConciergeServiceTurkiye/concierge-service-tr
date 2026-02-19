@@ -980,7 +980,42 @@ form.addEventListener("submit", async function (e) {
   let isValid = true;
   let firstErrorField = null;
 
+ // Participant var mı kontrolü
+const hasParticipants = participants.length > 0;
+
   hideInlineAlert();
+
+ // ================= PRIMARY PARTICIPANT REQUIRED =================
+if (!hasParticipants) {
+
+  const primaryName = document.querySelector('[name="name"]');
+  const primaryNationality = document.getElementById("participantNationalityInput");
+  const primaryBirthYear = document.getElementById("participantBirthYearInput");
+
+  if (primaryName && !primaryName.value.trim()) {
+    showFieldError(primaryName, "This field is required");
+    if (!firstErrorField) firstErrorField = primaryName;
+    isValid = false;
+  }
+
+  if (primaryNationality && !primaryNationality.value.trim()) {
+    showFieldError(
+      document.querySelector(".nationality-trigger"),
+      "This field is required"
+    );
+    if (!firstErrorField) firstErrorField = primaryNationality;
+    isValid = false;
+  }
+
+  if (primaryBirthYear && !primaryBirthYear.value.trim()) {
+    showFieldError(
+      document.querySelector(".birthyear-trigger"),
+      "This field is required"
+    );
+    if (!firstErrorField) firstErrorField = primaryBirthYear;
+    isValid = false;
+  }
+}
 
   /* REQUIRED */
   const requiredFields = form.querySelectorAll(
