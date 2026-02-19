@@ -455,6 +455,7 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 
 .field-wrapper.has-error input,
 .field-wrapper.has-error textarea,
+.field-wrapper.has-error select,
 .field-wrapper.has-error .nationality-trigger,
 .field-wrapper.has-error .birthyear-trigger {
   border: 1px solid #dc3545 !important;
