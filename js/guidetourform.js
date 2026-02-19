@@ -985,7 +985,6 @@ const hasParticipants = participants.length > 0;
 
   hideInlineAlert();
 
- // ================= PRIMARY PARTICIPANT REQUIRED =================
 // ================= PRIMARY PARTICIPANT REQUIRED =================
 if (!hasParticipants) {
 
@@ -1011,30 +1010,6 @@ if (!hasParticipants) {
     isValid = false;
   }
 }
-
-  if (primaryName && !primaryName.value.trim()) {
-    showFieldError(primaryName, "This field is required");
-    if (!firstErrorField) firstErrorField = primaryName;
-    isValid = false;
-  }
-
-  if (primaryNationality && !primaryNationality.value.trim()) {
-    showFieldError(
-      document.querySelector(".nationality-trigger"),
-      "This field is required"
-    );
-    if (!firstErrorField) firstErrorField = primaryNationality;
-    isValid = false;
-  }
-
-  if (primaryBirthYear && !primaryBirthYear.value.trim()) {
-    showFieldError(
-      document.querySelector(".birthyear-trigger"),
-      "This field is required"
-    );
-    if (!firstErrorField) firstErrorField = primaryBirthYear;
-    isValid = false;
-  }
 
   /* REQUIRED */
   const requiredFields = form.querySelectorAll(
