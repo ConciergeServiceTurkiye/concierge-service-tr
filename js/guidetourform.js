@@ -811,6 +811,10 @@ if (phoneInput) {
       "https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"
   });
 }
+ // 🔥 Sadece rakam girişine izin ver
+phoneInput.addEventListener("input", function () {
+  this.value = this.value.replace(/[^0-9]/g, "");
+});
 
 /* ========================= DATE PICKER ========================= */
   const dateInput = document.getElementById("date");
