@@ -458,8 +458,8 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 .field-wrapper.has-error .nationality-trigger,
 .field-wrapper.has-error .birthyear-trigger,
 .field-wrapper.has-error .select-trigger {
-  border: 1px solid #dc3545 !important;
-  box-shadow: 0 0 0 2px rgba(220,53,69,0.15) !important;
+  border: 1px solid #ff6b6b !important;
+  box-shadow: 0 0 0 2px rgba(255,107,107,0.25) !important;
   outline: none !important;
 }
 
