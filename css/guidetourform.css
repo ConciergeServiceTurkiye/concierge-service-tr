@@ -463,5 +463,11 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
   outline: none !important;
 }
 
+.field-wrapper {
+  position: relative;
+}
 
+.field-error {
+  min-height: 16px;
+}
 
