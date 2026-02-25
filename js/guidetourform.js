@@ -14,7 +14,7 @@ function showFieldError(el, message) {
   if (!error) {
     error = document.createElement("div");
     error.className = "field-error";
-    wrapper.prepend(error); // input/select üstüne error ekler
+    wrapper.appendChild(error); // input/select altına error ekler
   }
 
   error.textContent = message;
