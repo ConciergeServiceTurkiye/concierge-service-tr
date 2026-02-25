@@ -9,7 +9,7 @@
     input, textarea{background:#111;border:1px solid #d4af37;border-radius:10px;color:#d4af37;padding:12px 14px;}
     textarea{resize:none;}
     .custom-select{position:relative;}
-    .select-trigger {color: rgba(255, 255, 255, 0.65); /* Placeholder rengi */font-size: 14px;display: flex;align-items: center;height: 44px; /* Diğer inputlarla aynı yükseklik */box-sizing: border-box;} /* Language Trigger Temel Hali (Select Date/Hotel Name ile aynı) */
+    .select-trigger {border:1px solid #d4af37;border-radius:10px;padding:12px 14px;cursor:pointer;color: rgba(255, 255, 255, 0.65); /* Placeholder rengi */font-size: 14px;display: flex;align-items: center;height: 44px; /* Diğer inputlarla aynı yükseklik */box-sizing: border-box;} /* Language Trigger Temel Hali (Select Date/Hotel Name ile aynı) */
     .select-options{display:none;position:absolute;top:100%;left:0;width:100%;background:#111;border:1px solid #d4af37;border-radius:10px;z-index:50;}
     .custom-select.open .select-options{display:block;}
     .select-options li{padding:12px 14px;cursor:pointer;}
