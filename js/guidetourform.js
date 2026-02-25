@@ -844,6 +844,7 @@ document.querySelectorAll(".custom-select").forEach(select => {
 
   function open() {
     select.classList.add("open");
+    trigger.focus(); // Beyaz border'ın tetiklenmesi için odağı zorla
   }
 
   function close() {
