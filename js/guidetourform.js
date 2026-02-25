@@ -842,112 +842,55 @@ document.querySelectorAll(".custom-select").forEach(select => {
   const optionsList = select.querySelector(".select-options");
   const options = Array.from(optionsList.querySelectorAll("li"));
 
-  let currentIndex = -1;
-
-  // alfabetik sırala
-  options.sort((a, b) =>
-    a.textContent.trim().localeCompare(b.textContent.trim())
-  );
-  optionsList.innerHTML = "";
-  options.forEach(opt => optionsList.appendChild(opt));
-
   function open() {
     select.classList.add("open");
   }
 
   function close() {
     select.classList.remove("open");
-    currentIndex = -1;
     options.forEach(o => o.classList.remove("active"));
   }
 
-  // focus ile aç
-  // focus ile aç (SADECE keyboard için)
-trigger.addEventListener("focus", e => {
-  if (e.relatedTarget && e.relatedTarget.tagName === "LI") return;
-});
-
-  // mouse click (blink fix)
   trigger.addEventListener("click", e => {
     e.preventDefault();
     e.stopPropagation();
     select.classList.contains("open") ? close() : open();
   });
 
-  // keyboard navigation
-  trigger.addEventListener("keydown", e => {
-    if (!select.classList.contains("open") && ["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
-      e.preventDefault();
-      open();
-      currentIndex = 0;
-    }
-
-    if (!select.classList.contains("open")) return;
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      currentIndex = (currentIndex + 1) % options.length;
-    }
-
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      currentIndex = (currentIndex - 1 + options.length) % options.length;
-    }
-
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const opt = options[currentIndex];
-      if (!opt) return;
-
-      trigger.textContent = opt.textContent;
-      hidden.value = opt.textContent;
-      select.classList.add("has-value");
-      close();
-      trigger.focus();
-      return;
-    }
-
-    if (e.key === "Escape") {
-      e.preventDefault();
-      close();
-      trigger.focus();
-      return;
-    }
-
-    options.forEach(o => o.classList.remove("active"));
-    if (currentIndex >= 0) {
-      options[currentIndex].classList.add("active");
-      options[currentIndex].scrollIntoView({ block: "nearest" });
-    }
-  });
-
-  // option click
+  // SEÇİM YAPMA (MOUSE): 'mousedown' kullanarak focus kaybolmadan seçimi yakalıyoruz
   options.forEach(option => {
-    option.addEventListener("click", e => {
+    option.addEventListener("mousedown", e => {
+      e.preventDefault(); // focus'un kaçmasını engeller
       e.stopPropagation();
+      
       trigger.textContent = option.textContent;
       hidden.value = option.textContent;
-      select.classList.add("has-value");
+      
+      select.classList.add("has-value"); // Renk değişimi için class ekliyoruz
       close();
       trigger.focus();
+
+      // Hata mesajı varsa gizle
+      hideFieldError(trigger);
     });
   });
 
-  // dışarı tık
-  document.addEventListener("click", e => {
-  if (
-    !select.contains(e.target) &&
-    !e.target.closest(".select-options")
-  ) {
-    close();
-  }
-});
+  // Dışarı tıklandığında kapat
+  document.addEventListener("mousedown", e => {
+    if (!select.contains(e.target)) close();
+  });
 
-  // tab ile çıkınca kapat
-  select.addEventListener("focusout", () => {
-    setTimeout(() => {
-      if (!select.contains(document.activeElement)) close();
-    }, 10);
+  // Klavye navigasyonu (Enter ile seçim yapınca has-value eklemeyi unutma)
+  trigger.addEventListener("keydown", e => {
+    if (e.key === "Enter" && select.classList.contains("open")) {
+      const activeOption = options.find(o => o.classList.contains("active"));
+      if (activeOption) {
+        trigger.textContent = activeOption.textContent;
+        hidden.value = activeOption.textContent;
+        select.classList.add("has-value");
+        close();
+      }
+    }
   });
 });
   
