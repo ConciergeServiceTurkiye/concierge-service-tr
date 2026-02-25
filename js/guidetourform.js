@@ -18,7 +18,9 @@ function showFieldError(el, message) {
   }
 
   error.textContent = message;
-  wrapper.classList.add("has-error");
+  wrapper.classList.remove("has-error");
+void wrapper.offsetWidth; // reflow hack
+wrapper.classList.add("has-error");
 }
 
 function hideFieldError(el) {
@@ -537,6 +539,7 @@ function initNationalityDropdown(container) {
   container.classList.add("has-value");
   close();
   trigger.focus();
+     hideFieldError(trigger);
 
   // 🔥 EDIT MODE için değişim kontrolü
   if (editMode) {
@@ -710,6 +713,7 @@ function initBirthYearDropdown(container) {
   trigger.classList.add("has-value");
   hiddenInput.value = value;
   close();
+     hideFieldError(trigger);
 
   setTimeout(() => trigger.focus(), 0);
 
@@ -970,67 +974,6 @@ trigger.addEventListener("focus", e => {
   if (form) {
   bindLiveValidation(form);
 }
-
- /* ================= CUSTOM SELECT LIVE ERROR CLEAR ================= */
-
-// Nationality
-document.querySelectorAll(".nationality-select").forEach(select => {
-  const trigger = select.querySelector(".nationality-trigger");
-  const hidden = select.querySelector("input[type='hidden']");
-
-  if (!trigger || !hidden) return;
-
-  select.addEventListener("click", () => {
-    if (hidden.value && hidden.value.trim() !== "") {
-      hideFieldError(trigger);
-    }
-  });
-});
-
-// Birthyear
-document.querySelectorAll(".birthyear-select").forEach(select => {
-  const trigger = select.querySelector(".birthyear-trigger");
-  const hidden = select.querySelector("input[type='hidden']");
-
-  if (!trigger || !hidden) return;
-
-  select.addEventListener("click", () => {
-    if (hidden.value && hidden.value.trim() !== "") {
-      hideFieldError(trigger);
-    }
-  });
-});
-
-// Language
-document.querySelectorAll(".language-select").forEach(select => {
-  const trigger = select.querySelector(".select-trigger");
-  const hidden = select.querySelector("input[type='hidden']");
-
-  if (!trigger || !hidden) return;
-
-  select.addEventListener("click", () => {
-    if (hidden.value && hidden.value.trim() !== "") {
-      hideFieldError(trigger);
-    }
-  });
-});
-
-if (form) {
-form.addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  form.querySelectorAll(".field-wrapper.has-error").forEach(wrapper => {
-  wrapper.classList.remove("has-error");
-  wrapper.querySelector(".field-error")?.remove();
-});
-
-  let isValid = true;
-  let firstErrorField = null;
-
- // Participant var mı kontrolü
-const hasParticipants = participants.length > 0;
-
-  hideInlineAlert();
 
 // ================= PRIMARY PARTICIPANT REQUIRED =================
 if (!hasParticipants) {
