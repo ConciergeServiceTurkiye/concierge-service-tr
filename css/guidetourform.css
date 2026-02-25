@@ -487,3 +487,17 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 .field-wrapper.has-error .select-trigger {
     border-color: #ff6b6b !important;
 }
+
+/* Language kutusuna tıklandığında veya dropdown açıkken beyaz border efekti */
+.custom-select.open .select-trigger,
+.custom-select .select-trigger:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+    background: #111;
+}
+
+/* Geçişlerin yumuşak olması için (opsiyonel) */
+.select-trigger {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
