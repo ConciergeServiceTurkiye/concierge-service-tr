@@ -9,7 +9,7 @@
     input, textarea{background:#111;border:1px solid #d4af37;border-radius:10px;color:#d4af37;padding:12px 14px;}
     textarea{resize:none;}
     .custom-select{position:relative;}
-    .select-trigger{border:1px solid #d4af37;border-radius:10px;padding:12px 14px;cursor:pointer;}
+    .select-trigger {color: rgba(255, 255, 255, 0.65); /* Placeholder rengi */font-size: 14px;display: flex;align-items: center;height: 44px; /* Diğer inputlarla aynı yükseklik */box-sizing: border-box;} /* Language Trigger Temel Hali (Select Date/Hotel Name ile aynı) */
     .select-options{display:none;position:absolute;top:100%;left:0;width:100%;background:#111;border:1px solid #d4af37;border-radius:10px;z-index:50;}
     .custom-select.open .select-options{display:block;}
     .select-options li{padding:12px 14px;cursor:pointer;}
@@ -307,7 +307,7 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 	.field-wrapper.has-error input,
 	.field-wrapper.has-error textarea,
 	.field-wrapper.has-error select,
-	.field-wrapper.has-error .select-trigger {border-color: #ff6b6b;}
+	.field-wrapper.has-error  {border-color: #ff6b6b;}
 	.form-group input,
 	.form-group textarea,
 	.form-group select {width: 100%;box-sizing: border-box;}
@@ -457,7 +457,7 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 .field-wrapper.has-error textarea,
 .field-wrapper.has-error .nationality-trigger,
 .field-wrapper.has-error .birthyear-trigger,
-.field-wrapper.has-error .select-trigger {
+.field-wrapper.has-error  {
   border: 1px solid #ff6b6b !important;
   box-shadow: 0 0 0 2px rgba(255,107,107,0.25) !important;
   outline: none !important;
@@ -471,3 +471,18 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
   min-height: 16px;
 }
 
+/* Seçim yapıldıktan sonra Altın Rengi */
+.custom-select.has-value .select-trigger {
+    color: #d4af37;
+}
+
+/* Dropdown listesindeki yazıların boyutu */
+.select-options li {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Hata durumunda border (opsiyonel ama tutarlılık için iyi olur) */
+.field-wrapper.has-error .select-trigger {
+    border-color: #ff6b6b !important;
+}
