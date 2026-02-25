@@ -284,6 +284,8 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 
 
 /* ============================== TRANSPORTATION ============================== */
+/* Mevcut CSS'ine ekle: Orijinal çirkin kutuyu gizler */
+	.lux-check input[type="checkbox"] {position: absolute;opacity: 0;width: 0;height: 0;}
 	.lux-check span {width: 18px;height: 18px;border: 1px solid #d4af37;border-radius: 4px;display: inline-flex;align-items: center;justify-content: center;transition: background .2s ease, box-shadow .2s ease;}
 	.lux-check:hover span {background: rgba(212,175,55,0.12);}
 	.lux-check input:checked + span {background: #d4af37;}
