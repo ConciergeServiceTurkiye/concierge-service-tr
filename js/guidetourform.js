@@ -858,21 +858,22 @@ document.querySelectorAll(".custom-select").forEach(select => {
     select.classList.contains("open") ? close() : open();
   });
 
-  // SEÇİM YAPMA (MOUSE): 'mousedown' kullanarak focus kaybolmadan seçimi yakalıyoruz
+  // SEÇİM YAPMA (MOUSE)
   options.forEach(option => {
     option.addEventListener("mousedown", e => {
-      e.preventDefault(); // focus'un kaçmasını engeller
+      e.preventDefault();
       e.stopPropagation();
       
       trigger.textContent = option.textContent;
       hidden.value = option.textContent;
       
-      select.classList.add("has-value"); // Renk değişimi için class ekliyoruz
-      close();
+      select.classList.add("has-value");
+      select.classList.remove("open"); // Kapatırken 'open' class'ını kaldırıyoruz
       trigger.focus();
 
-      // Hata mesajı varsa gizle
-      hideFieldError(trigger);
+      if (typeof hideFieldError === "function") {
+        hideFieldError(trigger);
+      }
     });
   });
 
