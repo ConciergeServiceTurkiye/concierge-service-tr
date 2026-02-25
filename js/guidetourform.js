@@ -969,167 +969,139 @@ trigger.addEventListener("focus", e => {
     });
   }
 
- const form = document.getElementById("guideTourForm");
+ /* ============================== FORM SUBMISSION ============================== */
+const form = document.getElementById("guideTourForm");
 
-  if (form) {
+if (form) {
   bindLiveValidation(form);
-}
 
-// ================= PRIMARY PARTICIPANT REQUIRED =================
-if (!hasParticipants) {
+  // Form gönderildiğinde çalışacak ASYNC fonksiyon
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-  // Name
-  if (!nameInput.value.trim()) {
-    showFieldError(nameInput, "This field is required");
-    if (!firstErrorField) firstErrorField = nameInput;
-    isValid = false;
-  }
+    let isValid = true;
+    let firstErrorField = null;
+    const hasParticipants = participants.length > 0;
 
-  // Nationality
-  if (!natInput.value.trim()) {
-    showFieldError(natTrigger, "This field is required");
-    if (!firstErrorField) firstErrorField = natTrigger;
-    isValid = false;
-  }
+    hideInlineAlert();
 
-  // Birth Year
-  if (!yearInput.value.trim()) {
-    const yearTrigger = document.querySelector(".birthyear-trigger");
-    showFieldError(yearTrigger, "This field is required");
-    if (!firstErrorField) firstErrorField = yearTrigger;
-    isValid = false;
-  }
-}
+    // 1. KATILIMCI VALIDASYONU (Eğer liste boşsa giriş alanlarını kontrol et)
+    if (!hasParticipants) {
+      if (!nameInput.value.trim()) {
+        showFieldError(nameInput, "This field is required");
+        if (!firstErrorField) firstErrorField = nameInput;
+        isValid = false;
+      }
+      if (!natInput.value.trim()) {
+        showFieldError(natTrigger, "This field is required");
+        if (!firstErrorField) firstErrorField = natTrigger;
+        isValid = false;
+      }
+      if (!yearInput.value.trim()) {
+        const yearTrigger = document.querySelector(".birthyear-trigger");
+        showFieldError(yearTrigger, "This field is required");
+        if (!firstErrorField) firstErrorField = yearTrigger;
+        isValid = false;
+      }
+    }
 
-  /* REQUIRED */
-  const requiredFields = form.querySelectorAll(
-  "input[required]:not(#phone):not([name='email']), textarea[required], select[required]"
-);
-  requiredFields.forEach(field => {
-    if (!field.value.trim()) {
-      showFieldError(field, "This field is required");
-      if (!firstErrorField) firstErrorField = field;
+    // 2. GENEL ZORUNLU ALANLAR
+    const requiredFields = form.querySelectorAll(
+      "input[required]:not(#phone):not([name='email']), textarea[required], select[required]"
+    );
+    requiredFields.forEach(field => {
+      if (!field.value.trim()) {
+        showFieldError(field, "This field is required");
+        if (!firstErrorField) firstErrorField = field;
+        isValid = false;
+      }
+    });
+
+    // 3. EMAIL VALIDASYONU
+    const emailField = form.querySelector('[name="email"]');
+    if (emailField) {
+      const emailValue = emailField.value.trim();
+      if (!emailValue) {
+        showFieldError(emailField, "This field is required");
+        isValid = false;
+      } else if (!EMAIL_REGEX.test(emailValue)) {
+        showFieldError(emailField, "Please enter a valid email address");
+        isValid = false;
+      }
+    }
+
+    // 4. TELEFON VALIDASYONU
+    if (phoneInput) {
+      if (!iti || !iti.getNumber()) {
+        showFieldError(phoneInput, "This field is required");
+        isValid = false;
+      } else if (!iti.isValidNumber()) {
+        showFieldError(phoneInput, "Please enter a valid phone number");
+        isValid = false;
+      }
+    }
+
+    // 5. ULAŞIM (TRANSPORTATION) SEÇİMİ
+    const transportationChecked = Array.from(
+      document.querySelectorAll('input[name="transportation"]')
+    ).some(cb => cb.checked);
+
+    if (!transportationChecked) {
+      const transportWrapper = document.querySelector("#transportationGroup .field-wrapper");
+      const fakeInput = transportWrapper.querySelector("input");
+      showFieldError(fakeInput, "Please select a transportation option");
       isValid = false;
     }
-  });
 
- /* EMAIL */
-const emailField = form.querySelector('[name="email"]');
-if (emailField) {
-  const emailValue = emailField.value.trim();
-
-  if (!emailValue) {
-    showFieldError(emailField, "This field is required");
-    if (!firstErrorField) firstErrorField = emailField;
-    isValid = false;
-  } else if (!EMAIL_REGEX.test(emailValue)) {
-    showFieldError(emailField, "Please enter a valid email address");
-    if (!firstErrorField) firstErrorField = emailField;
-    isValid = false;
-  }
-}
-
-  /* PHONE */
-if (phoneInput) {
-  if (!iti || !iti.getNumber()) {
-    showFieldError(phoneInput, "This field is required");
-    if (!firstErrorField) firstErrorField = phoneInput;
-    isValid = false;
-  } else if (!iti.isValidNumber()) {
-    showFieldError(phoneInput, "Please enter a valid phone number");
-    if (!firstErrorField) firstErrorField = phoneInput;
-    isValid = false;
-  }
-}
- 
-  /* MOBILITY */
-  const mobilityTextarea = document.querySelector(
-    'textarea[name="mobility_details"]'
-  );
-  if (mobilityToggle?.checked && !mobilityTextarea.value.trim()) {
-    showFieldError(
-      mobilityTextarea,
-      "Please describe mobility assistance needs"
-    );
-    if (!firstErrorField) firstErrorField = mobilityTextarea;
-    isValid = false;
-  }
- /* ================= TRANSPORTATION REQUIRED ================= */
-
-const transportationChecked = Array.from(
-  document.querySelectorAll('input[name="transportation"]')
-).some(cb => cb.checked);
-
-if (!transportationChecked) {
-  const transportWrapper =
-  document.querySelector("#transportationGroup .field-wrapper");
- const fakeInput = transportWrapper.querySelector("input");
-
- showFieldError(
-  fakeInput,
-  "Please select a transportation option"
-);
-
-  isValid = false;
-}
-
-
-  /* FINAL DECISION */
-  if (!isValid) {
-    showInlineAlert("Please review the highlighted fields below.");
-    if (firstErrorField) {
-      firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-    return;
-  }
-
-  /* PAYLOAD (BEN KOYDUM) */
-  const payload = {
-    tour_name: tourName,
-    full_name: document.querySelector('[name="name"]')?.value || "",
-    email: document.querySelector('[name="email"]')?.value || "",
-    phone: iti ? iti.getNumber() : "",
-    tour_date: document.querySelector('[name="date"]')?.value || "",
-    language: document.querySelector('[name="language"]')?.value || "",
-    hotel: document.querySelector('[name="hotel_name"]')?.value || "",
-    notes: document.querySelector('[name="notes"]')?.value || ""
-  };
-
- payload.participants = participants;
-
-
-  
-  /* FETCH — SENİN URL */
-  try {
-    const res = await fetch(
-      "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec",
-      {
-        method: "POST",
-        body: JSON.stringify(payload)
+    // HATA VARSA DURDUR VE İLK HATAYA GİT
+    if (!isValid) {
+      showInlineAlert("Please review the highlighted fields below.");
+      if (firstErrorField) {
+        firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
       }
-    );
-    const data = await res.json();
-
-    if (data.status === "success") {
-      form.style.display = "none";
-      document.getElementById("successScreen").style.display = "block";
-      document.querySelector(".reservation-id").textContent =
-        `Reservation ID: ${data.reservation_id}`;
-    } else {
-      alert("Something went wrong. Please try again.");
+      return;
     }
-  } catch (err) {
-    console.error(err);
-    alert("Connection error. Please try again.");
-  };
-});
-  }
- /* ================= TRANSPORTATION – SINGLE SELECTION ================= */
 
-const transportCheckboxes = document.querySelectorAll(
-  'input[name="transportation"]'
-);
+    // PAYLOAD HAZIRLIĞI
+    const payload = {
+      tour_name: tourName,
+      full_name: document.querySelector('[name="name"]')?.value || "",
+      email: document.querySelector('[name="email"]')?.value || "",
+      phone: iti ? iti.getNumber() : "",
+      tour_date: document.querySelector('[name="date"]')?.value || "",
+      language: document.querySelector('[name="language"]')?.value || "",
+      hotel: document.querySelector('[name="hotel_name"]')?.value || "",
+      notes: document.querySelector('[name="notes"]')?.value || "",
+      participants: participants
+    };
 
+    // VERİ GÖNDERME (FETCH)
+    try {
+      const res = await fetch(
+        "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec",
+        {
+          method: "POST",
+          body: JSON.stringify(payload)
+        }
+      );
+      const data = await res.json();
+
+      if (data.status === "success") {
+        form.style.display = "none";
+        document.getElementById("successScreen").style.display = "block";
+        document.querySelector(".reservation-id").textContent = `Reservation ID: ${data.reservation_id}`;
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Connection error. Please try again.");
+    }
+  });
+}
+
+/* ================= TRANSPORTATION – SINGLE SELECTION ================= */
+const transportCheckboxes = document.querySelectorAll('input[name="transportation"]');
 transportCheckboxes.forEach(cb => {
   cb.addEventListener("change", () => {
     if (cb.checked) {
@@ -1139,5 +1111,5 @@ transportCheckboxes.forEach(cb => {
     }
   });
 });
-});
-  
+
+}); // DOMContentLoaded Kapanışı
