@@ -306,15 +306,6 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 	.select-options li:hover,
 	.select-options li.active {background: rgba(212,175,55,0.2);color: #111;}
 
-/* Custom select error border */
-	.field-wrapper.has-error input,
-	.field-wrapper.has-error textarea,
-	.field-wrapper.has-error select,
-	.field-wrapper.has-error  {border-color: #ff6b6b;}
-	.form-group input,
-	.form-group textarea,
-	.form-group select {width: 100%;box-sizing: border-box;}
-
 /* NATIONALITY PLACEHOLDER – GERÇEK FIX */
 .participant-input-row 
 .nationality-select:not(.has-value) 
@@ -456,14 +447,27 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 
 /* ================= ERROR STATE UNIFIED ================= */
 
+/* DÜZELTİLMİŞ KISIM */
 .field-wrapper.has-error input,
 .field-wrapper.has-error textarea,
 .field-wrapper.has-error .nationality-trigger,
 .field-wrapper.has-error .birthyear-trigger,
-.field-wrapper.has-error  {
+.field-wrapper.has-error .select-trigger {
   border: 1px solid #ff6b6b !important;
   box-shadow: 0 0 0 2px rgba(255,107,107,0.25) !important;
   outline: none !important;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Field-wrapper'ın kendisine (dış kutuya) sakın border verme */
+.field-wrapper.has-error {
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .field-wrapper {
