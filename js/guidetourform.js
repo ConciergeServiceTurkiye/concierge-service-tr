@@ -844,7 +844,7 @@ document.querySelectorAll(".custom-select").forEach(select => {
 
   function open() {
     select.classList.add("open");
-    trigger.focus(); // Beyaz border'ın tetiklenmesi için odağı zorla
+    trigger.focus();
   }
 
   function close() {
@@ -852,97 +852,7 @@ document.querySelectorAll(".custom-select").forEach(select => {
     options.forEach(o => o.classList.remove("active"));
   }
 
-  trigger.addEventListener("click", e => {
-    e.preventDefault();
-    e.stopPropagation();
-    select.classList.contains("open") ? close() : open();
-  });
-
- // KLAVYE İLE GELİNDİĞİNDE (TAB) OTOMATİK AÇILSIN
-  trigger.addEventListener("focus", () => {
-    open();
-  });
-
-  // OPSİYONEL: Tab ile çıkıldığında otomatik kapansın
-  select.addEventListener("focusout", (e) => {
-    // Eğer yeni odaklanan yer bu select kutusunun dışındaysa kapat
-    if (!select.contains(e.relatedTarget)) {
-      close();
-    }
-  });
-
-  // SEÇİM YAPMA (MOUSE)
-  options.forEach(option => {
-    option.addEventListener("mousedown", e => {
-      e.preventDefault();
-      e.stopPropagation();
-      
-      trigger.textContent = option.textContent;
-      hidden.value = option.textContent;
-      
-      select.classList.add("has-value");
-      select.classList.remove("open"); // Kapatırken 'open' class'ını kaldırıyoruz
-      trigger.focus();
-
-      if (typeof hideFieldError === "function") {
-        hideFieldError(trigger);
-      }
-    });
-  });
-
-  // Dışarı tıklandığında kapat
-  document.addEventListener("mousedown", e => {
-    if (!select.contains(e.target)) close();
-  });
-
-  // KLAVYE KONTROLLERİ (ESC, ENTER, SPACE, OK TUŞLARI)
-  trigger.addEventListener("keydown", e => {
-    const isOpen = select.classList.contains("open");
-    
-    // 1. ESC - Listeyi kapat ve sayfa zıplamasını engelle
-    if (e.key === "Escape") {
-      e.preventDefault();
-      close();
-      return;
-    }
-
-    // 2. ENTER veya SPACE - Kapalıysa aç, açıksa seç
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault(); // Sayfanın aşağı kaymasını (Space için) engeller
-      if (!isOpen) {
-        open();
-      } else {
-        const activeOption = options.find(o => o.classList.contains("active"));
-        if (activeOption) {
-          selectValue(activeOption);
-        }
-      }
-      return;
-    }
-
-    // 3. AŞAĞI/YUKARI OK TUŞLARI - Listede gezinme
-    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
-      e.preventDefault(); // Sayfanın scroll olmasını engeller
-      if (!isOpen) open();
-
-      const activeIndex = options.findIndex(o => o.classList.contains("active"));
-      let nextIndex;
-
-      if (e.key === "ArrowDown") {
-        nextIndex = (activeIndex + 1) % options.length;
-      } else {
-        nextIndex = (activeIndex - 1 + options.length) % options.length;
-      }
-
-      options.forEach(o => o.classList.remove("active"));
-      options[nextIndex].classList.add("active");
-      
-      // Liste çok uzunsa aktif elemanı görünür yap (Scroll takibi)
-      options[nextIndex].scrollIntoView({ block: "nearest" });
-    }
-  });
-
-  // Seçim işlemini merkezileştirelim (Kod tekrarını önlemek için)
+  // Merkezi Seçim Fonksiyonu
   function selectValue(option) {
     trigger.textContent = option.textContent;
     hidden.value = option.textContent;
@@ -952,13 +862,80 @@ document.querySelectorAll(".custom-select").forEach(select => {
     if (typeof hideFieldError === "function") hideFieldError(trigger);
   }
 
-  // Mouse seçimini de bu merkezi fonksiyona bağlayalım
+  // Tıklama Olayı (Sayfa zıplamasını engellemek için preventDefault şart)
+  trigger.addEventListener("click", e => {
+    e.preventDefault(); 
+    e.stopPropagation();
+    select.classList.contains("open") ? close() : open();
+  });
+
+  trigger.addEventListener("focus", () => {
+    open();
+  });
+
+  select.addEventListener("focusout", (e) => {
+    if (!select.contains(e.relatedTarget)) {
+      close();
+    }
+  });
+
+  // MOUSE İLE SEÇİM (Sadece bir kez tanımlıyoruz)
   options.forEach(option => {
     option.addEventListener("mousedown", e => {
       e.preventDefault();
       e.stopPropagation();
       selectValue(option);
     });
+  });
+
+  document.addEventListener("mousedown", e => {
+    if (!select.contains(e.target)) close();
+  });
+
+  // KLAVYE KONTROLLERİ
+  trigger.addEventListener("keydown", e => {
+    const isOpen = select.classList.contains("open");
+    
+    // ESC - Zıplamayı kesmek için kesin çözüm
+    if (e.key === "Escape") {
+      e.preventDefault(); 
+      e.stopPropagation();
+      close();
+      return;
+    }
+
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault(); 
+      if (!isOpen) {
+        open();
+      } else {
+        const activeOption = options.find(o => o.classList.contains("active"));
+        if (activeOption) selectValue(activeOption);
+      }
+      return;
+    }
+
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault(); 
+      if (!isOpen) {
+        open();
+        return;
+      }
+
+      const activeIndex = options.findIndex(o => o.classList.contains("active"));
+      let nextIndex;
+
+      if (e.key === "ArrowDown") {
+        nextIndex = (activeIndex + 1) % options.length;
+      } else {
+        // Eğer hiçbir şey seçili değilse ve yukarı basılırsa sonuncuya git
+        nextIndex = activeIndex === -1 ? options.length - 1 : (activeIndex - 1 + options.length) % options.length;
+      }
+
+      options.forEach(o => o.classList.remove("active"));
+      options[nextIndex].classList.add("active");
+      options[nextIndex].scrollIntoView({ block: "nearest" });
+    }
   });
 });
   
