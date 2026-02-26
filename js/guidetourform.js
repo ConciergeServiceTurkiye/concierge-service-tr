@@ -858,6 +858,19 @@ document.querySelectorAll(".custom-select").forEach(select => {
     select.classList.contains("open") ? close() : open();
   });
 
+ // KLAVYE İLE GELİNDİĞİNDE (TAB) OTOMATİK AÇILSIN
+  trigger.addEventListener("focus", () => {
+    open();
+  });
+
+  // OPSİYONEL: Tab ile çıkıldığında otomatik kapansın
+  select.addEventListener("focusout", (e) => {
+    // Eğer yeni odaklanan yer bu select kutusunun dışındaysa kapat
+    if (!select.contains(e.relatedTarget)) {
+      close();
+    }
+  });
+
   // SEÇİM YAPMA (MOUSE)
   options.forEach(option => {
     option.addEventListener("mousedown", e => {
