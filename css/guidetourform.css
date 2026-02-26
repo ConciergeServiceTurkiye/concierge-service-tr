@@ -507,3 +507,13 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 .select-trigger {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
+
+.select-trigger {
+    user-select: none; /* Metnin maviye boyanmasını engeller */
+    -webkit-user-select: none;
+    outline: none;
+}
+
+.select-options li {
+    user-select: none;
+}
