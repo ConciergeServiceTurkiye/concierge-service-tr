@@ -9,15 +9,13 @@
     input, textarea{background:#111;border:1px solid #d4af37;border-radius:10px;color:#d4af37;padding:12px 14px;}
     textarea{resize:none;}
     .custom-select{position:relative;}
-    .select-trigger {border:1px solid #d4af37;border-radius:10px;padding:12px 14px;cursor:pointer;color: rgba(255, 255, 255, 0.65); /* Placeholder rengi */font-size: 14px;display: flex;align-items: center;
-					 height: 44px; /* Diğer inputlarla aynı yükseklik */box-sizing: border-box;} /* Language Trigger Temel Hali (Select Date/Hotel Name ile aynı) */
+    .select-trigger {border:1px solid #d4af37;border-radius:10px;padding: 0 14px;cursor:pointer;color: rgba(255, 255, 255, 0.65); /* Placeholder rengi */font-size: 14px;display: flex;align-items: center;
+					 height: 48px; /* Diğer inputlarla aynı yükseklik */box-sizing: border-box;} /* Language Trigger Temel Hali (Select Date/Hotel Name ile aynı) */
     .select-options{display:none;position:absolute;top:100%;left:0;width:100%;background:#111;border:1px solid #d4af37;border-radius:10px;z-index:50;}
     .custom-select.open .select-options{display:block;}
     .select-options li{padding:12px 14px;cursor:pointer;}
     .select-options li:hover{background:rgba(212,175,55,.2);}
     .checkbox-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;}
-    .textarea-group{display:none;flex-direction:column;gap:6px;}
-    .textarea-group.active{display:flex;}
     .char-count{font-size:11px;text-align:right;color:rgba(255,255,255,.45);}
 /* ============================== INLINE ALERT ============================== */
 	#formInlineAlert {display: none; height: 48px;margin-bottom: 18px;padding: 12px 16px;border: 1px solid rgba(212,175,55,0.6);background: rgba(212,175,55,0.08);color: #d4af37;font-size: 13px;
@@ -245,7 +243,7 @@
 	.has-error textarea,
 	.has-error .nationality-trigger {border-color: #ff6b6b !important;box-shadow: 0 0 0 2px rgba(255,107,107,0.3);}
 	@keyframes shake {0% { transform: translateX(0); }25% { transform: translateX(-4px); }50% { transform: translateX(4px); }75% { transform: translateX(-4px); }100% { transform: translateX(0); }}
-	.field-error {font-size: 12px;color: #ff6b6b;
+	.field-error {font-size: 12px;color: #ff6b6b;z-index: 10;
     margin-top: 6px;      /* Input ile mesaj arasına mesafe açar */
     padding-left: 14px;   /* Mesajı bir TAB (input padding'i kadar) sağa kaydırır */
     display: block;       /* Yerleşimin düzgün olması için */
@@ -287,8 +285,6 @@
 body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 
 /* ============================== TRANSPORTATION ============================== */
-	.lux-check input[type=""] {position: absolute;opacity: 0;width: 0;height: 0;}
-/* 'ın görsel kutusu */
 	.lux-check span {width: 18px;height: 18px;border: 1px solid #d4af37;border-radius: 4px;display: inline-flex;align-items: center;justify-content: center;transition: all .2s ease; /* Geçişleri yumuşattık */}
 /* HOVER DURUMU */
 	.lux-check:hover span {background: rgba(212,175,55,0.12);}
@@ -360,7 +356,7 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
   position: sticky;
   top: 0;
   z-index: 5;
-  background: #111;
+  background: #111 !important;
 }
 
 /* Focus görünümü */
