@@ -963,12 +963,11 @@ if (form) {
 
   // Form gönderildiğinde çalışacak ASYNC fonksiyon
   form.addEventListener("submit", async function (e) {
-    e.preventDefault();
+   e.preventDefault();
+   const submitBtn = form.querySelector(".submit-btn");
+    if (submitBtn) submitBtn.disabled = true;
 
     let isValid = true;
-    let firstErrorField = null;
-    const hasParticipants = participants.length > 0;
-
     hideInlineAlert();
 
     // 1. KATILIMCI VALIDASYONU (Eğer liste boşsa giriş alanlarını kontrol et)
@@ -1079,22 +1078,19 @@ if (form) {
     }
 );
         
-      const data = await res.json();
-
-      if (data.status === "success") {
-        form.style.display = "none";
-        document.getElementById("successScreen").style.display = "block";
-        document.querySelector(".reservation-id").textContent = `Reservation ID: ${data.reservation_id}`;
-      } else {
-        alert("Something went wrong. Please try again.");
+      // no-cors modunda yanıt okunamaz, bu yüzden direkt başarı ekranına geçiyoruz
+      form.style.display = "none";
+      const successScreen = document.getElementById("successScreen");
+      if (successScreen) {
+          successScreen.style.display = "block";
+          const resId = document.querySelector(".reservation-id");
+          if (resId) resId.textContent = "Your request has been sent successfully.";
       }
     } catch (err) {
-    console.error("Submission error:", err);
-    showInlineAlert("A connection error occurred. Please check your internet or try again later.");
-    // Submit butonunu tekrar aktif etmeyi unutma (opsiyonel ama iyi olur)
-    const btn = form.querySelector(".submit-btn");
-    if(btn) btn.disabled = false;
-}
+        console.error("Submission error:", err);
+        showInlineAlert("A connection error occurred. Please try again later.");
+        if (submitBtn) submitBtn.disabled = false; // Hatada butonu geri aç
+    }
   });
 }
 
@@ -1109,5 +1105,14 @@ transportCheckboxes.forEach(cb => {
     }
   });
 });
+
+ /* ============================== ALERT RESET HELPER ============================== */
+function hideInlineAlert() {
+    const alertBox = document.getElementById("formInlineAlert");
+    if (alertBox) {
+        alertBox.classList.remove("show"); 
+        alertBox.style.display = "none";
+    }
+}
 
 }); // DOMContentLoaded Kapanışı
