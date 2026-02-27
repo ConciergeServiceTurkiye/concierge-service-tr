@@ -39,15 +39,22 @@ function scrollToFirstError() {
 }
 
 function showInlineAlert(message) {
-  const alert = document.getElementById("formInlineAlert");
-  alert.textContent = message;
-  alert.style.display = "block"; // Kutuyu görünür yapar ve boşluğu açar
-  scrollToFirstError();
-}
+    const alertBox = document.getElementById("formInlineAlert");
+    if (!alertBox) return;
 
-function hideInlineAlert() {
-  const alert = document.getElementById("formInlineAlert");
-  alert.style.display = "none"; // Kutuyu ve boşluğu tamamen gizler
+    alertBox.textContent = message;
+    alertBox.style.display = "flex"; // Önce fiziksel olarak var et
+    
+    // Küçük bir gecikme ile opacity animasyonunu tetikle
+    setTimeout(() => {
+        alertBox.classList.add("show");
+    }, 10);
+
+    // 5 saniye sonra kapatmak istersen:
+    setTimeout(() => {
+        alertBox.classList.remove("show");
+        setTimeout(() => { alertBox.style.display = "none"; }, 300);
+    }, 5000);
 }
 
 /* ===================== PARTICIPANTS STATE (NEW SYSTEM) ===================== */
