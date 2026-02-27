@@ -283,8 +283,8 @@
 body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 
 /* ============================== TRANSPORTATION ============================== */
-	.lux-check input[type="checkbox"] {position: absolute;opacity: 0;width: 0;height: 0;}
-/* Checkbox'ın görsel kutusu */
+	.lux-check input[type=""] {position: absolute;opacity: 0;width: 0;height: 0;}
+/* 'ın görsel kutusu */
 	.lux-check span {width: 18px;height: 18px;border: 1px solid #d4af37;border-radius: 4px;display: inline-flex;align-items: center;justify-content: center;transition: all .2s ease; /* Geçişleri yumuşattık */}
 /* HOVER DURUMU */
 	.lux-check:hover span {background: rgba(212,175,55,0.12);}
@@ -299,9 +299,6 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 
 /* ============================== Participant Remove Button ============================== */
 	.remove-participant {background: #ff6b6b;color: #fff;border-radius: 50%;}
-
-/* ============================== Mobility → Checkbox seçiliyse textarea zorunlu ============================== */ 	
-	.guidetour-form textarea::-webkit-scrollbar-thumb {background: #d4af37;}
 
 
 	.select-options {list-style: none;padding: 0;margin: 0;}
