@@ -250,7 +250,7 @@ function confirmEdit() {
   participants[index] = {
     id: editingId,
     name: nameInput.value.trim(),
-    nationality: natTrigger.textContent.trim(),
+    nationality: natTrigger.querySelector(".current")?.textContent.trim() || "",
     year: yearInput.value
   };
 
@@ -966,6 +966,7 @@ if (form) {
 
     // 1. KATILIMCI VALIDASYONU (Eğer liste boşsa giriş alanlarını kontrol et)
     if (!hasParticipants) {
+   
       if (!nameInput.value.trim()) {
         showFieldError(nameInput, "This field is required");
         if (!firstErrorField) firstErrorField = nameInput;
@@ -983,6 +984,8 @@ if (form) {
         isValid = false;
       }
     }
+
+   if (editMode) { showInlineAlert("Please confirm or cancel your current edit before submitting."); return; }
 
     // 2. GENEL ZORUNLU ALANLAR
     const requiredFields = form.querySelectorAll(
