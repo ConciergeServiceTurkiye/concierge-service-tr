@@ -948,17 +948,6 @@ document.querySelectorAll(".custom-select").forEach(select => {
   const date = document.getElementById("date");
   const hotel = document.querySelector('[name="hotel_name"]');
 
-  
-  /* ========================= MOBILITY ========================= */
-  const mobilityToggle = document.getElementById("mobilityToggle");
-  const mobilityGroup = document.getElementById("mobilityGroup");
-
-  if (mobilityToggle && mobilityGroup) {
-    mobilityToggle.addEventListener("change", () => {
-      mobilityGroup.classList.toggle("active", mobilityToggle.checked);
-    });
-  }
-
  /* ============================== FORM SUBMISSION ============================== */
 const form = document.getElementById("guideTourForm");
 
