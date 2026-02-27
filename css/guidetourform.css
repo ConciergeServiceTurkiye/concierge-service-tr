@@ -289,7 +289,10 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 /* HOVER DURUMU */
 	.lux-check:hover span {background: rgba(212,175,55,0.12);}
 /* KLAVYE ODAK (TAB) DURUMU - İstediğin beyaz border efekti */
-	.lux-check input:focus-visible + span {border-color: rgba(255, 255, 255, 0.9) !important;box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);background: rgba(255, 255, 255, 0.05);outline: none;}
+	.lux-check input[type="checkbox"] {position: absolute;opacity: 0;width: 0;height: 0; margin: 0;
+    -webkit-appearance: none; /* Chrome/Safari için */
+    -moz-appearance: none;    /* Firefox için */
+    appearance: none;         /* Standart */}
 /* SEÇİLİ (CHECKED) DURUMU */
 	.lux-check input:checked + span {background: #d4af37;border-color: #d4af37;}
 	.lux-check input:checked + span::after {content: "✓";font-size: 12px;color: #000;font-weight: 700;}
