@@ -894,9 +894,12 @@ document.querySelectorAll(".custom-select").forEach(select => {
   trigger.addEventListener("keydown", e => {
     const isOpen = select.classList.contains("open");
     
+    // ESC - Zıplamayı kesmek için en sert çözüm
     if (e.key === "Escape") {
-      e.preventDefault();
-      close();
+      e.preventDefault();       // Tarayıcının varsayılan hareketini durdur
+      e.stopPropagation();      // Olayın yukarı dallanmasını engelle
+      close();                  // Listeyi kapat
+      trigger.blur();           // ODAĞI SERBEST BIRAK (Zıplamayı bu çözer)
       return;
     }
 
