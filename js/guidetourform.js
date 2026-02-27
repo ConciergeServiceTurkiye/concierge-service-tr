@@ -1060,12 +1060,18 @@ if (form) {
     // VERİ GÖNDERME (FETCH)
     try {
       const res = await fetch(
-        "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec",
-        {
-          method: "POST",
-          body: JSON.stringify(payload)
-        }
-      );
+    "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec", 
+    {
+        method: "POST",
+        mode: "no-cors", // Güvenlik çakışmalarını aşmak için ekle
+        cache: "no-cache",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8", // Google Script json yerine düz metin bekleyebilir
+        },
+        body: JSON.stringify(payload)
+    }
+);
+        
       const data = await res.json();
 
       if (data.status === "success") {
@@ -1076,9 +1082,12 @@ if (form) {
         alert("Something went wrong. Please try again.");
       }
     } catch (err) {
-      console.error(err);
-      alert("Connection error. Please try again.");
-    }
+    console.error("Submission error:", err);
+    showInlineAlert("A connection error occurred. Please check your internet or try again later.");
+    // Submit butonunu tekrar aktif etmeyi unutma (opsiyonel ama iyi olur)
+    const btn = form.querySelector(".submit-btn");
+    if(btn) btn.disabled = false;
+}
   });
 }
 
