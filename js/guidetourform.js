@@ -1044,12 +1044,12 @@ if (form) {
       document.querySelectorAll('input[name="transportation"]')
     ).some(cb => cb.checked);
 
-    if (!transportationChecked) {
-      const transportWrapper = document.querySelector("#transportationGroup .field-wrapper");
-      const fakeInput = transportWrapper.querySelector("input");
-      showFieldError(fakeInput, "Please select a transportation option");
-      isValid = false;
-    }
+   // if (!transportationChecked) {
+   //   const transportWrapper = document.querySelector("#transportationGroup .field-wrapper");
+   // const fakeInput = transportWrapper.querySelector("input");
+   //   showFieldError(fakeInput, "Please select a transportation option");
+   //   isValid = false;
+   // }
 
     // HATA VARSA DURDUR VE İLK HATAYA GİT
     if (!isValid) {
