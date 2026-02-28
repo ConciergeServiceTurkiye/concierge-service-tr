@@ -1044,12 +1044,17 @@ if (form) {
       document.querySelectorAll('input[name="transportation"]')
     ).some(cb => cb.checked);
 
-   // if (!transportationChecked) {
-   //   const transportWrapper = document.querySelector("#transportationGroup .field-wrapper");
-   // const fakeInput = transportWrapper.querySelector("input");
-   //   showFieldError(fakeInput, "Please select a transportation option");
-   //   isValid = false;
-   // }
+    const selectedTransport = document.querySelector('input[name="transportation"]:checked');
+
+    if (!selectedTransport) {
+      // Eğer hata mesajı verecek yer bulunamazsa diye kontrol ekliyoruz
+      const transportGroup = document.getElementById("transportationGroup");
+      if (transportGroup) {
+          showInlineAlert("Please select a transportation option.");
+          if (!firstErrorField) firstErrorField = transportGroup;
+      }
+      isValid = false;
+    }
 
     // HATA VARSA DURDUR VE İLK HATAYA GİT
     if (!isValid) {
@@ -1068,12 +1073,12 @@ if (form) {
       phone: iti ? iti.getNumber() : "",
       tour_date: document.querySelector('[name="date"]')?.value || "",
       language: document.querySelector('[name="language"]')?.value || "",
+      transportation: document.querySelector('input[name="transportation"]:checked')?.value || "Not selected",
       hotel: document.querySelector('[name="hotel_name"]')?.value || "",
       notes: document.querySelector('[name="notes"]')?.value || "",
       participants: participants
     };
 
-    // VERİ GÖNDERME (FETCH)
     // VERİ GÖNDERME (FETCH)
     console.log("Gönderim başlıyor...", payload); // TEST 1
 
