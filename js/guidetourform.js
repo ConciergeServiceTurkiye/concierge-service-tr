@@ -1059,6 +1059,7 @@ if (form) {
     // HATA VARSA DURDUR VE İLK HATAYA GİT
     if (!isValid) {
       showInlineAlert("Please review the highlighted fields below.");
+      if (submitBtn) submitBtn.disabled = false; // 👈 Butonu geri aç ki düzeltebilsinler
       if (firstErrorField) {
         firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
       }
