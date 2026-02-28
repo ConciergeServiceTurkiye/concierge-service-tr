@@ -539,21 +539,3 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 .select-options li {
     user-select: none;
 }
-
-/* Tab ile odaklanıldığında (Focus) görünürlük ayarı */
-input:focus-visible, 
-select:focus-visible, 
-textarea:focus-visible, 
-.nationality-trigger:focus-visible, 
-.birthyear-trigger:focus-visible,
-.select-trigger:focus-visible {
-    outline: 2px solid #d4af37 !important; /* Altın sarısı çerçeve */
-    outline-offset: 3px;
-    box-shadow: 0 0 8px rgba(212, 175, 55, 0.4); /* Hafif parlama */
-}
-
-/* Checkbox'lar için özel Tab odağı */
-.transportation-option input[type="checkbox"]:focus + label::before {
-    border-color: #d4af37 !important;
-    box-shadow: 0 0 5px rgba(212, 175, 55, 0.8);
-}
