@@ -961,16 +961,26 @@ const form = document.getElementById("guideTourForm");
 if (form) {
   bindLiveValidation(form);
 
-  // Form gönderildiğinde çalışacak ASYNC fonksiyon
+ // Form gönderildiğinde çalışacak ASYNC fonksiyon
   form.addEventListener("submit", async function (e) {
-   e.preventDefault();
-   const submitBtn = form.querySelector(".submit-btn");
+    e.preventDefault();
+
+    // 🔒 Edit moddaysa göndermeyi hemen durdur
+    if (editMode) { 
+        showInlineAlert("Please confirm or cancel your current edit before submitting."); 
+        return; 
+    }
+
+    const submitBtn = form.querySelector(".submit-btn");
+    const hasParticipants = participants.length > 0;
+    let firstErrorField = null;
+    let isValid = true;
+
     if (submitBtn) submitBtn.disabled = true;
 
-    let isValid = true;
     hideInlineAlert();
 
-    // 1. KATILIMCI VALIDASYONU (Eğer liste boşsa giriş alanlarını kontrol et)
+    // 1. KATILIMCI VALIDASYONU
     if (!hasParticipants) {
    
       if (!nameInput.value.trim()) {
