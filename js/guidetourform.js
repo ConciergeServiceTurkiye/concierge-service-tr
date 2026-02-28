@@ -1074,32 +1074,41 @@ if (form) {
     };
 
     // VERİ GÖNDERME (FETCH)
+    // VERİ GÖNDERME (FETCH)
+    console.log("Gönderim başlıyor...", payload); // TEST 1
+
     try {
-      const res = await fetch(
-    "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec", 
-    {
-        method: "POST",
-        mode: "no-cors", // Güvenlik çakışmalarını aşmak için ekle
-        cache: "no-cache",
-        headers: {
-            "Content-Type": "text/plain;charset=utf-8", // Google Script json yerine düz metin bekleyebilir
-        },
-        body: JSON.stringify(payload)
-    }
-);
+        const res = await fetch(
+            "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec", 
+            {
+                method: "POST",
+                mode: "no-cors",
+                cache: "no-cache",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify(payload)
+            }
+        );
         
-      // no-cors modunda yanıt okunamaz, bu yüzden direkt başarı ekranına geçiyoruz
-      form.style.display = "none";
-      const successScreen = document.getElementById("successScreen");
-      if (successScreen) {
-          successScreen.style.display = "block";
-          const resId = document.querySelector(".reservation-id");
-          if (resId) resId.textContent = "Your request has been sent successfully.";
-      }
+        console.log("Fetch tamamlandı (no-cors mode)"); // TEST 2
+
+        // no-cors modunda yanıt içeriğini okuyamayız, o yüzden direkt başarıya geçiyoruz
+        form.style.display = "none";
+        const successScreen = document.getElementById("successScreen");
+        if (successScreen) {
+            successScreen.style.display = "block";
+            const resId = document.querySelector(".reservation-id");
+            if (resId) resId.textContent = "Your request has been received and is being processed.";
+        }
+        
+        // Formu temizle
+        form.reset();
+        participants.length = 0; // Listeyi boşalt
+        renderParticipants();
+
     } catch (err) {
-        console.error("Submission error:", err);
+        console.error("KRİTİK HATA:", err); // TEST 3
         showInlineAlert("A connection error occurred. Please try again later.");
-        if (submitBtn) submitBtn.disabled = false; // Hatada butonu geri aç
+        if (submitBtn) submitBtn.disabled = false;
     }
   });
 }
