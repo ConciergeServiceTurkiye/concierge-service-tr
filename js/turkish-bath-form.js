@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded',()=>{
  }
  function setupGuestColor(input){
    if(!input)return;
+   const styleId='bath-guest-zero-style';
+   if(!document.getElementById(styleId)){const style=document.createElement('style');style.id=styleId;style.textContent='.bath-number-input.guest-zero{color:var(--bath-offwhite)!important}.bath-number-input:not(.guest-zero){color:var(--bath-gold)!important}';document.head.appendChild(style)}
    const update=()=>input.classList.toggle('guest-zero',Number(input.value||0)===0);
    input.addEventListener('input',update);input.addEventListener('change',update);update();
  }
