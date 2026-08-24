@@ -25,7 +25,12 @@ document.addEventListener('DOMContentLoaded',()=>{
    const up=document.createElement('button'),down=document.createElement('button');up.type='button';down.type='button';up.className='bath-number-up';down.className='bath-number-down';up.setAttribute('aria-label','Increase');down.setAttribute('aria-label','Decrease');controls.append(up,down);wrap.appendChild(controls);
    up.addEventListener('click',()=>{input.stepUp();input.dispatchEvent(new Event('input',{bubbles:true}))});down.addEventListener('click',()=>{input.stepDown();input.dispatchEvent(new Event('input',{bubbles:true}))});
  }
- makeNumberStepper(female);makeNumberStepper(male);
+ function setupGuestColor(input){
+   if(!input)return;
+   const update=()=>input.classList.toggle('guest-zero',Number(input.value||0)===0);
+   input.addEventListener('input',update);input.addEventListener('change',update);update();
+ }
+ setupGuestColor(female);setupGuestColor(male);
  function installCalendar(instance){
    const select=instance.calendarContainer?.querySelector('.flatpickr-monthDropdown-months');if(!select||select.dataset.bathReady)return;select.dataset.bathReady='1';
    const trigger=document.createElement('button');trigger.type='button';trigger.className='bath-calendar-month-trigger';trigger.setAttribute('aria-expanded','false');
