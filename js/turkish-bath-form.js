@@ -1,48 +1,14 @@
 document.addEventListener('DOMContentLoaded',()=>{
-  const form=document.getElementById('bathReservationForm'); if(!form)return;
-  const alertBox=document.getElementById('bathFormAlert');
-  const params=new URLSearchParams(location.search);
-  const experience=document.getElementById('experience');
-  const date=document.getElementById('travelDate');
-  const time=document.getElementById('preferredTime');
-  const count=document.getElementById('passengerCount');
-  const gender=document.getElementById('genderPreference');
-  const female=document.getElementById('femaleGuests');
-  const male=document.getElementById('maleGuests');
-  const name=document.getElementById('fullName');
-  const email=document.getElementById('email');
-  const phone=document.getElementById('phone');
-  const details=document.getElementById('requestDetails');
-  const counter=document.getElementById('bathCharCount');
-
-  function alertUser(text){alertBox.textContent=text;alertBox.style.display='block';alertBox.scrollIntoView({behavior:'smooth',block:'nearest'});}
-  details.addEventListener('input',()=>counter.textContent=`${details.value.length} / 2000`);
-
-  const iti=intlTelInput(phone,{initialCountry:'us',separateDialCode:true});
-  phone.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||['Backspace','Delete','ArrowLeft','ArrowRight','Tab'].includes(e.key))return;if(!/^[0-9]$/.test(e.key))e.preventDefault();});
-  phone.addEventListener('input',()=>phone.value=phone.value.replace(/\D/g,''));
-
-  flatpickr(date,{dateFormat:'Y-m-d',altInput:true,altFormat:'F j, Y',minDate:'today',disableMobile:true});
-
-  const preset=params.get('experience');
-  if(preset){const wanted=preset.toLowerCase();[...experience.options].some(o=>{if(o.text.toLowerCase()===wanted){experience.value=o.value;return true}return false})}
-
-  function validate(){
-    if(!experience.value)return 'Please select your hammam experience.';
-    if(!date.value)return 'Please select your preferred date.';
-    if(!time.value)return 'Please select your preferred time.';
-    if(!count.value)return 'Please select the number of guests.';
-    if(!gender.value)return 'Please select the guest arrangement.';
-    const f=Number(female.value||0),m=Number(male.value||0),c=count.value==='17+'?17:Number(count.value);
-    if(f+m>0&&f+m!==c&&count.value!=='17+')return 'Please make sure the female and male guest counts match the total number of guests.';
-    if(!name.value.trim())return 'Please enter your full name.';
-    if(!email.value.trim())return 'Please enter your email address.';
-    if(!email.checkValidity())return 'Please enter a valid email address.';
-    if(!iti.isValidNumber())return 'Please enter a valid phone number.';
-    return '';
-  }
-
-  form.addEventListener('submit',e=>{e.preventDefault();alertBox.style.display='none';const error=validate();if(error)return alertUser(error);
-    alertUser('Your reservation request is ready. The booking connection will be added next.');
-  });
+ const form=document.getElementById('bathReservationForm');if(!form)return;
+ const alertBox=document.getElementById('bathFormAlert'),experience=document.getElementById('experience'),date=document.getElementById('travelDate'),time=document.getElementById('preferredTime'),female=document.getElementById('femaleGuests'),male=document.getElementById('maleGuests'),name=document.getElementById('fullName'),email=document.getElementById('email'),phone=document.getElementById('phone'),details=document.getElementById('requestDetails'),counter=document.getElementById('bathCharCount'),back=document.getElementById('bathFormBack');
+ const iti=intlTelInput(phone,{initialCountry:'us',separateDialCode:true,allowDropdown:true,autoPlaceholder:'off',nationalMode:false,showSelectedDialCode:true,utilsScript:'https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js'});
+ const backUrl=sessionStorage.getItem('bathReturnUrl');if(backUrl)back.href=backUrl;
+ back.addEventListener('click',e=>{if(backUrl){e.preventDefault();history.back()}});
+ details.addEventListener('input',()=>counter.textContent=`${details.value.length} / 2000`);
+ phone.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||['Backspace','Delete','ArrowLeft','ArrowRight','Tab'].includes(e.key))return;if(!/^[0-9]$/.test(e.key))e.preventDefault()});phone.addEventListener('input',()=>phone.value=phone.value.replace(/\D/g,''));
+ const fp=flatpickr(date,{dateFormat:'d/m/Y',allowInput:true,disableMobile:true,minDate:'today',locale:{firstDayOfWeek:1},onReady:[function(_,__,instance){installCalendar(instance)}],onOpen:[function(_,__,instance){installCalendar(instance)}]});
+ function installCalendar(instance){const select=instance.calendarContainer?.querySelector('.flatpickr-monthDropdown-months');if(!select||select.dataset.luxuryReady)return;select.dataset.luxuryReady='1';const menu=document.createElement('div');menu.className='flatpickr-month-custom-menu';menu.hidden=true;const arrow=document.createElement('span');arrow.className='flatpickr-month-dropdown-arrow';select.insertAdjacentElement('afterend',arrow);const build=()=>{menu.innerHTML='';Array.from(select.options).forEach(opt=>{const b=document.createElement('button');b.type='button';b.className='flatpickr-month-custom-option';b.textContent=opt.textContent;b.dataset.value=opt.value;if(opt.value===select.value)b.classList.add('selected');b.addEventListener('click',e=>{e.stopPropagation();select.value=opt.value;select.dispatchEvent(new Event('change',{bubbles:true}));menu.hidden=true;build()});menu.appendChild(b)})};const position=()=>{const r=select.getBoundingClientRect(),c=instance.calendarContainer.getBoundingClientRect();menu.style.left=`${r.left-c.left}px`;menu.style.top=`${r.bottom-c.top+3}px`};const toggle=e=>{e.preventDefault();e.stopPropagation();build();position();menu.hidden=!menu.hidden;select.setAttribute('aria-expanded',String(!menu.hidden))};select.addEventListener('mousedown',toggle);arrow.addEventListener('click',toggle);document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==select&&e.target!==arrow)menu.hidden=true});select.addEventListener('change',()=>{build();menu.hidden=true});instance.calendarContainer.appendChild(menu)}
+ const preset=new URLSearchParams(location.search).get('experience');if(preset){const wanted=preset.toLowerCase();[...experience.options].some(o=>{if(o.text.toLowerCase()===wanted){experience.value=o.value;return true}return false})}
+ function alertUser(text){alertBox.textContent=text;alertBox.style.display='block';alertBox.scrollIntoView({behavior:'smooth',block:'nearest'})}
+ form.addEventListener('submit',e=>{e.preventDefault();alertBox.style.display='none';if(!experience.value)return alertUser('Please select your hammam experience.');if(!date.value)return alertUser('Please select your preferred date.');if(!time.value)return alertUser('Please select your preferred time.');const f=Number(female.value||0),m=Number(male.value||0);if(f+m<1)return alertUser('Please enter the number of female and male guests.');if(!name.value.trim())return alertUser('Please enter your full name.');if(!email.value.trim()||!email.checkValidity())return alertUser('Please enter a valid email address.');if(!iti.isValidNumber())return alertUser('Please enter a valid phone number.');alertUser('Your reservation request is ready. The booking connection will be added next.')});
 });
