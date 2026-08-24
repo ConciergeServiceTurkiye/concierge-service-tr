@@ -10,101 +10,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const subjectHidden = document.getElementById("subject");
   const messageField = document.getElementById("message");
   const charCount = document.getElementById("charCount");
-
   const customSelect = document.getElementById("customSubject");
   if (!customSelect) return;
 
   const trigger = customSelect.querySelector(".select-trigger");
   const options = Array.from(customSelect.querySelectorAll(".select-options li"));
 
-  /* ======================
-     INLINE ALERT
-  ====================== */
   function showInlineAlert(text, success = false) {
     alertBox.textContent = text;
     alertBox.style.visibility = "visible";
     alertBox.style.opacity = "1";
     alertBox.style.borderColor = success ? "#d4af37" : "#c9a24d";
-
-    setTimeout(() => {
-      alertBox.style.opacity = "0";
-      alertBox.style.visibility = "hidden";
-    }, 3500);
+    setTimeout(() => { alertBox.style.opacity = "0"; alertBox.style.visibility = "hidden"; }, 3500);
   }
 
-  /* ======================
-     CHARACTER COUNTER
-  ====================== */
   if (charCount && messageField) {
     charCount.textContent = "0 / 2000";
-    messageField.addEventListener("input", () => {
-      charCount.textContent = `${messageField.value.length} / 2000`;
-    });
+    messageField.addEventListener("input", () => { charCount.textContent = `${messageField.value.length} / 2000`; });
   }
 
-  /* ======================
-     PHONE INPUT – intl-tel-input
-  ====================== */
-  const iti = intlTelInput(phoneField, {
-    initialCountry: "us",
-    separateDialCode: true
-  });
-
-  phoneField.addEventListener("focus", () => {
-    setTimeout(() => {
-      iti.setCountry(iti.getSelectedCountryData().iso2);
-    }, 50);
-  });
-
+  const iti = intlTelInput(phoneField, { initialCountry: "us", separateDialCode: true });
+  phoneField.addEventListener("focus", () => { setTimeout(() => { iti.setCountry(iti.getSelectedCountryData().iso2); }, 50); });
   phoneField.addEventListener("keydown", e => {
-    if (
-      e.ctrlKey ||
-      e.metaKey ||
-      ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(e.key)
-    ) return;
-
+    if (e.ctrlKey || e.metaKey || ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(e.key)) return;
     if (!/^[0-9]$/.test(e.key)) e.preventDefault();
   });
+  phoneField.addEventListener("input", () => { phoneField.value = phoneField.value.replace(/\D/g, ""); });
 
-  // Paste / drag / autofill güvenliği
-  phoneField.addEventListener("input", () => {
-    phoneField.value = phoneField.value.replace(/\D/g, "");
-  });
-
-  /* ======================
-     CUSTOM SELECT
-  ====================== */
   let currentIndex = -1;
-
-  function openDropdown() {
-    customSelect.classList.add("open");
-  }
-
-  function closeDropdown() {
-    customSelect.classList.remove("open");
-    currentIndex = -1;
-    options.forEach(o => o.classList.remove("active"));
-  }
-
+  function openDropdown() { customSelect.classList.add("open"); }
+  function closeDropdown() { customSelect.classList.remove("open"); currentIndex = -1; options.forEach(o => o.classList.remove("active")); }
   function move(direction) {
-    if (!customSelect.classList.contains("open")) {
-      openDropdown();
-      currentIndex = direction === 1 ? 0 : options.length - 1;
-    } else {
-      currentIndex += direction;
-      if (currentIndex < 0) currentIndex = options.length - 1;
-      if (currentIndex >= options.length) currentIndex = 0;
-    }
+    if (!customSelect.classList.contains("open")) { openDropdown(); currentIndex = direction === 1 ? 0 : options.length - 1; }
+    else { currentIndex += direction; if (currentIndex < 0) currentIndex = options.length - 1; if (currentIndex >= options.length) currentIndex = 0; }
     setActive();
   }
-
-  function setActive() {
-    options.forEach(o => o.classList.remove("active"));
-    const opt = options[currentIndex];
-    opt.classList.add("active");
-    opt.scrollIntoView({ block: "nearest" });
-  }
-
+  function setActive() { options.forEach(o => o.classList.remove("active")); const opt = options[currentIndex]; opt.classList.add("active"); opt.scrollIntoView({ block: "nearest" }); }
   function select(index) {
     const opt = options[index];
     trigger.textContent = opt.textContent;
@@ -113,38 +54,28 @@ document.addEventListener("DOMContentLoaded", () => {
     closeDropdown();
   }
 
-  trigger.addEventListener("click", () => {
-    customSelect.classList.contains("open") ? closeDropdown() : openDropdown();
-  });
-
+  trigger.addEventListener("click", () => { customSelect.classList.contains("open") ? closeDropdown() : openDropdown(); });
   trigger.addEventListener("keydown", e => {
     if (["ArrowDown", "ArrowUp", "Enter", " ", "Escape"].includes(e.key)) e.preventDefault();
     if (e.key === "ArrowDown") move(1);
     if (e.key === "ArrowUp") move(-1);
-    if (e.key === "Enter" || e.key === " ") {
-      if (customSelect.classList.contains("open") && currentIndex >= 0) select(currentIndex);
-      else openDropdown();
-    }
+    if (e.key === "Enter" || e.key === " ") { if (customSelect.classList.contains("open") && currentIndex >= 0) select(currentIndex); else openDropdown(); }
     if (e.key === "Escape") closeDropdown();
   });
+  options.forEach((opt, index) => { opt.addEventListener("click", () => { select(index); messageField.focus(); }); });
+  document.addEventListener("click", e => { if (!customSelect.contains(e.target)) closeDropdown(); });
 
-  options.forEach((opt, index) => {
-    opt.addEventListener("click", () => {
-      select(index);
-      messageField.focus();
-    });
-  });
+  // Service pages can pass a detailed subject through ?subject=...
+  const presetSubject = new URLSearchParams(window.location.search).get("subject");
+  if (presetSubject && presetSubject.trim()) {
+    const value = presetSubject.trim();
+    subjectHidden.value = value;
+    trigger.textContent = value;
+    trigger.classList.add("selected");
+  }
 
-  document.addEventListener("click", e => {
-    if (!customSelect.contains(e.target)) closeDropdown();
-  });
-
-  /* ======================
-     FORM SUBMIT
-  ====================== */
   form.addEventListener("submit", e => {
     e.preventDefault();
-
     if (!nameField.value.trim()) return showInlineAlert("Please enter your full name.");
     if (!emailField.value.trim()) return showInlineAlert("Please enter your email address.");
     if (!emailField.checkValidity()) return showInlineAlert("Please enter a valid email address.");
@@ -160,21 +91,9 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(t => {
         if (t.trim() === "success") {
           showInlineAlert("Your private concierge request has been received.", true);
-
-          form.reset();
-          charCount.textContent = "0 / 2000";
-          subjectHidden.value = "";
-          trigger.textContent = "Select a subject";
-          trigger.classList.remove("selected");
-          currentIndex = -1;
-          iti.setCountry("us");
-          phoneField.value = "";
-          closeDropdown();
-        } else {
-          showInlineAlert("Something went wrong. Please try again.");
-        }
+          form.reset(); charCount.textContent = "0 / 2000"; subjectHidden.value = ""; trigger.textContent = "Select a subject"; trigger.classList.remove("selected"); currentIndex = -1; iti.setCountry("us"); phoneField.value = ""; closeDropdown();
+        } else showInlineAlert("Something went wrong. Please try again.");
       })
       .catch(() => showInlineAlert("Connection error. Please try again later."));
   });
-
 });
