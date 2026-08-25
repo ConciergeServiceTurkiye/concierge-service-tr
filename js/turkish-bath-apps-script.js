@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded',()=>{
   const form=document.getElementById('bathReservationForm');
   if(!form)return;
-  const ENDPOINT='https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec';
+  const ENDPOINT='https://script.google.com/macros/s/AKfycbxI2iTBCliq8b9RSDmiDosZYaOaL4yEte4dBPSRepfTwZySkU0LaNrKUPeWeLCBZd98/exec';
   const alertBox=document.getElementById('bathFormAlert');
   const experience=document.getElementById('experience'),date=document.getElementById('travelDate'),time=document.getElementById('preferredTime');
   const female=document.getElementById('femaleGuests'),male=document.getElementById('maleGuests'),name=document.getElementById('fullName'),email=document.getElementById('email'),phone=document.getElementById('phone'),details=document.getElementById('requestDetails');
