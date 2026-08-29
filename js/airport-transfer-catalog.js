@@ -15,13 +15,16 @@ document.addEventListener('DOMContentLoaded',()=>{
   const restoreScroll=()=>{
     if(sessionStorage.getItem(restoreKey)!=='1')return;
     const saved=sessionStorage.getItem(scrollKey);
-    sessionStorage.removeItem(restoreKey);
     if(saved===null)return;
-    const y=Number(saved);
-    document.documentElement.style.scrollBehavior='auto';
-    document.body.style.scrollBehavior='auto';
-    window.scrollTo(0,y);
-    requestAnimationFrame(()=>window.scrollTo(0,y));
+    const y=Math.max(0,Number(saved)||0);
+    sessionStorage.removeItem(restoreKey);
+    const apply=()=>{
+      document.documentElement.style.scrollBehavior='auto';
+      document.body.style.scrollBehavior='auto';
+      window.scrollTo(0,y);
+    };
+    apply();
+    requestAnimationFrame(apply);
   };
 
   const close=()=>{modal.hidden=true;document.body.style.overflow=''};
@@ -40,6 +43,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.addEventListener('keydown',e=>{if(modal.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1)});
 
   window.addEventListener('pagehide',()=>{
+    // Do not overwrite the position saved immediately before navigating to the form.
     if(sessionStorage.getItem(restoreKey)==='1')return;
     sessionStorage.setItem(scrollKey,String(window.scrollY));
   });
