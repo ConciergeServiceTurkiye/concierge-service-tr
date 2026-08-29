@@ -4,27 +4,23 @@ document.addEventListener('DOMContentLoaded',()=>{
   const image=modal.querySelector('#vehicleModalImage'),title=modal.querySelector('#vehicleModalTitle'),capacity=modal.querySelector('#vehicleModalCapacity'),select=modal.querySelector('#vehicleModalSelect'),counter=modal.querySelector('#vehicleGalleryCounter'),fallback=modal.querySelector('#vehicleGalleryFallback'),prev=modal.querySelector('.vehicle-gallery-prev'),next=modal.querySelector('.vehicle-gallery-next');
   let images=[],index=0;
   const scrollKey='airportTransferCatalogScrollY';
-  const restoreKey='airportTransferCatalogRestorePending';
+
   if('scrollRestoration' in history)history.scrollRestoration='manual';
 
+  // Save the exact catalog position in the current history entry before leaving for the form.
   const saveScroll=()=>{
+    const state=Object.assign({},history.state||{}, {airportTransferScrollY:window.scrollY});
+    history.replaceState(state,'',window.location.href);
     sessionStorage.setItem(scrollKey,String(window.scrollY));
-    sessionStorage.setItem(restoreKey,'1');
   };
 
   const restoreScroll=()=>{
-    if(sessionStorage.getItem(restoreKey)!=='1')return;
-    const saved=sessionStorage.getItem(scrollKey);
-    if(saved===null)return;
-    const y=Math.max(0,Number(saved)||0);
-    sessionStorage.removeItem(restoreKey);
-    const apply=()=>{
-      document.documentElement.style.scrollBehavior='auto';
-      document.body.style.scrollBehavior='auto';
-      window.scrollTo(0,y);
-    };
-    apply();
-    requestAnimationFrame(apply);
+    const state=history.state||{};
+    const saved=state.airportTransferScrollY!=null ? Number(state.airportTransferScrollY) : Number(sessionStorage.getItem(scrollKey));
+    if(!Number.isFinite(saved)||saved<0)return;
+    document.documentElement.style.scrollBehavior='auto';
+    document.body.style.scrollBehavior='auto';
+    window.scrollTo(0,saved);
   };
 
   const close=()=>{modal.hidden=true;document.body.style.overflow=''};
@@ -42,21 +38,22 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   document.addEventListener('keydown',e=>{if(modal.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1)});
 
-  window.addEventListener('pagehide',()=>{
-    // Do not overwrite the position saved immediately before navigating to the form.
-    if(sessionStorage.getItem(restoreKey)==='1')return;
-    sessionStorage.setItem(scrollKey,String(window.scrollY));
+  // The form's Back to Vehicle Selection uses browser history, so the browser returns to this exact history entry.
+  // Do not use pagehide to overwrite the saved position.
+
+  window.addEventListener('pageshow',()=>{
+    const fromForm=performance.getEntriesByType('navigation')[0]?.type==='back_forward';
+    if(fromForm)requestAnimationFrame(restoreScroll);
   });
 
-  window.addEventListener('pageshow',restoreScroll);
   restoreScroll();
 
   const viewVehicle=new URLSearchParams(window.location.search).get('viewVehicle');
   if(viewVehicle){
     const card=Array.from(document.querySelectorAll('.vehicle-card')).find(item=>item.dataset.vehicle===viewVehicle);
     if(card){
-      history.replaceState({},'',window.location.pathname);
-      requestAnimationFrame(()=>requestAnimationFrame(()=>openVehicle(card)));
+      history.replaceState(history.state||{},'',window.location.pathname);
+      requestAnimationFrame(()=>openVehicle(card));
     }
   }
 });
