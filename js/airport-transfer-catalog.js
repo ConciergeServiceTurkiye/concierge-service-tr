@@ -3,24 +3,13 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(!modal)return;
   const image=modal.querySelector('#vehicleModalImage'),title=modal.querySelector('#vehicleModalTitle'),capacity=modal.querySelector('#vehicleModalCapacity'),select=modal.querySelector('#vehicleModalSelect'),counter=modal.querySelector('#vehicleGalleryCounter'),fallback=modal.querySelector('#vehicleGalleryFallback'),prev=modal.querySelector('.vehicle-gallery-prev'),next=modal.querySelector('.vehicle-gallery-next');
   let images=[],index=0;
-  const scrollKey='airportTransferCatalogScrollY';
 
-  if('scrollRestoration' in history)history.scrollRestoration='manual';
+  // Let the browser restore the exact scroll position when Back returns to this history entry.
+  if('scrollRestoration' in history)history.scrollRestoration='auto';
 
-  // Save the exact catalog position in the current history entry before leaving for the form.
   const saveScroll=()=>{
-    const state=Object.assign({},history.state||{}, {airportTransferScrollY:window.scrollY});
-    history.replaceState(state,'',window.location.href);
-    sessionStorage.setItem(scrollKey,String(window.scrollY));
-  };
-
-  const restoreScroll=()=>{
-    const state=history.state||{};
-    const saved=state.airportTransferScrollY!=null ? Number(state.airportTransferScrollY) : Number(sessionStorage.getItem(scrollKey));
-    if(!Number.isFinite(saved)||saved<0)return;
-    document.documentElement.style.scrollBehavior='auto';
-    document.body.style.scrollBehavior='auto';
-    window.scrollTo(0,saved);
+    // Keep the current position as metadata only. The browser itself restores the visual position.
+    history.replaceState(Object.assign({},history.state||{},{airportTransferScrollY:window.scrollY}),'',window.location.href);
   };
 
   const close=()=>{modal.hidden=true;document.body.style.overflow=''};
@@ -37,16 +26,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   modal.querySelector('.vehicle-modal-backdrop').addEventListener('click',close);
 
   document.addEventListener('keydown',e=>{if(modal.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1)});
-
-  // The form's Back to Vehicle Selection uses browser history, so the browser returns to this exact history entry.
-  // Do not use pagehide to overwrite the saved position.
-
-  window.addEventListener('pageshow',()=>{
-    const fromForm=performance.getEntriesByType('navigation')[0]?.type==='back_forward';
-    if(fromForm)requestAnimationFrame(restoreScroll);
-  });
-
-  restoreScroll();
 
   const viewVehicle=new URLSearchParams(window.location.search).get('viewVehicle');
   if(viewVehicle){
