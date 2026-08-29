@@ -18,8 +18,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     sessionStorage.removeItem(restoreKey);
     if(saved===null)return;
     const y=Number(saved);
-    requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo({top:y,left:0,behavior:'auto'})));
-    setTimeout(()=>window.scrollTo({top:y,left:0,behavior:'auto'}),150);
+    document.documentElement.style.scrollBehavior='auto';
+    document.body.style.scrollBehavior='auto';
+    window.scrollTo(0,y);
+    requestAnimationFrame(()=>window.scrollTo(0,y));
   };
 
   const close=()=>{modal.hidden=true;document.body.style.overflow=''};
@@ -28,10 +30,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   const openVehicle=card=>{if(!card)return;const v=card.dataset.vehicle,c=card.dataset.capacity;images=(card.dataset.images||'').split('|').map(x=>x.trim()).filter(Boolean);index=0;title.textContent=v;capacity.textContent=c;select.href=`forms/airport-transfer.html?vehicle=${encodeURIComponent(v)}&capacity=${encodeURIComponent(c)}`;render();modal.hidden=false;document.body.style.overflow='hidden'};
 
   document.querySelectorAll('.vehicle-view').forEach(btn=>btn.addEventListener('click',()=>openVehicle(btn.closest('.vehicle-card'))));
-
   document.querySelectorAll('.vehicle-select').forEach(link=>link.addEventListener('click',saveScroll));
   select.addEventListener('click',saveScroll);
-
   prev.addEventListener('click',()=>move(-1));
   next.addEventListener('click',()=>move(1));
   modal.querySelector('.vehicle-modal-close').addEventListener('click',close);
@@ -39,14 +39,12 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   document.addEventListener('keydown',e=>{if(modal.hidden)return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1)});
 
-  // Preserve the saved catalogue position when navigating to the form.
-  // Do not let pagehide overwrite it with an intermediate browser position.
   window.addEventListener('pagehide',()=>{
     if(sessionStorage.getItem(restoreKey)==='1')return;
     sessionStorage.setItem(scrollKey,String(window.scrollY));
   });
 
-  window.addEventListener('pageshow',()=>{setTimeout(restoreScroll,0)});
+  window.addEventListener('pageshow',restoreScroll);
   restoreScroll();
 
   const viewVehicle=new URLSearchParams(window.location.search).get('viewVehicle');
