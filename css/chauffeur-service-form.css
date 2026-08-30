@@ -3,8 +3,6 @@
 .chauffeur-form-page .service-form-title{color:var(--chauffeur-form-gold)!important}
 .chauffeur-form-page .service-form-subline{color:var(--chauffeur-form-offwhite)!important}
 .chauffeur-form-page .form-group input,.chauffeur-form-page .form-group textarea,.chauffeur-form-page .form-group select{font-family:inherit}
-.chauffeur-form-page .form-group input[type="time"]{color:var(--chauffeur-form-gold)!important;color-scheme:dark;min-height:46px}
-.chauffeur-form-page .form-group input[type="time"]::-webkit-calendar-picker-indicator{filter:none;opacity:.8;cursor:pointer}
 .chauffeur-form-page .destination-list{display:flex;flex-direction:column;gap:12px;width:100%}
 .chauffeur-form-page .destination-row{display:grid;grid-template-columns:44px minmax(0,1fr) 42px;gap:10px;align-items:end;width:100%}
 .chauffeur-form-page .destination-row .stop-no{height:46px;display:flex;align-items:center;justify-content:center;color:#fff;border:1px solid rgba(212,175,55,.25);border-radius:0;font-size:11px;background:#111}
@@ -26,10 +24,15 @@
 .chauffeur-form-page .service-form-wrapper .iti__selected-flag{background:#111!important}
 .chauffeur-form-page .service-form-wrapper .iti__selected-dial-code{color:var(--chauffeur-form-offwhite)!important}
 .chauffeur-form-page .luxury-native-select{position:absolute!important;opacity:0!important;pointer-events:none!important;width:1px!important;height:1px!important}
-.chauffeur-form-page .luxury-select{position:relative;width:100%;height:46px;z-index:1000}
-.chauffeur-form-page .luxury-select-trigger{width:100%;height:100%;padding:0 38px 0 14px;background:#111;border:1px solid #d4af37;color:rgba(255,255,255,.72);font:inherit;font-size:14px;text-align:left;cursor:pointer}
+.chauffeur-form-page .luxury-select{position:relative;width:100%;height:46px;z-index:1}
+.chauffeur-form-page .luxury-select.is-open{z-index:10001}
+.chauffeur-form-page .luxury-select-trigger{width:100%;height:100%;padding:0 42px 0 14px;background:#111;border:1px solid #d4af37;color:rgba(255,255,255,.72);font:inherit;font-size:14px;text-align:left;cursor:pointer;position:relative}
+.chauffeur-form-page .luxury-select-trigger::after{content:'';position:absolute;right:15px;top:50%;width:8px;height:8px;border-right:2px solid var(--chauffeur-form-gold);border-bottom:2px solid var(--chauffeur-form-gold);transform:translateY(-65%) rotate(45deg);transition:transform .2s ease}
+.chauffeur-form-page .luxury-select.is-open .luxury-select-trigger::after{transform:translateY(-20%) rotate(225deg)}
 .chauffeur-form-page .luxury-select-trigger.has-selection{color:#d4af37}
-.chauffeur-form-page .luxury-select-menu{position:absolute;left:0;right:0;top:calc(100% + 1px);max-height:320px;overflow-y:auto;background:#111;border:1px solid rgba(212,175,55,.8);z-index:10000;scrollbar-width:thin;scrollbar-color:#d4af37 rgba(255,255,255,.05)}
+.chauffeur-form-page .luxury-select-menu{position:absolute;left:0;right:0;top:calc(100% + 1px);max-height:320px;overflow-y:auto;background:#111;border:1px solid rgba(212,175,55,.8);z-index:10002;scrollbar-width:thin;scrollbar-color:#d4af37 rgba(255,255,255,.05);box-shadow:0 14px 30px rgba(0,0,0,.65)}
+.chauffeur-form-page .time-select-menu{max-height:260px}
 .chauffeur-form-page .luxury-select-option{display:block;width:100%;min-height:36px;padding:8px 14px;border:0;background:#111;color:rgba(255,255,255,.72);font:inherit;font-size:14px;text-align:left;cursor:pointer}
 .chauffeur-form-page .luxury-select-option:hover,.chauffeur-form-page .luxury-select-option:focus{background:rgba(212,175,55,.18);color:#d4af37;outline:none}
+.chauffeur-form-page .luxury-select-option:disabled,.chauffeur-form-page .luxury-select-option[aria-disabled="true"]{display:none!important}
 @media(max-width:768px){.chauffeur-form-page .destination-row{grid-template-columns:36px minmax(0,1fr) 38px}.chauffeur-form-page .service-form-wrapper .iti__dropdown-content{width:100%!important;min-width:0!important;max-width:none!important}.chauffeur-form-page .form-row{grid-template-columns:1fr}.chauffeur-form-page .service-form-wrapper{padding:24px 18px 30px}.chauffeur-form-page .destination-row .stop-no,.chauffeur-form-page .remove-stop{height:46px}.chauffeur-form-page .add-stop{height:46px}}
