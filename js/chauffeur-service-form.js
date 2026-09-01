@@ -1,25 +1,366 @@
-document.addEventListener('DOMContentLoaded',()=>{
- const form=document.getElementById('serviceForm');if(!form)return;
- const alertBox=document.getElementById('formInlineAlert'),service=document.getElementById('service'),vehicle=document.getElementById('vehicle'),passengers=document.getElementById('passengers'),startDate=document.getElementById('startDate'),endDate=document.getElementById('endDate'),start=document.getElementById('startTime'),end=document.getElementById('endTime'),phone=document.getElementById('phone'),email=document.getElementById('email'),flight=document.getElementById('flightNumber'),message=document.getElementById('message'),count=document.getElementById('charCount'),destinations=document.getElementById('destinations'),flightNote=document.getElementById('flightNote');
- const params=new URLSearchParams(location.search),requestedService=params.get('service');if(requestedService){const o=[...service.options].find(x=>x.text.toLowerCase()===requestedService.toLowerCase());if(o)service.value=o.value)}
- const iti=window.intlTelInput?intlTelInput(phone,{initialCountry:'us',separateDialCode:true,allowDropdown:true,autoPlaceholder:'off',nationalMode:false,showSelectedDialCode:true,utilsScript:'https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js'}):null;
- function makeLuxurySelect(select){const wrap=document.createElement('div');wrap.className='luxury-select';const trigger=document.createElement('button');trigger.type='button';trigger.className='luxury-select-trigger';trigger.setAttribute('aria-expanded','false');const list=document.createElement('div');list.className='luxury-select-menu';list.hidden=true;const refresh=()=>{const opt=select.options[select.selectedIndex];trigger.textContent=opt?opt.textContent:'';trigger.classList.toggle('has-selection',!!select.value)};const rebuild=()=>{list.innerHTML='';[...select.options].forEach(opt=>{const item=document.createElement('button');item.type='button';item.className='luxury-select-option';item.textContent=opt.textContent;item.dataset.value=opt.value;item.addEventListener('click',e=>{e.stopPropagation();select.value=opt.value;select.dispatchEvent(new Event('change',{bubbles:true}));list.hidden=true;wrap.classList.remove('is-open');trigger.setAttribute('aria-expanded','false');refresh()});list.appendChild(item)})};rebuild();trigger.addEventListener('click',e=>{e.stopPropagation();document.querySelectorAll('.luxury-select-menu:not([hidden])').forEach(x=>{if(x!==list){x.hidden=true;x.closest('.luxury-select')?.classList.remove('is-open')}});list.hidden=!list.hidden;wrap.classList.toggle('is-open',!list.hidden);trigger.setAttribute('aria-expanded',String(!list.hidden))});wrap.append(trigger,list);select.parentNode.insertBefore(wrap,select);select.classList.add('luxury-native-select');select.setAttribute('tabindex','-1');select.addEventListener('change',refresh);refresh();return{trigger,refresh,list,rebuild}}
- const serviceLuxury=makeLuxurySelect(service),vehicleLuxury=makeLuxurySelect(vehicle),passengerLuxury=makeLuxurySelect(passengers);
- const capacities={'Mercedes-Maybach S-Class':3,'Mercedes-Benz S-Class':3,'Mercedes-Benz V-Class VIP':7,'Mercedes-Benz EQS Electric':3,'Mercedes-Benz E-Class':3,'Mercedes-Benz Vito V-Class VIP':7,'Mercedes-Benz Vito V-Class Minivan':8,'Mercedes-Benz Sprinter VIP':16};
- function updatePassengerOptions(){const selectedVehicle=vehicle.value,max=Number(vehicle.selectedOptions[0]?.dataset.capacity||capacities[selectedVehicle]||0),old=passengers.value;passengers.innerHTML='';const placeholder=document.createElement('option');placeholder.value='';placeholder.textContent=max?`Select number of passengers (1–${max})`:'Select vehicle first';passengers.appendChild(placeholder);if(max){for(let i=1;i<=max;i++){const o=document.createElement('option');o.value=String(i);o.textContent=String(i);passengers.appendChild(o)}}if(old&&Number(old)<=max)passengers.value=old;passengerLuxury.rebuild();passengerLuxury.refresh()}
- vehicle.addEventListener('change',()=>{updatePassengerOptions();vehicleLuxury.refresh()});
- document.addEventListener('click',()=>document.querySelectorAll('.luxury-select-menu:not([hidden])').forEach(x=>{x.hidden=true;x.closest('.luxury-select')?.classList.remove('is-open')}));
- function makeTimePicker(input){const wrap=document.createElement('div');wrap.className='time-picker-inline';const grid=document.createElement('div');grid.className='time-picker-grid';const hourBox=document.createElement('div'),minuteBox=document.createElement('div');hourBox.className='time-picker-part';minuteBox.className='time-picker-part';const hl=document.createElement('label'),ml=document.createElement('label');hl.textContent='Hour';ml.textContent='Minute';const hour=document.createElement('select'),minute=document.createElement('select');hour.className='time-part-select';minute.className='time-part-select';for(let i=0;i<24;i++){const o=document.createElement('option');o.value=String(i).padStart(2,'0');o.textContent=o.value;hour.appendChild(o)}for(let i=0;i<60;i++){const o=document.createElement('option');o.value=String(i).padStart(2,'0');o.textContent=o.value;minute.appendChild(o)}hourBox.append(hl,hour);minuteBox.append(ml,minute);grid.append(hourBox,minuteBox);wrap.append(grid);input.parentNode.insertBefore(wrap,input);input.classList.add('luxury-native-select');input.setAttribute('tabindex','-1');input.required=true;const refresh=()=>{const m=/^(\d{2}):(\d{2})$/.exec(input.value||'');if(m){hour.value=m[1];minute.value=m[2]}else{hour.value='00';minute.value='00'}};const sync=()=>{input.value=`${hour.value}:${minute.value}`;input.dispatchEvent(new Event('change',{bubbles:true}))};hour.addEventListener('change',sync);minute.addEventListener('change',sync);refresh();return{refresh}}
- const startTimeUI=makeTimePicker(start),endTimeUI=makeTimePicker(end);
- function installLuxuryMonthMenu(fp){const select=fp.calendarContainer?.querySelector('.flatpickr-monthDropdown-months');if(!select||select.dataset.luxuryReady)return;select.dataset.luxuryReady='1';const menu=document.createElement('div');menu.className='flatpickr-month-custom-menu';menu.hidden=true;const arrow=document.createElement('span');arrow.className='flatpickr-month-dropdown-arrow';arrow.setAttribute('aria-hidden','true');select.insertAdjacentElement('afterend',arrow);const build=()=>{menu.innerHTML='';[...select.options].forEach(opt=>{const b=document.createElement('button');b.type='button';b.className='flatpickr-month-custom-option';b.textContent=opt.textContent;if(opt.value===select.value)b.classList.add('selected');b.addEventListener('click',e=>{e.stopPropagation();select.value=opt.value;select.dispatchEvent(new Event('change',{bubbles:true}));menu.hidden=true;build()});menu.appendChild(b)})};const position=()=>{const r=select.getBoundingClientRect(),c=fp.calendarContainer.getBoundingClientRect();menu.style.left=`${r.left-c.left}px`;menu.style.top=`${r.bottom-c.top+3}px`};fp.calendarContainer.appendChild(menu);const toggle=e=>{e.preventDefault();e.stopPropagation();build();position();menu.hidden=!menu.hidden;select.setAttribute('aria-expanded',String(!menu.hidden))};select.addEventListener('mousedown',toggle);arrow.addEventListener('click',toggle);document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==select&&e.target!==arrow)menu.hidden=true});select.addEventListener('change',()=>{build();menu.hidden=true})}
- let startDatePicker=null,endDatePicker=null;if(window.flatpickr){startDatePicker=flatpickr(startDate,{dateFormat:'d/m/Y',allowInput:true,disableMobile:true,minDate:'today',locale:{firstDayOfWeek:1},positionElement:startDate,onReady:[(s,d,fp)=>installLuxuryMonthMenu(fp)],onOpen:[(s,d,fp)=>installLuxuryMonthMenu(fp)]});endDatePicker=flatpickr(endDate,{dateFormat:'d/m/Y',allowInput:true,disableMobile:true,minDate:'today',locale:{firstDayOfWeek:1},positionElement:endDate,onReady:[(s,d,fp)=>installLuxuryMonthMenu(fp)],onOpen:[(s,d,fp)=>installLuxuryMonthMenu(fp)]});document.getElementById('startDateCalendarButton')?.addEventListener('click',()=>startDatePicker.open());document.getElementById('endDateCalendarButton')?.addEventListener('click',()=>endDatePicker.open())}
- let destinationRows=[];function renumber(){destinationRows.forEach((row,i)=>{row.querySelector('.stop-no').textContent=i+1;row.querySelector('label').textContent=i===0?'Pickup':'Destination';row.querySelector('input').name='destination_'+(i+1);if(i===0)row.querySelector('.remove-stop')?.remove()});updateFlightRequirement()}
- function addDestination(value=''){const index=destinationRows.length+1,row=document.createElement('div');row.className='destination-row';row.innerHTML=`<div class="stop-no">${index}</div><div class="form-group"><label>${index===1?'Pickup':'Destination'}</label><input type="text" name="destination_${index}" value="${String(value).replace(/"/g,'&quot;')}" placeholder="${index===1?'Airport / Hotel / Address':'Add a destination'}" required></div>${index===1?'':'<button type="button" class="remove-stop" aria-label="Remove destination">×</button>'}`;destinations.appendChild(row);destinationRows.push(row);if(index>1)row.querySelector('.remove-stop').addEventListener('click',()=>{row.remove();destinationRows=destinationRows.filter(r=>r!==row);renumber()});row.querySelector('input').addEventListener('input',updateFlightRequirement);renumber()}
- addDestination();document.getElementById('addDestination').addEventListener('click',()=>addDestination());
- function pickupIsAirport(){const input=destinationRows[0]?.querySelector('input'),v=(input?.value||'').toLowerCase().trim();return /airport|havalimani|havalimanı|istanbul airport|i̇stanbul airport|sabiha gökçen|sabiha gokcen|\bist\b|\bsaw\b/.test(v)}
- function updateFlightRequirement(){const airport=pickupIsAirport();flight.required=airport;flightNote.classList.toggle('show',airport);flight.placeholder=airport?'Required for airport pickup':'Optional'}
- message.addEventListener('input',()=>count.textContent=`${message.value.length} / 2000`);[email,phone,flight,message].forEach(x=>x?.addEventListener('input',()=>x.classList.remove('field-error')));
- function showValidation(text,fields=[]){fields.forEach(x=>x?.classList.add('field-error'));alertBox.textContent=text;alertBox.style.visibility='visible';alertBox.style.opacity='1';requestAnimationFrame(()=>alertBox.scrollIntoView({behavior:'smooth',block:'center'}));setTimeout(()=>{alertBox.style.opacity='0';alertBox.style.visibility='hidden'},3500)}
- form.addEventListener('submit',e=>{e.preventDefault();const errors=[];if(!service.value)errors.push(serviceLuxury.trigger);if(!vehicle.value)errors.push(vehicleLuxury.trigger);if(!passengers.value)errors.push(passengerLuxury.trigger);if(!startDate.value)errors.push(startDate);if(!endDate.value)errors.push(endDate);if(!start.value)errors.push(start);if(!end.value)errors.push(end);if(startDatePicker&&endDatePicker){const sd=startDatePicker.selectedDates[0],ed=endDatePicker.selectedDates[0];if(sd&&ed&&ed<sd)errors.push(endDate)}if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim()))errors.push(email);if(iti&&!iti.isValidNumber())errors.push(phone);if(flight.required&&!flight.value.trim())errors.push(flight);destinationRows.forEach(r=>{if(!r.querySelector('input').value.trim())errors.push(r.querySelector('input'))});if(errors.length){showValidation('Please complete the highlighted fields so we can submit your request.',errors);return}alertBox.textContent='Your private chauffeur request is ready to be connected to the reservation system.';alertBox.style.visibility='visible';alertBox.style.opacity='1';setTimeout(()=>{alertBox.style.opacity='0';alertBox.style.visibility='hidden'},4000)});
- updatePassengerOptions();serviceLuxury.refresh();vehicleLuxury.refresh();passengerLuxury.refresh();updateFlightRequirement();
+document.addEventListener('DOMContentLoaded', function () {
+  var form = document.getElementById('serviceForm');
+  if (!form) return;
+
+  var alertBox = document.getElementById('formInlineAlert');
+  var service = document.getElementById('service');
+  var vehicle = document.getElementById('vehicle');
+  var passengers = document.getElementById('passengers');
+  var startDate = document.getElementById('startDate');
+  var endDate = document.getElementById('endDate');
+  var startTime = document.getElementById('startTime');
+  var endTime = document.getElementById('endTime');
+  var phone = document.getElementById('phone');
+  var email = document.getElementById('email');
+  var flight = document.getElementById('flightNumber');
+  var message = document.getElementById('message');
+  var count = document.getElementById('charCount');
+  var destinations = document.getElementById('destinations');
+  var flightNote = document.getElementById('flightNote');
+
+  var params = new URLSearchParams(window.location.search);
+  var requestedService = params.get('service');
+  if (requestedService && service) {
+    Array.prototype.forEach.call(service.options, function (option) {
+      if (option.text.toLowerCase() === requestedService.toLowerCase()) service.value = option.value;
+    });
+  }
+
+  var iti = null;
+  if (window.intlTelInput && phone) {
+    iti = window.intlTelInput(phone, {
+      initialCountry: 'us',
+      separateDialCode: true,
+      allowDropdown: true,
+      autoPlaceholder: 'off',
+      nationalMode: false,
+      showSelectedDialCode: true,
+      utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js'
+    });
+  }
+
+  function makeLuxurySelect(select) {
+    if (!select || select.dataset.luxuryReady === '1') return null;
+    var wrap = document.createElement('div');
+    var trigger = document.createElement('button');
+    var list = document.createElement('div');
+    wrap.className = 'luxury-select';
+    trigger.type = 'button';
+    trigger.className = 'luxury-select-trigger';
+    trigger.setAttribute('aria-expanded', 'false');
+    list.className = 'luxury-select-menu';
+    list.hidden = true;
+
+    function refresh() {
+      var option = select.options[select.selectedIndex];
+      trigger.textContent = option ? option.textContent : '';
+      trigger.classList.toggle('has-selection', !!select.value);
+    }
+
+    function rebuild() {
+      list.innerHTML = '';
+      Array.prototype.forEach.call(select.options, function (option) {
+        var item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'luxury-select-option';
+        item.textContent = option.textContent;
+        item.dataset.value = option.value;
+        item.addEventListener('click', function (event) {
+          event.stopPropagation();
+          select.value = option.value;
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+          close();
+          refresh();
+        });
+        list.appendChild(item);
+      });
+    }
+
+    function open() {
+      document.querySelectorAll('.luxury-select-menu:not([hidden])').forEach(function (menu) {
+        if (menu !== list) {
+          menu.hidden = true;
+          var other = menu.closest('.luxury-select');
+          if (other) other.classList.remove('is-open');
+        }
+      });
+      list.hidden = false;
+      wrap.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    function close() {
+      list.hidden = true;
+      wrap.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    rebuild();
+    trigger.addEventListener('click', function (event) {
+      event.stopPropagation();
+      if (list.hidden) open(); else close();
+    });
+    wrap.appendChild(trigger);
+    wrap.appendChild(list);
+    select.parentNode.insertBefore(wrap, select);
+    select.classList.add('luxury-native-select');
+    select.dataset.luxuryReady = '1';
+    select.setAttribute('tabindex', '-1');
+    select.addEventListener('change', refresh);
+    refresh();
+    return { trigger: trigger, refresh: refresh, rebuild: rebuild, close: close };
+  }
+
+  var serviceLuxury = makeLuxurySelect(service);
+  var vehicleLuxury = makeLuxurySelect(vehicle);
+  var passengerLuxury = makeLuxurySelect(passengers);
+
+  var capacities = {
+    'Mercedes-Maybach S-Class': 3,
+    'Mercedes-Benz S-Class': 3,
+    'Mercedes-Benz V-Class VIP': 7,
+    'Mercedes-Benz EQS Electric': 3,
+    'Mercedes-Benz E-Class': 3,
+    'Mercedes-Benz Vito V-Class VIP': 7,
+    'Mercedes-Benz Vito V-Class Minivan': 8,
+    'Mercedes-Benz Sprinter VIP': 16
+  };
+
+  function updatePassengerOptions() {
+    if (!vehicle || !passengers) return;
+    var selected = vehicle.options[vehicle.selectedIndex];
+    var vehicleName = selected ? selected.textContent : '';
+    var max = selected && selected.dataset.capacity ? Number(selected.dataset.capacity) : (capacities[vehicleName] || 0);
+    var old = passengers.value;
+    passengers.innerHTML = '';
+    var placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = max ? 'Select number of passengers (1–' + max + ')' : 'Select vehicle first';
+    passengers.appendChild(placeholder);
+    for (var i = 1; i <= max; i++) {
+      var option = document.createElement('option');
+      option.value = String(i);
+      option.textContent = String(i);
+      passengers.appendChild(option);
+    }
+    if (old && Number(old) <= max) passengers.value = old;
+    if (passengerLuxury) {
+      passengerLuxury.rebuild();
+      passengerLuxury.refresh();
+    }
+  }
+
+  if (vehicle) vehicle.addEventListener('change', function () {
+    updatePassengerOptions();
+    if (vehicleLuxury) vehicleLuxury.refresh();
+  });
+
+  document.addEventListener('click', function () {
+    document.querySelectorAll('.luxury-select-menu:not([hidden])').forEach(function (menu) {
+      menu.hidden = true;
+      var wrap = menu.closest('.luxury-select');
+      if (wrap) wrap.classList.remove('is-open');
+    });
+  });
+
+  function buildTimePicker(input) {
+    if (!input) return null;
+    var wrap = document.createElement('div');
+    var grid = document.createElement('div');
+    var hourBox = document.createElement('div');
+    var minuteBox = document.createElement('div');
+    var hourLabel = document.createElement('label');
+    var minuteLabel = document.createElement('label');
+    var hour = document.createElement('select');
+    var minute = document.createElement('select');
+
+    wrap.className = 'time-picker-inline';
+    grid.className = 'time-picker-grid';
+    hourBox.className = 'time-picker-part';
+    minuteBox.className = 'time-picker-part';
+    hourLabel.textContent = 'Hour';
+    minuteLabel.textContent = 'Minute';
+    hour.className = 'time-part-select';
+    minute.className = 'time-part-select';
+    hour.setAttribute('aria-label', 'Hour');
+    minute.setAttribute('aria-label', 'Minute');
+
+    for (var h = 0; h < 24; h++) {
+      var ho = document.createElement('option');
+      ho.value = String(h).padStart(2, '0');
+      ho.textContent = ho.value;
+      hour.appendChild(ho);
+    }
+    for (var m = 0; m < 60; m++) {
+      var mo = document.createElement('option');
+      mo.value = String(m).padStart(2, '0');
+      mo.textContent = mo.value;
+      minute.appendChild(mo);
+    }
+
+    hourBox.appendChild(hourLabel);
+    hourBox.appendChild(hour);
+    minuteBox.appendChild(minuteLabel);
+    minuteBox.appendChild(minute);
+    grid.appendChild(hourBox);
+    grid.appendChild(minuteBox);
+    wrap.appendChild(grid);
+    input.parentNode.insertBefore(wrap, input);
+    input.classList.add('luxury-native-select');
+    input.setAttribute('tabindex', '-1');
+    input.setAttribute('aria-hidden', 'true');
+
+    function syncFromInput() {
+      var match = /^(\d{2}):(\d{2})$/.exec(input.value || '');
+      hour.value = match ? match[1] : '00';
+      minute.value = match ? match[2] : '00';
+    }
+    function syncToInput() {
+      input.value = hour.value + ':' + minute.value;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+    hour.addEventListener('change', syncToInput);
+    minute.addEventListener('change', syncToInput);
+    syncFromInput();
+    return { refresh: syncFromInput };
+  }
+
+  var startTimeUI = buildTimePicker(startTime);
+  var endTimeUI = buildTimePicker(endTime);
+
+  var startDatePicker = null;
+  var endDatePicker = null;
+  if (window.flatpickr) {
+    startDatePicker = flatpickr(startDate, {
+      dateFormat: 'd/m/Y',
+      allowInput: true,
+      disableMobile: true,
+      minDate: 'today',
+      locale: { firstDayOfWeek: 1 },
+      positionElement: startDate
+    });
+    endDatePicker = flatpickr(endDate, {
+      dateFormat: 'd/m/Y',
+      allowInput: true,
+      disableMobile: true,
+      minDate: 'today',
+      locale: { firstDayOfWeek: 1 },
+      positionElement: endDate
+    });
+    var startCalendar = document.getElementById('startDateCalendarButton');
+    var endCalendar = document.getElementById('endDateCalendarButton');
+    if (startCalendar) startCalendar.addEventListener('click', function () { startDatePicker.open(); });
+    if (endCalendar) endCalendar.addEventListener('click', function () { endDatePicker.open(); });
+  }
+
+  var destinationRows = [];
+  function updateFlightRequirement() {
+    var first = destinationRows[0];
+    var input = first ? first.querySelector('input') : null;
+    var value = input ? input.value.toLowerCase().trim() : '';
+    var airport = /airport|havalimani|havalimanı|istanbul airport|i̇stanbul airport|sabiha gökçen|sabiha gokcen|\bist\b|\bsaw\b/.test(value);
+    flight.required = airport;
+    flightNote.classList.toggle('show', airport);
+    flight.placeholder = airport ? 'Required for airport pickup' : 'Optional';
+  }
+
+  function renumberDestinations() {
+    destinationRows.forEach(function (row, index) {
+      var number = row.querySelector('.stop-no');
+      var label = row.querySelector('label');
+      var input = row.querySelector('input');
+      if (number) number.textContent = String(index + 1);
+      if (label) label.textContent = index === 0 ? 'Pickup' : 'Destination';
+      if (input) input.name = 'destination_' + String(index + 1);
+      if (index === 0) {
+        row.classList.add('pickup-row');
+        var remove = row.querySelector('.remove-stop');
+        if (remove) remove.remove();
+      } else {
+        row.classList.remove('pickup-row');
+      }
+    });
+    updateFlightRequirement();
+  }
+
+  function addDestination(value) {
+    var index = destinationRows.length + 1;
+    var row = document.createElement('div');
+    row.className = 'destination-row' + (index === 1 ? ' pickup-row' : '');
+    row.innerHTML = '<div class="stop-no">' + index + '</div>' +
+      '<div class="form-group"><label>' + (index === 1 ? 'Pickup' : 'Destination') + '</label>' +
+      '<input type="text" name="destination_' + index + '" placeholder="' + (index === 1 ? 'Airport / Hotel / Address' : 'Add a destination') + '" required></div>' +
+      (index === 1 ? '' : '<button type="button" class="remove-stop" aria-label="Remove destination">×</button>');
+    destinations.appendChild(row);
+    destinationRows.push(row);
+    var input = row.querySelector('input');
+    if (input && value) input.value = value;
+    if (index > 1) {
+      row.querySelector('.remove-stop').addEventListener('click', function () {
+        row.remove();
+        destinationRows = destinationRows.filter(function (item) { return item !== row; });
+        renumberDestinations();
+      });
+    }
+    if (input) input.addEventListener('input', updateFlightRequirement);
+    renumberDestinations();
+  }
+
+  addDestination('');
+  var addDestinationButton = document.getElementById('addDestination');
+  if (addDestinationButton) addDestinationButton.addEventListener('click', function () { addDestination(''); });
+
+  if (message && count) {
+    message.addEventListener('input', function () { count.textContent = message.value.length + ' / 2000'; });
+  }
+
+  function showValidation(text, fields) {
+    fields.forEach(function (field) { if (field) field.classList.add('field-error'); });
+    alertBox.textContent = text;
+    alertBox.style.visibility = 'visible';
+    alertBox.style.opacity = '1';
+    setTimeout(function () { alertBox.style.opacity = '0'; alertBox.style.visibility = 'hidden'; }, 3500);
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var errors = [];
+    if (!service.value) errors.push(serviceLuxury ? serviceLuxury.trigger : service);
+    if (!vehicle.value) errors.push(vehicleLuxury ? vehicleLuxury.trigger : vehicle);
+    if (!passengers.value) errors.push(passengerLuxury ? passengerLuxury.trigger : passengers);
+    if (!startDate.value) errors.push(startDate);
+    if (!endDate.value) errors.push(endDate);
+    if (!startTime.value) errors.push(startTime);
+    if (!endTime.value) errors.push(endTime);
+
+    if (startDatePicker && endDatePicker) {
+      var sd = startDatePicker.selectedDates[0];
+      var ed = endDatePicker.selectedDates[0];
+      if (sd && ed && ed < sd) errors.push(endDate);
+      if (sd && ed && sd.getTime() === ed.getTime() && startTime.value && endTime.value && endTime.value <= startTime.value) errors.push(endTime);
+    }
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) errors.push(email);
+    if (iti && !iti.isValidNumber()) errors.push(phone);
+    if (flight.required && !flight.value.trim()) errors.push(flight);
+    destinationRows.forEach(function (row) {
+      var input = row.querySelector('input');
+      if (input && !input.value.trim()) errors.push(input);
+    });
+
+    if (errors.length) {
+      showValidation('Please complete the highlighted fields so we can submit your request.', errors);
+      return;
+    }
+
+    alertBox.textContent = 'Your private chauffeur request is ready to be connected to the reservation system.';
+    alertBox.style.visibility = 'visible';
+    alertBox.style.opacity = '1';
+  });
+
+  updatePassengerOptions();
+  if (serviceLuxury) serviceLuxury.refresh();
+  if (vehicleLuxury) vehicleLuxury.refresh();
+  if (passengerLuxury) passengerLuxury.refresh();
+  updateFlightRequirement();
 });
