@@ -37,6 +37,13 @@ document.addEventListener('DOMContentLoaded', function () {
       showSelectedDialCode: true,
       utilsScript: 'https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js'
     });
+    phone.addEventListener('input', function () {
+      var digitsOnly = phone.value.replace(/\D/g, '');
+      if (phone.value !== digitsOnly) phone.value = digitsOnly;
+    });
+    phone.addEventListener('paste', function () {
+      setTimeout(function () { phone.value = phone.value.replace(/\D/g, ''); }, 0);
+    });
   }
 
   function makeLuxurySelect(select) {
@@ -232,20 +239,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var endDatePicker = null;
   if (window.flatpickr) {
     startDatePicker = flatpickr(startDate, {
-      dateFormat: 'd/m/Y',
-      allowInput: true,
-      disableMobile: true,
-      minDate: 'today',
-      locale: { firstDayOfWeek: 1 },
-      positionElement: startDate
+      dateFormat: 'd/m/Y', allowInput: true, disableMobile: true, minDate: 'today',
+      locale: { firstDayOfWeek: 1 }, positionElement: startDate
     });
     endDatePicker = flatpickr(endDate, {
-      dateFormat: 'd/m/Y',
-      allowInput: true,
-      disableMobile: true,
-      minDate: 'today',
-      locale: { firstDayOfWeek: 1 },
-      positionElement: endDate
+      dateFormat: 'd/m/Y', allowInput: true, disableMobile: true, minDate: 'today',
+      locale: { firstDayOfWeek: 1 }, positionElement: endDate
     });
     var startCalendar = document.getElementById('startDateCalendarButton');
     var endCalendar = document.getElementById('endDateCalendarButton');
@@ -276,9 +275,7 @@ document.addEventListener('DOMContentLoaded', function () {
         row.classList.add('pickup-row');
         var remove = row.querySelector('.remove-stop');
         if (remove) remove.remove();
-      } else {
-        row.classList.remove('pickup-row');
-      }
+      } else row.classList.remove('pickup-row');
     });
     updateFlightRequirement();
   }
@@ -310,15 +307,12 @@ document.addEventListener('DOMContentLoaded', function () {
   var addDestinationButton = document.getElementById('addDestination');
   if (addDestinationButton) addDestinationButton.addEventListener('click', function () { addDestination(''); });
 
-  if (message && count) {
-    message.addEventListener('input', function () { count.textContent = message.value.length + ' / 2000'; });
-  }
+  if (message && count) message.addEventListener('input', function () { count.textContent = message.value.length + ' / 2000'; });
 
   function showValidation(text, fields) {
     fields.forEach(function (field) { if (field) field.classList.add('field-error'); });
     alertBox.textContent = text;
-    alertBox.style.visibility = 'visible';
-    alertBox.style.opacity = '1';
+    alertBox.style.visibility = 'visible'; alertBox.style.opacity = '1';
     setTimeout(function () { alertBox.style.opacity = '0'; alertBox.style.visibility = 'hidden'; }, 3500);
   }
 
@@ -332,30 +326,18 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!endDate.value) errors.push(endDate);
     if (!startTime.value) errors.push(startTime);
     if (!endTime.value) errors.push(endTime);
-
     if (startDatePicker && endDatePicker) {
-      var sd = startDatePicker.selectedDates[0];
-      var ed = endDatePicker.selectedDates[0];
+      var sd = startDatePicker.selectedDates[0], ed = endDatePicker.selectedDates[0];
       if (sd && ed && ed < sd) errors.push(endDate);
       if (sd && ed && sd.getTime() === ed.getTime() && startTime.value && endTime.value && endTime.value <= startTime.value) errors.push(endTime);
     }
-
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim())) errors.push(email);
     if (iti && !iti.isValidNumber()) errors.push(phone);
     if (flight.required && !flight.value.trim()) errors.push(flight);
-    destinationRows.forEach(function (row) {
-      var input = row.querySelector('input');
-      if (input && !input.value.trim()) errors.push(input);
-    });
-
-    if (errors.length) {
-      showValidation('Please complete the highlighted fields so we can submit your request.', errors);
-      return;
-    }
-
+    destinationRows.forEach(function (row) { var input = row.querySelector('input'); if (input && !input.value.trim()) errors.push(input); });
+    if (errors.length) { showValidation('Please complete the highlighted fields so we can submit your request.', errors); return; }
     alertBox.textContent = 'Your private chauffeur request is ready to be connected to the reservation system.';
-    alertBox.style.visibility = 'visible';
-    alertBox.style.opacity = '1';
+    alertBox.style.visibility = 'visible'; alertBox.style.opacity = '1';
   });
 
   updatePassengerOptions();
