@@ -11,11 +11,7 @@ document.addEventListener('DOMContentLoaded',function(){
     alertBox._timer=setTimeout(function(){alertBox.style.opacity='0';alertBox.style.visibility='hidden'},3500)
   }
 
-  function closeAllSelects(except){
-    document.querySelectorAll('.luxury-select').forEach(function(w){
-      if(w!==except){w.classList.remove('is-open');var menu=w.querySelector('.luxury-select-menu');if(menu)menu.hidden=true}
-    });
-  }
+  function closeAllSelects(except){document.querySelectorAll('.luxury-select').forEach(function(w){if(w!==except){w.classList.remove('is-open');var menu=w.querySelector('.luxury-select-menu');if(menu)menu.hidden=true}})}
 
   function customSelect(sel){
     if(!sel)return null;
@@ -29,13 +25,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
   var serviceUI=customSelect(service),vehicleUI=customSelect(vehicle),passengerUI=customSelect(passengers);
   var caps={'Mercedes-Maybach S-Class':3,'Mercedes-Benz S-Class':3,'Mercedes-Benz V-Class VIP':7,'Mercedes-Benz EQS Electric':3,'Mercedes-Benz E-Class':3,'Mercedes-Benz Vito V-Class VIP':7,'Mercedes-Benz Vito V-Class Minivan':8,'Mercedes-Benz Sprinter VIP':16};
-  function passengersForVehicle(){
-    var o=vehicle.options[vehicle.selectedIndex],max=o&&o.dataset.capacity?+o.dataset.capacity:(caps[o?o.textContent:'']||0);
-    var placeholder=max?'Select Number of Passenger (1-'+max+')':'Select number of passengers';
-    passengers.innerHTML='<option value="">'+placeholder+'</option>';
-    for(var i=1;i<=max;i++)passengers.add(new Option(String(i),String(i)));
-    passengerUI.rebuild();passengerUI.refresh();
-  }
+  function passengersForVehicle(){var o=vehicle.options[vehicle.selectedIndex],max=o&&o.dataset.capacity?+o.dataset.capacity:(caps[o?o.textContent:'']||0);var placeholder=max?'Select Number of Passenger (1-'+max+')':'Select number of passengers';passengers.innerHTML='<option value="">'+placeholder+'</option>';for(var i=1;i<=max;i++)passengers.add(new Option(String(i),String(i)));passengerUI.rebuild();passengerUI.refresh()}
   vehicle.addEventListener('change',passengersForVehicle);passengersForVehicle();
   document.addEventListener('click',function(){closeAllSelects()});
 
@@ -49,7 +39,10 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   timeSelect(startTime);timeSelect(endTime);
 
-  var fpStart=flatpickr(startDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true}),fpEnd=flatpickr(endDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true});document.getElementById('startDateCalendarButton').onclick=function(){fpStart.open()};document.getElementById('endDateCalendarButton').onclick=function(){fpEnd.open()};
+  var fpStart=flatpickr(startDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true,allowInput:true}),fpEnd=flatpickr(endDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true,allowInput:true});
+  var startCalendarButton=document.getElementById('startDateCalendarButton'),endCalendarButton=document.getElementById('endDateCalendarButton');
+  if(startCalendarButton)startCalendarButton.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(fpStart.isOpen)fpStart.close();else fpStart.open()});
+  if(endCalendarButton)endCalendarButton.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(fpEnd.isOpen)fpEnd.close();else fpEnd.open()});
 
   var rows=[];
   function bindDestinationInput(input){input.addEventListener('input',function(){clearFieldError(input)})}
@@ -62,38 +55,15 @@ document.addEventListener('DOMContentLoaded',function(){
   phone.addEventListener('keydown',function(e){if(e.ctrlKey||e.metaKey||['Backspace','Delete','ArrowLeft','ArrowRight','Tab'].includes(e.key))return;if(!/^[0-9]$/.test(e.key))e.preventDefault()});phone.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');clearFieldError(phone.closest('.iti')||phone)});phone.addEventListener('paste',function(e){e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'');try{document.execCommand('insertText',false,t)}catch(_){phone.value+=t}clearFieldError(phone.closest('.iti')||phone)});
 
   message.addEventListener('input',function(){count.textContent=this.value.length+' / 2000'});
-
   function airport(){var v=(rows[0]&&rows[0].querySelector('input').value||'').toLowerCase(),a=/airport|havaliman|istanbul airport|sabiha|\bist\b|\bsaw\b/.test(v);flight.required=a;flight.placeholder=a?'Required for airport pickup':'Optional';flightNote.classList.toggle('show',a);if(!a)clearFieldError(flight)}rows[0].querySelector('input').addEventListener('input',airport);airport();
-
   function clearFieldError(field){if(field)field.classList.remove('field-error')}
   function markFieldError(field){if(field)field.classList.add('field-error')}
   function validEmail(v){return/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())}
   function validDate(v){var m=v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!m)return false;var d=new Date(+m[3],+m[2]-1,+m[1]);return d.getFullYear()===+m[3]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[1]}
   function clearTimeErrors(input){if(input&&input._timeTriggers)input._timeTriggers.forEach(clearFieldError);clearFieldError(input)}
   function showValidation(fields){fields.forEach(markFieldError);showInlineAlert('Please complete the highlighted fields so we can submit your request.',false)}
-
-  service.addEventListener('change',function(){clearFieldError(serviceUI.trigger)});
-  vehicle.addEventListener('change',function(){clearFieldError(vehicleUI.trigger)});
-  passengers.addEventListener('change',function(){clearFieldError(passengerUI.trigger)});
+  service.addEventListener('change',function(){clearFieldError(serviceUI.trigger)});vehicle.addEventListener('change',function(){clearFieldError(vehicleUI.trigger)});passengers.addEventListener('change',function(){clearFieldError(passengerUI.trigger)});
   [startDate,endDate].forEach(function(f){f.addEventListener('input',function(){clearFieldError(f)});f.addEventListener('change',function(){clearFieldError(f)})});
   [document.getElementById('name'),document.getElementById('email'),flight].forEach(function(f){if(f)f.addEventListener('input',function(){clearFieldError(f)})});
-
-  form.addEventListener('submit',function(e){
-    var errors=[];
-    if(!service.value)errors.push(serviceUI.trigger);
-    if(!vehicle.value)errors.push(vehicleUI.trigger);
-    if(!passengers.value)errors.push(passengerUI.trigger);
-    if(!validDate(startDate.value.trim()))errors.push(startDate);
-    if(!validDate(endDate.value.trim()))errors.push(endDate);
-    if(!startTime.value.trim())errors.push(startTime._timeTriggers?startTime._timeTriggers[0]:startTime);
-    if(!endTime.value.trim())errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime);
-    rows.forEach(function(r){var input=r.querySelector('input');if(!input.value.trim())errors.push(input)});
-    var name=document.getElementById('name'),email=document.getElementById('email');
-    if(!name.value.trim())errors.push(name);
-    if(!validEmail(email.value))errors.push(email);
-    if(!phone.value.trim()||!iti.isValidNumber())errors.push(phone.closest('.iti')||phone);
-    if(flight.required&&!flight.value.trim())errors.push(flight);
-    if(startDate.value&&endDate.value&&validDate(startDate.value)&&validDate(endDate.value)){var s=startDate.value.split('/'),ed=endDate.value.split('/'),sdObj=new Date(+s[2],+s[1]-1,+s[0]),edObj=new Date(+ed[2],+ed[1]-1,+ed[0]);if(edObj<sdObj){errors.push(endDate)}else if(edObj.getTime()===sdObj.getTime()&&endTime.value&&startTime.value&&endTime.value<=startTime.value){errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime)}}
-    if(errors.length){e.preventDefault();e.stopImmediatePropagation();showValidation(errors)}
-  },true);
+  form.addEventListener('submit',function(e){var errors=[];if(!service.value)errors.push(serviceUI.trigger);if(!vehicle.value)errors.push(vehicleUI.trigger);if(!passengers.value)errors.push(passengerUI.trigger);if(!validDate(startDate.value.trim()))errors.push(startDate);if(!validDate(endDate.value.trim()))errors.push(endDate);if(!startTime.value.trim())errors.push(startTime._timeTriggers?startTime._timeTriggers[0]:startTime);if(!endTime.value.trim())errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime);rows.forEach(function(r){var input=r.querySelector('input');if(!input.value.trim())errors.push(input)});var name=document.getElementById('name'),email=document.getElementById('email');if(!name.value.trim())errors.push(name);if(!validEmail(email.value))errors.push(email);if(!phone.value.trim()||!iti.isValidNumber())errors.push(phone.closest('.iti')||phone);if(flight.required&&!flight.value.trim())errors.push(flight);if(startDate.value&&endDate.value&&validDate(startDate.value)&&validDate(endDate.value)){var s=startDate.value.split('/'),ed=endDate.value.split('/'),sdObj=new Date(+s[2],+s[1]-1,+s[0]),edObj=new Date(+ed[2],+ed[1]-1,+ed[0]);if(edObj<sdObj)errors.push(endDate);else if(edObj.getTime()===sdObj.getTime()&&endTime.value&&startTime.value&&endTime.value<=startTime.value)errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime)}if(errors.length){e.preventDefault();e.stopImmediatePropagation();showValidation(errors)}},true);
 });
