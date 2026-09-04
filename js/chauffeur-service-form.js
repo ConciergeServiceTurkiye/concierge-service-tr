@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded',function(){
   if(!form)return;
 
   var APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbx2UPqPHPbKy1NrXBtyvxz5T-7nekLM5tp13I9q1lpcJCREevssNU2NPFOFKS308qRvHA/exec';
-
   var service=document.getElementById('service'),vehicle=document.getElementById('vehicle'),passengers=document.getElementById('passengers'),startDate=document.getElementById('startDate'),endDate=document.getElementById('endDate'),startTime=document.getElementById('startTime'),endTime=document.getElementById('endTime'),phone=document.getElementById('phone'),destinations=document.getElementById('destinations'),addBtn=document.getElementById('addDestination'),message=document.getElementById('message'),count=document.getElementById('charCount'),flight=document.getElementById('flightNumber'),flightNote=document.getElementById('flightNote'),alertBox=document.getElementById('formInlineAlert'),passengerDetails=document.getElementById('passengerDetails'),passengerDetailsGroup=document.getElementById('passengerDetailsGroup');
 
   function showInlineAlert(text,success){
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded',function(){
   }
 
   function closeAllSelects(except){document.querySelectorAll('.luxury-select').forEach(function(w){if(w!==except){w.classList.remove('is-open');var menu=w.querySelector('.luxury-select-menu');if(menu)menu.hidden=true}})}
-
   function customSelect(sel){
     if(!sel)return null;
     var w=document.createElement('div'),b=document.createElement('button'),m=document.createElement('div');
@@ -29,134 +27,43 @@ document.addEventListener('DOMContentLoaded',function(){
   var caps={'Mercedes-Maybach S-Class':3,'Mercedes-Benz S-Class':3,'Mercedes-Benz V-Class VIP':7,'Mercedes-Benz EQS Electric':3,'Mercedes-Benz E-Class':3,'Mercedes-Benz Vito V-Class VIP':7,'Mercedes-Benz Vito V-Class Minivan':8,'Mercedes-Benz Sprinter VIP':16};
   function renderPassengerDetails(){
     if(!passengerDetails)return;
-    var existing={};
-    passengerDetails.querySelectorAll('input[name^="passengerName_"]').forEach(function(input){existing[input.name]=input.value});
-    var total=Number(passengers.value)||0;
-    passengerDetails.innerHTML='';
-    if(passengerDetailsGroup)passengerDetailsGroup.hidden=!total;
-    for(var i=1;i<=total;i++){
-      var group=document.createElement('div');
-      group.className='passenger-detail-row';
-      var label=document.createElement('label');
-      label.setAttribute('for','passengerName_'+i);
-      label.textContent='Passenger '+i+' Full Name';
-      var input=document.createElement('input');
-      input.type='text';input.id='passengerName_'+i;input.name='passengerName_'+i;input.placeholder='Full Name';input.autocomplete='name';input.required=true;
-      input.value=existing['passengerName_'+i]||'';
-      input.addEventListener('input',function(){clearFieldError(this)});
-      group.append(label,input);passengerDetails.appendChild(group)
-    }
+    var existing={};passengerDetails.querySelectorAll('input[name^="passengerName_"]').forEach(function(input){existing[input.name]=input.value});
+    var total=Number(passengers.value)||0;passengerDetails.innerHTML='';if(passengerDetailsGroup)passengerDetailsGroup.hidden=!total;
+    for(var i=1;i<=total;i++){var group=document.createElement('div');group.className='passenger-detail-row';var label=document.createElement('label');label.setAttribute('for','passengerName_'+i);label.textContent='Passenger '+i+' Full Name';var input=document.createElement('input');input.type='text';input.id='passengerName_'+i;input.name='passengerName_'+i;input.placeholder='Full Name';input.autocomplete='name';input.required=true;input.value=existing['passengerName_'+i]||'';input.addEventListener('input',function(){clearFieldError(this)});group.append(label,input);passengerDetails.appendChild(group)}
   }
   function passengersForVehicle(){var o=vehicle.options[vehicle.selectedIndex],max=o&&o.dataset.capacity?+o.dataset.capacity:(caps[o?o.textContent:'']||0);var placeholder=max?'Select Number of Passenger (1-'+max+')':'Select number of passengers';passengers.innerHTML='<option value="">'+placeholder+'</option>';for(var i=1;i<=max;i++)passengers.add(new Option(String(i),String(i)));passengerUI.rebuild();passengerUI.refresh();renderPassengerDetails()}
-  vehicle.addEventListener('change',passengersForVehicle);passengers.addEventListener('change',renderPassengerDetails);passengersForVehicle();
-  document.addEventListener('click',function(){closeAllSelects()});
+  vehicle.addEventListener('change',passengersForVehicle);passengers.addEventListener('change',renderPassengerDetails);passengersForVehicle();document.addEventListener('click',function(){closeAllSelects()});
 
-  function timeSelect(input){
-    var wrap=document.createElement('div'),grid=document.createElement('div');wrap.className='time-picker-inline';grid.className='time-picker-grid';wrap.appendChild(grid);
-    var hs=document.createElement('select'),ms=document.createElement('select');hs.className='time-part-select';ms.className='time-part-select';for(var h=0;h<24;h++)hs.add(new Option(String(h).padStart(2,'0'),String(h).padStart(2,'0')));for(var q=0;q<60;q++)ms.add(new Option(String(q).padStart(2,'0'),String(q).padStart(2,'0')));
-    var hb=document.createElement('div'),mb=document.createElement('div'),hl=document.createElement('label'),ml=document.createElement('label');hb.className=mb.className='time-picker-part';hl.textContent='Hour';ml.textContent='Minute';hb.append(hl,hs);mb.append(ml,ms);grid.append(hb,mb);input.parentNode.insertBefore(wrap,input);input.style.display='none';input.required=true;
-    var hu=customSelect(hs),mu=customSelect(ms);
-    function sync(){input.value=hs.value+':'+ms.value;hu.refresh();mu.refresh();hu.trigger.classList.toggle('time-zero',hs.value==='00');mu.trigger.classList.toggle('time-zero',ms.value==='00');clearFieldError(hu.trigger);clearFieldError(mu.trigger);clearFieldError(input)}
-    hs.onchange=ms.onchange=sync;sync();input._timeTriggers=[hu.trigger,mu.trigger]
-  }
+  function timeSelect(input){var wrap=document.createElement('div'),grid=document.createElement('div');wrap.className='time-picker-inline';grid.className='time-picker-grid';wrap.appendChild(grid);var hs=document.createElement('select'),ms=document.createElement('select');hs.className='time-part-select';ms.className='time-part-select';for(var h=0;h<24;h++)hs.add(new Option(String(h).padStart(2,'0'),String(h).padStart(2,'0'));for(var q=0;q<60;q++)ms.add(new Option(String(q).padStart(2,'0'),String(q).padStart(2,'0'));var hb=document.createElement('div'),mb=document.createElement('div'),hl=document.createElement('label'),ml=document.createElement('label');hb.className=mb.className='time-picker-part';hl.textContent='Hour';ml.textContent='Minute';hb.append(hl,hs);mb.append(ml,ms);grid.append(hb,mb);input.parentNode.insertBefore(wrap,input);input.style.display='none';input.required=true;var hu=customSelect(hs),mu=customSelect(ms);function sync(){input.value=hs.value+':'+ms.value;hu.refresh();mu.refresh();hu.trigger.classList.toggle('time-zero',hs.value==='00');mu.trigger.classList.toggle('time-zero',ms.value==='00');clearFieldError(hu.trigger);clearFieldError(mu.trigger);clearFieldError(input)}hs.onchange=ms.onchange=sync;sync();input._timeTriggers=[hu.trigger,mu.trigger]}
   timeSelect(startTime);timeSelect(endTime);
 
   var fpStart=flatpickr(startDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true,allowInput:false,clickOpens:false}),fpEnd=flatpickr(endDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true,allowInput:false,clickOpens:false});
   function toggleCalendar(picker,e){e.preventDefault();e.stopPropagation();if(picker.isOpen)picker.close();else picker.open()}
-  var startCalendarButton=document.getElementById('startDateCalendarButton'),endCalendarButton=document.getElementById('endDateCalendarButton');
-  startDate.addEventListener('click',function(e){toggleCalendar(fpStart,e)});
-  endDate.addEventListener('click',function(e){toggleCalendar(fpEnd,e)});
-  if(startCalendarButton)startCalendarButton.addEventListener('click',function(e){toggleCalendar(fpStart,e)});
-  if(endCalendarButton)endCalendarButton.addEventListener('click',function(e){toggleCalendar(fpEnd,e)});
+  var startCalendarButton=document.getElementById('startDateCalendarButton'),endCalendarButton=document.getElementById('endDateCalendarButton');startDate.addEventListener('click',function(e){toggleCalendar(fpStart,e)});endDate.addEventListener('click',function(e){toggleCalendar(fpEnd,e)});if(startCalendarButton)startCalendarButton.addEventListener('click',function(e){toggleCalendar(fpStart,e)});if(endCalendarButton)endCalendarButton.addEventListener('click',function(e){toggleCalendar(fpEnd,e)});
 
-  var rows=[];
-  function bindDestinationInput(input){input.addEventListener('input',function(){clearFieldError(input)})}
-  function renumber(){rows.forEach(function(r,i){r.querySelector('.stop-no').textContent=i+1;r.querySelector('label').textContent=i?'Destination':'Pickup';r.querySelector('input').name='destination_'+(i+1);r.querySelector('input').placeholder='Airport / Hotel / Address';if(i===0){var x=r.querySelector('.remove-stop');if(x)x.remove()}})}
-  function addDestination(){var i=rows.length+1,r=document.createElement('div');r.className='destination-row';r.innerHTML='<div class="stop-no">'+i+'</div><div class="form-group"><label>'+(i===1?'Pickup':'Destination')+'</label><input type="text" name="destination_'+i+'" placeholder="Airport / Hotel / Address" required></div>'+(i>1?'<button type="button" class="remove-stop">×</button>':'');destinations.appendChild(r);rows.push(r);bindDestinationInput(r.querySelector('input'));if(i>1)r.querySelector('.remove-stop').onclick=function(){r.remove();rows=rows.filter(function(x){return x!==r});renumber()};renumber()}
-  addDestination();addBtn.onclick=addDestination;
+  var rows=[];function bindDestinationInput(input){input.addEventListener('input',function(){clearFieldError(input)})}function renumber(){rows.forEach(function(r,i){r.querySelector('.stop-no').textContent=i+1;r.querySelector('label').textContent=i?'Destination':'Pickup';r.querySelector('input').name='destination_'+(i+1);r.querySelector('input').placeholder='Airport / Hotel / Address';if(i===0){var x=r.querySelector('.remove-stop');if(x)x.remove()}})}function addDestination(){var i=rows.length+1,r=document.createElement('div');r.className='destination-row';r.innerHTML='<div class="stop-no">'+i+'</div><div class="form-group"><label>'+(i===1?'Pickup':'Destination')+'</label><input type="text" name="destination_'+i+'" placeholder="Airport / Hotel / Address" required></div>'+(i>1?'<button type="button" class="remove-stop">×</button>':'');destinations.appendChild(r);rows.push(r);bindDestinationInput(r.querySelector('input'));if(i>1)r.querySelector('.remove-stop').onclick=function(){r.remove();rows=rows.filter(function(x){return x!==r});renumber()};renumber()}addDestination();addBtn.onclick=addDestination;
 
-  var iti=intlTelInput(phone,{initialCountry:'us',separateDialCode:true,allowDropdown:true,autoPlaceholder:'aggressive'});phone.setAttribute('autocomplete','tel');phone.setAttribute('placeholder','501 234 56 78');
-  phone.addEventListener('countrychange',function(){var p=phone.getAttribute('placeholder');if(!p||p==='Phone Number')phone.setAttribute('placeholder','501 234 56 78');clearFieldError(phone.closest('.iti')||phone)});
-  phone.addEventListener('keydown',function(e){if(e.ctrlKey||e.metaKey||['Backspace','Delete','ArrowLeft','ArrowRight','Tab'].includes(e.key))return;if(!/^[0-9]$/.test(e.key))e.preventDefault()});phone.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');clearFieldError(phone.closest('.iti')||phone)});phone.addEventListener('paste',function(e){e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'');try{document.execCommand('insertText',false,t)}catch(_){phone.value+=t}clearFieldError(phone.closest('.iti')||phone)});
+  var iti=intlTelInput(phone,{initialCountry:'us',separateDialCode:true,allowDropdown:true,autoPlaceholder:'aggressive'});phone.setAttribute('autocomplete','tel');phone.setAttribute('placeholder','501 234 56 78');phone.addEventListener('countrychange',function(){var p=phone.getAttribute('placeholder');if(!p||p==='Phone Number')phone.setAttribute('placeholder','501 234 56 78');clearFieldError(phone.closest('.iti')||phone)});phone.addEventListener('keydown',function(e){if(e.ctrlKey||e.metaKey||['Backspace','Delete','ArrowLeft','ArrowRight','Tab'].includes(e.key))return;if(!/^[0-9]$/.test(e.key))e.preventDefault()});phone.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');clearFieldError(phone.closest('.iti')||phone)});phone.addEventListener('paste',function(e){e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'');try{document.execCommand('insertText',false,t)}catch(_){phone.value+=t}clearFieldError(phone.closest('.iti')||phone)});
 
-  message.addEventListener('input',function(){count.textContent=this.value.length+' / 2000'});
-  function airport(){var v=(rows[0]&&rows[0].querySelector('input').value||'').toLowerCase(),a=/airport|havaliman|istanbul airport|sabiha|\bist\b|\bsaw\b/.test(v);flight.required=a;flight.placeholder=a?'Required for airport pickup':'Optional';flightNote.classList.toggle('show',a);if(!a)clearFieldError(flight)}rows[0].querySelector('input').addEventListener('input',airport);airport();
-  function clearFieldError(field){if(field)field.classList.remove('field-error')}
-  function markFieldError(field){if(field)field.classList.add('field-error')}
-  function validEmail(v){return/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())}
-  function validDate(v){var m=v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!m)return false;var d=new Date(+m[3],+m[2]-1,+m[1]);return d.getFullYear()===+m[3]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[1]}
-  function clearTimeErrors(input){if(input&&input._timeTriggers)input._timeTriggers.forEach(clearFieldError);clearFieldError(input)}
-  function showValidation(fields){fields.forEach(markFieldError);showInlineAlert('Please complete the highlighted fields so we can submit your request.',false)}
-  service.addEventListener('change',function(){clearFieldError(serviceUI.trigger)});vehicle.addEventListener('change',function(){clearFieldError(vehicleUI.trigger)});passengers.addEventListener('change',function(){clearFieldError(passengerUI.trigger)});
-  [startDate,endDate].forEach(function(f){f.addEventListener('input',function(){clearFieldError(f)});f.addEventListener('change',function(){clearFieldError(f)})});
-  [document.getElementById('name'),document.getElementById('email'),flight].forEach(function(f){if(f)f.addEventListener('input',function(){clearFieldError(f)})});
+  message.addEventListener('input',function(){count.textContent=this.value.length+' / 2000'});function airport(){var v=(rows[0]&&rows[0].querySelector('input').value||'').toLowerCase(),a=/airport|havaliman|istanbul airport|sabiha|\bist\b|\bsaw\b/.test(v);flight.required=a;flight.placeholder=a?'Required for airport pickup':'Optional';flightNote.classList.toggle('show',a);if(!a)clearFieldError(flight)}rows[0].querySelector('input').addEventListener('input',airport);airport();function clearFieldError(field){if(field)field.classList.remove('field-error')}function markFieldError(field){if(field)field.classList.add('field-error')}function validEmail(v){return/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())}function validDate(v){var m=v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!m)return false;var d=new Date(+m[3],+m[2]-1,+m[1]);return d.getFullYear()===+m[3]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[1]}function clearTimeErrors(input){if(input&&input._timeTriggers)input._timeTriggers.forEach(clearFieldError);clearFieldError(input)}function showValidation(fields){fields.forEach(markFieldError);showInlineAlert('Please complete the highlighted fields so we can submit your request.',false)}
+  service.addEventListener('change',function(){clearFieldError(serviceUI.trigger)});vehicle.addEventListener('change',function(){clearFieldError(vehicleUI.trigger)});passengers.addEventListener('change',function(){clearFieldError(passengerUI.trigger)});[startDate,endDate].forEach(function(f){f.addEventListener('input',function(){clearFieldError(f)});f.addEventListener('change',function(){clearFieldError(f)})});[document.getElementById('name'),document.getElementById('email'),flight].forEach(function(f){if(f)f.addEventListener('input',function(){clearFieldError(f)})});
+
+  /* Restore the service selected from a Chauffeur Services card. */
+  var params=new URLSearchParams(window.location.search),requestedService=params.get('service');
+  if(requestedService){
+    var serviceOption=Array.from(service.options).find(function(o){return o.value===requestedService||o.textContent.trim()===requestedService});
+    if(serviceOption){service.value=serviceOption.value;service.dispatchEvent(new Event('change',{bubbles:true}));serviceUI.refresh();}
+  }
+
+  /* Both the form Back button and browser Back return to the exact previous scroll position. */
+  var backButton=document.getElementById('chauffeurBackButton');
+  if(backButton){
+    backButton.addEventListener('click',function(e){
+      if(document.referrer&&document.referrer.indexOf('/chauffeur-service')!==-1){e.preventDefault();history.back();}
+    });
+  }
 
   form.addEventListener('submit',function(e){var errors=[];if(!service.value)errors.push(serviceUI.trigger);if(!vehicle.value)errors.push(vehicleUI.trigger);if(!passengers.value)errors.push(passengerUI.trigger);if(passengerDetails){passengerDetails.querySelectorAll('input[name^="passengerName_"]').forEach(function(input){if(!input.value.trim())errors.push(input)})}if(!validDate(startDate.value.trim()))errors.push(startDate);if(!validDate(endDate.value.trim()))errors.push(endDate);if(!startTime.value.trim())errors.push(startTime._timeTriggers?startTime._timeTriggers[0]:startTime);if(!endTime.value.trim())errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime);rows.forEach(function(r){var input=r.querySelector('input');if(!input.value.trim())errors.push(input)});var name=document.getElementById('name'),email=document.getElementById('email');if(!name.value.trim())errors.push(name);if(!validEmail(email.value))errors.push(email);if(!phone.value.trim()||!iti.isValidNumber())errors.push(phone.closest('.iti')||phone);if(flight.required&&!flight.value.trim())errors.push(flight);if(startDate.value&&endDate.value&&validDate(startDate.value)&&validDate(endDate.value)){var s=startDate.value.split('/'),ed=endDate.value.split('/'),sdObj=new Date(+s[2],+s[1]-1,+s[0]),edObj=new Date(+ed[2],+ed[1]-1,+ed[0]);if(edObj<sdObj)errors.push(endDate);else if(edObj.getTime()===sdObj.getTime()&&endTime.value&&startTime.value&&endTime.value<=startTime.value)errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime)}if(errors.length){e.preventDefault();e.stopImmediatePropagation();showValidation(errors)}},true);
 
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-
-    var submitButton=form.querySelector('.submit-btn');
-    var originalText=submitButton?submitButton.textContent:'Request Chauffeur';
-
-    if(submitButton){
-      submitButton.disabled=true;
-      submitButton.textContent='Sending Request...';
-    }
-
-    var formData=new FormData(form);
-
-    formData.set('service',service.value||'');
-    formData.set('vehicle',vehicle.value||'');
-    formData.set('passengers',passengers.value||'');
-    formData.set('startDate',startDate.value||'');
-    formData.set('startTime',startTime.value||'');
-    formData.set('endDate',endDate.value||'');
-    formData.set('endTime',endTime.value||'');
-    formData.set('name',(document.getElementById('name').value||'').trim());
-    formData.set('email',(document.getElementById('email').value||'').trim());
-    formData.set('phone',(phone.value||'').trim());
-    formData.set('flightNumber',(flight.value||'').trim());
-    formData.set('message',(message.value||'').trim());
-
-    fetch(APPS_SCRIPT_URL,{
-      method:'POST',
-      body:new URLSearchParams(formData)
-    })
-    .then(function(response){
-      if(!response.ok)throw new Error('Server returned HTTP '+response.status);
-      return response.text();
-    })
-    .then(function(result){
-      if(String(result).trim().toLowerCase()!=='success'){
-        throw new Error('Unexpected server response.');
-      }
-
-      showInlineAlert('Thank you. Your chauffeur request has been received.',true);
-      form.reset();
-      passengersForVehicle();
-      renderPassengerDetails();
-      rows=[];
-      destinations.innerHTML='';
-      addDestination();
-      count.textContent='0 / 2000';
-      flight.required=false;
-      flight.placeholder='Optional';
-      flightNote.classList.remove('show');
-
-      if(submitButton){
-        submitButton.disabled=false;
-        submitButton.textContent=originalText;
-      }
-    })
-    .catch(function(error){
-      console.error('Chauffeur submission error:',error);
-      showInlineAlert('We could not submit your request right now. Please try again.',false);
-
-      if(submitButton){
-        submitButton.disabled=false;
-        submitButton.textContent=originalText;
-      }
-    });
-  });
+  form.addEventListener('submit',function(e){e.preventDefault();var submitButton=form.querySelector('.submit-btn'),originalText=submitButton?submitButton.textContent:'Request Chauffeur';if(submitButton){submitButton.disabled=true;submitButton.textContent='Sending Request...'}var formData=new FormData(form);formData.set('service',service.value||'');formData.set('vehicle',vehicle.value||'');formData.set('passengers',passengers.value||'');formData.set('startDate',startDate.value||'');formData.set('startTime',startTime.value||'');formData.set('endDate',endDate.value||'');formData.set('endTime',endTime.value||'');formData.set('name',(document.getElementById('name').value||'').trim());formData.set('email',(document.getElementById('email').value||'').trim());formData.set('phone',(phone.value||'').trim());formData.set('flightNumber',(flight.value||'').trim());formData.set('message',(message.value||'').trim());fetch(APPS_SCRIPT_URL,{method:'POST',body:new URLSearchParams(formData)}).then(function(response){if(!response.ok)throw new Error('Server returned HTTP '+response.status);return response.text()}).then(function(result){if(String(result).trim().toLowerCase()!=='success')throw new Error('Unexpected server response.');showInlineAlert('Thank you. Your chauffeur request has been received.',true);form.reset();passengersForVehicle();renderPassengerDetails();rows=[];destinations.innerHTML='';addDestination();count.textContent='0 / 2000';flight.required=false;flight.placeholder='Optional';flightNote.classList.remove('show');if(submitButton){submitButton.disabled=false;submitButton.textContent=originalText}}).catch(function(error){console.error('Chauffeur submission error:',error);showInlineAlert('We could not submit your request right now. Please try again.',false);if(submitButton){submitButton.disabled=false;submitButton.textContent=originalText}})});
 });
