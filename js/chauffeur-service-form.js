@@ -39,10 +39,13 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   timeSelect(startTime);timeSelect(endTime);
 
-  var fpStart=flatpickr(startDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true,allowInput:true}),fpEnd=flatpickr(endDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true,allowInput:true});
+  var fpStart=flatpickr(startDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true,allowInput:false,clickOpens:false}),fpEnd=flatpickr(endDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true,allowInput:false,clickOpens:false});
+  function toggleCalendar(picker,e){e.preventDefault();e.stopPropagation();if(picker.isOpen)picker.close();else picker.open()}
   var startCalendarButton=document.getElementById('startDateCalendarButton'),endCalendarButton=document.getElementById('endDateCalendarButton');
-  if(startCalendarButton)startCalendarButton.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(fpStart.isOpen)fpStart.close();else fpStart.open()});
-  if(endCalendarButton)endCalendarButton.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(fpEnd.isOpen)fpEnd.close();else fpEnd.open()});
+  startDate.addEventListener('click',function(e){toggleCalendar(fpStart,e)});
+  endDate.addEventListener('click',function(e){toggleCalendar(fpEnd,e)});
+  if(startCalendarButton)startCalendarButton.addEventListener('click',function(e){toggleCalendar(fpStart,e)});
+  if(endCalendarButton)endCalendarButton.addEventListener('click',function(e){toggleCalendar(fpEnd,e)});
 
   var rows=[];
   function bindDestinationInput(input){input.addEventListener('input',function(){clearFieldError(input)})}
