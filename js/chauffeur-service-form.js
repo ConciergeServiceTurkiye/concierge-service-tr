@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var form=document.getElementById('serviceForm');
   if(!form)return;
 
-  var service=document.getElementById('service'),vehicle=document.getElementById('vehicle'),passengers=document.getElementById('passengers'),startDate=document.getElementById('startDate'),endDate=document.getElementById('endDate'),startTime=document.getElementById('startTime'),endTime=document.getElementById('endTime'),phone=document.getElementById('phone'),destinations=document.getElementById('destinations'),addBtn=document.getElementById('addDestination'),message=document.getElementById('message'),count=document.getElementById('charCount'),flight=document.getElementById('flightNumber'),flightNote=document.getElementById('flightNote'),alertBox=document.getElementById('formInlineAlert');
+  var service=document.getElementById('service'),vehicle=document.getElementById('vehicle'),passengers=document.getElementById('passengers'),startDate=document.getElementById('startDate'),endDate=document.getElementById('endDate'),startTime=document.getElementById('startTime'),endTime=document.getElementById('endTime'),phone=document.getElementById('phone'),destinations=document.getElementById('destinations'),addBtn=document.getElementById('addDestination'),message=document.getElementById('message'),count=document.getElementById('charCount'),flight=document.getElementById('flightNumber'),flightNote=document.getElementById('flightNote'),alertBox=document.getElementById('formInlineAlert'),passengerDetails=document.getElementById('passengerDetails'),passengerDetailsGroup=document.getElementById('passengerDetailsGroup');
 
   function showInlineAlert(text,success){
     if(!alertBox){alert(text);return}
@@ -25,8 +25,28 @@ document.addEventListener('DOMContentLoaded',function(){
 
   var serviceUI=customSelect(service),vehicleUI=customSelect(vehicle),passengerUI=customSelect(passengers);
   var caps={'Mercedes-Maybach S-Class':3,'Mercedes-Benz S-Class':3,'Mercedes-Benz V-Class VIP':7,'Mercedes-Benz EQS Electric':3,'Mercedes-Benz E-Class':3,'Mercedes-Benz Vito V-Class VIP':7,'Mercedes-Benz Vito V-Class Minivan':8,'Mercedes-Benz Sprinter VIP':16};
-  function passengersForVehicle(){var o=vehicle.options[vehicle.selectedIndex],max=o&&o.dataset.capacity?+o.dataset.capacity:(caps[o?o.textContent:'']||0);var placeholder=max?'Select Number of Passenger (1-'+max+')':'Select number of passengers';passengers.innerHTML='<option value="">'+placeholder+'</option>';for(var i=1;i<=max;i++)passengers.add(new Option(String(i),String(i)));passengerUI.rebuild();passengerUI.refresh()}
-  vehicle.addEventListener('change',passengersForVehicle);passengersForVehicle();
+  function renderPassengerDetails(){
+    if(!passengerDetails)return;
+    var existing={};
+    passengerDetails.querySelectorAll('input[name^="passengerName_"]').forEach(function(input){existing[input.name]=input.value});
+    var total=Number(passengers.value)||0;
+    passengerDetails.innerHTML='';
+    if(passengerDetailsGroup)passengerDetailsGroup.hidden=!total;
+    for(var i=1;i<=total;i++){
+      var group=document.createElement('div');
+      group.className='passenger-detail-row';
+      var label=document.createElement('label');
+      label.setAttribute('for','passengerName_'+i);
+      label.textContent='Passenger '+i+' Full Name';
+      var input=document.createElement('input');
+      input.type='text';input.id='passengerName_'+i;input.name='passengerName_'+i;input.placeholder='Full Name';input.autocomplete='name';input.required=true;
+      input.value=existing['passengerName_'+i]||'';
+      input.addEventListener('input',function(){clearFieldError(this)});
+      group.append(label,input);passengerDetails.appendChild(group)
+    }
+  }
+  function passengersForVehicle(){var o=vehicle.options[vehicle.selectedIndex],max=o&&o.dataset.capacity?+o.dataset.capacity:(caps[o?o.textContent:'']||0);var placeholder=max?'Select Number of Passenger (1-'+max+')':'Select number of passengers';passengers.innerHTML='<option value="">'+placeholder+'</option>';for(var i=1;i<=max;i++)passengers.add(new Option(String(i),String(i)));passengerUI.rebuild();passengerUI.refresh();renderPassengerDetails()}
+  vehicle.addEventListener('change',passengersForVehicle);passengers.addEventListener('change',renderPassengerDetails);passengersForVehicle();
   document.addEventListener('click',function(){closeAllSelects()});
 
   function timeSelect(input){
@@ -49,8 +69,8 @@ document.addEventListener('DOMContentLoaded',function(){
 
   var rows=[];
   function bindDestinationInput(input){input.addEventListener('input',function(){clearFieldError(input)})}
-  function renumber(){rows.forEach(function(r,i){r.querySelector('.stop-no').textContent=i+1;r.querySelector('label').textContent=i?'Destination':'Pickup';r.querySelector('input').name='destination_'+(i+1);if(i===0){var x=r.querySelector('.remove-stop');if(x)x.remove()}})}
-  function addDestination(){var i=rows.length+1,r=document.createElement('div');r.className='destination-row';r.innerHTML='<div class="stop-no">'+i+'</div><div class="form-group"><label>'+(i===1?'Pickup':'Destination')+'</label><input type="text" name="destination_'+i+'" placeholder="'+(i===1?'Airport / Hotel / Address':'Add a destination')+'" required></div>'+(i>1?'<button type="button" class="remove-stop">×</button>':'');destinations.appendChild(r);rows.push(r);bindDestinationInput(r.querySelector('input'));if(i>1)r.querySelector('.remove-stop').onclick=function(){r.remove();rows=rows.filter(function(x){return x!==r});renumber()};renumber()}
+  function renumber(){rows.forEach(function(r,i){r.querySelector('.stop-no').textContent=i+1;r.querySelector('label').textContent=i?'Destination':'Pickup';r.querySelector('input').name='destination_'+(i+1);r.querySelector('input').placeholder='Airport / Hotel / Address';if(i===0){var x=r.querySelector('.remove-stop');if(x)x.remove()}})}
+  function addDestination(){var i=rows.length+1,r=document.createElement('div');r.className='destination-row';r.innerHTML='<div class="stop-no">'+i+'</div><div class="form-group"><label>'+(i===1?'Pickup':'Destination')+'</label><input type="text" name="destination_'+i+'" placeholder="Airport / Hotel / Address" required></div>'+(i>1?'<button type="button" class="remove-stop">×</button>':'');destinations.appendChild(r);rows.push(r);bindDestinationInput(r.querySelector('input'));if(i>1)r.querySelector('.remove-stop').onclick=function(){r.remove();rows=rows.filter(function(x){return x!==r});renumber()};renumber()}
   addDestination();addBtn.onclick=addDestination;
 
   var iti=intlTelInput(phone,{initialCountry:'us',separateDialCode:true,allowDropdown:true,autoPlaceholder:'aggressive'});phone.setAttribute('autocomplete','tel');phone.setAttribute('placeholder','501 234 56 78');
@@ -68,5 +88,5 @@ document.addEventListener('DOMContentLoaded',function(){
   service.addEventListener('change',function(){clearFieldError(serviceUI.trigger)});vehicle.addEventListener('change',function(){clearFieldError(vehicleUI.trigger)});passengers.addEventListener('change',function(){clearFieldError(passengerUI.trigger)});
   [startDate,endDate].forEach(function(f){f.addEventListener('input',function(){clearFieldError(f)});f.addEventListener('change',function(){clearFieldError(f)})});
   [document.getElementById('name'),document.getElementById('email'),flight].forEach(function(f){if(f)f.addEventListener('input',function(){clearFieldError(f)})});
-  form.addEventListener('submit',function(e){var errors=[];if(!service.value)errors.push(serviceUI.trigger);if(!vehicle.value)errors.push(vehicleUI.trigger);if(!passengers.value)errors.push(passengerUI.trigger);if(!validDate(startDate.value.trim()))errors.push(startDate);if(!validDate(endDate.value.trim()))errors.push(endDate);if(!startTime.value.trim())errors.push(startTime._timeTriggers?startTime._timeTriggers[0]:startTime);if(!endTime.value.trim())errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime);rows.forEach(function(r){var input=r.querySelector('input');if(!input.value.trim())errors.push(input)});var name=document.getElementById('name'),email=document.getElementById('email');if(!name.value.trim())errors.push(name);if(!validEmail(email.value))errors.push(email);if(!phone.value.trim()||!iti.isValidNumber())errors.push(phone.closest('.iti')||phone);if(flight.required&&!flight.value.trim())errors.push(flight);if(startDate.value&&endDate.value&&validDate(startDate.value)&&validDate(endDate.value)){var s=startDate.value.split('/'),ed=endDate.value.split('/'),sdObj=new Date(+s[2],+s[1]-1,+s[0]),edObj=new Date(+ed[2],+ed[1]-1,+ed[0]);if(edObj<sdObj)errors.push(endDate);else if(edObj.getTime()===sdObj.getTime()&&endTime.value&&startTime.value&&endTime.value<=startTime.value)errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime)}if(errors.length){e.preventDefault();e.stopImmediatePropagation();showValidation(errors)}},true);
+  form.addEventListener('submit',function(e){var errors=[];if(!service.value)errors.push(serviceUI.trigger);if(!vehicle.value)errors.push(vehicleUI.trigger);if(!passengers.value)errors.push(passengerUI.trigger);if(passengerDetails){passengerDetails.querySelectorAll('input[name^="passengerName_"]').forEach(function(input){if(!input.value.trim())errors.push(input)})}if(!validDate(startDate.value.trim()))errors.push(startDate);if(!validDate(endDate.value.trim()))errors.push(endDate);if(!startTime.value.trim())errors.push(startTime._timeTriggers?startTime._timeTriggers[0]:startTime);if(!endTime.value.trim())errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime);rows.forEach(function(r){var input=r.querySelector('input');if(!input.value.trim())errors.push(input)});var name=document.getElementById('name'),email=document.getElementById('email');if(!name.value.trim())errors.push(name);if(!validEmail(email.value))errors.push(email);if(!phone.value.trim()||!iti.isValidNumber())errors.push(phone.closest('.iti')||phone);if(flight.required&&!flight.value.trim())errors.push(flight);if(startDate.value&&endDate.value&&validDate(startDate.value)&&validDate(endDate.value)){var s=startDate.value.split('/'),ed=endDate.value.split('/'),sdObj=new Date(+s[2],+s[1]-1,+s[0]),edObj=new Date(+ed[2],+ed[1]-1,+ed[0]);if(edObj<sdObj)errors.push(endDate);else if(edObj.getTime()===sdObj.getTime()&&endTime.value&&startTime.value&&endTime.value<=startTime.value)errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime)}if(errors.length){e.preventDefault();e.stopImmediatePropagation();showValidation(errors)}},true);
 });
