@@ -4,13 +4,17 @@ document.addEventListener('DOMContentLoaded',function(){
 
   var service=document.getElementById('service'),vehicle=document.getElementById('vehicle'),passengers=document.getElementById('passengers'),startDate=document.getElementById('startDate'),endDate=document.getElementById('endDate'),startTime=document.getElementById('startTime'),endTime=document.getElementById('endTime'),phone=document.getElementById('phone'),destinations=document.getElementById('destinations'),addBtn=document.getElementById('addDestination'),message=document.getElementById('message'),count=document.getElementById('charCount'),flight=document.getElementById('flightNumber'),flightNote=document.getElementById('flightNote'),alertBox=document.getElementById('formInlineAlert');
 
-  function showInlineAlert(text,success){if(!alertBox){alert(text);return}alertBox.textContent=text;alertBox.style.visibility='visible';alertBox.style.opacity='1';alertBox.style.borderColor=success?'#d4af37':'#c9a24d';clearTimeout(alertBox._timer);if(!success)requestAnimationFrame(function(){alertBox.scrollIntoView({behavior:'smooth',block:'center'})});alertBox._timer=setTimeout(function(){alertBox.style.opacity='0';alertBox.style.visibility='hidden'},3500)}
+  function showInlineAlert(text,success){
+    if(!alertBox){alert(text);return}
+    alertBox.textContent=text;alertBox.style.visibility='visible';alertBox.style.opacity='1';alertBox.style.borderColor=success?'#d4af37':'#c9a24d';clearTimeout(alertBox._timer);
+    if(!success)requestAnimationFrame(function(){alertBox.scrollIntoView({behavior:'smooth',block:'center'})});
+    alertBox._timer=setTimeout(function(){alertBox.style.opacity='0';alertBox.style.visibility='hidden'},3500)
+  }
 
   function customSelect(sel){
     if(!sel)return null;
     var w=document.createElement('div'),b=document.createElement('button'),m=document.createElement('div');
-    w.className='luxury-select';b.type='button';b.className='luxury-select-trigger';m.className='luxury-select-menu';m.hidden=true;
-    w.append(b,m);sel.parentNode.insertBefore(w,sel);sel.classList.add('luxury-native-select');
+    w.className='luxury-select';b.type='button';b.className='luxury-select-trigger';m.className='luxury-select-menu';m.hidden=true;w.append(b,m);sel.parentNode.insertBefore(w,sel);sel.classList.add('luxury-native-select');
     function draw(){b.textContent=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].textContent:'';b.classList.toggle('has-selection',!!sel.value)}
     function build(){m.innerHTML='';Array.from(sel.options).forEach(function(o){var x=document.createElement('button');x.type='button';x.className='luxury-select-option';x.textContent=o.textContent;x.onclick=function(e){e.stopPropagation();sel.value=o.value;sel.dispatchEvent(new Event('change',{bubbles:true}));m.hidden=true;w.classList.remove('is-open');draw()};m.appendChild(x)})}
     b.onclick=function(e){e.stopPropagation();document.querySelectorAll('.luxury-select-menu').forEach(function(x){x.hidden=true});document.querySelectorAll('.luxury-select').forEach(function(x){x.classList.remove('is-open')});m.hidden=false;w.classList.add('is-open')};
@@ -29,8 +33,7 @@ document.addEventListener('DOMContentLoaded',function(){
     var hb=document.createElement('div'),mb=document.createElement('div'),hl=document.createElement('label'),ml=document.createElement('label');hb.className=mb.className='time-picker-part';hl.textContent='Hour';ml.textContent='Minute';hb.append(hl,hs);mb.append(ml,ms);grid.append(hb,mb);input.parentNode.insertBefore(wrap,input);input.style.display='none';input.required=true;
     var hu=customSelect(hs),mu=customSelect(ms);
     function sync(){input.value=hs.value+':'+ms.value;hu.refresh();mu.refresh();hu.trigger.classList.toggle('time-zero',hs.value==='00');mu.trigger.classList.toggle('time-zero',ms.value==='00');clearFieldError(hu.trigger);clearFieldError(mu.trigger);clearFieldError(input)}
-    hs.onchange=ms.onchange=sync;sync();
-    input._timeTriggers=[hu.trigger,mu.trigger];
+    hs.onchange=ms.onchange=sync;sync();input._timeTriggers=[hu.trigger,mu.trigger]
   }
   timeSelect(startTime);timeSelect(endTime);
 
@@ -44,7 +47,8 @@ document.addEventListener('DOMContentLoaded',function(){
   addDestination();addBtn.onclick=addDestination;
 
   var iti=intlTelInput(phone,{initialCountry:'us',separateDialCode:true,allowDropdown:true,autoPlaceholder:'aggressive'});phone.setAttribute('autocomplete','tel');phone.setAttribute('placeholder','501 234 56 78');
-  phone.addEventListener('countrychange',function(){var p=phone.getAttribute('placeholder');if(!p||p==='Phone Number')phone.setAttribute('placeholder','501 234 56 78');clearFieldError(phone.closest('.iti')||phone)});phone.addEventListener('keydown',function(e){if(e.ctrlKey||e.metaKey||['Backspace','Delete','ArrowLeft','ArrowRight','Tab'].includes(e.key))return;if(!/^[0-9]$/.test(e.key))e.preventDefault()});phone.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');clearFieldError(phone.closest('.iti')||phone)});phone.addEventListener('paste',function(e){e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'');try{document.execCommand('insertText',false,t)}catch(_){phone.value+=t}clearFieldError(phone.closest('.iti')||phone)});
+  phone.addEventListener('countrychange',function(){var p=phone.getAttribute('placeholder');if(!p||p==='Phone Number')phone.setAttribute('placeholder','501 234 56 78');clearFieldError(phone.closest('.iti')||phone)});
+  phone.addEventListener('keydown',function(e){if(e.ctrlKey||e.metaKey||['Backspace','Delete','ArrowLeft','ArrowRight','Tab'].includes(e.key))return;if(!/^[0-9]$/.test(e.key))e.preventDefault()});phone.addEventListener('input',function(){this.value=this.value.replace(/\D/g,'');clearFieldError(phone.closest('.iti')||phone)});phone.addEventListener('paste',function(e){e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'');try{document.execCommand('insertText',false,t)}catch(_){phone.value+=t}clearFieldError(phone.closest('.iti')||phone)});
 
   message.addEventListener('input',function(){count.textContent=this.value.length+' / 2000'});
 
@@ -55,7 +59,6 @@ document.addEventListener('DOMContentLoaded',function(){
   function validEmail(v){return/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())}
   function validDate(v){var m=v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!m)return false;var d=new Date(+m[3],+m[2]-1,+m[1]);return d.getFullYear()===+m[3]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[1]}
   function clearTimeErrors(input){if(input&&input._timeTriggers)input._timeTriggers.forEach(clearFieldError);clearFieldError(input)}
-  function clearAllRelevantError(field){clearFieldError(field);if(field===startTime||field===endTime)clearTimeErrors(field)}
   function showValidation(fields){fields.forEach(markFieldError);showInlineAlert('Please complete the highlighted fields so we can submit your request.',false)}
 
   service.addEventListener('change',function(){clearFieldError(serviceUI.trigger)});
@@ -80,12 +83,6 @@ document.addEventListener('DOMContentLoaded',function(){
     if(!phone.value.trim()||!iti.isValidNumber())errors.push(phone.closest('.iti')||phone);
     if(flight.required&&!flight.value.trim())errors.push(flight);
     if(startDate.value&&endDate.value&&validDate(startDate.value)&&validDate(endDate.value)){var s=startDate.value.split('/'),ed=endDate.value.split('/'),sdObj=new Date(+s[2],+s[1]-1,+s[0]),edObj=new Date(+ed[2],+ed[1]-1,+ed[0]);if(edObj<sdObj){errors.push(endDate)}else if(edObj.getTime()===sdObj.getTime()&&endTime.value&&startTime.value&&endTime.value<=startTime.value){errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime)}}
-    if(errors.length){e.preventDefault();e.stopImmediatePropagation();showValidation(errors)},true
-  });
-
-  function valueOf(id){var el=document.getElementById(id);return el?el.value.trim():''}
-  function firstMissingDestination(){for(var i=0;i<rows.length;i++){var input=rows[i].querySelector('input');if(!input.value.trim())return i+1}return 0}
-  function validDatesAndTimes(){if(!startDate.value.trim()||!endDate.value.trim()||!startTime.value.trim()||!endTime.value.trim())return'Please select your start and end date and time.';var s=startDate.value.split('/'),e=endDate.value.split('/');if(s.length!==3||e.length!==3)return'Please enter valid dates.';var sd=new Date(+s[2],+s[1]-1,+s[0]),ed=new Date(+e[2],+e[1]-1,+e[0]);if(isNaN(sd.getTime())||isNaN(ed.getTime()))return'Please enter valid dates.';if(ed<sd)return'End Date cannot be before Start Date.';if(ed.getTime()===sd.getTime()&&endTime.value<=startTime.value)return'End Time must be later than Start Time on the same day.';return''}
-
-  form.addEventListener('submit',function(e){e.preventDefault();var missing=firstMissingDestination();if(!service.value)return showInlineAlert('Please select a chauffeur service.');if(!vehicle.value)return showInlineAlert('Please select a preferred vehicle.');if(!passengers.value)return showInlineAlert('Please select the number of passengers.');var dateError=validDatesAndTimes();if(dateError)return showInlineAlert(dateError);if(missing)return showInlineAlert(missing===1?'Please enter your pickup location.':'Please enter Destination '+missing+'.');if(!valueOf('name'))return showInlineAlert('Please enter your full name.');if(!valueOf('email'))return showInlineAlert('Please enter your email address.');if(!document.getElementById('email').checkValidity())return showInlineAlert('Please enter a valid email address.');if(!phone.value.trim())return showInlineAlert('Please enter your phone number.');if(!iti.isValidNumber())return showInlineAlert('Please enter a valid phone number.');if(flight.required&&!flight.value.trim())return showInlineAlert('Please enter your flight number for airport pickup.');showInlineAlert('Please review your request details. All required fields are complete.',true)});
+    if(errors.length){e.preventDefault();e.stopImmediatePropagation();showValidation(errors)}
+  },true);
 });
