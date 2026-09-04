@@ -11,21 +11,33 @@ document.addEventListener('DOMContentLoaded',function(){
     alertBox._timer=setTimeout(function(){alertBox.style.opacity='0';alertBox.style.visibility='hidden'},3500)
   }
 
+  function closeAllSelects(except){
+    document.querySelectorAll('.luxury-select').forEach(function(w){
+      if(w!==except){w.classList.remove('is-open');var menu=w.querySelector('.luxury-select-menu');if(menu)menu.hidden=true}
+    });
+  }
+
   function customSelect(sel){
     if(!sel)return null;
     var w=document.createElement('div'),b=document.createElement('button'),m=document.createElement('div');
     w.className='luxury-select';b.type='button';b.className='luxury-select-trigger';m.className='luxury-select-menu';m.hidden=true;w.append(b,m);sel.parentNode.insertBefore(w,sel);sel.classList.add('luxury-native-select');
     function draw(){b.textContent=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].textContent:'';b.classList.toggle('has-selection',!!sel.value)}
     function build(){m.innerHTML='';Array.from(sel.options).forEach(function(o){var x=document.createElement('button');x.type='button';x.className='luxury-select-option';x.textContent=o.textContent;x.onclick=function(e){e.stopPropagation();sel.value=o.value;sel.dispatchEvent(new Event('change',{bubbles:true}));m.hidden=true;w.classList.remove('is-open');draw()};m.appendChild(x)})}
-    b.onclick=function(e){e.stopPropagation();document.querySelectorAll('.luxury-select-menu').forEach(function(x){x.hidden=true});document.querySelectorAll('.luxury-select').forEach(function(x){x.classList.remove('is-open')});m.hidden=false;w.classList.add('is-open')};
+    b.onclick=function(e){e.stopPropagation();if(w.classList.contains('is-open')){m.hidden=true;w.classList.remove('is-open');return}closeAllSelects(w);m.hidden=false;w.classList.add('is-open')};
     sel.addEventListener('change',draw);build();draw();return{rebuild:build,refresh:draw,trigger:b}
   }
 
   var serviceUI=customSelect(service),vehicleUI=customSelect(vehicle),passengerUI=customSelect(passengers);
   var caps={'Mercedes-Maybach S-Class':3,'Mercedes-Benz S-Class':3,'Mercedes-Benz V-Class VIP':7,'Mercedes-Benz EQS Electric':3,'Mercedes-Benz E-Class':3,'Mercedes-Benz Vito V-Class VIP':7,'Mercedes-Benz Vito V-Class Minivan':8,'Mercedes-Benz Sprinter VIP':16};
-  function passengersForVehicle(){var o=vehicle.options[vehicle.selectedIndex],max=o&&o.dataset.capacity?+o.dataset.capacity:(caps[o?o.textContent:'']||0);passengers.innerHTML='<option value="">Select number of passengers</option>';for(var i=1;i<=max;i++)passengers.add(new Option(String(i),String(i)));passengerUI.rebuild();passengerUI.refresh()}
+  function passengersForVehicle(){
+    var o=vehicle.options[vehicle.selectedIndex],max=o&&o.dataset.capacity?+o.dataset.capacity:(caps[o?o.textContent:'']||0);
+    var placeholder=max?'Select Number of Passenger (1-'+max+')':'Select number of passengers';
+    passengers.innerHTML='<option value="">'+placeholder+'</option>';
+    for(var i=1;i<=max;i++)passengers.add(new Option(String(i),String(i)));
+    passengerUI.rebuild();passengerUI.refresh();
+  }
   vehicle.addEventListener('change',passengersForVehicle);passengersForVehicle();
-  document.addEventListener('click',function(){document.querySelectorAll('.luxury-select-menu').forEach(function(m){m.hidden=true});document.querySelectorAll('.luxury-select').forEach(function(w){w.classList.remove('is-open')})});
+  document.addEventListener('click',function(){closeAllSelects()});
 
   function timeSelect(input){
     var wrap=document.createElement('div'),grid=document.createElement('div');wrap.className='time-picker-inline';grid.className='time-picker-grid';wrap.appendChild(grid);
@@ -37,8 +49,7 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   timeSelect(startTime);timeSelect(endTime);
 
-  var fpStart=flatpickr(startDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true}),fpEnd=flatpickr(endDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true});
-  document.getElementById('startDateCalendarButton').onclick=function(){fpStart.open()};document.getElementById('endDateCalendarButton').onclick=function(){fpEnd.open()};
+  var fpStart=flatpickr(startDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true}),fpEnd=flatpickr(endDate,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true});document.getElementById('startDateCalendarButton').onclick=function(){fpStart.open()};document.getElementById('endDateCalendarButton').onclick=function(){fpEnd.open()};
 
   var rows=[];
   function bindDestinationInput(input){input.addEventListener('input',function(){clearFieldError(input)})}
