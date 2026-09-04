@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded',function(){
   var form=document.getElementById('serviceForm');
   if(!form)return;
 
+  var APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbx2UPqPHPbKy1NrXBtyvxz5T-7nekLM5tp13I9q1lpcJCREevssNU2NPFOFKS308qRvHA/exec';
+
   var service=document.getElementById('service'),vehicle=document.getElementById('vehicle'),passengers=document.getElementById('passengers'),startDate=document.getElementById('startDate'),endDate=document.getElementById('endDate'),startTime=document.getElementById('startTime'),endTime=document.getElementById('endTime'),phone=document.getElementById('phone'),destinations=document.getElementById('destinations'),addBtn=document.getElementById('addDestination'),message=document.getElementById('message'),count=document.getElementById('charCount'),flight=document.getElementById('flightNumber'),flightNote=document.getElementById('flightNote'),alertBox=document.getElementById('formInlineAlert'),passengerDetails=document.getElementById('passengerDetails'),passengerDetailsGroup=document.getElementById('passengerDetailsGroup');
 
   function showInlineAlert(text,success){
@@ -88,5 +90,73 @@ document.addEventListener('DOMContentLoaded',function(){
   service.addEventListener('change',function(){clearFieldError(serviceUI.trigger)});vehicle.addEventListener('change',function(){clearFieldError(vehicleUI.trigger)});passengers.addEventListener('change',function(){clearFieldError(passengerUI.trigger)});
   [startDate,endDate].forEach(function(f){f.addEventListener('input',function(){clearFieldError(f)});f.addEventListener('change',function(){clearFieldError(f)})});
   [document.getElementById('name'),document.getElementById('email'),flight].forEach(function(f){if(f)f.addEventListener('input',function(){clearFieldError(f)})});
+
   form.addEventListener('submit',function(e){var errors=[];if(!service.value)errors.push(serviceUI.trigger);if(!vehicle.value)errors.push(vehicleUI.trigger);if(!passengers.value)errors.push(passengerUI.trigger);if(passengerDetails){passengerDetails.querySelectorAll('input[name^="passengerName_"]').forEach(function(input){if(!input.value.trim())errors.push(input)})}if(!validDate(startDate.value.trim()))errors.push(startDate);if(!validDate(endDate.value.trim()))errors.push(endDate);if(!startTime.value.trim())errors.push(startTime._timeTriggers?startTime._timeTriggers[0]:startTime);if(!endTime.value.trim())errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime);rows.forEach(function(r){var input=r.querySelector('input');if(!input.value.trim())errors.push(input)});var name=document.getElementById('name'),email=document.getElementById('email');if(!name.value.trim())errors.push(name);if(!validEmail(email.value))errors.push(email);if(!phone.value.trim()||!iti.isValidNumber())errors.push(phone.closest('.iti')||phone);if(flight.required&&!flight.value.trim())errors.push(flight);if(startDate.value&&endDate.value&&validDate(startDate.value)&&validDate(endDate.value)){var s=startDate.value.split('/'),ed=endDate.value.split('/'),sdObj=new Date(+s[2],+s[1]-1,+s[0]),edObj=new Date(+ed[2],+ed[1]-1,+ed[0]);if(edObj<sdObj)errors.push(endDate);else if(edObj.getTime()===sdObj.getTime()&&endTime.value&&startTime.value&&endTime.value<=startTime.value)errors.push(endTime._timeTriggers?endTime._timeTriggers[0]:endTime)}if(errors.length){e.preventDefault();e.stopImmediatePropagation();showValidation(errors)}},true);
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+
+    var submitButton=form.querySelector('.submit-btn');
+    var originalText=submitButton?submitButton.textContent:'Request Chauffeur';
+
+    if(submitButton){
+      submitButton.disabled=true;
+      submitButton.textContent='Sending Request...';
+    }
+
+    var formData=new FormData(form);
+
+    formData.set('service',service.value||'');
+    formData.set('vehicle',vehicle.value||'');
+    formData.set('passengers',passengers.value||'');
+    formData.set('startDate',startDate.value||'');
+    formData.set('startTime',startTime.value||'');
+    formData.set('endDate',endDate.value||'');
+    formData.set('endTime',endTime.value||'');
+    formData.set('name',(document.getElementById('name').value||'').trim());
+    formData.set('email',(document.getElementById('email').value||'').trim());
+    formData.set('phone',(phone.value||'').trim());
+    formData.set('flightNumber',(flight.value||'').trim());
+    formData.set('message',(message.value||'').trim());
+
+    fetch(APPS_SCRIPT_URL,{
+      method:'POST',
+      body:new URLSearchParams(formData)
+    })
+    .then(function(response){
+      if(!response.ok)throw new Error('Server returned HTTP '+response.status);
+      return response.text();
+    })
+    .then(function(result){
+      if(String(result).trim().toLowerCase()!=='success'){
+        throw new Error('Unexpected server response.');
+      }
+
+      showInlineAlert('Thank you. Your chauffeur request has been received.',true);
+      form.reset();
+      passengersForVehicle();
+      renderPassengerDetails();
+      rows=[];
+      destinations.innerHTML='';
+      addDestination();
+      count.textContent='0 / 2000';
+      flight.required=false;
+      flight.placeholder='Optional';
+      flightNote.classList.remove('show');
+
+      if(submitButton){
+        submitButton.disabled=false;
+        submitButton.textContent=originalText;
+      }
+    })
+    .catch(function(error){
+      console.error('Chauffeur submission error:',error);
+      showInlineAlert('We could not submit your request right now. Please try again.',false);
+
+      if(submitButton){
+        submitButton.disabled=false;
+        submitButton.textContent=originalText;
+      }
+    });
+  });
 });
