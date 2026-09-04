@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded',function(){
   function showInlineAlert(text,success){
     if(!alertBox){alert(text);return}
     alertBox.textContent=text;alertBox.style.visibility='visible';alertBox.style.opacity='1';alertBox.style.borderColor=success?'#d4af37':'#c9a24d';clearTimeout(alertBox._timer);
-    if(!success)requestAnimationFrame(function(){alertBox.scrollIntoView({behavior:'smooth',block:'center'})});
+    requestAnimationFrame(function(){alertBox.scrollIntoView({behavior:'smooth',block:'start'})});
     alertBox._timer=setTimeout(function(){alertBox.style.opacity='0';alertBox.style.visibility='hidden'},3500)
   }
 
