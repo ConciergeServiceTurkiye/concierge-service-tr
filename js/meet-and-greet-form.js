@@ -23,16 +23,42 @@ document.addEventListener('DOMContentLoaded', function(){
   serviceRadios.forEach(r=>r.addEventListener('change',()=>{updateCards(serviceRadios,serviceCards);syncFlightBlocks()}));
   onwardRadios.forEach(r=>r.addEventListener('change',()=>updateCards(onwardRadios,onwardCards)));
 
+  function closeAllSelects(except){document.querySelectorAll('.luxury-select').forEach(w=>{if(w!==except){w.classList.remove('is-open');const menu=w.querySelector('.luxury-select-menu');if(menu)menu.hidden=true}})}
+  function customSelect(sel){
+    if(!sel)return null;
+    const w=document.createElement('div'),b=document.createElement('button'),m=document.createElement('div');
+    w.className='luxury-select';b.type='button';b.className='luxury-select-trigger';m.className='luxury-select-menu';m.hidden=true;w.append(b,m);sel.parentNode.insertBefore(w,sel);sel.classList.add('luxury-native-select');
+    function draw(){b.textContent=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].textContent:'';b.classList.toggle('has-selection',!!sel.value)}
+    function build(){m.innerHTML='';Array.from(sel.options).forEach(o=>{const x=document.createElement('button');x.type='button';x.className='luxury-select-option';x.textContent=o.textContent;x.onclick=e=>{e.stopPropagation();sel.value=o.value;sel.dispatchEvent(new Event('change',{bubbles:true}));m.hidden=true;w.classList.remove('is-open');draw()};m.appendChild(x)})}
+    b.onclick=e=>{e.stopPropagation();if(w.classList.contains('is-open')){m.hidden=true;w.classList.remove('is-open');return}closeAllSelects(w);m.hidden=false;w.classList.add('is-open')};
+    sel.addEventListener('change',draw);build();draw();return{rebuild:build,refresh:draw,trigger:b}
+  }
+
+  customSelect(adults);customSelect(children);customSelect(babies);
+  customSelect(document.getElementById('checkedBags'));customSelect(document.getElementById('carryOnBags'));
+  document.addEventListener('click',()=>closeAllSelects());
+
   function totalPassengers(){return Number(adults.value||0)+Number(children.value||0)+Number(babies.value||0)}
   function renderPassengerNames(){
-    const total=totalPassengers(), old=[...passengerNames.querySelectorAll('input')].map(x=>x.value);
+    const old=[...passengerNames.querySelectorAll('input')].map(x=>x.value);
     passengerNames.innerHTML='';
-    for(let i=0;i<total;i++){
-      const wrap=document.createElement('div');wrap.className='mg-passenger-field';
-      const badge=document.createElement('span');badge.textContent=String(i+1).padStart(2,'0');
-      const input=document.createElement('input');input.type='text';input.name='passenger'+(i+1);input.placeholder='Passenger '+(i+1)+' Full Name';input.autocomplete='name';input.required=true;if(old[i])input.value=old[i];
-      wrap.append(badge,input);passengerNames.appendChild(wrap);
-    }
+    const groups=[
+      {title:'Adults 12+',count:Number(adults.value||0)},
+      {title:'Children 7–12',count:Number(children.value||0)},
+      {title:'Babies 0–6',count:Number(babies.value||0)}
+    ];
+    let globalIndex=0;
+    groups.forEach(group=>{
+      const column=document.createElement('div');column.className='mg-passenger-column';
+      const heading=document.createElement('div');heading.className='mg-passenger-column-title';heading.textContent=group.title;column.appendChild(heading);
+      for(let i=1;i<=group.count;i++){
+        const wrap=document.createElement('div');wrap.className='mg-passenger-field';
+        const badge=document.createElement('span');badge.textContent=String(i).padStart(2,'0');
+        const input=document.createElement('input');globalIndex++;input.type='text';input.name='passenger'+globalIndex;input.placeholder='Passenger '+i+' Full Name';input.autocomplete='name';input.required=true;if(old[globalIndex-1])input.value=old[globalIndex-1];
+        wrap.append(badge,input);column.appendChild(wrap);
+      }
+      passengerNames.appendChild(column);
+    });
   }
   [adults,children,babies].forEach(el=>el.addEventListener('change',renderPassengerNames)); renderPassengerNames();
 
