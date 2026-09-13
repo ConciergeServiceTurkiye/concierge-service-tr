@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const payload=collectHandoff();
     const token='mg_'+Date.now()+'_'+Math.random().toString(36).slice(2);
     try{localStorage.setItem(token,JSON.stringify(payload));}catch(e){showAlert('We could not prepare the next service. Please try again.','error');return}
-    const target=kind==='airport'?'../forms/airport-transfer.html':'../forms/chauffeur-service.html';
+    const target=kind==='airport'?'../airport-transfer.html':'../forms/chauffeur-service.html';
     const url=target+'?from=meet-and-greet&prefill='+encodeURIComponent(token);
     window.open(url,'_blank','noopener');
   }
