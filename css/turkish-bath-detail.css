@@ -8,9 +8,11 @@
 .bath-detail-cagaloglu .bath-massage .ritual-grid .ritual-card:nth-child(1) h3:after{background-image:url('../assets/hammams/cagalogluhamami/footmassage.jpg')!important}
 .bath-detail-cagaloglu .bath-massage .ritual-grid .ritual-card:nth-child(2) h3:after{background-image:url('../assets/hammams/cagalogluhamami/aromatherapymassage.jpg')!important}
 .bath-detail-cagaloglu .bath-massage .ritual-grid .ritual-card:nth-child(3) h3:after{background-image:url('../assets/hammams/cagalogluhamami/organicclaymask.jpg')!important}
-.bath-detail-cagaloglu .event-title{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.bath-detail-cagaloglu .event-title .event-icon{font-size:18px;line-height:1}
+.bath-detail-cagaloglu .event-title{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.bath-detail-cagaloglu .event-title .event-icon{display:block;flex:0 0 10px;width:10px;height:10px;background:var(--gold);transform:rotate(45deg);border-radius:1px}
 .bath-detail-cagaloglu .event-title h3{margin:0;color:var(--gold);font-size:24px;font-weight:500}
 .bath-detail-cagaloglu .event-card>p{color:#fff}
-.bath-detail-cagaloglu .event-card li{color:rgba(255,255,255,.82)}
-.bath-detail-cagaloglu .bath-info li{color:rgba(255,255,255,.82)}
+.bath-detail-cagaloglu .event-card ul li{color:rgba(255,255,255,.82)!important}
+.bath-detail-cagaloglu .event-card ul li::marker{color:rgba(255,255,255,.82)}
+.bath-detail-cagaloglu .bath-info ul li{color:rgba(255,255,255,.82)!important}
+.bath-detail-cagaloglu .bath-info ul li::marker{color:rgba(255,255,255,.82)}
