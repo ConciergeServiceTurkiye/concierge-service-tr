@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 const restoreBathScroll=()=>{const saved=sessionStorage.getItem('cagalogluBathReturnScrollY');if(saved!==null){requestAnimationFrame(()=>{window.scrollTo(0,Number(saved));sessionStorage.removeItem('cagalogluBathReturnScrollY')})}};
 restoreBathScroll();
 window.addEventListener('pageshow',restoreBathScroll);
-document.querySelectorAll('.bath-form-link').forEach(a=>a.addEventListener('click',()=>{sessionStorage.setItem('cagalogluBathReturnUrl',location.href);sessionStorage.setItem('cagalogluBathReturnScrollY',String(window.scrollY))}));
+document.querySelectorAll('a[href^="forms/turkish-bath-cagaloglu.html"]').forEach(a=>a.addEventListener('click',()=>{sessionStorage.setItem('cagalogluBathReturnUrl',location.href);sessionStorage.setItem('cagalogluBathReturnScrollY',String(window.scrollY))}));
 const items=[...document.querySelectorAll('.bath-hero-gallery-item')],modal=document.getElementById('bathImageModal'),image=document.getElementById('bathModalImage'),counter=document.getElementById('bathModalCounter'),close=document.querySelector('.bath-modal-close'),prev=document.querySelector('.bath-modal-prev'),next=document.querySelector('.bath-modal-next');
 let index=0;
 function show(i){index=(i+items.length)%items.length;const img=items[index].querySelector('img');image.src=img.src;image.alt=img.alt;counter.textContent=(index+1)+' / '+items.length;modal.classList.add('is-open');document.body.classList.add('bath-modal-open');close.focus()}
