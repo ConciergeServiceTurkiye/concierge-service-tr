@@ -32,3 +32,6 @@
 .bath-detail-cagaloglu .event-title .event-image-wrap{flex:0 0 68px;width:68px;height:96px;border:1px solid rgba(212,175,55,.45);border-radius:10px;overflow:hidden;background:#111;box-shadow:0 5px 14px rgba(0,0,0,.3)}
 .bath-detail-cagaloglu .event-title .event-image{display:block;width:100%;height:100%;object-fit:cover}
 @media(max-width:760px){.bath-detail-cagaloglu .event-title .event-image-wrap{width:60px;height:82px;flex-basis:60px}}
+
+/* Keep the full 21-image gallery available in the modal while showing only four thumbnails in the hero. */
+.bath-detail-cagaloglu .bath-hero-gallery .bath-gallery-hidden{display:none!important}
