@@ -132,17 +132,61 @@ const restoreBathScroll=()=>{const saved=sessionStorage.getItem('cagalogluBathRe
 restoreBathScroll();
 window.addEventListener('pageshow',restoreBathScroll);
 document.querySelectorAll('a[href^="forms/turkish-bath-cagaloglu.html"]').forEach(a=>a.addEventListener('click',()=>{sessionStorage.setItem('cagalogluBathReturnUrl',location.href);sessionStorage.setItem('cagalogluBathReturnScrollY',String(window.scrollY))}));
-const items=[...document.querySelectorAll('.bath-hero-gallery-item')],modal=document.getElementById('bathImageModal'),image=document.getElementById('bathModalImage'),counter=document.getElementById('bathModalCounter'),close=document.querySelector('.bath-modal-close'),prev=document.querySelector('.bath-modal-prev'),next=document.querySelector('.bath-modal-next');
+const gallery=document.querySelector('.bath-hero-gallery');
+const items=[...document.querySelectorAll('.bath-hero-gallery-item')];
+const modal=document.getElementById('bathImageModal');
+const image=document.getElementById('bathModalImage');
+const counter=document.getElementById('bathModalCounter');
+const close=document.querySelector('.bath-modal-close');
+const prev=document.querySelector('.bath-modal-prev');
+const next=document.querySelector('.bath-modal-next');
 let index=0;
-function show(i){if(!items.length)return;index=(i+items.length)%items.length;const img=items[index].querySelector('img');image.src=img.src;image.alt=img.alt;counter.textContent=(index+1)+' / '+items.length;modal.classList.add('is-open');document.body.classList.add('bath-modal-open');close.focus()}
-function hide(){modal.classList.remove('is-open');document.body.classList.remove('bath-modal-open');image.src=''}
-items.forEach((item,i)=>item.addEventListener('click',()=>show(i)));
-prev.addEventListener('click',e=>{e.stopPropagation();show(index-1)});
-next.addEventListener('click',e=>{e.stopPropagation();show(index+1)});
-close.addEventListener('click',hide);
-modal.addEventListener('click',e=>{if(e.target===modal)hide()});
-document.addEventListener('keydown',e=>{if(!modal.classList.contains('is-open'))return;if(e.key==='Escape')hide();if(e.key==='ArrowLeft')show(index-1);if(e.key==='ArrowRight')show(index+1)});
-const explore=document.getElementById('exploreExperiences');if(explore){explore.addEventListener('click',e=>{e.preventDefault();const target=document.getElementById('rituals');if(target)target.scrollIntoView({behavior:'smooth',block:'start'});}}
+
+function show(i){
+  if(!items.length || !modal || !image)return;
+  index=(i+items.length)%items.length;
+  const img=items[index].querySelector('img');
+  if(!img)return;
+  image.src=img.src;
+  image.alt=img.alt;
+  if(counter)counter.textContent=(index+1)+' / '+items.length;
+  modal.classList.add('is-open');
+  document.body.classList.add('bath-modal-open');
+}
+
+function hide(){
+  if(!modal)return;
+  modal.classList.remove('is-open');
+  document.body.classList.remove('bath-modal-open');
+  if(image)image.src='';
+}
+
+if(gallery){
+  gallery.addEventListener('click',e=>{
+    const item=e.target.closest('.bath-hero-gallery-item');
+    if(!item)return;
+    e.preventDefault();
+    show(Number(item.dataset.galleryIndex)||0);
+  });
+}
+if(prev)prev.addEventListener('click',e=>{e.stopPropagation();show(index-1)});
+if(next)next.addEventListener('click',e=>{e.stopPropagation();show(index+1)});
+if(close)close.addEventListener('click',hide);
+if(modal)modal.addEventListener('click',e=>{if(e.target===modal)hide()});
+document.addEventListener('keydown',e=>{
+  if(!modal || !modal.classList.contains('is-open'))return;
+  if(e.key==='Escape')hide();
+  if(e.key==='ArrowLeft')show(index-1);
+  if(e.key==='ArrowRight')show(index+1);
+});
+const explore=document.getElementById('exploreExperiences');
+if(explore){
+  explore.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=document.getElementById('rituals');
+    if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+}
 });
 </script>
 <script src="js/common.js"></script>
