@@ -21,7 +21,7 @@ function initCagalogluExperienceModal(){
     'Organic Clay Mask':'organic-clay-mask.jpg'
   };
   const modal=document.createElement('div');
-  modal.className='bath-experience-modal';
+  modal.className='bath-experience-modal bath-experience-modal-cagaloglu';
   modal.innerHTML='<div class="bath-experience-modal-inner" role="dialog" aria-modal="true"><button type="button" class="bath-experience-close" aria-label="Close">×</button><button type="button" class="bath-experience-prev" aria-label="Previous">‹</button><div class="bath-experience-body"><div class="bath-experience-image-wrap"><img class="bath-experience-image" alt=""></div><div class="bath-experience-copy"><div class="bath-experience-kicker">CAĞALOĞLU HAMAMI</div><h3 class="bath-experience-title"></h3><div class="bath-experience-meta"><span class="bath-experience-duration"></span><span class="bath-experience-price"></span></div><p class="bath-experience-description"></p><a class="bath-experience-reserve" href="#">Request Reservation →</a></div></div><button type="button" class="bath-experience-next" aria-label="Next">›</button><div class="bath-experience-count"></div></div>';
   document.body.appendChild(modal);
   const title=modal.querySelector('.bath-experience-title'),image=modal.querySelector('.bath-experience-image'),duration=modal.querySelector('.bath-experience-duration'),price=modal.querySelector('.bath-experience-price'),desc=modal.querySelector('.bath-experience-description'),count=modal.querySelector('.bath-experience-count'),reserve=modal.querySelector('.bath-experience-reserve');
