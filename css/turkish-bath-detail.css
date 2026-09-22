@@ -50,3 +50,5 @@
 .bath-detail-cagaloglu .event-title::before{order:1}
 .bath-detail-cagaloglu .event-title h3{order:2}
 .bath-detail-cagaloglu .event-title .event-image-wrap{order:3;margin-left:80px}
+
+.ritual-hours{font-size:10px;line-height:1.55;letter-spacing:.35px;color:rgba(255,255,255,.52);margin:-7px 0 12px}.bath-detail-cagaloglu .ritual-hours{color:rgba(255,255,255,.58)}
