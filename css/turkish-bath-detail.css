@@ -49,4 +49,4 @@
 .bath-detail-cagaloglu .event-title{justify-content:flex-start}
 .bath-detail-cagaloglu .event-title::before{order:1}
 .bath-detail-cagaloglu .event-title h3{order:2}
-.bath-detail-cagaloglu .event-title .event-image-wrap{order:3;margin-left:auto}
+.bath-detail-cagaloglu .event-title .event-image-wrap{order:3;margin-left:55px}
