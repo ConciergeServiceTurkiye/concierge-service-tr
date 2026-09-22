@@ -44,3 +44,9 @@
 .bath-experience-modal-cagaloglu .bath-experience-copy{text-align:left;width:100%}
 @media(max-width:1050px){.bath-experience-modal-cagaloglu .bath-experience-body{display:flex;flex-direction:column;gap:20px}.bath-experience-modal-cagaloglu .bath-experience-image-wrap{width:100%;height:280px}}
 @media(max-width:760px){.bath-experience-modal-cagaloglu .bath-experience-modal-inner{width:96vw;min-height:0;max-height:92vh;padding:54px 22px 50px;overflow:auto}.bath-experience-modal-cagaloglu .bath-experience-body{display:flex;flex-direction:column;gap:20px}.bath-experience-modal-cagaloglu .bath-experience-image-wrap{width:100%;height:240px}}
+
+/* Cağaloğlu Bridal Bath: diamond + title on the left, photo on the right. */
+.bath-detail-cagaloglu .event-title{justify-content:flex-start}
+.bath-detail-cagaloglu .event-title::before{order:1}
+.bath-detail-cagaloglu .event-title h3{order:2}
+.bath-detail-cagaloglu .event-title .event-image-wrap{order:3;margin-left:auto}
