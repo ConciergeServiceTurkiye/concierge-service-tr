@@ -24,3 +24,39 @@
 .hotel-cta{text-align:center;padding:70px 40px;background:linear-gradient(180deg,#101010,#18130d)}
 @media(max-width:900px){.hotel-grid,.hotel-room-grid,.hotel-feature-grid,.hotel-program-grid{grid-template-columns:1fr 1fr}.hotel-facts{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.hotel-hero,.hotel-section,.hotel-detail-section,.hotel-detail-hero,.hotel-cta{padding-left:20px;padding-right:20px}.hotel-grid,.hotel-room-grid,.hotel-feature-grid,.hotel-program-grid,.hotel-facts{grid-template-columns:1fr}.hotel-card-visual{height:190px}}
+
+/* ============================== HOTEL DETAIL INTERACTIONS ============================== */
+.hotel-section-heading-row{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:25px}
+.hotel-section-intro{max-width:780px;margin:0!important;color:rgba(255,255,255,.62)!important}
+.hotel-source-note{margin-top:20px;padding:13px 16px;border-left:2px solid var(--gold);background:#111;color:rgba(255,255,255,.55);font-size:12px}
+.hotel-room-button{position:relative;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;transition:.28s;appearance:none}
+.hotel-room-button:hover{transform:translateY(-5px);border-color:rgba(212,175,55,.7);box-shadow:0 14px 30px rgba(0,0,0,.25)}
+.hotel-room-button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.hotel-room-arrow{position:absolute;top:18px;right:19px;color:var(--gold);font-size:18px;opacity:.75}
+.hotel-room-meta{display:block;margin-top:12px;color:rgba(255,255,255,.5);font-size:12px;line-height:1.5}
+.hotel-review-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.hotel-review-card{display:block;text-decoration:none;color:#fff;padding:24px;border:1px solid rgba(212,175,55,.22);border-radius:12px;background:#131313;transition:.25s}
+.hotel-review-card:hover{transform:translateY(-4px);border-color:rgba(212,175,55,.65);background:#171717}
+.hotel-review-source{font-size:14px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.hotel-review-score{font-size:34px;font-weight:700;line-height:1}.hotel-review-score span{font-size:14px;font-weight:400;color:rgba(255,255,255,.5)}
+.hotel-review-count{margin-top:8px;color:rgba(255,255,255,.65);font-size:13px}
+.hotel-review-link{margin-top:20px;color:var(--gold);font-size:12px;font-weight:600}
+.hotel-review-checked{white-space:nowrap;color:rgba(255,255,255,.42);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.hotel-review-footer{margin-top:18px;color:rgba(255,255,255,.42);font-size:12px;line-height:1.6}
+.hotel-room-modal{position:fixed;inset:0;z-index:60000;display:none;align-items:center;justify-content:center;padding:24px}
+.hotel-room-modal.is-open{display:flex}
+.hotel-room-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}
+.hotel-room-modal-dialog{position:relative;z-index:1;width:min(680px,100%);max-height:88vh;overflow:auto;padding:38px;border:1px solid rgba(212,175,55,.35);border-radius:18px;background:#121212;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.hotel-room-modal-dialog h2{margin:0 0 25px;color:#fff;font-size:32px}
+.hotel-room-modal-close{position:absolute;top:13px;right:16px;width:38px;height:38px;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:#181818;color:#fff;font-size:25px;line-height:1;cursor:pointer}
+.hotel-room-modal-close:hover{border-color:var(--gold);color:var(--gold)}
+.hotel-room-detail-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.hotel-room-detail-list>div{padding:16px;border:1px solid rgba(212,175,55,.16);border-radius:10px;background:#171717}
+.hotel-room-detail-list strong{display:block;color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
+.hotel-room-detail-list span{color:rgba(255,255,255,.78);font-size:14px;line-height:1.5}
+.hotel-room-modal-note{margin:20px 0 25px!important;color:rgba(255,255,255,.55)!important;font-size:13px!important}
+.hotel-modal-reserve{margin-top:2px}
+body.hotel-modal-open{overflow:hidden}
+@media(max-width:1100px){.hotel-review-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){.hotel-section-heading-row{align-items:flex-start;flex-direction:column}.hotel-review-checked{white-space:normal}.hotel-room-modal-dialog{padding:30px 24px}}
+@media(max-width:600px){.hotel-review-grid{grid-template-columns:1fr}.hotel-room-detail-list{grid-template-columns:1fr}.hotel-room-modal{padding:12px}.hotel-room-modal-dialog{padding:30px 20px}.hotel-room-modal-dialog h2{font-size:26px}}
