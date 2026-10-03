@@ -60,3 +60,27 @@ body.hotel-modal-open{overflow:hidden}
 @media(max-width:1100px){.hotel-review-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:900px){.hotel-section-heading-row{align-items:flex-start;flex-direction:column}.hotel-review-checked{white-space:normal}.hotel-room-modal-dialog{padding:30px 24px}}
 @media(max-width:600px){.hotel-review-grid{grid-template-columns:1fr}.hotel-room-detail-list{grid-template-columns:1fr}.hotel-room-modal{padding:12px}.hotel-room-modal-dialog{padding:30px 20px}.hotel-room-modal-dialog h2{font-size:26px}}
+
+
+/* ============================== HOTEL CARD PREMIUM RECOGNITION ============================== */
+.hotel-card-recognition{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 12px}
+.hotel-card-recognition span{display:inline-flex;align-items:center;min-height:28px;padding:5px 9px;border:1px solid rgba(212,175,55,.42);border-radius:999px;color:var(--gold);font-size:9px;letter-spacing:1.35px;font-weight:700;white-space:nowrap;background:rgba(212,175,55,.025)}
+.hotel-card-highlights{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 20px}
+.hotel-card-highlights span{color:rgba(255,255,255,.5);font-size:11px;letter-spacing:.25px}
+.hotel-card-highlights span:not(:last-child)::after{content:"·";margin-left:7px;color:rgba(212,175,55,.55)}
+.hotel-awards-section{background:linear-gradient(180deg,#0c0c0c,#10100f)}
+.hotel-awards-list{display:grid;gap:12px}
+.hotel-award-year{display:grid;grid-template-columns:86px 1fr;gap:24px;padding:22px 24px;border:1px solid rgba(212,175,55,.18);border-radius:13px;background:#121212}
+.hotel-award-year-label{color:var(--gold);font-family:Georgia,serif;font-size:28px;line-height:1;font-weight:600}
+.hotel-award-content h3{margin:0 0 12px;color:#fff;font-size:17px}
+.hotel-award-content ul{margin:0;padding-left:18px;display:grid;gap:5px}
+.hotel-award-content li{font-size:13px!important;color:rgba(255,255,255,.7)!important;line-height:1.55!important}
+.hotel-recognition-note{display:flex;align-items:baseline;gap:14px;margin-top:18px;padding:17px 20px;border-left:2px solid var(--gold);background:#131313}
+.hotel-recognition-note strong{color:var(--gold);font-size:13px;letter-spacing:.7px}
+.hotel-recognition-note span{color:rgba(255,255,255,.55);font-size:12px;line-height:1.6}
+@media(max-width:600px){
+  .hotel-award-year{grid-template-columns:1fr;gap:10px}
+  .hotel-award-year-label{font-size:24px}
+  .hotel-recognition-note{display:block}
+  .hotel-recognition-note strong{display:block;margin-bottom:5px}
+}
