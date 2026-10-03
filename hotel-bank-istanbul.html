@@ -336,5 +336,15 @@
   });
 })();
 </script>
+<script>
+(function(){
+  if (window.location.hash === '#hotel-rooms') {
+    window.addEventListener('load', function(){
+      const target=document.getElementById('hotel-rooms');
+      if(target) setTimeout(function(){ target.scrollIntoView({behavior:'smooth', block:'start'}); }, 150);
+    });
+  }
+})();
+</script>
 </body>
 </html>
