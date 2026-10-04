@@ -107,3 +107,20 @@ body.hotel-modal-open{overflow:hidden}
 
 /* The Bank Hotel card logo */
 .hotel-card-logo{width:100%;height:100%;object-fit:cover;display:block}
+
+
+/* Classic King room photography */
+.hotel-room-has-image{padding:0;overflow:hidden;display:flex;flex-direction:column}
+.hotel-room-cover{display:block;width:100%;height:190px;object-fit:cover;border-bottom:1px solid rgba(212,175,55,.18)}
+.hotel-room-copy{padding:23px}
+.hotel-room-has-image .hotel-room-arrow{z-index:2}
+.hotel-room-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 0 22px}
+.hotel-room-gallery-item{padding:0;border:1px solid rgba(212,175,55,.16);border-radius:10px;overflow:hidden;background:#171717;cursor:pointer;aspect-ratio:4/3}
+.hotel-room-gallery-item img{display:block;width:100%;height:100%;object-fit:cover;transition:.25s}
+.hotel-room-gallery-item:hover img{transform:scale(1.03)}
+.hotel-room-gallery-item:first-child{grid-column:1 / -1;aspect-ratio:16/9}
+@media(max-width:600px){
+  .hotel-room-cover{height:175px}
+  .hotel-room-gallery{grid-template-columns:1fr}
+  .hotel-room-gallery-item:first-child{grid-column:auto}
+}
