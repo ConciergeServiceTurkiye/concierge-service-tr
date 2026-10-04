@@ -216,3 +216,13 @@ body.hotel-modal-open{overflow:hidden}
 @media(max-width:600px){
   .hotel-room-modal-title-row{align-items:flex-start;flex-direction:column;gap:10px}
 }
+
+/* Classic King: compact icon-only amenity row */
+.classic-room-description h3{margin:22px 0 14px}
+.classic-room-amenities{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 22px}
+.classic-room-amenity{position:relative;width:48px;height:48px;min-height:48px;padding:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(212,175,55,.22);border-radius:9px;background:rgba(255,255,255,.025);cursor:help}
+.classic-room-amenity img{width:28px;height:28px;object-fit:contain;margin:0}
+.classic-room-amenity span{display:none}
+.classic-room-amenity::after{content:attr(title);position:absolute;left:50%;bottom:calc(100% + 9px);transform:translateX(-50%) translateY(4px);padding:7px 10px;border:1px solid rgba(212,175,55,.45);border-radius:6px;background:#121212;color:#f0d77a;font-size:11px;line-height:1.2;white-space:nowrap;opacity:0;pointer-events:none;transition:.18s;z-index:20;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.classic-room-amenity:hover::after,.classic-room-amenity:focus-visible::after{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:600px){.classic-room-amenity{width:44px;height:44px;min-height:44px}}
