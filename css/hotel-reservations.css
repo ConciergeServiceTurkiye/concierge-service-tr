@@ -202,3 +202,9 @@ body.hotel-modal-open{overflow:hidden}
 .hotel-room-virtual-tour-links a span{font-size:14px}
 .hotel-room-virtual-tour-links a:hover{border-color:#d4af37;background:rgba(212,175,55,.14);color:#f4dc87;transform:translateY(-1px);box-shadow:0 7px 20px rgba(212,175,55,.12)}
 @media(max-width:600px){.hotel-room-virtual-tour-links{flex-direction:column}.hotel-room-virtual-tour-links a{justify-content:space-between}}
+
+/* Seven-room layout: 3 + 3 + centered Penthouse */
+.hotel-room-grid .hotel-room-penthouse{grid-column:2}
+@media(max-width:900px){
+  .hotel-room-grid .hotel-room-penthouse{grid-column:auto}
+}
