@@ -208,3 +208,11 @@ body.hotel-modal-open{overflow:hidden}
 @media(max-width:900px){
   .hotel-room-grid .hotel-room-penthouse{grid-column:auto}
 }
+
+.hotel-room-modal-title-row{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 25px}
+.hotel-room-modal-title-row h2{margin:0}
+.hotel-room-virtual-tour-inline{display:inline-flex;align-items:center;padding:8px 12px;border:1px solid rgba(212,175,55,.5);border-radius:7px;background:rgba(212,175,55,.06);color:#d4af37;text-decoration:none;font-size:11px;letter-spacing:.04em;white-space:nowrap;transition:.2s}
+.hotel-room-virtual-tour-inline:hover{border-color:#d4af37;background:rgba(212,175,55,.13);color:#f0d77a}
+@media(max-width:600px){
+  .hotel-room-modal-title-row{align-items:flex-start;flex-direction:column;gap:10px}
+}
