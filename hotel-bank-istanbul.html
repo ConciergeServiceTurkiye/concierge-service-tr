@@ -366,18 +366,21 @@
 <script>
 (function(){
   const rooms = {
-    classic: {title:'Classic King', size:'20 m²', guests:'2 guests', bed:'King-sized bed', view:'City view', extra:'', gallery:[
+    classic: {title:'Classic King', size:'20 m²', guests:'2 guests', bed:'King-sized bed', view:'City view', extra:'', virtualTours:[{label:'Classic King · 3D Virtual Tour',url:'https://kuula.co/share/567Gf/collection/7cJHZ?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.04&thumbs=3'}], gallery:[
       'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-bedroom-cover.jpeg',
       'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-bedroom-1.jpeg',
       'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-working.jpeg',
       'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-bathroom.jpeg',
       'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-view.jpg'
     ]},
-    superior: {title:'Superior King', size:'25 m²', guests:'2 guests', bed:'King-sized bed', view:'City view', extra:''},
-    deluxe: {title:'Deluxe King / Twin', size:'29 m²', guests:'2 + 1 child', bed:'King-sized bed / twin configuration', view:'City view', extra:''},
-    duplex: {title:'Deluxe Duplex King', size:'42 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'City view', extra:''},
-    executive: {title:'Executive Suite', size:'40 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'Partial sea view and city view · French balcony · Fireplace', extra:''},
-    penthouse: {title:'Penthouse Suite', size:'83 m²', guests:'2 + 2 guests', bed:'King-sized bed', view:'Terrace / balcony · Bosphorus / Old City / Golden Horn / Galata Tower views · Bathtub · 2 bathrooms & 2 WCs', extra:''}
+    superior: {title:'Superior King', size:'25 m²', guests:'2 guests', bed:'King-sized bed', view:'City view', extra:'', virtualTours:[{label:'Superior King · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJHY?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.04&thumbs=3'}]},
+    deluxe: {title:'Deluxe King / Twin', size:'29 m²', guests:'2 + 1 child', bed:'King-sized bed / twin configuration', view:'City view', extra:'', virtualTours:[
+      {label:'Deluxe King · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJHL?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&thumbs=3'},
+      {label:'Deluxe Twin · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJH0?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.04&thumbs=3'}
+    ]},
+    duplex: {title:'Deluxe Duplex King', size:'42 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'City view', extra:'', virtualTours:[{label:'Deluxe Duplex · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJHJ?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.04&thumbs=3'}]},
+    executive: {title:'Executive Suite', size:'40 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'Partial sea view and city view · French balcony · Fireplace', extra:'', virtualTours:[{label:'Executive Suite · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJHk?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.04&thumbs=3'}]},
+    penthouse: {title:'Penthouse Suite', size:'83 m²', guests:'2 + 2 guests', bed:'King-sized bed', view:'Terrace / balcony · Bosphorus / Old City / Golden Horn / Galata Tower views · Bathtub · 2 bathrooms & 2 WCs', extra:'', virtualTours:[{label:'Penthouse Suite · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJHD?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&thumbs=3'}]}
   };
   const modal=document.getElementById('hotelRoomModal');
   const title=document.getElementById('hotelRoomModalTitle');
@@ -417,7 +420,8 @@
           </ul>
           <p class="classic-room-note">Amenities, services, room details and visuals may be regularly updated, improved or occasionally removed from the service offering. Room décor may vary in accordance with the historic character of the building, and certain amenities may not be available in every room type.</p>
         </div>` : '';
-      content.innerHTML=gallery+'<div class="hotel-room-detail-list"><div><strong>Size</strong><span>'+r.size+'</span></div><div><strong>Maximum occupancy</strong><span>'+r.guests+'</span></div><div><strong>Bed</strong><span>'+r.bed+'</span></div><div><strong>View</strong><span>'+r.view+'</span></div></div>'+classicDetails;
+      const virtualTours = r.virtualTours ? '<div class="hotel-room-virtual-tour"><div class="hotel-room-virtual-tour-title">3D Virtual Tour</div><div class="hotel-room-virtual-tour-links">'+r.virtualTours.map(t=>'<a href="'+t.url+'" target="_blank" rel="noopener noreferrer">'+t.label+' <span>↗</span></a>').join('')+'</div></div>' : '';
+      content.innerHTML=gallery+'<div class="hotel-room-detail-list"><div><strong>Size</strong><span>'+r.size+'</span></div><div><strong>Maximum occupancy</strong><span>'+r.guests+'</span></div><div><strong>Bed</strong><span>'+r.bed+'</span></div><div><strong>View</strong><span>'+r.view+'</span></div></div>'+virtualTours+classicDetails;
       modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.add('hotel-modal-open');
     });
   });
