@@ -53,11 +53,14 @@
       </div>
     </div>
     <div class="hotel-room-grid">
-      <button class="hotel-room hotel-room-button" type="button" data-room="classic">
+      <button class="hotel-room hotel-room-button hotel-room-has-image" type="button" data-room="classic">
         <span class="hotel-room-arrow">↗</span>
-        <h3>Classic King</h3>
-        <p>20 m² · 2 guests · King-sized bed</p>
-        <span class="hotel-room-meta">Partial Golden Horn / Old City view</span>
+        <img class="hotel-room-cover" src="assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-king-01.webp" alt="The Bank Hotel Istanbul Classic King room">
+        <div class="hotel-room-copy">
+          <h3>Classic King</h3>
+          <p>20 m² · 2 guests · King-sized bed</p>
+          <span class="hotel-room-meta">Partial Golden Horn / Old City view</span>
+        </div>
       </button>
       <button class="hotel-room hotel-room-button" type="button" data-room="superior">
         <span class="hotel-room-arrow">↗</span>
@@ -358,7 +361,13 @@
 <script>
 (function(){
   const rooms = {
-    classic: {title:'Classic King', size:'20 m²', guests:'2 guests', bed:'King-sized bed', view:'Partial Golden Horn / Old City view', extra:'The factsheet lists this category with 14 rooms.'},
+    classic: {title:'Classic King', size:'20 m²', guests:'2 guests', bed:'King-sized bed', view:'Partial Golden Horn / Old City view', extra:'The factsheet lists this category with 14 rooms.', gallery:[
+      'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-king-01.webp',
+      'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-king-02.webp',
+      'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-king-03.webp',
+      'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-king-bathroom-01.webp',
+      'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-king-04.webp'
+    ]},
     superior: {title:'Superior King', size:'25 m²', guests:'2 guests', bed:'King-sized bed', view:'Bosphorus / Golden Horn / Old City views', extra:'The factsheet lists this category with 14 rooms.'},
     deluxe: {title:'Deluxe King / Twin', size:'29 m²', guests:'2 + 1 child', bed:'King-sized bed / twin configuration', view:'Bosphorus / Golden Horn / Old City views', extra:'The factsheet groups the Deluxe King / Twin category together.'},
     duplex: {title:'Deluxe Duplex King', size:'42 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'Bosphorus / Golden Horn / Old City views', extra:'Duplex category.'},
@@ -373,7 +382,8 @@
     btn.addEventListener('click',()=>{
       const r=rooms[btn.dataset.room]; if(!r)return;
       title.textContent=r.title;
-      content.innerHTML='<div class="hotel-room-detail-list"><div><strong>Size</strong><span>'+r.size+'</span></div><div><strong>Maximum occupancy</strong><span>'+r.guests+'</span></div><div><strong>Bed</strong><span>'+r.bed+'</span></div><div><strong>View</strong><span>'+r.view+'</span></div></div><p class="hotel-room-modal-note">'+r.extra+'</p>';
+      const gallery = r.gallery ? '<div class="hotel-room-gallery">'+r.gallery.map((src,i)=>'<button type="button" class="hotel-room-gallery-item" data-room-image="'+src+'"><img src="'+src+'" alt="'+r.title+' photo '+(i+1)+'"></button>').join('')+'</div>' : '';
+      content.innerHTML=gallery+'<div class="hotel-room-detail-list"><div><strong>Size</strong><span>'+r.size+'</span></div><div><strong>Maximum occupancy</strong><span>'+r.guests+'</span></div><div><strong>Bed</strong><span>'+r.bed+'</span></div><div><strong>View</strong><span>'+r.view+'</span></div></div><p class="hotel-room-modal-note">'+r.extra+'</p>';
       modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.add('hotel-modal-open');
     });
   });
