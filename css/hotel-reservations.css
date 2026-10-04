@@ -155,3 +155,22 @@ body.hotel-modal-open{overflow:hidden}
   .hotel-room-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hotel-photo-lightbox-dialog img{max-width:92vw;max-height:78vh}
 }
+
+/* Classic King room information */
+.classic-room-description{margin-top:26px;padding-top:24px;border-top:1px solid rgba(212,175,55,.18)}
+.classic-room-description>p:first-child{margin:0 0 24px;color:rgba(255,255,255,.82);font-size:15px;line-height:1.8}
+.classic-room-description h3{margin:0 0 16px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#d4af37}
+.classic-room-amenities{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:22px}
+.classic-room-amenity{display:flex;align-items:center;gap:11px;min-height:58px;padding:10px 12px;border:1px solid rgba(212,175,55,.13);border-radius:8px;background:rgba(255,255,255,.025)}
+.classic-room-amenity img{width:27px;height:27px;object-fit:contain;flex:0 0 27px;opacity:.86}
+.classic-room-amenity span{font-size:12px;line-height:1.4;color:rgba(255,255,255,.78)}
+.classic-room-features{margin:0 0 22px;padding-left:18px;color:rgba(255,255,255,.72);font-size:13px;line-height:1.8;columns:2;column-gap:36px}
+.classic-room-features li{break-inside:avoid;margin-bottom:4px}
+.classic-room-note{margin:0!important;padding-top:18px;border-top:1px solid rgba(212,175,55,.12);font-size:11px!important;line-height:1.7!important;color:rgba(255,255,255,.48)!important;font-style:italic}
+@media (max-width:700px){
+  .classic-room-amenities{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .classic-room-features{columns:1}
+}
+@media (max-width:480px){
+  .classic-room-amenities{grid-template-columns:1fr}
+}
