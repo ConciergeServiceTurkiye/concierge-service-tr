@@ -66,9 +66,14 @@
         <p>25 m² · 2 guests · King-sized bed</p>
         <span class="hotel-room-meta">City view</span>
       </button>
-      <button class="hotel-room hotel-room-button" type="button" data-room="deluxe">
-        <h3>Deluxe King / Twin</h3>
-        <p>29 m² · 2 + 1 child · King-sized bed / twin configuration</p>
+      <button class="hotel-room hotel-room-button" type="button" data-room="deluxe-king">
+        <h3>Deluxe King</h3>
+        <p>29 m² · 2 guests · King-sized bed</p>
+        <span class="hotel-room-meta">City view</span>
+      </button>
+      <button class="hotel-room hotel-room-button" type="button" data-room="deluxe-twin">
+        <h3>Deluxe Twin</h3>
+        <p>29 m² · 2 guests · Twin configuration</p>
         <span class="hotel-room-meta">City view</span>
       </button>
       <button class="hotel-room hotel-room-button" type="button" data-room="duplex">
@@ -79,14 +84,13 @@
       <button class="hotel-room hotel-room-button" type="button" data-room="executive">
         <h3>Executive Suite</h3>
         <p>40 m² · 2 + 1 child · King-sized bed</p>
-        <span class="hotel-room-meta">Bosphorus / Golden Horn / Old City views</span>
+        <span class="hotel-room-meta">Partial sea view and city view · French balcony · Fireplace</span>
       </button>
-      <button class="hotel-room hotel-room-button" type="button" data-room="penthouse">
+      <button class="hotel-room hotel-room-button hotel-room-penthouse" type="button" data-room="penthouse">
         <h3>Penthouse Suite</h3>
         <p>83 m² · 2 + 2 guests · King-sized bed</p>
         <span class="hotel-room-meta">Terrace / balcony · Bosphorus / Old City / Golden Horn / Galata Tower views · Bathtub · 2 rooms · 2 separate bathrooms &amp; WCs</span>
-      </button>
-    </div>
+      </button>    </div>
   </div>
 </section>
 
@@ -374,10 +378,8 @@
       'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-view.jpg'
     ]},
     superior: {title:'Superior King', size:'25 m²', guests:'2 guests', bed:'King-sized bed', view:'City view', extra:'', virtualTours:[{label:'Superior King · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJHY?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.04&thumbs=3'}]},
-    deluxe: {title:'Deluxe King / Twin', size:'29 m²', guests:'2 + 1 child', bed:'King-sized bed / twin configuration', view:'City view', extra:'', virtualTours:[
-      {label:'Deluxe King · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJHL?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&thumbs=3'},
-      {label:'Deluxe Twin · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJH0?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.04&thumbs=3'}
-    ]},
+    'deluxe-king': {title:'Deluxe King', size:'29 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'City view', extra:'', virtualTours:[{label:'Deluxe King · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJHL?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&thumbs=3'}]},
+    'deluxe-twin': {title:'Deluxe Twin', size:'29 m²', guests:'2 + 1 child', bed:'Twin configuration', view:'City view', extra:'', virtualTours:[{label:'Deluxe Twin · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJH0?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.04&thumbs=3'}]},
     duplex: {title:'Deluxe Duplex King', size:'42 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'City view', extra:'', virtualTours:[{label:'Deluxe Duplex · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJHJ?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.04&thumbs=3'}]},
     executive: {title:'Executive Suite', size:'40 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'Partial sea view and city view · French balcony · Fireplace', extra:'', virtualTours:[{label:'Executive Suite · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJHk?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&autorotate=0.04&thumbs=3'}]},
     penthouse: {title:'Penthouse Suite', size:'83 m²', guests:'2 + 2 guests', bed:'King-sized bed', view:'Terrace / balcony · Bosphorus / Old City / Golden Horn / Galata Tower views · Bathtub · 2 bathrooms & 2 WCs', extra:'', virtualTours:[{label:'Penthouse Suite · 3D Virtual Tour',url:'https://kuula.co/share/collection/7cJHD?logo=-1&card=1&info=0&fs=1&vr=1&zoom=1&thumbs=3'}]}
