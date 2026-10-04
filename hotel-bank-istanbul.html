@@ -391,7 +391,31 @@
       currentGallery=r.gallery || [];
       title.textContent=r.title;
       const gallery = r.gallery ? '<div class="hotel-room-gallery">'+r.gallery.map((src,i)=>'<button type="button" class="hotel-room-gallery-item" data-room-image="'+src+'" aria-label="Open '+r.title+' photo '+(i+1)+'"><img src="'+src+'" alt="'+r.title+' photo '+(i+1)+'"></button>').join('')+'</div>' : '';
-      content.innerHTML=gallery+'<div class="hotel-room-detail-list"><div><strong>Size</strong><span>'+r.size+'</span></div><div><strong>Maximum occupancy</strong><span>'+r.guests+'</span></div><div><strong>Bed</strong><span>'+r.bed+'</span></div><div><strong>View</strong><span>'+r.view+'</span></div></div>';
+      const classicDetails = r.title === 'Classic King' ? `
+        <div class="classic-room-description">
+          <p>Our 20 m² Classic King rooms feature decorative ceilings, bathrooms finished in green Carrara marble with rain showers, and specially designed furniture and lighting.</p>
+          <h3>In All Our Rooms</h3>
+          <div class="classic-room-amenities">
+            <div class="classic-room-amenity"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/icons/bath.png" alt=""><span>Rain shower bathroom</span></div>
+            <div class="classic-room-amenity"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/icons/desk.png" alt=""><span>Work desk</span></div>
+            <div class="classic-room-amenity"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/icons/adsl.png" alt=""><span>Complimentary internet</span></div>
+            <div class="classic-room-amenity"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/icons/tv.png" alt=""><span>LCD television</span></div>
+            <div class="classic-room-amenity"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/icons/mini-bar.png" alt=""><span>Mini bar</span></div>
+            <div class="classic-room-amenity"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/icons/wifi.png" alt=""><span>Free Wi-Fi</span></div>
+          </div>
+          <ul class="classic-room-features">
+            <li>Warm, organic interior design by Sinan Kafadar</li>
+            <li>Decorative ceilings and parquet flooring</li>
+            <li>Original preserved radiators</li>
+            <li>Blackout curtains</li>
+            <li>Goose-down duvets and pillows</li>
+            <li>L'Occitane bathroom amenities</li>
+            <li>Bathrobes and slippers</li>
+            <li>Complimentary water and tea station</li>
+          </ul>
+          <p class="classic-room-note">Amenities, services, room details and visuals may be regularly updated, improved or occasionally removed from the service offering. Room décor may vary in accordance with the historic character of the building, and certain amenities may not be available in every room type.</p>
+        </div>` : '';
+      content.innerHTML=gallery+'<div class="hotel-room-detail-list"><div><strong>Size</strong><span>'+r.size+'</span></div><div><strong>Maximum occupancy</strong><span>'+r.guests+'</span></div><div><strong>Bed</strong><span>'+r.bed+'</span></div><div><strong>View</strong><span>'+r.view+'</span></div></div>'+classicDetails;
       modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.add('hotel-modal-open');
     });
   });
