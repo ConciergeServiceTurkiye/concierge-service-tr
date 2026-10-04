@@ -228,11 +228,12 @@ body.hotel-modal-open{overflow:hidden}
 @media(max-width:600px){.classic-room-amenity{width:44px;height:44px;min-height:44px}}
 
 /* Hotel card recognition logos */
-.hotel-card-recognition{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:14px 0}
-.hotel-card-recognition>span{width:150px;height:50px;display:flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:8px;background:#fff;border:1px solid rgba(212,175,55,.28);box-shadow:0 3px 14px rgba(0,0,0,.28);overflow:hidden}
-.hotel-card-recognition>span img{display:block;width:auto;height:36px;max-width:126px;object-fit:contain}
+.hotel-card-recognition{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin:14px 0}
+.hotel-card-recognition>span{width:150px;height:50px;display:flex;align-items:center;justify-content:center;padding:0;border:0;background:transparent;box-shadow:none;overflow:hidden}
+.hotel-card-recognition>span img{display:block;width:auto;height:38px;max-width:132px;object-fit:contain}
+.hotel-card-recognition>span:nth-child(2) img{filter:brightness(0) invert(1)}
 @media(max-width:600px){
-  .hotel-card-recognition{gap:8px}
-  .hotel-card-recognition>span{width:112px;height:42px;padding:5px 8px}
-  .hotel-card-recognition>span img{height:30px;max-width:96px}
+  .hotel-card-recognition{gap:10px}
+  .hotel-card-recognition>span{width:112px;height:42px}
+  .hotel-card-recognition>span img{height:30px;max-width:100px}
 }
