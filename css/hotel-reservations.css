@@ -236,3 +236,7 @@ body.hotel-modal-open{overflow:hidden}
   .hotel-card-recognition>span{width:112px;height:42px}
   .hotel-card-recognition>span img{height:30px;max-width:100px}
 }
+
+/* Hotel card location */
+.hotel-card .hotel-location{text-align:right;letter-spacing:.45px}
+.hotel-card .hotel-location span{display:inline-block;margin:0 7px;color:var(--gold);font-size:10px}
