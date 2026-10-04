@@ -238,5 +238,5 @@ body.hotel-modal-open{overflow:hidden}
 }
 
 /* Hotel card location */
-.hotel-card .hotel-location{text-align:right;letter-spacing:.45px}
+.hotel-card .hotel-location{text-align:center;letter-spacing:.45px}
 .hotel-card .hotel-location span{display:inline-block;margin:0 7px;color:var(--gold);font-size:10px}
