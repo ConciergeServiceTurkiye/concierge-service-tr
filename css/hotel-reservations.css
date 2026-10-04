@@ -240,3 +240,10 @@ body.hotel-modal-open{overflow:hidden}
 /* Hotel card location */
 .hotel-card .hotel-location{text-align:center;letter-spacing:.45px}
 .hotel-card .hotel-location span{display:inline-block;margin:0 7px;color:var(--gold);font-size:10px}
+
+.hotel-card-coming-soon{min-height:390px;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(145deg,#171512,#0c0c0c);border-style:dashed}
+.hotel-coming-inner{padding:40px 34px}
+.hotel-coming-eyebrow{margin-bottom:14px;color:var(--gold);font-size:10px;letter-spacing:2.8px;font-weight:700}
+.hotel-card-coming-soon h2{margin:0 0 12px;color:#fff;font-size:24px;font-weight:500}
+.hotel-card-coming-soon p{max-width:430px;margin:0 auto;color:rgba(255,255,255,.58);font-size:14px;line-height:1.7}
+.hotel-coming-mark{margin-top:24px;color:rgba(212,175,55,.55);font-size:22px}
