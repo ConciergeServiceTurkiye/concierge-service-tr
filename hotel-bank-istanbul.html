@@ -54,43 +54,37 @@
     </div>
     <div class="hotel-room-grid">
       <button class="hotel-room hotel-room-button hotel-room-has-image" type="button" data-room="classic">
-        <span class="hotel-room-arrow">↗</span>
         <img class="hotel-room-cover" src="assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-bedroom-cover.jpeg" alt="The Bank Hotel Istanbul Classic King room">
         <div class="hotel-room-copy">
           <h3>Classic King</h3>
           <p>20 m² · 2 guests · King-sized bed</p>
-          <span class="hotel-room-meta">Partial Golden Horn / Old City view</span>
+          <span class="hotel-room-meta">City view</span>
         </div>
       </button>
       <button class="hotel-room hotel-room-button" type="button" data-room="superior">
-        <span class="hotel-room-arrow">↗</span>
         <h3>Superior King</h3>
         <p>25 m² · 2 guests · King-sized bed</p>
-        <span class="hotel-room-meta">Bosphorus / Golden Horn / Old City views</span>
+        <span class="hotel-room-meta">City view</span>
       </button>
       <button class="hotel-room hotel-room-button" type="button" data-room="deluxe">
-        <span class="hotel-room-arrow">↗</span>
         <h3>Deluxe King / Twin</h3>
         <p>29 m² · 2 + 1 child · King-sized bed / twin configuration</p>
-        <span class="hotel-room-meta">Bosphorus / Golden Horn / Old City views</span>
+        <span class="hotel-room-meta">City view</span>
       </button>
       <button class="hotel-room hotel-room-button" type="button" data-room="duplex">
-        <span class="hotel-room-arrow">↗</span>
         <h3>Deluxe Duplex King</h3>
         <p>42 m² · 2 + 1 child · King-sized bed</p>
         <span class="hotel-room-meta">Bosphorus / Golden Horn / Old City views</span>
       </button>
       <button class="hotel-room hotel-room-button" type="button" data-room="executive">
-        <span class="hotel-room-arrow">↗</span>
         <h3>Executive Suite</h3>
         <p>40 m² · 2 + 1 child · King-sized bed</p>
         <span class="hotel-room-meta">Bosphorus / Golden Horn / Old City views</span>
       </button>
       <button class="hotel-room hotel-room-button" type="button" data-room="penthouse">
-        <span class="hotel-room-arrow">↗</span>
         <h3>Penthouse Suite</h3>
         <p>83 m² · 2 + 2 guests · King-sized bed</p>
-        <span class="hotel-room-meta">Terrace / balcony · Bosphorus / Golden Horn / Old City views</span>
+        <span class="hotel-room-meta">Terrace / balcony · Bosphorus / Old City / Golden Horn / Galata Tower views · Bathtub · 2 bathrooms & 2 WCs</span>
       </button>
     </div>
   </div>
@@ -355,24 +349,35 @@
   </div>
 </div>
 
+<div class="hotel-photo-lightbox" id="hotelPhotoLightbox" aria-hidden="true">
+  <div class="hotel-photo-lightbox-backdrop" data-close-photo-lightbox></div>
+  <div class="hotel-photo-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Room photo gallery">
+    <button class="hotel-photo-lightbox-close" type="button" aria-label="Close" data-close-photo-lightbox>×</button>
+    <button class="hotel-photo-lightbox-prev" type="button" aria-label="Previous photo" data-photo-prev>‹</button>
+    <img id="hotelPhotoLightboxImage" src="" alt="">
+    <button class="hotel-photo-lightbox-next" type="button" aria-label="Next photo" data-photo-next>›</button>
+    <div class="hotel-photo-lightbox-counter" id="hotelPhotoLightboxCounter"></div>
+  </div>
+</div>
+
 <div id="footerInclude"></div>
 </div>
 <script src="js/common.js"></script>
 <script>
 (function(){
   const rooms = {
-    classic: {title:'Classic King', size:'20 m²', guests:'2 guests', bed:'King-sized bed', view:'Partial Golden Horn / Old City view', extra:'The factsheet lists this category with 14 rooms.', gallery:[
-      'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-king-01.webp',
+    classic: {title:'Classic King', size:'20 m²', guests:'2 guests', bed:'King-sized bed', view:'City view', extra:'', gallery:[
+      'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-bedroom-cover.jpeg',
       'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-bedroom-1.jpeg',
       'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-working.jpeg',
       'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-bathroom.jpeg',
       'assets/hotels/the-bank-hotel-istanbul/rooms/classic-king/classic-view.jpg'
     ]},
-    superior: {title:'Superior King', size:'25 m²', guests:'2 guests', bed:'King-sized bed', view:'Bosphorus / Golden Horn / Old City views', extra:'The factsheet lists this category with 14 rooms.'},
-    deluxe: {title:'Deluxe King / Twin', size:'29 m²', guests:'2 + 1 child', bed:'King-sized bed / twin configuration', view:'Bosphorus / Golden Horn / Old City views', extra:'The factsheet groups the Deluxe King / Twin category together.'},
-    duplex: {title:'Deluxe Duplex King', size:'42 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'Bosphorus / Golden Horn / Old City views', extra:'Duplex category.'},
-    executive: {title:'Executive Suite', size:'40 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'Bosphorus / Golden Horn / Old City views', extra:'Suite category.'},
-    penthouse: {title:'Penthouse Suite', size:'83 m²', guests:'2 + 2 guests', bed:'King-sized bed', view:'Bosphorus / Golden Horn / Old City views', extra:'Terrace / balcony. The factsheet identifies this as the penthouse suite.'}
+    superior: {title:'Superior King', size:'25 m²', guests:'2 guests', bed:'King-sized bed', view:'City view', extra:''},
+    deluxe: {title:'Deluxe King / Twin', size:'29 m²', guests:'2 + 1 child', bed:'King-sized bed / twin configuration', view:'City view', extra:''},
+    duplex: {title:'Deluxe Duplex King', size:'42 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'City view', extra:''},
+    executive: {title:'Executive Suite', size:'40 m²', guests:'2 + 1 child', bed:'King-sized bed', view:'Partial sea view and city view · French balcony · Fireplace', extra:''},
+    penthouse: {title:'Penthouse Suite', size:'83 m²', guests:'2 + 2 guests', bed:'King-sized bed', view:'Terrace / balcony · Bosphorus / Old City / Golden Horn / Galata Tower views · Bathtub · 2 bathrooms & 2 WCs', extra:''}
   };
   const modal=document.getElementById('hotelRoomModal');
   const title=document.getElementById('hotelRoomModalTitle');
@@ -381,11 +386,55 @@
   document.querySelectorAll('.hotel-room-button').forEach(btn=>{
     btn.addEventListener('click',()=>{
       const r=rooms[btn.dataset.room]; if(!r)return;
+      document.querySelectorAll('.hotel-room-button').forEach(b=>b.removeAttribute('aria-current'));
+      btn.setAttribute('aria-current','true');
+      currentGallery=r.gallery || [];
       title.textContent=r.title;
-      const gallery = r.gallery ? '<div class="hotel-room-gallery">'+r.gallery.map((src,i)=>'<button type="button" class="hotel-room-gallery-item" data-room-image="'+src+'"><img src="'+src+'" alt="'+r.title+' photo '+(i+1)+'"></button>').join('')+'</div>' : '';
-      content.innerHTML=gallery+'<div class="hotel-room-detail-list"><div><strong>Size</strong><span>'+r.size+'</span></div><div><strong>Maximum occupancy</strong><span>'+r.guests+'</span></div><div><strong>Bed</strong><span>'+r.bed+'</span></div><div><strong>View</strong><span>'+r.view+'</span></div></div><p class="hotel-room-modal-note">'+r.extra+'</p>';
+      const gallery = r.gallery ? '<div class="hotel-room-gallery">'+r.gallery.map((src,i)=>'<button type="button" class="hotel-room-gallery-item" data-room-image="'+src+'" aria-label="Open '+r.title+' photo '+(i+1)+'"><img src="'+src+'" alt="'+r.title+' photo '+(i+1)+'"></button>').join('')+'</div>' : '';
+      content.innerHTML=gallery+'<div class="hotel-room-detail-list"><div><strong>Size</strong><span>'+r.size+'</span></div><div><strong>Maximum occupancy</strong><span>'+r.guests+'</span></div><div><strong>Bed</strong><span>'+r.bed+'</span></div><div><strong>View</strong><span>'+r.view+'</span></div></div>';
       modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.add('hotel-modal-open');
     });
+  });
+  const photoLightbox=document.getElementById('hotelPhotoLightbox');
+  const photoLightboxImage=document.getElementById('hotelPhotoLightboxImage');
+  const photoLightboxCounter=document.getElementById('hotelPhotoLightboxCounter');
+  let currentGallery=[];
+  let currentPhotoIndex=0;
+  function showPhoto(index){
+    if(!currentGallery.length)return;
+    currentPhotoIndex=(index+currentGallery.length)%currentGallery.length;
+    const src=currentGallery[currentPhotoIndex];
+    photoLightboxImage.src=src;
+    photoLightboxImage.alt=title.textContent+' photo '+(currentPhotoIndex+1);
+    photoLightboxCounter.textContent=(currentPhotoIndex+1)+' / '+currentGallery.length;
+  }
+  function openPhoto(index){
+    showPhoto(index);
+    photoLightbox.classList.add('is-open');
+    photoLightbox.setAttribute('aria-hidden','false');
+  }
+  function closePhoto(){
+    photoLightbox.classList.remove('is-open');
+    photoLightbox.setAttribute('aria-hidden','true');
+    photoLightboxImage.removeAttribute('src');
+  }
+  content.addEventListener('click',e=>{
+    const item=e.target.closest('[data-room-image]');
+    if(!item)return;
+    e.preventDefault();
+    currentGallery=rooms[document.querySelector('.hotel-room-button[aria-current="true"]')?.dataset.room || 'classic']?.gallery || [];
+    const src=item.dataset.roomImage;
+    const index=currentGallery.indexOf(src);
+    openPhoto(index>=0?index:0);
+  });
+  document.querySelectorAll('[data-close-photo-lightbox]').forEach(el=>el.addEventListener('click',closePhoto));
+  document.querySelector('[data-photo-prev]').addEventListener('click',()=>showPhoto(currentPhotoIndex-1));
+  document.querySelector('[data-photo-next]').addEventListener('click',()=>showPhoto(currentPhotoIndex+1));
+  document.addEventListener('keydown',e=>{
+    if(!photoLightbox.classList.contains('is-open'))return;
+    if(e.key==='Escape')closePhoto();
+    if(e.key==='ArrowLeft')showPhoto(currentPhotoIndex-1);
+    if(e.key==='ArrowRight')showPhoto(currentPhotoIndex+1);
   });
   document.querySelectorAll('[data-close-room-modal]').forEach(el=>el.addEventListener('click',close));
   document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
