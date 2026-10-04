@@ -193,3 +193,12 @@ body.hotel-modal-open{overflow:hidden}
 .hotel-room-modal-dialog::-webkit-scrollbar-thumb:hover{
   background:linear-gradient(180deg,#ffe9a3 0%,#e1bd4a 48%,#b8891b 100%);
 }
+
+/* Premium 3D virtual tour links */
+.hotel-room-virtual-tour{margin-top:24px;padding-top:22px;border-top:1px solid rgba(212,175,55,.16)}
+.hotel-room-virtual-tour-title{margin-bottom:12px;color:#d4af37;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.hotel-room-virtual-tour-links{display:flex;flex-wrap:wrap;gap:10px}
+.hotel-room-virtual-tour-links a{display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border:1px solid rgba(212,175,55,.45);border-radius:8px;background:linear-gradient(180deg,rgba(212,175,55,.10),rgba(212,175,55,.04));color:#e7c75a;text-decoration:none;font-size:12px;letter-spacing:.02em;transition:.25s}
+.hotel-room-virtual-tour-links a span{font-size:14px}
+.hotel-room-virtual-tour-links a:hover{border-color:#d4af37;background:rgba(212,175,55,.14);color:#f4dc87;transform:translateY(-1px);box-shadow:0 7px 20px rgba(212,175,55,.12)}
+@media(max-width:600px){.hotel-room-virtual-tour-links{flex-direction:column}.hotel-room-virtual-tour-links a{justify-content:space-between}}
