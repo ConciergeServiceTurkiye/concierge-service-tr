@@ -445,3 +445,6 @@ body.hotel-amenities-open{overflow:hidden}
 .hotel-logo-tooltip:hover::after,.hotel-logo-tooltip:hover::before,.hotel-logo-tooltip:focus-visible::after,.hotel-logo-tooltip:focus-visible::before{opacity:1;visibility:visible}
 .hotel-logo-tooltip:hover::after,.hotel-logo-tooltip:focus-visible::after{transform:translateX(-50%) translateY(0)}
 @media(max-width:700px){.hotel-logo-tooltip::after{max-width:210px;font-size:11px;padding:8px 11px}}
+
+.hotel-logo-tooltip.is-open::after,.hotel-logo-tooltip.is-open::before{opacity:1;visibility:visible}
+.hotel-logo-tooltip.is-open::after{transform:translateX(-50%) translateY(0)}
