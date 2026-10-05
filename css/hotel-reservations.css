@@ -433,3 +433,7 @@ body.hotel-amenities-open{overflow:hidden}
 /* Amenities modal typography refinement */
 .hotel-amenities-eyebrow{color:#fff}
 .hotel-amenities-dialog h2{color:var(--gold)}
+
+/* Bank Hotel detail hero typography */
+.hotel-detail-hero .hotel-eyebrow{color:#fff}
+.hotel-detail-hero h1{color:var(--gold)}
