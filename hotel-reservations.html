@@ -22,12 +22,13 @@
 <span><img src="assets/hotels/the-bank-hotel-istanbul/hotel/marriott-bonvoy-logo.png" alt="Marriott Bonvoy"></span>
 <span><img src="assets/hotels/the-bank-hotel-istanbul/hotel/michelin-key.png" alt="MICHELIN Key"></span>
 </div>
-<div class="hotel-card-highlights">
+<div class="hotel-card-highlights" aria-label="Selected hotel highlights">
+<span>Rooftop Bar</span>
+<span>Spa &amp; Turkish Hammam</span>
 <span>Pet Friendly</span>
-<span>Spa &amp; Hammam</span>
-<span>Rooftop</span>
-<span>Sustainable Tourism</span>
+<span>24/7 Concierge</span>
 </div>
+<span class="hotel-card-amenities-trigger" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="hotelAmenitiesModal">✦ &nbsp;AMENITIES &amp; SERVICES</span>
 <p class="hotel-card-copy">A historic bank building transformed into a design-led boutique hotel in Karaköy, with rooftop dining, spa and a strong connection to Istanbul's architectural and cultural character.</p>
 </div></a>
 <article class="hotel-card hotel-card-coming-soon">
@@ -39,5 +40,90 @@
 </div>
 </article>
 </div></div></section>
+
+<div class="hotel-amenities-modal" id="hotelAmenitiesModal" aria-hidden="true">
+<div class="hotel-amenities-backdrop" data-amenities-close></div>
+<div class="hotel-amenities-dialog" role="dialog" aria-modal="true" aria-labelledby="hotelAmenitiesTitle">
+<button type="button" class="hotel-amenities-close" data-amenities-close aria-label="Close amenities and services">×</button>
+<div class="hotel-amenities-eyebrow">THE BANK HOTEL ISTANBUL</div>
+<h2 id="hotelAmenitiesTitle">Amenities &amp; Services</h2>
+<p class="hotel-amenities-intro">A curated overview of the hotel's guest services, wellness facilities and lifestyle amenities.</p>
+<div class="hotel-amenities-grid">
+<section class="hotel-amenity-group">
+<h3>Guest Services</h3>
+<ul>
+<li>24-hour reception &amp; concierge</li>
+<li>24-hour room service</li>
+<li>Luggage storage</li>
+<li>Wake-up service</li>
+<li>Multilingual staff</li>
+<li>Laundry service</li>
+</ul>
+</section>
+<section class="hotel-amenity-group">
+<h3>Wellness &amp; Fitness</h3>
+<ul>
+<li>Turkish hammam</li>
+<li>Sauna</li>
+<li>Steam rooms</li>
+<li>Fitness centre</li>
+<li>Spa treatments by appointment</li>
+<li>Massage &amp; facial treatment rooms</li>
+</ul>
+</section>
+<section class="hotel-amenity-group">
+<h3>Dining &amp; Lifestyle</h3>
+<ul>
+<li>Restaurant &amp; bar</li>
+<li>Rooftop terrace bar</li>
+<li>Wine cellar</li>
+<li>24-hour room service</li>
+</ul>
+</section>
+<section class="hotel-amenity-group">
+<h3>In-Room &amp; Hotel</h3>
+<ul>
+<li>Complimentary Wi-Fi</li>
+<li>Air conditioning</li>
+<li>Minibar</li>
+<li>Non-smoking hotel</li>
+<li>Complimentary water &amp; tea</li>
+<li>Complimentary coffee machine</li>
+</ul>
+</section>
+<section class="hotel-amenity-group">
+<h3>Pets &amp; Arrival</h3>
+<ul>
+<li>Pet-friendly accommodation</li>
+<li>Guest drop-off &amp; pick-up area</li>
+<li>Short-term vehicle waiting at the hotel entrance</li>
+</ul>
+</section>
+<section class="hotel-amenity-group">
+<h3>Sustainability</h3>
+<ul>
+<li>Sustainable Tourism practices</li>
+<li>Zero Waste certification</li>
+</ul>
+</section>
+</div>
+<p class="hotel-amenities-note">Wine cellar is available within the hotel but is not presented as a guest tour. Parking and valet service are not listed as standard hotel services on this page.</p>
+</div>
+</div>
+
+<script>
+(function(){
+  const modal=document.getElementById('hotelAmenitiesModal');
+  const trigger=document.querySelector('.hotel-card-amenities-trigger');
+  if(!modal||!trigger) return;
+  const closeButtons=modal.querySelectorAll('[data-amenities-close]');
+  const openModal=()=>{modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.add('hotel-amenities-open');modal.querySelector('.hotel-amenities-close')?.focus();};
+  const closeModal=()=>{modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('hotel-amenities-open');trigger.focus();};
+  trigger.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openModal();});
+  trigger.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopPropagation();openModal();}});
+  closeButtons.forEach(btn=>btn.addEventListener('click',e=>{e.preventDefault();closeModal();}));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('is-open')) closeModal();});
+})();
+</script>
 </div><a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank" title="Chat with Concierge on WhatsApp"><img src="assets/whatsapp.png" alt="WhatsApp"></a><div id="footerInclude"></div></div>
 <script src="js/common.js"></script></body></html>
