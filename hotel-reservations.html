@@ -111,6 +111,24 @@
 </div>
 
 <script>
+document.addEventListener('DOMContentLoaded', function(){
+  const logoTips = document.querySelectorAll('.hotel-logo-tooltip');
+  if (!logoTips.length) return;
+  logoTips.forEach(function(tip){
+    tip.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      const wasOpen = tip.classList.contains('is-open');
+      logoTips.forEach(function(item){ item.classList.remove('is-open'); });
+      if (!wasOpen) tip.classList.add('is-open');
+    });
+  });
+  document.addEventListener('click', function(){
+    logoTips.forEach(function(item){ item.classList.remove('is-open'); });
+  });
+});
+</script>
+<script>
 (function(){
   const modal=document.getElementById('hotelAmenitiesModal');
   const trigger=document.querySelector('.hotel-card-amenities-trigger');
