@@ -437,14 +437,8 @@ body.hotel-amenities-open{overflow:hidden}
 /* Bank Hotel detail hero typography */
 .hotel-detail-hero .hotel-eyebrow{color:#fff}
 .hotel-detail-hero h1{color:var(--gold)}
-
-/* Premium tooltips for hotel recognition logos */
-.hotel-logo-tooltip{position:relative;display:flex!important;align-items:center;justify-content:center;cursor:help}
-.hotel-logo-tooltip::after{content:attr(data-tooltip);position:absolute;left:50%;bottom:calc(100% + 14px);transform:translateX(-50%) translateY(6px);width:max-content;max-width:260px;padding:10px 14px;border:1px solid rgba(212,175,55,.7);border-radius:8px;background:linear-gradient(145deg,#211a10,#0d0d0d);color:#f5e6b3;font-size:12px;line-height:1.45;letter-spacing:.2px;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.5),0 0 18px rgba(212,175,55,.12);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,transform .22s ease,visibility .22s ease;z-index:100}
-.hotel-logo-tooltip::before{content:"";position:absolute;left:50%;bottom:calc(100% + 7px);transform:translateX(-50%) rotate(45deg);width:10px;height:10px;border-right:1px solid rgba(212,175,55,.7);border-bottom:1px solid rgba(212,175,55,.7);background:#17120c;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility .22s ease;z-index:101}
-.hotel-logo-tooltip:hover::after,.hotel-logo-tooltip:hover::before,.hotel-logo-tooltip:focus-visible::after,.hotel-logo-tooltip:focus-visible::before{opacity:1;visibility:visible}
-.hotel-logo-tooltip:hover::after,.hotel-logo-tooltip:focus-visible::after{transform:translateX(-50%) translateY(0)}
-@media(max-width:700px){.hotel-logo-tooltip::after{max-width:210px;font-size:11px;padding:8px 11px}}
-
-.hotel-logo-tooltip.is-open::after,.hotel-logo-tooltip.is-open::before{opacity:1;visibility:visible}
-.hotel-logo-tooltip.is-open::after{transform:translateX(-50%) translateY(0)}
+/* Compact premium gold tooltips */
+.hotel-logo-tooltip,.hotel-icon-tooltip{position:relative;cursor:default}
+.hotel-logo-tooltip::after,.hotel-icon-tooltip::after{content:attr(data-tooltip);position:absolute;left:50%;bottom:calc(100% + 9px);transform:translateX(-50%) translateY(4px);width:max-content;max-width:220px;padding:7px 11px;border:1px solid rgba(212,175,55,.42);border-radius:6px;background:linear-gradient(145deg,#1b1812,#0c0c0c);color:#d4af37;font-size:11px;font-weight:600;line-height:1.25;letter-spacing:.15px;text-align:center;white-space:nowrap;box-shadow:0 8px 22px rgba(0,0,0,.45);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease,transform .18s ease,visibility .18s ease;z-index:100}
+.hotel-logo-tooltip:hover::after,.hotel-icon-tooltip:hover::after,.hotel-logo-tooltip.is-open::after,.hotel-icon-tooltip.is-open::after{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+@media(max-width:700px){.hotel-logo-tooltip::after,.hotel-icon-tooltip::after{max-width:180px;font-size:10px;padding:6px 9px;white-space:normal}}
