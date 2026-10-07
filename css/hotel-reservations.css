@@ -1537,3 +1537,72 @@ body.hotel-amenities-open{overflow:hidden}
  .hotel-dining-lightbox-next{right:-8px}
  .hotel-dining-lightbox-close{top:-16px;right:-8px}
 }
+
+
+/* Serica reservation rules inside the dining detail modal */
+.hotel-dining-reservation{
+ margin:0 0 30px;
+ padding:22px;
+ border:1px solid rgba(212,175,55,.22);
+ border-radius:12px;
+ background:#151515;
+}
+.hotel-dining-reservation>h3{
+ margin:0 0 16px;
+ color:#d4af37;
+ font-size:17px;
+ letter-spacing:.04em;
+}
+.hotel-dining-reservation-important{
+ margin-bottom:16px;
+ padding:15px 17px;
+ border-left:2px solid #d4af37;
+ background:rgba(212,175,55,.08);
+}
+.hotel-dining-reservation-important strong{
+ display:block;
+ margin-bottom:6px;
+ color:#e0c56b;
+ font-size:11px;
+ letter-spacing:.12em;
+ text-transform:uppercase;
+}
+.hotel-dining-reservation-important p,
+.hotel-dining-reservation-personal,
+.hotel-dining-reservation-facts p,
+.hotel-dining-reservation-terms p,
+.hotel-dining-reservation-terms li{
+ margin:0;
+ color:rgba(255,255,255,.78);
+ font-size:12px;
+ line-height:1.65;
+}
+.hotel-dining-reservation-facts,
+.hotel-dining-reservation-terms{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:10px;
+}
+.hotel-dining-reservation-facts>div,
+.hotel-dining-reservation-terms>div{
+ padding:13px 15px;
+ border:1px solid rgba(212,175,55,.14);
+ border-radius:8px;
+ background:#191919;
+}
+.hotel-dining-reservation-facts h4,
+.hotel-dining-reservation-terms h4{
+ margin:0 0 6px;
+ color:#d4af37;
+ font-size:10px;
+ letter-spacing:.1em;
+ text-transform:uppercase;
+}
+.hotel-dining-reservation-personal{margin:14px 0!important}
+.hotel-dining-reservation-terms ul{margin:0;padding-left:17px}
+.hotel-dining-reservation-terms li+li{margin-top:5px}
+@media(max-width:600px){
+ .hotel-dining-reservation{padding:16px}
+ .hotel-dining-reservation-facts,
+ .hotel-dining-reservation-terms{grid-template-columns:1fr}
+}
