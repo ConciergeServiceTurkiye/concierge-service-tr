@@ -1096,3 +1096,30 @@ body.hotel-amenities-open{overflow:hidden}
  text-align:left;
  white-space:nowrap;
 }
+
+/* Match the outlined gold hover treatment used by View Airport Transfers */
+#hotelRoomModal .hotel-room-modal-heading-group .hotel-modal-reserve{
+ display:inline-flex!important;
+ align-items:center;
+ justify-content:center;
+ min-height:48px;
+ padding:0 24px!important;
+ border:1px solid #d4af37!important;
+ border-radius:26px!important;
+ background:transparent!important;
+ color:#d4af37!important;
+ font-size:12px;
+ font-weight:700;
+ letter-spacing:.6px;
+ text-decoration:none;
+ transition:background .25s,color .25s,border-color .25s!important;
+}
+#hotelRoomModal .hotel-room-modal-heading-group .hotel-modal-reserve:hover{
+ border-color:#d4af37!important;
+ background:#d4af37!important;
+ color:#090909!important;
+}
+#hotelRoomModal .hotel-room-modal-heading-group .hotel-modal-reserve:focus-visible{
+ outline:2px solid #d4af37;
+ outline-offset:3px;
+}
