@@ -1128,7 +1128,7 @@ body.hotel-amenities-open{overflow:hidden}
 .hotel-detail-hero-gallery{height:clamp(340px,50vw,620px);min-height:320px;padding:0!important;background:#111;display:block;text-align:initial;overflow:hidden}
 .hotel-detail-hero-gallery-frame{width:100%;max-width:1440px;height:100%;margin:0 auto}
 .hotel-overview-intro{max-width:950px;margin:0 auto 38px;padding-bottom:28px;border-bottom:1px solid rgba(212,175,55,.22);text-align:center}
-.hotel-overview-intro .hotel-eyebrow{color:var(--gold)}
+.hotel-overview-intro .hotel-eyebrow{color:#fff}
 .hotel-overview-intro h1{margin:8px 0 12px;color:var(--gold);font-size:clamp(34px,5vw,58px);line-height:1.1}
 .hotel-overview-intro p{margin:0;color:rgba(255,255,255,.72);line-height:1.7}
 @media(max-width:600px){
