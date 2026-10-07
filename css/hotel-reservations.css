@@ -1076,3 +1076,23 @@ body.hotel-amenities-open{overflow:hidden}
  #hotelRoomModal .hotel-room-modal-heading-group .hotel-modal-reserve{padding:9px 12px!important;font-size:12px!important}
  #hotelRoomModal .hotel-room-virtual-tour-inline{align-self:flex-end}
 }
+
+/* Align first-column room diamonds on one shared axis close to the center divider */
+.hotel-room-fact-column:first-child .hotel-room-fact{
+ display:grid;
+ grid-template-columns:minmax(0,1fr) 10px minmax(0,88px);
+ align-items:center;
+ justify-content:initial;
+ text-align:left;
+}
+.hotel-room-fact-column:first-child .hotel-room-fact .hotel-room-diamond{
+ grid-column:2;
+ grid-row:1;
+ justify-self:center;
+}
+.hotel-room-fact-column:first-child .hotel-room-fact>span:last-child{
+ grid-column:3;
+ grid-row:1;
+ text-align:left;
+ white-space:nowrap;
+}
