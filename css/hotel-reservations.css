@@ -1606,3 +1606,33 @@ body.hotel-amenities-open{overflow:hidden}
  .hotel-dining-reservation-facts,
  .hotel-dining-reservation-terms{grid-template-columns:1fr}
 }
+
+
+/* Make the dining detail modal logos prominent and readable */
+.hotel-dining-modal-heading{
+ flex-direction:column;
+ align-items:center;
+ gap:14px;
+ padding:0 48px 22px;
+ text-align:center;
+}
+.hotel-dining-modal-logo{
+ flex:0 0 auto;
+ width:min(100%,380px);
+ min-height:150px;
+}
+.hotel-dining-modal-logo img{
+ width:100%;
+ max-width:380px;
+ max-height:150px;
+ object-fit:contain;
+}
+.hotel-dining-modal-heading>div:last-child{width:100%}
+.hotel-dining-modal-heading .hotel-eyebrow{text-align:center}
+.hotel-dining-modal-heading h2{font-size:clamp(28px,4vw,40px)}
+@media(max-width:600px){
+ .hotel-dining-modal-heading{gap:10px;padding:0 30px 18px}
+ .hotel-dining-modal-logo{width:min(100%,300px);min-height:120px}
+ .hotel-dining-modal-logo img{max-width:300px;max-height:120px}
+ .hotel-dining-modal-heading h2{font-size:27px}
+}
