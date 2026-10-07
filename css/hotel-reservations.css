@@ -447,3 +447,167 @@ body.hotel-amenities-open{overflow:hidden}
 .hotel-card{overflow:visible}
 .hotel-card-visual{overflow:hidden;border-radius:17px 17px 0 0}
 .hotel-logo-tooltip{z-index:20}
+
+
+/* Room details modal — refined premium layout */
+.hotel-room-modal-dialog{
+  width:min(1120px,calc(100% - 24px));
+  max-height:92vh;
+  padding:34px;
+}
+.hotel-room-modal-dialog .hotel-eyebrow{
+  color:#fff;
+  margin-bottom:6px;
+  letter-spacing:.16em;
+}
+.hotel-room-modal-dialog h2{
+  margin:0 0 18px;
+  color:var(--gold);
+  font-size:34px;
+  line-height:1.15;
+}
+.hotel-room-modal-title-row{
+  margin:0 0 22px;
+}
+.hotel-room-virtual-tour-inline{
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--gold);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.03em;
+}
+.hotel-room-virtual-tour-inline:hover{
+  border:0;
+  background:transparent;
+  color:#f0d77a;
+  transform:none;
+  box-shadow:none;
+}
+.hotel-room-detail-list{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:0;
+  margin:0 0 18px;
+  border:1px solid rgba(212,175,55,.55);
+  border-radius:9px;
+  background:#121212;
+  overflow:hidden;
+}
+.hotel-room-detail-list>div{
+  min-width:0;
+  padding:13px 12px 14px;
+  border:0;
+  border-right:1px solid rgba(255,255,255,.55);
+  border-radius:0;
+  background:transparent;
+  text-align:center;
+}
+.hotel-room-detail-list>div:last-child{border-right:0}
+.hotel-room-detail-list strong{
+  display:block;
+  margin:0 0 6px;
+  color:#fff;
+  font-size:12px;
+  text-transform:none;
+  letter-spacing:.02em;
+  font-weight:500;
+}
+.hotel-room-detail-list span{
+  display:block;
+  color:var(--gold);
+  font-size:15px;
+  line-height:1.35;
+  font-weight:600;
+}
+.classic-room-description{
+  margin-top:0;
+  padding-top:0;
+  border-top:0;
+}
+.classic-room-description>p:first-child{
+  margin:0 0 16px;
+  color:rgba(255,255,255,.86);
+  font-size:15px;
+  line-height:1.7;
+}
+.classic-room-amenities{
+  display:flex;
+  flex-wrap:nowrap;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  margin:0;
+  padding:0 10px 18px;
+  border-bottom:1px solid var(--gold);
+}
+.classic-room-amenity{
+  position:relative;
+  flex:1 1 0;
+  min-width:0;
+  min-height:58px;
+  padding:9px 6px;
+  border:1px solid rgba(212,175,55,.32);
+  border-radius:8px;
+  background:rgba(255,255,255,.025);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:default;
+}
+.classic-room-amenity img{
+  width:30px;
+  height:30px;
+  object-fit:contain;
+  margin:0;
+}
+.classic-room-description>h3{
+  margin:22px 0 12px;
+  color:#fff;
+  font-size:18px;
+  letter-spacing:0;
+  text-transform:none;
+}
+.classic-room-features{
+  margin:0 0 22px;
+  padding-left:20px;
+  color:rgba(255,255,255,.82);
+  font-size:14px;
+  line-height:1.75;
+  columns:1;
+}
+.classic-room-features li{margin-bottom:3px}
+.classic-room-note{
+  margin:0 0 22px!important;
+  padding:18px 0 0;
+  border-top:1px solid var(--gold);
+  font-size:11px!important;
+  line-height:1.7!important;
+  color:rgba(255,255,255,.5)!important;
+  font-style:italic;
+}
+.hotel-modal-reserve{
+  display:block;
+  width:max-content;
+  margin:0 auto;
+  text-align:center;
+}
+@media(max-width:800px){
+  .hotel-room-modal-dialog{padding:28px 20px}
+  .hotel-room-detail-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hotel-room-detail-list>div:nth-child(2){border-right:0}
+  .hotel-room-detail-list>div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.55)}
+  .classic-room-amenities{flex-wrap:wrap;justify-content:center}
+  .classic-room-amenity{flex:0 1 76px}
+}
+@media(max-width:600px){
+  .hotel-room-modal-dialog{width:calc(100% - 16px);padding:24px 16px}
+  .hotel-room-modal-dialog h2{font-size:28px}
+  .hotel-room-modal-title-row{flex-direction:row;align-items:center;gap:10px}
+  .hotel-room-detail-list{grid-template-columns:1fr 1fr}
+  .hotel-room-detail-list>div:nth-child(odd){border-right:1px solid rgba(255,255,255,.55)}
+  .hotel-room-detail-list>div:nth-child(even){border-right:0}
+  .classic-room-amenities{gap:8px;padding-left:0;padding-right:0}
+  .classic-room-amenity{flex:0 1 62px}
+}
