@@ -1781,3 +1781,81 @@ body.hotel-amenities-open{overflow:hidden}
  .hotel-dining-modal.is-serica .hotel-dining-modal-logo img{max-width:420px;max-height:140px}
  .hotel-dining-serica-hours{grid-template-columns:1fr;gap:5px}
 }
+
+
+/* Four-at-a-time Serica photo carousel */
+.hotel-dining-serica-photos{margin:8px 0 18px}
+.hotel-dining-serica-carousel{
+ display:grid;
+ grid-template-columns:42px minmax(0,1fr) 42px;
+ align-items:center;
+ gap:10px;
+}
+.hotel-dining-serica-viewport{min-width:0;overflow:hidden}
+.hotel-dining-modal.is-serica .hotel-dining-serica-gallery-track{
+ grid-template-columns:repeat(4,minmax(0,1fr));
+ gap:10px;
+}
+.hotel-dining-serica-gallery-track button{
+ display:block;
+ min-width:0;
+ overflow:hidden;
+ aspect-ratio:1.35;
+ padding:0;
+ border:1px solid rgba(212,175,55,.24);
+ border-radius:8px;
+ background:#1a1a1a;
+ cursor:zoom-in;
+}
+.hotel-dining-serica-gallery-track img{
+ display:block;
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ transition:transform .25s ease;
+}
+.hotel-dining-serica-gallery-track button:hover img{transform:scale(1.04)}
+.hotel-dining-serica-arrow{
+ display:grid;
+ width:40px;
+ height:44px;
+ place-items:center;
+ padding:0;
+ border:1px solid rgba(212,175,55,.42);
+ border-radius:22px;
+ background:transparent;
+ color:#d4af37;
+ font-family:Georgia,serif;
+ font-size:27px;
+ line-height:1;
+ cursor:pointer;
+ transition:background .2s,color .2s,border-color .2s;
+}
+.hotel-dining-serica-arrow:hover{border-color:#d4af37;background:#d4af37;color:#111}
+.hotel-dining-serica-arrow:focus-visible{outline:2px solid #d4af37;outline-offset:3px}
+
+/* Gold Serica story framed by the soft gold fade rules */
+.hotel-dining-serica-intro{
+ position:relative;
+ margin:18px 0;
+ padding:20px 0;
+}
+.hotel-dining-serica-intro::before,
+.hotel-dining-serica-intro::after{
+ content:"";
+ position:absolute;
+ right:0;
+ left:0;
+ height:1px;
+ background:linear-gradient(to right,transparent 0%,rgba(212,175,55,.25) 15%,#d4af37 50%,rgba(212,175,55,.25) 85%,transparent 100%);
+}
+.hotel-dining-serica-intro::before{top:0}
+.hotel-dining-serica-intro::after{bottom:0}
+.hotel-dining-modal.is-serica .hotel-dining-serica-intro p{color:#d4af37;text-align:left}
+@media(max-width:600px){
+ .hotel-dining-serica-carousel{grid-template-columns:30px minmax(0,1fr) 30px;gap:5px}
+ .hotel-dining-modal.is-serica .hotel-dining-serica-gallery-track{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+ .hotel-dining-serica-arrow{width:28px;height:38px;font-size:22px}
+ .hotel-dining-serica-gallery-track button{aspect-ratio:1}
+ .hotel-dining-serica-intro{margin:15px 0;padding:16px 0}
+}
