@@ -1318,3 +1318,18 @@ body.hotel-amenities-open{overflow:hidden}
  margin:14px auto 0;
  background:linear-gradient(to right,transparent 0%,rgba(212,175,55,.28) 18%,#d4af37 50%,rgba(212,175,55,.28) 82%,transparent 100%);
 }
+
+
+/* Enlarge official dining venue logos */
+.hotel-dining-logo{min-height:132px;margin-bottom:22px}
+.hotel-dining-logo img{max-width:min(100%,300px);max-height:108px}
+.hotel-dining-logo-serica img{max-width:min(100%,250px);max-height:108px}
+.hotel-dining-logo-bank img,
+.hotel-dining-logo-roof img{max-width:min(100%,300px);max-height:102px}
+@media(max-width:600px){
+ .hotel-dining-logo{min-height:118px;margin-bottom:18px}
+ .hotel-dining-logo img{max-height:98px}
+ .hotel-dining-logo-serica img{max-height:98px}
+ .hotel-dining-logo-bank img,
+ .hotel-dining-logo-roof img{max-height:92px}
+}
