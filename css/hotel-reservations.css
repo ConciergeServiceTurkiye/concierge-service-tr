@@ -1204,10 +1204,9 @@ body.hotel-amenities-open{overflow:hidden}
  border-radius:14px;
  background:linear-gradient(180deg,#171717 0%,#121212 100%);
  text-align:center;
- transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+ transition:border-color .25s ease,box-shadow .25s ease;
 }
 .hotel-dining-card:hover{
- transform:translateY(-4px);
  border-color:rgba(212,175,55,.62);
  box-shadow:0 14px 32px rgba(0,0,0,.24);
 }
