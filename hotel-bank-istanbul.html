@@ -716,13 +716,7 @@
       intro:'Serica tells the culinary story of Türkiye through regional ingredients and traditions. Its soil-to-plate approach puts local, geographically marked produce at the centre of each plate.',
       detail:'Chef Yiğit Alıcıoğlu draws on the Aegean, Black Sea, Central Anatolia and Southeast Anatolia, reinterpreting the country’s culinary heritage with contemporary techniques.',
       hours:'18:30–00:00. Kitchen last orders are at 23:00. Guest information lists the restaurant as closed on Mondays.',
-      address:'Azapkapı, Bankalar Cd. No:5, Karaköy, 34321 Beyoğlu / İstanbul',
-      phone:'+90 (212) 283 00 55 · +90 (531) 892 36 00',
-      email:'reservation@sericarestaurant.com',
       note:'The menu includes starters, main courses, desserts, tasting selections and drinks. Dishes may contain allergens; ask the service team for detailed allergen information.',
-      menu:'https://www.thebankhotelistanbul.com/pdfdocuments/Ser%C4%B1ca_Tam_Menu_9.6.26_.pdf',
-      booking:'https://checkandplace.com/public/online-booking/thebankhotel/serica/serica-restaurant',
-      website:'https://www.sericarestaurant.com/',
       tour:'https://kuula.co/share/collection/7cf5D?logo=-1&amp;info=0&amp;fs=1&amp;vr=1&amp;zoom=1&amp;thumbs=3&amp;iosfs=1',
       reservation:{
         important:'To protect the balance of our flavours, we are unable to remove essential ingredients such as onion and garlic from our dishes. Thank you for your understanding.',
@@ -791,40 +785,49 @@
   function renderReservation(info){
     if(!info.reservation)return '';
     const r=info.reservation;
+    const item=(heading,body)=>'<div class="hotel-dining-reservation-item"><h4>'+heading+'</h4>'+body+'</div>';
     return '<section class="hotel-dining-reservation">'+
       '<h3>Reservation Information</h3>'+
-      '<div class="hotel-dining-reservation-important"><strong>Important Information</strong><p>'+r.important+'</p></div>'+
-      '<div class="hotel-dining-reservation-facts">'+
-        '<div><h4>Party size</h4><p>'+r.guests+'</p></div>'+
-        '<div><h4>Available times</h4><p>'+r.times+'</p></div>'+
-        '<div><h4>Opening days</h4><p>'+r.days+'</p></div>'+
-        '<div><h4>Allergies &amp; occasions</h4><p>'+r.preferences+' Event choices: '+r.occasions+'.</p></div>'+
-      '</div>'+
-      '<p class="hotel-dining-reservation-personal">'+r.personal+'</p>'+
-      '<div class="hotel-dining-reservation-terms">'+
-        '<div><h4>Advance payment</h4><p>'+r.payment+'</p></div>'+
-        '<div><h4>Cancellation</h4><p>'+r.cancellation+'</p></div>'+
-        '<div><h4>Dress code</h4><p>'+r.dress+'</p></div>'+
-        '<div><h4>Terms &amp; conditions</h4><ul>'+r.terms.map(term=>'<li>'+term+'</li>').join('')+'</ul></div>'+
-      '</div>'+
+      item('Important Information','<p>'+r.important+'</p>')+
+      item('Party size','<p>'+r.guests+'</p>')+
+      item('Available times','<p>'+r.times+'</p>')+
+      item('Opening days','<p>'+r.days+'</p>')+
+      item('Allergies &amp; occasions','<p>'+r.preferences+' Event choices: '+r.occasions+'.</p>')+
+      item('Personal details','<p>'+r.personal+'</p>')+
+      item('Advance payment','<p>'+r.payment+'</p>')+
+      item('Cancellation','<p>'+r.cancellation+'</p>')+
+      item('Dress code','<p>'+r.dress+'</p>')+
+      item('Terms &amp; conditions','<ul>'+r.terms.map(term=>'<li>'+term+'</li>').join('')+'</ul>')+
     '</section>';
   }
   function openDining(key,trigger){
     const info=diningInfo[key]; if(!info)return;
     activeVenue=info; previousFocus=trigger;
+    modal.classList.toggle('is-serica',key==='serica');
     title.textContent=info.title;
     logo.innerHTML='<img src="'+info.logo+'" alt="">';
-    content.innerHTML=
-      '<div class="hotel-dining-modal-intro"><p>'+info.intro+'</p><p>'+info.detail+'</p></div>'+
-      '<div class="hotel-dining-modal-facts">'+
-        '<section><h3>Opening hours</h3><p>'+info.hours+'</p></section>'+
-        '<section><h3>Address</h3><p>'+info.address+'</p></section>'+
-        '<section><h3>Contact</h3><p><a href="tel:'+info.phone.replace(/[^+\d]/g,'')+'">'+info.phone+'</a><br><a href="mailto:'+info.email+'">'+info.email+'</a></p></section>'+
-        '<section><h3>Guest information</h3><p>'+info.note+'</p></section>'+
-      '</div>'+
-      '<div class="hotel-dining-modal-actions">'+renderLinks(info)+'</div>'+
-      renderReservation(info)+
-      (info.gallery&&info.gallery.length ? '<section class="hotel-dining-modal-gallery-section"><h3>Gallery</h3><div class="hotel-dining-modal-gallery">'+info.gallery.map((src,index)=>'<button type="button" data-dining-photo-index="'+index+'" aria-label="Open '+info.title+' gallery image '+(index+1)+'"><img src="'+src+'" alt="'+info.title+' photo '+(index+1)+'" loading="lazy"></button>').join('')+'</div></section>' : '');
+    if(key==='serica'){
+      content.innerHTML=
+        '<div class="hotel-dining-modal-gallery-slot" aria-label="Serica photo gallery"></div>'+
+        '<div class="hotel-dining-modal-actions hotel-dining-serica-tour"><a href="'+info.tour+'" target="_blank" rel="noopener noreferrer">3D Virtual Tour</a></div>'+
+        '<div class="hotel-dining-serica-hours"><strong>Opening Time</strong><p>'+info.hours+'</p></div>'+
+        '<div class="hotel-dining-serica-divider" aria-hidden="true"></div>'+
+        '<section class="hotel-dining-serica-guest"><h3>Guest Information</h3><p>'+info.note+'</p></section>'+
+        '<div class="hotel-dining-serica-divider" aria-hidden="true"></div>'+
+        renderReservation(info);
+    }else{
+      content.innerHTML=
+        '<div class="hotel-dining-modal-intro"><p>'+info.intro+'</p><p>'+info.detail+'</p></div>'+
+        '<div class="hotel-dining-modal-facts">'+
+          '<section><h3>Opening hours</h3><p>'+info.hours+'</p></section>'+
+          '<section><h3>Address</h3><p>'+info.address+'</p></section>'+
+          '<section><h3>Contact</h3><p><a href="tel:'+info.phone.replace(/[^+\\d]/g,'')+'">'+info.phone+'</a><br><a href="mailto:'+info.email+'">'+info.email+'</a></p></section>'+
+          '<section><h3>Guest information</h3><p>'+info.note+'</p></section>'+
+        '</div>'+
+        '<div class="hotel-dining-modal-actions">'+renderLinks(info)+'</div>'+
+        renderReservation(info)+
+        (info.gallery&&info.gallery.length ? '<section class="hotel-dining-modal-gallery-section"><h3>Gallery</h3><div class="hotel-dining-modal-gallery">'+info.gallery.map((src,index)=>'<button type="button" data-dining-photo-index="'+index+'" aria-label="Open '+info.title+' gallery image '+(index+1)+'"><img src="'+src+'" alt="'+info.title+' photo '+(index+1)+'" loading="lazy"></button>').join('')+'</div></section>' : '');
+    }
     modal.classList.add('is-open'); modal.setAttribute('aria-hidden','false');
     document.documentElement.classList.add('hotel-modal-open'); document.body.classList.add('hotel-modal-open');
     dialog.focus();
