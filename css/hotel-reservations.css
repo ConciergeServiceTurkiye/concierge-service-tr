@@ -800,3 +800,13 @@ body.hotel-amenities-open{overflow:hidden}
     grid-template-columns:1fr!important;
   }
 }
+
+
+/* Make the room disclaimer clearly readable */
+#hotelRoomModal .classic-room-note{
+  font-size:13px!important;
+  line-height:1.75!important;
+  color:rgba(255,255,255,.78)!important;
+  font-style:normal!important;
+  padding-top:18px!important;
+}
