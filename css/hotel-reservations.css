@@ -934,3 +934,10 @@ body.hotel-amenities-open{overflow:hidden}
   line-height:1.4!important;
   text-align:left!important;
 }
+
+
+/* Increase room-card text for easier reading */
+.hotel-room-copy h3{font-size:23px!important;}
+.hotel-room-copy p{font-size:14px!important;}
+.hotel-room-copy p > span{font-size:13px!important;}
+.hotel-room-copy .hotel-room-meta{font-size:13px!important;}
