@@ -676,3 +676,83 @@ body.hotel-amenities-open{overflow:hidden}
   .hotel-room-modal-dialog .hotel-room-detail-list>div:nth-child(2){border-right:0!important}
   .hotel-room-modal-dialog .hotel-room-detail-list>div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.55)!important}
 }
+
+
+/* Room modal — explicit final overrides */
+#hotelRoomModal .hotel-room-modal-dialog > .hotel-eyebrow{
+  color:#fff!important;
+}
+#hotelRoomModal .hotel-room-modal-title-row h2{
+  color:#d4af37!important;
+}
+#hotelRoomModal .hotel-room-detail-list{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  border:1px solid #d4af37!important;
+  border-bottom:1px solid #d4af37!important;
+  margin-bottom:18px!important;
+}
+#hotelRoomModal .hotel-room-detail-list > div{
+  border-top:0!important;
+  border-bottom:0!important;
+  border-right:1px solid rgba(255,255,255,.55)!important;
+}
+#hotelRoomModal .hotel-room-detail-list > div:last-child{
+  border-right:0!important;
+}
+#hotelRoomModal .hotel-room-detail-list strong{
+  color:#fff!important;
+}
+#hotelRoomModal .hotel-room-detail-list span{
+  color:#d4af37!important;
+}
+#hotelRoomModal .classic-room-amenities{
+  display:flex!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0 10px 18px!important;
+  border:0!important;
+  border-bottom:1px solid #d4af37!important;
+}
+#hotelRoomModal .classic-room-amenity{
+  flex:1 1 0!important;
+}
+#hotelRoomModal .classic-room-description > p:first-of-type{
+  margin:22px 0 18px!important;
+  color:rgba(255,255,255,.86)!important;
+}
+#hotelRoomModal .classic-room-description > h3{
+  color:#fff!important;
+}
+#hotelRoomModal .classic-room-note{
+  border-top:1px solid #d4af37!important;
+}
+#hotelRoomModal .hotel-modal-reserve{
+  display:block!important;
+  position:relative!important;
+  left:50%!important;
+  width:max-content!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  transform:translateX(-50%)!important;
+}
+@media(max-width:800px){
+  #hotelRoomModal .hotel-room-detail-list{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  #hotelRoomModal .hotel-room-detail-list > div:nth-child(2){
+    border-right:0!important;
+  }
+  #hotelRoomModal .hotel-room-detail-list > div:nth-child(-n+2){
+    border-bottom:1px solid rgba(255,255,255,.55)!important;
+  }
+  #hotelRoomModal .classic-room-amenities{
+    flex-wrap:wrap!important;
+    justify-content:center!important;
+  }
+  #hotelRoomModal .classic-room-amenity{
+    flex:0 1 76px!important;
+  }
+}
