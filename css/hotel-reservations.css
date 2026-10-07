@@ -1301,3 +1301,20 @@ body.hotel-amenities-open{overflow:hidden}
 .hotel-dining-logo-serica img{max-width:min(100%,205px);max-height:82px}
 .hotel-dining-logo-bank img,
 .hotel-dining-logo-roof img{max-width:min(100%,240px);max-height:76px}
+
+
+/* Gold fade divider between dining card title and description */
+.hotel-dining-card h3{
+ width:100%;
+ margin-bottom:15px;
+ padding-bottom:14px;
+ border-bottom:0;
+}
+.hotel-dining-card h3::after{
+ content:"";
+ display:block;
+ width:100%;
+ height:1px;
+ margin:14px auto 0;
+ background:linear-gradient(to right,transparent 0%,rgba(212,175,55,.28) 18%,#d4af37 50%,rgba(212,175,55,.28) 82%,transparent 100%);
+}
