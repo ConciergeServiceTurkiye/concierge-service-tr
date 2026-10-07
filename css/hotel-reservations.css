@@ -46,7 +46,7 @@
 .hotel-room-modal{position:fixed;inset:0;z-index:60000;display:none;align-items:center;justify-content:center;padding:24px}
 .hotel-room-modal.is-open{display:flex}
 .hotel-room-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}
-.hotel-room-modal-dialog{position:relative;z-index:1;width:min(680px,100%);max-height:88vh;overflow:auto;padding:38px;border:1px solid rgba(212,175,55,.35);border-radius:18px;background:#121212;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.hotel-room-modal-dialog{position:relative;z-index:1;width:min(680px,100%);max-height:88vh;overflow:auto;overscroll-behavior:contain;padding:38px;border:1px solid rgba(212,175,55,.35);border-radius:18px;background:#121212;box-shadow:0 30px 80px rgba(0,0,0,.55)}
 .hotel-room-modal-dialog h2{margin:0 0 25px;color:#fff;font-size:32px}
 .hotel-room-modal-close{position:absolute;top:13px;right:16px;width:38px;height:38px;border:1px solid rgba(255,255,255,.18);border-radius:50%;background:#181818;color:#fff;font-size:25px;line-height:1;cursor:pointer}
 .hotel-room-modal-close:hover{border-color:var(--gold);color:var(--gold)}
@@ -56,7 +56,7 @@
 .hotel-room-detail-list span{color:rgba(255,255,255,.78);font-size:14px;line-height:1.5}
 .hotel-room-modal-note{margin:20px 0 25px!important;color:rgba(255,255,255,.55)!important;font-size:13px!important}
 .hotel-modal-reserve{margin-top:2px}
-body.hotel-modal-open{overflow:hidden}
+html.hotel-modal-open,body.hotel-modal-open{overflow:hidden!important;}
 @media(max-width:1100px){.hotel-review-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:900px){.hotel-section-heading-row{align-items:flex-start;flex-direction:column}.hotel-review-checked{white-space:normal}.hotel-room-modal-dialog{padding:30px 24px}}
 @media(max-width:600px){.hotel-review-grid{grid-template-columns:1fr}.hotel-room-detail-list{grid-template-columns:1fr}.hotel-room-modal{padding:12px}.hotel-room-modal-dialog{padding:30px 20px}.hotel-room-modal-dialog h2{font-size:26px}}
