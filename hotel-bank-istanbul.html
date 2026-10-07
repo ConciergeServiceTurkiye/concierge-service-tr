@@ -408,18 +408,26 @@
       currentGallery=r.gallery || [];
       title.textContent=r.title;
       const gallery = r.gallery ? '<div class="hotel-room-gallery">'+r.gallery.map((src,i)=>'<button type="button" class="hotel-room-gallery-item" data-room-image="'+src+'" aria-label="Open '+r.title+' photo '+(i+1)+'"><img src="'+src+'" alt="'+r.title+' photo '+(i+1)+'"></button>').join('')+'</div>' : '';
-      const classicDetails = r.title === 'Classic King' ? `
+      const roomAmenityIcons = [
+        ['bath.png','Rain shower bathroom'],
+        ['desk.png','Work desk'],
+        ['adsl.png','Complimentary internet'],
+        ['tv.png','LCD television'],
+        ['mini-bar.png','Mini bar'],
+        ['wifi.png','Free Wi-Fi'],
+        ['coffee-machine.png','Coffee machine'],
+        ['hairdryer.png','Hairdryer']
+      ];
+      if (r.title === 'Executive Suite') roomAmenityIcons.push(['balcony.png','French balcony']);
+      if (r.title === 'Penthouse Suite') {
+        roomAmenityIcons.push(['balcony.png','Balcony']);
+        roomAmenityIcons.push(['terrace.png','Terrace']);
+      }
+      const roomDetails = `
         <div class="classic-room-description">
-          <p>Our 20 m² Classic King rooms feature decorative ceilings, bathrooms finished in green Carrara marble with rain showers, and specially designed furniture and lighting.</p>
+          <p>${r.title === 'Classic King' ? 'Our 20 m² Classic King rooms feature decorative ceilings, bathrooms finished in green Carrara marble with rain showers, and specially designed furniture and lighting.' : r.title === 'Superior King' ? 'Our 25 m² Superior King rooms feature patterned ceilings, green Carrara marble bathrooms with rain showers, and specially designed furniture and lighting.' : r.title === 'Deluxe Twin' ? 'Our 29 m² Deluxe Twin rooms feature 110 cm-wide twin beds, patterned ceilings, green Carrara marble bathrooms with rain showers, and specially designed furniture and lighting. Most rooms also offer large windows and 5-meter-high ceilings.' : r.title === 'Deluxe King' ? 'Our 29 m² Deluxe King rooms feature patterned ceilings, a green Carrara marble bathroom with a rain shower, specially designed furniture and lighting, a spacious sofa, and a motorized curtain system. Most rooms also offer large windows and 5-meter-high ceilings.' : r.title === 'Deluxe Duplex King' ? 'Our 42 m² Deluxe Duplex King Room features 6-meter-high patterned ceilings, a kitchen with two ceramic hobs, mini oven, microwave and sink, two televisions, a large sofa and motorized curtains.' : r.title === 'Executive Suite' ? 'Each 40 m² Executive Suite features a unique colour scheme, a living room with a historic fireplace, two wardrobes, two televisions, patterned ceilings, and a white Brazilian marble bathroom with rain shower.' : 'Our 83 m² Penthouse Suite has two separate entrances, a separate living area, a bedroom, two bathrooms, a large balcony, two wardrobes, two televisions, patterned ceilings and a romantic bathtub surrounded by windows.'}</p>
           <div class="classic-room-amenities" aria-label="Room amenities">
-            <div class="classic-room-amenity hotel-icon-tooltip" data-tooltip="Rain shower bathroom"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/icons/bath.png" alt="Rain shower bathroom"></div>
-            <div class="classic-room-amenity hotel-icon-tooltip" data-tooltip="Work desk"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/icons/desk.png" alt="Work desk"></div>
-            <div class="classic-room-amenity hotel-icon-tooltip" data-tooltip="Complimentary internet"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/icons/adsl.png" alt="Complimentary internet"></div>
-            <div class="classic-room-amenity hotel-icon-tooltip" data-tooltip="LCD television"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/icons/tv.png" alt="LCD television"></div>
-            <div class="classic-room-amenity hotel-icon-tooltip" data-tooltip="Mini bar"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/icons/mini-bar.png" alt="Mini bar"></div>
-            <div class="classic-room-amenity hotel-icon-tooltip" data-tooltip="Free Wi-Fi"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/icons/wifi.png" alt="Free Wi-Fi"></div>
-            <div class="classic-room-amenity hotel-icon-tooltip" data-tooltip="Coffee machine"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/icons/coffee-machine.png" alt="Coffee machine"></div>
-            <div class="classic-room-amenity hotel-icon-tooltip" data-tooltip="Hairdryer"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/icons/hairdryer.png" alt="Hairdryer"></div>
+            ${roomAmenityIcons.map(icon=>'<div class="classic-room-amenity hotel-icon-tooltip" data-tooltip="'+icon[1]+'"><img src="assets/hotels/the-bank-hotel-istanbul/rooms/icons/'+icon[0]+'" alt="'+icon[1]+'"></div>').join('')}
           </div>
           <h3>In All Our Rooms</h3>
           <ul class="classic-room-features">
@@ -430,10 +438,11 @@
             <li>Goose-down duvets and pillows</li>
             <li>L'Occitane bathroom amenities</li>
             <li>Bathrobes and slippers</li>
-            <li>Complimentary water and tea station</li>
+            <li>Complimentary water, tea &amp; coffee</li>
           </ul>
+          ${r.extra ? '<p class="classic-room-extra"><strong>Room features:</strong> '+r.extra+'</p>' : ''}
           <p class="classic-room-note">Amenities, services, room details and visuals may be regularly updated, improved or occasionally removed from the service offering. Room décor may vary in accordance with the historic character of the building, and certain amenities may not be available in every room type.</p>
-        </div>` : '';
+        </div>`;
       const virtualTourInline=document.getElementById('hotelRoomVirtualTourInline');
       virtualTourInline.innerHTML=r.virtualTours ? r.virtualTours.map(t=>'<a class="hotel-room-virtual-tour-inline" href="'+t.url+'" target="_blank" rel="noopener noreferrer">[3D Virtual Tour]</a>').join(' ') : '';
       content.innerHTML=gallery+'<div class="hotel-room-detail-list"><div><strong>Size</strong><span>'+r.size+'</span></div><div><strong>Maximum occupancy</strong><span>'+r.guests+'</span></div><div><strong>Bed</strong><span>'+r.bed+'</span></div><div><strong>View</strong><span>'+r.view+'</span></div></div>'+classicDetails;
