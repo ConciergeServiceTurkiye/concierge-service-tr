@@ -788,7 +788,7 @@
   const lightbox=document.getElementById('hotelDiningLightbox');
   const lightboxImage=document.getElementById('hotelDiningLightboxImage');
   const counter=document.getElementById('hotelDiningLightboxCounter');
-  let activeVenue=null, activePhoto=0, previousFocus=null;
+  let activeVenue=null, activePhoto=0, previousFocus=null, sericaGalleryStart=0;
   function renderLinks(info){
     const links=[];
     if(info.menu) links.push('<a href="'+info.menu+'" target="_blank" rel="noopener noreferrer">View menu (PDF)</a>');
@@ -816,6 +816,22 @@
       item('Terms &amp; conditions','<ul>'+r.terms.map(term=>'<li>'+term+'</li>').join('')+'</ul>')+
     '</section>';
   }
+  function renderSericaGallery(){
+    const track=content.querySelector('[data-serica-gallery-track]');
+    if(!track||!activeVenue||!activeVenue.gallery.length)return;
+    const total=activeVenue.gallery.length;
+    track.innerHTML=Array.from({length:Math.min(4,total)},(_,offset)=>{
+      const index=(sericaGalleryStart+offset)%total;
+      const src=activeVenue.gallery[index];
+      const alt=index===0?'Serica cover photo':'Serica Restaurant photo '+(index+1);
+      return '<button type="button" data-dining-photo-index="'+index+'" aria-label="Open '+alt+'"><img src="'+src+'" alt="'+alt+'" loading="lazy"></button>';
+    }).join('');
+  }
+  function moveSericaGallery(delta){
+    if(!activeVenue||!activeVenue.gallery.length)return;
+    sericaGalleryStart=(sericaGalleryStart+delta+activeVenue.gallery.length)%activeVenue.gallery.length;
+    renderSericaGallery();
+  }
   function openDining(key,trigger){
     const info=diningInfo[key]; if(!info)return;
     activeVenue=info; previousFocus=trigger;
@@ -824,7 +840,7 @@
     logo.innerHTML='<img src="'+info.logo+'" alt="">';
     if(key==='serica'){
       content.innerHTML=
-        '<section class="hotel-dining-modal-gallery-section hotel-dining-serica-gallery"><h3>Gallery</h3><div class="hotel-dining-modal-gallery">'+info.gallery.map((src,index)=>'<button type="button" data-dining-photo-index="'+index+'" aria-label="Open '+info.title+' photo '+(index+1)+'"><img src="'+src+'" alt="'+(index===0?'Serica cover photo':info.title+' photo '+(index+1))+'" loading="lazy"></button>').join('')+'</div></section>'+
+        '<section class="hotel-dining-serica-photos" aria-label="Serica photos"><div class="hotel-dining-serica-carousel"><button class="hotel-dining-serica-arrow" type="button" aria-label="Previous Serica photo" data-serica-gallery-prev>&lt;</button><div class="hotel-dining-serica-viewport"><div class="hotel-dining-modal-gallery hotel-dining-serica-gallery-track" data-serica-gallery-track></div></div><button class="hotel-dining-serica-arrow" type="button" aria-label="Next Serica photo" data-serica-gallery-next>&gt;</button></div></section>'+
         '<div class="hotel-dining-modal-actions hotel-dining-serica-tour"><a href="'+info.tour+'" target="_blank" rel="noopener noreferrer">3D Virtual Tour</a></div>'+
         '<div class="hotel-dining-modal-intro hotel-dining-serica-intro"><p>'+info.intro+'</p><p>'+info.detail+'</p></div>'+
         '<div class="hotel-dining-serica-hours"><strong>Opening Time</strong><p>'+info.hours+'</p></div>'+
@@ -832,6 +848,8 @@
         '<section class="hotel-dining-serica-guest"><h3>Guest Information</h3><p>'+info.note+'</p></section>'+
         '<div class="hotel-dining-serica-divider" aria-hidden="true"></div>'+
         renderReservation(info);
+      sericaGalleryStart=0;
+      renderSericaGallery();
     }else{
       content.innerHTML=
         '<div class="hotel-dining-modal-intro"><p>'+info.intro+'</p><p>'+info.detail+'</p></div>'+
@@ -868,6 +886,10 @@
   document.querySelectorAll('[data-open-dining-details]').forEach(button=>button.addEventListener('click',()=>openDining(button.dataset.openDiningDetails,button)));
   modal.querySelectorAll('[data-close-dining-modal]').forEach(button=>button.addEventListener('click',closeDining));
   content.addEventListener('click',event=>{
+    const previous=event.target.closest('[data-serica-gallery-prev]');
+    const next=event.target.closest('[data-serica-gallery-next]');
+    if(previous){moveSericaGallery(-1);return;}
+    if(next){moveSericaGallery(1);return;}
     const photo=event.target.closest('[data-dining-photo-index]');
     if(photo) openPhoto(Number(photo.dataset.diningPhotoIndex));
   });
