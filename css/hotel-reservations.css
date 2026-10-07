@@ -1859,3 +1859,11 @@ body.hotel-amenities-open{overflow:hidden}
  .hotel-dining-serica-gallery-track button{aspect-ratio:1}
  .hotel-dining-serica-intro{margin:15px 0;padding:16px 0}
 }
+
+
+/* Enlarge the initially visible Serica photo thumbnails */
+.hotel-dining-serica-gallery-track button{aspect-ratio:1.05}
+.hotel-dining-modal.is-serica .hotel-dining-serica-intro p{color:#f1eee5}
+@media(max-width:600px){
+ .hotel-dining-serica-gallery-track button{aspect-ratio:.88}
+}
