@@ -451,7 +451,7 @@
           </ul>
           <p class="classic-room-note">Amenities, services, room details and visuals may be regularly updated, improved or occasionally removed from the service offering. Room décor may vary in accordance with the historic character of the building, and certain amenities may not be available in every room type.</p>
         </div>`;
-      const virtualTourInline=RoomVirtualTourInline');
+      const virtualTourInline=document.getElementById('hotelRoomVirtualTourInline');
       virtualTourInline.innerHTML=r.virtualTours ? r.virtualTours.map(t=>'<a class="hotel-room-virtual-tour-inline" href="'+t.url+'" target="_blank" rel="noopener noreferrer">3D Virtual Tour</a>').join(' ') : '';
       content.innerHTML=gallery+'<div class="hotel-room-detail-list"><div><strong>Size</strong><span>'+r.size+'</span></div><div><strong>Maximum occupancy</strong><span>'+r.guests+'</span></div><div><strong>Bed</strong><span>'+r.bed+'</span></div><div><strong>View</strong><span>'+r.view+'</span></div></div>'+roomDetails;
       modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.add('hotel-modal-open');
