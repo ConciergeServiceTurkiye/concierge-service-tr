@@ -723,7 +723,20 @@
       menu:'https://www.thebankhotelistanbul.com/pdfdocuments/Ser%C4%B1ca_Tam_Menu_9.6.26_.pdf',
       booking:'https://checkandplace.com/public/online-booking/thebankhotel/serica/serica-restaurant',
       website:'https://www.sericarestaurant.com/',
-      tour:'https://www.sericarestaurant.com/360',
+      tour:'https://kuula.co/share/collection/7cf5D?logo=-1&amp;info=0&amp;fs=1&amp;vr=1&amp;zoom=1&amp;thumbs=3&amp;iosfs=1',
+      reservation:{
+        important:'To protect the balance of our flavours, we are unable to remove essential ingredients such as onion and garlic from our dishes. Thank you for your understanding.',
+        guests:'The reservation form accepts up to 8 guests.',
+        times:'19:00 · 20:00 · 21:00 · 22:00',
+        days:'Closed on Mondays.',
+        preferences:'The booking form asks whether guests have any allergies or intolerances (Yes / No).',
+        occasions:'Birthday · Anniversary · Special event · Meeting',
+        personal:'Guests are then asked to provide their personal and contact details.',
+        payment:'An advance payment of TRY 1,000 per person is required. On the reservation date, the service bill is collected after deducting the advance payment.',
+        cancellation:'Payments are non-refundable if a reservation is cancelled.',
+        dress:'Smart casual. Shorts, slippers and tracksuits are not accepted.',
+        terms:['Pets are not permitted.','Guests must be 18 or older.','Outside food and beverages are not permitted.','Reservations are held for the booked time and the following 30 minutes. A reservation is cancelled if the guest has not arrived within 30 minutes after the booked time.']
+      },
       gallery:[
         'https://www.thebankhotelistanbul.com/medias/article/big/249/t-web-2.jpg',
         'https://www.thebankhotelistanbul.com/medias/article/big/247/t-web-3.jpg',
@@ -766,6 +779,7 @@
       menu:'https://www.thebankhotelistanbul.com/pdfdocuments/Roof_Tam_Menu_9.6.26_.pdf',
       booking:'https://checkandplace.com/public/online-booking/thebankhotel/beyoglu/roof-bar',
       website:'https://www.thebankhotelistanbul.com/en/restaurant/the-bank-roof-bar',
+      tour:'https://kuula.co/share/collection/7cf56?logo=-1&amp;info=0&amp;fs=1&amp;vr=1&amp;zoom=1&amp;thumbs=3&amp;iosfs=1',
       gallery:[
         'https://www.thebankhotelistanbul.com/medias/article/big/132/slider3.jpg',
         'https://www.thebankhotelistanbul.com/medias/article/big/290/sliderv2.jpg',
@@ -787,9 +801,30 @@
     if(info.menu) links.push('<a href="'+info.menu+'" target="_blank" rel="noopener noreferrer">View menu (PDF)</a>');
     if(info.booking) links.push('<a href="'+info.booking+'" target="_blank" rel="noopener noreferrer">Reserve a table</a>');
     if(info.website) links.push('<a href="'+info.website+'" target="_blank" rel="noopener noreferrer">Official website</a>');
-    if(info.tour) links.push('<a href="'+info.tour+'" target="_blank" rel="noopener noreferrer">Virtual tour</a>');
+    if(info.tour) links.push('<a href="'+info.tour+'" target="_blank" rel="noopener noreferrer">3D Virtual Tour</a>');
     links.push('<a href="https://www.google.com/maps/search/?api=1&amp;query='+encodeURIComponent(info.address)+'" target="_blank" rel="noopener noreferrer">Open in Maps</a>');
     return links.join('');
+  }
+  function renderReservation(info){
+    if(!info.reservation)return '';
+    const r=info.reservation;
+    return '<section class="hotel-dining-reservation">'+
+      '<h3>Reservation Information</h3>'+
+      '<div class="hotel-dining-reservation-important"><strong>Important Information</strong><p>'+r.important+'</p></div>'+
+      '<div class="hotel-dining-reservation-facts">'+
+        '<div><h4>Party size</h4><p>'+r.guests+'</p></div>'+
+        '<div><h4>Available times</h4><p>'+r.times+'</p></div>'+
+        '<div><h4>Opening days</h4><p>'+r.days+'</p></div>'+
+        '<div><h4>Allergies &amp; occasions</h4><p>'+r.preferences+' Event choices: '+r.occasions+'.</p></div>'+
+      '</div>'+
+      '<p class="hotel-dining-reservation-personal">'+r.personal+'</p>'+
+      '<div class="hotel-dining-reservation-terms">'+
+        '<div><h4>Advance payment</h4><p>'+r.payment+'</p></div>'+
+        '<div><h4>Cancellation</h4><p>'+r.cancellation+'</p></div>'+
+        '<div><h4>Dress code</h4><p>'+r.dress+'</p></div>'+
+        '<div><h4>Terms &amp; conditions</h4><ul>'+r.terms.map(term=>'<li>'+term+'</li>').join('')+'</ul></div>'+
+      '</div>'+
+    '</section>';
   }
   function openDining(key,trigger){
     const info=diningInfo[key]; if(!info)return;
@@ -805,6 +840,7 @@
         '<section><h3>Guest information</h3><p>'+info.note+'</p></section>'+
       '</div>'+
       '<div class="hotel-dining-modal-actions">'+renderLinks(info)+'</div>'+
+      renderReservation(info)+
       '<section class="hotel-dining-modal-gallery-section"><h3>Gallery</h3><div class="hotel-dining-modal-gallery">'+info.gallery.map((src,index)=>'<button type="button" data-dining-photo-index="'+index+'" aria-label="Open '+info.title+' gallery image '+(index+1)+'"><img src="'+src+'" alt="'+info.title+' photo '+(index+1)+'" loading="lazy"></button>').join('')+'</div></section>';
     modal.classList.add('is-open'); modal.setAttribute('aria-hidden','false');
     document.documentElement.classList.add('hotel-modal-open'); document.body.classList.add('hotel-modal-open');
