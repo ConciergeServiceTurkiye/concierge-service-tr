@@ -1059,3 +1059,20 @@ body.hotel-amenities-open{overflow:hidden}
  .hotel-room-modal .hotel-room-nav-prev{left:8px;right:auto}
  .hotel-room-modal .hotel-room-nav-next{right:8px;left:auto}
 }
+
+/* Keep the room selection action beside the room name */
+#hotelRoomModal .hotel-room-modal-title-row{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:18px!important}
+#hotelRoomModal .hotel-room-modal-heading-group{display:flex;min-width:0;align-items:center;gap:18px}
+#hotelRoomModal .hotel-room-modal-heading-group h2{margin:0!important}
+#hotelRoomModal .hotel-room-modal-title-row .hotel-modal-reserve{position:static!important;left:auto!important;transform:none!important;width:max-content!important;margin:0!important;flex:0 0 auto;white-space:nowrap}
+@media(max-width:800px){
+ #hotelRoomModal .hotel-room-modal-title-row{align-items:flex-start!important;gap:12px!important}
+ #hotelRoomModal .hotel-room-modal-heading-group{flex-wrap:wrap;gap:10px}
+ #hotelRoomModal .hotel-room-modal-heading-group h2{font-size:28px!important}
+}
+@media(max-width:600px){
+ #hotelRoomModal .hotel-room-modal-title-row{flex-direction:column!important}
+ #hotelRoomModal .hotel-room-modal-heading-group h2{font-size:25px!important}
+ #hotelRoomModal .hotel-room-modal-heading-group .hotel-modal-reserve{padding:9px 12px!important;font-size:12px!important}
+ #hotelRoomModal .hotel-room-virtual-tour-inline{align-self:flex-end}
+}
