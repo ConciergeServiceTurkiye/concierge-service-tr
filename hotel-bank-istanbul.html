@@ -737,16 +737,7 @@
         dress:'Smart casual. Shorts, slippers and tracksuits are not accepted.',
         terms:['Pets are not permitted.','Guests must be 18 or older.','Outside food and beverages are not permitted.','Reservations are held for the booked time and the following 30 minutes. A reservation is cancelled if the guest has not arrived within 30 minutes after the booked time.']
       },
-      gallery:[
-        'https://www.thebankhotelistanbul.com/medias/article/big/249/t-web-2.jpg',
-        'https://www.thebankhotelistanbul.com/medias/article/big/247/t-web-3.jpg',
-        'https://www.thebankhotelistanbul.com/medias/article/big/380/img-9713.jpeg',
-        'https://www.thebankhotelistanbul.com/medias/article/big/381/img-9777.jpeg',
-        'https://www.thebankhotelistanbul.com/medias/article/big/382/img-9711.jpeg',
-        'https://www.thebankhotelistanbul.com/medias/article/big/383/img-9780.jpeg',
-        'https://www.thebankhotelistanbul.com/medias/article/big/384/img-9782.jpeg',
-        'https://www.thebankhotelistanbul.com/medias/article/big/385/img-9794.jpeg'
-      ]
+      gallery:[]
     },
     lobby: {
       title:'The Bank Lobby Restaurant & Bar',
@@ -760,11 +751,7 @@
       note:'The venue offers open-buffet breakfast and all-day food and beverage service. In-room dining is available around the clock.',
       menu:'https://www.thebankhotelistanbul.com/pdfdocuments/Lobby_Tam_Menu_9.6.26_.pdf',
       website:'https://www.thebankhotelistanbul.com/en/restaurant/lobby-bar-restaurant',
-      gallery:[
-        'https://www.thebankhotelistanbul.com/medias/article/big/192/ekran-resmi-2023-03-15-16-34-04.png',
-        'https://www.thebankhotelistanbul.com/medias/article/big/191/ekran-resmi-2023-03-15-16-33-48.png',
-        'https://www.thebankhotelistanbul.com/medias/article/big/193/ekran-resmi-2023-03-15-16-34-24.png'
-      ]
+      gallery:[]
     },
     roof: {
       title:'The Bank Roof Bar',
@@ -780,11 +767,7 @@
       booking:'https://checkandplace.com/public/online-booking/thebankhotel/beyoglu/roof-bar',
       website:'https://www.thebankhotelistanbul.com/en/restaurant/the-bank-roof-bar',
       tour:'https://kuula.co/share/collection/7cf56?logo=-1&amp;info=0&amp;fs=1&amp;vr=1&amp;zoom=1&amp;thumbs=3&amp;iosfs=1',
-      gallery:[
-        'https://www.thebankhotelistanbul.com/medias/article/big/132/slider3.jpg',
-        'https://www.thebankhotelistanbul.com/medias/article/big/290/sliderv2.jpg',
-        'https://www.thebankhotelistanbul.com/medias/article/big/291/sliderv1.jpg'
-      ]
+      gallery:[]
     }
   };
   const modal=document.getElementById('hotelDiningModal');
@@ -841,7 +824,7 @@
       '</div>'+
       '<div class="hotel-dining-modal-actions">'+renderLinks(info)+'</div>'+
       renderReservation(info)+
-      '<section class="hotel-dining-modal-gallery-section"><h3>Gallery</h3><div class="hotel-dining-modal-gallery">'+info.gallery.map((src,index)=>'<button type="button" data-dining-photo-index="'+index+'" aria-label="Open '+info.title+' gallery image '+(index+1)+'"><img src="'+src+'" alt="'+info.title+' photo '+(index+1)+'" loading="lazy"></button>').join('')+'</div></section>';
+      (info.gallery&&info.gallery.length ? '<section class="hotel-dining-modal-gallery-section"><h3>Gallery</h3><div class="hotel-dining-modal-gallery">'+info.gallery.map((src,index)=>'<button type="button" data-dining-photo-index="'+index+'" aria-label="Open '+info.title+' gallery image '+(index+1)+'"><img src="'+src+'" alt="'+info.title+' photo '+(index+1)+'" loading="lazy"></button>').join('')+'</div></section>' : '');
     modal.classList.add('is-open'); modal.setAttribute('aria-hidden','false');
     document.documentElement.classList.add('hotel-modal-open'); document.body.classList.add('hotel-modal-open');
     dialog.focus();
