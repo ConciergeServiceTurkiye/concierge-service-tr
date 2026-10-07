@@ -193,16 +193,19 @@
         <div class="hotel-dining-logo hotel-dining-logo-serica"><img src="assets/hotels/the-bank-hotel-istanbul/hotel/serica-logo-gold.png" alt="Serica logo"></div>
         <h3>Serica Restaurant</h3>
         <p>Serica presents a menu rooted in the diverse culinary geography of Türkiye, with an emphasis on local ingredients and a soil-to-plate approach. The restaurant is open from 18:30–00:00; the guest information states that the kitchen takes last orders at 23:00 and the restaurant is closed on Mondays.</p>
+        <button class="hotel-dining-details-button" type="button" data-open-dining-details="serica" aria-haspopup="dialog" aria-controls="hotelDiningModal">View Details <span aria-hidden="true">↗</span></button>
       </article>
       <article class="hotel-dining-card">
         <div class="hotel-dining-logo hotel-dining-logo-bank"><img src="assets/hotels/the-bank-hotel-istanbul/hotel/tbh-lobby-bar-logo-white.png" alt="The Bank Lobby Restaurant &amp; Bar logo"></div>
         <h3>The Bank Lobby Restaurant &amp; Bar</h3>
         <p>The lobby venue offers cocktails, an extensive wine and drinks menu, international cuisine and open-buffet breakfast. À la carte room service is available 24/7 with 24/7 availability.</p>
+        <button class="hotel-dining-details-button" type="button" data-open-dining-details="lobby" aria-haspopup="dialog" aria-controls="hotelDiningModal">View Details <span aria-hidden="true">↗</span></button>
       </article>
       <article class="hotel-dining-card">
         <div class="hotel-dining-logo hotel-dining-logo-roof"><img src="assets/hotels/the-bank-hotel-istanbul/hotel/Tbh-Roof-bar-02.png" alt="The Bank Roof Bar logo"></div>
         <h3>The Bank Roof Bar</h3>
         <p>The open-air rooftop offers views across the Historic Peninsula, Golden Horn and Bosphorus, with classic and signature cocktails, whiskies, local and international wines and finger foods. Guest information lists service from 12:00–02:00, subject to weather conditions.</p>
+        <button class="hotel-dining-details-button" type="button" data-open-dining-details="roof" aria-haspopup="dialog" aria-controls="hotelDiningModal">View Details <span aria-hidden="true">↗</span></button>
       </article>
     </div>
 </section>
@@ -446,6 +449,32 @@
   </div>
 </section>
 
+
+<div class="hotel-dining-modal" id="hotelDiningModal" aria-hidden="true">
+  <div class="hotel-dining-modal-backdrop" data-close-dining-modal></div>
+  <div class="hotel-dining-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="hotelDiningModalTitle" tabindex="-1">
+    <button class="hotel-dining-modal-close" type="button" aria-label="Close details" data-close-dining-modal>×</button>
+    <div class="hotel-dining-modal-heading">
+      <div id="hotelDiningModalLogo" class="hotel-dining-modal-logo"></div>
+      <div>
+        <div class="hotel-eyebrow">DINING &amp; BARS</div>
+        <h2 id="hotelDiningModalTitle"></h2>
+      </div>
+    </div>
+    <div id="hotelDiningModalContent"></div>
+  </div>
+</div>
+<div class="hotel-dining-lightbox" id="hotelDiningLightbox" aria-hidden="true">
+  <div class="hotel-dining-lightbox-backdrop" data-close-dining-lightbox></div>
+  <div class="hotel-dining-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Dining gallery photo">
+    <button class="hotel-dining-lightbox-close" type="button" aria-label="Close photo" data-close-dining-lightbox>×</button>
+    <button class="hotel-dining-lightbox-prev" type="button" aria-label="Previous photo" data-dining-photo-prev>‹</button>
+    <img id="hotelDiningLightboxImage" src="" alt="">
+    <button class="hotel-dining-lightbox-next" type="button" aria-label="Next photo" data-dining-photo-next>›</button>
+    <div class="hotel-dining-lightbox-counter" id="hotelDiningLightboxCounter"></div>
+  </div>
+</div>
+
 <div class="hotel-room-modal" id="hotelRoomModal" aria-hidden="true">
   <div class="hotel-room-modal-backdrop" data-close-room-modal></div>
   <button class="hotel-room-nav-arrow hotel-room-nav-prev" type="button" aria-label="Previous room" data-room-prev>‹</button>
@@ -677,5 +706,146 @@
   });
 })();
 </script>
+
+<script>
+(function(){
+  const diningInfo = {
+    serica: {
+      title:'Serica Restaurant',
+      logo:'assets/hotels/the-bank-hotel-istanbul/hotel/serica-logo-gold.png',
+      intro:'Serica tells the culinary story of Türkiye through regional ingredients and traditions. Its soil-to-plate approach puts local, geographically marked produce at the centre of each plate.',
+      detail:'Chef Yiğit Alıcıoğlu draws on the Aegean, Black Sea, Central Anatolia and Southeast Anatolia, reinterpreting the country’s culinary heritage with contemporary techniques.',
+      hours:'18:30–00:00. Kitchen last orders are at 23:00. Guest information lists the restaurant as closed on Mondays.',
+      address:'Azapkapı, Bankalar Cd. No:5, Karaköy, 34321 Beyoğlu / İstanbul',
+      phone:'+90 (212) 283 00 55 · +90 (531) 892 36 00',
+      email:'reservation@sericarestaurant.com',
+      note:'The menu includes starters, main courses, desserts, tasting selections and drinks. Dishes may contain allergens; ask the service team for detailed allergen information.',
+      menu:'https://www.thebankhotelistanbul.com/pdfdocuments/Ser%C4%B1ca_Tam_Menu_9.6.26_.pdf',
+      booking:'https://checkandplace.com/public/online-booking/thebankhotel/serica/serica-restaurant',
+      website:'https://www.sericarestaurant.com/',
+      tour:'https://www.sericarestaurant.com/360',
+      gallery:[
+        'https://www.thebankhotelistanbul.com/medias/article/big/249/t-web-2.jpg',
+        'https://www.thebankhotelistanbul.com/medias/article/big/247/t-web-3.jpg',
+        'https://www.thebankhotelistanbul.com/medias/article/big/380/img-9713.jpeg',
+        'https://www.thebankhotelistanbul.com/medias/article/big/381/img-9777.jpeg',
+        'https://www.thebankhotelistanbul.com/medias/article/big/382/img-9711.jpeg',
+        'https://www.thebankhotelistanbul.com/medias/article/big/383/img-9780.jpeg',
+        'https://www.thebankhotelistanbul.com/medias/article/big/384/img-9782.jpeg',
+        'https://www.thebankhotelistanbul.com/medias/article/big/385/img-9794.jpeg'
+      ]
+    },
+    lobby: {
+      title:'The Bank Lobby Restaurant & Bar',
+      logo:'assets/hotels/the-bank-hotel-istanbul/hotel/tbh-lobby-bar-logo-white.png',
+      intro:'Set within the hotel’s warm, sophisticated lobby, the restaurant serves international cuisine, open-buffet breakfast, cocktails and a broad selection of drinks.',
+      detail:'Breakfast is served on weekdays from 07:00–10:30 and on weekends from 07:00–11:00. Food and beverage service is listed as 12:00–23:00.',
+      hours:'Breakfast: weekdays 07:00–10:30; weekends 07:00–11:00. Food and beverage service: 12:00–23:00. À la carte in-room dining is available 24/7.',
+      address:'The Bank Hotel Istanbul, Azapkapı, Bankalar Cd. No:5, Karaköy, 34421 Beyoğlu / İstanbul',
+      phone:'+90 212 283 00 55',
+      email:'tbh@thebankhotelistanbul.com',
+      note:'The venue offers open-buffet breakfast and all-day food and beverage service. In-room dining is available around the clock.',
+      menu:'https://www.thebankhotelistanbul.com/pdfdocuments/Lobby_Tam_Menu_9.6.26_.pdf',
+      website:'https://www.thebankhotelistanbul.com/en/restaurant/lobby-bar-restaurant',
+      gallery:[
+        'https://www.thebankhotelistanbul.com/medias/article/big/192/ekran-resmi-2023-03-15-16-34-04.png',
+        'https://www.thebankhotelistanbul.com/medias/article/big/191/ekran-resmi-2023-03-15-16-33-48.png',
+        'https://www.thebankhotelistanbul.com/medias/article/big/193/ekran-resmi-2023-03-15-16-34-24.png'
+      ]
+    },
+    roof: {
+      title:'The Bank Roof Bar',
+      logo:'assets/hotels/the-bank-hotel-istanbul/hotel/Tbh-Roof-bar-02.png',
+      intro:'An open-air rooftop bar in Karaköy with views towards the Historic Peninsula. The menu combines classic and signature cocktails, spirits, local and international wines, and food to share.',
+      detail:'The menu includes Turkish-inspired bites alongside fresh dishes, grills and desserts. Outdoor service is subject to weather conditions.',
+      hours:'12:00–02:00, subject to weather conditions.',
+      address:'The Bank Hotel Istanbul, Azapkapı, Bankalar Cd. No:5, Karaköy, 34421 Beyoğlu / İstanbul',
+      phone:'+90 212 283 00 55',
+      email:'tbh@thebankhotelistanbul.com',
+      note:'The current menu includes local delicacies, crispy bites, fresh dishes, grilled items and desserts. Menu items and prices can change.',
+      menu:'https://www.thebankhotelistanbul.com/pdfdocuments/Roof_Tam_Menu_9.6.26_.pdf',
+      booking:'https://checkandplace.com/public/online-booking/thebankhotel/beyoglu/roof-bar',
+      website:'https://www.thebankhotelistanbul.com/en/restaurant/the-bank-roof-bar',
+      tour:'https://kuula.co/',
+      gallery:[
+        'https://www.thebankhotelistanbul.com/medias/article/big/132/slider3.jpg',
+        'https://www.thebankhotelistanbul.com/medias/article/big/290/sliderv2.jpg',
+        'https://www.thebankhotelistanbul.com/medias/article/big/291/sliderv1.jpg'
+      ]
+    }
+  };
+  const modal=document.getElementById('hotelDiningModal');
+  const dialog=modal.querySelector('.hotel-dining-modal-dialog');
+  const title=document.getElementById('hotelDiningModalTitle');
+  const logo=document.getElementById('hotelDiningModalLogo');
+  const content=document.getElementById('hotelDiningModalContent');
+  const lightbox=document.getElementById('hotelDiningLightbox');
+  const lightboxImage=document.getElementById('hotelDiningLightboxImage');
+  const counter=document.getElementById('hotelDiningLightboxCounter');
+  let activeVenue=null, activePhoto=0, previousFocus=null;
+  function renderLinks(info){
+    const links=[];
+    if(info.menu) links.push('<a href="'+info.menu+'" target="_blank" rel="noopener noreferrer">View menu (PDF)</a>');
+    if(info.booking) links.push('<a href="'+info.booking+'" target="_blank" rel="noopener noreferrer">Reserve a table</a>');
+    if(info.website) links.push('<a href="'+info.website+'" target="_blank" rel="noopener noreferrer">Official website</a>');
+    if(info.tour) links.push('<a href="'+info.tour+'" target="_blank" rel="noopener noreferrer">Virtual tour</a>');
+    links.push('<a href="https://www.google.com/maps/search/?api=1&amp;query='+encodeURIComponent(info.address)+'" target="_blank" rel="noopener noreferrer">Open in Maps</a>');
+    return links.join('');
+  }
+  function openDining(key,trigger){
+    const info=diningInfo[key]; if(!info)return;
+    activeVenue=info; previousFocus=trigger;
+    title.textContent=info.title;
+    logo.innerHTML='<img src="'+info.logo+'" alt="">';
+    content.innerHTML=
+      '<div class="hotel-dining-modal-intro"><p>'+info.intro+'</p><p>'+info.detail+'</p></div>'+
+      '<div class="hotel-dining-modal-facts">'+
+        '<section><h3>Opening hours</h3><p>'+info.hours+'</p></section>'+
+        '<section><h3>Address</h3><p>'+info.address+'</p></section>'+
+        '<section><h3>Contact</h3><p><a href="tel:'+info.phone.replace(/[^+\d]/g,'')+'">'+info.phone+'</a><br><a href="mailto:'+info.email+'">'+info.email+'</a></p></section>'+
+        '<section><h3>Guest information</h3><p>'+info.note+'</p></section>'+
+      '</div>'+
+      '<div class="hotel-dining-modal-actions">'+renderLinks(info)+'</div>'+
+      '<section class="hotel-dining-modal-gallery-section"><h3>Gallery</h3><div class="hotel-dining-modal-gallery">'+info.gallery.map((src,index)=>'<button type="button" data-dining-photo-index="'+index+'" aria-label="Open '+info.title+' gallery image '+(index+1)+'"><img src="'+src+'" alt="'+info.title+' photo '+(index+1)+'" loading="lazy"></button>').join('')+'</div></section>';
+    modal.classList.add('is-open'); modal.setAttribute('aria-hidden','false');
+    document.documentElement.classList.add('hotel-modal-open'); document.body.classList.add('hotel-modal-open');
+    dialog.focus();
+  }
+  function closeDining(){
+    closeLightbox();
+    modal.classList.remove('is-open'); modal.setAttribute('aria-hidden','true');
+    document.documentElement.classList.remove('hotel-modal-open'); document.body.classList.remove('hotel-modal-open');
+    if(previousFocus) previousFocus.focus();
+    activeVenue=null;
+  }
+  function showPhoto(index){
+    if(!activeVenue||!activeVenue.gallery.length)return;
+    activePhoto=(index+activeVenue.gallery.length)%activeVenue.gallery.length;
+    lightboxImage.src=activeVenue.gallery[activePhoto];
+    lightboxImage.alt=activeVenue.title+' photo '+(activePhoto+1);
+    counter.textContent=(activePhoto+1)+' / '+activeVenue.gallery.length;
+  }
+  function openPhoto(index){showPhoto(index);lightbox.classList.add('is-open');lightbox.setAttribute('aria-hidden','false');}
+  function closeLightbox(){lightbox.classList.remove('is-open');lightbox.setAttribute('aria-hidden','true');lightboxImage.removeAttribute('src');}
+  document.querySelectorAll('[data-open-dining-details]').forEach(button=>button.addEventListener('click',()=>openDining(button.dataset.openDiningDetails,button)));
+  modal.querySelectorAll('[data-close-dining-modal]').forEach(button=>button.addEventListener('click',closeDining));
+  content.addEventListener('click',event=>{
+    const photo=event.target.closest('[data-dining-photo-index]');
+    if(photo) openPhoto(Number(photo.dataset.diningPhotoIndex));
+  });
+  lightbox.querySelectorAll('[data-close-dining-lightbox]').forEach(button=>button.addEventListener('click',closeLightbox));
+  lightbox.querySelector('[data-dining-photo-prev]').addEventListener('click',()=>showPhoto(activePhoto-1));
+  lightbox.querySelector('[data-dining-photo-next]').addEventListener('click',()=>showPhoto(activePhoto+1));
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'){
+      if(lightbox.classList.contains('is-open')) closeLightbox();
+      else if(modal.classList.contains('is-open')) closeDining();
+    }
+    if(lightbox.classList.contains('is-open')&&event.key==='ArrowLeft')showPhoto(activePhoto-1);
+    if(lightbox.classList.contains('is-open')&&event.key==='ArrowRight')showPhoto(activePhoto+1);
+  });
+})();
+</script>
+
 </body>
 </html>
