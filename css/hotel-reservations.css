@@ -1287,3 +1287,17 @@ body.hotel-amenities-open{overflow:hidden}
  .hotel-dining-card{padding:24px 21px}
  .hotel-dining-logo{min-height:100px;margin-bottom:16px}
 }
+
+
+/* Use the official hotel dining and bar logo artwork */
+.hotel-dining-logo img{
+ display:block;
+ width:auto;
+ max-width:min(100%,240px);
+ height:auto;
+ max-height:82px;
+ object-fit:contain;
+}
+.hotel-dining-logo-serica img{max-width:min(100%,205px);max-height:82px}
+.hotel-dining-logo-bank img,
+.hotel-dining-logo-roof img{max-width:min(100%,240px);max-height:76px}
