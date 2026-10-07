@@ -759,7 +759,7 @@ body.hotel-amenities-open{overflow:hidden}
 
 
 /* Test: recolor the existing TV room icon to the site's gold */
-#hotelRoomModal .classic-room-amenity img[src$="tv.png"]{
+#hotelRoomModal .classic-room-amenity img{
   filter: brightness(0) saturate(100%) invert(72%) sepia(53%) saturate(675%) hue-rotate(6deg) brightness(91%) contrast(88%);
 }
 
