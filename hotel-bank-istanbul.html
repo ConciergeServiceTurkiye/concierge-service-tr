@@ -345,7 +345,7 @@
 
 <div class="hotel-room-modal" id="hotelRoomModal" aria-hidden="true">
   <div class="hotel-room-modal-backdrop" data-close-room-modal></div>
-  <div class="hotel-room-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="hotelRoomModalTitle">
+  <div class="hotel-room-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="hotelRoomModalTitle" tabindex="-1">
     <button class="hotel-room-modal-close" type="button" aria-label="Close" data-close-room-modal>×</button>
     <div class="hotel-eyebrow">ROOM DETAILS</div>
     <div class="hotel-room-modal-title-row"><h2 id="hotelRoomModalTitle"></h2><span id="hotelRoomVirtualTourInline"></span></div>
@@ -408,7 +408,7 @@
   const modal=document.getElementById('hotelRoomModal');
   const title=document.getElementById('hotelRoomModalTitle');
   const content=document.getElementById('hotelRoomModalContent');
-  function close(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('hotel-modal-open');}
+  function close(){modal.classList.remove('is-open');modal.setAttribute('aria-hidden','true');document.documentElement.classList.remove('hotel-modal-open');document.body.classList.remove('hotel-modal-open');}
   document.querySelectorAll('.hotel-room-button').forEach(btn=>{
     btn.addEventListener('click',()=>{
       const r=rooms[btn.dataset.room]; if(!r)return;
@@ -454,7 +454,7 @@
       const virtualTourInline=document.getElementById('hotelRoomVirtualTourInline');
       virtualTourInline.innerHTML=r.virtualTours ? r.virtualTours.map(t=>'<a class="hotel-room-virtual-tour-inline" href="'+t.url+'" target="_blank" rel="noopener noreferrer">3D Virtual Tour</a>').join(' ') : '';
       content.innerHTML=gallery+'<div class="hotel-room-detail-list"><div><strong>Size</strong><span>'+r.size+'</span></div><div><strong>Maximum occupancy</strong><span>'+r.guests+'</span></div><div><strong>Bed</strong><span>'+r.bed+'</span></div><div><strong>View</strong><span>'+r.view+'</span></div></div>'+roomDetails;
-      modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.body.classList.add('hotel-modal-open');
+      modal.classList.add('is-open');modal.setAttribute('aria-hidden','false');document.documentElement.classList.add('hotel-modal-open');document.body.classList.add('hotel-modal-open');dialog.focus();
     });
   });
   const photoLightbox=document.getElementById('hotelPhotoLightbox');
