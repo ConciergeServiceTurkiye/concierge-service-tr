@@ -900,3 +900,37 @@ body.hotel-amenities-open{overflow:hidden}
 @media(max-width:900px){
   .hotel-room-cover-wrap{height:175px}
 }
+
+
+/* Final room-card typography/alignment */
+.hotel-room-cover-label{display:none!important;}
+.hotel-room-copy{
+  padding:20px 20px 22px!important;
+  text-align:left!important;
+}
+.hotel-room-copy h3{
+  margin:0 0 12px!important;
+  color:#d4af37!important;
+  font-size:22px!important;
+  text-align:center!important;
+}
+.hotel-room-copy p{
+  display:block!important;
+  margin:0!important;
+  color:rgba(255,255,255,.82)!important;
+  font-size:13px!important;
+  line-height:1.45!important;
+  text-align:left!important;
+}
+.hotel-room-copy p > span{
+  color:#d4af37!important;
+  font-size:12px!important;
+}
+.hotel-room-copy .hotel-room-meta{
+  display:block!important;
+  margin-top:6px!important;
+  color:rgba(255,255,255,.76)!important;
+  font-size:12px!important;
+  line-height:1.4!important;
+  text-align:left!important;
+}
