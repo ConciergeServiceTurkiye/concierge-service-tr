@@ -183,70 +183,7 @@
   </div>
 </section>
 
-<section class="hotel-detail-section hotel-awards-section" id="hotel-awards">
-  <div class="hotel-detail-inner">
-    <div class="hotel-section-heading-row">
-      <div>
-        <div class="hotel-eyebrow">AWARDS & RECOGNITION</div>
-        <h2>Honours & Recognition</h2>
-        <p class="hotel-section-intro">Verified awards and recognitions for The Bank Hotel Istanbul, presented by year and category.</p>
-      </div>
-    </div>
-    <div class="hotel-awards-list">
-      <article class="hotel-award-year">
-        <div class="hotel-award-year-label">2026</div>
-        <div class="hotel-award-content">
-          <h3>Haute Grandeur Global Excellence Awards</h3>
-          <ul>
-            <li>Best Historical Hotel — Turkey</li>
-            <li>Best Leisure Hotel — Turkey</li>
-            <li>Best Sustainable Lifestyle Hotel — Turkey</li>
-            <li>Most Luxurious Hotel Lobby — Turkey</li>
-          </ul>
-        </div>
-      </article>
-      <article class="hotel-award-year">
-        <div class="hotel-award-year-label">2025</div>
-        <div class="hotel-award-content">
-          <h3>Haute Grandeur Global Excellence Awards</h3>
-          <ul>
-            <li>Best Design Hotel — Europe</li>
-            <li>Best Sustainable Hotel — Europe</li>
-            <li>Best Sustainable Lifestyle Hotel — Europe</li>
-            <li>Best Historical Hotel — Turkey</li>
-          </ul>
-        </div>
-      </article>
-      <article class="hotel-award-year">
-        <div class="hotel-award-year-label">2024</div>
-        <div class="hotel-award-content">
-          <h3>Haute Grandeur Global Excellence Awards</h3>
-          <ul>
-            <li>Best Boutique Hotel — Turkey</li>
-            <li>Best Historical Hotel — Turkey</li>
-            <li>Best Leisure Hotel — Turkey</li>
-            <li>Best Lifestyle Hotel — Turkey</li>
-            <li>Best Luxury Boutique Hotel — Turkey</li>
-          </ul>
-        </div>
-      </article>
-      <article class="hotel-award-year">
-        <div class="hotel-award-year-label">2023</div>
-        <div class="hotel-award-content">
-          <h3>Haute Grandeur Global Excellence Awards</h3>
-          <ul>
-            <li>Best Historical Hotel — Turkey</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-    <div class="hotel-recognition-note">
-      <strong>One MICHELIN Key</strong>
-      <span>Displayed separately as a Michelin Key recognition rather than being grouped with the Haute Grandeur awards.</span>
-    </div>
-    
-  </div>
-</section>
+
 
 <section class="hotel-detail-section">
   <div class="hotel-detail-inner">
@@ -427,6 +364,73 @@
     <h2>Request a Hotel Reservation</h2>
     <p>Start by selecting your preferred room type above. Your reservation request can then be handled by Concierge Service Türkiye.</p>
     <a class="hotel-btn primary hotel-scroll-reservation" href="#hotel-rooms">Request Hotel Reservation</a>
+  </div>
+</section>
+
+<section class="hotel-detail-section hotel-awards-section" id="hotel-awards">
+  <div class="hotel-detail-inner">
+    <h2 class="hotel-awards-heading">
+      <button class="hotel-awards-toggle" type="button" aria-expanded="false" aria-controls="hotelAwardsContent">
+        <span class="hotel-awards-toggle-eyebrow">AWARDS &amp; RECOGNITION</span>
+        <span class="hotel-awards-toggle-title">Honours &amp; Recognition</span>
+        <span class="hotel-awards-toggle-description">Verified awards and recognitions for The Bank Hotel Istanbul, presented by year and category.</span>
+        <span class="hotel-awards-toggle-chevron" aria-hidden="true">⌄</span>
+      </button>
+    </h2>
+    <div class="hotel-awards-content" id="hotelAwardsContent" hidden>
+<div class="hotel-awards-list">
+      <article class="hotel-award-year">
+        <div class="hotel-award-year-label">2026</div>
+        <div class="hotel-award-content">
+          <h3>Haute Grandeur Global Excellence Awards</h3>
+          <ul>
+            <li>Best Historical Hotel — Turkey</li>
+            <li>Best Leisure Hotel — Turkey</li>
+            <li>Best Sustainable Lifestyle Hotel — Turkey</li>
+            <li>Most Luxurious Hotel Lobby — Turkey</li>
+          </ul>
+        </div>
+      </article>
+      <article class="hotel-award-year">
+        <div class="hotel-award-year-label">2025</div>
+        <div class="hotel-award-content">
+          <h3>Haute Grandeur Global Excellence Awards</h3>
+          <ul>
+            <li>Best Design Hotel — Europe</li>
+            <li>Best Sustainable Hotel — Europe</li>
+            <li>Best Sustainable Lifestyle Hotel — Europe</li>
+            <li>Best Historical Hotel — Turkey</li>
+          </ul>
+        </div>
+      </article>
+      <article class="hotel-award-year">
+        <div class="hotel-award-year-label">2024</div>
+        <div class="hotel-award-content">
+          <h3>Haute Grandeur Global Excellence Awards</h3>
+          <ul>
+            <li>Best Boutique Hotel — Turkey</li>
+            <li>Best Historical Hotel — Turkey</li>
+            <li>Best Leisure Hotel — Turkey</li>
+            <li>Best Lifestyle Hotel — Turkey</li>
+            <li>Best Luxury Boutique Hotel — Turkey</li>
+          </ul>
+        </div>
+      </article>
+      <article class="hotel-award-year">
+        <div class="hotel-award-year-label">2023</div>
+        <div class="hotel-award-content">
+          <h3>Haute Grandeur Global Excellence Awards</h3>
+          <ul>
+            <li>Best Historical Hotel — Turkey</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+    <div class="hotel-recognition-note">
+      <strong>One MICHELIN Key</strong>
+      <span>Displayed separately as a Michelin Key recognition rather than being grouped with the Haute Grandeur awards.</span>
+    </div>
+    </div>
   </div>
 </section>
 
@@ -647,6 +651,18 @@
       if(target) setTimeout(function(){ target.scrollIntoView({behavior:'smooth', block:'start'}); }, 150);
     });
   }
+})();
+</script>
+<script>
+(function(){
+  const toggle=document.querySelector('.hotel-awards-toggle');
+  const content=document.getElementById('hotelAwardsContent');
+  if(!toggle||!content)return;
+  toggle.addEventListener('click',function(){
+    const expanded=toggle.getAttribute('aria-expanded')==='true';
+    toggle.setAttribute('aria-expanded',String(!expanded));
+    content.hidden=expanded;
+  });
 })();
 </script>
 </body>
