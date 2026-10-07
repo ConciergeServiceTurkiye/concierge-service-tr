@@ -731,7 +731,23 @@
         dress:'Smart casual. Shorts, slippers and tracksuits are not accepted.',
         terms:['Pets are not permitted.','Guests must be 18 or older.','Outside food and beverages are not permitted.','Reservations are held for the booked time and the following 30 minutes. A reservation is cancelled if the guest has not arrived within 30 minutes after the booked time.']
       },
-      gallery:[]
+      gallery:[
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-cover.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-1.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-2.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-3.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-4.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-5.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-6.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-7.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-8.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-9.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-10.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-11.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-12.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-14.jpg',
+        'assets/hotels/the-bank-hotel-istanbul/Serica/serica-bar.jpg'
+      ]
     },
     lobby: {
       title:'The Bank Lobby Restaurant & Bar',
@@ -808,8 +824,9 @@
     logo.innerHTML='<img src="'+info.logo+'" alt="">';
     if(key==='serica'){
       content.innerHTML=
-        '<div class="hotel-dining-modal-gallery-slot" aria-label="Serica photo gallery"></div>'+
+        '<section class="hotel-dining-modal-gallery-section hotel-dining-serica-gallery"><h3>Gallery</h3><div class="hotel-dining-modal-gallery">'+info.gallery.map((src,index)=>'<button type="button" data-dining-photo-index="'+index+'" aria-label="Open '+info.title+' photo '+(index+1)+'"><img src="'+src+'" alt="'+(index===0?'Serica cover photo':info.title+' photo '+(index+1))+'" loading="lazy"></button>').join('')+'</div></section>'+
         '<div class="hotel-dining-modal-actions hotel-dining-serica-tour"><a href="'+info.tour+'" target="_blank" rel="noopener noreferrer">3D Virtual Tour</a></div>'+
+        '<div class="hotel-dining-modal-intro hotel-dining-serica-intro"><p>'+info.intro+'</p><p>'+info.detail+'</p></div>'+
         '<div class="hotel-dining-serica-hours"><strong>Opening Time</strong><p>'+info.hours+'</p></div>'+
         '<div class="hotel-dining-serica-divider" aria-hidden="true"></div>'+
         '<section class="hotel-dining-serica-guest"><h3>Guest Information</h3><p>'+info.note+'</p></section>'+
