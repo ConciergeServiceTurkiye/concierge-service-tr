@@ -16,3 +16,135 @@
 .wifi-final{text-align:center;padding:120px 7vw;background:radial-gradient(circle at center,rgba(212,175,55,.1),transparent 45%),#090909}.wifi-final h2{font-size:clamp(42px,5vw,72px);line-height:1;margin:16px 0 30px;font-weight:500}
 @media(max-width:900px){.wifi-hero{grid-template-columns:1fr;padding-top:130px}.wifi-device-visual{min-height:340px}.wifi-benefit-grid{grid-template-columns:1fr 1fr}.wifi-process-grid{grid-template-columns:1fr 1fr}.wifi-process-grid article:last-child{grid-column:1/-1}.wifi-pricing-box{grid-template-columns:1fr}.wifi-location-grid{grid-template-columns:1fr}.wifi-location-card.wide{grid-column:auto}}
 @media(max-width:640px){.wifi-section{padding:75px 5vw}.wifi-hero{padding:120px 5vw 70px}.wifi-hero h1{letter-spacing:-1.5px}.wifi-hero-actions{align-items:flex-start;flex-direction:column;gap:18px}.wifi-benefit-grid{grid-template-columns:1fr}.wifi-form-grid{grid-template-columns:1fr}.wifi-form-grid label.full{grid-column:auto}.wifi-booking-form{padding:24px}.wifi-form-summary{align-items:flex-start;flex-direction:column}.wifi-process-grid{grid-template-columns:1fr}.wifi-process-grid article:last-child{grid-column:auto}.wifi-pricing-box{padding:30px 24px}.wifi-pricing-box h2{font-size:48px}.wifi-pricing-points{grid-template-columns:1fr}.wifi-return-rules{flex-direction:column}.wifi-device{transform:scale(.85) rotate(8deg)}}
+
+/* ============================== STAYINWIFI REFINEMENTS ============================== */
+.wifi-hero-eyebrow{color:#fff}
+.wifi-partner strong{color:var(--gold)}
+.wifi-gold-btn{
+  border-radius:24px;
+  border:1px solid var(--gold);
+  background:transparent;
+  color:var(--gold);
+  padding:13px 22px;
+}
+.wifi-gold-btn:hover{
+  border-color:var(--gold);
+  background:var(--gold);
+  color:#111;
+}
+.wifi-price strong{color:var(--gold)}
+.wifi-benefits .wifi-heading .wifi-eyebrow{color:#fff}
+.wifi-benefits .wifi-heading h2{color:var(--gold)}
+.wifi-benefits .wifi-heading{position:relative;padding-bottom:38px;margin-bottom:48px}
+.wifi-benefits .wifi-heading:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,.65),transparent);
+}
+.wifi-benefit-grid{
+  border:0;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+}
+.wifi-benefit-grid article{
+  position:relative;
+  padding:10px 42px 12px;
+  min-height:0;
+  border:0;
+  background:transparent;
+  text-align:center;
+}
+.wifi-benefit-grid article:not(:last-child):after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:1px;
+  height:100%;
+  background:linear-gradient(180deg,transparent,rgba(212,175,55,.62) 18%,rgba(212,175,55,.62) 82%,transparent);
+}
+.wifi-icon{
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,.9);
+  color:#fff;
+  background:transparent;
+  font-size:13px;
+  margin:0 auto;
+}
+.wifi-benefit-grid h3{
+  color:var(--gold);
+  margin:20px 0 10px;
+}
+.wifi-benefit-grid p{
+  margin:0 auto;
+  max-width:235px;
+}
+@media(max-width:900px){
+  .wifi-benefit-grid{grid-template-columns:1fr 1fr}
+  .wifi-benefit-grid article:nth-child(2):after{display:none}
+  .wifi-benefit-grid article:nth-child(1),
+  .wifi-benefit-grid article:nth-child(2){padding-bottom:35px}
+  .wifi-benefit-grid article:nth-child(1),
+  .wifi-benefit-grid article:nth-child(3){border-right:0}
+  .wifi-benefit-grid article:nth-child(1):after,
+  .wifi-benefit-grid article:nth-child(3):after{
+    display:none;
+  }
+  .wifi-benefit-grid article:nth-child(1),
+  .wifi-benefit-grid article:nth-child(3){
+    border-right:1px solid transparent;
+    position:relative;
+  }
+  .wifi-benefit-grid article:nth-child(1):before,
+  .wifi-benefit-grid article:nth-child(3):before{
+    content:"";
+    position:absolute;
+    top:0;
+    right:0;
+    width:1px;
+    height:100%;
+    background:linear-gradient(180deg,transparent,rgba(212,175,55,.62) 18%,rgba(212,175,55,.62) 82%,transparent);
+  }
+  .wifi-benefit-grid article:nth-child(-n+2){border-bottom:0}
+}
+@media(max-width:640px){
+  .wifi-benefit-grid{grid-template-columns:1fr}
+  .wifi-benefit-grid article{padding:15px 15px 35px}
+  .wifi-benefit-grid article:not(:last-child):after,
+  .wifi-benefit-grid article:nth-child(1):before,
+  .wifi-benefit-grid article:nth-child(3):before{display:none}
+  .wifi-benefit-grid article:not(:last-child){border-bottom:1px solid rgba(212,175,55,.12)}
+}
+
+/* ============================== CONNECTIVITY LANDING ============================== */
+.connectivity-page{background:#090909;color:#fff;min-height:70vh;padding-bottom:100px}
+.connectivity-hero{padding:150px 7vw 65px;text-align:center;max-width:900px;margin:auto}
+.connectivity-hero .wifi-eyebrow{color:#fff}
+.connectivity-hero h1{font-size:clamp(44px,6vw,76px);line-height:1;margin:16px 0 22px;font-weight:500}
+.connectivity-hero h1 span{color:var(--gold)}
+.connectivity-hero p{color:rgba(255,255,255,.6);font-size:17px;line-height:1.8;max-width:650px;margin:auto}
+.connectivity-options{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:24px;padding:0 7vw}
+.connectivity-card{background:linear-gradient(145deg,#131313,#0b0b0b);border:1px solid rgba(212,175,55,.28);padding:0;min-height:540px;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+.connectivity-card:hover{transform:translateY(-5px);border-color:rgba(212,175,55,.7)}
+.connectivity-card-top{display:flex;justify-content:space-between;padding:25px 28px 0}
+.connectivity-number{color:var(--gold);font-size:11px;letter-spacing:2px}
+.connectivity-label{color:rgba(255,255,255,.42);font-size:10px;letter-spacing:2px}
+.connectivity-card-visual{height:235px;display:flex;align-items:center;justify-content:center}
+.mini-wifi-device{width:125px;height:175px;border-radius:22px;background:linear-gradient(145deg,#252525,#080808);border:1px solid rgba(212,175,55,.35);box-shadow:0 20px 50px rgba(0,0,0,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(7deg)}
+.mini-wifi-device b{font-size:38px;color:var(--gold)}.mini-wifi-device small{font-size:8px;letter-spacing:1.5px;color:rgba(255,255,255,.45);margin-top:8px}
+.esim-symbol{width:175px;height:175px;border:1px solid rgba(255,255,255,.16);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.55);font-size:26px;letter-spacing:2px}
+.connectivity-card-content{padding:10px 34px 34px;display:flex;flex-direction:column;flex:1}
+.connectivity-card-content .wifi-eyebrow{font-size:10px}
+.connectivity-card-content h2{font-size:34px;font-weight:500;color:var(--gold);margin:10px 0 12px}
+.connectivity-card-content p{color:rgba(255,255,255,.56);font-size:14px;line-height:1.75;margin:0 0 24px;max-width:480px}
+.connectivity-details-button{display:inline-flex;align-items:center;justify-content:center;gap:10px;align-self:flex-start;min-height:44px;padding:0 20px;border:1px solid rgba(212,175,55,.72);border-radius:24px;background:transparent;color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background .2s,color .2s,border-color .2s;margin-top:auto}
+.connectivity-details-button:hover{border-color:#d4af37;background:#d4af37;color:#111}
+.connectivity-details-button.disabled{opacity:.55;cursor:default}
+.connectivity-details-button.disabled:hover{background:transparent;color:var(--gold)}
+@media(max-width:800px){.connectivity-options{grid-template-columns:1fr;padding:0 5vw}.connectivity-hero{padding:125px 5vw 50px}.connectivity-card{min-height:500px}}
