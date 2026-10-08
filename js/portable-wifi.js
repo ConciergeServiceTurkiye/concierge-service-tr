@@ -2,75 +2,68 @@ document.addEventListener('DOMContentLoaded',()=>{
   const form=document.getElementById('portableWifiForm');
   if(!form)return;
 
+  const name=form.querySelector('[name="name"]');
   const pickup=form.querySelector('[name="pickupDate"]');
   const ret=form.querySelector('[name="returnDate"]');
   const devices=form.querySelector('[name="devices"]');
   const whatsapp=form.querySelector('[name="whatsapp"]');
   const email=form.querySelector('[name="email"]');
+  const pickupLocation=form.querySelector('[name="pickup"]');
+  const returnLocation=form.querySelector('[name="return"]');
   const estimate=document.getElementById('wifiEstimate');
   const daily=8.90;
 
   const pad=n=>String(n).padStart(2,'0');
-  const today=new Date();
-  const todayIso=`${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`;
+  const now=new Date();
+  const todayIso=`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
 
-  // -------------------------
-  // WhatsApp number
-  // -------------------------
-  const normalizePhone=value=>{
-    const digits=String(value||'').replace(/\D/g,'');
-    return '+'+digits;
-  };
-
+  // -------------------------------------------------
+  // WhatsApp number: permanent + prefix, digits only
+  // -------------------------------------------------
   if(whatsapp){
     whatsapp.value='+';
 
-    const keepCaretAfterPrefix=()=>{
-      if(whatsapp.selectionStart===0){
-        whatsapp.setSelectionRange(1,1);
-      }
+    const placeCaretAfterPlus=()=>{
+      const pos=Math.max(1,whatsapp.value.length);
+      whatsapp.setSelectionRange(pos,pos);
     };
 
     whatsapp.addEventListener('focus',()=>{
-      if(!whatsapp.value || whatsapp.value.charAt(0)!=='+'){
-        whatsapp.value=normalizePhone(whatsapp.value);
+      if(!whatsapp.value.startsWith('+')){
+        whatsapp.value='+'+whatsapp.value.replace(/\\D/g,'');
       }
-      requestAnimationFrame(()=>{
-        whatsapp.setSelectionRange(Math.max(1,whatsapp.value.length),Math.max(1,whatsapp.value.length));
-      });
+      requestAnimationFrame(placeCaretAfterPlus);
     });
 
     whatsapp.addEventListener('keydown',event=>{
       const start=whatsapp.selectionStart ?? 0;
       const end=whatsapp.selectionEnd ?? 0;
 
-      if(['Tab','ArrowLeft','ArrowRight','Home','End'].includes(event.key)){
-        if(event.key==='Home'){
+      if(['Tab','ArrowLeft','ArrowRight','End'].includes(event.key))return;
+
+      if(event.key==='Home'){
+        event.preventDefault();
+        whatsapp.setSelectionRange(1,1);
+        return;
+      }
+
+      if(event.key==='Backspace'){
+        if(start<=1){
           event.preventDefault();
           whatsapp.setSelectionRange(1,1);
         }
         return;
       }
 
-      if(event.key==='Backspace'){
-        if(start<=1 || (start<2 && end>0)){
-          event.preventDefault();
-          keepCaretAfterPrefix();
-        }
-        return;
-      }
-
       if(event.key==='Delete'){
-        if(start===0 || (start<1 && end>0)){
+        if(start===0 || (start===1 && end>1)){
           event.preventDefault();
-          keepCaretAfterPrefix();
+          whatsapp.setSelectionRange(1,1);
         }
         return;
       }
 
-      if(event.ctrlKey||event.metaKey){
-        return;
-      }
+      if(event.ctrlKey||event.metaKey)return;
 
       if(!/^[0-9]$/.test(event.key)){
         event.preventDefault();
@@ -84,36 +77,90 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
 
     whatsapp.addEventListener('input',()=>{
-      let normalized=normalizePhone(whatsapp.value);
-      if(!normalized.startsWith('+'))normalized='+'+normalized;
-      if(whatsapp.value!==normalized)whatsapp.value=normalized;
-      if(whatsapp.value.length===0)whatsapp.value='+';
+      const digits=whatsapp.value.replace(/\\D/g,'');
+      whatsapp.value='+'+digits;
       whatsapp.setCustomValidity('');
     });
 
     whatsapp.addEventListener('paste',()=>{
       setTimeout(()=>{
-        whatsapp.value=normalizePhone(whatsapp.value);
-        if(!whatsapp.value)whatsapp.value='+';
+        const digits=whatsapp.value.replace(/\\D/g,'');
+        whatsapp.value='+'+digits;
+        whatsapp.setCustomValidity('');
       },0);
     });
   }
 
-  // -------------------------
-  // DD.MM.YYYY date inputs
-  // -------------------------
-  const formatDateInput=input=>{
-    if(!input)return;
-    const digits=input.value.replace(/\D/g,'').slice(0,8);
-    let formatted=digits;
-    if(digits.length>2)formatted=digits.slice(0,2)+'.'+digits.slice(2);
-    if(digits.length>4)formatted=formatted.slice(0,5)+'.'+formatted.slice(4);
-    input.value=formatted;
+  // -------------------------------------------------
+  // DD.MM.YYYY mask
+  // The value is rebuilt from digits so the browser
+  // cannot turn 2026 into 0020/0002 while tabbing.
+  // -------------------------------------------------
+  const sanitizeDateDigits=digits=>{
+    let raw=String(digits||'').replace(/\\D/g,'').slice(0,8);
+
+    // Day: DD
+    if(raw.length>=1 && Number(raw[0])>3)raw=raw.slice(0,0);
+    if(raw.length>=2){
+      const day=Number(raw.slice(0,2));
+      if(day<1 || day>31)raw=raw.slice(0,1);
+    }
+
+    // Month: MM
+    if(raw.length>=3 && Number(raw[2])>1)raw=raw.slice(0,2);
+    if(raw.length>=4){
+      const month=Number(raw.slice(2,4));
+      if(month<1 || month>12)raw=raw.slice(0,3);
+    }
+
+    // Year: YYYY — exactly four digits, no browser date coercion.
+    return raw;
   };
+
+  const formatDateDigits=digits=>{
+    const raw=sanitizeDateDigits(digits);
+    if(raw.length<=2)return raw;
+    if(raw.length<=4)return raw.slice(0,2)+'.'+raw.slice(2);
+    return raw.slice(0,2)+'.'+raw.slice(2,4)+'.'+raw.slice(4);
+  };
+
+  const syncDateInput=input=>{
+    if(!input)return;
+    const digits=input.value.replace(/\\D/g,'');
+    const formatted=formatDateDigits(digits);
+    input.value=formatted;
+    requestAnimationFrame(()=>{
+      input.setSelectionRange(input.value.length,input.value.length);
+    });
+  };
+
+  [pickup,ret].forEach(input=>{
+    if(!input)return;
+
+    input.addEventListener('keydown',event=>{
+      if(event.ctrlKey||event.metaKey)return;
+      if(['Tab','Shift','ArrowLeft','ArrowRight','Home','End','Backspace','Delete'].includes(event.key))return;
+      if(!/^[0-9]$/.test(event.key))event.preventDefault();
+    });
+
+    input.addEventListener('input',()=>{
+      syncDateInput(input);
+      input.setCustomValidity('');
+      updateEstimate();
+    });
+
+    input.addEventListener('paste',()=>{
+      setTimeout(()=>{
+        syncDateInput(input);
+        input.setCustomValidity('');
+        updateEstimate();
+      },0);
+    });
+  });
 
   const parseDate=input=>{
     const value=input?.value.trim()||'';
-    const match=value.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+    const match=value.match(/^(\\d{2})\\.(\\d{2})\\.(\\d{4})$/);
     if(!match)return null;
 
     const day=Number(match[1]);
@@ -136,139 +183,89 @@ document.addEventListener('DOMContentLoaded',()=>{
     };
   };
 
-  const displayDateFromIso=iso=>{
-    if(!iso)return '';
-    const [year,month,day]=iso.split('-').map(Number);
-    return `${pad(day)}.${pad(month)}.${year}`;
-  };
+  function setError(field,message,focus=true){
+    field.setCustomValidity(message);
+    if(focus){
+      field.focus();
+      field.reportValidity();
+    }
+    return false;
+  }
 
-  [pickup,ret].forEach(input=>{
-    if(!input)return;
-
-    input.addEventListener('input',()=>{
-      formatDateInput(input);
-      input.setCustomValidity('');
-      updateEstimate();
+  function clearErrors(){
+    form.querySelectorAll('input,select,textarea').forEach(field=>{
+      field.setCustomValidity('');
     });
+  }
 
-    input.addEventListener('blur',()=>{
-      formatDateInput(input);
-      if(input.value && !parseDate(input)){
-        input.setCustomValidity('Please enter a valid date in DD.MM.YYYY format.');
-      }else{
-        input.setCustomValidity('');
-      }
-    });
-  });
+  function validateForm(){
+    clearErrors();
 
-  function validateDates(showMessage=false){
-    if(!pickup||!ret)return true;
-
-    pickup.setCustomValidity('');
-    ret.setCustomValidity('');
-
-    const pickupDate=parseDate(pickup);
-    const returnDate=parseDate(ret);
-
-    if(!pickup.value){
-      pickup.setCustomValidity('Please select a pickup date.');
-      if(showMessage)pickup.reportValidity();
-      return false;
+    if(!name.value.trim()){
+      return setError(name,'Please enter your full name.');
     }
 
+    const phoneDigits=whatsapp.value.replace(/\\D/g,'');
+    if(phoneDigits.length<7){
+      return setError(whatsapp,'Please enter your WhatsApp number.');
+    }
+
+    const emailValue=email.value.trim();
+    if(!emailValue){
+      return setError(email,'Please enter your email address.');
+    }
+    if(!emailValue.includes('@')){
+      return setError(email,'Please add an @ to your email address.');
+    }
+    if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(emailValue)){
+      return setError(email,'Please enter a valid email address.');
+    }
+
+    if(!pickup.value){
+      return setError(pickup,'Please select a pickup date.');
+    }
+
+    const pickupDate=parseDate(pickup);
     if(!pickupDate){
-      pickup.setCustomValidity('Please enter a valid pickup date in DD.MM.YYYY format.');
-      if(showMessage)pickup.reportValidity();
-      return false;
+      return setError(pickup,'Please enter a valid date in DD.MM.YYYY format.');
     }
 
     if(pickupDate.iso<todayIso){
-      pickup.setCustomValidity('Please select today or a future pickup date.');
-      if(showMessage)pickup.reportValidity();
-      return false;
+      return setError(pickup,'Please select today or a future pickup date.');
     }
 
     if(!ret.value){
-      ret.setCustomValidity('Please select a return date.');
-      if(showMessage)ret.reportValidity();
-      return false;
+      return setError(ret,'Please select a return date.');
     }
 
+    const returnDate=parseDate(ret);
     if(!returnDate){
-      ret.setCustomValidity('Please enter a valid return date in DD.MM.YYYY format.');
-      if(showMessage)ret.reportValidity();
-      return false;
+      return setError(ret,'Please enter a valid date in DD.MM.YYYY format.');
     }
 
     if(returnDate.iso<todayIso){
-      ret.setCustomValidity('Please select today or a future return date.');
-      if(showMessage)ret.reportValidity();
-      return false;
+      return setError(ret,'Please select today or a future return date.');
     }
 
     if(returnDate.iso<pickupDate.iso){
-      ret.setCustomValidity('Please select a return date on or after the pickup date.');
-      if(showMessage)ret.reportValidity();
-      return false;
+      return setError(ret,'Please select a return date on or after the pickup date.');
+    }
+
+    if(!pickupLocation.value){
+      return setError(pickupLocation,'Please select a pickup location.');
+    }
+
+    if(!returnLocation.value){
+      return setError(returnLocation,'Please select a return location.');
     }
 
     return true;
   }
 
-  // -------------------------
-  // English validation
-  // -------------------------
-  form.querySelectorAll('input, select, textarea').forEach(field=>{
-    field.addEventListener('invalid',()=>{
-      if(field===whatsapp){
-        const digits=field.value.replace(/\D/g,'');
-        field.setCustomValidity(
-          digits.length<7
-            ? 'Please enter your WhatsApp number.'
-            : ''
-        );
-        return;
-      }
-
-      if(field===email){
-        const value=field.value.trim();
-
-        if(!value){
-          field.setCustomValidity('Please enter your email address.');
-        }else if(!value.includes('@')){
-          field.setCustomValidity('Please add an @ to your email address.');
-        }else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)){
-          field.setCustomValidity('Please enter a valid email address.');
-        }else{
-          field.setCustomValidity('');
-        }
-        return;
-      }
-
-      if(field===pickup||field===ret){
-        validateDates();
-        return;
-      }
-
-      if(field.validity.valueMissing){
-        const messages={
-          name:'Please enter your full name.',
-          pickup:'Please select a pickup location.',
-          return:'Please select a return location.'
-        };
-        field.setCustomValidity(messages[field.name]||'Please complete this field.');
-      }else{
-        field.setCustomValidity('Please enter a valid value.');
-      }
-    },true);
-
-    field.addEventListener('input',()=>{
-      if(field!==pickup&&field!==ret)field.setCustomValidity('');
-    });
-
-    field.addEventListener('change',()=>{
-      if(field!==pickup&&field!==ret)field.setCustomValidity('');
-    });
+  // Clear any custom message as soon as the customer corrects a field.
+  form.querySelectorAll('input,select,textarea').forEach(field=>{
+    field.addEventListener('input',()=>field.setCustomValidity(''));
+    field.addEventListener('change',()=>field.setCustomValidity(''));
   });
 
   function days(){
@@ -283,15 +280,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     estimate.textContent='€'+total.toFixed(2)+' estimated';
   }
 
-  form.addEventListener('submit',e=>{
-    e.preventDefault();
+  form.addEventListener('submit',event=>{
+    event.preventDefault();
 
-    if(!validateDates(true))return;
-
-    if(!form.checkValidity()){
-      form.reportValidity();
-      return;
-    }
+    if(!validateForm())return;
 
     const data=new FormData(form);
     const pickupDate=parseDate(pickup);
@@ -299,6 +291,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const d=days();
     const total=(d*Number(data.get('devices')||1)*daily).toFixed(2);
 
+    // WhatsApp supports *bold* text and real line breaks.
     const message=[
       'PORTABLE WI-FI REQUEST — Concierge Service Türkiye',
       '',
@@ -316,7 +309,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       '*Estimated Wi-Fi service:* €'+total,
       '',
       'Please arrange the reservation and send the secure 3D payment link.'
-    ].join('\n');
+    ].join('\\n');
 
     window.open(
       'https://wa.me/905344888624?text='+encodeURIComponent(message),
