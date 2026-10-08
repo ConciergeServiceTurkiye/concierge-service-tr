@@ -176,3 +176,74 @@
  .wifi-network-visual{transform:scale(.82)}
  .connectivity-card-visual{height:210px}
 }
+
+/* Final connectivity-card visual refinements */
+.connectivity-card{border-radius:22px;overflow:hidden}
+.connectivity-card-top{justify-content:flex-end}
+.connectivity-card-top .connectivity-brand{margin-left:auto}
+.connectivity-card-visual{height:235px}
+.wifi-network-visual{max-width:500px;height:220px}
+.mini-wifi-device{
+  width:185px;
+  height:92px;
+  border-radius:18px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background:linear-gradient(145deg,#292929,#090909);
+  border:1px solid rgba(212,175,55,.5);
+  box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 22px rgba(212,175,55,.08);
+}
+.mini-wifi-device b{font-size:20px;letter-spacing:2px}
+.mini-wifi-device small{font-size:8px;letter-spacing:2px;margin-top:5px}
+.mini-wifi-device .device-led{top:10px;width:28px}
+.network-device{
+  width:auto;
+  height:auto;
+  border:0;
+  border-radius:0;
+  background:none;
+  box-shadow:none;
+  padding:0;
+}
+.network-device span{
+  display:block;
+  color:rgba(255,255,255,.78);
+  font-size:42px;
+  line-height:1;
+}
+.network-device small{display:none}
+.device-laptop{left:52px;top:15px}
+.device-phone{left:100px;bottom:18px}
+.device-tablet{left:155px;bottom:5px}
+.device-phone-2{right:100px;top:15px}
+.device-laptop-2{right:52px;bottom:18px}
+.device-tablet-2{right:155px;bottom:5px}
+.device-laptop span,.device-laptop-2 span{
+  width:48px;height:31px;border:2px solid rgba(255,255,255,.78);
+  border-radius:3px;font-size:0;position:relative;
+}
+.device-laptop span:after,.device-laptop-2 span:after{
+  content:"";position:absolute;left:-7px;right:-7px;bottom:-7px;height:3px;
+  border-radius:4px;background:rgba(255,255,255,.72);
+}
+.device-phone span,.device-phone-2 span{
+  width:17px;height:34px;border:2px solid rgba(255,255,255,.78);
+  border-radius:4px;font-size:0;
+}
+.device-tablet span,.device-tablet-2 span{
+  width:34px;height:27px;border:2px solid rgba(255,255,255,.78);
+  border-radius:4px;font-size:0;
+}
+.network-line{width:70px}
+.line-1{left:105px;top:63px;transform:rotate(25deg)}
+.line-2{left:143px;top:157px;transform:rotate(-55deg)}
+.line-3{left:180px;top:157px;transform:rotate(-12deg)}
+.line-4{left:395px;top:63px;transform:rotate(155deg)}
+.line-5{left:395px;top:157px;transform:rotate(190deg)}
+.line-6{left:357px;top:157px;transform:rotate(192deg)}
+.network-24{bottom:-2px}
+@media(max-width:640px){
+ .connectivity-card{border-radius:18px}
+ .wifi-network-visual{transform:scale(.82)}
+}
