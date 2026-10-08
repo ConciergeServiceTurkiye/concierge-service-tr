@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     whatsapp.addEventListener('focus',()=>{
       if(!whatsapp.value.startsWith('+')){
-        whatsapp.value='+'+whatsapp.value.replace(/\\D/g,'');
+        whatsapp.value='+'+whatsapp.value.replace(/\D/g,'');
       }
       requestAnimationFrame(placeCaretAfterPlus);
     });
@@ -77,14 +77,14 @@ document.addEventListener('DOMContentLoaded',()=>{
     });
 
     whatsapp.addEventListener('input',()=>{
-      const digits=whatsapp.value.replace(/\\D/g,'');
+      const digits=whatsapp.value.replace(/\D/g,'');
       whatsapp.value='+'+digits;
       whatsapp.setCustomValidity('');
     });
 
     whatsapp.addEventListener('paste',()=>{
       setTimeout(()=>{
-        const digits=whatsapp.value.replace(/\\D/g,'');
+        const digits=whatsapp.value.replace(/\D/g,'');
         whatsapp.value='+'+digits;
         whatsapp.setCustomValidity('');
       },0);
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   // cannot turn 2026 into 0020/0002 while tabbing.
   // -------------------------------------------------
   const sanitizeDateDigits=digits=>{
-    let raw=String(digits||'').replace(/\\D/g,'').slice(0,8);
+    let raw=String(digits||'').replace(/\D/g,'').slice(0,8);
 
     // Day: DD
     if(raw.length>=1 && Number(raw[0])>3)raw=raw.slice(0,0);
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   const syncDateInput=input=>{
     if(!input)return;
-    const digits=input.value.replace(/\\D/g,'');
+    const digits=input.value.replace(/\D/g,'');
     const formatted=formatDateDigits(digits);
     input.value=formatted;
     requestAnimationFrame(()=>{
@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   const parseDate=input=>{
     const value=input?.value.trim()||'';
-    const match=value.match(/^(\\d{2})\\.(\\d{2})\\.(\\d{4})$/);
+    const match=value.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
     if(!match)return null;
 
     const day=Number(match[1]);
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       return setError(name,'Please enter your full name.');
     }
 
-    const phoneDigits=whatsapp.value.replace(/\\D/g,'');
+    const phoneDigits=whatsapp.value.replace(/\D/g,'');
     if(phoneDigits.length<7){
       return setError(whatsapp,'Please enter your WhatsApp number.');
     }
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(!emailValue.includes('@')){
       return setError(email,'Please add an @ to your email address.');
     }
-    if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(emailValue)){
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)){
       return setError(email,'Please enter a valid email address.');
     }
 
@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       '*Estimated Wi-Fi service:* €'+total,
       '',
       'Please arrange the reservation and send the secure 3D payment link.'
-    ].join('\\n');
+    ].join('\n');
 
     window.open(
       'https://wa.me/905344888624?text='+encodeURIComponent(message),
