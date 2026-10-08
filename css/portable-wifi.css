@@ -254,3 +254,29 @@
  .connectivity-card{border-radius:18px}
  .wifi-network-visual{transform:scale(.82)}
 }
+
+
+/* Final precise Stay Connected diagram layout */
+.connectivity-card .wifi-network-visual{width:100%;max-width:420px;height:220px;position:relative;margin:0 auto;overflow:visible;transform:none}
+.connectivity-card .network-line{display:none}
+.connectivity-card .network-lines{position:absolute;inset:0;width:100%;height:100%;z-index:1;overflow:visible;pointer-events:none}
+.connectivity-card .network-lines path{fill:none;stroke:rgba(212,175,55,.42);stroke-width:1;vector-effect:non-scaling-stroke}
+.connectivity-card .mini-wifi-device{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:185px;height:92px;border-radius:18px;background:linear-gradient(145deg,#292929,#090909);border:1px solid rgba(212,175,55,.5);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 22px rgba(212,175,55,.08);display:flex;align-items:center;justify-content:center;z-index:3}
+.connectivity-card .mini-wifi-device b{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:15px;line-height:1.05;letter-spacing:2px;color:var(--gold)}
+.connectivity-card .mini-wifi-device b span:first-child{font-size:16px}
+.connectivity-card .mini-wifi-device b span:last-child{font-size:14px}
+.connectivity-card .mini-wifi-device .device-led{position:absolute;top:10px;width:28px;height:3px;border-radius:4px;background:var(--gold);box-shadow:0 0 10px rgba(212,175,55,.6)}
+.connectivity-card .network-device{position:absolute;width:auto;height:auto;border:0;border-radius:0;background:none;box-shadow:none;padding:0;display:flex;align-items:center;justify-content:center;z-index:2}
+.connectivity-card .network-device span{display:block;color:rgba(255,255,255,.8);font-size:0;line-height:1}
+.connectivity-card .network-device small{display:none}
+.connectivity-card .device-laptop{left:8px;top:8px}
+.connectivity-card .device-phone{left:8px;top:93px}
+.connectivity-card .device-tablet{left:12px;bottom:5px}
+.connectivity-card .device-tablet-2{right:12px;top:5px}
+.connectivity-card .device-phone-2{right:8px;top:93px}
+.connectivity-card .device-laptop-2{right:8px;bottom:8px}
+.connectivity-card .device-laptop span,.connectivity-card .device-laptop-2 span{width:48px;height:31px;border:2px solid rgba(255,255,255,.78);border-radius:3px;position:relative}
+.connectivity-card .device-laptop span:after,.connectivity-card .device-laptop-2 span:after{content:"";position:absolute;left:-7px;right:-7px;bottom:-7px;height:3px;border-radius:4px;background:rgba(255,255,255,.72)}
+.connectivity-card .device-phone span,.connectivity-card .device-phone-2 span{width:17px;height:34px;border:2px solid rgba(255,255,255,.78);border-radius:4px}
+.connectivity-card .device-tablet span,.connectivity-card .device-tablet-2 span{width:34px;height:27px;border:2px solid rgba(255,255,255,.78);border-radius:4px}
+@media(max-width:640px){.connectivity-card .wifi-network-visual{transform:none}}
