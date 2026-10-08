@@ -194,7 +194,7 @@
   border:1px solid rgba(212,175,55,.5);
   box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 22px rgba(212,175,55,.08);
 }
-.mini-wifi-device b{font-size:20px;letter-spacing:2px}
+.mini-wifi-device b{font-size:15px;letter-spacing:1.8px}
 .mini-wifi-device small{font-size:8px;letter-spacing:2px;margin-top:5px}
 .mini-wifi-device .device-led{top:10px;width:28px}
 .network-device{
@@ -213,12 +213,12 @@
   line-height:1;
 }
 .network-device small{display:none}
-.device-laptop{left:52px;top:15px}
-.device-phone{left:100px;bottom:18px}
-.device-tablet{left:155px;bottom:5px}
-.device-phone-2{right:100px;top:15px}
-.device-laptop-2{right:52px;bottom:18px}
-.device-tablet-2{right:155px;bottom:5px}
+.device-laptop{left:40px;top:18px}
+.device-phone{left:95px;bottom:15px}
+.device-tablet{left:45px;bottom:5px}
+.device-phone-2{right:95px;top:15px}
+.device-laptop-2{right:40px;bottom:15px}
+.device-tablet-2{right:45px;bottom:5px}
 .device-laptop span,.device-laptop-2 span{
   width:48px;height:31px;border:2px solid rgba(255,255,255,.78);
   border-radius:3px;font-size:0;position:relative;
@@ -235,13 +235,14 @@
   width:34px;height:27px;border:2px solid rgba(255,255,255,.78);
   border-radius:4px;font-size:0;
 }
-.network-line{width:70px}
-.line-1{left:105px;top:63px;transform:rotate(25deg)}
-.line-2{left:143px;top:157px;transform:rotate(-55deg)}
-.line-3{left:180px;top:157px;transform:rotate(-12deg)}
-.line-4{left:395px;top:63px;transform:rotate(155deg)}
-.line-5{left:395px;top:157px;transform:rotate(190deg)}
-.line-6{left:357px;top:157px;transform:rotate(192deg)}
+/* Exact edge-to-edge connections */
+.network-line{height:1px;width:86px;background:linear-gradient(90deg,rgba(212,175,55,.12),rgba(212,175,55,.48));transform-origin:left center}
+.line-1{left:88px;top:34px;width:87px;transform:rotate(37.5deg)}
+.line-2{left:112px;top:188px;width:76px;transform:rotate(-52.8deg)}
+.line-3{left:79px;top:201px;width:99px;transform:rotate(-36.9deg)}
+.line-4{left:412px;top:34px;width:87px;transform:rotate(142.5deg)}
+.line-5{left:405px;top:188px;width:76px;transform:rotate(-127.2deg)}
+.line-6{left:421px;top:201px;width:97px;transform:rotate(-144.2deg)}
 .network-24{bottom:-2px}
 @media(max-width:640px){
  .connectivity-card{border-radius:18px}
