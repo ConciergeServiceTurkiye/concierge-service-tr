@@ -89,10 +89,10 @@
     <div class="wifi-form-grid">
       <label>Full Name<input required name="name" autocomplete="name" placeholder="Your full name"></label>
       <label>WhatsApp Number<input required type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" maxlength="18" value="+" placeholder="+90 ..."></label>
-      <label>Email Address<input required type="email" name="email" autocomplete="email" placeholder="you@example.com"></label>
+      <label>Email Address<input required type="text" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com"></label>
       <label>Number of Devices<select name="devices"><option value="1">1 device</option><option value="2">2 devices</option><option value="3">3 devices</option><option value="4">4 devices</option><option value="5">5 devices</option><option value="6">6 devices</option></select></label>
-      <label>Pickup Date<input required type="date" name="pickupDate"></label>
-      <label>Return Date<input required type="date" name="returnDate"></label>
+      <label>Pickup Date<input required type="text" name="pickupDate" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD.MM.YYYY"></label>
+      <label>Return Date<input required type="text" name="returnDate" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD.MM.YYYY"></label>
       <label>Pickup Location<select required name="pickup"><option value="">Select pickup</option><option>Istanbul Airport (IST)</option><option>Sabiha Gökçen Airport (SAW)</option><option>Trabzon Airport (TZX)</option><option>Istanbul Hotel / Airbnb</option><option>Istanbul Office</option><option>Bursa Office</option><option>Turkey-wide Delivery</option></select></label>
       <label>Return Location<select required name="return"><option value="">Select return</option><option>Istanbul Airport (IST)</option><option>Sabiha Gökçen Airport (SAW)</option><option>Trabzon Airport (TZX)</option><option>Istanbul Hotel / Airbnb</option><option>Istanbul Office</option><option>Bursa Office</option><option>Turkey-wide Delivery</option></select></label>
       <label class="full">Hotel / Delivery Address<textarea name="address" rows="3" placeholder="Hotel name, Airbnb address or delivery details (if applicable)"></textarea></label>
