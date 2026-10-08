@@ -534,3 +534,5 @@
   content:"";display:block;height:1px;max-width:1050px;margin:42px auto 0;
   background:linear-gradient(90deg,transparent,rgba(212,175,55,.35),transparent);
 }
+
+.wifi-booking-form .wifi-submit{display:flex;margin:0 auto;max-width:100%}
