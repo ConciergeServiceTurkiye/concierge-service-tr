@@ -148,3 +148,31 @@
 .connectivity-details-button.disabled{opacity:.55;cursor:default}
 .connectivity-details-button.disabled:hover{background:transparent;color:var(--gold)}
 @media(max-width:800px){.connectivity-options{grid-template-columns:1fr;padding:0 5vw}.connectivity-hero{padding:125px 5vw 50px}.connectivity-card{min-height:500px}}
+
+/* ============================== STAY CONNECTED LANDING REFINEMENTS ============================== */
+.connectivity-card{transition:border-color .2s}
+.connectivity-card:hover{transform:none;border-color:rgba(212,175,55,.7)}
+.connectivity-card-top{align-items:center}
+.connectivity-brand{color:var(--gold)!important;font-size:13px;letter-spacing:1.6px;font-weight:700}
+.connectivity-card-content .connectivity-description{color:#fff;font-size:9px;letter-spacing:1.7px}
+.connectivity-card-content h2{color:var(--gold)}
+.connectivity-coming-soon{color:#fff!important}
+.connectivity-card-visual{height:235px}
+.wifi-network-visual{width:100%;height:220px;max-width:470px;position:relative;margin:auto}
+.mini-wifi-device{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:112px;height:150px;border-radius:24px;background:linear-gradient(145deg,#252525,#080808);border:1px solid rgba(212,175,55,.48);box-shadow:0 18px 45px rgba(0,0,0,.55),0 0 25px rgba(212,175,55,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3}
+.mini-wifi-device b{font-size:34px;color:var(--gold);line-height:1}
+.mini-wifi-device small{font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.62);margin-top:8px}
+.device-led{position:absolute;top:14px;width:24px;height:3px;border-radius:4px;background:var(--gold);box-shadow:0 0 10px rgba(212,175,55,.6)}
+.network-device{position:absolute;width:66px;height:48px;border:1px solid rgba(255,255,255,.2);border-radius:9px;background:linear-gradient(145deg,#181818,#0c0c0c);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.network-device span{color:rgba(255,255,255,.8);font-size:21px;line-height:1}
+.network-device small{font-size:6px;letter-spacing:1px;color:rgba(255,255,255,.42);margin-top:3px}
+.device-laptop{left:0;top:8px}.device-phone{left:15px;bottom:5px}.device-tablet{left:120px;bottom:0}
+.device-phone-2{right:15px;top:5px}.device-laptop-2{right:0;bottom:18px}.device-tablet-2{right:112px;bottom:0}
+.network-line{position:absolute;height:1px;width:120px;background:linear-gradient(90deg,transparent,rgba(212,175,55,.52),transparent);z-index:1;transform-origin:left center}
+.line-1{left:53px;top:44px;transform:rotate(20deg)}.line-2{left:76px;top:174px;transform:rotate(-34deg)}.line-3{left:125px;top:177px;transform:rotate(-8deg)}.line-4{left:286px;top:47px;transform:rotate(156deg)}.line-5{left:395px;top:54px;transform:rotate(177deg)}.line-6{left:390px;top:182px;transform:rotate(192deg)}
+.network-24{position:absolute;left:50%;bottom:-5px;transform:translateX(-50%);font-size:11px;line-height:1.1;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-align:center;z-index:4}
+.network-24 span{font-size:6px;color:rgba(255,255,255,.42);letter-spacing:1px}
+@media(max-width:640px){
+ .wifi-network-visual{transform:scale(.82)}
+ .connectivity-card-visual{height:210px}
+}
