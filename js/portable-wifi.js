@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       '*Estimated Wi-Fi service:* €'+total,
       '',
       'Please arrange the reservation and send the secure 3D payment link.'
-    ].join('\\n');
+    ].join('\n');
 
     window.open(
       'https://wa.me/905344888624?text='+encodeURIComponent(message),
