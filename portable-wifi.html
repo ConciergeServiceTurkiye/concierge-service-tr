@@ -67,7 +67,7 @@
     <article class="wifi-location-card"><div class="wifi-location-number">04</div><div><h3>Istanbul Hotel / Airbnb</h3><p>Same-day delivery in Istanbul. Your hotel reception can receive the device under your reservation name.</p><small>IDEAL FOR HOTEL ARRIVALS</small></div></article>
     <article class="wifi-location-card"><div class="wifi-location-number">05</div><div><h3>Istanbul Office</h3><p>Pickup from the StayinWiFi office in Levent, available daily 09:00–18:00.</p><small>OFFICE PICKUP</small></div></article>
     <article class="wifi-location-card"><div class="wifi-location-number">06</div><div><h3>Bursa Office</h3><p>Pickup from the Bursa office, with return options coordinated around your journey.</p><small>OFFICE PICKUP</small></div></article>
-    <article class="wifi-location-card wide"><div class="wifi-location-number">07</div><div><h3>Turkey-wide Delivery</h3><p>Nationwide cargo delivery is available with advance planning. Allow 2–3 days before your required delivery date.</p><small>RETURN BY CARGO • CUSTOMER PAYS RETURN SHIPPING</small></div></article>
+    <article class="wifi-location-card wide"><div class="wifi-location-number">07</div><div><h3>Turkey-wide Delivery</h3><p>Nationwide cargo delivery is available with advance planning. Allow 2–3 days before your delivery date.</p><small>RETURN BY CARGO • CUSTOMER PAYS RETURN SHIPPING</small></div></article>
   </div>
 </section>
 
@@ -87,14 +87,14 @@
   </div>
   <form class="wifi-booking-form" id="portableWifiForm" novalidate>
     <div class="wifi-form-grid">
-      <label>Full Name<input required name="name" autocomplete="name" placeholder="Your full name"></label>
-      <label>WhatsApp Number<input required type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" maxlength="18" value="+" placeholder="+90 ..."></label>
-      <label>Email Address<input required type="text" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com"></label>
+      <label>Full Name<input name="name" autocomplete="name" placeholder="Your full name"></label>
+      <label>WhatsApp Number<input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" maxlength="18" value="+" placeholder="+90 ..."></label>
+      <label>Email Address<input type="text" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com"></label>
       <label>Number of Devices<select name="devices"><option value="1">1 device</option><option value="2">2 devices</option><option value="3">3 devices</option><option value="4">4 devices</option><option value="5">5 devices</option><option value="6">6 devices</option></select></label>
-      <label>Pickup Date<input required type="text" name="pickupDate" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD.MM.YYYY"></label>
-      <label>Return Date<input required type="text" name="returnDate" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD.MM.YYYY"></label>
-      <label>Pickup Location<select required name="pickup"><option value="">Select pickup</option><option>Istanbul Airport (IST)</option><option>Sabiha Gökçen Airport (SAW)</option><option>Trabzon Airport (TZX)</option><option>Istanbul Hotel / Airbnb</option><option>Istanbul Office</option><option>Bursa Office</option><option>Turkey-wide Delivery</option></select></label>
-      <label>Return Location<select required name="return"><option value="">Select return</option><option>Istanbul Airport (IST)</option><option>Sabiha Gökçen Airport (SAW)</option><option>Trabzon Airport (TZX)</option><option>Istanbul Hotel / Airbnb</option><option>Istanbul Office</option><option>Bursa Office</option><option>Turkey-wide Delivery</option></select></label>
+      <label>Pickup Date<input type="text" name="pickupDate" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD.MM.YYYY"></label>
+      <label>Return Date<input type="text" name="returnDate" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD.MM.YYYY"></label>
+      <label>Pickup Location<select name="pickup"><option value="">Select pickup</option><option>Istanbul Airport (IST)</option><option>Sabiha Gökçen Airport (SAW)</option><option>Trabzon Airport (TZX)</option><option>Istanbul Hotel / Airbnb</option><option>Istanbul Office</option><option>Bursa Office</option><option>Turkey-wide Delivery</option></select></label>
+      <label>Return Location<select name="return"><option value="">Select return</option><option>Istanbul Airport (IST)</option><option>Sabiha Gökçen Airport (SAW)</option><option>Trabzon Airport (TZX)</option><option>Istanbul Hotel / Airbnb</option><option>Istanbul Office</option><option>Bursa Office</option><option>Turkey-wide Delivery</option></select></label>
       <label class="full">Hotel / Delivery Address<textarea name="address" rows="3" placeholder="Hotel name, Airbnb address or delivery details (if applicable)"></textarea></label>
       <label class="full">Flight Details / Additional Requests<textarea name="notes" rows="3" placeholder="Flight number, arrival time or anything else we should know"></textarea></label>
     </div>
