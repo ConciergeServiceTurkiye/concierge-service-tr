@@ -285,3 +285,245 @@
 /* Final position adjustments requested: left phone centered vertically; right tablet at upper-right */
 .connectivity-card .device-phone{left:8px;top:50%;bottom:auto;transform:translateY(-50%)}
 .connectivity-card .device-tablet-2{right:12px;top:8px;bottom:auto}
+
+
+/* ============================== STAYINWIFI PAGE POLISH ============================== */
+/* Section headings and fine dividers */
+.wifi-receive .wifi-heading,
+.wifi-pricing .wifi-pricing-box,
+.wifi-booking-section .wifi-heading,
+.wifi-process .wifi-heading,
+.wifi-return .wifi-return-copy,
+.wifi-faq .wifi-heading{
+  position:relative;
+}
+.wifi-receive .wifi-heading,
+.wifi-booking-section .wifi-heading,
+.wifi-process .wifi-heading,
+.wifi-return .wifi-return-copy,
+.wifi-faq .wifi-heading{
+  padding-bottom:32px;
+  margin-bottom:44px;
+}
+.wifi-receive .wifi-heading:before,
+.wifi-pricing:before,
+.wifi-booking-section .wifi-heading:before,
+.wifi-process .wifi-heading:before,
+.wifi-return .wifi-return-copy:after,
+.wifi-faq .wifi-heading:before,
+.wifi-final:before{
+  content:"";
+  display:block;
+  height:1px;
+  width:100%;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,.35),transparent);
+}
+.wifi-receive .wifi-heading:before,
+.wifi-booking-section .wifi-heading:before,
+.wifi-process .wifi-heading:before,
+.wifi-faq .wifi-heading:before{margin:0 auto 30px}
+.wifi-receive .wifi-eyebrow,
+.wifi-pricing .wifi-eyebrow,
+.wifi-booking-section .wifi-eyebrow,
+.wifi-process .wifi-eyebrow,
+.wifi-return .wifi-eyebrow,
+.wifi-faq .wifi-eyebrow,
+.wifi-final .wifi-eyebrow{color:#fff}
+.wifi-receive .wifi-heading h2,
+.wifi-booking-section .wifi-heading h2,
+.wifi-process .wifi-heading h2,
+.wifi-return h2,
+.wifi-faq .wifi-heading h2{color:var(--gold)}
+.wifi-receive .wifi-heading:after,
+.wifi-booking-section .wifi-heading:after,
+.wifi-process .wifi-heading:after,
+.wifi-faq .wifi-heading:after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,.35),transparent);
+}
+.wifi-receive .wifi-heading p{color:rgba(255,255,255,.6)}
+
+/* Delivery options: no cards, paired columns with subtle separators */
+.wifi-location-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0;
+  border:0;
+}
+.wifi-location-card,
+.wifi-location-card.featured{
+  position:relative;
+  display:flex;
+  gap:20px;
+  padding:28px 30px;
+  min-height:155px;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  transform:none;
+}
+.wifi-location-card:nth-child(odd):not(.wide):after{
+  content:"";position:absolute;top:18%;bottom:18%;right:0;width:1px;
+  background:linear-gradient(180deg,transparent,rgba(212,175,55,.32),transparent);
+}
+.wifi-location-card .wifi-location-number{color:#fff;flex:0 0 25px;font-size:12px;letter-spacing:1px}
+.wifi-location-card h3{color:var(--gold)}
+.wifi-location-card h3 span{color:var(--gold)}
+.wifi-location-card p{color:rgba(255,255,255,.57)}
+.wifi-location-card small{display:inline-block;margin-top:8px;font-size:10px;letter-spacing:1.5px;color:rgba(255,255,255,.66)}
+.wifi-location-card.wide{
+  grid-column:1/-1;
+  justify-content:center;
+  text-align:left;
+  max-width:620px;
+  width:100%;
+  margin:0 auto;
+  border-top:1px solid rgba(212,175,55,.18);
+}
+.wifi-location-card.wide:after{display:none}
+
+/* Pricing: remove outer and inner boxes, separate features with vertical lines */
+.wifi-pricing{position:relative;padding-top:70px}
+.wifi-pricing:before{margin:0 auto 55px}
+.wifi-pricing-box{
+  max-width:1050px;
+  margin:0 auto;
+  padding:0 0 35px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:24px;
+  background:transparent;
+  border:0;
+}
+.wifi-pricing-box .wifi-eyebrow{color:#fff}
+.wifi-pricing-box h2{color:var(--gold)}
+.wifi-pricing-box h2 span{color:rgba(255,255,255,.5)}
+.wifi-pricing-points{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:0;
+  border:0;
+  background:transparent;
+  color:rgba(255,255,255,.72);
+}
+.wifi-pricing-points span{
+  position:relative;
+  padding:12px 18px;
+  text-align:center;
+  background:transparent;
+}
+.wifi-pricing-points span:not(:last-child):after{
+  content:"";position:absolute;top:15%;bottom:15%;right:0;width:1px;
+  background:linear-gradient(180deg,transparent,rgba(212,175,55,.32),transparent);
+}
+.wifi-pricing-note{margin-top:0}
+
+/* Form submit: match the slim outlined pill CTA above, while retaining submit behavior */
+.wifi-submit{
+  display:inline-flex;
+  width:auto;
+  min-height:44px;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:0 22px;
+  border:1px solid rgba(212,175,55,.72);
+  border-radius:24px;
+  background:transparent;
+  color:var(--gold);
+  font:700 11px inherit;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.wifi-submit:hover{background:var(--gold);border-color:var(--gold);color:#111;transform:none}
+.wifi-submit span{font-size:16px;line-height:1}
+
+/* Process steps: remove dark boxes, use subtle vertical dividers */
+.wifi-process-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:0;
+  background:transparent;
+}
+.wifi-process-grid article{
+  position:relative;
+  min-height:0;
+  padding:22px 24px;
+  background:transparent;
+  border:0;
+}
+.wifi-process-grid article:not(:last-child):after{
+  content:"";position:absolute;top:12%;bottom:12%;right:0;width:1px;
+  background:linear-gradient(180deg,transparent,rgba(212,175,55,.32),transparent);
+}
+.wifi-process-grid b{color:#fff}
+.wifi-process-grid h3{color:var(--gold)}
+
+/* Return instructions: text-only row with dividers */
+.wifi-return .wifi-return-copy:after{margin-top:42px}
+.wifi-return-rules{
+  display:flex;
+  flex-wrap:nowrap;
+  gap:0;
+  margin-top:28px;
+  border:0;
+}
+.wifi-return-rules span{
+  position:relative;
+  flex:1 1 0;
+  padding:8px 18px;
+  background:transparent;
+  border:0;
+  font-size:12px;
+  color:rgba(255,255,255,.68);
+}
+.wifi-return-rules span:first-child{padding-left:0}
+.wifi-return-rules span:not(:last-child):after{
+  content:"";position:absolute;top:10%;bottom:10%;right:0;width:1px;
+  background:linear-gradient(180deg,transparent,rgba(212,175,55,.32),transparent);
+}
+.wifi-return-rules b{color:#fff}
+
+/* FAQ and final section divider */
+.wifi-faq .wifi-heading{margin-bottom:35px}
+.wifi-faq-list{border-top:0}
+.wifi-faq-list details{border-bottom:0;padding:18px 0}
+.wifi-faq-list details:last-child{padding-bottom:0}
+.wifi-faq-list details:after{
+  content:"";display:block;height:1px;margin-top:18px;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,.28),transparent);
+}
+.wifi-faq-list summary{font-weight:700}
+.wifi-final:before{margin:0 auto 48px}
+
+@media(max-width:900px){
+ .wifi-location-card{padding:24px 18px}
+ .wifi-pricing-points{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .wifi-pricing-points span:nth-child(2):after{display:none}
+ .wifi-pricing-points span:nth-child(1),.wifi-pricing-points span:nth-child(2){border-bottom:1px solid rgba(212,175,55,.16)}
+ .wifi-process-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .wifi-process-grid article:nth-child(2):after,.wifi-process-grid article:nth-child(4):after{display:none}
+ .wifi-process-grid article:last-child{grid-column:1/-1}
+}
+@media(max-width:640px){
+ .wifi-receive .wifi-heading,.wifi-booking-section .wifi-heading,.wifi-process .wifi-heading,.wifi-return .wifi-return-copy,.wifi-faq .wifi-heading{padding-bottom:25px;margin-bottom:30px}
+ .wifi-location-grid{grid-template-columns:1fr}
+ .wifi-location-card,.wifi-location-card.featured{padding:22px 0;min-height:0}
+ .wifi-location-card:nth-child(odd):not(.wide):after{display:none}
+ .wifi-location-card:not(.wide){border-bottom:1px solid rgba(212,175,55,.16)}
+ .wifi-location-card.wide{grid-column:auto;max-width:none;margin:0;padding:24px 0}
+ .wifi-pricing-points{grid-template-columns:1fr 1fr}
+ .wifi-pricing-points span{padding:12px 8px;font-size:12px}
+ .wifi-process-grid{grid-template-columns:1fr}
+ .wifi-process-grid article{padding:20px 0}
+ .wifi-process-grid article:not(:last-child):after{display:none}
+ .wifi-process-grid article:not(:last-child){border-bottom:1px solid rgba(212,175,55,.16)}
+ .wifi-process-grid article:last-child{grid-column:auto}
+ .wifi-return-rules{flex-direction:column;flex-wrap:nowrap}
+ .wifi-return-rules span,.wifi-return-rules span:first-child{padding:12px 0}
+ .wifi-return-rules span:not(:last-child):after{display:none}
+ .wifi-return-rules span:not(:last-child){border-bottom:1px solid rgba(212,175,55,.16)}
+ .wifi-submit{max-width:100%}
+}
