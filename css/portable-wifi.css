@@ -214,11 +214,11 @@
 }
 .network-device small{display:none}
 .device-laptop{left:40px;top:18px}
-.device-phone{left:95px;bottom:15px}
+.device-phone{left:95px;top:92px}
 .device-tablet{left:45px;bottom:5px}
-.device-phone-2{right:95px;top:15px}
-.device-laptop-2{right:40px;bottom:15px}
-.device-tablet-2{right:45px;bottom:5px}
+.device-phone-2{right:95px;top:92px}
+.device-laptop-2{right:40px;bottom:5px}
+.device-tablet-2{right:45px;top:5px}
 .device-laptop span,.device-laptop-2 span{
   width:48px;height:31px;border:2px solid rgba(255,255,255,.78);
   border-radius:3px;font-size:0;position:relative;
@@ -235,14 +235,20 @@
   width:34px;height:27px;border:2px solid rgba(255,255,255,.78);
   border-radius:4px;font-size:0;
 }
-/* Exact edge-to-edge connections */
-.network-line{height:1px;width:86px;background:linear-gradient(90deg,rgba(212,175,55,.12),rgba(212,175,55,.48));transform-origin:left center}
-.line-1{left:88px;top:34px;width:87px;transform:rotate(37.5deg)}
-.line-2{left:112px;top:188px;width:76px;transform:rotate(-52.8deg)}
-.line-3{left:79px;top:201px;width:99px;transform:rotate(-36.9deg)}
-.line-4{left:412px;top:34px;width:87px;transform:rotate(142.5deg)}
-.line-5{left:405px;top:188px;width:76px;transform:rotate(-127.2deg)}
-.line-6{left:421px;top:201px;width:97px;transform:rotate(-144.2deg)}
+
+/* Clean device-to-modem connections: six independent lines, each aimed at the modem edge. */
+.network-line{
+  height:1px;
+  background:linear-gradient(90deg,rgba(212,175,55,.10),rgba(212,175,55,.42));
+  transform-origin:left center;
+  z-index:1;
+}
+.line-1{left:88px;top:34px;width:92px;transform:rotate(20deg)}
+.line-2{left:112px;top:109px;width:52px;transform:rotate(-8deg)}
+.line-3{left:79px;top:201px;width:103px;transform:rotate(-40deg)}
+.line-4{left:421px;top:18px;width:107px;transform:rotate(137deg)}
+.line-5{left:388px;top:109px;width:52px;transform:rotate(188deg)}
+.line-6{left:412px;top:194px;width:82px;transform:rotate(208deg)}
 .network-24{bottom:-2px}
 @media(max-width:640px){
  .connectivity-card{border-radius:18px}
