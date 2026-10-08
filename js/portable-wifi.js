@@ -280,6 +280,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     estimate.textContent='€'+total.toFixed(2)+' estimated';
   }
 
+  // Keep the estimate in sync whenever the selected device count changes.
+  devices?.addEventListener('change',updateEstimate);
+  devices?.addEventListener('input',updateEstimate);
+
   form.addEventListener('submit',event=>{
     event.preventDefault();
 
