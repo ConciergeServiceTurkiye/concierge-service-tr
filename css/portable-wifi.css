@@ -280,3 +280,8 @@
 .connectivity-card .device-phone span,.connectivity-card .device-phone-2 span{width:17px;height:34px;border:2px solid rgba(255,255,255,.78);border-radius:4px}
 .connectivity-card .device-tablet span,.connectivity-card .device-tablet-2 span{width:34px;height:27px;border:2px solid rgba(255,255,255,.78);border-radius:4px}
 @media(max-width:640px){.connectivity-card .wifi-network-visual{transform:none}}
+
+
+/* Final position adjustments requested: left phone centered vertically; right tablet at upper-right */
+.connectivity-card .device-phone{left:8px;top:50%;bottom:auto;transform:translateY(-50%)}
+.connectivity-card .device-tablet-2{right:12px;top:8px;bottom:auto}
