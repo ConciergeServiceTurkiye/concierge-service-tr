@@ -529,3 +529,8 @@
  .wifi-return-rules span:not(:last-child){border-bottom:1px solid rgba(212,175,55,.16)}
  .wifi-submit{max-width:100%}
 }
+
+.wifi-pricing-note:after{
+  content:"";display:block;height:1px;max-width:1050px;margin:42px auto 0;
+  background:linear-gradient(90deg,transparent,rgba(212,175,55,.35),transparent);
+}
