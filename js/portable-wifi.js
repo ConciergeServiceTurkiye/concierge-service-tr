@@ -10,56 +10,203 @@ document.addEventListener('DOMContentLoaded',()=>{
   const estimate=document.getElementById('wifiEstimate');
   const daily=8.90;
 
+  const pad=n=>String(n).padStart(2,'0');
   const today=new Date();
-  const iso=d=>{
-    const x=new Date(d.getTime()-d.getTimezoneOffset()*60000);
-    return x.toISOString().slice(0,10);
-  };
+  const todayIso=`${today.getFullYear()}-${pad(today.getMonth()+1)}-${pad(today.getDate())}`;
 
-  if(pickup)pickup.min=iso(today);
-  if(ret)ret.min=iso(today);
-
-  // Keep the WhatsApp number numeric and always start it with +.
+  // -------------------------
+  // WhatsApp number
+  // -------------------------
   const normalizePhone=value=>{
-    const digits=String(value||'').replace(/\\D/g,'');
+    const digits=String(value||'').replace(/\D/g,'');
     return '+'+digits;
   };
 
   if(whatsapp){
     whatsapp.value='+';
 
+    const keepCaretAfterPrefix=()=>{
+      if(whatsapp.selectionStart===0){
+        whatsapp.setSelectionRange(1,1);
+      }
+    };
+
     whatsapp.addEventListener('focus',()=>{
-      if(!whatsapp.value)whatsapp.value='+';
-      if(whatsapp.value.charAt(0)!=='+')whatsapp.value='+'+whatsapp.value.replace(/\\D/g,'');
+      if(!whatsapp.value || whatsapp.value.charAt(0)!=='+'){
+        whatsapp.value=normalizePhone(whatsapp.value);
+      }
       requestAnimationFrame(()=>{
-        whatsapp.setSelectionRange(whatsapp.value.length,whatsapp.value.length);
+        whatsapp.setSelectionRange(Math.max(1,whatsapp.value.length),Math.max(1,whatsapp.value.length));
       });
     });
 
+    whatsapp.addEventListener('keydown',event=>{
+      const start=whatsapp.selectionStart ?? 0;
+      const end=whatsapp.selectionEnd ?? 0;
+
+      if(['Tab','ArrowLeft','ArrowRight','Home','End'].includes(event.key)){
+        if(event.key==='Home'){
+          event.preventDefault();
+          whatsapp.setSelectionRange(1,1);
+        }
+        return;
+      }
+
+      if(event.key==='Backspace'){
+        if(start<=1 || (start<2 && end>0)){
+          event.preventDefault();
+          keepCaretAfterPrefix();
+        }
+        return;
+      }
+
+      if(event.key==='Delete'){
+        if(start===0 || (start<1 && end>0)){
+          event.preventDefault();
+          keepCaretAfterPrefix();
+        }
+        return;
+      }
+
+      if(event.ctrlKey||event.metaKey){
+        return;
+      }
+
+      if(!/^[0-9]$/.test(event.key)){
+        event.preventDefault();
+        return;
+      }
+
+      if(start===0){
+        event.preventDefault();
+        whatsapp.setSelectionRange(1,1);
+      }
+    });
+
     whatsapp.addEventListener('input',()=>{
-      const normalized=normalizePhone(whatsapp.value);
+      let normalized=normalizePhone(whatsapp.value);
+      if(!normalized.startsWith('+'))normalized='+'+normalized;
       if(whatsapp.value!==normalized)whatsapp.value=normalized;
+      if(whatsapp.value.length===0)whatsapp.value='+';
       whatsapp.setCustomValidity('');
     });
 
-    whatsapp.addEventListener('keydown',event=>{
-      if(['Backspace','Delete','ArrowLeft','ArrowRight','Home','End','Tab'].includes(event.key))return;
-      if(event.ctrlKey||event.metaKey)return;
-      if(!/^[0-9]$/.test(event.key) && event.key!=='+')event.preventDefault();
-      if(event.key==='+' && (whatsapp.selectionStart!==0 || whatsapp.value.includes('+')))event.preventDefault();
-    });
-
-    whatsapp.addEventListener('blur',()=>{
-      if(!whatsapp.value)whatsapp.value='+';
+    whatsapp.addEventListener('paste',()=>{
+      setTimeout(()=>{
+        whatsapp.value=normalizePhone(whatsapp.value);
+        if(!whatsapp.value)whatsapp.value='+';
+      },0);
     });
   }
+
+  // -------------------------
+  // DD.MM.YYYY date inputs
+  // -------------------------
+  const formatDateInput=input=>{
+    if(!input)return;
+    const digits=input.value.replace(/\D/g,'').slice(0,8);
+    let formatted=digits;
+    if(digits.length>2)formatted=digits.slice(0,2)+'.'+digits.slice(2);
+    if(digits.length>4)formatted=formatted.slice(0,5)+'.'+formatted.slice(4);
+    input.value=formatted;
+  };
+
+  const parseDate=input=>{
+    const value=input?.value.trim()||'';
+    const match=value.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
+    if(!match)return null;
+
+    const day=Number(match[1]);
+    const month=Number(match[2]);
+    const year=Number(match[3]);
+
+    const date=new Date(year,month-1,day);
+    if(
+      date.getFullYear()!==year ||
+      date.getMonth()!==month-1 ||
+      date.getDate()!==day
+    )return null;
+
+    return {
+      day,
+      month,
+      year,
+      iso:`${year}-${pad(month)}-${pad(day)}`,
+      date
+    };
+  };
+
+  const displayDateFromIso=iso=>{
+    if(!iso)return '';
+    const [year,month,day]=iso.split('-').map(Number);
+    return `${pad(day)}.${pad(month)}.${year}`;
+  };
+
+  [pickup,ret].forEach(input=>{
+    if(!input)return;
+
+    input.addEventListener('input',()=>{
+      formatDateInput(input);
+      input.setCustomValidity('');
+      updateEstimate();
+    });
+
+    input.addEventListener('blur',()=>{
+      formatDateInput(input);
+      if(input.value && !parseDate(input)){
+        input.setCustomValidity('Please enter a valid date in DD.MM.YYYY format.');
+      }else{
+        input.setCustomValidity('');
+      }
+    });
+  });
 
   function validateDates(showMessage=false){
     if(!pickup||!ret)return true;
 
+    pickup.setCustomValidity('');
     ret.setCustomValidity('');
 
-    if(ret.value && pickup.value && ret.value<pickup.value){
+    const pickupDate=parseDate(pickup);
+    const returnDate=parseDate(ret);
+
+    if(!pickup.value){
+      pickup.setCustomValidity('Please select a pickup date.');
+      if(showMessage)pickup.reportValidity();
+      return false;
+    }
+
+    if(!pickupDate){
+      pickup.setCustomValidity('Please enter a valid pickup date in DD.MM.YYYY format.');
+      if(showMessage)pickup.reportValidity();
+      return false;
+    }
+
+    if(pickupDate.iso<todayIso){
+      pickup.setCustomValidity('Please select today or a future pickup date.');
+      if(showMessage)pickup.reportValidity();
+      return false;
+    }
+
+    if(!ret.value){
+      ret.setCustomValidity('Please select a return date.');
+      if(showMessage)ret.reportValidity();
+      return false;
+    }
+
+    if(!returnDate){
+      ret.setCustomValidity('Please enter a valid return date in DD.MM.YYYY format.');
+      if(showMessage)ret.reportValidity();
+      return false;
+    }
+
+    if(returnDate.iso<todayIso){
+      ret.setCustomValidity('Please select today or a future return date.');
+      if(showMessage)ret.reportValidity();
+      return false;
+    }
+
+    if(returnDate.iso<pickupDate.iso){
       ret.setCustomValidity('Please select a return date on or after the pickup date.');
       if(showMessage)ret.reportValidity();
       return false;
@@ -68,67 +215,38 @@ document.addEventListener('DOMContentLoaded',()=>{
     return true;
   }
 
-  pickup?.addEventListener('change',()=>{
-    if(pickup.value && ret)ret.min=pickup.value;
-    validateDates();
-    updateEstimate();
-  });
-
-  ret?.addEventListener('change',()=>{
-    validateDates(true);
-    updateEstimate();
-  });
-
-  devices?.addEventListener('change',updateEstimate);
-
-  // Replace browser-localized validation messages with consistent English.
+  // -------------------------
+  // English validation
+  // -------------------------
   form.querySelectorAll('input, select, textarea').forEach(field=>{
     field.addEventListener('invalid',()=>{
       if(field===whatsapp){
-        const digits=field.value.replace(/\\D/g,'');
-        if(!digits){
-          field.setCustomValidity('Please enter your WhatsApp number.');
-        }else if(digits.length<7){
-          field.setCustomValidity('Please enter a valid WhatsApp number.');
+        const digits=field.value.replace(/\D/g,'');
+        field.setCustomValidity(
+          digits.length<7
+            ? 'Please enter your WhatsApp number.'
+            : ''
+        );
+        return;
+      }
+
+      if(field===email){
+        const value=field.value.trim();
+
+        if(!value){
+          field.setCustomValidity('Please enter your email address.');
+        }else if(!value.includes('@')){
+          field.setCustomValidity('Please add an @ to your email address.');
+        }else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)){
+          field.setCustomValidity('Please enter a valid email address.');
         }else{
           field.setCustomValidity('');
         }
         return;
       }
 
-      if(field===email){
-        const value=field.value.trim();
-        if(!value){
-          field.setCustomValidity('Please enter your email address.');
-        }else if(!value.includes('@')){
-          field.setCustomValidity('Please add an @ to your email address.');
-        }else{
-          field.setCustomValidity('Please enter a valid email address.');
-        }
-        return;
-      }
-
-      if(field===pickup){
-        if(!field.value){
-          field.setCustomValidity('Please select a pickup date.');
-        }else if(field.validity.rangeUnderflow){
-          field.setCustomValidity('Please select today or a future pickup date.');
-        }else{
-          field.setCustomValidity('Please enter a valid pickup date.');
-        }
-        return;
-      }
-
-      if(field===ret){
-        if(!field.value){
-          field.setCustomValidity('Please select a return date.');
-        }else if(field.validity.rangeUnderflow){
-          field.setCustomValidity('Please select today or a future return date.');
-        }else if(!validateDates()){
-          // validateDates() supplies the cross-field English message.
-        }else{
-          field.setCustomValidity('Please enter a valid return date.');
-        }
+      if(field===pickup||field===ret){
+        validateDates();
         return;
       }
 
@@ -145,20 +263,19 @@ document.addEventListener('DOMContentLoaded',()=>{
     },true);
 
     field.addEventListener('input',()=>{
-      if(field!==ret)field.setCustomValidity('');
+      if(field!==pickup&&field!==ret)field.setCustomValidity('');
     });
 
     field.addEventListener('change',()=>{
-      if(field!==ret)field.setCustomValidity('');
+      if(field!==pickup&&field!==ret)field.setCustomValidity('');
     });
   });
 
   function days(){
-    if(!pickup?.value||!ret?.value)return 1;
-    const a=new Date(pickup.value+'T12:00:00');
-    const b=new Date(ret.value+'T12:00:00');
-    const d=Math.ceil((b-a)/86400000);
-    return Math.max(1,d);
+    const a=parseDate(pickup);
+    const b=parseDate(ret);
+    if(!a||!b)return 1;
+    return Math.max(1,Math.ceil((b.date-a.date)/86400000));
   }
 
   function updateEstimate(){
@@ -169,7 +286,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   form.addEventListener('submit',e=>{
     e.preventDefault();
 
-    validateDates();
+    if(!validateDates(true))return;
 
     if(!form.checkValidity()){
       form.reportValidity();
@@ -177,29 +294,35 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
 
     const data=new FormData(form);
+    const pickupDate=parseDate(pickup);
+    const returnDate=parseDate(ret);
     const d=days();
     const total=(d*Number(data.get('devices')||1)*daily).toFixed(2);
 
     const message=[
       'PORTABLE WI-FI REQUEST — Concierge Service Türkiye',
       '',
-      'Guest: '+data.get('name'),
-      'WhatsApp: '+data.get('whatsapp'),
-      'Email: '+data.get('email'),
-      'Devices: '+data.get('devices'),
-      'Pickup date: '+data.get('pickupDate'),
-      'Return date: '+data.get('returnDate'),
-      'Pickup: '+data.get('pickup'),
-      'Return: '+data.get('return'),
-      'Hotel / address: '+(data.get('address')||'N/A'),
-      'Flight / notes: '+(data.get('notes')||'N/A'),
+      '*Guest:* '+data.get('name'),
+      '*WhatsApp:* '+data.get('whatsapp'),
+      '*Email:* '+data.get('email'),
+      '*Devices:* '+data.get('devices'),
+      '*Pickup date:* '+pickupDate.iso,
+      '*Return date:* '+returnDate.iso,
+      '*Pickup:* '+data.get('pickup'),
+      '*Return:* '+data.get('return'),
+      '*Hotel / address:* '+(data.get('address')||'N/A'),
+      '*Flight / notes:* '+(data.get('notes')||'N/A'),
       '',
-      'Estimated Wi-Fi service: €'+total,
+      '*Estimated Wi-Fi service:* €'+total,
       '',
       'Please arrange the reservation and send the secure 3D payment link.'
     ].join('\\n');
 
-    window.open('https://wa.me/905344888624?text='+encodeURIComponent(message),'_blank','noopener');
+    window.open(
+      'https://wa.me/905344888624?text='+encodeURIComponent(message),
+      '_blank',
+      'noopener'
+    );
   });
 
   updateEstimate();
