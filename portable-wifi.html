@@ -85,10 +85,10 @@
     <h2>Tell Us About Your Journey</h2>
     <p>Submit your dates and preferred locations. Our concierge team will coordinate the reservation and send you the secure 3D payment link.</p>
   </div>
-  <form class="wifi-booking-form" id="portableWifiForm">
+  <form class="wifi-booking-form" id="portableWifiForm" novalidate>
     <div class="wifi-form-grid">
       <label>Full Name<input required name="name" autocomplete="name" placeholder="Your full name"></label>
-      <label>WhatsApp Number<input required name="whatsapp" autocomplete="tel" placeholder="+90 ..."></label>
+      <label>WhatsApp Number<input required type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" maxlength="18" value="+" placeholder="+90 ..."></label>
       <label>Email Address<input required type="email" name="email" autocomplete="email" placeholder="you@example.com"></label>
       <label>Number of Devices<select name="devices"><option value="1">1 device</option><option value="2">2 devices</option><option value="3">3 devices</option><option value="4">4 devices</option><option value="5">5 devices</option><option value="6">6 devices</option></select></label>
       <label>Pickup Date<input required type="date" name="pickupDate"></label>
