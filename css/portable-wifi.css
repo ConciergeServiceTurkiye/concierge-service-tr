@@ -604,3 +604,11 @@
 
 /* Preferred language field helper text */
 .wifi-language-note{display:block;margin-top:2px;color:rgba(255,255,255,.48);font-size:11px;line-height:1.6;letter-spacing:0}
+
+
+/* Contact-method submission feedback */
+#wifiSubmitStatus{min-height:0;margin:14px 0 0;text-align:center;font-size:12px;line-height:1.6;letter-spacing:.02em}
+#wifiSubmitStatus:empty{display:none}
+#wifiSubmitStatus.is-success{color:#d4af37}
+#wifiSubmitStatus.is-error{color:#ffb4a9}
+.wifi-submit:disabled{opacity:.65;cursor:wait}
