@@ -324,12 +324,11 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     // WhatsApp supports *bold* text and real line breaks.
     const message=[
-      'PORTABLE WI-FI REQUEST — Concierge Service Türkiye',
+      'STAYINWIFI PORTABLE WI-FI REQUEST — Concierge Service Türkiye',
       '',
       '*Guest:* '+data.get('name'),
       '*WhatsApp:* '+data.get('whatsapp'),
       '*Email:* '+data.get('email'),
-      '*Preferred contact method:* '+data.get('contactMethod'),
       '*Devices:* '+data.get('devices'),
       '*Pickup / return photo instruction language:* '+data.get('instructionLanguage'),
       '*Pickup date:* '+pickupDate.iso,
@@ -375,7 +374,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       if(submitStatus)submitStatus.textContent='Sending your request by email…';
 
       const emailPayload={
-        _subject:'Portable Wi-Fi Request — '+String(data.get('name')||'Guest'),
+        _subject:'STAYINWIFI PORTABLE WI-FI REQUEST — '+String(data.get('name')||'Guest'),
         _template:'table',
         _captcha:'false',
         'Contact Method':'Email',
@@ -383,7 +382,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         'Phone Number (Preferred WhatsApp)':String(data.get('whatsapp')||''),
         'Guest Email':String(data.get('email')||''),
         'Preferred Instruction Language':String(data.get('instructionLanguage')||''),
-        'Number of Devices':String(data.get('devices')||''),
+        'Number of Wi-Fi Devices to Rent':String(data.get('devices')||''),
         'Pickup Date':pickupDate.iso,
         'Return Date':returnDate.iso,
         'Pickup Location':String(data.get('pickup')||''),
