@@ -350,17 +350,20 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
 
     if(method==='WhatsApp'){
-      const opened=window.open(
-        'https://wa.me/905344888624?text='+encodeURIComponent(message),
-        '_blank',
-        'noopener'
-      );
+      const whatsappUrl='https://wa.me/905344888624?text='+encodeURIComponent(message);
+      const opened=window.open(whatsappUrl,'_blank');
 
-      // With "noopener", browsers may return null even when the tab opens.
-      // Reset after handing the prepared request off to the WhatsApp URL.
+      if(!opened){
+        if(submitStatus){
+          submitStatus.textContent='WhatsApp could not be opened. Your details are still here; please allow pop-ups and try again.';
+          submitStatus.classList.add('is-error');
+        }
+        return;
+      }
+
       resetRequestFields();
       if(submitStatus){
-        submitStatus.textContent='Your request details have been cleared. Please send the prepared message in WhatsApp to complete your request. If WhatsApp did not open, allow pop-ups and try again.';
+        submitStatus.textContent='Your request details have been cleared. Please send the prepared message in WhatsApp to complete your request.';
         submitStatus.classList.add('is-success');
       }
       return;
