@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     const a=parseDate(pickup);
     const b=parseDate(ret);
     if(!a||!b)return 1;
-    return Math.max(1,Math.ceil((b.date-a.date)/86400000));
+    return Math.max(1,Math.floor((b.date-a.date)/86400000)+1);
   }
 
   function updateEstimate(){
@@ -329,6 +329,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       '*Guest:* '+data.get('name'),
       '*WhatsApp:* '+data.get('whatsapp'),
       '*Email:* '+data.get('email'),
+      '*Preferred contact method:* '+data.get('contactMethod'),
       '*Devices:* '+data.get('devices'),
       '*Pickup / return photo instruction language:* '+data.get('instructionLanguage'),
       '*Pickup date:* '+pickupDate.iso,
