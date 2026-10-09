@@ -356,17 +356,12 @@ document.addEventListener('DOMContentLoaded',()=>{
         'noopener'
       );
 
-      if(!opened){
-        if(submitStatus){
-          submitStatus.textContent='Your browser may have blocked the WhatsApp window. Please check for a new tab or allow pop-ups.';
-          submitStatus.classList.add('is-error');
-        }
-      }else{
-        resetRequestFields();
-        if(submitStatus){
-          submitStatus.textContent='Your request details have been cleared. Please send the prepared message in WhatsApp to complete your request.';
-          submitStatus.classList.add('is-success');
-        }
+      // With "noopener", browsers may return null even when the tab opens.
+      // Reset after handing the prepared request off to the WhatsApp URL.
+      resetRequestFields();
+      if(submitStatus){
+        submitStatus.textContent='Your request details have been cleared. Please send the prepared message in WhatsApp to complete your request. If WhatsApp did not open, allow pop-ups and try again.';
+        submitStatus.classList.add('is-success');
       }
       return;
     }
