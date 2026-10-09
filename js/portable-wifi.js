@@ -298,6 +298,19 @@ document.addEventListener('DOMContentLoaded',()=>{
   devices?.addEventListener('change',updateEstimate);
   devices?.addEventListener('input',updateEstimate);
 
+  function resetRequestFields(){
+    form.reset();
+
+    // Keep the phone field's required international-prefix convention.
+    if(whatsapp)whatsapp.value='+';
+
+    // Clear any leftover custom validation state and refresh the estimate.
+    form.querySelectorAll('input,select,textarea').forEach(field=>{
+      field.setCustomValidity('');
+    });
+    updateEstimate();
+  }
+
   form.addEventListener('submit',event=>{
     event.preventDefault();
 
@@ -345,8 +358,14 @@ document.addEventListener('DOMContentLoaded',()=>{
 
       if(!opened){
         if(submitStatus){
-          submitStatus.textContent='Your browser blocked the WhatsApp window. Please allow pop-ups and submit the form again.';
+          submitStatus.textContent='Your browser may have blocked the WhatsApp window. Please check for a new tab or allow pop-ups.';
           submitStatus.classList.add('is-error');
+        }
+      }else{
+        resetRequestFields();
+        if(submitStatus){
+          submitStatus.textContent='Your request details have been cleared. Please send the prepared message in WhatsApp to complete your request.';
+          submitStatus.classList.add('is-success');
         }
       }
       return;
@@ -385,6 +404,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         if(!response.ok || result.success===false){
           throw new Error(result.message||'The email service could not accept the request.');
         }
+        resetRequestFields();
         if(submitStatus){
           submitStatus.textContent='Your request has been submitted. We will contact you by email after reviewing the details.';
           submitStatus.classList.add('is-success');
