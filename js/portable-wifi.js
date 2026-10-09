@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   const instructionLanguage=form.querySelector('[name="instructionLanguage"]');
   const whatsapp=form.querySelector('[name="whatsapp"]');
   const email=form.querySelector('[name="email"]');
+  const contactMethod=form.querySelector('[name="contactMethod"]');
+  const submitStatus=document.getElementById('wifiSubmitStatus');
+  const submitButton=form.querySelector('[type="submit"]');
   const pickupLocation=form.querySelector('[name="pickup"]');
   const returnLocation=form.querySelector('[name="return"]');
   const estimate=document.getElementById('wifiEstimate');
@@ -208,7 +211,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     const phoneDigits=whatsapp.value.replace(/\D/g,'');
     if(phoneDigits.length<7){
-      return setError(whatsapp,'Please enter your WhatsApp number.');
+      return setError(whatsapp,'Please enter a valid phone number (including country code).');
     }
 
     const emailValue=email.value.trim();
@@ -220,6 +223,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue)){
       return setError(email,'Please enter a valid email address.');
+    }
+
+    if(!contactMethod?.value){
+      return setError(contactMethod,'Please select your preferred contact method.');
     }
 
     if(!instructionLanguage?.value){
@@ -321,11 +328,79 @@ document.addEventListener('DOMContentLoaded',()=>{
       'Please arrange the reservation and send the secure 3D payment link.'
     ].join('\n');
 
-    window.open(
-      'https://wa.me/905344888624?text='+encodeURIComponent(message),
-      '_blank',
-      'noopener'
-    );
+    const method=data.get('contactMethod');
+
+    if(submitStatus){
+      submitStatus.textContent='';
+      submitStatus.classList.remove('is-success','is-error');
+    }
+
+    if(method==='WhatsApp'){
+      const opened=window.open(
+        'https://wa.me/905344888624?text='+encodeURIComponent(message),
+        '_blank',
+        'noopener'
+      );
+
+      if(!opened){
+        if(submitStatus){
+          submitStatus.textContent='Your browser blocked the WhatsApp window. Please allow pop-ups and submit the form again.';
+          submitStatus.classList.add('is-error');
+        }
+      }
+      return;
+    }
+
+    if(method==='Email'){
+      if(submitButton)submitButton.disabled=true;
+      if(submitStatus)submitStatus.textContent='Sending your request by email…';
+
+      const emailPayload={
+        _subject:'Portable Wi-Fi Request — '+String(data.get('name')||'Guest'),
+        _template:'table',
+        _captcha:'false',
+        'Contact Method':'Email',
+        'Guest Name':String(data.get('name')||''),
+        'Phone Number (Preferred WhatsApp)':String(data.get('whatsapp')||''),
+        'Guest Email':String(data.get('email')||''),
+        'Preferred Instruction Language':String(data.get('instructionLanguage')||''),
+        'Number of Devices':String(data.get('devices')||''),
+        'Pickup Date':pickupDate.iso,
+        'Return Date':returnDate.iso,
+        'Pickup Location':String(data.get('pickup')||''),
+        'Return Location':String(data.get('return')||''),
+        'Hotel / Delivery Address':String(data.get('address')||'N/A'),
+        'Flight Details / Additional Requests':String(data.get('notes')||'N/A'),
+        'Estimated Wi-Fi Service':'€'+total,
+        'Request':'Please arrange the reservation and send the secure 3D payment link.'
+      };
+
+      fetch('https://formsubmit.co/ajax/conciergeserviceturkiye@gmail.com',{
+        method:'POST',
+        headers:{'Content-Type':'application/json',Accept:'application/json'},
+        body:JSON.stringify(emailPayload)
+      })
+      .then(async response=>{
+        const result=await response.json().catch(()=>({}));
+        if(!response.ok || result.success===false){
+          throw new Error(result.message||'The email service could not accept the request.');
+        }
+        if(submitStatus){
+          submitStatus.textContent='Your request has been submitted. We will contact you by email after reviewing the details.';
+          submitStatus.classList.add('is-success');
+        }
+      })
+      .catch(error=>{
+        console.error('Portable Wi-Fi email request failed:',error);
+        if(submitStatus){
+          submitStatus.textContent='We could not send your request by email just now. Please try again or contact Concierge Service Türkiye directly.';
+          submitStatus.classList.add('is-error');
+        }
+      })
+      .finally(()=>{
+        if(submitButton)submitButton.disabled=false;
+      });
+    }
   });
 
   updateEstimate();
