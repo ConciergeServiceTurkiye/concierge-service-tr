@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const pickup=form.querySelector('[name="pickupDate"]');
   const ret=form.querySelector('[name="returnDate"]');
   const devices=form.querySelector('[name="devices"]');
+  const instructionLanguage=form.querySelector('[name="instructionLanguage"]');
   const whatsapp=form.querySelector('[name="whatsapp"]');
   const email=form.querySelector('[name="email"]');
   const pickupLocation=form.querySelector('[name="pickup"]');
@@ -221,6 +222,10 @@ document.addEventListener('DOMContentLoaded',()=>{
       return setError(email,'Please enter a valid email address.');
     }
 
+    if(!instructionLanguage?.value){
+      return setError(instructionLanguage,'Please select a language for the pickup and return instructions.');
+    }
+
     if(!pickup.value){
       return setError(pickup,'Please select a pickup date.');
     }
@@ -303,6 +308,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       '*WhatsApp:* '+data.get('whatsapp'),
       '*Email:* '+data.get('email'),
       '*Devices:* '+data.get('devices'),
+      '*Pickup / return photo instruction language:* '+data.get('instructionLanguage'),
       '*Pickup date:* '+pickupDate.iso,
       '*Return date:* '+returnDate.iso,
       '*Pickup:* '+data.get('pickup'),
