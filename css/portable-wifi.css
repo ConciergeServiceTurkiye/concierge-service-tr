@@ -612,3 +612,58 @@
 #wifiSubmitStatus.is-success{color:#d4af37}
 #wifiSubmitStatus.is-error{color:#ffb4a9}
 .wifi-submit:disabled{opacity:.65;cursor:wait}
+
+
+/* StayinWiFi form: centered contact radios and compact language choices */
+.wifi-form-grid .wifi-choice-fieldset{
+  min-width:0;margin:0;padding:0;border:0;
+}
+.wifi-form-grid .wifi-choice-fieldset legend{
+  width:100%;margin:0 0 18px;padding:0;text-align:center;
+  color:rgba(255,255,255,.82);font-size:12px;letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+.wifi-contact-choice{padding-bottom:4px!important}
+.wifi-radio-options{
+  display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:30px;
+}
+.wifi-radio-option{
+  display:inline-flex!important;flex-direction:row!important;align-items:center;
+  justify-content:center;gap:9px!important;color:rgba(255,255,255,.78)!important;
+  font-size:13px!important;letter-spacing:.2px!important;cursor:pointer;
+}
+.wifi-radio-option input[type="radio"]{
+  appearance:none;-webkit-appearance:none;flex:0 0 16px;
+  width:16px;height:16px;min-width:16px;margin:0;padding:0;
+  border:1px solid rgba(212,175,55,.7);border-radius:50%;
+  background:transparent;display:grid;place-content:center;cursor:pointer;
+}
+.wifi-radio-option input[type="radio"]::before{
+  content:"";width:8px;height:8px;border-radius:50%;background:#d4af37;
+  transform:scale(0);transition:transform .14s ease;
+}
+.wifi-radio-option input[type="radio"]:checked::before{transform:scale(1)}
+.wifi-radio-option input[type="radio"]:focus-visible{outline:2px solid rgba(212,175,55,.6);outline-offset:3px}
+.wifi-radio-option:has(input:checked){color:#d4af37!important}
+.wifi-language-choice{padding:10px 0 0!important}
+.wifi-language-choice legend{margin-bottom:20px!important}
+.wifi-language-options{gap:10px 20px}
+.wifi-language-options .wifi-radio-option{
+  min-width:42px;min-height:34px;padding:5px 9px;border:1px solid rgba(255,255,255,.12);
+  transition:border-color .2s ease,color .2s ease,background .2s ease;
+}
+.wifi-language-options .wifi-radio-option:has(input:checked){
+  border-color:rgba(212,175,55,.75);background:rgba(212,175,55,.07);
+}
+.wifi-language-options .wifi-radio-option input[type="radio"]{width:14px;height:14px;min-width:14px;flex-basis:14px}
+.wifi-language-options .wifi-radio-option input[type="radio"]::before{width:6px;height:6px}
+.wifi-form-grid .wifi-choice-fieldset .wifi-language-note{text-align:center;margin-top:14px}
+@media(max-width:640px){
+  .wifi-booking-form{padding:24px 18px}
+  .wifi-form-grid{grid-template-columns:1fr;gap:18px}
+  .wifi-form-grid label.full,.wifi-form-grid .wifi-choice-fieldset.full{grid-column:1}
+  .wifi-radio-options{gap:20px}
+  .wifi-language-options{gap:9px}
+  .wifi-language-options .wifi-radio-option{min-width:38px;padding:5px 7px}
+  .wifi-form-summary{align-items:flex-start;flex-direction:column;padding:16px}
+}
