@@ -590,3 +590,13 @@
     mask-image:radial-gradient(ellipse 94% 90% at 50% 50%,#000 77%,rgba(0,0,0,.92) 89%,transparent 100%);
   }
 }
+
+
+/* Keep the first delivery option's hover lift consistent with options 02–07 */
+.wifi-location-card.featured{
+  transition:transform .25s ease,border-color .25s ease;
+}
+.wifi-location-card.featured:hover{
+  transform:translateY(-2px);
+  border-color:rgba(212,175,55,.35);
+}
