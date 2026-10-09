@@ -7,9 +7,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   const ret=form.querySelector('[name="returnDate"]');
   const devices=form.querySelector('[name="devices"]');
   const instructionLanguage=form.querySelector('[name="instructionLanguage"]');
+  const instructionLanguageOptions=form.querySelectorAll('input[name="instructionLanguage"]');
   const whatsapp=form.querySelector('[name="whatsapp"]');
   const email=form.querySelector('[name="email"]');
   const contactMethod=form.querySelector('[name="contactMethod"]');
+  const contactMethodOptions=form.querySelectorAll('input[name="contactMethod"]');
   const submitStatus=document.getElementById('wifiSubmitStatus');
   const submitButton=form.querySelector('[type="submit"]');
   const pickupLocation=form.querySelector('[name="pickup"]');
@@ -225,12 +227,12 @@ document.addEventListener('DOMContentLoaded',()=>{
       return setError(email,'Please enter a valid email address.');
     }
 
-    if(!contactMethod?.value){
-      return setError(contactMethod,'Please select your preferred contact method.');
+    if(!form.querySelector('input[name="contactMethod"]:checked')){
+      return setError(contactMethodOptions[0],'Please select your preferred contact method.');
     }
 
-    if(!instructionLanguage?.value){
-      return setError(instructionLanguage,'Please select a language for the pickup and return instructions.');
+    if(!form.querySelector('input[name="instructionLanguage"]:checked')){
+      return setError(instructionLanguageOptions[0],'Please select a language for the pickup and return instructions.');
     }
 
     if(!pickup.value){
@@ -320,8 +322,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       '*Return date:* '+returnDate.iso,
       '*Pickup:* '+data.get('pickup'),
       '*Return:* '+data.get('return'),
-      '*Hotel / address:* '+(data.get('address')||'N/A'),
-      '*Flight / notes:* '+(data.get('notes')||'N/A'),
+      '*Hotel / delivery address / flight details / additional requests:* '+(data.get('address')||'N/A'),
       '',
       '*Estimated Wi-Fi service:* €'+total,
       '',
@@ -369,8 +370,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         'Return Date':returnDate.iso,
         'Pickup Location':String(data.get('pickup')||''),
         'Return Location':String(data.get('return')||''),
-        'Hotel / Delivery Address':String(data.get('address')||'N/A'),
-        'Flight Details / Additional Requests':String(data.get('notes')||'N/A'),
+        'Hotel / Delivery Address / Flight Details / Additional Requests':String(data.get('address')||'N/A'),
         'Estimated Wi-Fi Service':'€'+total,
         'Request':'Please arrange the reservation and send the secure 3D payment link.'
       };
