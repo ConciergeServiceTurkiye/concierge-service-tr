@@ -667,3 +667,74 @@
   .wifi-language-options .wifi-radio-option{min-width:38px;padding:5px 7px}
   .wifi-form-summary{align-items:flex-start;flex-direction:column;padding:16px}
 }
+
+
+/* Final alignment refinements requested for the StayinWiFi form */
+.wifi-form-grid .wifi-contact-choice{
+  grid-column:1/-1!important;
+  width:100%;
+  text-align:center;
+}
+.wifi-form-grid .wifi-contact-choice legend{
+  display:block;
+  text-align:center!important;
+  width:100%;
+  margin:0 0 12px!important;
+  text-transform:none!important;
+  letter-spacing:.4px!important;
+  font-size:13px!important;
+  color:rgba(255,255,255,.82)!important;
+}
+.wifi-form-grid .wifi-contact-choice .wifi-radio-options{
+  justify-content:center!important;
+  flex-wrap:nowrap;
+  gap:28px;
+}
+.wifi-form-grid .wifi-language-choice{
+  grid-column:1/-1!important;
+  width:100%;
+  text-align:left;
+}
+.wifi-form-grid .wifi-language-choice legend{
+  text-align:left!important;
+  text-transform:none!important;
+  letter-spacing:.2px!important;
+  font-size:13px!important;
+  margin:0 0 14px!important;
+  color:rgba(255,255,255,.82)!important;
+}
+.wifi-form-grid .wifi-language-options{
+  justify-content:flex-start!important;
+  flex-wrap:nowrap!important;
+  gap:clamp(9px,1.65vw,22px)!important;
+  width:100%;
+}
+.wifi-form-grid .wifi-language-options .wifi-radio-option{
+  min-width:0!important;
+  min-height:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  gap:6px!important;
+  white-space:nowrap;
+}
+.wifi-form-grid .wifi-language-options .wifi-radio-option:has(input:checked){
+  border:0!important;
+  background:transparent!important;
+}
+.wifi-form-grid .wifi-language-choice .wifi-language-note{
+  text-align:left!important;
+}
+#wifiSubmitStatus{
+  text-align:center!important;
+  font-size:15px!important;
+  line-height:1.7!important;
+  margin:18px auto 0!important;
+  max-width:90%;
+}
+@media(max-width:700px){
+  .wifi-form-grid .wifi-language-options{
+    flex-wrap:wrap!important;
+    gap:14px 18px!important;
+  }
+}
