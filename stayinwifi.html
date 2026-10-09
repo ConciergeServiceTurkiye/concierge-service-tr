@@ -89,8 +89,9 @@
   <form class="wifi-booking-form" id="portableWifiForm" novalidate>
     <div class="wifi-form-grid">
       <label>Full Name<input name="name" autocomplete="name" placeholder="Your full name"></label>
-      <label>WhatsApp Number<input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" maxlength="18" value="+" placeholder="+90 ..."></label>
-      <label>Email Address<input type="text" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com"></label>
+      <label>Phone Number (Preferred WhatsApp)<input type="tel" name="whatsapp" autocomplete="tel" inputmode="tel" maxlength="18" value="+" placeholder="+90 ..."></label>
+      <label>Email Address<input type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com"></label>
+      <label class="full">Preferred Contact Method<select name="contactMethod" required><option value="">Select your preferred contact method</option><option value="WhatsApp">WhatsApp</option><option value="Email">Email</option></select><small class="wifi-language-note">Your phone number and email address are both required, whichever contact method you choose.</small></label>
       <label class="full">Preferred language for pickup and return photo instructions<select name="instructionLanguage" required><option value="">Select your preferred language</option><option value="AR - Arabic">AR - Arabic</option><option value="DE - Deutsch">DE - Deutsch</option><option value="EN - English">EN - English</option><option value="ES - Spanish">ES - Spanish</option><option value="FR - French">FR - French</option><option value="IT - Italian">IT - Italian</option><option value="KO - Korean">KO - Korean</option><option value="PT - Portuguese">PT - Portuguese</option><option value="RU - Russian">RU - Russian</option><option value="ZH - Chinese">ZH - Chinese</option></select><small class="wifi-language-note">After payment is received and confirmed, we will send the matching photo instructions via WhatsApp or email.</small></label>
       <label>Number of Devices<select name="devices"><option value="1">1 device</option><option value="2">2 devices</option><option value="3">3 devices</option><option value="4">4 devices</option><option value="5">5 devices</option><option value="6">6 devices</option></select></label>
       <label>Pickup Date<input type="text" name="pickupDate" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD.MM.YYYY"></label>
@@ -102,7 +103,8 @@
     </div>
     <div class="wifi-form-summary"><div><span>Estimated Wi-Fi service</span><strong id="wifiEstimate">€8.90 / day</strong></div><small>Final total and any applicable delivery details will be confirmed by our concierge team before payment.</small></div>
     <button class="wifi-submit" type="submit">Request &amp; Continue to Secure Payment <span>→</span></button>
-    <p class="wifi-form-note">Your request opens a WhatsApp message to Concierge Service Türkiye with the details you entered. We then coordinate the reservation and send the secure payment link.</p>
+    <p class="wifi-form-note">Choose WhatsApp or email as your preferred contact method. Your phone number and email address are both required. We will receive your request through the selected channel, then coordinate the reservation and send the secure payment link.</p>
+    <p class="wifi-form-note" id="wifiSubmitStatus" role="status" aria-live="polite"></p>
   </form>
 </section>
 
@@ -150,6 +152,6 @@
 <a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank" rel="noopener"><img src="assets/whatsapp.png" alt="WhatsApp"></a>
 <div id="footerInclude"></div>
 <script src="js/common.js"></script>
-<script src="js/portable-wifi.js?v=2026100901"></script>
+<script src="js/portable-wifi.js?v=2026100902"></script>
 </body>
 </html>
