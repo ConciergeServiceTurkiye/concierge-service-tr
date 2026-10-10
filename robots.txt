@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://conciergeservice.com.tr/sitemap.xml
+Sitemap: https://www.conciergeservice.com.tr/sitemap.xml
