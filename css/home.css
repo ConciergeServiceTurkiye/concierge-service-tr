@@ -73,3 +73,21 @@
 @media(max-width:900px){.home-section{padding:76px 5%}.home-journey{padding:76px 5%;gap:5%}.home-final-cta{padding:50px 5%}.home-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.home-service-card{min-height:250px}.home-hero-content{left:6%;width:86%}.home-scroll-cue{left:6%}}
 @media(max-width:620px){.hero{min-height:690px;height:88svh;max-height:850px}.hero .overlay{background:linear-gradient(90deg,rgba(8,10,12,.76),rgba(8,10,12,.38))}.home-hero-content{top:47%;transform:translateY(-42%);left:6%;width:88%}.home-hero-content h1{font-size:clamp(40px,11vw,58px)}.home-hero-lead{font-size:14px;line-height:1.75}.home-hero-actions{align-items:stretch;flex-direction:column;max-width:310px}.home-btn{min-height:48px}.home-hero-note{font-size:8px;letter-spacing:.1em;align-items:flex-start}.home-scroll-cue{bottom:18px;font-size:8px}.home-intro{padding-top:65px;padding-bottom:65px}.home-section-heading{display:block}.home-section-heading .home-text-link{margin-top:20px}.home-service-grid{grid-template-columns:1fr}.home-service-card{min-height:220px;padding:24px}.home-service-card h3{margin-top:23px}.home-journey{grid-template-columns:1fr;gap:38px;padding:65px 6%}.home-feature-row{grid-template-columns:1fr;gap:35px}.home-feature-panel{min-height:250px}.home-guide-cta{padding:65px 6%}.home-final-cta{padding:48px 6%;align-items:flex-start;flex-direction:column}.home-final-cta h2{font-size:34px}.home-final-cta .home-btn{width:100%}}
 @media(prefers-reduced-motion:reduce){.slide-layer,.home-btn,.home-service-card{transition:none}.home-btn:hover{transform:none}}
+
+/* BRAND CONSISTENCY OVERRIDE — retain the site's established black / charcoal / gold identity */
+.home-intro,.home-services,.home-feature-row,.home-guide-cta{background:#080808;color:#f4f0e6}
+.home-intro h2 span{color:#d4af55}
+.home-intro>p,.home-service-card p,.home-feature-copy p,.home-guide-cta>p{color:rgba(244,240,230,.7)}
+.home-services{background:#0d0d0d}
+.home-service-grid{border-color:rgba(212,175,55,.2)}
+.home-service-card{background:#0d0d0d;color:#f4f0e6;border-color:rgba(212,175,55,.2)}
+.home-service-card:hover{background:#171510}
+.home-card-link{border-top-color:rgba(212,175,55,.2);color:#d4af55}
+.home-text-link{color:#d4af55;border-bottom-color:rgba(212,175,55,.45)}
+.home-text-link:hover{color:#f1d97a;border-color:#f1d97a}
+.home-guide-cta .home-btn-outline{border-color:rgba(212,175,55,.65);color:#f4f0e6;background:transparent}
+.home-guide-cta .home-btn-outline:hover{background:rgba(212,175,55,.1)}
+.home-feature-row{background:#080808}
+.home-feature-panel{background:linear-gradient(145deg,#191919,#050505);border-color:rgba(212,175,55,.32)}
+.home-journey{background:#111}
+.home-final-cta{background:#050505}
