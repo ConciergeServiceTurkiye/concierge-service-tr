@@ -91,3 +91,8 @@
 .home-feature-panel{background:linear-gradient(145deg,#191919,#050505);border-color:rgba(212,175,55,.32)}
 .home-journey{background:#111}
 .home-final-cta{background:#050505}
+
+/* Use the official brand logo instead of an unexplained monogram. */
+.home-feature-logo{position:absolute;left:32px;top:26px;width:auto;max-width:150px;height:54px;object-fit:contain;object-position:left center}
+.home-feature-panel{padding-top:112px}
+@media(max-width:620px){.home-feature-logo{left:26px;top:24px;max-width:135px;height:48px}.home-feature-panel{padding-top:100px}}
