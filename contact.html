@@ -59,9 +59,15 @@
           <div class="select-trigger" tabindex="0">Select a subject</div>
           <ul class="select-options">
             <li data-value="Airport Transfer">Airport Transfer</li>
+            <li data-value="Meet &amp; Greet">Meet &amp; Greet</li>
             <li data-value="Private Tours">Private Tours</li>
             <li data-value="Restaurant Reservation">Restaurant Reservation</li><li data-value="Hotel Reservation">Hotel Reservation</li>
+            <li data-value="Turkish Hammam">Turkish Hammam</li>
+            <li data-value="Internet &amp; eSIM">Internet &amp; eSIM</li>
+            <li data-value="Private Chauffeur">Private Chauffeur</li>
+            <li data-value="Bosphorus &amp; Yacht">Bosphorus &amp; Yacht</li>
             <li data-value="VIP Assistance">VIP Assistance</li>
+            <li data-value="General Concierge">General Concierge</li>
             <li data-value="Event Organization">Event Organization</li>
             <li data-value="Other">Other</li>
           </ul>
@@ -69,19 +75,29 @@
         <input type="hidden" id="subject" name="subject">
       </div>
 
+      <fieldset class="contact-choice-fieldset">
+        <legend>Preferred Contact Method</legend>
+        <div class="contact-radio-options">
+          <label class="contact-radio-option"><input type="radio" name="contactMethod" value="WhatsApp" required><span>WhatsApp</span></label>
+          <label class="contact-radio-option"><input type="radio" name="contactMethod" value="Email" required><span>E-mail</span></label>
+        </div>
+      </fieldset>
+
       <div class="form-group">
   <label>Request Details</label>
   <div class="textarea-wrapper">
     <textarea id="message" name="message" maxlength="2000"
-      placeholder="Please describe your request with as much detail as you wish..."></textarea>
+      required placeholder="Tell us what you need. If relevant, include dates, times, number of guests, preferred location and any special requests."></textarea>
     <span class="char-count" id="charCount">0 / 2000</span>
   </div>
 </div>
 
       <input type="hidden" name="referrer" value="contact-page">
 
+      <p class="contact-form-note">We’ll review your request, check availability and pricing with the relevant provider, and contact you with the confirmed options and next steps. Payment will be made directly to the provider.</p>
+
       <button type="submit" class="submit-btn">
-        Submit Confidential Request
+        Submit Concierge Request
       </button>
 
     </form>
