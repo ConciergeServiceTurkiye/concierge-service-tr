@@ -37,7 +37,7 @@
       add('tour','Make your time count','Consider a private guide or tour','A local guide can help connect the landmarks, neighbourhoods and stories that interest you. It can be especially useful when your time is limited or you want a day shaped around your pace.','guidetours.html','Explore private tours');
     }
     if (needs.internet === 'Interested' || needs.internet === 'Not sure') {
-      add('internet','Stay connected','Plan your internet before you arrive','Maps, transport apps, messages and bookings are easier when you can get online. Portable Wi-Fi may be useful if you travel with several devices or a group.','portable-wifi.html','Compare connectivity options');
+      add('internet','Stay connected','Plan your internet before you arrive','Maps, transport apps, messages and bookings are easier when you can get online. Portable Wi-Fi or an eSIM may be useful depending on your devices, trip length and whether you need to connect more than one device.','portable-wifi.html','Compare connectivity options');
     }
     if (needs.dining === 'Interested' || needs.dining === 'Not sure' || interests.some(x => /Food/.test(x))) {
       add('dining','Taste the city','Find places worth making time for','From Turkish breakfast and street food to a special dinner, we can help you explore options that match your interests and occasion.','restaurants.html','Explore restaurant assistance');
