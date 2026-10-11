@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const phoneField = document.getElementById("phone");
   const subjectHidden = document.getElementById("subject");
   const messageField = document.getElementById("message");
+  const contactMethodFields = Array.from(form.querySelectorAll('input[name="contactMethod"]'));
+  const submitButton = form.querySelector('button[type="submit"]');
   const charCount = document.getElementById("charCount");
   const customSelect = document.getElementById("customSubject");
   if (!customSelect) return;
@@ -81,19 +83,25 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!emailField.checkValidity()) return showInlineAlert("Please enter a valid email address.");
     if (!subjectHidden.value.trim()) return showInlineAlert("Please select a subject.");
     if (!messageField.value.trim()) return showInlineAlert("Please enter your request details.");
+    if (!contactMethodFields.some(field => field.checked)) return showInlineAlert("Please choose your preferred contact method.");
     if (!iti.isValidNumber()) return showInlineAlert("Please enter a valid phone number.");
 
     const formData = new FormData(form);
     formData.set("phone", iti.getNumber());
 
+    const originalButtonText = submitButton.textContent.trim();
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending Request...";
+
     fetch(form.action, { method: "POST", body: formData })
-      .then(r => r.text())
+      .then(r => { if (!r.ok) throw new Error("Request failed"); return r.text(); })
       .then(t => {
         if (t.trim() === "success") {
           showInlineAlert("Your private concierge request has been received.", true);
           form.reset(); charCount.textContent = "0 / 2000"; subjectHidden.value = ""; trigger.textContent = "Select a subject"; trigger.classList.remove("selected"); currentIndex = -1; iti.setCountry("us"); phoneField.value = ""; closeDropdown();
         } else showInlineAlert("Something went wrong. Please try again.");
       })
-      .catch(() => showInlineAlert("Connection error. Please try again later."));
+      .catch(() => showInlineAlert("Connection error. Please try again later."))
+      .finally(() => { submitButton.disabled = false; submitButton.textContent = originalButtonText; });
   });
 });
