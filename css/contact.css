@@ -154,3 +154,112 @@ form {display: flex;flex-direction: column;gap: 22px;}
 .contact-form-note{margin:0;color:rgba(255,255,255,.68);font-size:12px;line-height:1.7;text-align:center}
 .submit-btn:disabled{opacity:.7;cursor:wait;transform:none}
 @media(max-width:480px){.contact-radio-options{gap:8px}.contact-radio-option span{padding:11px 8px;font-size:13px}}
+
+
+/* StayinWiFi visual theme alignment */
+.contact-hero{
+  min-height:100vh;
+  padding:calc(var(--nav-h) + 48px) 7vw 80px;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+  background:radial-gradient(circle at 50% 22%,rgba(212,175,55,.10),transparent 36%),linear-gradient(135deg,#090909,#111 55%,#090909);
+}
+.contact-hero .seo-headings{text-align:center;margin:0 auto;max-width:900px}
+.contact-hero .seo-headings h1{
+  color:#fff;font-size:clamp(38px,5vw,64px);font-weight:500;
+  line-height:1.05;letter-spacing:-1.5px;margin:0 0 14px;
+}
+.contact-hero .seo-headings h2{
+  color:var(--gold,#d4af37);font-size:clamp(20px,2.5vw,30px);
+  font-weight:400;letter-spacing:.2px;margin:0;
+}
+.contact-form-wrapper{
+  width:100%;max-width:1050px;box-sizing:border-box;margin:0 auto;
+  padding:40px;background:#0a0a0a;border:1px solid rgba(255,255,255,.08);
+  border-radius:0;box-shadow:none;
+}
+.contact-form-header{text-align:left;margin-bottom:30px}
+.contact-form-title{font-size:clamp(25px,3vw,34px);font-weight:500;color:var(--gold,#d4af37);margin-bottom:8px}
+.contact-form-subline{font-size:11px;letter-spacing:2px;color:rgba(255,255,255,.48)}
+#contactForm{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+#contactForm .form-group{min-width:0}
+#contactForm .form-group label,
+.contact-choice-fieldset legend{color:rgba(255,255,255,.72);font-size:12px;letter-spacing:.4px;font-weight:400}
+#contactForm .form-group input,
+#contactForm .form-group textarea{
+  width:100%;box-sizing:border-box;background:#111;color:#fff;
+  border:1px solid rgba(255,255,255,.13);border-radius:0;
+  padding:13px 14px;font:inherit;font-size:14px;outline:none;
+}
+#contactForm .form-group input{height:48px}
+#contactForm .form-group textarea{min-height:145px;resize:vertical}
+#contactForm .form-group input:focus,
+#contactForm .form-group textarea:focus{border-color:rgba(212,175,55,.7);box-shadow:none;background:#111}
+#contactForm .form-group input::placeholder,
+#contactForm .form-group textarea::placeholder{color:rgba(255,255,255,.38)}
+#contactForm .form-group:has(#message),
+#contactForm .contact-choice-fieldset,
+#contactForm .contact-form-note,
+#contactForm .submit-btn{grid-column:1/-1}
+#contactForm .custom-select{z-index:20}
+#contactForm .select-trigger{
+  height:48px;box-sizing:border-box;padding:0 14px;background:#111;
+  border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.6);
+}
+#contactForm .select-trigger.selected{color:#fff}
+#contactForm .select-options{background:#0d0d0d;border:1px solid rgba(212,175,55,.45)}
+#contactForm .select-options li{padding:12px 14px;color:rgba(255,255,255,.72)}
+#contactForm .select-options li:hover,
+#contactForm .select-options li.active{background:rgba(212,175,55,.1);color:var(--gold,#d4af37)}
+#contactForm .contact-choice-fieldset{min-width:0;margin:0;padding:0;border:0}
+#contactForm .contact-choice-fieldset legend{margin:0 0 14px;padding:0}
+#contactForm .contact-radio-options{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:28px}
+#contactForm .contact-radio-option{
+  display:inline-flex;align-items:center;gap:9px;position:relative;
+  cursor:pointer;color:rgba(255,255,255,.78);font-size:13px;
+}
+#contactForm .contact-radio-option input{
+  appearance:none;-webkit-appearance:none;position:static;opacity:1;pointer-events:auto;
+  flex:0 0 16px;width:16px;height:16px;min-width:16px;margin:0;padding:0;
+  border:1px solid rgba(212,175,55,.7);border-radius:50%;background:transparent;
+  display:grid;place-content:center;
+}
+#contactForm .contact-radio-option input::before{
+  content:"";width:8px;height:8px;border-radius:50%;background:#d4af37;
+  transform:scale(0);transition:transform .14s ease;
+}
+#contactForm .contact-radio-option input:checked::before{transform:scale(1)}
+#contactForm .contact-radio-option input:focus-visible{outline:2px solid rgba(212,175,55,.6);outline-offset:3px}
+#contactForm .contact-radio-option:has(input:checked){color:var(--gold,#d4af37)}
+#contactForm .contact-form-note{
+  margin:0;color:rgba(255,255,255,.42);font-size:11px;line-height:1.7;text-align:center;
+}
+#contactForm .submit-btn{
+  width:100%;height:auto;min-height:50px;margin:0;padding:16px 20px;
+  border:1px solid var(--gold,#d4af37);border-radius:0;background:var(--gold,#d4af37);
+  color:#080808;font:700 13px inherit;letter-spacing:.5px;cursor:pointer;
+  transition:background .25s,color .25s,transform .25s;
+}
+#contactForm .submit-btn::after{display:none}
+#contactForm .submit-btn:hover{background:transparent;color:var(--gold,#d4af37);transform:translateY(-1px)}
+#contactForm .submit-btn:disabled{opacity:.65;cursor:wait;transform:none}
+.contact-form-wrapper .iti{width:100%;position:relative;z-index:30}
+.contact-form-wrapper .iti input{height:48px!important;padding-left:56px!important;background:#111!important;color:#fff!important;border:1px solid rgba(255,255,255,.13)!important}
+.contact-form-wrapper .iti__country-list{background:#0d0d0d;border:1px solid rgba(212,175,55,.45);box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.contact-form-wrapper .iti__country-name{color:rgba(255,255,255,.82)}
+.contact-form-wrapper .iti__dial-code{color:rgba(255,255,255,.48)}
+.contact-form-wrapper .iti__search{background:#111;border-bottom:1px solid rgba(255,255,255,.12)}
+.contact-form-wrapper .iti__search-input{background:#111!important;border:1px solid rgba(255,255,255,.13)!important;color:#fff!important;-webkit-text-fill-color:#fff!important}
+.contact-form-wrapper .iti__search-input::placeholder{-webkit-text-fill-color:rgba(255,255,255,.5)!important}
+#formInlineAlert{height:auto;min-height:0;margin:0 0 18px;padding:12px 16px;border-color:rgba(212,175,55,.25);background:#111;color:var(--gold,#d4af37)}
+@media(max-width:700px){
+  .contact-hero{padding:120px 5vw 60px;gap:22px}
+  .contact-form-wrapper{padding:26px 20px}
+  #contactForm{grid-template-columns:1fr;gap:18px}
+  #contactForm .form-group:has(#message),#contactForm .contact-choice-fieldset,#contactForm .contact-form-note,#contactForm .submit-btn{grid-column:1}
+  .contact-hero .seo-headings h1{letter-spacing:-.7px}
+}
