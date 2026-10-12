@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   const email=$("email"),phone=$("phone"),message=$("message"),passengerCount=$("passengerCount"),passengerFields=$("passengerFields"),vehiclePlan=$("vehiclePlan");
   const seatGroup=$("seatRequestGroup"),seatRequest=$("seatRequest"),travelDate=$("travelDate"),returnDate=$("returnDate"),flightNumber=$("flightNumber"),returnFlightNumber=$("returnFlightNumber");
   const pickup=$("pickup"),dropoff=$("dropoff"),pickupTime=$("pickupTime"),returnTime=$("returnTime");
-  const returnDateGroup=$("returnDateGroup"),returnTimeLocationRow=$("returnTimeLocationRow"),returnLocationRow=$("returnLocationRow");
+  const returnDateGroup=$("returnDateGroup"),returnTimeLocationRow=$("returnTimeLocationRow"),returnLocationRow=$("returnLocationRow"),returnTransferPanel=$("returnTransferPanel");
   const contactOptions=Array.from(form.querySelectorAll('input[name="contactMethod"]')),tripOptions=Array.from(form.querySelectorAll('input[name="tripType"]'));
   const iti=intlTelInput(phone,{initialCountry:"us",separateDialCode:true,allowDropdown:true,autoPlaceholder:"off",nationalMode:false,showSelectedDialCode:true,utilsScript:"https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"});
   const phoneStyle=document.createElement("style");phoneStyle.textContent='.iti{width:100%}.iti input#phone,.iti--separate-dial-code input#phone{padding-left:110px!important;box-sizing:border-box}.iti__selected-dial-code{color:rgba(255,255,255,.88)!important}.iti__selected-flag{padding-left:14px!important;padding-right:14px!important}';document.head.appendChild(phoneStyle);
@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
   function syncTripType(){
     const round=isRoundTrip();
-    returnDateGroup.hidden=!round;returnTimeLocationRow.hidden=!round;returnLocationRow.hidden=!round;
+    returnDateGroup.hidden=!round;returnTimeLocationRow.hidden=!round;returnLocationRow.hidden=!round;if(returnTransferPanel)returnTransferPanel.hidden=!round;
     returnDate.required=round;returnTime.required=round;$("returnPickup").required=round;$("returnDropoff").required=round;
     if(round){
       if(!$("returnPickup").value.trim()&&dropoff.value.trim())$("returnPickup").value=dropoff.value;
