@@ -758,3 +758,13 @@
 /* Booking form field headings in brand gold */
 .wifi-form-grid label{color:var(--gold,#d4af37)!important;}
 .wifi-form-grid .wifi-choice-fieldset legend{color:var(--gold,#d4af37)!important;}
+
+
+/* StayinWiFi radio labels: white by default, gold on hover or selection */
+.wifi-form-grid .wifi-radio-option{
+  color:#fff!important;
+}
+.wifi-form-grid .wifi-radio-option:hover,
+.wifi-form-grid .wifi-radio-option:has(input[type="radio"]:checked){
+  color:#d4af37!important;
+}
