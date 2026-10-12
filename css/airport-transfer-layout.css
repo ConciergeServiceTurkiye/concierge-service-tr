@@ -8,3 +8,22 @@
 /* Exact outer box parity with Contact form */
 .service-form-wrapper{width:100%!important;max-width:760px!important;box-sizing:border-box!important;padding:45px 40px 40px!important;background:rgba(10,10,10,.88)!important;border:1.5px solid rgba(255,255,255,.08)!important;border-radius:0!important;box-shadow:none!important;backdrop-filter:none!important}
 @media(max-width:768px){.service-form-wrapper{padding:24px 18px 30px!important}}
+
+/* Match Contact's outer form box exactly: width, box model, padding, border and radius */
+.service-form-wrapper{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  max-width:760px!important;
+  box-sizing:border-box!important;
+  margin:0 auto!important;
+  padding:45px 40px 40px!important;
+  background:rgba(10,10,10,.88)!important;
+  border:1.5px solid #d4af37!important;
+  border-radius:14px!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+@media(max-width:700px){
+  .service-form-wrapper{padding:26px 20px!important}
+}
