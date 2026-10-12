@@ -103,3 +103,8 @@
 .form-back-button span:first-child{color:#d4af37}
 @media(max-width:850px){.service-hero{padding:28px 4vw 50px}.service-form-wrapper{padding:28px 24px}#serviceForm{grid-template-columns:minmax(0,1fr);gap:18px}.transfer-contact-panel,.transfer-outbound-panel,.transfer-return-panel,.transfer-additional-panel{grid-column:1}.transfer-contact-grid{grid-template-columns:1fr}.transfer-outbound-panel .form-row,.transfer-return-panel .form-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 @media(max-width:560px){.service-form-wrapper{padding:24px 18px}.transfer-panel{padding:18px 14px}.transfer-outbound-panel .form-row,.transfer-return-panel .form-row{grid-template-columns:1fr}.trip-type-options{grid-template-columns:1fr}.transfer-contact-grid{gap:18px}.transfer-radio-options{gap:18px}}
+
+/* Native dropdowns and directional trip cues */
+.form-group select option{background:#111;color:#fff}
+.trip-type-options .transfer-radio-option:first-child span::before{content:"→";display:inline-block;margin-right:9px;color:#d4af37;font-size:17px;line-height:1;vertical-align:-1px}
+.trip-type-options .transfer-radio-option:last-child span::before{content:"↔";display:inline-block;margin-right:9px;color:#d4af37;font-size:17px;line-height:1;vertical-align:-1px}
