@@ -70,3 +70,7 @@
  .transfer-layout-panel .trip-type-options{gap:10px}
  .transfer-layout-panel .form-row,.details-panel>.form-row:first-of-type,.details-panel .contact-detail-row{grid-template-columns:minmax(0,1fr);gap:12px}
 }
+
+/* Keep the return-date row collapsed as a whole until Round-trip is selected */
+.transfer-return-column .form-row:has(#returnDateGroup[hidden]){display:none!important}
+.transfer-return-column .form-row:has(#returnDateGroup:not([hidden])){display:grid}
