@@ -12,11 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactMethodFields = Array.from(form.querySelectorAll('input[name="contactMethod"]'));
   const submitButton = form.querySelector('button[type="submit"]');
   const charCount = document.getElementById("charCount");
-  const customSelect = document.getElementById("customSubject");
-  if (!customSelect) return;
-
-  const trigger = customSelect.querySelector(".select-trigger");
-  const options = Array.from(customSelect.querySelectorAll(".select-options li"));
+  const subjectSelect = document.getElementById("subject");
+  if (!subjectSelect) return;
 
   function showInlineAlert(text, success = false) {
     alertBox.textContent = text;
@@ -51,41 +48,16 @@ document.addEventListener("DOMContentLoaded", () => {
   phoneField.addEventListener("input", () => { phoneField.value = "+" + phoneField.value.replace(/\D/g, ""); });
   phoneField.addEventListener("paste", () => setTimeout(() => { phoneField.value = "+" + phoneField.value.replace(/\D/g, ""); }, 0));
 
-  let currentIndex = -1;
-  function openDropdown() { customSelect.classList.add("open"); }
-  function closeDropdown() { customSelect.classList.remove("open"); currentIndex = -1; options.forEach(o => o.classList.remove("active")); }
-  function move(direction) {
-    if (!customSelect.classList.contains("open")) { openDropdown(); currentIndex = direction === 1 ? 0 : options.length - 1; }
-    else { currentIndex += direction; if (currentIndex < 0) currentIndex = options.length - 1; if (currentIndex >= options.length) currentIndex = 0; }
-    setActive();
-  }
-  function setActive() { options.forEach(o => o.classList.remove("active")); const opt = options[currentIndex]; opt.classList.add("active"); opt.scrollIntoView({ block: "nearest" }); }
-  function select(index) {
-    const opt = options[index];
-    trigger.textContent = opt.textContent;
-    subjectHidden.value = opt.dataset.value;
-    trigger.classList.add("selected");
-    closeDropdown();
-  }
-
-  trigger.addEventListener("click", () => { customSelect.classList.contains("open") ? closeDropdown() : openDropdown(); });
-  trigger.addEventListener("keydown", e => {
-    if (["ArrowDown", "ArrowUp", "Enter", " ", "Escape"].includes(e.key)) e.preventDefault();
-    if (e.key === "ArrowDown") move(1);
-    if (e.key === "ArrowUp") move(-1);
-    if (e.key === "Enter" || e.key === " ") { if (customSelect.classList.contains("open") && currentIndex >= 0) select(currentIndex); else openDropdown(); }
-    if (e.key === "Escape") closeDropdown();
-  });
-  options.forEach((opt, index) => { opt.addEventListener("click", () => { select(index); messageField.focus(); }); });
-  document.addEventListener("click", e => { if (!customSelect.contains(e.target)) closeDropdown(); });
-
   // Service pages can pass a detailed subject through ?subject=...
   const presetSubject = new URLSearchParams(window.location.search).get("subject");
   if (presetSubject && presetSubject.trim()) {
     const value = presetSubject.trim();
-    subjectHidden.value = value;
-    trigger.textContent = value;
-    trigger.classList.add("selected");
+    const matchingOption = Array.from(subjectSelect.options).find(option => option.value === value || option.textContent.trim() === value);
+    if (matchingOption) subjectSelect.value = matchingOption.value;
+    else {
+      subjectSelect.add(new Option(value, value, true, true));
+      subjectSelect.value = value;
+    }
   }
 
   form.addEventListener("submit", e => {
@@ -95,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!emailField.value.trim()) return showInlineAlert("Please enter your email address.");
     if (!emailField.checkValidity()) return showInlineAlert("Please enter a valid email address.");
     if (phoneField.value.replace(/\D/g, "").length < 7) return showInlineAlert("Please enter a valid phone number, including country code.");
-    if (!subjectHidden.value.trim()) return showInlineAlert("Please select a subject.");
+    if (!subjectSelect.value.trim()) return showInlineAlert("Please select a subject.");
 
 
     const method = new FormData(form).get("contactMethod");
@@ -146,12 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
         showInlineAlert("Your request has been submitted successfully. We will contact you after reviewing it.", true);
         form.reset();
         if (charCount) charCount.textContent = "0 / 2000";
-        subjectHidden.value = "";
-        trigger.textContent = "Select a subject";
-        trigger.classList.remove("selected");
-        currentIndex = -1;
+        subjectSelect.value = "";
         phoneField.value = "+";
-        closeDropdown();
       })
       .catch(error => {
         console.error("Contact form email request failed:", error);
