@@ -183,7 +183,13 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
   };
   const syncPickerFromText=()=>{
-    if(pickupPicker)pickupPicker.value=toIsoFromText(pickup);
+    const pickupIso=toIsoFromText(pickup);
+    const returnIso=toIsoFromText(ret);
+    if(pickupIso && returnIso && returnIso<pickupIso){
+      ret.value='';
+      if(returnPicker)returnPicker.value='';
+    }
+    if(pickupPicker)pickupPicker.value=pickupIso;
     if(returnPicker)returnPicker.value=toIsoFromText(ret);
     syncPickerConstraints();
   };
