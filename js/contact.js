@@ -31,13 +31,25 @@ document.addEventListener("DOMContentLoaded", () => {
     messageField.addEventListener("input", () => { charCount.textContent = `${messageField.value.length} / 2000`; });
   }
 
-  const iti = intlTelInput(phoneField, { initialCountry: "us", separateDialCode: true });
-  phoneField.addEventListener("focus", () => { setTimeout(() => { iti.setCountry(iti.getSelectedCountryData().iso2); }, 50); });
-  phoneField.addEventListener("keydown", e => {
-    if (e.ctrlKey || e.metaKey || ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"].includes(e.key)) return;
-    if (!/^[0-9]$/.test(e.key)) e.preventDefault();
+  // StayinWiFi-style phone: permanent + prefix, digits only.
+  phoneField.value = phoneField.value.startsWith("+") ? phoneField.value : "+";
+  const placeCaretAfterPlus = () => phoneField.setSelectionRange(Math.max(1, phoneField.value.length), Math.max(1, phoneField.value.length));
+  phoneField.addEventListener("focus", () => {
+    if (!phoneField.value.startsWith("+")) phoneField.value = "+" + phoneField.value.replace(/\D/g, "");
+    requestAnimationFrame(placeCaretAfterPlus);
   });
-  phoneField.addEventListener("input", () => { phoneField.value = phoneField.value.replace(/\D/g, ""); });
+  phoneField.addEventListener("keydown", event => {
+    const start = phoneField.selectionStart ?? 0, end = phoneField.selectionEnd ?? 0;
+    if (["Tab", "ArrowLeft", "ArrowRight", "End"].includes(event.key)) return;
+    if (event.key === "Home") { event.preventDefault(); phoneField.setSelectionRange(1, 1); return; }
+    if (event.key === "Backspace") { if (start <= 1) { event.preventDefault(); phoneField.setSelectionRange(1, 1); } return; }
+    if (event.key === "Delete") { if (start === 0 || (start === 1 && end > 1)) { event.preventDefault(); phoneField.setSelectionRange(1, 1); } return; }
+    if (event.ctrlKey || event.metaKey) return;
+    if (!/^[0-9]$/.test(event.key)) { event.preventDefault(); return; }
+    if (start === 0) { event.preventDefault(); phoneField.setSelectionRange(1, 1); }
+  });
+  phoneField.addEventListener("input", () => { phoneField.value = "+" + phoneField.value.replace(/\D/g, ""); });
+  phoneField.addEventListener("paste", () => setTimeout(() => { phoneField.value = "+" + phoneField.value.replace(/\D/g, ""); }, 0));
 
   let currentIndex = -1;
   function openDropdown() { customSelect.classList.add("open"); }
@@ -78,16 +90,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", e => {
     e.preventDefault();
+    if (!contactMethodFields.some(field => field.checked)) return showInlineAlert("Please choose your preferred contact method.");
     if (!nameField.value.trim()) return showInlineAlert("Please enter your full name.");
     if (!emailField.value.trim()) return showInlineAlert("Please enter your email address.");
     if (!emailField.checkValidity()) return showInlineAlert("Please enter a valid email address.");
-    if (!phoneField.value.trim() || !iti.isValidNumber()) return showInlineAlert("Please enter a valid phone number, including the country code.");
+    if (phoneField.value.replace(/\D/g, "").length < 7) return showInlineAlert("Please enter a valid phone number, including country code.");
     if (!subjectHidden.value.trim()) return showInlineAlert("Please select a subject.");
-    if (!messageField.value.trim()) return showInlineAlert("Please enter your request details.");
-    if (!contactMethodFields.some(field => field.checked)) return showInlineAlert("Please choose your preferred contact method.");
+
 
     const method = new FormData(form).get("contactMethod");
-    const fullPhone = iti.getNumber();
+    const fullPhone = phoneField.value.trim();
     const requestMessage = [
       "CONCIERGE SERVICE TÜRKİYE — CONTACT REQUEST", "",
       "Name: " + nameField.value.trim(),
@@ -138,8 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
         trigger.textContent = "Select a subject";
         trigger.classList.remove("selected");
         currentIndex = -1;
-        iti.setCountry("us");
-        phoneField.value = "";
+        phoneField.value = "+";
         closeDropdown();
       })
       .catch(error => {
