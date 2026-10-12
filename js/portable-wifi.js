@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const returnLocation=form.querySelector('[name="return"]');
   const estimate=document.getElementById('wifiEstimate');
   const daily=8.90;
+  const shippingFee=29.99;
 
   const pad=n=>String(n).padStart(2,'0');
   const now=new Date();
@@ -353,8 +354,9 @@ document.addEventListener('DOMContentLoaded',()=>{
       estimate.textContent='Select number of devices';
       return;
     }
-    const total=days()*Number(devices.value)*daily;
-    estimate.textContent='€'+total.toFixed(2)+' estimated';
+    const rentalTotal=days()*Number(devices.value)*daily;
+    const total=rentalTotal+shippingFee;
+    estimate.textContent='€'+total.toFixed(2)+' total (incl. €29.99 shipping)';
   }
 
   // Keep the estimate in sync whenever the selected device count changes.
@@ -384,7 +386,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     const pickupDate=parseDate(pickup);
     const returnDate=parseDate(ret);
     const d=days();
-    const total=(d*Number(data.get('devices')||1)*daily).toFixed(2);
+    const rentalTotal=d*Number(data.get('devices')||1)*daily;
+    const shipping=shippingFee;
+    const total=(rentalTotal+shipping).toFixed(2);
+    const rentalTotalFormatted=rentalTotal.toFixed(2);
 
     // WhatsApp supports *bold* text and real line breaks.
     const message=[
@@ -401,7 +406,10 @@ document.addEventListener('DOMContentLoaded',()=>{
       '*Return:* '+data.get('return'),
       '*Hotel / delivery address / flight details / additional requests:* '+(data.get('address')||'N/A'),
       '',
-      '*Estimated Wi-Fi service:* €'+total,
+      '*Rental period:* '+d+' day(s), including both pickup and return dates',
+      '*Estimated Wi-Fi service:* €'+rentalTotalFormatted,
+      '*Shipping fee:* €'+shipping.toFixed(2),
+      '*Estimated total including shipping:* €'+total,
       '',
       'Please arrange the reservation and send the secure 3D payment link.'
     ].join('\n');
@@ -452,7 +460,10 @@ document.addEventListener('DOMContentLoaded',()=>{
         'Pickup Location':String(data.get('pickup')||''),
         'Return Location':String(data.get('return')||''),
         'Hotel / Delivery Address / Flight Details / Additional Requests':String(data.get('address')||'N/A'),
-        'Estimated Wi-Fi Service':'€'+total,
+        'Rental Duration (inclusive of pickup and return dates)':d+' day(s)',
+        'Estimated Wi-Fi Service':'€'+rentalTotalFormatted,
+        'Shipping Fee':'€'+shipping.toFixed(2),
+        'Estimated Total Including Shipping':'€'+total,
         'Request':'Please arrange the reservation and send the secure 3D payment link.'
       };
 
