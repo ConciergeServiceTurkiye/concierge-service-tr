@@ -30,3 +30,9 @@
 #serviceForm .submit-btn:disabled{opacity:.65;cursor:wait}
 #serviceForm .form-group.is-optional .optional-label{color:rgba(255,255,255,.42)}
 @media(max-width:768px){.transfer-radio-options{gap:12px}.transfer-radio-option span{min-width:118px;padding:10px 14px}.service-form-wrapper .form-row[hidden]{display:none!important}}
+
+/* Match the StayinWiFi field text color and keep typed values easy to read */
+#serviceForm .form-group input,
+#serviceForm .form-group textarea{color:#fff!important}
+#serviceForm .form-group input:focus,
+#serviceForm .form-group textarea:focus{color:#fff!important}
