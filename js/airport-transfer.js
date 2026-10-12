@@ -8,8 +8,14 @@ document.addEventListener("DOMContentLoaded",()=>{
   const pickup=$("pickup"),dropoff=$("dropoff"),pickupTime=$("pickupTime"),returnTime=$("returnTime");
   const returnDateGroup=$("returnDateGroup"),returnTimeLocationRow=$("returnTimeLocationRow"),returnLocationRow=$("returnLocationRow"),returnTransferPanel=$("returnTransferPanel");
   const contactOptions=Array.from(form.querySelectorAll('input[name="contactMethod"]')),tripOptions=Array.from(form.querySelectorAll('input[name="tripType"]'));
-  const iti=intlTelInput(phone,{initialCountry:"us",separateDialCode:true,allowDropdown:true,autoPlaceholder:"off",nationalMode:false,showSelectedDialCode:true,utilsScript:"https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js"});
-  const phoneStyle=document.createElement("style");phoneStyle.textContent='.iti{width:100%}.iti input#phone,.iti--separate-dial-code input#phone{padding-left:110px!important;box-sizing:border-box}.iti__selected-dial-code{color:rgba(255,255,255,.88)!important}.iti__selected-flag{padding-left:14px!important;padding-right:14px!important}';document.head.appendChild(phoneStyle);
+  
+  
+
+  phone.value=phone.value.startsWith("+")?phone.value:"+";
+  phone.addEventListener("focus",()=>{if(!phone.value.startsWith("+"))phone.value="+"+phone.value.replace(/\D/g,"");requestAnimationFrame(()=>phone.setSelectionRange(phone.value.length,phone.value.length))});
+  phone.addEventListener("keydown",e=>{const s=phone.selectionStart||0;if(["Tab","ArrowLeft","ArrowRight","End"].includes(e.key))return;if(e.key==="Home"){e.preventDefault();phone.setSelectionRange(1,1);return}if(e.key==="Backspace"&&s<=1){e.preventDefault();phone.setSelectionRange(1,1);return}if(e.key==="Delete"&&s===0){e.preventDefault();phone.setSelectionRange(1,1);return}if(e.ctrlKey||e.metaKey||["Backspace","Delete"].includes(e.key))return;if(!/^\d$/.test(e.key))e.preventDefault()});
+  phone.addEventListener("input",()=>{phone.value="+"+phone.value.replace(/\D/g,"")});
+  phone.addEventListener("paste",()=>setTimeout(()=>phone.value="+"+phone.value.replace(/\D/g,""),0));
   const params=new URLSearchParams(location.search),vehicle=params.get("vehicle"),capacity=params.get("capacity");
   const vehicleBox=$("selectedVehicleBox"),vehicleName=$("selectedVehicleName"),vehicleCapacity=$("selectedVehicleCapacity"),selectedVehicle=$("selectedVehicle"),selectedCapacity=$("selectedCapacity");
   if(vehicle){vehicleName.textContent=vehicle;vehicleCapacity.textContent=capacity||"";vehicleBox.hidden=false;selectedVehicle.value=vehicle;selectedCapacity.value=capacity||"";vehicleName.href='../airport-transfer.html?viewVehicle='+encodeURIComponent(vehicle)}
@@ -42,9 +48,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   seatRequest.addEventListener("change",()=>{syncSelectColor(seatRequest);seatLuxury.refresh()});
   syncSelectColor(passengerCount);syncSelectColor(seatRequest);renderPassengers();
   document.addEventListener("click",()=>document.querySelectorAll(".luxury-select-menu:not([hidden])").forEach(x=>x.hidden=true));
-  function parseDate(value){const match=String(value||"").trim().match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!match)return null;const day=+match[1],month=+match[2],year=+match[3],date=new Date(year,month-1,day);if(date.getFullYear()!==year||date.getMonth()!==month-1||date.getDate()!==day)return null;return{date,iso:year+'-'+String(month).padStart(2,'0')+'-'+String(day).padStart(2,'0')}}
-  function dateMask(input){input.addEventListener("input",()=>{const digits=input.value.replace(/\D/g,"").slice(0,8);input.value=digits.length>4?digits.slice(0,2)+"/"+digits.slice(2,4)+"/"+digits.slice(4):digits.length>2?digits.slice(0,2)+"/"+digits.slice(2):digits;clearFieldError(input)});input.addEventListener("keydown",e=>{if(e.ctrlKey||e.metaKey||["Backspace","Delete","ArrowLeft","ArrowRight","Tab","Home","End"].includes(e.key))return;if(!/^\d$/.test(e.key))e.preventDefault()})}
-  dateMask(travelDate);dateMask(returnDate);
+  function parseDate(value){const v=String(value||"").trim();let year,month,day;let match=v.match(/^(\\d{4})-(\\d{2})-(\\d{2})$/);if(match){year=+match[1];month=+match[2];day=+match[3]}else{match=v.match(/^(\\d{2})\\/(\\d{2})\\/(\\d{4})$/);if(!match)return null;day=+match[1];month=+match[2];year=+match[3]}const date=new Date(year,month-1,day);if(date.getFullYear()!==year||date.getMonth()!==month-1||date.getDate()!==day)return null;return{date,iso:year+"-"+String(month).padStart(2,"0")+"-"+String(day).padStart(2,"0")}}
+  const todayIso=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);travelDate.min=todayIso;returnDate.min=todayIso;travelDate.addEventListener("change",()=>{returnDate.min=travelDate.value||todayIso;if(returnDate.value&&travelDate.value&&returnDate.value<travelDate.value)returnDate.value="";});
   function installLuxuryMonthMenu(fp){
     const select=fp.calendarContainer?.querySelector(".flatpickr-monthDropdown-months");if(!select||select.dataset.luxuryReady)return;select.dataset.luxuryReady="1";
     const menu=document.createElement("div");menu.className="flatpickr-month-custom-menu";menu.hidden=true;const arrow=document.createElement("span");arrow.className="flatpickr-month-dropdown-arrow";arrow.setAttribute("aria-hidden","true");select.insertAdjacentElement("afterend",arrow);
@@ -147,7 +152,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       const result=await response.json().catch(()=>({}));
       if(!response.ok||result.success===false)throw new Error(result.message||"The email service could not accept the request.");
       status.textContent="Your transfer request has been submitted successfully. We will contact you after reviewing the details.";status.classList.add("is-success");
-      form.reset();selectedVehicle.value=vehicle||"";selectedCapacity.value=capacity||"";vehiclePlan.value="";iti.setCountry("us");phone.value="";Object.keys(passengerNameCache).forEach(k=>delete passengerNameCache[k]);passengerCount.value="";seatRequest.value="0";syncSelectColor(passengerCount);syncSelectColor(seatRequest);passengerLuxury.refresh();seatLuxury.refresh();if(isSedan){seatGroup.hidden=true;seatGroup.style.setProperty("display","none","important")}else{seatGroup.hidden=false;seatGroup.style.removeProperty("display")}renderPassengers();syncTripType();syncFlightRequirements();
+      form.reset();selectedVehicle.value=vehicle||"";selectedCapacity.value=capacity||"";vehiclePlan.value="";iti.setCountry("us");phone.value="+";Object.keys(passengerNameCache).forEach(k=>delete passengerNameCache[k]);passengerCount.value="";seatRequest.value="0";syncSelectColor(passengerCount);syncSelectColor(seatRequest);passengerLuxury.refresh();seatLuxury.refresh();if(isSedan){seatGroup.hidden=true;seatGroup.style.setProperty("display","none","important")}else{seatGroup.hidden=false;seatGroup.style.removeProperty("display")}renderPassengers();syncTripType();syncFlightRequirements();
     }catch(error){console.error("Airport transfer request failed:",error);status.textContent="We could not send your request by email just now. Your details are still here; please try again or contact us directly.";status.classList.add("is-error")}
     finally{submit.disabled=false;submit.textContent=originalText}
   });
