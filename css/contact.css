@@ -263,3 +263,17 @@ form {display: flex;flex-direction: column;gap: 22px;}
   #contactForm .form-group:has(#message),#contactForm .contact-choice-fieldset,#contactForm .contact-form-note,#contactForm .submit-btn{grid-column:1}
   .contact-hero .seo-headings h1{letter-spacing:-.7px}
 }
+
+
+/* Preferred contact method — centered at the top, without framed option labels */
+#contactForm .contact-choice-fieldset{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;text-align:center;margin:0 0 4px;min-width:0;padding:0;border:0}
+#contactForm .contact-choice-fieldset legend{width:100%;padding:0;margin:0 0 14px;text-align:center;color:var(--gold,#d4af37);font-size:13px;letter-spacing:.5px}
+#contactForm .contact-radio-options{display:flex;justify-content:center;align-items:center;gap:34px}
+#contactForm .contact-radio-option{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:28px;cursor:pointer}
+#contactForm .contact-radio-option input{position:static;opacity:1;pointer-events:auto;appearance:none;-webkit-appearance:none;width:17px!important;height:17px!important;min-width:17px;margin:0;padding:0!important;border:1px solid rgba(212,175,55,.75)!important;border-radius:50%!important;background:transparent!important;cursor:pointer}
+#contactForm .contact-radio-option input:checked{border-color:var(--gold,#d4af37)!important;background:radial-gradient(circle,var(--gold,#d4af37) 0 4px,transparent 4.5px)!important}
+#contactForm .contact-radio-option input:focus-visible{outline:2px solid var(--gold,#d4af37);outline-offset:3px}
+#contactForm .contact-radio-option span,#contactForm .contact-radio-option input:checked+span{min-height:0;padding:0;border:0!important;border-radius:0!important;background:transparent!important;color:#fff;font-size:14px;line-height:1.4}
+#contactForm .contact-radio-option:has(input:checked) span{color:var(--gold,#d4af37)}
+#contactForm .contact-radio-option:hover span{color:var(--gold,#d4af37)}
+@media(max-width:600px){#contactForm .contact-radio-options{gap:24px}}
