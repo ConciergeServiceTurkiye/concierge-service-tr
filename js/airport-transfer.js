@@ -48,25 +48,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   seatRequest.addEventListener("change",()=>{syncSelectColor(seatRequest);seatLuxury.refresh()});
   syncSelectColor(passengerCount);syncSelectColor(seatRequest);renderPassengers();
   document.addEventListener("click",()=>document.querySelectorAll(".luxury-select-menu:not([hidden])").forEach(x=>x.hidden=true));
-  function parseDate(value){const v=String(value||"").trim();let year,month,day;let match=v.match(/^(\\d{4})-(\\d{2})-(\\d{2})$/);if(match){year=+match[1];month=+match[2];day=+match[3]}else{match=v.match(/^(\\d{2})\\/(\\d{2})\\/(\\d{4})$/);if(!match)return null;day=+match[1];month=+match[2];year=+match[3]}const date=new Date(year,month-1,day);if(date.getFullYear()!==year||date.getMonth()!==month-1||date.getDate()!==day)return null;return{date,iso:year+"-"+String(month).padStart(2,"0")+"-"+String(day).padStart(2,"0")}}
+  function parseDate(value){const v=String(value||"").trim();let year,month,day;let match=v.match(/^(\d{4})-(\d{2})-(\d{2})$/);if(match){year=+match[1];month=+match[2];day=+match[3]}else{match=v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!match)return null;day=+match[1];month=+match[2];year=+match[3]}const date=new Date(year,month-1,day);if(date.getFullYear()!==year||date.getMonth()!==month-1||date.getDate()!==day)return null;return{date,iso:year+"-"+String(month).padStart(2,"0")+"-"+String(day).padStart(2,"0")}}
   const todayIso=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);travelDate.min=todayIso;returnDate.min=todayIso;travelDate.addEventListener("change",()=>{returnDate.min=travelDate.value||todayIso;if(returnDate.value&&travelDate.value&&returnDate.value<travelDate.value)returnDate.value="";});
-  function installLuxuryMonthMenu(fp){
-    const select=fp.calendarContainer?.querySelector(".flatpickr-monthDropdown-months");if(!select||select.dataset.luxuryReady)return;select.dataset.luxuryReady="1";
-    const menu=document.createElement("div");menu.className="flatpickr-month-custom-menu";menu.hidden=true;const arrow=document.createElement("span");arrow.className="flatpickr-month-dropdown-arrow";arrow.setAttribute("aria-hidden","true");select.insertAdjacentElement("afterend",arrow);
-    const build=()=>{menu.innerHTML="";Array.from(select.options).forEach(opt=>{const b=document.createElement("button");b.type="button";b.className="flatpickr-month-custom-option";b.textContent=opt.textContent;b.dataset.value=opt.value;if(opt.value===select.value)b.classList.add("selected");b.addEventListener("click",e=>{e.stopPropagation();select.value=opt.value;select.dispatchEvent(new Event("change",{bubbles:true}));menu.hidden=true;build()});menu.appendChild(b)})};
-    const position=()=>{const a=select.getBoundingClientRect(),b=fp.calendarContainer.getBoundingClientRect();menu.style.left=(a.left-b.left)+"px";menu.style.top=(a.bottom-b.top+3)+"px"};
-    select.classList.remove("custom-month-hidden");select.setAttribute("aria-haspopup","listbox");select.setAttribute("aria-expanded","false");fp.calendarContainer.appendChild(menu);
-    const toggle=e=>{e.preventDefault();e.stopPropagation();build();position();menu.hidden=!menu.hidden;select.setAttribute("aria-expanded",String(!menu.hidden))};select.addEventListener("mousedown",toggle);arrow.addEventListener("click",toggle);
-    document.addEventListener("click",e=>{if(!menu.contains(e.target)&&e.target!==select&&e.target!==arrow){menu.hidden=true;select.setAttribute("aria-expanded","false")}});
-    select.addEventListener("change",()=>{build();menu.hidden=true;select.setAttribute("aria-expanded","false")});
-  }
-  const pickers={};
-  if(window.flatpickr){
-    [["travelDate","dateCalendarButton"],["returnDate","returnDateCalendarButton"]].forEach(([inputId,buttonId])=>{
-      const input=$(inputId),button=$(buttonId);
-      pickers[inputId]=flatpickr(input,{dateFormat:"d/m/Y",allowInput:true,disableMobile:true,minDate:"today",locale:{firstDayOfWeek:1},positionElement:input,onReady:[(dates,str,fp)=>installLuxuryMonthMenu(fp)],onOpen:[(dates,str,fp)=>installLuxuryMonthMenu(fp)]});
-      button?.addEventListener("click",()=>{clearFieldError(input);pickers[inputId].open()});
-    });
   }
   const tripType=()=>form.querySelector('input[name="tripType"]:checked')?.value||"One-way";
   const isRoundTrip=()=>tripType()==="Round-trip";
@@ -100,7 +83,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     if(!contactOptions.some(x=>x.checked))errors.push($("contactMethodGroup"));
     if(!passengerCount.value)errors.push(passengerLuxury.trigger);
     if(!validEmail(email.value))errors.push(email);
-    if(!iti.isValidNumber())errors.push(phone);
+    if(phone.value.replace(/\D/g,"").length<7)errors.push(phone);
     if(!parseDate(travelDate.value))errors.push(travelDate);
     if(!pickupTime.value)errors.push(pickupTime);
     if(!pickup.value.trim())errors.push(pickup);
@@ -122,7 +105,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   form.addEventListener("submit",async event=>{
     event.preventDefault();rememberPassengerNames();if(!validate())return;
     const method=form.querySelector('input[name="contactMethod"]:checked').value;
-    const round=isRoundTrip(),data=new FormData(form);data.set("phone",iti.getNumber());
+    const round=isRoundTrip(),data=new FormData(form);data.set("phone",phone.value);
     data.set("Selected Vehicle",selectedVehicle.value||"Not specified");data.set("Vehicle Capacity",selectedCapacity.value||"Not specified");
     const names=Array.from(passengerFields.querySelectorAll("input[data-passenger-number]")).map(x=>"Passenger "+x.dataset.passengerNumber+": "+x.value.trim());
     const fields=[
@@ -135,7 +118,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       "Flight number: "+(flightNumber.value.trim()||"Not applicable"),
       ...(round?["","RETURN JOURNEY","Return date: "+(parseDate(returnDate.value)?.iso||returnDate.value),"Return pickup time: "+data.get("returnTime"),"Return pickup location: "+data.get("returnPickup"),"Return drop-off location: "+data.get("returnDropoff"),"Return flight number: "+(returnFlightNumber.value.trim()||"Not applicable")]:[]),
       "Infant / child seat: "+(isSedan?"Not applicable":seatRequest.options[seatRequest.selectedIndex]?.textContent||"Not specified"),
-      "Guest email: "+email.value.trim(),"Guest phone: "+iti.getNumber(),
+      "Guest email: "+email.value.trim(),"Guest phone: "+phone.value,
       "Additional requests: "+(message.value.trim()||"None"),""
     ];
     const requestMessage=fields.join("\n");
@@ -146,13 +129,13 @@ document.addEventListener("DOMContentLoaded",()=>{
       status.textContent="Your request is ready in WhatsApp. Please press Send there to complete your request.";status.classList.add("is-success");return;
     }
     const originalText=submit.textContent;submit.disabled=true;submit.textContent="Sending Request…";status.textContent="Sending your request by email…";
-    const payload={_subject:"Airport Transfer Request — "+(selectedVehicle.value||"Private Transfer"),_template:"table",_captcha:"false","Contact Method":"Email","Trip Type":tripType(),"Selected Vehicle":selectedVehicle.value||"Not specified","Vehicle Capacity":selectedCapacity.value||"Not specified","Number of Passengers":String(data.get("passengerCount")||""),"Passenger Names":names.join("\n"),"Pickup Date":parseDate(travelDate.value)?.iso||travelDate.value,"Pickup Time":String(data.get("pickupTime")||""),"Pickup Location":String(data.get("pickup")||""),"Drop-off Location":String(data.get("dropoff")||""),"Flight Number":flightNumber.value.trim()||"Not applicable","Return Date":round?(parseDate(returnDate.value)?.iso||returnDate.value):"Not applicable","Return Pickup Time":round?String(data.get("returnTime")||""):"Not applicable","Return Pickup Location":round?String(data.get("returnPickup")||""):"Not applicable","Return Drop-off Location":round?String(data.get("returnDropoff")||""):"Not applicable","Return Flight Number":round?(returnFlightNumber.value.trim()||"Not applicable"):"Not applicable","Infant / Child Seat":isSedan?"Not applicable":seatRequest.options[seatRequest.selectedIndex]?.textContent||"Not specified","Guest Name(s)":names.join("\n"),"Guest Email":email.value.trim(),"Guest Phone":iti.getNumber(),"Additional Requests":message.value.trim()||"None","Referrer":"Airport Transfer page"};
+    const payload={_subject:"Airport Transfer Request — "+(selectedVehicle.value||"Private Transfer"),_template:"table",_captcha:"false","Contact Method":"Email","Trip Type":tripType(),"Selected Vehicle":selectedVehicle.value||"Not specified","Vehicle Capacity":selectedCapacity.value||"Not specified","Number of Passengers":String(data.get("passengerCount")||""),"Passenger Names":names.join("\n"),"Pickup Date":parseDate(travelDate.value)?.iso||travelDate.value,"Pickup Time":String(data.get("pickupTime")||""),"Pickup Location":String(data.get("pickup")||""),"Drop-off Location":String(data.get("dropoff")||""),"Flight Number":flightNumber.value.trim()||"Not applicable","Return Date":round?(parseDate(returnDate.value)?.iso||returnDate.value):"Not applicable","Return Pickup Time":round?String(data.get("returnTime")||""):"Not applicable","Return Pickup Location":round?String(data.get("returnPickup")||""):"Not applicable","Return Drop-off Location":round?String(data.get("returnDropoff")||""):"Not applicable","Return Flight Number":round?(returnFlightNumber.value.trim()||"Not applicable"):"Not applicable","Infant / Child Seat":isSedan?"Not applicable":seatRequest.options[seatRequest.selectedIndex]?.textContent||"Not specified","Guest Name(s)":names.join("\n"),"Guest Email":email.value.trim(),"Guest Phone":phone.value,"Additional Requests":message.value.trim()||"None","Referrer":"Airport Transfer page"};
     try{
       const response=await fetch("https://formsubmit.co/ajax/conciergeserviceturkiye@gmail.com",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(payload)});
       const result=await response.json().catch(()=>({}));
       if(!response.ok||result.success===false)throw new Error(result.message||"The email service could not accept the request.");
       status.textContent="Your transfer request has been submitted successfully. We will contact you after reviewing the details.";status.classList.add("is-success");
-      form.reset();selectedVehicle.value=vehicle||"";selectedCapacity.value=capacity||"";vehiclePlan.value="";iti.setCountry("us");phone.value="+";Object.keys(passengerNameCache).forEach(k=>delete passengerNameCache[k]);passengerCount.value="";seatRequest.value="0";syncSelectColor(passengerCount);syncSelectColor(seatRequest);passengerLuxury.refresh();seatLuxury.refresh();if(isSedan){seatGroup.hidden=true;seatGroup.style.setProperty("display","none","important")}else{seatGroup.hidden=false;seatGroup.style.removeProperty("display")}renderPassengers();syncTripType();syncFlightRequirements();
+      form.reset();selectedVehicle.value=vehicle||"";selectedCapacity.value=capacity||"";vehiclePlan.value="";phone.value="+";Object.keys(passengerNameCache).forEach(k=>delete passengerNameCache[k]);passengerCount.value="";seatRequest.value="0";syncSelectColor(passengerCount);syncSelectColor(seatRequest);passengerLuxury.refresh();seatLuxury.refresh();if(isSedan){seatGroup.hidden=true;seatGroup.style.setProperty("display","none","important")}else{seatGroup.hidden=false;seatGroup.style.removeProperty("display")}renderPassengers();syncTripType();syncFlightRequirements();
     }catch(error){console.error("Airport transfer request failed:",error);status.textContent="We could not send your request by email just now. Your details are still here; please try again or contact us directly.";status.classList.add("is-error")}
     finally{submit.disabled=false;submit.textContent=originalText}
   });
