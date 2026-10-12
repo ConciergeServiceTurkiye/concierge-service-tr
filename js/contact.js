@@ -56,15 +56,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Match StayinWiFi's native validation tooltip.
+  form.querySelectorAll("input,select,textarea").forEach(field => {
+    field.addEventListener("input", () => field.setCustomValidity(""));
+    field.addEventListener("change", () => field.setCustomValidity(""));
+  });
+  function validateWithNativeTooltip() {
+    form.querySelectorAll("input,select,textarea").forEach(field => field.setCustomValidity(""));
+    const fail = (field, message) => { field.setCustomValidity(message); field.reportValidity(); return false; };
+    if (!contactMethodFields.some(field => field.checked)) return fail(contactMethodFields[0], "Please select your preferred contact method.");
+    if (!nameField.value.trim()) return fail(nameField, "Please enter your full name.");
+    if (!emailField.value.trim()) return fail(emailField, "Please enter your email address.");
+    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(emailField.value.trim())) return fail(emailField, "Please enter a valid email address.");
+    if (phoneField.value.replace(/\\D/g, "").length < 7) return fail(phoneField, "Please enter a valid phone number, including country code.");
+    if (!subjectSelect.value.trim()) return fail(subjectSelect, "Please select a subject.");
+    return true;
+  }
   form.addEventListener("submit", e => {
     e.preventDefault();
-    if (!contactMethodFields.some(field => field.checked)) return showInlineAlert("Please select your preferred contact method.");
-    if (!nameField.value.trim()) return showInlineAlert("Please enter your full name.");
-    if (!emailField.value.trim()) return showInlineAlert("Please enter your email address.");
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value.trim())) return showInlineAlert("Please enter a valid email address.");
-    if (phoneField.value.replace(/\D/g, "").length < 7) return showInlineAlert("Please enter a valid phone number, including country code.");
-    if (!subjectSelect.value.trim()) return showInlineAlert("Please select a subject.");
-
+    if (!validateWithNativeTooltip()) return;
 
     const method = new FormData(form).get("contactMethod");
     const fullPhone = phoneField.value.trim();
