@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   const name=form.querySelector('[name="name"]');
   const pickup=form.querySelector('[name="pickupDate"]');
   const ret=form.querySelector('[name="returnDate"]');
+  const pickupPicker=form.querySelector('[data-date-for="pickupDate"]');
+  const returnPicker=form.querySelector('[data-date-for="returnDate"]');
   const devices=form.querySelector('[name="devices"]');
   const instructionLanguage=form.querySelector('[name="instructionLanguage"]');
   const instructionLanguageOptions=form.querySelectorAll('input[name="instructionLanguage"]');
@@ -152,6 +154,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     input.addEventListener('input',()=>{
       syncDateInput(input);
       input.setCustomValidity('');
+      syncPickerFromText();
       updateEstimate();
     });
 
@@ -159,12 +162,58 @@ document.addEventListener('DOMContentLoaded',()=>{
       setTimeout(()=>{
         syncDateInput(input);
         input.setCustomValidity('');
+        syncPickerFromText();
         updateEstimate();
       },0);
     });
   });
 
-  const parseDate=input=>{
+  // Native calendar pickers enhance the existing DD.MM.YYYY text fields.
+  // Keep manual entry and the existing validation/submission format unchanged.
+  const toIsoFromText=input=>{
+    const parsed=parseDate(input);
+    return parsed ? parsed.iso : '';
+  };
+  const syncPickerConstraints=()=>{
+    if(pickupPicker)pickupPicker.min=todayIso;
+    const pickupIso=toIsoFromText(pickup);
+    if(returnPicker){
+      returnPicker.min=pickupIso && pickupIso>todayIso ? pickupIso : todayIso;
+      if(returnPicker.value && returnPicker.value<returnPicker.min)returnPicker.value='';
+    }
+  };
+  const syncPickerFromText=()=>{
+    if(pickupPicker)pickupPicker.value=toIsoFromText(pickup);
+    if(returnPicker)returnPicker.value=toIsoFromText(ret);
+    syncPickerConstraints();
+  };
+  const attachPicker=(picker,target)=>{
+    if(!picker||!target)return;
+    picker.addEventListener('change',()=>{
+      if(!picker.value)return;
+      target.value=picker.value.split('-').reverse().join('.');
+      target.setCustomValidity('');
+      if(target===pickup && ret.value){
+        const picked=toIsoFromText(pickup);
+        const returned=toIsoFromText(ret);
+        if(returned && picked && returned<picked){
+          ret.value='';
+          if(returnPicker)returnPicker.value='';
+        }
+      }
+      syncPickerFromText();
+      updateEstimate();
+    });
+    picker.addEventListener('click',()=>{
+      if(typeof picker.showPicker==='function'){
+        try{picker.showPicker();}catch(_error){}
+      }
+    });
+  };
+  attachPicker(pickupPicker,pickup);
+  attachPicker(returnPicker,ret);
+
+    const parseDate=input=>{
     const value=input?.value.trim()||'';
     const match=value.match(/^(\d{2})\.(\d{2})\.(\d{4})$/);
     if(!match)return null;
@@ -297,6 +346,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   // Keep the estimate in sync whenever the selected device count changes.
   devices?.addEventListener('change',updateEstimate);
   devices?.addEventListener('input',updateEstimate);
+  syncPickerFromText();
 
   function resetRequestFields(){
     form.reset();
