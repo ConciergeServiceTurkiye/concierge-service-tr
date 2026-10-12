@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Concierge Service Türkiye">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/portable-wifi.css?v=2026100910">
+<link rel="stylesheet" href="css/portable-wifi.css?v=2026101210">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Portable Wi-Fi in Türkiye","provider":{"@type":"Organization","name":"Concierge Service Türkiye","url":"https://www.conciergeservice.com.tr"},"areaServed":"Türkiye","serviceType":"Portable Wi-Fi Rental"}</script>
 </head>
 <body>
@@ -119,8 +119,8 @@
         <small class="wifi-language-note">After payment is received and confirmed, we will send the matching photo instructions via WhatsApp or email.</small>
       </fieldset>
 
-      <label>Pickup Date<input type="text" name="pickupDate" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD.MM.YYYY"></label>
-      <label>Return Date<input type="text" name="returnDate" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD.MM.YYYY"></label>
+      <label class="wifi-date-label">Pickup Date<input type="text" name="pickupDate" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD.MM.YYYY" aria-label="Pickup date"><span class="wifi-calendar-icon" aria-hidden="true">▦</span><input class="wifi-native-date-picker" type="date" data-date-for="pickupDate" aria-label="Choose pickup date" tabindex="-1"></label>
+      <label class="wifi-date-label">Return Date<input type="text" name="returnDate" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="DD.MM.YYYY" aria-label="Return date"><span class="wifi-calendar-icon" aria-hidden="true">▦</span><input class="wifi-native-date-picker" type="date" data-date-for="returnDate" aria-label="Choose return date" tabindex="-1"></label>
 
       <label>Pickup Location<select name="pickup"><option value="">Select pickup</option><option>Istanbul Airport (IST)</option><option>Sabiha Gökçen Airport (SAW)</option><option>Trabzon Airport (TZX)</option><option>Istanbul Hotel / Airbnb</option><option>Istanbul Office</option><option>Bursa Office</option><option>Turkey-wide Delivery</option></select></label>
       <label>Return Location<select name="return"><option value="">Select return</option><option>Istanbul Airport (IST)</option><option>Sabiha Gökçen Airport (SAW)</option><option>Trabzon Airport (TZX)</option><option>Istanbul Hotel / Airbnb</option><option>Istanbul Office</option><option>Bursa Office</option><option>Turkey-wide Delivery</option></select></label>
@@ -178,6 +178,6 @@
 <a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank" rel="noopener"><img src="assets/whatsapp.png" alt="WhatsApp"></a>
 <div id="footerInclude"></div>
 <script src="js/common.js"></script>
-<script src="js/portable-wifi.js?v=2026100910"></script>
+<script src="js/portable-wifi.js?v=2026101210"></script>
 </body>
 </html>
