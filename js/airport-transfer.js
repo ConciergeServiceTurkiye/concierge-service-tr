@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   passengerCount.innerHTML="";
   const ph=document.createElement("option");ph.value="";ph.textContent="Please select number of passengers";ph.disabled=true;ph.selected=true;passengerCount.appendChild(ph);
   for(let i=vehicleMin;i<=vehicleMax;i++){const o=document.createElement("option");o.value=i;o.textContent=String(i);passengerCount.appendChild(o)}
+  passengerCount.value="1";
+  seatRequest.value="0";
   if(isSedan){seatGroup.hidden=true;seatGroup.style.setProperty("display","none","important");seatRequest.value="0"}else{seatGroup.hidden=false;seatGroup.style.removeProperty("display")}
   function syncSelectColor(el){el.classList.toggle("has-selection",el.value!==""&&!(el===seatRequest&&el.value==="0"))}
   function makeLuxurySelect(select){
