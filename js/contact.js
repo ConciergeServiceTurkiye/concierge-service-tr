@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const messageField = document.getElementById("message");
   const contactMethodFields = Array.from(form.querySelectorAll('input[name="contactMethod"]'));
   const submitButton = form.querySelector('button[type="submit"]');
-  const charCount = document.getElementById("charCount");
   const subjectSelect = document.getElementById("subject");
   if (!subjectSelect) return;
 
@@ -23,10 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => { alertBox.style.opacity = "0"; alertBox.style.visibility = "hidden"; }, 3500);
   }
 
-  if (charCount && messageField) {
-    charCount.textContent = "0 / 2000";
-    messageField.addEventListener("input", () => { charCount.textContent = `${messageField.value.length} / 2000`; });
-  }
 
   // StayinWiFi-style phone: permanent + prefix, digits only.
   phoneField.value = phoneField.value.startsWith("+") ? phoneField.value : "+";
@@ -117,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!response.ok || result.success === false) throw new Error(result.message || "The email service could not accept the request.");
         showInlineAlert("Your request has been submitted successfully. We will contact you after reviewing it.", true);
         form.reset();
-        if (charCount) charCount.textContent = "0 / 2000";
         subjectSelect.value = "";
         phoneField.value = "+";
       })
