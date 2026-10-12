@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     alertBox.textContent = text;
     alertBox.style.visibility = "visible";
     alertBox.style.opacity = "1";
-    alertBox.style.borderColor = success ? "#d4af37" : "#c9a24d";
+    alertBox.style.borderColor = "rgba(212,175,55,.35)";
+    alertBox.classList.toggle("is-error", !success);
     setTimeout(() => { alertBox.style.opacity = "0"; alertBox.style.visibility = "hidden"; }, 3500);
   }
 
@@ -57,10 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", e => {
     e.preventDefault();
-    if (!contactMethodFields.some(field => field.checked)) return showInlineAlert("Please choose your preferred contact method.");
+    if (!contactMethodFields.some(field => field.checked)) return showInlineAlert("Please select your preferred contact method.");
     if (!nameField.value.trim()) return showInlineAlert("Please enter your full name.");
     if (!emailField.value.trim()) return showInlineAlert("Please enter your email address.");
-    if (!emailField.checkValidity()) return showInlineAlert("Please enter a valid email address.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value.trim())) return showInlineAlert("Please enter a valid email address.");
     if (phoneField.value.replace(/\D/g, "").length < 7) return showInlineAlert("Please enter a valid phone number, including country code.");
     if (!subjectSelect.value.trim()) return showInlineAlert("Please select a subject.");
 
