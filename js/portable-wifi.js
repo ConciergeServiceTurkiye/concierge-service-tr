@@ -290,6 +290,10 @@ document.addEventListener('DOMContentLoaded',()=>{
       return setError(instructionLanguageOptions[0],'Please select a language for the pickup and return instructions.');
     }
 
+    if(!devices?.value){
+      return setError(devices,'Please select the number of Wi-Fi devices you would like to rent.');
+    }
+
     if(!pickup.value){
       return setError(pickup,'Please select a pickup date.');
     }
@@ -345,7 +349,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
   function updateEstimate(){
-    const total=days()*Number(devices?.value||1)*daily;
+    if(!devices?.value){
+      estimate.textContent='Select number of devices';
+      return;
+    }
+    const total=days()*Number(devices.value)*daily;
     estimate.textContent='€'+total.toFixed(2)+' estimated';
   }
 
