@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   function validate(){
     const errors=[];
     if(!contactOptions.some(x=>x.checked))errors.push($("contactMethodGroup"));
-    if(!passengerCount.value)errors.push(passengerLuxury.trigger);
+    if(!passengerCount.value)errors.push(passengerCount);
     if(!validEmail(email.value))errors.push(email);
     if(phone.value.replace(/\D/g,"").length<7)errors.push(phone);
     if(!parseDate(travelDate.value))errors.push(travelDate);
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       if(returnFlightNumber.required&&!returnFlightNumber.value.trim())errors.push(returnFlightNumber);
     }
     passengerFields.querySelectorAll("input[required]").forEach(input=>{if(input.value.trim().length<2)errors.push(input)});
-    if(errors.length){showValidation("Please complete the highlighted fields so we can submit your request.",errors);return false}
+    if(errors.length){showValidation("Please complete the required fields before submitting your request.",errors);return false}
     return true;
   }
   form.addEventListener("submit",async event=>{
