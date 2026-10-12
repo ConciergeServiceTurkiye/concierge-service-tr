@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     if(!passengerCount.value)return fail(passengerCount,"Please select the number of passengers.");
     if(!email.value.trim())return fail(email,"Please enter your email address.");
     if(!validEmail(email.value))return fail(email,"Please enter a valid email address.");
-    if(phone.value.replace(/\\D/g,"").length<7)return fail(phone,"Please enter a valid phone number, including country code.");
+    if(phone.value.replace(/\D/g,"").length<7)return fail(phone,"Please enter a valid phone number, including country code.");
     if(!parseDate(travelDate.value))return fail(travelDate,"Please enter a valid pickup date.");
     if(!pickupTime.value)return fail(pickupTime,"Please select a pickup time.");
     if(!pickup.value.trim())return fail(pickup,"Please enter a pickup location.");
