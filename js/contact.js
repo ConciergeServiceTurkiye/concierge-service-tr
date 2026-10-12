@@ -67,8 +67,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!contactMethodFields.some(field => field.checked)) return fail(contactMethodFields[0], "Please select your preferred contact method.");
     if (!nameField.value.trim()) return fail(nameField, "Please enter your full name.");
     if (!emailField.value.trim()) return fail(emailField, "Please enter your email address.");
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(emailField.value.trim())) return fail(emailField, "Please enter a valid email address.");
-    if (phoneField.value.replace(/\\D/g, "").length < 7) return fail(phoneField, "Please enter a valid phone number, including country code.");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value.trim())) return fail(emailField, "Please enter a valid email address.");
+    if (phoneField.value.replace(/\D/g, "").length < 7) return fail(phoneField, "Please enter a valid phone number, including country code.");
     if (!subjectSelect.value.trim()) return fail(subjectSelect, "Please select a subject.");
     return true;
   }
