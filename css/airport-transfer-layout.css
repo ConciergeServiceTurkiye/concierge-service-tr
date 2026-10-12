@@ -21,3 +21,52 @@
   background:#0a0a0a!important;
   box-shadow:none!important;
 }
+
+/* Airport Transfer form: intentional two-column transfer layout */
+.contact-method-section{margin:0 0 28px;padding:0;border:0}
+.contact-method-section .transfer-choice-fieldset{border:0;padding:0;margin:0;text-align:center}
+.contact-method-section .transfer-choice-fieldset legend{display:block;width:100%;text-align:center;margin:0 0 14px;color:#d4af37;font-size:13px}
+.contact-method-options{justify-content:center;align-items:center;gap:24px}
+.contact-method-options .transfer-radio-option{gap:9px;color:#fff}
+.contact-method-options .transfer-radio-option span{color:#fff}
+.contact-method-options .transfer-radio-option:hover span,.contact-method-options .transfer-radio-option:has(input:checked) span{color:#d4af37}
+.transfer-layout-panel{border:1px solid rgba(255,255,255,.16);padding:22px 22px 24px;margin:0 0 24px;background:rgba(10,10,10,.32)}
+.transfer-layout-panel>.transfer-panel-heading{text-align:left;margin:0 0 18px}
+.transfer-layout-panel .trip-type-group{margin:0 0 22px}
+.transfer-layout-panel .trip-type-group .transfer-choice-fieldset{border:0;padding:0;margin:0}
+.transfer-layout-panel .trip-type-group legend{width:100%;text-align:center;margin:0 0 12px}
+.transfer-layout-panel .trip-type-options{display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative}
+.transfer-layout-panel .trip-type-options .transfer-radio-option{width:100%;justify-content:center}
+.transfer-layout-panel .trip-type-options .transfer-radio-option span{min-width:0;width:min(100%,320px);text-align:center}
+.transfer-columns{display:grid;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);column-gap:24px;align-items:stretch}
+.transfer-column{min-width:0}
+.transfer-column-divider{background:rgba(255,255,255,.22);width:1px;align-self:stretch;min-height:100%;grid-column:2;grid-row:1}
+.transfer-outbound-column{grid-column:1;grid-row:1}
+.transfer-return-column{grid-column:3;grid-row:1}
+.transfer-return-column .return-column-heading{font-size:13px;text-align:left;color:#d4af37;margin:0 0 16px}
+.transfer-return-column .form-row,.transfer-outbound-column .form-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin:0 0 16px}
+.transfer-return-column .form-row[hidden],.transfer-return-column .form-group[hidden]{display:none!important}
+.transfer-outbound-column .airport-flight-row .form-group,.transfer-return-column .form-row:has(#returnFlightNumber) .form-group{max-width:100%}
+.transfer-layout-panel .form-group{min-width:0}
+.transfer-layout-panel .form-group label{display:block}
+.transfer-layout-panel .date-input-wrap{width:100%}
+.transfer-layout-panel .date-input-wrap input{min-width:0}
+.transfer-layout-panel .transfer-return-panel{display:contents}
+.details-panel{border:1px solid rgba(255,255,255,.16);padding:22px;margin:0 0 24px}
+.details-panel>.transfer-panel-heading{text-align:left;margin:0 0 18px}
+.details-panel>.form-row:first-of-type{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin-bottom:20px}
+.details-panel .passenger-fields{margin:0 0 18px}
+.details-panel .passenger-heading{color:#d4af37;font-size:13px;margin-bottom:5px}
+.details-panel .passenger-note{color:rgba(255,255,255,.65);font-size:12px;margin:0 0 14px}
+.details-panel .passenger-row{margin:0 0 14px}
+.details-panel .contact-detail-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;margin:0}
+.details-panel .contact-detail-field{min-width:0}
+@media(max-width:760px){
+ .transfer-layout-panel{padding:18px 14px}
+ .transfer-columns{grid-template-columns:minmax(0,1fr);row-gap:18px}
+ .transfer-column-divider{height:1px;width:100%;min-height:1px;grid-column:1;grid-row:2}
+ .transfer-outbound-column{grid-column:1;grid-row:1}
+ .transfer-return-column{grid-column:1;grid-row:3}
+ .transfer-layout-panel .trip-type-options{gap:10px}
+ .transfer-layout-panel .form-row,.details-panel>.form-row:first-of-type,.details-panel .contact-detail-row{grid-template-columns:minmax(0,1fr);gap:12px}
+}
