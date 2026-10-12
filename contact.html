@@ -34,9 +34,18 @@
     <form
       id="contactForm"
       method="POST"
-      action="https://script.google.com/macros/s/AKfycbxvOeMaThb3zFJVCZuGdQbJk-dAFH7W06vkoYPCfyfal_GUxF1dvXinEWMZoP8OtKpKcg/exec"
       novalidate
     >
+
+<fieldset class="contact-choice-fieldset">
+        <legend>Preferred Contact Method</legend>
+        <div class="contact-radio-options">
+          <label class="contact-radio-option"><input type="radio" name="contactMethod" value="WhatsApp" required><span>WhatsApp</span></label>
+          <label class="contact-radio-option"><input type="radio" name="contactMethod" value="Email" required><span>E-mail</span></label>
+        </div>
+      </fieldset>
+
+
 
       <div class="form-group">
         <label>Full Name</label>
@@ -75,15 +84,7 @@
         <input type="hidden" id="subject" name="subject">
       </div>
 
-      <fieldset class="contact-choice-fieldset">
-        <legend>Preferred Contact Method</legend>
-        <div class="contact-radio-options">
-          <label class="contact-radio-option"><input type="radio" name="contactMethod" value="WhatsApp" required><span>WhatsApp</span></label>
-          <label class="contact-radio-option"><input type="radio" name="contactMethod" value="Email" required><span>E-mail</span></label>
-        </div>
-      </fieldset>
-
-      <div class="form-group">
+<div class="form-group">
   <label>Request Details</label>
   <div class="textarea-wrapper">
     <textarea id="message" name="message" maxlength="2000"
