@@ -738,3 +738,18 @@
     gap:14px 18px!important;
   }
 }
+
+
+/* StayinWiFi date fields: keep manual entry and add a native calendar picker */
+.wifi-form-grid .wifi-date-label{position:relative;}
+.wifi-form-grid .wifi-date-label input[name="pickupDate"],
+.wifi-form-grid .wifi-date-label input[name="returnDate"]{padding-right:48px!important;}
+.wifi-form-grid .wifi-date-label .wifi-calendar-icon{
+  position:absolute;right:15px;bottom:13px;z-index:1;pointer-events:none;
+  color:var(--gold);font-size:20px;line-height:1;
+}
+.wifi-form-grid .wifi-date-label .wifi-native-date-picker{
+  position:absolute;right:7px;bottom:5px;width:42px;height:42px;
+  margin:0;padding:0;border:0;opacity:0;cursor:pointer;z-index:2;
+}
+.wifi-form-grid .wifi-date-label .wifi-native-date-picker::-webkit-calendar-picker-indicator{cursor:pointer;width:100%;height:100%;}
