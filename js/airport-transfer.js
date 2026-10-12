@@ -82,26 +82,23 @@ document.addEventListener("DOMContentLoaded",()=>{
   function validate(){
     form.querySelectorAll("input,select,textarea").forEach(field=>field.setCustomValidity(""));
     const fail=(field,message)=>{field.setCustomValidity(message);field.reportValidity();return false};
-
-    // Validate in the same order the customer encounters fields from top to bottom.
+    // Follow the visual row order, left to right, from the top of the form down.
     if(!contactOptions.some(x=>x.checked))return fail(contactOptions[0],"Please select your preferred contact method.");
     if(!parseDate(travelDate.value))return fail(travelDate,"Please enter a valid pickup date.");
-    if(!pickupTime.value)return fail(pickupTime,"Please select a pickup time.");
-    if(!pickup.value.trim())return fail(pickup,"Please enter a pickup location.");
-    if(!dropoff.value.trim())return fail(dropoff,"Please enter a drop-off location.");
-    syncFlightRequirements();
-    if(flightNumber.required&&!flightNumber.value.trim())return fail(flightNumber,"Please enter your flight number.");
-
     if(isRoundTrip()){
       const out=parseDate(travelDate.value),ret=parseDate(returnDate.value);
       if(!ret)return fail(returnDate,"Please enter a valid return date.");
       if(out&&ret.date<out.date)return fail(returnDate,"Return date must be on or after the pickup date.");
-      if(!returnTime.value)return fail(returnTime,"Please select a return pickup time.");
-      if(!$("returnPickup").value.trim())return fail($("returnPickup"),"Please enter a return pickup location.");
-      if(!$("returnDropoff").value.trim())return fail($("returnDropoff"),"Please enter a return drop-off location.");
-      if(returnFlightNumber.required&&!returnFlightNumber.value.trim())return fail(returnFlightNumber,"Please enter your return flight number.");
     }
-
+    if(!pickupTime.value)return fail(pickupTime,"Please select a pickup time.");
+    if(isRoundTrip()&&!returnTime.value)return fail(returnTime,"Please select a return pickup time.");
+    if(!pickup.value.trim())return fail(pickup,"Please enter a pickup location.");
+    if(isRoundTrip()&&!$("returnPickup").value.trim())return fail($("returnPickup"),"Please enter a return pickup location.");
+    if(!dropoff.value.trim())return fail(dropoff,"Please enter a drop-off location.");
+    if(isRoundTrip()&&!$("returnDropoff").value.trim())return fail($("returnDropoff"),"Please enter a return drop-off location.");
+    syncFlightRequirements();
+    if(flightNumber.required&&!flightNumber.value.trim())return fail(flightNumber,"Please enter your flight number.");
+    if(isRoundTrip()&&returnFlightNumber.required&&!returnFlightNumber.value.trim())return fail(returnFlightNumber,"Please enter your return flight number.");
     if(!passengerCount.value)return fail(passengerCount,"Please select the number of passengers.");
     const passengerName=Array.from(passengerFields.querySelectorAll("input[required]")).find(input=>input.value.trim().length<2);
     if(passengerName)return fail(passengerName,"Please enter the passenger's full name.");
