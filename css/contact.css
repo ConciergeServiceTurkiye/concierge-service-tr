@@ -302,3 +302,9 @@ form {display: flex;flex-direction: column;gap: 22px;}
 /* Match Subject select placeholder and options to the other form fields */
 #contactForm select#subject{font-family:inherit;font-size:13.5px;line-height:1.4;}
 #contactForm select#subject option{font-family:inherit;font-size:13.5px;line-height:1.4;}
+
+
+/* Contact form field headings in brand gold */
+#contactForm .form-group label,
+#contactForm > label,
+#contactForm .contact-choice-fieldset legend{color:var(--gold,#d4af37)!important;}
