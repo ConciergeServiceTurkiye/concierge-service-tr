@@ -20,13 +20,11 @@ document.addEventListener("DOMContentLoaded",()=>{
   if(isSedan){seatGroup.hidden=true;seatGroup.style.setProperty("display","none","important");seatRequest.value="0"}else{seatGroup.hidden=false;seatGroup.style.removeProperty("display")}
   function syncSelectColor(el){el.classList.toggle("has-selection",el.value!==""&&!(el===seatRequest&&el.value==="0"))}
   function makeLuxurySelect(select){
-    const wrap=document.createElement("div");wrap.className="luxury-select";
-    const trigger=document.createElement("button");trigger.type="button";trigger.className="luxury-select-trigger";trigger.setAttribute("aria-haspopup","listbox");trigger.setAttribute("aria-expanded","false");
-    const list=document.createElement("div");list.className="luxury-select-menu";list.hidden=true;
-    const refresh=()=>{const opt=select.options[select.selectedIndex];trigger.textContent=opt?opt.textContent:"";trigger.classList.toggle("has-selection",select.value!==""&&!(select===seatRequest&&select.value==="0"));Array.from(list.children).forEach(b=>b.classList.toggle("selected",b.dataset.value===select.value))};
-    Array.from(select.options).forEach(opt=>{const item=document.createElement("button");item.type="button";item.className="luxury-select-option";item.textContent=opt.textContent;item.dataset.value=opt.value;item.disabled=opt.disabled;item.addEventListener("click",()=>{select.value=opt.value;select.dispatchEvent(new Event("change",{bubbles:true}));list.hidden=true;trigger.setAttribute("aria-expanded","false");refresh()});list.appendChild(item)});
-    trigger.addEventListener("click",e=>{e.stopPropagation();document.querySelectorAll(".luxury-select-menu:not([hidden])").forEach(x=>{if(x!==list)x.hidden=true});list.hidden=!list.hidden;trigger.setAttribute("aria-expanded",String(!list.hidden))});
-    wrap.append(trigger,list);select.parentNode.insertBefore(wrap,select);select.classList.add("luxury-native-select");select.setAttribute("tabindex","-1");select.addEventListener("change",refresh);refresh();return{refresh,trigger,list}
+    // Keep the native select interaction, matching the Contact subject dropdown.
+    const refresh=()=>syncSelectColor(select);
+    select.addEventListener("change",refresh);
+    refresh();
+    return{refresh,trigger:null,list:null};
   }
   const passengerLuxury=makeLuxurySelect(passengerCount),seatLuxury=makeLuxurySelect(seatRequest),passengerNameCache={};
   function rememberPassengerNames(){passengerFields.querySelectorAll(".passenger-row input").forEach(input=>{const n=input.dataset.passengerNumber;if(n)passengerNameCache[n]=input.value})}
