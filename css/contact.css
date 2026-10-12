@@ -291,3 +291,9 @@ form {display: flex;flex-direction: column;gap: 22px;}
 #contactForm .submit-btn{display:flex;width:max-content;max-width:100%;margin:8px auto 0;padding:0 28px;min-height:48px;height:auto;min-width:0;border-radius:999px;background:var(--gold,#d4af37);color:#080808;border:0;font-size:13px;font-weight:600;letter-spacing:.5px;line-height:1.3;white-space:normal;text-align:center;align-self:center}
 #contactForm .form-group:has(#message){grid-column:1/-1}
 @media(max-width:480px){#contactForm .submit-btn{padding:0 22px;font-size:12px}}
+
+
+/* Contact subject: same native dropdown behavior and neutral styling as StayinWiFi locations */
+#contactForm select#subject{display:block;width:100%;height:var(--form-h);box-sizing:border-box;padding:13px 14px;background:transparent;color:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.13);border-radius:0;font:inherit;outline:none;appearance:auto;-webkit-appearance:auto;cursor:pointer}
+#contactForm select#subject:focus{border-color:rgba(212,175,55,.65);box-shadow:none;color:#fff}
+#contactForm select#subject option{background:#111;color:#fff}
