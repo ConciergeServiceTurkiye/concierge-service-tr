@@ -308,3 +308,8 @@ form {display: flex;flex-direction: column;gap: 22px;}
 #contactForm .form-group label,
 #contactForm > label,
 #contactForm .contact-choice-fieldset legend{color:var(--gold,#d4af37)!important;}
+
+/* Contact submit button exactly follows StayinWiFi form CTA */
+#contactForm .submit-btn{display:inline-flex!important;width:auto!important;min-height:44px!important;align-items:center;justify-content:center;gap:10px;margin:0 auto;padding:0 22px;border:1px solid rgba(212,175,55,.72)!important;border-radius:24px!important;background:transparent!important;color:var(--gold,#d4af37)!important;font-family:inherit;font-size:11px!important;font-weight:700!important;letter-spacing:.12em!important;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
+#contactForm .submit-btn:hover{background:var(--gold,#d4af37)!important;border-color:var(--gold,#d4af37)!important;color:#111!important;transform:none!important}
+#contactForm .submit-btn span{font-size:16px;line-height:1}
