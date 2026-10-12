@@ -36,3 +36,70 @@
 #serviceForm .form-group textarea{color:#fff!important}
 #serviceForm .form-group input:focus,
 #serviceForm .form-group textarea:focus{color:#fff!important}
+
+/* Simplified, Contact-matched airport transfer layout */
+.service-hero{padding:42px 4vw 70px;align-items:flex-start}
+.service-form-wrapper{width:min(1240px,100%);padding:38px 42px 42px;background:#0a0a0a;border:1px solid rgba(255,255,255,.08);border-radius:0;box-shadow:none;backdrop-filter:none}
+.service-form-header{text-align:left;margin-bottom:26px}
+.service-form-title{font-size:clamp(26px,3vw,34px);letter-spacing:0}
+.service-form-subline{font-size:11px;letter-spacing:2px;text-align:left;color:rgba(255,255,255,.48)}
+.selected-vehicle-box{display:flex;flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin:0 0 28px;padding:0;background:transparent;border:0;border-radius:0}
+.selected-vehicle-label{font-size:11px;letter-spacing:.5px;color:rgba(255,255,255,.62)}
+.selected-vehicle-box span:last-child{font-size:12px;color:rgba(255,255,255,.62)}
+#serviceForm{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:22px 28px}
+.transfer-contact-panel,.transfer-additional-panel{grid-column:1/-1;min-width:0}
+.transfer-contact-panel{padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,.10)}
+.transfer-panel{min-width:0;padding:22px 24px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.015)}
+.transfer-panel-heading{margin:0 0 22px;color:#fff;font-size:14px;font-weight:500;letter-spacing:.5px}
+.transfer-contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px 28px}
+.contact-method-group{grid-column:1/-1}
+.transfer-outbound-panel{grid-column:1}
+.transfer-return-panel{grid-column:2}
+.transfer-return-panel[hidden]{display:none!important}
+.transfer-return-panel:not([hidden]){display:block!important}
+.transfer-outbound-panel .form-row,.transfer-return-panel .form-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.transfer-outbound-panel .form-group,.transfer-return-panel .form-group{min-width:0}
+.transfer-outbound-panel .trip-type-group{margin-bottom:4px}
+.transfer-additional-panel{padding-top:4px}
+.transfer-contact-grid .form-group{min-width:0}
+.service-form-wrapper .form-group label,.transfer-choice-fieldset legend{color:rgba(255,255,255,.72);font-size:12px;letter-spacing:.35px;font-weight:400}
+.form-group input,.form-group textarea,.form-group select,.luxury-select-trigger,.service-form-wrapper .iti input{background:#111!important;color:#fff!important;border:1px solid rgba(255,255,255,.13)!important;border-radius:0!important;font-size:14px}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus,.luxury-select-trigger:focus-visible,.service-form-wrapper .iti input:focus{border-color:rgba(212,175,55,.8)!important;box-shadow:none!important;outline:none}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,.38)}
+.service-form-wrapper .iti__selected-dial-code{color:#fff!important}
+.service-form-wrapper .iti__arrow{border-top-color:rgba(255,255,255,.7)!important}
+.transfer-choice-fieldset legend{margin:0 0 15px;color:rgba(255,255,255,.82)}
+.transfer-radio-options{display:flex;align-items:center;justify-content:flex-start;gap:28px;flex-wrap:wrap}
+.transfer-radio-option{display:inline-flex;align-items:center;gap:9px;cursor:pointer;color:rgba(255,255,255,.82);font-size:14px}
+.transfer-radio-option input{appearance:none;-webkit-appearance:none;position:static;opacity:1;pointer-events:auto;width:17px!important;height:17px!important;min-width:17px;margin:0;padding:0!important;border:1px solid rgba(255,255,255,.65)!important;border-radius:50%!important;background:transparent!important;display:grid;place-content:center;cursor:pointer}
+.transfer-radio-option input::before{content:"";width:8px;height:8px;border-radius:50%;background:#d4af37;transform:scale(0);transition:transform .15s ease}
+.transfer-radio-option input:checked{border-color:#d4af37!important}
+.transfer-radio-option input:checked::before{transform:scale(1)}
+.transfer-radio-option:has(input:checked){color:#d4af37}
+.transfer-radio-option:hover{color:#d4af37}
+.transfer-radio-option input:focus-visible{outline:2px solid rgba(212,175,55,.6);outline-offset:3px}
+.trip-type-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.trip-type-options .transfer-radio-option{display:grid;grid-template-columns:18px minmax(0,1fr);grid-template-rows:auto auto;align-items:start;column-gap:10px;row-gap:4px;padding:16px;border:1px solid rgba(255,255,255,.13);min-height:82px;box-sizing:border-box;transition:border-color .2s,background .2s}
+.trip-type-options .transfer-radio-option input{grid-row:1/3;grid-column:1;margin-top:2px}
+.trip-type-options .transfer-radio-option span{grid-column:2;grid-row:1;color:inherit;font-size:14px;font-weight:500;min-width:0}
+.trip-type-options .transfer-radio-option::after{grid-column:2;grid-row:2;color:rgba(255,255,255,.5);font-size:12px;content:"Single transfer"}
+.trip-type-options .transfer-radio-option:has(input[value="Round-trip"])::after{content:"Return transfer included"}
+.trip-type-options .transfer-radio-option:has(input:checked){border-color:#d4af37;background:rgba(212,175,55,.06);color:#d4af37}
+.trip-type-options .transfer-radio-option:has(input:checked)::after{color:rgba(255,255,255,.7)}
+.luxury-select{height:var(--form-h)}
+.luxury-select-trigger{color:rgba(255,255,255,.75)!important}
+.luxury-select-trigger.has-selection{color:#fff!important}
+.luxury-select-menu{background:#111;border:1px solid rgba(255,255,255,.18)}
+.luxury-select-option{background:#111;color:rgba(255,255,255,.8)}
+.luxury-select-option:hover,.luxury-select-option:focus,.luxury-select-option.selected{background:rgba(212,175,55,.08);color:#d4af37}
+.passenger-row input{color:#fff!important;border-color:rgba(255,255,255,.13)!important}
+.passenger-heading{color:rgba(255,255,255,.72);font-size:12px;letter-spacing:.35px}
+.passenger-note,.passenger-capacity-note{color:rgba(255,255,255,.48)!important}
+.submit-btn{width:max-content!important;min-width:230px;max-width:100%;height:48px!important;margin:8px auto 0!important;padding:0 28px;border:1px solid #d4af37!important;border-radius:999px!important;background:#d4af37!important;color:#080808!important;font-size:13px;font-weight:600;letter-spacing:.4px;transition:background .25s,color .25s,transform .25s}
+.submit-btn:hover{background:transparent!important;color:#d4af37!important;transform:translateY(-1px)}
+#serviceForm>.submit-btn,#serviceForm>.transfer-submit-status{grid-column:1/-1;justify-self:center}
+.transfer-submit-status{margin:0;text-align:center}
+.form-back-button{margin-bottom:20px}
+.form-back-button span:first-child{color:#d4af37}
+@media(max-width:850px){.service-hero{padding:28px 4vw 50px}.service-form-wrapper{padding:28px 24px}#serviceForm{grid-template-columns:minmax(0,1fr);gap:18px}.transfer-contact-panel,.transfer-outbound-panel,.transfer-return-panel,.transfer-additional-panel{grid-column:1}.transfer-contact-grid{grid-template-columns:1fr}.transfer-outbound-panel .form-row,.transfer-return-panel .form-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media(max-width:560px){.service-form-wrapper{padding:24px 18px}.transfer-panel{padding:18px 14px}.transfer-outbound-panel .form-row,.transfer-return-panel .form-row{grid-template-columns:1fr}.trip-type-options{grid-template-columns:1fr}.transfer-contact-grid{gap:18px}.transfer-radio-options{gap:18px}}
