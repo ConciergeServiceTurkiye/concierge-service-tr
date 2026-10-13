@@ -165,3 +165,58 @@
 }
 .contact-method-options{gap:28px!important}
 @media(max-width:760px){.contact-method-options{gap:22px!important}}
+
+/* Contact-method options must stay inline: radio immediately before its label */
+.contact-method-options{
+  display:flex!important;
+  flex-direction:row!important;
+  justify-content:center!important;
+  align-items:center!important;
+  flex-wrap:nowrap!important;
+  gap:32px!important;
+}
+.contact-method-options .transfer-radio-option{
+  display:inline-flex!important;
+  flex:0 0 auto!important;
+  flex-basis:auto!important;
+  width:auto!important;
+  max-width:none!important;
+  min-width:0!important;
+  grid-template-columns:none!important;
+  grid-template-rows:none!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  column-gap:7px!important;
+  row-gap:0!important;
+  gap:7px!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:0!important;
+}
+.contact-method-options .transfer-radio-option input[type="radio"]{
+  position:static!important;
+  display:inline-grid!important;
+  flex:0 0 17px!important;
+  width:17px!important;
+  min-width:17px!important;
+  height:17px!important;
+  margin:0!important;
+  padding:0!important;
+}
+.contact-method-options .transfer-radio-option span{
+  display:inline-block!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  white-space:nowrap!important;
+  line-height:1.4!important;
+}
+@media(max-width:760px){
+  .contact-method-options{gap:24px!important}
+}
