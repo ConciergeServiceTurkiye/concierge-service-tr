@@ -55,6 +55,16 @@ html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice i
   min-width:17px!important;margin:0!important;opacity:1!important;
 }
 html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-round-trip{padding-left:32px!important}
+/* Round-Trip: arrow above; radio and return arrow together; label below. */
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-round-trip{
+  align-items:flex-start!important;
+}
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-round-trip>input[type=radio]{
+  margin-top:25px!important;
+}
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-round-trip .trip-type-label{
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:3px!important;
+}
 /* Subtle gold divider between One-way and Round-Trip */
 #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-options{position:relative!important}
 html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-options:after{
