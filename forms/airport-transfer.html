@@ -141,7 +141,7 @@ html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .
 #serviceForm .trip-type-choice .trip-type-return-arrow{cursor:pointer!important}
 
 /* Final visual adjustments requested for the transfer form. */
-.transfer-details-outside-heading{position:relative!important;top:12px!important;margin:0 auto 12px!important;padding:0 7px!important;background:#090a0c!important;width:max-content!important;max-width:100%!important}
+.transfer-details-outside-heading{position:relative!important;top:32px!important;margin:0 auto 12px!important;padding:0 7px!important;background:#090a0c!important;width:max-content!important;max-width:100%!important}
 #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .trip-type-label{color:#fff!important;transition:color .18s ease}
 #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice:hover .trip-type-label,
 #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice:has(input:checked) .trip-type-label{color:#d4af37!important}
@@ -151,6 +151,7 @@ html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .
 #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-options:after{height:calc(100% + 300px)!important;background:linear-gradient(to bottom,rgba(245,205,85,.06) 0%,rgba(245,205,85,.14) 24%,rgba(245,205,85,.94) 53%,rgba(245,205,85,.94) 61%,rgba(245,205,85,.22) 88%,rgba(245,205,85,0) 100%)!important;width:1px!important;box-shadow:none!important}
 #serviceForm .transfer-layout-panel .date-native-wrap{position:relative!important}
 #serviceForm .transfer-layout-panel .date-native-wrap input[type=date]{color-scheme:dark}
+#serviceForm .transfer-layout-panel .date-native-wrap:not(.has-value) input[type=date]::-webkit-datetime-edit{color:transparent!important}
 #serviceForm .transfer-layout-panel .date-native-placeholder{position:absolute;left:12px;top:50%;transform:translateY(-50%);z-index:1;color:rgba(255,255,255,.55);font-size:13px;pointer-events:none}
 #serviceForm .transfer-layout-panel .date-native-wrap.is-focused .date-native-placeholder,
 #serviceForm .transfer-layout-panel .date-native-wrap.has-value .date-native-placeholder{display:none}
@@ -164,7 +165,7 @@ html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .
 #serviceForm .details-panel>.transfer-panel-heading{position:absolute!important;top:-12px!important;left:14px!important;margin:0!important;padding:0 7px!important;background:#090a0c!important;z-index:2!important}
 #serviceForm .details-panel .passenger-heading{margin-top:8px!important}
 @media(max-width:760px){
- .transfer-details-outside-heading{top:8px!important;margin-bottom:8px!important}
+ .transfer-details-outside-heading{top:20px!important;margin-bottom:8px!important}
  #serviceForm .transfer-layout-panel .transfer-return-column .form-row{grid-template-columns:minmax(0,1fr)!important}
  #serviceForm .transfer-layout-panel .transfer-return-column #returnLocationRow>.form-group{grid-column:1!important}
  #serviceForm .details-panel{padding-top:30px!important}
