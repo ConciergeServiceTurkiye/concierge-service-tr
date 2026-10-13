@@ -190,6 +190,11 @@ html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .
  #serviceForm .transfer-layout-panel>.transfer-details-outside-heading{left:14px!important}
  #serviceForm .submit-btn.wifi-match-submit{width:max-content!important}
 }
+
+/* Tighten spacing around passenger-name instructions. */
+#serviceForm .details-panel .passenger-heading{margin-bottom:1px!important}
+#serviceForm .details-panel .passenger-row{margin:0 0 4px!important}
+#serviceForm .details-panel .passenger-note{margin:0 0 14px!important}
 </style></head><body><div id="navbarInclude"></div><section class="service-hero"><div class="service-form-wrapper"><a class="form-back-button" href="../airport-transfer.html" aria-label="Back to vehicle selection" onclick="if(history.length>1){event.preventDefault();history.back();}"><span aria-hidden="true">←</span><span>Back to Vehicle Selection</span></a><div class="service-form-header"><div class="service-form-title">Private Airport Transfer</div><div class="service-form-subline">Discreet • Reliable • Effortless</div></div><div id="selectedVehicleBox" class="selected-vehicle-box" hidden><span class="selected-vehicle-label">Selected Vehicle</span><a id="selectedVehicleName" class="luxury-selected-vehicle" href="#" aria-label="View selected vehicle photos"></a><span id="selectedVehicleCapacity"></span></div><div id="formInlineAlert"></div><form id="serviceForm" action="#" novalidate>
 <section class="contact-method-section"><fieldset class="transfer-choice-fieldset" id="contactMethodGroup"><legend>Preferred Contact Method</legend><div class="contact-method-options"><label class="contact-method-choice"><input type="radio" name="contactMethod" value="WhatsApp" required><span>WhatsApp</span></label><label class="contact-method-choice"><input type="radio" name="contactMethod" value="Email" required><span>E-mail</span></label></div></fieldset></section>
 <section class="transfer-panel transfer-layout-panel"><div class="transfer-panel-heading transfer-gold-heading transfer-details-outside-heading">Transfer Details</div><div class="form-group trip-type-group"><fieldset class="transfer-choice-fieldset" id="tripTypeGroup"><legend>Transfer Type</legend>
