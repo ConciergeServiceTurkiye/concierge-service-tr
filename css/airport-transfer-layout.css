@@ -137,3 +137,31 @@
 .transfer-return-column .return-column-heading{display:none!important}
 .transfer-return-column{padding-top:0!important}
 .transfer-return-column #returnDateGroup{margin-top:0!important}
+
+/* Tighten only the radio-to-label gap for contact method options */
+.contact-method-options .transfer-radio-option{
+  display:inline-flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:7px!important;
+  margin:0!important;
+  padding:0!important;
+}
+.contact-method-options .transfer-radio-option input[type="radio"]{
+  display:inline-block!important;
+  position:static!important;
+  flex:0 0 16px!important;
+  width:16px!important;
+  height:16px!important;
+  margin:0!important;
+  padding:0!important;
+}
+.contact-method-options .transfer-radio-option span{
+  display:inline-block!important;
+  margin:0!important;
+  padding:0!important;
+  white-space:nowrap!important;
+}
+.contact-method-options{gap:28px!important}
+@media(max-width:760px){.contact-method-options{gap:22px!important}}
