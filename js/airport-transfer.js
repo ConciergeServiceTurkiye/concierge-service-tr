@@ -39,7 +39,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   function renderPassengers(){
     rememberPassengerNames();passengerFields.querySelectorAll(".passenger-row").forEach(el=>el.remove());const n=Number(passengerCount.value||0);
     if(!n){vehiclePlan.value="";return}
+    const passengerNote=passengerFields.querySelector(".passenger-note");
     for(let i=1;i<=n;i++){const row=document.createElement("div");row.className="passenger-row";row.innerHTML='<input id="passenger-'+i+'" name="passenger_'+i+'" data-passenger-number="'+i+'" type="text" aria-label="Full name of passenger - '+i+'" placeholder="Full name of passenger - '+i+'" minlength="2" maxlength="100" required>';const input=row.querySelector("input");input.value=passengerNameCache[i]||"";input.addEventListener("input",()=>clearFieldError(input));passengerFields.appendChild(row)}
+    if(passengerNote)passengerFields.appendChild(passengerNote);
     vehiclePlan.value=n>vehicleMax?'Multiple vehicles required for '+n+' passengers':vehicle?'1 x '+vehicle:"";
   }
   function clearFieldError(field){if(field)field.classList.remove("field-error")}
