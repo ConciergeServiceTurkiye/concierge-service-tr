@@ -108,3 +108,32 @@
  .contact-method-options{gap:22px!important}
  .transfer-layout-panel .trip-type-options:before{display:none!important}
 }
+
+/* Final refinement requested from annotated screenshot */
+.transfer-layout-panel .trip-type-options{
+  position:relative!important;
+  isolation:isolate!important;
+}
+.transfer-layout-panel .trip-type-options:before{
+  left:50%!important;
+  top:-2px!important;
+  bottom:-18px!important;
+  transform:translateX(-50%)!important;
+  z-index:0!important;
+}
+.transfer-layout-panel .trip-type-options .transfer-radio-option{
+  position:relative!important;
+  z-index:1!important;
+}
+.transfer-column-divider{
+  display:block!important;
+  grid-column:2!important;
+  grid-row:1!important;
+  align-self:stretch!important;
+  width:1px!important;
+  min-height:100%!important;
+  background:linear-gradient(to bottom,rgba(255,255,255,.22) 0%,rgba(255,255,255,.22) 78%,rgba(255,255,255,0) 100%)!important;
+}
+.transfer-return-column .return-column-heading{display:none!important}
+.transfer-return-column{padding-top:0!important}
+.transfer-return-column #returnDateGroup{margin-top:0!important}
