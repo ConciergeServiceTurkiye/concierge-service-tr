@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const returnPickup=$("returnPickup"),returnDropoff=$("returnDropoff");
     const returnAirport=isAirport(returnPickup?.value)||isAirport(returnDropoff?.value);
     returnFlightNumber.required=isRoundTrip()&&returnAirport;
-    $("returnTimeLocationRow").querySelector("#returnFlightNumber").closest(".form-group").classList.toggle("is-optional",!returnFlightNumber.required);
+    returnFlightNumber.closest(".form-group").classList.toggle("is-optional",!returnFlightNumber.required);
   }
   function syncTripType(){
     const round=isRoundTrip();
