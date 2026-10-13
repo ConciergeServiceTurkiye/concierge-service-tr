@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())}
   function validate(){
     form.querySelectorAll("input,select,textarea").forEach(field=>field.setCustomValidity(""));
-    const fail=(field,message)=>{field.setCustomValidity(message);field.reportValidity();return false};
+    const fail=(field,message)=>{field.setCustomValidity(message);try{field.focus({preventScroll:true})}catch{field.focus()}showValidation(message,[field]);return false};
     // Follow the visual row order, left to right, from the top of the form down.
     if(!contactOptions.some(x=>x.checked))return fail(contactOptions[0],"Please select your preferred contact method.");
     if(!parseDate(travelDate.value))return fail(travelDate,"Please enter a valid pickup date.");
