@@ -220,3 +220,53 @@
 @media(max-width:760px){
   .contact-method-options{gap:24px!important}
 }
+
+/* Hard reset for contact method: put radio and label on one horizontal line */
+#contactMethodGroup .transfer-radio-options.contact-method-options{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:32px!important;
+}
+#contactMethodGroup .transfer-radio-options.contact-method-options > label.transfer-radio-option{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:0!important;
+  max-width:none!important;
+  min-height:0!important;
+  grid-template-columns:none!important;
+  grid-template-rows:none!important;
+  column-gap:7px!important;
+  row-gap:0!important;
+  gap:7px!important;
+  padding:0!important;
+  margin:0!important;
+}
+#contactMethodGroup .transfer-radio-options.contact-method-options > label.transfer-radio-option > input[type="radio"]{
+  position:static!important;
+  display:inline-block!important;
+  flex:0 0 17px!important;
+  width:17px!important;
+  min-width:17px!important;
+  height:17px!important;
+  margin:0!important;
+  opacity:1!important;
+}
+#contactMethodGroup .transfer-radio-options.contact-method-options > label.transfer-radio-option > span{
+  display:inline-block!important;
+  flex:0 0 auto!important;
+  width:auto!important;
+  min-width:0!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+  margin:0!important;
+  padding:0!important;
+  white-space:nowrap!important;
+}
