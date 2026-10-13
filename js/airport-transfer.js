@@ -39,7 +39,9 @@ document.addEventListener("DOMContentLoaded",()=>{
   function renderPassengers(){
     rememberPassengerNames();passengerFields.querySelectorAll(".passenger-row").forEach(el=>el.remove());const n=Number(passengerCount.value||0);
     if(!n){vehiclePlan.value="";return}
-    for(let i=1;i<=n;i++){const row=document.createElement("div");row.className="passenger-row";row.innerHTML='<label for="passenger-'+i+'">Passenger '+i+' — Full Name</label><input id="passenger-'+i+'" name="passenger_'+i+'" data-passenger-number="'+i+'" type="text" placeholder="Full name" minlength="2" maxlength="100" required>';const input=row.querySelector("input");input.value=passengerNameCache[i]||"";input.addEventListener("input",()=>clearFieldError(input));passengerFields.appendChild(row)}
+    const passengerNote=passengerFields.querySelector(".passenger-note");
+    for(let i=1;i<=n;i++){const row=document.createElement("div");row.className="passenger-row";row.innerHTML='<input id="passenger-'+i+'" name="passenger_'+i+'" data-passenger-number="'+i+'" type="text" aria-label="Full name of passenger - '+i+'" placeholder="Full name of passenger - '+i+'" minlength="2" maxlength="100" required>';const input=row.querySelector("input");input.value=passengerNameCache[i]||"";input.addEventListener("input",()=>clearFieldError(input));passengerFields.appendChild(row)}
+    if(passengerNote)passengerFields.appendChild(passengerNote);
     vehiclePlan.value=n>vehicleMax?'Multiple vehicles required for '+n+' passengers':vehicle?'1 x '+vehicle:"";
   }
   function clearFieldError(field){if(field)field.classList.remove("field-error")}
@@ -51,7 +53,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   syncSelectColor(passengerCount);syncSelectColor(seatRequest);renderPassengers();
   document.addEventListener("click",()=>document.querySelectorAll(".luxury-select-menu:not([hidden])").forEach(x=>x.hidden=true));
   function parseDate(value){const v=String(value||"").trim();let year,month,day;let match=v.match(/^(\d{4})-(\d{2})-(\d{2})$/);if(match){year=+match[1];month=+match[2];day=+match[3]}else{match=v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!match)return null;day=+match[1];month=+match[2];year=+match[3]}const date=new Date(year,month-1,day);if(date.getFullYear()!==year||date.getMonth()!==month-1||date.getDate()!==day)return null;return{date,iso:year+"-"+String(month).padStart(2,"0")+"-"+String(day).padStart(2,"0")}}
-  const todayIso=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);travelDate.min=todayIso;returnDate.min=todayIso;travelDate.addEventListener("change",()=>{returnDate.min=travelDate.value||todayIso;if(returnDate.value&&travelDate.value&&returnDate.value<travelDate.value)returnDate.value="";});
+  const todayIso=new Date(Date.now()-new Date().getTimezoneOffset()*60000).toISOString().slice(0,10);travelDate.min=todayIso;returnDate.min=todayIso;[travelDate,returnDate].forEach(field=>{const wrap=field.closest(".date-native-wrap");const sync=()=>wrap?.classList.toggle("has-value",!!field.value);field.addEventListener("focus",()=>wrap?.classList.add("is-focused"));field.addEventListener("blur",()=>wrap?.classList.remove("is-focused"));field.addEventListener("click",()=>{if(typeof field.showPicker==="function"){try{field.showPicker()}catch{}}});field.addEventListener("keydown",event=>{if(["Enter"," "].includes(event.key)&&typeof field.showPicker==="function"){event.preventDefault();try{field.showPicker()}catch{}}});field.addEventListener("change",sync);field.addEventListener("input",sync);sync()});travelDate.addEventListener("change",()=>{returnDate.min=travelDate.value||todayIso;if(returnDate.value&&travelDate.value&&returnDate.value<travelDate.value)returnDate.value="";});
   const tripType=()=>form.querySelector('input[name="tripType"]:checked')?.value||"One-way";
   const isRoundTrip=()=>tripType()==="Round-trip";
   function isAirport(value){return /airport|\bIST\b|\bSAW\b|sabiha\s*g[oö]k[cç]en|istanbul\s*airport/i.test(value||"")}
@@ -61,7 +63,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const returnPickup=$("returnPickup"),returnDropoff=$("returnDropoff");
     const returnAirport=isAirport(returnPickup?.value)||isAirport(returnDropoff?.value);
     returnFlightNumber.required=isRoundTrip()&&returnAirport;
-    $("returnTimeLocationRow").querySelector("#returnFlightNumber").closest(".form-group").classList.toggle("is-optional",!returnFlightNumber.required);
+    returnFlightNumber.closest(".form-group").classList.toggle("is-optional",!returnFlightNumber.required);
   }
   function syncTripType(){
     const round=isRoundTrip();
