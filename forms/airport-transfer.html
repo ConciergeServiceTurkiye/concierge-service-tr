@@ -22,6 +22,39 @@
 .transfer-return-column{grid-column:2!important}
 @media(max-width:760px){.transfer-details-outside-heading{max-width:100%!important;font-size:18px!important}.transfer-columns{grid-template-columns:minmax(0,1fr)!important}.transfer-outbound-column,.transfer-return-column{grid-column:1!important}.transfer-layout-panel .trip-type-options{grid-template-columns:1fr 1fr!important;gap:12px!important}.transfer-layout-panel .trip-type-choice{gap:8px!important}.transfer-layout-panel .trip-type-label{white-space:normal!important}}
 
+/* Flatten legacy button styles inside the two trip-type choices. */
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice>span,
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .trip-type-choice-content,
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .trip-type-label,
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .trip-type-arrow,
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .trip-type-description,
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .trip-type-return-arrow{
+  border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;outline:0!important;
+  min-width:0!important;min-height:0!important;padding:0!important;margin:0!important;
+}
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .trip-type-choice-content{
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;
+  gap:4px!important;width:auto!important;max-width:none!important;
+}
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .trip-type-label{
+  display:flex!important;align-items:center!important;gap:8px!important;color:#fff!important;font-size:15px!important;
+  line-height:1.3!important;white-space:nowrap!important;
+}
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .trip-type-description{
+  display:block!important;color:rgba(255,255,255,.72)!important;font-size:12px!important;line-height:1.3!important;
+}
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice:before,
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice:after,
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice span:before,
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice span:after{
+  display:none!important;content:none!important;
+}
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice input[type=radio]{
+  appearance:auto!important;-webkit-appearance:auto!important;accent-color:#d4af37!important;
+  position:static!important;display:inline-block!important;flex:0 0 17px!important;width:17px!important;height:17px!important;
+  min-width:17px!important;margin:0!important;opacity:1!important;
+}
+html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-round-trip{padding-left:32px!important}
 /* Subtle gold divider between One-way and Round-Trip */
 #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-options{position:relative!important}
 html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-options:after{
