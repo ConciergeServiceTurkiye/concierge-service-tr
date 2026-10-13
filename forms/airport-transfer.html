@@ -149,10 +149,15 @@ html body #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-choice .
 #serviceForm .transfer-layout-panel #tripTypeGroup .trip-type-options:after{height:calc(100% + 300px)!important;background:linear-gradient(to bottom,rgba(245,205,85,.06) 0%,rgba(245,205,85,.14) 24%,rgba(245,205,85,.94) 53%,rgba(245,205,85,.94) 61%,rgba(245,205,85,.22) 88%,rgba(245,205,85,0) 100%)!important;width:1px!important;box-shadow:none!important}
 #serviceForm .transfer-layout-panel .date-native-wrap{position:relative!important}
 #serviceForm .transfer-layout-panel .date-native-wrap input[type=date]{color-scheme:dark}
-#serviceForm .transfer-layout-panel .date-native-wrap:not(.has-value) input[type=date]::-webkit-datetime-edit{color:transparent!important}
-#serviceForm .transfer-layout-panel input[type=date]::-webkit-calendar-picker-indicator{filter:invert(77%) sepia(65%) saturate(470%) hue-rotate(5deg) brightness(91%) contrast(90%);opacity:1;cursor:pointer}
+#serviceForm .transfer-layout-panel .date-native-wrap:not(.has-value) input[type=date]::-webkit-datetime-edit,
+#serviceForm .transfer-layout-panel .date-native-wrap:not(.has-value) input[type=date]::-webkit-datetime-edit-fields-wrapper,
+#serviceForm .transfer-layout-panel .date-native-wrap:not(.has-value) input[type=date]::-webkit-datetime-edit-text,
+#serviceForm .transfer-layout-panel .date-native-wrap:not(.has-value) input[type=date]::-webkit-datetime-edit-month-field,
+#serviceForm .transfer-layout-panel .date-native-wrap:not(.has-value) input[type=date]::-webkit-datetime-edit-day-field,
+#serviceForm .transfer-layout-panel .date-native-wrap:not(.has-value) input[type=date]::-webkit-datetime-edit-year-field{opacity:0!important;color:transparent!important}
+#serviceForm .transfer-layout-panel input[type=date]::-webkit-calendar-picker-indicator{filter:invert(70%) sepia(73%) saturate(475%) hue-rotate(4deg) brightness(115%) contrast(101%);opacity:1;cursor:pointer}
 #serviceForm .transfer-layout-panel input[type=date]{cursor:pointer}
-#serviceForm .transfer-layout-panel .date-native-placeholder{position:absolute;left:12px;top:50%;transform:translateY(-50%);z-index:1;color:rgba(255,255,255,.55);font-size:13px;pointer-events:none}
+#serviceForm .transfer-layout-panel .date-native-placeholder{position:absolute;left:12px;top:50%;transform:translateY(-50%);z-index:2;color:rgba(255,255,255,.55);font-size:13px;pointer-events:none}
 #serviceForm .transfer-layout-panel .date-native-wrap.has-value .date-native-placeholder{display:none}
 
 #serviceForm .transfer-layout-panel .transfer-return-column .form-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
