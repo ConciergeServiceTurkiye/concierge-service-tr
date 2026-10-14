@@ -39,3 +39,15 @@
 .about-related a:hover{color:#fff}
 @media(max-width:760px){.about-wrap{width:88%}.about-hero{min-height:410px;padding:65px 6%}.about-hero-mark{right:3%;opacity:.6}.about-intro,.about-approach-grid{grid-template-columns:1fr;gap:25px}.about-intro{padding-top:68px;padding-bottom:68px}.about-approach{padding:68px 0}.about-services{padding-top:68px;padding-bottom:72px}.about-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:480px){.about-hero h1{font-size:39px}.about-hero-lead{font-size:14px}.about-service-grid{grid-template-columns:1fr}.about-service-grid>a{min-height:185px}.about-related{align-items:center;flex-direction:column;gap:15px}}
+
+.about-reviews{padding:88px 0;background:#151614;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+.about-reviews-heading{display:flex;justify-content:space-between;align-items:end;gap:28px;margin:10px 0 30px}
+.about-reviews-heading h2{margin:0 0 12px}
+.about-reviews-heading p,.about-reviews-footnote{margin:0;color:#b7b4ac;font-size:14px;line-height:1.8}
+.about-reviews-heading .about-button{flex:none;margin:0}
+.about-review-widget{min-height:360px;overflow:hidden;border:1px solid rgba(212,175,85,.3);background:#101110}
+.about-review-widget gmp-map{display:block;width:100%;height:360px;--gmp-mat-color-surface:#111210;--gmp-mat-color-on-surface:#f5f3ee;--gmp-mat-color-on-surface-variant:#c0beb8;--gmp-mat-color-primary:#d4af55;--gmp-mat-color-outline-variant:rgba(255,255,255,.16)}
+.about-review-details{width:min(390px,calc(100vw - 48px));max-height:320px;margin:16px;overflow:auto;box-shadow:0 8px 28px rgba(0,0,0,.42)}
+.about-review-details gmp-place-details{display:block;width:100%;max-height:320px}
+.about-reviews-footnote{margin-top:14px;font-size:12px}
+@media(max-width:760px){.about-reviews{padding:68px 0}.about-reviews-heading{align-items:flex-start;flex-direction:column}.about-review-widget,.about-review-widget gmp-map{min-height:420px;height:420px}.about-review-details{max-height:380px}.about-review-details gmp-place-details{max-height:380px}}
