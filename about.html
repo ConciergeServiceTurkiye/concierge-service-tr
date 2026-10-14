@@ -92,6 +92,33 @@
       </div>
     </section>
 
+    <section class="about-reviews" aria-labelledby="about-reviews-title">
+      <div class="about-wrap">
+        <div class="about-section-label">GOOGLE REVIEWS</div>
+        <div class="about-reviews-heading">
+          <div>
+            <h2 id="about-reviews-title">Trusted by travellers.<br><span>Shared by our guests.</span></h2>
+            <p>See feedback shared by guests on our Google Business Profile.</p>
+          </div>
+          <a class="about-button" href="https://www.google.com/maps/place/?q=place_id:ChIJ-5wZ4v7ScSoRRXBzBgIU3XQ" target="_blank" rel="noopener noreferrer">View us on Google <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="about-review-widget">
+          <gmp-map center="41.0053215,29.0121794" zoom="13" map-id="DEMO_MAP_ID" aria-label="Google reviews for Concierge Service Türkiye">
+            <div class="about-review-details" slot="control-inline-start-block-start">
+              <gmp-place-details>
+                <gmp-place-details-place-request place="ChIJ-5wZ4v7ScSoRRXBzBgIU3XQ"></gmp-place-details-place-request>
+                <gmp-place-content-config>
+                  <gmp-place-rating></gmp-place-rating>
+                  <gmp-place-reviews></gmp-place-reviews>
+                </gmp-place-content-config>
+              </gmp-place-details>
+            </div>
+          </gmp-map>
+        </div>
+        <p class="about-reviews-footnote">Reviews and ratings are provided directly by Google and update as new reviews are published.</p>
+      </div>
+    </section>
+
     <section class="about-note">
       <div class="about-note-inner">
         <div class="about-section-label">A MORE REASSURING WAY TO PLAN</div>
@@ -112,5 +139,9 @@
   </a>
   <div id="footerInclude"></div>
   <script src="js/common.js" defer></script>
+  <script>
+    (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await(a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));m.head.append(a)}));d[l]?console.warn(p+" only loads once.",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](...n))})({key:"AIzaSyDUvurOg1vtS92bke9m8A8EWO0XuC2Yb0k",v:"weekly"});
+    google.maps.importLibrary("places").catch(error=>console.error("Google reviews could not be loaded.",error));
+  </script>
 </body>
 </html>
