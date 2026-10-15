@@ -86,18 +86,23 @@
           </div>
           <a class="about-button" href="https://www.google.com/maps/place/?q=place_id:ChIJ-5wZ4v7ScSoRRXBzBgIU3XQ" target="_blank" rel="noopener noreferrer">Rate us on Google <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="about-review-widget">
-          <gmp-map center="41.0053215,29.0121794" zoom="13" map-id="DEMO_MAP_ID" aria-label="Google reviews for Concierge Service Türkiye">
-            <div class="about-review-details" slot="control-inline-start-block-start">
-              <gmp-place-details>
-                <gmp-place-details-place-request place="ChIJ-5wZ4v7ScSoRRXBzBgIU3XQ"></gmp-place-details-place-request>
-                <gmp-place-content-config>
-                  <gmp-place-rating></gmp-place-rating>
-                  <gmp-place-reviews></gmp-place-reviews>
-                </gmp-place-content-config>
-              </gmp-place-details>
+        <div class="about-review-layout">
+          <div class="about-review-map">
+            <gmp-map center="41.0053215,29.0121794" zoom="13" map-id="DEMO_MAP_ID" aria-label="Map for Concierge Service Türkiye"></gmp-map>
+          </div>
+          <div class="about-review-panel" aria-label="Google rating and guest reviews">
+            <div class="about-review-panel-heading">
+              <span class="about-review-google-label">GOOGLE BUSINESS PROFILE</span>
+              <span class="about-review-stars" aria-hidden="true">★★★★★</span>
             </div>
-          </gmp-map>
+            <gmp-place-details>
+              <gmp-place-details-place-request place="ChIJ-5wZ4v7ScSoRRXBzBgIU3XQ"></gmp-place-details-place-request>
+              <gmp-place-content-config>
+                <gmp-place-rating></gmp-place-rating>
+                <gmp-place-reviews></gmp-place-reviews>
+              </gmp-place-content-config>
+            </gmp-place-details>
+          </div>
         </div>
         <p class="about-reviews-footnote">Reviews and ratings are provided directly by Google and update as new reviews are published.</p>
       </div>
