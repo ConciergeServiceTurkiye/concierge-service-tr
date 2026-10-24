@@ -54,7 +54,8 @@
       'Please confirm availability, final price and booking terms. I understand this is an enquiry and not a confirmed booking.'
     ];
     const url = 'https://wa.me/905344888624?text=' + encodeURIComponent(lines.join('\n'));
-    const popup = window.open(url, '_blank', 'noopener,noreferrer');
-    if (!popup) window.location.href = url;
+    const popup = window.open(url, '_blank');
+    if (popup) popup.opener = null;
+    else window.location.href = url;
   });
 })();
