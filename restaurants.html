@@ -136,7 +136,7 @@
       });
 
       cards.forEach(card => {
-        const categories = (card.dataset.categories || '').split(/\\s+/).filter(Boolean);
+        const categories = (card.dataset.categories || '').split(/\s+/).filter(Boolean);
         card.hidden = selected !== 'all' && !categories.includes(selected);
       });
 
