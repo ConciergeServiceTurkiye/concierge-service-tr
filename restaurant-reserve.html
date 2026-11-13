@@ -26,6 +26,11 @@
     </div>
 
     <div id="formInlineAlert"></div>
+    <div class="lokanta-reservation-note" id="lokantaReservationNote" hidden>
+      <strong>Lokanta 1741 — Important Information</strong>
+      <p>Guests under 15 are not accepted. Requests for 8 or more guests require individual confirmation.</p>
+      <p>Some reservations may require an advance deposit. If applicable, payment instructions will be shared after your request is reviewed. Any deposit paid is credited toward your bill at the restaurant.</p>
+    </div>
 
     <form id="reservationForm" class="restaurant-form" novalidate>
 
@@ -66,7 +71,7 @@
         <div class="custom-select" id="guestsSelect">
           <div class="select-trigger" tabindex="0">Select Guests(adult)</div>
           <ul class="select-options">
-            <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>For groups larger than 7, please specify in the notes.</li>
+            <li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8 or more (please specify in notes)</li>
           </ul>
         </div>
         <input type="hidden" id="guests" name="guests">
@@ -150,6 +155,12 @@ const restaurantName = params.get("restaurant") || "Restaurant Reservation";
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector("input[name='restaurant']").value = restaurantName;
   document.querySelector(".restaurant-form-title").textContent = restaurantName;
+  if (restaurantName.trim().toLowerCase() === "lokanta 1741") {
+    const note = document.getElementById("lokantaReservationNote");
+    if (note) note.hidden = false;
+    const childrenGroup = document.querySelector(".children-form-group");
+    if (childrenGroup) childrenGroup.hidden = true;
+  }
 });
 </script>
 
