@@ -31,12 +31,14 @@
 
 <!-- RESTAURANT GRID -->
 <section class="restaurants-section">
-  <div class="restaurants-filters">
-  <button class="filter-btn active">All</button>
-  <button class="filter-btn">Fine Dining</button>
-  <button class="filter-btn">Rooftop</button>
-  <button class="filter-btn">Michelin</button>
-  <button class="filter-btn">Romantic</button>
+  <div class="restaurants-filters" role="group" aria-label="Filter restaurants">
+  <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All</button>
+  <button class="filter-btn" type="button" data-filter="fine-dining" aria-pressed="false">Fine Dining</button>
+  <button class="filter-btn" type="button" data-filter="rooftop" aria-pressed="false">Rooftop</button>
+  <button class="filter-btn" type="button" data-filter="michelin" aria-pressed="false">Michelin Guide</button>
+  <button class="filter-btn" type="button" data-filter="romantic" aria-pressed="false">Romantic</button>
+  <button class="filter-btn" type="button" data-filter="seafood" aria-pressed="false">Seafood</button>
+  <button class="filter-btn" type="button" data-filter="breakfast" aria-pressed="false">Breakfast</button>
 </div>
   <div class="restaurants-grid">
 
@@ -124,6 +126,15 @@
 
   const buttons = [...filters.querySelectorAll('[data-filter]')];
   const cards = [...grid.querySelectorAll('.restaurant-card[data-categories]')];
+  let emptyState = grid.querySelector('.restaurant-filter-empty');
+  if (!emptyState) {
+    emptyState = document.createElement('p');
+    emptyState.className = 'restaurant-filter-empty';
+    emptyState.setAttribute('role', 'status');
+    emptyState.textContent = 'No restaurants are currently listed in this category. Please check back soon.';
+    emptyState.hidden = true;
+    grid.appendChild(emptyState);
+  }
 
   buttons.forEach(button => {
     button.addEventListener('click', () => {
@@ -135,10 +146,14 @@
         item.setAttribute('aria-pressed', String(active));
       });
 
+      let visibleCount = 0;
       cards.forEach(card => {
         const categories = (card.dataset.categories || '').split(/\s+/).filter(Boolean);
-        card.hidden = selected !== 'all' && !categories.includes(selected);
+        const visible = selected === 'all' || categories.includes(selected);
+        card.hidden = !visible;
+        if (visible) visibleCount++;
       });
+      emptyState.hidden = visibleCount > 0;
 
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'restaurant_filter_select', {
