@@ -96,3 +96,15 @@
 .home-feature-logo{position:absolute;left:32px;top:26px;width:auto;max-width:150px;height:54px;object-fit:contain;object-position:left center}
 .home-feature-panel{padding-top:112px}
 @media(max-width:620px){.home-feature-logo{left:26px;top:24px;max-width:135px;height:48px}.home-feature-panel{padding-top:100px}}
+
+/* FEATURED PARTNER — LOKANTA 1741 */
+.home-lokanta-feature{display:grid;grid-template-columns:1.05fr .95fr;min-height:410px;background:#111;color:#f4f0e6;border-top:1px solid rgba(212,175,85,.22);border-bottom:1px solid rgba(212,175,85,.22)}
+.home-lokanta-photo{min-height:410px;background:linear-gradient(135deg,rgba(22,18,12,.18),rgba(0,0,0,.2)),url('../assets/restaurants/lokanta-1741/home-feature.jpg') center/cover no-repeat,#191714}
+.home-lokanta-copy{align-self:center;padding:55px max(7%,calc((100vw - 1240px)/2));padding-left:48px}
+.home-lokanta-copy h2{font-size:clamp(32px,4vw,48px);font-weight:500;line-height:1.14;margin:14px 0 10px}
+.home-lokanta-copy h2 span{color:#d4af55}
+.home-lokanta-copy h3{margin:0 0 12px;color:#d4af55;font-size:19px;font-weight:500}
+.home-lokanta-copy p{max-width:520px;color:rgba(244,240,230,.72);font-size:14px;line-height:1.85;margin:0 0 20px}
+.home-lokanta-tags{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 25px}
+.home-lokanta-tags span{padding:7px 10px;border:1px solid rgba(212,175,85,.35);border-radius:20px;color:#d8cba9;font-size:9px;letter-spacing:.04em}
+@media(max-width:760px){.home-lokanta-feature{grid-template-columns:1fr}.home-lokanta-photo{min-height:260px}.home-lokanta-copy{padding:36px 6% 42px}}
