@@ -41,7 +41,7 @@
 .lokanta-info-list span{color:rgba(255,255,255,.75)}
 .lokanta-small-note{grid-column:2;color:rgba(255,255,255,.48)!important;font-size:11px!important}
 .lokanta-hammam-promo{display:grid;grid-template-columns:.9fr 1.1fr;min-height:300px;margin-top:24px;border:1px solid rgba(212,175,85,.38);border-radius:14px;overflow:hidden;background:#10100f}
-.lokanta-hammam-photo{background-image:url('../assets/restaurants/lokanta-1741/hammam.jpg')}
+.lokanta-hammam-photo{background-image:url('../assets/hammams/cagalogluhamami/gallery-20.jpg')}
 .lokanta-hammam-copy{padding:40px;align-self:center}
 .lokanta-hammam-copy p{max-width:560px}
 .lokanta-reservation{text-align:center;padding:55px 30px}
