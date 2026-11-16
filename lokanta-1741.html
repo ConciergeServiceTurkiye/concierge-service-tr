@@ -52,14 +52,17 @@
         <button class="lokanta-gallery-photo lokanta-gallery-five" type="button" data-lokanta-photo="4" aria-label="Open cocktails photograph"><img src="assets/restaurants/lokanta-1741/lokanta-1741-cocktails.jpeg" alt="Lokanta 1741 cocktails" loading="lazy"></button>
         <button class="lokanta-gallery-photo lokanta-gallery-six" type="button" data-lokanta-photo="5" aria-label="Open architecture photograph"><img src="assets/restaurants/lokanta-1741/lokanta-1741-architecture.jpg" alt="Lokanta 1741 architectural detail" loading="lazy"></button>
       </div>
-      <div class="lokanta-lightbox" id="lokantaLightbox" aria-hidden="true">
-        <div class="lokanta-lightbox-backdrop" data-lokanta-close></div>
-        <div class="lokanta-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Lokanta 1741 photo gallery">
-          <button class="lokanta-lightbox-close" type="button" aria-label="Close gallery" data-lokanta-close>×</button>
-          <button class="lokanta-lightbox-prev" type="button" aria-label="Previous photo" data-lokanta-prev>‹</button>
-          <img id="lokantaLightboxImage" src="" alt="">
-          <button class="lokanta-lightbox-next" type="button" aria-label="Next photo" data-lokanta-next>›</button>
-          <div class="lokanta-lightbox-counter" id="lokantaLightboxCounter"></div>
+      <div class="lokanta-vehicle-modal" id="lokantaVehicleModal" hidden>
+        <div class="lokanta-vehicle-modal-backdrop"></div>
+        <div class="lokanta-vehicle-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="lokantaVehicleModalTitle">
+          <button class="lokanta-vehicle-modal-close" type="button" aria-label="Close gallery">×</button>
+          <div class="lokanta-vehicle-gallery">
+            <button class="lokanta-vehicle-gallery-arrow lokanta-vehicle-gallery-prev" type="button" aria-label="Previous photo">‹</button>
+            <div class="lokanta-vehicle-modal-image" id="lokantaVehicleModalImage"></div>
+            <button class="lokanta-vehicle-gallery-arrow lokanta-vehicle-gallery-next" type="button" aria-label="Next photo">›</button>
+            <div class="lokanta-vehicle-gallery-counter" id="lokantaVehicleGalleryCounter"></div>
+          </div>
+          <div class="lokanta-vehicle-modal-content"><div class="lokanta-kicker">THE SETTING</div><h2 id="lokantaVehicleModalTitle">A closer look at Lokanta 1741</h2></div>
         </div>
       </div>
     </section>
@@ -114,35 +117,31 @@
 <a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank" rel="noopener noreferrer" aria-label="Chat with Concierge Service Türkiye on WhatsApp"><img src="assets/whatsapp.png" alt=""></a>
 <script src="js/common.js"></script>
 <script>
-(function(){
-  const items=[...document.querySelectorAll('[data-lokanta-photo]')];
-  const lightbox=document.getElementById('lokantaLightbox');
-  if(!items.length||!lightbox)return;
-  const image=document.getElementById('lokantaLightboxImage');
-  const counter=document.getElementById('lokantaLightboxCounter');
-  let active=0,previousFocus=null;
-  function show(index){
-    active=(index+items.length)%items.length;
-    const thumb=items[active].querySelector('img');
-    image.src=thumb.src; image.alt=thumb.alt;
-    counter.textContent=(active+1)+' / '+items.length;
-  }
-  function open(index,trigger){previousFocus=trigger;show(index);lightbox.classList.add('is-open');lightbox.setAttribute('aria-hidden','false');document.documentElement.classList.add('lokanta-lightbox-open');document.body.classList.add('lokanta-lightbox-open');lightbox.querySelector('[data-lokanta-close]').focus();}
-  function close(){lightbox.classList.remove('is-open');lightbox.setAttribute('aria-hidden','true');image.removeAttribute('src');document.documentElement.classList.remove('lokanta-lightbox-open');document.body.classList.remove('lokanta-lightbox-open');if(previousFocus)previousFocus.focus();}
-  items.forEach(button=>button.addEventListener('click',()=>open(Number(button.dataset.lokantaPhoto),button)));
-  lightbox.querySelectorAll('[data-lokanta-close]').forEach(button=>button.addEventListener('click',close));
-  lightbox.querySelector('[data-lokanta-prev]').addEventListener('click',()=>show(active-1));
-  lightbox.querySelector('[data-lokanta-next]').addEventListener('click',()=>show(active+1));
-  document.addEventListener('keydown',event=>{
-    if(!lightbox.classList.contains('is-open'))return;
-    if(event.key==='Escape')close();
-    if(event.key==='ArrowLeft')show(active-1);
-    if(event.key==='ArrowRight')show(active+1);
-  });
-  let touchStartX=0;
-  image.addEventListener('touchstart',event=>{touchStartX=event.changedTouches[0].screenX;},{passive:true});
-  image.addEventListener('touchend',event=>{const dx=event.changedTouches[0].screenX-touchStartX;if(Math.abs(dx)>45)show(active+(dx<0?1:-1));},{passive:true});
-})();
+document.addEventListener('DOMContentLoaded',()=>{
+  const modal=document.getElementById('lokantaVehicleModal');
+  if(!modal)return;
+  const image=modal.querySelector('#lokantaVehicleModalImage');
+  const counter=modal.querySelector('#lokantaVehicleGalleryCounter');
+  const title=modal.querySelector('#lokantaVehicleModalTitle');
+  const prev=modal.querySelector('.lokanta-vehicle-gallery-prev');
+  const next=modal.querySelector('.lokanta-vehicle-gallery-next');
+  const photos=[...document.querySelectorAll('.lokanta-gallery-photo img')].map(img=>({src:img.getAttribute('src'),alt:img.alt}));
+  let index=0;
+  const render=()=>{
+    image.style.backgroundImage=photos.length?`url('${photos[index].src}')`:'none';
+    image.setAttribute('aria-label',photos[index]?.alt||'Lokanta 1741 photo');
+    counter.textContent=photos.length?`${index+1} / ${photos.length}`:'';
+    prev.hidden=photos.length<2;next.hidden=photos.length<2;
+  };
+  const move=step=>{if(photos.length<2)return;index=(index+step+photos.length)%photos.length;render();};
+  const close=()=>{modal.hidden=true;document.body.style.overflow='';};
+  const open=button=>{index=Number(button.dataset.lokantaPhoto)||0;title.textContent='A closer look at Lokanta 1741';render();modal.hidden=false;document.body.style.overflow='hidden';};
+  document.querySelectorAll('.lokanta-gallery-photo').forEach(button=>button.addEventListener('click',()=>open(button)));
+  prev.addEventListener('click',()=>move(-1));next.addEventListener('click',()=>move(1));
+  modal.querySelector('.lokanta-vehicle-modal-close').addEventListener('click',close);
+  modal.querySelector('.lokanta-vehicle-modal-backdrop').addEventListener('click',close);
+  document.addEventListener('keydown',event=>{if(modal.hidden)return;if(event.key==='Escape')close();if(event.key==='ArrowLeft')move(-1);if(event.key==='ArrowRight')move(1);});
+});
 </script>
 </body>
 </html>
