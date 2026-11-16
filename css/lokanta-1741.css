@@ -4,7 +4,7 @@
 .lokanta-back{display:inline-block;margin:0 0 22px;color:#d4af55;text-decoration:none;font-size:12px}
 .lokanta-hero{display:grid;grid-template-columns:1.1fr .9fr;min-height:440px;border:1px solid rgba(212,175,85,.42);border-radius:16px;overflow:hidden;background:#10100f}
 .lokanta-hero-photo,.lokanta-gallery-photo,.lokanta-hammam-photo{background-color:#191714;background-position:center;background-size:cover;background-repeat:no-repeat}
-.lokanta-hero-photo{background-image:linear-gradient(135deg,rgba(38,31,20,.25),rgba(0,0,0,.15)),url('../assets/restaurants/lokanta-1741/hero.jpg');min-height:440px}
+.lokanta-hero-photo{background-image:linear-gradient(135deg,rgba(38,31,20,.25),rgba(0,0,0,.15)),url('../assets/restaurants/lokanta-1741/lokanta-1741-hero.jpeg');min-height:440px}
 .lokanta-hero-copy{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:48px}
 .lokanta-eyebrow,.lokanta-kicker{font-size:10px;letter-spacing:2.2px;color:#d4af55;text-transform:uppercase;line-height:1.7}
 .lokanta-hero h1{font-size:clamp(38px,5vw,62px);font-weight:500;color:#d4af55;margin:14px 0}
@@ -24,10 +24,12 @@
 .lokanta-section-heading p{font-size:12px;color:rgba(255,255,255,.55)}
 .lokanta-gallery{display:grid;grid-template-columns:1.35fr 1fr 1fr;grid-template-rows:180px 180px;gap:12px}
 .lokanta-gallery-photo{border:1px solid rgba(212,175,85,.28);border-radius:9px;min-height:150px}
-.lokanta-gallery-main{grid-row:span 2;background-image:url('../assets/restaurants/lokanta-1741/gallery-01.jpg')}
-.lokanta-gallery-two{background-image:url('../assets/restaurants/lokanta-1741/gallery-02.jpg')}
-.lokanta-gallery-three{background-image:url('../assets/restaurants/lokanta-1741/gallery-03.jpg')}
-.lokanta-gallery-four{grid-column:2/4;background-image:url('../assets/restaurants/lokanta-1741/gallery-04.jpg')}
+.lokanta-gallery-main{grid-row:span 2;background-image:url('../assets/restaurants/lokanta-1741/lokanta-1741-interior-01.jpeg')}
+.lokanta-gallery-two{background-image:url('../assets/restaurants/lokanta-1741/lokanta-1741-interior-02.jpeg')}
+.lokanta-gallery-three{background-image:url('../assets/restaurants/lokanta-1741/lokanta-1741-food-01.jpg')}
+.lokanta-gallery-four{grid-column:2/4;background-image:url('../assets/restaurants/lokanta-1741/lokanta-1741-terrace.jpg')}
+.lokanta-gallery-five{background-image:url('../assets/restaurants/lokanta-1741/lokanta-1741-cocktails.jpeg')}
+.lokanta-gallery-six{background-image:url('../assets/restaurants/lokanta-1741/lokanta-1741-architecture.jpg')}
 .lokanta-highlight-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .lokanta-highlight-grid article{padding:22px;border:1px solid rgba(212,175,85,.22);background:rgba(255,255,255,.025);border-radius:10px}
 .lokanta-highlight-grid article>span{font-size:10px;color:#d4af55;letter-spacing:1.5px}
@@ -46,4 +48,4 @@
 .lokanta-reservation>p{max-width:760px;margin:0 auto 24px}
 .lokanta-reservation .lokanta-deposit-note{margin:20px auto 0;font-size:11px;color:rgba(255,255,255,.52)}
 @media(max-width:900px){.lokanta-highlight-grid{grid-template-columns:repeat(2,1fr)}.lokanta-hero{grid-template-columns:1fr}.lokanta-hero-photo{min-height:330px}.lokanta-intro,.lokanta-info{grid-template-columns:1fr;gap:20px}.lokanta-small-note{grid-column:1}}
-@media(max-width:620px){.lokanta-page{padding-left:14px;padding-right:14px}.lokanta-hero-copy{padding:30px 24px}.lokanta-section{padding:28px 22px}.lokanta-gallery{grid-template-columns:1fr 1fr;grid-template-rows:220px 140px 140px}.lokanta-gallery-main{grid-column:span 2;grid-row:auto}.lokanta-gallery-four{grid-column:auto}.lokanta-highlight-grid{grid-template-columns:1fr}.lokanta-info-list>div{grid-template-columns:1fr;gap:4px}.lokanta-hammam-promo{grid-template-columns:1fr}.lokanta-hammam-photo{min-height:220px}.lokanta-hammam-copy{padding:28px 22px}.lokanta-section-heading{display:block}.lokanta-reservation{padding:38px 22px}}
+@media(max-width:620px){.lokanta-page{padding-left:14px;padding-right:14px}.lokanta-hero-copy{padding:30px 24px}.lokanta-section{padding:28px 22px}.lokanta-gallery{grid-template-columns:1fr 1fr;grid-template-rows:220px 140px 140px}.lokanta-gallery-main{grid-column:span 2;grid-row:auto}.lokanta-gallery-four{grid-column:auto}.lokanta-gallery-five,.lokanta-gallery-six{grid-column:auto}.lokanta-highlight-grid{grid-template-columns:1fr}.lokanta-info-list>div{grid-template-columns:1fr;gap:4px}.lokanta-hammam-promo{grid-template-columns:1fr}.lokanta-hammam-photo{min-height:220px}.lokanta-hammam-copy{padding:28px 22px}.lokanta-section-heading{display:block}.lokanta-reservation{padding:38px 22px}}
