@@ -73,6 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.textContent = "Submit Reservation";
   }
 
+  // Restore the submit button when returning from WhatsApp via browser history.
+  window.addEventListener("pageshow", () => {
+    unlockSubmit();
+  });
+
   /* ==============================
      PHONE (INTL TEL INPUT)
   ============================== */
@@ -389,8 +394,8 @@ document.addEventListener("click", e => {
         `Notes: ${data.get("notes") || "None"}`,
         "Preferred Method: WhatsApp"
       ];
-      window.location.href = "https://wa.me/905344888624?text=" + encodeURIComponent(lines.join("\n"));
       submitBtn.textContent = "Opening WhatsApp...";
+      window.location.href = "https://wa.me/905344888624?text=" + encodeURIComponent(lines.join("\n"));
       return;
     }
 
