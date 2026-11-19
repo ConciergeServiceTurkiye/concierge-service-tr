@@ -361,55 +361,67 @@ document.addEventListener("click", e => {
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending...";
 
-    if (!name.value.trim()) return showInlineAlert("Please enter your full name."), unlockSubmit();
-    if (!email.value.trim() || !email.checkValidity()) return showInlineAlert("Please enter a valid email."), unlockSubmit();
-    if (!iti.isValidNumber()) return showInlineAlert("Please enter a valid phone number."), unlockSubmit();
-    if (!date.value) return showInlineAlert("Please select a date."), unlockSubmit();
-    if (!time.value) return showInlineAlert("Please select a time."), unlockSubmit();
-    if (!guests.value) return showInlineAlert("Please select number of guests."), unlockSubmit();
-
-    const preferredMethod = form.querySelector('input[name="preferred_method"]:checked');
-    if (!preferredMethod) return showInlineAlert("Please select your preferred contact method."), unlockSubmit();
-
-    const data = new FormData(form);
-    data.set("phone", iti.getNumber());
-    data.set("restaurant", restaurantName);
-    data.set("_subject", `New ${restaurantName} Reservation Request`);
-
-    if (preferredMethod.value === "WhatsApp") {
-      const lines = [
-        "NEW RESTAURANT RESERVATION REQUEST",
-        `Restaurant: ${data.get("restaurant")}`,
-        `Name: ${data.get("name")}`,
-        `Email: ${data.get("email")}`,
-        `Phone / WhatsApp: ${data.get("phone")}`,
-        `Date: ${data.get("date")}`,
-        `Time: ${data.get("time")}`,
-        `Guests: ${data.get("guests")}`,
-        `Children (0–3): ${data.get("age_0_3") || "N/A"}`,
-        `Children (4–13): ${data.get("age_4_13") || "N/A"}`,
-        `Children (14–17): ${data.get("age_14_17") || "N/A"}`,
-        `Pets: ${data.get("pets") || "None"}`,
-        `Allergies: ${data.get("allergy") || "None"}`,
-        `Notes: ${data.get("notes") || "None"}`,
-        "Preferred Method: WhatsApp"
-      ];
-      submitBtn.textContent = "Opening WhatsApp...";
-      window.location.href = "https://wa.me/905344888624?text=" + encodeURIComponent(lines.join("\n"));
-      return;
-    }
-
-    const payload = Object.fromEntries(data.entries());
     try {
-      const response = await fetch("https://formsubmit.co/ajax/conciergeserviceturkiye@gmail.com", {
-        method: "POST",
-        headers: {"Content-Type": "application/json", "Accept": "application/json"},
-        body: JSON.stringify(payload)
-      });
-      const result = await response.json();
-      if (!response.ok || !(result.success === "true" || result.success === true)) {
-        throw new Error(result.message || "Email service could not accept the request.");
+      if (!name.value.trim()) throw new Error("Please enter your full name.");
+      if (!email.value.trim() || !email.checkValidity()) throw new Error("Please enter a valid email.");
+      if (!iti.isValidNumber()) throw new Error("Please enter a valid phone number.");
+      if (!date.value) throw new Error("Please select a date.");
+      if (!time.value) throw new Error("Please select a time.");
+      if (!guests.value) throw new Error("Please select number of guests.");
+
+      const preferredMethod = form.querySelector('input[name="preferred_method"]:checked');
+      if (!preferredMethod) throw new Error("Please select your preferred contact method.");
+
+      const data = new FormData(form);
+      data.set("phone", iti.getNumber());
+      data.set("restaurant", restaurantName);
+      data.set("_subject", `New ${restaurantName} Reservation Request`);
+
+      if (preferredMethod.value === "WhatsApp") {
+        const lines = [
+          "NEW RESTAURANT RESERVATION REQUEST",
+          `Restaurant: ${data.get("restaurant")}`,
+          `Name: ${data.get("name")}`,
+          `Email: ${data.get("email")}`,
+          `Phone / WhatsApp: ${data.get("phone")}`,
+          `Date: ${data.get("date")}`,
+          `Time: ${data.get("time")}`,
+          `Guests: ${data.get("guests")}`,
+          `Children (0–3): ${data.get("age_0_3") || "N/A"}`,
+          `Children (4–13): ${data.get("age_4_13") || "N/A"}`,
+          `Children (14–17): ${data.get("age_14_17") || "N/A"}`,
+          `Pets: ${data.get("pets") || "None"}`,
+          `Allergies: ${data.get("allergy") || "None"}`,
+          `Notes: ${data.get("notes") || "None"}`,
+          "Preferred Method: WhatsApp"
+        ];
+        submitBtn.textContent = "Opening WhatsApp...";
+        window.location.href = "https://wa.me/905344888624?text=" + encodeURIComponent(lines.join("\\n"));
+        return;
       }
+
+      const payload = Object.fromEntries(data.entries());
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), 20000);
+
+      let response;
+      let result;
+      try {
+        response = await fetch("https://formsubmit.co/ajax/conciergeserviceturkiye@gmail.com", {
+          method: "POST",
+          headers: {"Content-Type": "application/json", "Accept": "application/json"},
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        result = await response.json();
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
+
+      if (!response.ok || String(result.success) !== "true") {
+        throw new Error(result.message || `Email service returned HTTP ${response.status}.`);
+      }
+
       showInlineAlert("Your reservation request has been emailed to our concierge team. We will contact you shortly.");
       form.reset();
       iti.destroy();
@@ -443,8 +455,11 @@ document.addEventListener("click", e => {
       });
       unlockSubmit();
     } catch (error) {
-      console.error("Reservation email submission failed:", error);
-      showInlineAlert("We could not send your request. Please try again or contact us on WhatsApp.");
+      console.error("Reservation form submission failed:", error);
+      const message = error.name === "AbortError"
+        ? "The email service did not respond within 20 seconds. Your details are still in the form; please try again."
+        : (error.message || "An unexpected error occurred. Your details are still in the form.");
+      showInlineAlert(message);
       unlockSubmit();
     }
   });
