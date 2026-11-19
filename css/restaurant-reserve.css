@@ -733,3 +733,10 @@ input[type="checkbox"]:checked:focus-visible {
 .lokanta-reservation-note[hidden],.children-form-group[hidden]{display:none!important}
 .lokanta-reservation-note strong{display:block;margin-bottom:8px;color:#d4af37;font-size:13px}
 .lokanta-reservation-note p{margin:6px 0;color:rgba(255,255,255,.76);font-size:12px;line-height:1.7}
+
+/* Preferred contact method */
+.preferred-method-options{display:flex;gap:14px}
+.preferred-method-option{flex:1;display:flex!important;align-items:center;gap:10px;min-height:46px;padding:0 14px;border:1px solid rgba(212,175,55,.75);border-radius:10px;background:#111;color:#d4af37;cursor:pointer;box-sizing:border-box}
+.restaurant-form .preferred-method-option input[type="radio"]{width:16px;height:16px;margin:0;accent-color:#d4af37}
+.preferred-method-option span{color:#d4af37;font-size:14px}
+@media(max-width:480px){.preferred-method-options{flex-direction:column;gap:10px}}
