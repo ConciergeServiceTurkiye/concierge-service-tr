@@ -351,9 +351,8 @@ document.addEventListener("click", e => {
   /* ==============================
      SUBMIT
   ============================== */
-  form.addEventListener("submit", e => {
+  form.addEventListener("submit", async e => {
     e.preventDefault();
-
     submitBtn.disabled = true;
     submitBtn.textContent = "Sending...";
 
@@ -364,54 +363,86 @@ document.addEventListener("click", e => {
     if (!time.value) return showInlineAlert("Please select a time."), unlockSubmit();
     if (!guests.value) return showInlineAlert("Please select number of guests."), unlockSubmit();
 
+    const preferredMethod = form.querySelector('input[name="preferred_method"]:checked');
+    if (!preferredMethod) return showInlineAlert("Please select your preferred contact method."), unlockSubmit();
+
     const data = new FormData(form);
     data.set("phone", iti.getNumber());
+    data.set("restaurant", restaurantName);
+    data.set("_subject", `New ${restaurantName} Reservation Request`);
 
-    fetch("https://script.google.com/macros/s/AKfycbw9P03YjqbWBLy_YiGiJOUIL19uk89RmsSqWOt1CN3FV6WVqPg6IQFwjuj9RbBiYND7ZA/exec", {
-      method: "POST",
-      body: data,
-      mode: "no-cors"
-    })
-    .then(() => {
-      showInlineAlert("Reservation received. Our concierge team will contact you shortly.");
+    if (preferredMethod.value === "WhatsApp") {
+      const lines = [
+        "NEW RESTAURANT RESERVATION REQUEST",
+        `Restaurant: ${data.get("restaurant")}`,
+        `Name: ${data.get("name")}`,
+        `Email: ${data.get("email")}`,
+        `Phone / WhatsApp: ${data.get("phone")}`,
+        `Date: ${data.get("date")}`,
+        `Time: ${data.get("time")}`,
+        `Guests: ${data.get("guests")}`,
+        `Children (0–3): ${data.get("age_0_3") || "N/A"}`,
+        `Children (4–13): ${data.get("age_4_13") || "N/A"}`,
+        `Children (14–17): ${data.get("age_14_17") || "N/A"}`,
+        `Pets: ${data.get("pets") || "None"}`,
+        `Allergies: ${data.get("allergy") || "None"}`,
+        `Notes: ${data.get("notes") || "None"}`,
+        "Preferred Method: WhatsApp"
+      ];
+      window.location.href = "https://wa.me/905344888624?text=" + encodeURIComponent(lines.join("\n"));
+      submitBtn.textContent = "Opening WhatsApp...";
+      return;
+    }
+
+    const payload = Object.fromEntries(data.entries());
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/conciergeserviceturkiye@gmail.com", {
+        method: "POST",
+        headers: {"Content-Type": "application/json", "Accept": "application/json"},
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+      if (!response.ok || !(result.success === "true" || result.success === true)) {
+        throw new Error(result.message || "Email service could not accept the request.");
+      }
+      showInlineAlert("Your reservation request has been emailed to our concierge team. We will contact you shortly.");
       form.reset();
-
       iti.destroy();
       phone.value = "";
       initPhoneInput();
-
-      flatpickr("#date", {
-        minDate: "today",
-        dateFormat: "Y-m-d",
-        disableMobile: true,
-        defaultDate: null
-      });
-      date.placeholder = "Select a date";
-
+      datePicker.clear();
+      date.placeholder = "Select date";
+      time.value = "";
+      timeTrigger.textContent = "Select time";
+      timeSelect.classList.remove("has-value");
+      guests.value = "";
+      guestsTrigger.textContent = "Select Guests(adult)";
+      guestsSelect.classList.remove("has-value");
       childrenToggle.checked = false;
       childrenAges.style.display = "none";
-
+      ageToggles.forEach(cb => {
+        cb.checked = false;
+        const input = document.getElementById(cb.dataset.target);
+        input.style.display = "none";
+        input.value = "";
+      });
       petsToggle.checked = false;
       petsGroup.style.display = "none";
       petsTextarea.value = "";
-
       allergyToggle.checked = false;
       allergyGroup.style.display = "none";
       allergyTextarea.value = "";
-
       document.querySelectorAll(".textarea-group textarea").forEach(textarea => {
         const charCount = textarea.parentElement.querySelector(".char-count");
         if (charCount) charCount.textContent = `0 / ${charCount.dataset.max}`;
       });
-
       unlockSubmit();
-    })
-    .catch(() => {
-      showInlineAlert("Connection error. Please try again.");
+    } catch (error) {
+      console.error("Reservation email submission failed:", error);
+      showInlineAlert("We could not send your request. Please try again or contact us on WhatsApp.");
       unlockSubmit();
-    });
+    }
   });
-
 });
 
 
