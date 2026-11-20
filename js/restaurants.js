@@ -401,8 +401,13 @@ document.addEventListener("click", e => {
       }
 
       const payload = Object.fromEntries(data.entries());
-      const controller = new AbortController();
-      const timeoutId = window.setTimeout(() => controller.abort(), 20000);
+
+      // FormSubmit can deliver the email before its AJAX response reaches the browser.
+      // Keep the request alive instead of aborting it and risking duplicate submissions.
+      const slowResponseNotice = window.setTimeout(() => {
+        submitBtn.textContent = "Still processing...";
+        showInlineAlert("Your request is still being processed. Please do not submit it again.");
+      }, 4000);
 
       let response;
       let result;
@@ -410,12 +415,11 @@ document.addEventListener("click", e => {
         response = await fetch("https://formsubmit.co/ajax/info@conciergeservice.com.tr", {
           method: "POST",
           headers: {"Content-Type": "application/json", "Accept": "application/json"},
-          body: JSON.stringify(payload),
-          signal: controller.signal
+          body: JSON.stringify(payload)
         });
         result = await response.json();
       } finally {
-        window.clearTimeout(timeoutId);
+        window.clearTimeout(slowResponseNotice);
       }
 
       if (!response.ok || String(result.success) !== "true") {
@@ -456,9 +460,7 @@ document.addEventListener("click", e => {
       unlockSubmit();
     } catch (error) {
       console.error("Reservation form submission failed:", error);
-      const message = error.name === "AbortError"
-        ? "The email service did not respond within 20 seconds. Your details are still in the form; please try again."
-        : (error.message || "An unexpected error occurred. Your details are still in the form.");
+      const message = error.message || "The email service could not confirm the request. Your details are still in the form.";
       showInlineAlert(message);
       unlockSubmit();
     }
