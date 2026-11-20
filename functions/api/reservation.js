@@ -1,7 +1,8 @@
 const ALLOWED_ORIGINS = new Set([
   "https://www.conciergeservice.com.tr",
   "https://conciergeservice.com.tr",
-  "https://concierge-service-tr.pages.dev"
+  "https://concierge-service-tr.pages.dev",
+  "https://feature-resend-reservation-a.concierge-service-tr.pages.dev"
 ]);
 
 const TEAM_EMAIL = "info@conciergeservice.com.tr";
