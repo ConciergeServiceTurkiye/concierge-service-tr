@@ -407,7 +407,7 @@ document.addEventListener("click", e => {
       let response;
       let result;
       try {
-        response = await fetch("https://formsubmit.co/ajax/conciergeserviceturkiye@gmail.com", {
+        response = await fetch("https://formsubmit.co/ajax/info@conciergeservice.com.tr", {
           method: "POST",
           headers: {"Content-Type": "application/json", "Accept": "application/json"},
           body: JSON.stringify(payload),
