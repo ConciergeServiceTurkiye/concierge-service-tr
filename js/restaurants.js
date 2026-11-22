@@ -59,8 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
     alertBox.style.visibility = "visible";
     alertBox.style.opacity = "1";
 
-    const top = form.getBoundingClientRect().top + window.pageYOffset;
-    window.scrollTo({ top: top - 140, behavior: "smooth" });
+    const alertTop = alertBox.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({ top: Math.max(0, alertTop - 160), behavior: "smooth" });
 
     setTimeout(() => {
       alertBox.style.opacity = "0";
