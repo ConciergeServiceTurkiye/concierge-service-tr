@@ -378,23 +378,37 @@ document.addEventListener("click", e => {
       data.set("_subject", `New ${restaurantName} Reservation Request`);
 
       if (preferredMethod.value === "WhatsApp") {
+        const optionalDetails = [];
+        if (data.get("age_0_3")) optionalDetails.push(`• Ages 0–3: ${data.get("age_0_3")}`);
+        if (data.get("age_4_13")) optionalDetails.push(`• Ages 4–13: ${data.get("age_4_13")}`);
+        if (data.get("age_14_17")) optionalDetails.push(`• Ages 14–17: ${data.get("age_14_17")}`);
+
         const lines = [
-          "NEW RESTAURANT RESERVATION REQUEST",
-          `Restaurant: ${data.get("restaurant")}`,
+          "🍽️ *RESTAURANT RESERVATION REQUEST*",
+          "",
+          `📍 *Restaurant:* ${data.get("restaurant")}`,
+          "",
+          "👤 *GUEST DETAILS*",
           `Name: ${data.get("name")}`,
           `Email: ${data.get("email")}`,
-          `Phone / WhatsApp: ${data.get("phone")}`,
+          `Phone: ${data.get("phone")}`,
+          "",
+          "📅 *RESERVATION DETAILS*",
           `Date: ${data.get("date")}`,
           `Time: ${data.get("time")}`,
           `Guests: ${data.get("guests")}`,
-          `Children (0–3): ${data.get("age_0_3") || "N/A"}`,
-          `Children (4–13): ${data.get("age_4_13") || "N/A"}`,
-          `Children (14–17): ${data.get("age_14_17") || "N/A"}`,
-          `Pets: ${data.get("pets") || "None"}`,
+          ...(optionalDetails.length ? ["", "👨‍👩‍👧 *CHILDREN*", ...optionalDetails] : []),
+          "",
+          "📝 *ADDITIONAL INFORMATION*",
+          `Pets: ${data.get("pets") || "No"}`,
           `Allergies: ${data.get("allergy") || "None"}`,
-          `Notes: ${data.get("notes") || "None"}`,
-          "Preferred Method: WhatsApp"
+          `Special requests: ${data.get("notes") || "None"}`,
+          "",
+          "📲 *Preferred contact method:* WhatsApp",
+          "",
+          "_New request submitted via Concierge Service Türkiye website._"
         ];
+
         submitBtn.textContent = "Opening WhatsApp...";
         window.location.href = "https://wa.me/905344888624?text=" + encodeURIComponent(lines.join("\\n"));
         return;
