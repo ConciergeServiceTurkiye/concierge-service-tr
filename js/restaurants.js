@@ -401,9 +401,9 @@ document.addEventListener("click", e => {
       }
 
       const payload = Object.fromEntries(data.entries());
+      const requestId = crypto.randomUUID();
 
-      // FormSubmit can deliver the email before its AJAX response reaches the browser.
-      // Keep the request alive instead of aborting it and risking duplicate submissions.
+      // Keep the form locked while the server submits both emails.
       const slowResponseNotice = window.setTimeout(() => {
         submitBtn.textContent = "Still processing...";
         showInlineAlert("Your request is still being processed. Please do not submit it again.");
@@ -412,9 +412,12 @@ document.addEventListener("click", e => {
       let response;
       let result;
       try {
-        response = await fetch("https://formsubmit.co/ajax/info@conciergeservice.com.tr", {
+        response = await fetch("/api/reservation", {
           method: "POST",
-          headers: {"Content-Type": "application/json", "Accept": "application/json"},
+          headers: {
+            "Content-Type": "application/json",
+            "Idempotency-Key": requestId
+          },
           body: JSON.stringify(payload)
         });
         result = await response.json();
@@ -422,8 +425,8 @@ document.addEventListener("click", e => {
         window.clearTimeout(slowResponseNotice);
       }
 
-      if (!response.ok || String(result.success) !== "true") {
-        throw new Error(result.message || `Email service returned HTTP ${response.status}.`);
+      if (!response.ok || result.success !== true) {
+        throw new Error(result.message || `Reservation service returned HTTP ${response.status}.`);
       }
 
       showInlineAlert("Your reservation request has been emailed to our concierge team. We will contact you shortly.");
