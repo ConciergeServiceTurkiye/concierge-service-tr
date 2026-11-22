@@ -410,7 +410,7 @@ document.addEventListener("click", e => {
         ];
 
         submitBtn.textContent = "Opening WhatsApp...";
-        window.location.href = "https://wa.me/905344888624?text=" + encodeURIComponent(lines.join("\\n"));
+        window.location.href = "https://wa.me/905344888624?text=" + encodeURIComponent(lines.join("\n"));
         return;
       }
 
