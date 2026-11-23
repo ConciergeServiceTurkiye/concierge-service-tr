@@ -33,6 +33,13 @@
 <section class="restaurants-section">
   <div class="restaurants-filters" role="group" aria-label="Filter restaurants">
   <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All</button>
+  <select id="priceLevelFilter" class="filter-btn budget-filter" aria-label="Filter restaurants by budget">
+    <option value="all">Budget</option>
+    <option value="1">Budget</option>
+    <option value="2">Mid-range</option>
+    <option value="3">Upper segment</option>
+    <option value="4">Luxury</option>
+  </select>
   <button class="filter-btn" type="button" data-filter="fine-dining" aria-pressed="false">Fine Dining</button>
   <button class="filter-btn" type="button" data-filter="rooftop" aria-pressed="false">Rooftop</button>
   <button class="filter-btn" type="button" data-filter="michelin" aria-pressed="false">Michelin Guide</button>
@@ -40,16 +47,6 @@
   <button class="filter-btn" type="button" data-filter="seafood" aria-pressed="false">Seafood</button>
   <button class="filter-btn" type="button" data-filter="breakfast" aria-pressed="false">Breakfast</button>
 </div>
-  <div class="restaurant-price-filter">
-    <label for="priceLevelFilter">Price range</label>
-    <select id="priceLevelFilter" aria-label="Filter restaurants by price range">
-      <option value="all">All price ranges</option>
-      <option value="1">Budget</option>
-      <option value="2">Mid-range</option>
-      <option value="3">Upper segment</option>
-      <option value="4">Luxury</option>
-    </select>
-  </div>
   <div class="restaurants-grid">
 
 
