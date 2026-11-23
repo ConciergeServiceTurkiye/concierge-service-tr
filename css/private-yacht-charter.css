@@ -305,3 +305,36 @@
   object-position:center center;
   transform:none !important;
 }
+
+
+/* Final lightbox sizing: use a defined image viewport, not intrinsic flex sizing.
+   The media fills the available viewport while object-fit:contain shows the full frame. */
+.yacht-page .lokanta-vehicle-gallery{
+  position:relative !important;
+  overflow:hidden;
+}
+.yacht-page .lokanta-vehicle-gallery > .yacht-gallery-modal-photo,
+.yacht-page .lokanta-vehicle-gallery > .yacht-gallery-modal-video{
+  position:absolute !important;
+  inset:48px 70px 56px !important;
+  display:block !important;
+  width:calc(100% - 140px) !important;
+  height:calc(100% - 104px) !important;
+  min-width:0 !important;
+  min-height:0 !important;
+  max-width:none !important;
+  max-height:none !important;
+  margin:0 !important;
+  padding:0 !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  transform:none !important;
+}
+@media(max-width:650px){
+  .yacht-page .lokanta-vehicle-gallery > .yacht-gallery-modal-photo,
+  .yacht-page .lokanta-vehicle-gallery > .yacht-gallery-modal-video{
+    inset:48px 42px 54px !important;
+    width:calc(100% - 84px) !important;
+    height:calc(100% - 102px) !important;
+  }
+}
