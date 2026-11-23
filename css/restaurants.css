@@ -144,7 +144,11 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: url("../assets/restaurants/lokanta-1741/restaurants.png") center center / cover no-repeat;
+  background-image: url("../assets/restaurants/lokanta-1741/restaurants.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   filter: blur(28px);
   transform: scale(1.04);
   opacity: .72;
@@ -155,10 +159,11 @@
   position: absolute;
   inset: 0;
   z-index: 1;
-  background-image: linear-gradient(rgba(0,0,0,.34), rgba(0,0,0,.52)), url("../assets/restaurants/lokanta-1741/restaurants.png");
-  background-position: center top;
-  background-size: 100% auto;
+  background-image: linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.38)), url("../assets/restaurants/lokanta-1741/restaurants.png");
+  background-position: center center;
+  background-size: cover;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   pointer-events: none;
 }
 .restaurants-section > * {
