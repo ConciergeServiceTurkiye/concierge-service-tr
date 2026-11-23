@@ -359,3 +359,29 @@
  .yacht-lightbox-arrow{width:38px;height:42px;font-size:30px}
  .yacht-lightbox-prev{left:7px}.yacht-lightbox-next{right:7px}
 }
+
+
+/* Lightbox backdrop: keep the yacht page visible and avoid global button hover styles */
+.yacht-lightbox-backdrop{
+  position:absolute;
+  inset:0;
+  width:auto;
+  height:auto;
+  border:0;
+  padding:0;
+  margin:0;
+  background:rgba(0,0,0,.48) !important;
+  backdrop-filter:blur(2px);
+  cursor:default;
+  box-shadow:none !important;
+  transform:none !important;
+  transition:none !important;
+}
+.yacht-lightbox-backdrop:hover,
+.yacht-lightbox-backdrop:focus,
+.yacht-lightbox-backdrop:active{
+  background:rgba(0,0,0,.48) !important;
+  color:inherit !important;
+  box-shadow:none !important;
+  outline:none;
+}
