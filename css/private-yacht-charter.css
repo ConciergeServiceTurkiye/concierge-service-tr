@@ -100,3 +100,9 @@
 @media(max-width:900px){.yacht-section{padding:76px 5%}.yacht-hero-copy{width:88%}.yacht-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.yacht-card:last-child{grid-column:1/-1;max-width:calc(50% - 10px)}.yacht-extras-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.yacht-section-heading{align-items:start;flex-direction:column;gap:18px}.yacht-request{grid-template-columns:1fr;gap:35px}}
 @media(max-width:620px){.yacht-hero{min-height:700px;height:88svh;max-height:850px}.yacht-hero-copy{width:88%;padding:55px 0}.yacht-hero h1{font-size:clamp(44px,12vw,62px)}.yacht-hero-copy>p:not(.yacht-eyebrow){font-size:14px;line-height:1.8}.yacht-hero-actions{flex-direction:column;align-items:stretch;max-width:330px}.yacht-hero-note{font-size:8px;letter-spacing:.1em}.yacht-section{padding:64px 6%}.yacht-benefits,.yacht-card-grid,.yacht-extras-grid,.yacht-included,.yacht-process-steps{grid-template-columns:1fr}.yacht-card:last-child{grid-column:auto;max-width:none}.yacht-benefits{gap:22px}.yacht-card-copy{padding:22px}.yacht-included{padding:20px}.yacht-form{padding:20px}.yacht-form-row{grid-template-columns:1fr;gap:0}.yacht-extras-fieldset .yacht-check{display:flex}.yacht-extra>div:last-child:not(.yacht-extra-image){padding:21px}}
 @media(prefers-reduced-motion:reduce){.yacht-btn,.yacht-card-image>img{transition:none}.yacht-btn:hover,.yacht-card:hover .yacht-card-image>img{transform:none}}
+
+/* Luxury 2 additional photos and video */
+.yacht-card-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;padding:3px;background:#090909}
+.yacht-card-gallery img,.yacht-card-gallery video{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#171612}
+.yacht-card-gallery video{grid-column:span 3;aspect-ratio:16/9;max-height:320px}
+@media(max-width:620px){.yacht-card-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.yacht-card-gallery video{grid-column:span 2}}
