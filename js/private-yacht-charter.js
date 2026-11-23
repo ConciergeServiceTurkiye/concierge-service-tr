@@ -6,24 +6,56 @@
     const prev = modal.querySelector('.lokanta-vehicle-gallery-prev');
     const next = modal.querySelector('.lokanta-vehicle-gallery-next');
     const gallery = document.querySelector('.yacht-lokanta-gallery');
-    const photos = gallery ? Array.from(gallery.querySelectorAll('.lokanta-gallery-photo img')).slice(0, 4).map(img => ({src: img.getAttribute('src'), alt: img.alt})) : [];
+    const videoButton = document.querySelector('.yacht-video-open');
+    const items = gallery ? Array.from(gallery.querySelectorAll('.lokanta-gallery-photo img')).map(img => ({type:'image',src:img.getAttribute('src'),alt:img.alt})) : [];
+    if (videoButton) items.push({type:'video',src:videoButton.dataset.yachtVideo,alt:'Luxury 2 yacht video'});
     let index = 0;
     let lastTrigger = null;
+    let video = null;
+    const stopVideo = () => {
+      if (!video) return;
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+      video.remove();
+      video = null;
+    };
     const render = () => {
-      const photo = photos[index];
-      if (!photo) return;
-      image.style.backgroundImage = `url("${photo.src}")`;
-      image.setAttribute('aria-label', photo.alt || 'Luxury 2 yacht photo');
-      counter.textContent = `${index + 1} / ${photos.length}`;
-      prev.hidden = photos.length < 2;
-      next.hidden = photos.length < 2;
+      stopVideo();
+      const item = items[index];
+      if (!item) return;
+      image.style.display = item.type === 'image' ? 'flex' : 'none';
+      image.style.backgroundImage = item.type === 'image' ? `url("${item.src}")` : 'none';
+      image.setAttribute('aria-label', item.alt || 'Luxury 2 yacht media');
+      if (item.type === 'video') {
+        video = document.createElement('video');
+        video.src = item.src;
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.className = 'yacht-gallery-modal-video';
+        modal.querySelector('.lokanta-vehicle-gallery').appendChild(video);
+        image.style.display = 'none';
+      }
+      counter.textContent = `${index + 1} / ${items.length}`;
+      prev.hidden = items.length < 2;
+      next.hidden = items.length < 2;
     };
     const move = step => {
-      if (photos.length < 2) return;
-      index = (index + step + photos.length) % photos.length;
+      if (items.length < 2) return;
+      index = (index + step + items.length) % items.length;
       render();
     };
+    const openAt = (itemIndex, trigger) => {
+      lastTrigger = trigger;
+      index = itemIndex;
+      render();
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      modal.querySelector('.lokanta-vehicle-modal-close').focus();
+    };
     const close = () => {
+      stopVideo();
       modal.hidden = true;
       document.body.style.overflow = '';
       if (lastTrigger) lastTrigger.focus();
@@ -33,14 +65,10 @@
         const button = event.target.closest('.lokanta-gallery-photo');
         if (!button) return;
         const buttons = Array.from(gallery.querySelectorAll('.lokanta-gallery-photo'));
-        lastTrigger = button;
-        index = Math.max(0, buttons.indexOf(button));
-        render();
-        modal.hidden = false;
-        document.body.style.overflow = 'hidden';
-        modal.querySelector('.lokanta-vehicle-modal-close').focus();
+        openAt(buttons.indexOf(button), button);
       });
     }
+    if (videoButton) videoButton.addEventListener('click', () => openAt(items.length - 1, videoButton));
     prev.addEventListener('click', () => move(-1));
     next.addEventListener('click', () => move(1));
     modal.querySelector('.lokanta-vehicle-modal-close').addEventListener('click', close);

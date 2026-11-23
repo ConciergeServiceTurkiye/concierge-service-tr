@@ -164,11 +164,11 @@
 .yacht-lokanta-gallery{
   display:grid;
   grid-template-columns:minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr);
-  grid-template-rows:180px 180px;
+  grid-template-rows:180px 180px 180px;
   grid-auto-flow:row;
   gap:12px;
   width:100%;
-  height:372px;
+  height:auto;
   min-height:0;
   padding:0;
   overflow:hidden;
@@ -212,8 +212,8 @@
 @media(max-width:620px){
   .yacht-lokanta-gallery{
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    grid-template-rows:220px 140px 140px;
-    height:520px;
+    grid-template-rows:220px 140px 140px 140px;
+    height:auto;
   }
   .yacht-lokanta-gallery .lokanta-gallery-main{grid-column:1 / span 2;grid-row:1}
   .yacht-lokanta-gallery .lokanta-gallery-two{grid-column:1;grid-row:2}
@@ -244,3 +244,11 @@
 
 /* Show the complete yacht photo in the lightbox without cropping */
 .yacht-page .lokanta-vehicle-modal-image{background-size:contain}
+
+
+/* Keep all six Lokanta-style yacht photo tiles and provide a separate video entry */
+.yacht-video-open{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:44px;margin-top:10px;border:1px solid rgba(212,175,85,.4);background:#11100d;color:#e6c979;font:600 11px inherit;letter-spacing:.06em;cursor:pointer}
+.yacht-video-open span{display:grid;place-items:center;width:23px;height:23px;border-radius:50%;background:#d4af55;color:#111;font-size:10px}
+.yacht-video-open:hover{background:#201c12}
+.yacht-gallery-modal-video{display:block;width:100%;height:100%;max-height:420px;object-fit:contain;background:#000}
+@media(max-width:650px){.yacht-gallery-modal-video{max-height:240px}}
