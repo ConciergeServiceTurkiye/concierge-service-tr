@@ -159,6 +159,70 @@
 .yacht-extra strong{color:#d4af55;font-weight:600}
 
 
+
+/* Correct the missing base grid layout: match Lokanta 1741's six-photo collage */
+.yacht-lokanta-gallery{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(0,1fr) minmax(0,1fr);
+  grid-template-rows:180px 180px;
+  grid-auto-flow:row;
+  gap:12px;
+  width:100%;
+  height:372px;
+  min-height:0;
+  padding:0;
+  overflow:hidden;
+  background:transparent;
+}
+.yacht-lokanta-gallery .lokanta-gallery-photo{
+  display:block;
+  position:relative;
+  width:100%;
+  height:100%;
+  min-width:0;
+  min-height:0;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  border:1px solid rgba(212,175,85,.28);
+  border-radius:9px;
+  background:#191714;
+  cursor:zoom-in;
+  appearance:none;
+  -webkit-appearance:none;
+}
+.yacht-lokanta-gallery .lokanta-gallery-main{grid-column:1;grid-row:1 / span 2}
+.yacht-lokanta-gallery .lokanta-gallery-two{grid-column:2;grid-row:1}
+.yacht-lokanta-gallery .lokanta-gallery-three{grid-column:3;grid-row:1}
+.yacht-lokanta-gallery .lokanta-gallery-four{grid-column:2 / span 2;grid-row:2}
+.yacht-lokanta-gallery .lokanta-gallery-five,
+.yacht-lokanta-gallery .lokanta-gallery-six{display:none}
+.yacht-lokanta-gallery .lokanta-gallery-photo img{
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:0;
+  margin:0;
+  object-fit:cover;
+  pointer-events:none;
+  transition:transform .45s ease;
+}
+.yacht-lokanta-gallery .lokanta-gallery-photo:hover img{transform:scale(1.045)}
+.yacht-lokanta-gallery .lokanta-gallery-photo:focus-visible{outline:2px solid #d4af55;outline-offset:3px}
+@media(max-width:620px){
+  .yacht-lokanta-gallery{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-rows:220px 140px 140px;
+    height:520px;
+  }
+  .yacht-lokanta-gallery .lokanta-gallery-main{grid-column:1 / span 2;grid-row:1}
+  .yacht-lokanta-gallery .lokanta-gallery-two{grid-column:1;grid-row:2}
+  .yacht-lokanta-gallery .lokanta-gallery-three{grid-column:2;grid-row:2}
+  .yacht-lokanta-gallery .lokanta-gallery-four{grid-column:1 / span 2;grid-row:3}
+  .yacht-lokanta-gallery .lokanta-gallery-five,
+  .yacht-lokanta-gallery .lokanta-gallery-six{display:none}
+}
+
 /* Lokanta 1741 gallery component styles, scoped to yacht gallery */
 .yacht-lokanta-gallery .lokanta-gallery-photo{position:relative;display:block;width:100%;padding:0;overflow:hidden;background:#191714;cursor:zoom-in;text-align:left;appearance:none}
 .lokanta-vehicle-modal[hidden]{display:none}
