@@ -125,3 +125,13 @@
 .yacht-lightbox button:hover{background:#d4af55;color:#111}
 @media(max-width:620px){.yacht-lightbox{gap:8px;padding:65px 10px 48px}.yacht-lightbox-stage{width:calc(100vw - 92px);height:72vh}.yacht-lightbox-prev,.yacht-lightbox-next{flex-basis:34px;width:34px;height:48px;font-size:30px}.yacht-lightbox-close{top:12px;right:12px}}
 @media(prefers-reduced-motion:reduce){.yacht-gallery-main>img,.yacht-gallery-thumbs img{transition:none}}
+
+/* Keep every gallery element strictly inside its yacht card */
+.yacht-card{min-width:0;max-width:100%;overflow:hidden}
+.yacht-card>.yacht-gallery{display:block;flex:0 0 auto;width:100%;min-width:0;max-width:100%;overflow:hidden;contain:layout paint}
+.yacht-gallery-main{box-sizing:border-box;width:100%;min-width:0;max-width:100%;height:auto;aspect-ratio:4/3;overflow:hidden}
+.yacht-gallery-main>img{position:absolute;inset:0;width:100%;max-width:100%;height:100%;max-height:100%;object-fit:cover}
+.yacht-gallery-thumbs{width:100%;min-width:0;max-width:100%;grid-template-columns:repeat(3,minmax(0,1fr));overflow:hidden}
+.yacht-gallery-thumbs button{width:100%;min-width:0;max-width:100%;aspect-ratio:4/3;overflow:hidden}
+.yacht-gallery-thumbs img{width:100%;min-width:0;max-width:100%;height:100%;max-height:100%;object-fit:cover}
+.yacht-gallery-items{display:none}
