@@ -135,3 +135,25 @@
 .yacht-gallery-thumbs button{width:100%;min-width:0;max-width:100%;aspect-ratio:4/3;overflow:hidden}
 .yacht-gallery-thumbs img{width:100%;min-width:0;max-width:100%;height:100%;max-height:100%;object-fit:cover}
 .yacht-gallery-items{display:none}
+
+
+/* Yacht prices */
+.yacht-card-price{display:flex;flex-direction:column;gap:7px;margin:2px 0 20px;padding:15px 0;border-top:1px solid rgba(212,175,85,.22);border-bottom:1px solid rgba(212,175,85,.22)}
+.yacht-card-price>span{color:#d4af55;font-size:25px;font-weight:600;letter-spacing:-.02em}
+.yacht-card-price small{font-size:11px;font-weight:400;color:rgba(244,240,230,.65)}
+.yacht-card-price>b{font-size:10px;letter-spacing:.04em;color:rgba(244,240,230,.65);font-weight:500}
+.yacht-tier-prices{gap:0;padding:4px 0}
+.yacht-tier-prices>div{display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:11px 0;border-bottom:1px solid rgba(212,175,85,.13)}
+.yacht-tier-prices>div:last-child{border-bottom:0}
+.yacht-tier-prices>div>span{font-size:11px;color:rgba(244,240,230,.72)}
+.yacht-tier-prices>div>b{font-size:16px;color:#d4af55;white-space:nowrap}
+.yacht-tier-prices em{grid-column:1/-1;font-size:10px;font-style:normal;color:rgba(244,240,230,.48)}
+.yacht-lokanta-gallery{grid-template-columns:1.35fr 1fr 1fr;grid-template-rows:180px 180px;gap:12px;padding:0;background:transparent}
+.yacht-lokanta-gallery .lokanta-gallery-photo{min-width:0;min-height:150px;border:1px solid rgba(212,175,85,.28);border-radius:9px}
+.yacht-lokanta-gallery .lokanta-gallery-main{grid-row:span 2}
+.yacht-lokanta-gallery .lokanta-gallery-four{grid-column:2/4}
+.yacht-lokanta-gallery .lokanta-gallery-photo img{display:block;width:100%;height:100%;min-height:150px;object-fit:cover;transition:transform .45s ease}
+.yacht-lokanta-gallery .lokanta-gallery-photo:hover img{transform:scale(1.045)}
+.yacht-lokanta-gallery .lokanta-gallery-photo:focus-visible{outline:2px solid #d4af55;outline-offset:3px}
+@media(max-width:620px){.yacht-lokanta-gallery{grid-template-columns:1fr 1fr;grid-template-rows:220px 140px 140px}.yacht-lokanta-gallery .lokanta-gallery-main{grid-column:span 2;grid-row:auto}.yacht-lokanta-gallery .lokanta-gallery-four{grid-column:auto}.yacht-lokanta-gallery .lokanta-gallery-five,.yacht-lokanta-gallery .lokanta-gallery-six{grid-column:auto}}
+.yacht-extra strong{color:#d4af55;font-weight:600}
