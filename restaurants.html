@@ -33,13 +33,15 @@
 <section class="restaurants-section">
   <div class="restaurants-filters" role="group" aria-label="Filter restaurants">
   <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">All</button>
-  <select id="priceLevelFilter" class="filter-btn budget-filter" aria-label="Filter restaurants by budget">
-    <option value="all">Budget</option>
-    <option value="1">Budget</option>
-    <option value="2">Mid-range</option>
-    <option value="3">Upper segment</option>
-    <option value="4">Luxury</option>
-  </select>
+  <div class="budget-dropdown">
+    <button class="filter-btn budget-filter" id="budgetFilterButton" type="button" aria-haspopup="true" aria-expanded="false">Budget <span class="budget-chevron">⌄</span></button>
+    <div class="budget-menu" id="budgetFilterMenu" role="menu" hidden>
+      <button type="button" role="menuitemradio" aria-checked="true" data-price-value="all">All budgets</button>
+      <button type="button" role="menuitemradio" aria-checked="false" data-price-value="2">Mid-range</button>
+      <button type="button" role="menuitemradio" aria-checked="false" data-price-value="3">Upper segment</button>
+      <button type="button" role="menuitemradio" aria-checked="false" data-price-value="4">Luxury</button>
+    </div>
+  </div>
   <button class="filter-btn" type="button" data-filter="fine-dining" aria-pressed="false">Fine Dining</button>
   <button class="filter-btn" type="button" data-filter="rooftop" aria-pressed="false">Rooftop</button>
   <button class="filter-btn" type="button" data-filter="michelin" aria-pressed="false">Michelin Guide</button>
@@ -156,7 +158,9 @@
   filters.dataset.initialized = 'true';
 
   const buttons = [...filters.querySelectorAll('[data-filter]')];
-  const priceSelect = document.getElementById('priceLevelFilter');
+  const budgetButton = document.getElementById('budgetFilterButton');
+  const budgetMenu = document.getElementById('budgetFilterMenu');
+  let selectedPrice = 'all';
   const cards = [...grid.querySelectorAll('.restaurant-card[data-categories]')];
   let emptyState = grid.querySelector('.restaurant-filter-empty');
   if (!emptyState) {
@@ -170,7 +174,7 @@
 
   function applyFilters() {
     const selectedCategory = buttons.find(button => button.classList.contains('active'))?.dataset.filter || 'all';
-    const selectedPrice = priceSelect?.value || 'all';
+    
     let visibleCount = 0;
     cards.forEach(card => {
       const categories = (card.dataset.categories || '').split(/\s+/).filter(Boolean);
@@ -183,7 +187,36 @@
     emptyState.hidden = visibleCount > 0;
   }
 
-  priceSelect?.addEventListener('change', applyFilters);
+  if (budgetButton && budgetMenu) {
+    budgetButton.addEventListener('click', () => {
+      const isOpen = budgetButton.getAttribute('aria-expanded') === 'true';
+      budgetButton.setAttribute('aria-expanded', String(!isOpen));
+      budgetMenu.hidden = isOpen;
+    });
+    budgetMenu.querySelectorAll('[data-price-value]').forEach(option => {
+      option.addEventListener('click', () => {
+        selectedPrice = option.dataset.priceValue;
+        budgetMenu.querySelectorAll('[data-price-value]').forEach(item => {
+          item.setAttribute('aria-checked', String(item === option));
+        });
+        budgetMenu.hidden = true;
+        budgetButton.setAttribute('aria-expanded', 'false');
+        applyFilters();
+      });
+    });
+    document.addEventListener('click', event => {
+      if (!event.target.closest('.budget-dropdown')) {
+        budgetMenu.hidden = true;
+        budgetButton.setAttribute('aria-expanded', 'false');
+      }
+    });
+    budgetButton.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        budgetMenu.hidden = true;
+        budgetButton.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 
   buttons.forEach(button => {
     button.addEventListener('click', () => {
