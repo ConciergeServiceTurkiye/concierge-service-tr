@@ -66,21 +66,28 @@
       </div>
       <div class="yacht-card-grid">
         <article class="yacht-card">
-          <div class="yacht-card-image">
-            <img src="assets/yachts/luxury-2/luxury-2-hero.jpeg" alt="Luxury 2 private yacht exterior on the Istanbul Bosphorus" loading="lazy" onerror="this.style.display='none'" onload="this.nextElementSibling.style.display='none'">
-            <div class="yacht-image-placeholder"><span>PHOTO TO BE ADDED</span><b>LUXURY 2</b><small>Use the yacht's real exterior photo</small></div>
-            <span class="yacht-image-label">INTIMATE ESCAPES</span>
-          </div>
-          <div class="yacht-card-gallery" aria-label="Luxury 2 yacht photo gallery">
-            <img src="assets/yachts/luxury-2/luxury-2-exterior-angle.jpeg" alt="Luxury 2 yacht from an alternative exterior angle" loading="lazy">
-            <img src="assets/yachts/luxury-2/luxury-2-deck.jpeg" alt="Luxury 2 yacht deck" loading="lazy">
-            <img src="assets/yachts/luxury-2/luxury-2-interior.jpeg" alt="Luxury 2 yacht interior" loading="lazy">
-            <img src="assets/yachts/luxury-2/luxury-2-dining.jpeg" alt="Dining setup aboard Luxury 2" loading="lazy">
-            <img src="assets/yachts/luxury-2/luxury-2-sunset.jpeg" alt="Luxury 2 yacht at sunset" loading="lazy">
-            <video controls preload="metadata" playsinline poster="assets/yachts/luxury-2/luxury-2-hero.jpeg" aria-label="Luxury 2 yacht video">
-              <source src="assets/yachts/luxury-2/luxury-2-video.mp4" type="video/mp4">
-              Your browser does not support the video element.
-            </video>
+          <div class="yacht-gallery" data-yacht-gallery="luxury-2" aria-label="Luxury 2 photo gallery">
+            <button class="yacht-gallery-main" type="button" data-gallery-open="0" aria-label="Open Luxury 2 photo gallery">
+              <img src="assets/yachts/luxury-2/luxury-2-hero.jpeg" alt="Luxury 2 private yacht exterior on the Istanbul Bosphorus" loading="lazy">
+              <span class="yacht-image-label">INTIMATE ESCAPES</span>
+              <span class="yacht-gallery-open-hint">VIEW GALLERY ↗</span>
+            </button>
+            <div class="yacht-gallery-thumbs">
+              <button type="button" data-gallery-open="1" aria-label="View Luxury 2 exterior angle"><img src="assets/yachts/luxury-2/luxury-2-exterior-angle.jpeg" alt="Luxury 2 exterior angle" loading="lazy"></button>
+              <button type="button" data-gallery-open="2" aria-label="View Luxury 2 deck"><img src="assets/yachts/luxury-2/luxury-2-deck.jpeg" alt="Luxury 2 deck" loading="lazy"></button>
+              <button type="button" data-gallery-open="3" aria-label="View Luxury 2 interior"><img src="assets/yachts/luxury-2/luxury-2-interior.jpeg" alt="Luxury 2 interior" loading="lazy"></button>
+            </div>
+            <div class="yacht-gallery-items" hidden>
+              <img src="assets/yachts/luxury-2/luxury-2-hero.jpeg" alt="Luxury 2 exterior">
+              <img src="assets/yachts/luxury-2/luxury-2-exterior-angle.jpeg" alt="Luxury 2 exterior angle">
+              <img src="assets/yachts/luxury-2/luxury-2-deck.jpeg" alt="Luxury 2 deck">
+              <img src="assets/yachts/luxury-2/luxury-2-interior.jpeg" alt="Luxury 2 interior">
+              <img src="assets/yachts/luxury-2/luxury-2-dining.jpeg" alt="Luxury 2 dining area">
+              <img src="assets/yachts/luxury-2/luxury-2-sunset.jpeg" alt="Luxury 2 at sunset">
+              <video controls preload="metadata" playsinline poster="assets/yachts/luxury-2/luxury-2-hero.jpeg" aria-label="Luxury 2 yacht video">
+                <source src="assets/yachts/luxury-2/luxury-2-video.mp4" type="video/mp4">
+              </video>
+            </div>
           </div>
           <div class="yacht-card-copy">
             <div class="yacht-card-top"><h3>Luxury 2</h3><span>18 metres</span></div>
@@ -220,6 +227,17 @@
       </form>
     </section>
   </main>
+  <div class="yacht-lightbox" id="yachtLightbox" role="dialog" aria-modal="true" aria-label="Yacht photo gallery" hidden>
+    <button class="yacht-lightbox-close" type="button" aria-label="Close gallery">×</button>
+    <button class="yacht-lightbox-prev" type="button" aria-label="Previous image">‹</button>
+    <div class="yacht-lightbox-stage">
+      <img class="yacht-lightbox-image" alt="">
+      <video class="yacht-lightbox-video" controls playsinline></video>
+      <p class="yacht-lightbox-caption"></p>
+      <span class="yacht-lightbox-count"></span>
+    </div>
+    <button class="yacht-lightbox-next" type="button" aria-label="Next image">›</button>
+  </div>
   <div id="footerInclude"></div>
   <a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank" rel="noopener noreferrer" aria-label="Chat with Concierge Service Türkiye on WhatsApp"><img src="assets/whatsapp.png" alt=""></a>
   <script src="js/common.js" defer></script>

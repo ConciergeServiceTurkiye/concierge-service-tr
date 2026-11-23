@@ -101,8 +101,27 @@
 @media(max-width:620px){.yacht-hero{min-height:700px;height:88svh;max-height:850px}.yacht-hero-copy{width:88%;padding:55px 0}.yacht-hero h1{font-size:clamp(44px,12vw,62px)}.yacht-hero-copy>p:not(.yacht-eyebrow){font-size:14px;line-height:1.8}.yacht-hero-actions{flex-direction:column;align-items:stretch;max-width:330px}.yacht-hero-note{font-size:8px;letter-spacing:.1em}.yacht-section{padding:64px 6%}.yacht-benefits,.yacht-card-grid,.yacht-extras-grid,.yacht-included,.yacht-process-steps{grid-template-columns:1fr}.yacht-card:last-child{grid-column:auto;max-width:none}.yacht-benefits{gap:22px}.yacht-card-copy{padding:22px}.yacht-included{padding:20px}.yacht-form{padding:20px}.yacht-form-row{grid-template-columns:1fr;gap:0}.yacht-extras-fieldset .yacht-check{display:flex}.yacht-extra>div:last-child:not(.yacht-extra-image){padding:21px}}
 @media(prefers-reduced-motion:reduce){.yacht-btn,.yacht-card-image>img{transition:none}.yacht-btn:hover,.yacht-card:hover .yacht-card-image>img{transform:none}}
 
-/* Luxury 2 additional photos and video */
-.yacht-card-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;padding:3px;background:#090909}
-.yacht-card-gallery img,.yacht-card-gallery video{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#171612}
-.yacht-card-gallery video{grid-column:span 3;aspect-ratio:16/9;max-height:320px}
-@media(max-width:620px){.yacht-card-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.yacht-card-gallery video{grid-column:span 2}}
+
+.yacht-gallery{background:#090909;padding:3px}
+.yacht-gallery-main{position:relative;display:block;width:100%;padding:0;border:0;background:#171612;aspect-ratio:4/3;overflow:hidden;cursor:zoom-in;text-align:left}
+.yacht-gallery-main>img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.yacht-gallery-main:hover>img{transform:scale(1.025)}
+.yacht-gallery-open-hint{position:absolute;right:14px;top:14px;padding:8px 10px;background:rgba(0,0,0,.68);color:#f3d987;font-size:9px;letter-spacing:.12em}
+.yacht-gallery-thumbs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-top:3px}
+.yacht-gallery-thumbs button{display:block;min-width:0;padding:0;border:0;background:#171612;aspect-ratio:4/3;overflow:hidden;cursor:pointer}
+.yacht-gallery-thumbs img{display:block;width:100%;height:100%;object-fit:cover;transition:opacity .2s ease}
+.yacht-gallery-thumbs button:hover img{opacity:.76}
+.yacht-gallery-main:focus-visible,.yacht-gallery-thumbs button:focus-visible{outline:2px solid #d4af55;outline-offset:-3px}
+.yacht-lightbox{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;gap:22px;padding:70px 5vw 42px;background:rgba(0,0,0,.96)}
+.yacht-lightbox[hidden]{display:none}
+.yacht-lightbox-stage{position:relative;display:flex;align-items:center;justify-content:center;width:min(1100px,78vw);height:min(78vh,820px)}
+.yacht-lightbox-image,.yacht-lightbox-video{display:none;max-width:100%;max-height:100%;object-fit:contain}
+.yacht-lightbox-image.is-active,.yacht-lightbox-video.is-active{display:block}
+.yacht-lightbox-caption{position:absolute;left:0;bottom:-30px;margin:0;color:#e7d39b;font-size:12px}
+.yacht-lightbox-count{position:absolute;right:0;bottom:-30px;color:rgba(255,255,255,.65);font-size:11px}
+.yacht-lightbox-close,.yacht-lightbox-prev,.yacht-lightbox-next{display:flex;align-items:center;justify-content:center;border:1px solid rgba(212,175,85,.5);background:rgba(15,15,15,.85);color:#e6c979;cursor:pointer}
+.yacht-lightbox-close{position:absolute;top:22px;right:26px;width:44px;height:44px;font-size:30px}
+.yacht-lightbox-prev,.yacht-lightbox-next{flex:0 0 46px;width:46px;height:58px;font-size:38px;line-height:1}
+.yacht-lightbox button:hover{background:#d4af55;color:#111}
+@media(max-width:620px){.yacht-lightbox{gap:8px;padding:65px 10px 48px}.yacht-lightbox-stage{width:calc(100vw - 92px);height:72vh}.yacht-lightbox-prev,.yacht-lightbox-next{flex-basis:34px;width:34px;height:48px;font-size:30px}.yacht-lightbox-close{top:12px;right:12px}}
+@media(prefers-reduced-motion:reduce){.yacht-gallery-main>img,.yacht-gallery-thumbs img{transition:none}}
