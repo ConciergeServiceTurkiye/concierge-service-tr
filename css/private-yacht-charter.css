@@ -280,3 +280,28 @@
  .yacht-lokanta-gallery{grid-template-rows:180px 86px;gap:6px}
  .yacht-page .lokanta-vehicle-gallery{height:68vh;min-height:260px;padding:48px 42px 54px}
 }
+
+
+/* Lightbox: preserve each source photo's intrinsic aspect ratio.
+   Do not stretch the image to the stage dimensions; contain the whole frame. */
+.yacht-page .lokanta-vehicle-gallery{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.yacht-page .lokanta-vehicle-gallery > .yacht-gallery-modal-photo,
+.yacht-page .lokanta-vehicle-gallery > .yacht-gallery-modal-video{
+  display:block;
+  flex:0 1 auto;
+  position:static;
+  width:auto !important;
+  height:auto !important;
+  min-width:0;
+  min-height:0;
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain !important;
+  object-position:center center;
+  transform:none !important;
+}
