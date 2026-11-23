@@ -143,23 +143,27 @@
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
   background: url("../assets/restaurants/lokanta-1741/restaurants.png") center center / cover no-repeat;
   filter: blur(28px);
   transform: scale(1.04);
-  opacity: .42;
+  opacity: .72;
   pointer-events: none;
 }
 .restaurants-section::after {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: -1;
-  background-image: linear-gradient(rgba(0,0,0,.76), rgba(0,0,0,.86)), url("../assets/restaurants/lokanta-1741/restaurants.png");
+  z-index: 1;
+  background-image: linear-gradient(rgba(0,0,0,.34), rgba(0,0,0,.52)), url("../assets/restaurants/lokanta-1741/restaurants.png");
   background-position: center top;
   background-size: 100% auto;
   background-repeat: no-repeat;
   pointer-events: none;
+}
+.restaurants-section > * {
+  position: relative;
+  z-index: 2;
 }
 .restaurants-grid {
   position: relative;
