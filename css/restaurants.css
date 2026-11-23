@@ -133,3 +133,24 @@
   color:var(--gold);background:rgba(212,175,55,.14);
 }
 .budget-menu button:focus-visible{outline:1px solid rgba(212,175,55,.7);outline-offset:-2px}
+
+/* Istanbul rooftop atmosphere behind the restaurant listing */
+.restaurants-section {
+  position: relative;
+  isolation: isolate;
+}
+.restaurants-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(rgba(0,0,0,.78), rgba(0,0,0,.88)), url("../assets/restaurants/lokanta-1741/restaurants.png");
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 1;
+  pointer-events: none;
+}
+.restaurants-grid {
+  position: relative;
+}
