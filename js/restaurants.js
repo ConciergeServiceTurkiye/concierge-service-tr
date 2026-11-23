@@ -31,9 +31,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const submitBtn = form.querySelector("button[type='submit']");
 
-  // Keep each preferred-method option in the Tab sequence.
-  form.querySelectorAll('input[name="preferred_method"]').forEach(radio => {
-    radio.tabIndex = 0;
+  // Give WhatsApp and Email separate, predictable Tab stops.
+  const whatsappMethod = form.querySelector('input[name="preferred_method"][value="WhatsApp"]');
+  const emailMethod = form.querySelector('input[name="preferred_method"][value="Email"]');
+  const notesField = document.getElementById("notesField");
+
+  // Radios remain usable with arrow keys, while Tab is handled explicitly.
+  whatsappMethod.tabIndex = -1;
+  emailMethod.tabIndex = -1;
+
+  notesField.addEventListener("keydown", event => {
+    if (event.key === "Tab" && !event.shiftKey) {
+      event.preventDefault();
+      whatsappMethod.focus();
+    }
+  });
+
+  whatsappMethod.addEventListener("keydown", event => {
+    if (event.key === "Tab" && !event.shiftKey) {
+      event.preventDefault();
+      emailMethod.focus();
+    } else if (event.key === "Tab" && event.shiftKey) {
+      event.preventDefault();
+      notesField.focus();
+    }
+  });
+
+  emailMethod.addEventListener("keydown", event => {
+    if (event.key === "Tab" && event.shiftKey) {
+      event.preventDefault();
+      whatsappMethod.focus();
+    }
+  });
+
+  submitBtn.addEventListener("keydown", event => {
+    if (event.key === "Tab" && event.shiftKey) {
+      event.preventDefault();
+      emailMethod.focus();
+    }
   });
 
   const timeSelect = document.getElementById("timeSelect");
