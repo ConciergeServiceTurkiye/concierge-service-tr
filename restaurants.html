@@ -39,12 +39,17 @@
   <button class="filter-btn" type="button" data-filter="romantic" aria-pressed="false">Romantic</button>
   <button class="filter-btn" type="button" data-filter="seafood" aria-pressed="false">Seafood</button>
   <button class="filter-btn" type="button" data-filter="breakfast" aria-pressed="false">Breakfast</button>
-  <button class="filter-btn" type="button" data-filter="price-1" aria-pressed="false">₺</button>
-  <button class="filter-btn" type="button" data-filter="price-2" aria-pressed="false">₺₺</button>
-  <button class="filter-btn" type="button" data-filter="price-3" aria-pressed="false">₺₺₺</button>
-  <button class="filter-btn" type="button" data-filter="price-4" aria-pressed="false">₺₺₺₺</button>
 </div>
-  <p class="restaurant-price-legend">Price guide: ₺ Budget · ₺₺ Mid-range · ₺₺₺ Upper segment · ₺₺₺₺ Luxury. Indicative per-person dining budget; drinks may increase the final bill.</p>
+  <div class="restaurant-price-filter">
+    <label for="priceLevelFilter">Price range</label>
+    <select id="priceLevelFilter" aria-label="Filter restaurants by price range">
+      <option value="all">All price ranges</option>
+      <option value="1">Budget</option>
+      <option value="2">Mid-range</option>
+      <option value="3">Upper segment</option>
+      <option value="4">Luxury</option>
+    </select>
+  </div>
   <div class="restaurants-grid">
 
 
@@ -54,7 +59,7 @@
         <div class="restaurant-card-badges"><span>MICHELIN GUIDE</span><span>PARTNER EXPERIENCE</span></div>
         <div class="restaurant-title">Lokanta 1741</div>
         <div class="restaurant-meta">Contemporary Turkish Cuisine<br><span>Inside Cağaloğlu Hamamı · Rooftop Terrace</span></div>
-        <span class="restaurant-price-level" aria-label="Price level 3 out of 4">₺₺₺</span>
+        <span class="restaurant-price-level" aria-label="Price range: Upper segment">Upper segment</span>
         <span class="restaurant-card-link">Discover &amp; Request a Table <b>↗</b></span>
       </div>
     </a>
@@ -92,7 +97,7 @@
     <a class="restaurant-card" data-categories="michelin" href="restaurant-reserve.html?restaurant=Aheste" aria-label="Reserve Aheste" data-price-level="4">
       <div class="restaurant-title">Aheste</div>
       <div class="restaurant-meta">Turkish · Middle Eastern Mezze & Tapas<br><span>15 min walk</span></div>
-        <span class="restaurant-price-level" aria-label="Price level 4 out of 4">₺₺₺₺</span>
+        <span class="restaurant-price-level" aria-label="Price range: Luxury">Luxury</span>
     </a>
     <a class="restaurant-card" data-categories="fine-dining michelin" href="restaurant-reserve.html?restaurant=Mikla" aria-label="Reserve Mikla" data-price-level="4">
       <div class="restaurant-title">Mikla</div>
@@ -154,6 +159,7 @@
   filters.dataset.initialized = 'true';
 
   const buttons = [...filters.querySelectorAll('[data-filter]')];
+  const priceSelect = document.getElementById('priceLevelFilter');
   const cards = [...grid.querySelectorAll('.restaurant-card[data-categories]')];
   let emptyState = grid.querySelector('.restaurant-filter-empty');
   if (!emptyState) {
@@ -165,26 +171,31 @@
     grid.appendChild(emptyState);
   }
 
+  function applyFilters() {
+    const selectedCategory = buttons.find(button => button.classList.contains('active'))?.dataset.filter || 'all';
+    const selectedPrice = priceSelect?.value || 'all';
+    let visibleCount = 0;
+    cards.forEach(card => {
+      const categories = (card.dataset.categories || '').split(/\s+/).filter(Boolean);
+      const categoryMatch = selectedCategory === 'all' || categories.includes(selectedCategory);
+      const priceMatch = selectedPrice === 'all' || (card.dataset.priceLevel || '') === selectedPrice;
+      const visible = categoryMatch && priceMatch;
+      card.hidden = !visible;
+      if (visible) visibleCount++;
+    });
+    emptyState.hidden = visibleCount > 0;
+  }
+
+  priceSelect?.addEventListener('change', applyFilters);
+
   buttons.forEach(button => {
     button.addEventListener('click', () => {
-      const selected = button.dataset.filter;
-
       buttons.forEach(item => {
         const active = item === button;
         item.classList.toggle('active', active);
         item.setAttribute('aria-pressed', String(active));
       });
-
-      let visibleCount = 0;
-      cards.forEach(card => {
-        const categories = (card.dataset.categories || '').split(/\s+/).filter(Boolean);
-        const priceLevel = card.dataset.priceLevel || '';
-        const isPriceFilter = selected.startsWith('price-');
-        const visible = selected === 'all' || (isPriceFilter ? priceLevel === selected.slice(-1) : categories.includes(selected));
-        card.hidden = !visible;
-        if (visible) visibleCount++;
-      });
-      emptyState.hidden = visibleCount > 0;
+      applyFilters();
 
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'restaurant_filter_select', {
