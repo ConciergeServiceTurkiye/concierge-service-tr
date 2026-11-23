@@ -168,7 +168,7 @@
   grid-auto-flow:row;
   gap:12px;
   width:100%;
-  height:552px;
+  height:auto;
   min-height:0;
   padding:0;
   overflow:hidden;
@@ -213,7 +213,7 @@
   .yacht-lokanta-gallery{
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
     grid-template-rows:220px 140px 140px 140px;
-    height:660px;
+    height:auto;
   }
   .yacht-lokanta-gallery .lokanta-gallery-main{grid-column:1 / span 2;grid-row:1}
   .yacht-lokanta-gallery .lokanta-gallery-two{grid-column:1;grid-row:2}
