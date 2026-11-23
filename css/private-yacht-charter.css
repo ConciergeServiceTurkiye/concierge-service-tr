@@ -240,3 +240,7 @@
 .lokanta-vehicle-modal-close{position:absolute;right:14px;top:10px;z-index:3;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:30px;width:42px;height:42px;border-radius:50%;cursor:pointer}
 .lokanta-vehicle-modal-close:hover{color:#d4af37}
 @media(max-width:650px){.lokanta-vehicle-gallery{height:240px}.lokanta-vehicle-gallery-arrow{width:42px;height:42px;font-size:34px}.lokanta-vehicle-gallery-prev{left:10px}.lokanta-vehicle-gallery-next{right:10px}.lokanta-vehicle-modal-content h2{font-size:24px}}
+
+
+/* Show the complete yacht photo in the lightbox without cropping */
+.yacht-page .lokanta-vehicle-modal-image{background-size:contain}
