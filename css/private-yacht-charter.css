@@ -157,3 +157,22 @@
 .yacht-lokanta-gallery .lokanta-gallery-photo:focus-visible{outline:2px solid #d4af55;outline-offset:3px}
 @media(max-width:620px){.yacht-lokanta-gallery{grid-template-columns:1fr 1fr;grid-template-rows:220px 140px 140px}.yacht-lokanta-gallery .lokanta-gallery-main{grid-column:span 2;grid-row:auto}.yacht-lokanta-gallery .lokanta-gallery-four{grid-column:auto}.yacht-lokanta-gallery .lokanta-gallery-five,.yacht-lokanta-gallery .lokanta-gallery-six{grid-column:auto}}
 .yacht-extra strong{color:#d4af55;font-weight:600}
+
+
+/* Lokanta 1741 gallery component styles, scoped to yacht gallery */
+.yacht-lokanta-gallery .lokanta-gallery-photo{position:relative;display:block;width:100%;padding:0;overflow:hidden;background:#191714;cursor:zoom-in;text-align:left;appearance:none}
+.lokanta-vehicle-modal[hidden]{display:none}
+.lokanta-vehicle-modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:24px}
+.lokanta-vehicle-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(5px)}
+.lokanta-vehicle-modal-dialog{position:relative;z-index:1;width:min(900px,96vw);background:#0b0b0b;border:1px solid #d4af37;border-radius:16px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.65)}
+.lokanta-vehicle-gallery{height:420px;position:relative;background:#151515}
+.lokanta-vehicle-modal-image{width:100%;height:100%;background:#151515 center/cover no-repeat;display:flex;align-items:center;justify-content:center}
+.lokanta-vehicle-gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:46px;height:46px;border:0;background:rgba(0,0,0,.34);color:rgba(255,255,255,.9);font-size:38px;font-weight:300;line-height:1;border-radius:50%;cursor:pointer;transition:color .2s ease,background .2s ease}
+.lokanta-vehicle-gallery-arrow:hover{color:#d4af37;background:rgba(0,0,0,.58)}
+.lokanta-vehicle-gallery-prev{left:18px}.lokanta-vehicle-gallery-next{right:18px}
+.lokanta-vehicle-gallery-counter{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.78);font-size:11px;letter-spacing:1px;background:rgba(0,0,0,.5);padding:5px 10px;border-radius:14px}
+.lokanta-vehicle-modal-content{padding:28px}
+.lokanta-vehicle-modal-content h2{margin:0;color:#d4af37;font-size:30px;font-weight:500}
+.lokanta-vehicle-modal-close{position:absolute;right:14px;top:10px;z-index:3;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:30px;width:42px;height:42px;border-radius:50%;cursor:pointer}
+.lokanta-vehicle-modal-close:hover{color:#d4af37}
+@media(max-width:650px){.lokanta-vehicle-gallery{height:240px}.lokanta-vehicle-gallery-arrow{width:42px;height:42px;font-size:34px}.lokanta-vehicle-gallery-prev{left:10px}.lokanta-vehicle-gallery-next{right:10px}.lokanta-vehicle-modal-content h2{font-size:24px}}
