@@ -224,3 +224,43 @@
     gap: 8px;
   }
 }
+
+
+/* Keep filter controls floating over the photo; improve contrast without a backing panel */
+.restaurants-filters {
+  width: auto;
+  max-width: 1400px;
+  margin: 5px auto 20px;
+  padding: 0 16px;
+  gap: 14px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.restaurants-filters .filter-btn {
+  background: transparent;
+  color: #f2c94c;
+  border-color: rgba(212,175,55,.78);
+  text-shadow: 0 1px 3px rgba(0,0,0,.95), 0 0 8px rgba(0,0,0,.7);
+}
+.restaurants-filters .filter-btn.active {
+  background: var(--gold);
+  color: #000;
+  text-shadow: none;
+}
+.restaurants-filters .budget-filter {
+  background: rgba(8,8,8,.92);
+  color: #f2c94c;
+}
+@media (max-width: 768px) {
+  .restaurants-filters {
+    width: auto;
+    max-width: 100%;
+    padding: 0 12px 8px;
+    border-radius: 0;
+    gap: 8px;
+  }
+}
