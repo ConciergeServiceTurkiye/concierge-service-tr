@@ -100,24 +100,36 @@
 }
 .restaurant-card-lokanta .restaurant-price-level{margin-top:0;margin-bottom:8px}
 
-/* Budget dropdown aligned with the category filter buttons */
+
+/* Custom gold-and-charcoal budget dropdown */
+.budget-dropdown{position:relative;display:inline-flex;flex:0 0 auto}
 .restaurants-filters .budget-filter{
-  flex:0 0 auto;
-  width:auto;
-  min-width:104px;
-  padding:8px 30px 8px 18px;
-  appearance:auto;
-  font-family:inherit;
-  line-height:normal;
-  text-transform:uppercase;
-  color:var(--gold);
-  background:#080808;
+  min-width:104px;display:inline-flex;align-items:center;justify-content:center;
+  gap:12px;padding:8px 16px;color:var(--gold);
+  background:#080808;border:1px solid rgba(212,175,55,.6);
+  border-radius:20px;font:inherit;font-size:13px;letter-spacing:1px;
+  text-transform:uppercase;cursor:pointer;outline:none;
 }
-.restaurants-filters .budget-filter:focus{
-  outline:1px solid var(--gold);
-  outline-offset:2px;
+.restaurants-filters .budget-filter:focus,
+.restaurants-filters .budget-filter:focus-visible{
+  outline:none;box-shadow:none;border-color:rgba(212,175,55,.6);
 }
-.restaurants-filters .budget-filter option{
-  color:#fff;
-  background:#111;
+.budget-chevron{font-size:15px;line-height:10px;transition:transform .2s}
+.budget-filter[aria-expanded="true"] .budget-chevron{transform:rotate(180deg)}
+.budget-menu{
+  position:absolute;z-index:30;top:calc(100% + 8px);left:0;
+  min-width:100%;padding:6px;background:linear-gradient(145deg,#1b1814,#0d0c0b);
+  border:1px solid rgba(212,175,55,.5);border-radius:12px;
+  box-shadow:0 14px 32px rgba(0,0,0,.65);
 }
+.budget-menu[hidden]{display:none}
+.budget-menu button{
+  display:block;width:100%;padding:10px 14px;border:0;border-radius:7px;
+  background:transparent;color:rgba(255,255,255,.82);font:inherit;
+  font-size:12px;letter-spacing:.7px;text-align:left;text-transform:uppercase;
+  white-space:nowrap;cursor:pointer;transition:background .18s,color .18s;
+}
+.budget-menu button:hover,.budget-menu button[aria-checked="true"]{
+  color:var(--gold);background:rgba(212,175,55,.14);
+}
+.budget-menu button:focus-visible{outline:1px solid rgba(212,175,55,.7);outline-offset:-2px}
