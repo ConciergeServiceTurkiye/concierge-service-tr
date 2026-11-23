@@ -1,11 +1,11 @@
 (() => {
   const modal = document.getElementById('yachtGalleryModal');
   if (modal) {
-    const stage = modal.querySelector('.lokanta-vehicle-gallery');
-    const imageFrame = modal.querySelector('#yachtGalleryModalImage');
-    const counter = modal.querySelector('#yachtGalleryCounter');
-    const prev = modal.querySelector('.lokanta-vehicle-gallery-prev');
-    const next = modal.querySelector('.lokanta-vehicle-gallery-next');
+    const stage = document.getElementById('yachtGalleryStage');
+    const counter = document.getElementById('yachtGalleryCounter');
+    const prev = modal.querySelector('.yacht-lightbox-prev');
+    const next = modal.querySelector('.yacht-lightbox-next');
+    const closeButton = modal.querySelector('.yacht-lightbox-close');
     const gallery = document.querySelector('.yacht-lokanta-gallery');
     const photoButtons = gallery ? Array.from(gallery.querySelectorAll('.lokanta-gallery-photo')) : [];
     const items = photoButtons.map(button => {
@@ -16,7 +16,7 @@
     let index = 0;
     let lastTrigger = null;
     let media = null;
-    const stopMedia = () => {
+    const clearMedia = () => {
       if (media && media.tagName === 'VIDEO') {
         media.pause();
         media.removeAttribute('src');
@@ -26,31 +26,23 @@
       media = null;
     };
     const render = () => {
-      stopMedia();
+      clearMedia();
       const item = items[index];
       if (!item) return;
       if (item.type === 'image') {
         media = document.createElement('img');
         media.src = item.src;
         media.alt = item.alt || 'Luxury 2 yacht photograph';
-        media.className = 'yacht-gallery-modal-photo';
+        media.className = 'yacht-lightbox-media';
       } else {
         media = document.createElement('video');
         media.src = item.src;
         media.controls = true;
-        media.autoplay = true;
         media.playsInline = true;
-        media.className = 'yacht-gallery-modal-video';
+        media.className = 'yacht-lightbox-media yacht-lightbox-video';
       }
-      stage.insertBefore(media, counter);
-      imageFrame.style.display = 'none';
-      counter.textContent = `${index + 1} / ${items.length}`;
-      prev.hidden = false;
-      next.hidden = false;
-    };
-    const move = step => {
-      index = (index + step + items.length) % items.length;
-      render();
+      stage.appendChild(media);
+      counter.textContent = (index + 1) + ' / ' + items.length;
     };
     const openAt = (itemIndex, trigger) => {
       lastTrigger = trigger;
@@ -58,25 +50,28 @@
       render();
       modal.hidden = false;
       document.body.style.overflow = 'hidden';
-      modal.querySelector('.lokanta-vehicle-modal-close').focus();
+      closeButton.focus();
     };
     const close = () => {
-      stopMedia();
+      clearMedia();
       modal.hidden = true;
       document.body.style.overflow = '';
       if (lastTrigger) lastTrigger.focus();
     };
-    if (gallery) {
-      gallery.addEventListener('click', event => {
-        const button = event.target.closest('.lokanta-gallery-photo');
-        if (!button) return;
-        openAt(photoButtons.indexOf(button), button);
-      });
-    }
+    const move = step => {
+      index = (index + step + items.length) % items.length;
+      render();
+    };
+    if (gallery) gallery.addEventListener('click', event => {
+      const button = event.target.closest('.lokanta-gallery-photo');
+      if (!button) return;
+      const itemIndex = photoButtons.indexOf(button);
+      if (itemIndex >= 0) openAt(itemIndex, button);
+    });
     prev.addEventListener('click', () => move(-1));
     next.addEventListener('click', () => move(1));
-    modal.querySelector('.lokanta-vehicle-modal-close').addEventListener('click', close);
-    modal.querySelector('.lokanta-vehicle-modal-backdrop').addEventListener('click', close);
+    closeButton.addEventListener('click', close);
+    modal.querySelector('.yacht-lightbox-backdrop').addEventListener('click', close);
     document.addEventListener('keydown', event => {
       if (modal.hidden) return;
       if (event.key === 'Escape') close();
