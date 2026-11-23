@@ -31,6 +31,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const submitBtn = form.querySelector("button[type='submit']");
 
+  // Keep each preferred-method option in the Tab sequence.
+  form.querySelectorAll('input[name="preferred_method"]').forEach(radio => {
+    radio.tabIndex = 0;
+  });
+
   const timeSelect = document.getElementById("timeSelect");
   const timeTrigger = timeSelect.querySelector(".select-trigger");
   const timeOptions = timeSelect.querySelector(".select-options");

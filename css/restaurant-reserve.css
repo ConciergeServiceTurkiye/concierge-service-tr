@@ -740,3 +740,26 @@ input[type="checkbox"]:checked:focus-visible {
 .restaurant-form .preferred-method-option input[type="radio"]{width:16px;height:16px;margin:0;accent-color:#d4af37}
 .preferred-method-option span{color:#d4af37;font-size:14px}
 @media(max-width:480px){.preferred-method-options{flex-direction:column;gap:10px}}
+
+
+/* Preferred method: clear keyboard focus and selected states */
+.restaurant-form .preferred-method-option:focus-within {
+  border-color: #f1d97a;
+  background: rgba(212,175,55,.16);
+  box-shadow: 0 0 0 3px rgba(212,175,55,.28);
+}
+
+.restaurant-form .preferred-method-option:has(input[type="radio"]:focus-visible) {
+  outline: 2px solid #f1d97a;
+  outline-offset: 3px;
+}
+
+.restaurant-form .preferred-method-option:has(input[type="radio"]:checked) {
+  border-color: #f1d97a;
+  background: rgba(212,175,55,.12);
+}
+
+.restaurant-form .preferred-method-option input[type="radio"]:focus-visible {
+  outline: 2px solid #f1d97a;
+  outline-offset: 3px;
+}
