@@ -86,3 +86,5 @@ html.lokanta-lightbox-open,body.lokanta-lightbox-open{overflow:hidden}
 @media(max-width:650px){.lokanta-vehicle-gallery{height:240px}.lokanta-vehicle-gallery-arrow{width:42px;height:42px;font-size:34px}.lokanta-vehicle-gallery-prev{left:10px}.lokanta-vehicle-gallery-next{right:10px}.lokanta-vehicle-modal-content h2{font-size:24px}}
 
 .lokanta-price-level{color:#d4af55!important;border-color:rgba(212,175,55,.55)!important;letter-spacing:2px;font-weight:600}
+
+.lokanta-price-level{color:#d4af55!important;border-color:rgba(212,175,55,.55)!important;letter-spacing:2px;font-weight:600}
