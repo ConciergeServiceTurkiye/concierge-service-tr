@@ -3,6 +3,7 @@
   if (modal) {
     const stage = document.getElementById('yachtGalleryStage');
     const counter = document.getElementById('yachtGalleryCounter');
+    const caption = document.getElementById('yachtGalleryCaption');
     const prev = modal.querySelector('.yacht-lightbox-prev');
     const next = modal.querySelector('.yacht-lightbox-next');
     const closeButton = modal.querySelector('.yacht-lightbox-close');
@@ -42,6 +43,7 @@
         media.className = 'yacht-lightbox-media yacht-lightbox-video';
       }
       stage.appendChild(media);
+      caption.textContent = item.type === 'video' ? 'Luxury 2 — Video' : item.alt;
       counter.textContent = (index + 1) + ' / ' + items.length;
     };
     const openAt = (itemIndex, trigger) => {

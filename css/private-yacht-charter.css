@@ -385,3 +385,10 @@
   box-shadow:none !important;
   outline:none;
 }
+
+
+/* Luxury 2 gallery label and restored media captions */
+.yacht-lokanta-gallery .lokanta-gallery-main{position:relative}
+.yacht-lokanta-gallery .yacht-image-label{position:absolute;left:14px;bottom:14px;z-index:3;pointer-events:none}
+.yacht-lightbox-caption{position:absolute;z-index:6;left:50%;bottom:42px;transform:translateX(-50%);max-width:calc(100% - 150px);color:#e7d39b;font-size:12px;letter-spacing:.04em;text-align:center;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+@media(max-width:650px){.yacht-lightbox-caption{bottom:40px;max-width:calc(100% - 100px);font-size:11px}}
