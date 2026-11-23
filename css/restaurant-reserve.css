@@ -4,8 +4,10 @@
 .restaurant-hero {
   min-height: 45vh;
   padding-top: 120px;
-  background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
-              url("../assets/restaurant-hero.jpg") center / cover no-repeat;
+  background:
+    linear-gradient(rgba(0,0,0,0.48), rgba(0,0,0,0.72)),
+    url("../assets/restaurants/lokanta-1741/lokanta-1741-hero.jpeg") center / cover no-repeat;
+  background-attachment: fixed;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -21,7 +23,7 @@
   width: 100%;
   margin: 0 auto;
   padding: 45px 40px 40px;
-  background: rgba(10,10,10,.88);
+  background: rgba(10,10,10,.80);
   border: 1.5px solid #d4af37;
   border-radius: 14px;
 }
@@ -388,6 +390,10 @@
    RESPONSIVE
 ================================ */
 @media (max-width: 768px) {
+  .restaurant-hero {
+    background-attachment: scroll;
+    background-position: center top;
+  }
   .restaurant-form-wrapper {
     max-width: 94%;
     padding: 35px 25px;
