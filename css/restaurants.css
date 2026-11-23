@@ -146,7 +146,7 @@
   z-index: -1;
   background-image: linear-gradient(rgba(0,0,0,.78), rgba(0,0,0,.88)), url("../assets/restaurants/lokanta-1741/restaurants.png");
   background-position: center top;
-  background-size: cover;
+  background-size: 100% auto;
   background-repeat: no-repeat;
   opacity: 1;
   pointer-events: none;
