@@ -1,48 +1,54 @@
 (() => {
   const modal = document.getElementById('yachtGalleryModal');
   if (modal) {
-    const image = modal.querySelector('#yachtGalleryModalImage');
+    const stage = modal.querySelector('.lokanta-vehicle-gallery');
+    const imageFrame = modal.querySelector('#yachtGalleryModalImage');
     const counter = modal.querySelector('#yachtGalleryCounter');
     const prev = modal.querySelector('.lokanta-vehicle-gallery-prev');
     const next = modal.querySelector('.lokanta-vehicle-gallery-next');
     const gallery = document.querySelector('.yacht-lokanta-gallery');
-    const videoButton = document.querySelector('.yacht-video-open');
-    const items = gallery ? Array.from(gallery.querySelectorAll('.lokanta-gallery-photo img')).map(img => ({type:'image',src:img.getAttribute('src'),alt:img.alt})) : [];
-    if (videoButton) items.push({type:'video',src:videoButton.dataset.yachtVideo,alt:'Luxury 2 yacht video'});
+    const photoButtons = gallery ? Array.from(gallery.querySelectorAll('.lokanta-gallery-photo')) : [];
+    const items = photoButtons.map(button => {
+      const img = button.querySelector('img');
+      return {type:'image',src:img.getAttribute('src'),alt:img.alt};
+    });
+    items.push({type:'video',src:'assets/yachts/luxury-2/luxury-2-video.mp4',alt:'Luxury 2 yacht video'});
     let index = 0;
     let lastTrigger = null;
-    let video = null;
-    const stopVideo = () => {
-      if (!video) return;
-      video.pause();
-      video.removeAttribute('src');
-      video.load();
-      video.remove();
-      video = null;
+    let media = null;
+    const stopMedia = () => {
+      if (media && media.tagName === 'VIDEO') {
+        media.pause();
+        media.removeAttribute('src');
+        media.load();
+      }
+      if (media) media.remove();
+      media = null;
     };
     const render = () => {
-      stopVideo();
+      stopMedia();
       const item = items[index];
       if (!item) return;
-      image.style.display = item.type === 'image' ? 'flex' : 'none';
-      image.style.backgroundImage = item.type === 'image' ? `url("${item.src}")` : 'none';
-      image.setAttribute('aria-label', item.alt || 'Luxury 2 yacht media');
-      if (item.type === 'video') {
-        video = document.createElement('video');
-        video.src = item.src;
-        video.controls = true;
-        video.autoplay = true;
-        video.playsInline = true;
-        video.className = 'yacht-gallery-modal-video';
-        modal.querySelector('.lokanta-vehicle-gallery').appendChild(video);
-        image.style.display = 'none';
+      if (item.type === 'image') {
+        media = document.createElement('img');
+        media.src = item.src;
+        media.alt = item.alt || 'Luxury 2 yacht photograph';
+        media.className = 'yacht-gallery-modal-photo';
+      } else {
+        media = document.createElement('video');
+        media.src = item.src;
+        media.controls = true;
+        media.autoplay = true;
+        media.playsInline = true;
+        media.className = 'yacht-gallery-modal-video';
       }
+      stage.insertBefore(media, counter);
+      imageFrame.style.display = 'none';
       counter.textContent = `${index + 1} / ${items.length}`;
-      prev.hidden = items.length < 2;
-      next.hidden = items.length < 2;
+      prev.hidden = false;
+      next.hidden = false;
     };
     const move = step => {
-      if (items.length < 2) return;
       index = (index + step + items.length) % items.length;
       render();
     };
@@ -55,7 +61,7 @@
       modal.querySelector('.lokanta-vehicle-modal-close').focus();
     };
     const close = () => {
-      stopVideo();
+      stopMedia();
       modal.hidden = true;
       document.body.style.overflow = '';
       if (lastTrigger) lastTrigger.focus();
@@ -64,11 +70,9 @@
       gallery.addEventListener('click', event => {
         const button = event.target.closest('.lokanta-gallery-photo');
         if (!button) return;
-        const buttons = Array.from(gallery.querySelectorAll('.lokanta-gallery-photo'));
-        openAt(buttons.indexOf(button), button);
+        openAt(photoButtons.indexOf(button), button);
       });
     }
-    if (videoButton) videoButton.addEventListener('click', () => openAt(items.length - 1, videoButton));
     prev.addEventListener('click', () => move(-1));
     next.addEventListener('click', () => move(1));
     modal.querySelector('.lokanta-vehicle-modal-close').addEventListener('click', close);
