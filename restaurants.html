@@ -190,6 +190,7 @@
 
   buttons.forEach(button => {
     button.addEventListener('click', () => {
+      const selected = button.dataset.filter;
       buttons.forEach(item => {
         const active = item === button;
         item.classList.toggle('active', active);
