@@ -264,3 +264,17 @@
     gap: 8px;
   }
 }
+
+
+/* Lift filter controls into the dark band above the restaurant photography.
+   Relative positioning preserves the grid's original vertical layout. */
+.restaurants-filters {
+  position: relative;
+  top: -52px;
+  margin-bottom: 20px;
+}
+@media (max-width: 768px) {
+  .restaurants-filters {
+    top: -42px;
+  }
+}
