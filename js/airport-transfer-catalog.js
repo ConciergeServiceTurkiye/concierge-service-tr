@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const move=step=>{if(images.length<2)return;index=(index+step+images.length)%images.length;render()};
   const openVehicle=card=>{if(!card)return;const v=card.dataset.vehicle,c=card.dataset.capacity;images=(card.dataset.images||'').split('|').map(x=>x.trim()).filter(Boolean);index=0;title.textContent=v;capacity.textContent=c;select.href=addPrefill(`forms/airport-transfer.html?vehicle=${encodeURIComponent(v)}&capacity=${encodeURIComponent(c)}`);render();modal.hidden=false;document.body.style.overflow='hidden'};
 
-  document.querySelectorAll('.vehicle-view').forEach(btn=>btn.addEventListener('click',()=>openVehicle(btn.closest('.vehicle-card'))));
+  document.querySelectorAll('[data-vehicle-gallery]').forEach(btn=>btn.addEventListener('click',()=>openVehicle(btn.closest('.vehicle-card'))));
   document.querySelectorAll('.vehicle-select').forEach(link=>link.addEventListener('click',e=>{saveScroll();if(handoffPrefill){e.preventDefault();window.location.href=addPrefill(link.getAttribute('href'))}}));
   select.addEventListener('click',saveScroll);
   prev.addEventListener('click',()=>move(-1));
