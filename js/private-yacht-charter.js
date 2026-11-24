@@ -7,13 +7,8 @@
     const prev = modal.querySelector('.yacht-lightbox-prev');
     const next = modal.querySelector('.yacht-lightbox-next');
     const closeButton = modal.querySelector('.yacht-lightbox-close');
-    const gallery = document.querySelector('.yacht-lokanta-gallery');
-    const photoButtons = gallery ? Array.from(gallery.querySelectorAll('.lokanta-gallery-photo')) : [];
-    const items = photoButtons.map(button => {
-      const img = button.querySelector('img');
-      return {type:'image',src:img.getAttribute('src'),alt:img.alt};
-    });
-    items.push({type:'video',src:'assets/yachts/luxury-2/luxury-2-video.mp4',alt:'Luxury 2 yacht video'});
+    const galleries = Array.from(document.querySelectorAll('[data-yacht-gallery]'));
+    let items = [];
     let index = 0;
     let lastTrigger = null;
     let media = null;
@@ -33,20 +28,28 @@
       if (item.type === 'image') {
         media = document.createElement('img');
         media.src = item.src;
-        media.alt = item.alt || 'Luxury 2 yacht photograph';
+        media.alt = item.alt || 'Private yacht photograph';
         media.className = 'yacht-lightbox-media';
       } else {
         media = document.createElement('video');
         media.src = item.src;
         media.controls = true;
         media.playsInline = true;
+        media.preload = 'metadata';
         media.className = 'yacht-lightbox-media yacht-lightbox-video';
       }
       stage.appendChild(media);
-      caption.textContent = item.type === 'video' ? 'Luxury 2 — Video' : item.alt;
+      caption.textContent = item.type === 'video' ? item.caption : item.alt;
       counter.textContent = (index + 1) + ' / ' + items.length;
     };
-    const openAt = (itemIndex, trigger) => {
+    const openGallery = (gallery, itemIndex, trigger) => {
+      const photos = Array.from(gallery.querySelectorAll('.lokanta-gallery-photo'));
+      items = photos.map(button => {
+        const img = button.querySelector('img');
+        return {type:'image',src:img.getAttribute('src'),alt:img.alt};
+      });
+      const yachtName = gallery.getAttribute('data-yacht-gallery').replace('luxury-','Luxury ');
+      items.push({type:'video',src:gallery.getAttribute('data-yacht-video'),caption:yachtName+' — Video'});
       lastTrigger = trigger;
       index = itemIndex;
       render();
@@ -61,15 +64,16 @@
       if (lastTrigger) lastTrigger.focus();
     };
     const move = step => {
+      if (!items.length) return;
       index = (index + step + items.length) % items.length;
       render();
     };
-    if (gallery) gallery.addEventListener('click', event => {
+    galleries.forEach(gallery => gallery.addEventListener('click', event => {
       const button = event.target.closest('.lokanta-gallery-photo');
-      if (!button) return;
-      const itemIndex = photoButtons.indexOf(button);
-      if (itemIndex >= 0) openAt(itemIndex, button);
-    });
+      if (!button || !gallery.contains(button)) return;
+      const itemIndex = Array.from(gallery.querySelectorAll('.lokanta-gallery-photo')).indexOf(button);
+      if (itemIndex >= 0) openGallery(gallery,itemIndex,button);
+    }));
     prev.addEventListener('click', () => move(-1));
     next.addEventListener('click', () => move(1));
     closeButton.addEventListener('click', close);
