@@ -313,3 +313,20 @@ form {display: flex;flex-direction: column;gap: 22px;}
 #contactForm .submit-btn{display:inline-flex!important;width:auto!important;min-height:44px!important;align-items:center;justify-content:center;gap:10px;margin:0 auto;padding:0 22px;border:1px solid rgba(212,175,55,.72)!important;border-radius:24px!important;background:transparent!important;color:var(--gold,#d4af37)!important;font-family:inherit;font-size:11px!important;font-weight:700!important;letter-spacing:.12em!important;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s,border-color .2s}
 #contactForm .submit-btn:hover{background:var(--gold,#d4af37)!important;border-color:var(--gold,#d4af37)!important;color:#111!important;transform:none!important}
 #contactForm .submit-btn span{font-size:16px;line-height:1}
+
+
+/* Legal links in the contact form — match the gold inline-link treatment used on guide pages. */
+#contactForm .contact-form-note a{
+  display:inline;
+  color:var(--gold,#d4af37);
+  font-weight:600;
+  text-decoration:none;
+  border-bottom:1px solid rgba(212,175,55,.55);
+  padding-bottom:1px;
+  transition:color .2s ease,border-color .2s ease,background .2s ease;
+}
+#contactForm .contact-form-note a:hover{
+  color:var(--gold-soft,#f1d97a);
+  border-bottom-color:var(--gold-soft,#f1d97a);
+  background:rgba(212,175,55,.07);
+}
