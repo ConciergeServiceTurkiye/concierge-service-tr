@@ -406,3 +406,6 @@
 .yacht-price-summary p{margin:12px 0 0;font-size:10px;line-height:1.6;color:rgba(244,240,230,.5)}
 .yacht-form select{display:block;width:100%;min-height:46px;margin:0 0 18px;padding:12px 13px;border:1px solid rgba(212,175,85,.25);border-radius:0;background:#090909;color:#f4f0e6;font:inherit;font-size:13px}
 .yacht-form select:focus{outline:2px solid #d4af55;outline-offset:2px}
+
+/* Override broad form-input dimensions for compact contact radio buttons. */
+.yacht-form input[type="radio"]{appearance:auto!important;-webkit-appearance:radio!important;width:15px!important;height:15px!important;min-width:15px!important;min-height:15px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;background:transparent!important;box-shadow:none!important;accent-color:#d4af55;transform:none!important}
