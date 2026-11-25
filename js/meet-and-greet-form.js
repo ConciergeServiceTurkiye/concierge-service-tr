@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const type=document.querySelector('input[name="serviceType"]:checked').value;
     const names=[...passengerNames.querySelectorAll('input')].map(x=>x.value.trim()).filter(Boolean);
     const special=[...document.querySelectorAll('input[name="specialRequirements"]:checked')].map(x=>x.value);
-    const data={serviceType:type,airport:document.getElementById('airport').value,adults:adults.value,children:children.value,babies:babies.value,passengerNames:names,fullName:document.getElementById('fullName').value.trim(),email:document.getElementById('email').value.trim(),phone:window.mgPhoneIti?window.mgPhoneIti.getNumber():document.getElementById('phone').value,checkedBags:document.getElementById('checkedBags').value,carryOnBags:document.getElementById('carryOnBags').value,specialRequirements:special.join(', '),specialDetails:document.getElementById('specialDetails').value.trim(),requestDetails:message.value.trim(),createdAt:Date.now()};
+    const data={serviceType:type,airport:document.getElementById('airport').value,adults:adults.value,children:children.value,babies:babies.value,passengerNames:names,fullName:document.getElementById('fullName').value.trim(),email:document.getElementById('email').value.trim(),phone:window.mgPhoneIti?window.mgPhoneIti.getNumber():document.getElementById('phone').value,preferredMethod:form.querySelector('input[name="preferredMethod"]:checked')?.value||'',checkedBags:document.getElementById('checkedBags').value,carryOnBags:document.getElementById('carryOnBags').value,specialRequirements:special.join(', '),specialDetails:document.getElementById('specialDetails').value.trim(),requestDetails:message.value.trim(),createdAt:Date.now()};
     if(type==='Arrival'){data.travelDate=document.getElementById('arrivalDate').value;data.travelTime=document.getElementById('arrivalTime').value;data.flightNumber=document.getElementById('arrivalFlight').value.trim();data.pickup='Istanbul Airport (IST)';data.dropoff=''}
     if(type==='Departure'){data.travelDate=document.getElementById('departureDate').value;data.travelTime=document.getElementById('departureTime').value;data.flightNumber=document.getElementById('departureFlight').value.trim();data.pickup='';data.dropoff='Istanbul Airport (IST)'}
     if(type==='Transfer'){data.travelDate=document.getElementById('transferArrivalDate').value;data.travelTime=document.getElementById('transferArrivalTime').value;data.flightNumber=document.getElementById('transferArrivalFlight').value.trim();data.transferDepartureDate=document.getElementById('transferDepartureDate').value;data.transferDepartureTime=document.getElementById('transferDepartureTime').value;data.transferDepartureFlight=document.getElementById('transferDepartureFlight').value.trim();data.pickup='Istanbul Airport (IST)';data.dropoff=''}
@@ -81,13 +81,26 @@ document.addEventListener('DOMContentLoaded', function(){
   document.getElementById('arrangePrivateChauffeur')?.addEventListener('click',()=>openHandoff('chauffeur'));
   syncOnwardActions();
 
-  form.addEventListener('submit',function(e){
+  form.addEventListener('submit',async function(e){
     e.preventDefault();
     if(!form.checkValidity()){form.reportValidity();showAlert('Please complete the required fields before sending your request.','error');return}
     if(window.mgPhoneIti&&!window.mgPhoneIti.isValidNumber()){showAlert('Please enter a valid phone number.','error');document.getElementById('phone').focus();return}
-    const data=new FormData(form);if(window.mgPhoneIti)data.set('phone',window.mgPhoneIti.getNumber());data.set('service','Meet & Greet');data.set('specialRequirements',[...document.querySelectorAll('input[name="specialRequirements"]:checked')].map(x=>x.value).join(', '));data.set('passengerCount',String(totalPassengers()));
-    const summary={serviceType:data.get('serviceType'),passengerCount:data.get('passengerCount'),onwardService:data.get('onwardService')};console.info('Meet & Greet request ready',summary);
-    form.innerHTML='<div class="mg-form-success"><div class="mg-form-eyebrow">REQUEST READY</div><h2>Your request has been prepared.</h2><p>The form structure and validation are in place. The final submission connection will be added after the Meet &amp; Greet request sheet is set up.</p><a href="../meet-and-greet.html">← Back to Meet &amp; Greet</a></div>';
+    const data=collectHandoff();
+    if(!data.preferredMethod){showAlert('Please select your preferred contact method.','error');return}
+    const {fullName,email,preferredMethod,...fields}=data;
+    const submit=form.querySelector('button[type="submit"]');
+    const originalText=submit.textContent;submit.disabled=true;submit.textContent='Sending Request...';
+    try{
+      const response=await fetch('../api/request',{method:'POST',headers:{'Content-Type':'application/json','Idempotency-Key':crypto.randomUUID()},body:JSON.stringify({formType:'Meet & Greet request',subject:'New Meet & Greet Request — '+fullName,customer:{name:fullName,email},preferredMethod,fields})});
+      const result=await response.json().catch(()=>({}));
+      if(!response.ok||result.success!==true)throw new Error(result.message||'The request could not be submitted.');
+      if(preferredMethod==='WhatsApp'){
+        const message=Object.entries(data).map(([key,value])=>key+': '+(Array.isArray(value)?value.join(', '):value)).join('\n');
+        window.open('https://wa.me/905344888624?text='+encodeURIComponent('MEET & GREET REQUEST\n\n'+message),'_blank');
+      }
+      showAlert('Your Meet & Greet request has been sent to our concierge team. We will contact you using your preferred method.','success');
+      form.innerHTML='<div class="mg-form-success"><div class="mg-form-eyebrow">REQUEST RECEIVED</div><h2>Thank you. Your request has been received.</h2><p>Our concierge team will review the details and contact you using your preferred method.</p><a href="../meet-and-greet.html">← Back to Meet &amp; Greet</a></div>';
+    }catch(error){console.error('Meet & Greet request failed:',error);showAlert(error.message||'We could not submit your request. Your details are still in the form.','error');submit.disabled=false;submit.textContent=originalText}
   });
   syncFlightBlocks();
 });

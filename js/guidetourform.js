@@ -1039,6 +1039,15 @@ if (form) {
       }
     }
 
+    const preferredMethod = form.querySelector('input[name="preferredMethod"]:checked')?.value;
+    if (!preferredMethod) {
+      const methodField = form.querySelector('input[name="preferredMethod"]');
+      showInlineAlert("Please select your preferred contact method.");
+      if (submitBtn) submitBtn.disabled = false;
+      if (methodField) methodField.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
     // 5. ULAŞIM (TRANSPORTATION) SEÇİMİ
     const transportationChecked = Array.from(
       document.querySelectorAll('input[name="transportation"]')
@@ -1069,6 +1078,7 @@ if (form) {
     // PAYLOAD HAZIRLIĞI
     const payload = {
       tour_name: tourName,
+      preferred_method: preferredMethod,
       full_name: document.querySelector('[name="name"]')?.value || "",
       email: document.querySelector('[name="email"]')?.value || "",
       phone: iti ? iti.getNumber() : "",
@@ -1084,36 +1094,37 @@ if (form) {
     console.log("Gönderim başlıyor...", payload); // TEST 1
 
     try {
-        const res = await fetch(
-            "https://script.google.com/macros/s/AKfycbxf2ogLE7U3uoib55DI3BHERQSxFM1zU1rEmydfI_rQFGPDVszVFvpbgj5XIML9aulf/exec", 
-            {
-                method: "POST",
-                mode: "no-cors",
-                cache: "no-cache",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify(payload)
-            }
-        );
-        
-        console.log("Fetch tamamlandı (no-cors mode)"); // TEST 2
+        const res = await fetch("/api/request", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Idempotency-Key": crypto.randomUUID() },
+          body: JSON.stringify({
+            formType: "Private guide tour request",
+            subject: "New Private Guide Tour Request — " + payload.tour_name,
+            customer: { name: payload.full_name, email: payload.email },
+            preferredMethod,
+            fields: payload
+          })
+        });
+        const result = await res.json().catch(() => ({}));
+        if (!res.ok || result.success !== true) throw new Error(result.message || "The request could not be submitted.");
+        if (preferredMethod === "WhatsApp") {
+          const message = Object.entries(payload).map(([key, value]) => key + ": " + (typeof value === "object" ? JSON.stringify(value) : value)).join("\n");
+          window.open("https://wa.me/905344888624?text=" + encodeURIComponent("PRIVATE GUIDE TOUR REQUEST\n\n" + message), "_blank");
+        }
 
-        // no-cors modunda yanıt içeriğini okuyamayız, o yüzden direkt başarıya geçiyoruz
         form.style.display = "none";
         const successScreen = document.getElementById("successScreen");
         if (successScreen) {
-            successScreen.style.display = "block";
-            const resId = document.querySelector(".reservation-id");
-            if (resId) resId.textContent = "Your request has been received and is being processed.";
+          successScreen.style.display = "block";
+          const resId = document.querySelector(".reservation-id");
+          if (resId) resId.textContent = "Your request has been received and our concierge team will contact you using your preferred method.";
         }
-        
-        // Formu temizle
         form.reset();
-        participants.length = 0; // Listeyi boşalt
+        participants.length = 0;
         renderParticipants();
-
     } catch (err) {
         console.error("KRİTİK HATA:", err); // TEST 3
-        showInlineAlert("A connection error occurred. Please try again later.");
+        showInlineAlert(err.message || "A connection error occurred. Your details are still in the form.");
         if (submitBtn) submitBtn.disabled = false;
     }
   });
