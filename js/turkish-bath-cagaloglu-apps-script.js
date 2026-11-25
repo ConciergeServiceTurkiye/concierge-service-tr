@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded',()=>{
   const form=document.getElementById('bathReservationForm');
   if(!form)return;
-  const ENDPOINT='https://script.google.com/macros/s/AKfycbxI2iTBCliq8b9RSDmiDosZYaOaL4yEte4dBPSRepfTwZySkU0LaNrKUPeWeLCBZd98/exec';
   const alertBox=document.getElementById('bathFormAlert');
   const experience=document.getElementById('experience'),date=document.getElementById('travelDate'),time=document.getElementById('preferredTime');
   const female=document.getElementById('femaleGuests'),male=document.getElementById('maleGuests'),name=document.getElementById('fullName'),email=document.getElementById('email'),phone=document.getElementById('phone'),details=document.getElementById('requestDetails');
@@ -17,14 +16,26 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(!name.value.trim())return show('Please enter your full name.');
     if(!email.value.trim()||!email.checkValidity())return show('Please enter a valid email address.');
     if(iti&&!iti.isValidNumber())return show('Please enter a valid phone number.');
+    const preferredMethod=form.querySelector('input[name="preferredMethod"]:checked')?.value;
+    if(!preferredMethod)return show('Please select your preferred contact method.');
     const payload=new FormData();
     payload.set('reservationType','Turkish Bath');
     payload.set('name',name.value.trim());payload.set('fullName',name.value.trim());payload.set('email',email.value.trim());payload.set('phone',iti?iti.getNumber():phone.value.trim());
     payload.set('subject','Turkish Bath Reservation');payload.set('experience',experience.value);payload.set('travelDate',date.value);payload.set('preferredTime',time.value);payload.set('femaleGuests',String(f));payload.set('maleGuests',String(m));payload.set('requestDetails',details.value.trim());payload.set('partner','Cağaloğlu Hamamı');payload.set('status','New');payload.set('availability','Pending');payload.set('referrer','turkish-bath-cagaloglu-form');
     payload.set('message',`Experience: ${experience.value}\nPreferred Date: ${date.value}\nPreferred Time: ${time.value}\nFemale Guests: ${f}\nMale Guests: ${m}\nPartner: Cağaloğlu Hamamı\nRequest Details: ${details.value.trim()}`);
+    payload.set('preferredMethod',preferredMethod);
     const submit=form.querySelector('button[type="submit"]');if(submit){submit.disabled=true;submit.dataset.originalText=submit.textContent;submit.textContent='Sending Request...';}
-    try{const response=await fetch(ENDPOINT,{method:'POST',body:payload});const text=(await response.text()).trim();if(text==='success'){show('Your Turkish bath reservation request has been received.',true);form.reset();if(iti){iti.setCountry('us');phone.value='';}document.getElementById('bathCharCount').textContent='0 / 2000';experience.dispatchEvent(new Event('change',{bubbles:true}));}else show('Something went wrong. Please try again.');}
-    catch(err){console.error('Turkish Bath Apps Script error:',err);show('Connection error. Please try again later.');}
+    const fields={};
+    for(const [key,value] of payload.entries())if(!['name','fullName','email'].includes(key))fields[key]=value;
+    try{
+      const response=await fetch('/api/request',{method:'POST',headers:{'Content-Type':'application/json','Idempotency-Key':crypto.randomUUID()},body:JSON.stringify({formType:'Turkish bath reservation',subject:'New '+payload.get('partner')+' Reservation Request',customer:{name:name.value.trim(),email:email.value.trim()},preferredMethod,fields})});
+      const result=await response.json().catch(()=>({}));
+      if(!response.ok||result.success!==true)throw new Error(result.message||'The request could not be submitted.');
+      if(preferredMethod==='WhatsApp')window.open('https://wa.me/905344888624?text='+encodeURIComponent(payload.get('message')),'_blank');
+      show('Your Turkish bath request has been sent to our concierge team.',true);
+      form.reset();if(iti){iti.setCountry('us');phone.value='';}document.getElementById('bathCharCount').textContent='0 / 2000';experience.dispatchEvent(new Event('change',{bubbles:true}));
+    }
+    catch(err){console.error('Turkish bath request error:',err);show(err.message||'Connection error. Please try again later.');}
     finally{if(submit){submit.disabled=false;submit.textContent=submit.dataset.originalText||'Submit Reservation Request';}}
   },true);
 });
