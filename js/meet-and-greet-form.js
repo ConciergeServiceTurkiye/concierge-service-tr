@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function(){
       const result=await response.json().catch(()=>({}));
       if(!response.ok||result.success!==true)throw new Error(result.message||'The request could not be submitted.');
       if(preferredMethod==='WhatsApp'){
-        const message=Object.entries(data).map(([key,value])=>key+': '+(Array.isArray(value)?value.join(', '):value)).join('\\n');
-        window.open('https://wa.me/905344888624?text='+encodeURIComponent('MEET & GREET REQUEST\\n\\n'+message),'_blank');
+        const message=Object.entries(data).map(([key,value])=>key+': '+(Array.isArray(value)?value.join(', '):value)).join('\n');
+        window.open('https://wa.me/905344888624?text='+encodeURIComponent('MEET & GREET REQUEST\n\n'+message),'_blank');
       }
       showAlert('Your Meet & Greet request has been sent to our concierge team. We will contact you using your preferred method.','success');
       form.innerHTML='<div class="mg-form-success"><div class="mg-form-eyebrow">REQUEST RECEIVED</div><h2>Thank you. Your request has been received.</h2><p>Our concierge team will review the details and contact you using your preferred method.</p><a href="../meet-and-greet.html">← Back to Meet &amp; Greet</a></div>';
