@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   'GUEST DETAILS', 'Name: '+name.value.trim(), 'Email: '+email.value.trim(), 'Phone: '+(iti?iti.getNumber():phone.value.trim()), 'Preferred contact method: '+preferredMethod, '',
   'EXPERIENCE DETAILS', 'Experience: '+experience.value, 'Preferred date: '+date.value, 'Preferred time: '+time.value, 'Female guests: '+f, 'Male guests: '+m, 'Additional requests: '+(details.value.trim()||'None'), '',
   'This is a reservation request, not a confirmed booking. Please confirm availability and final details.'
-].join('\\n'));
+].join('\n'));
     payload.set('preferredMethod',preferredMethod);
     const submit=form.querySelector('button[type="submit"]');if(submit){submit.disabled=true;submit.dataset.originalText=submit.textContent;submit.textContent='Sending Request...';}
     const fields={};
