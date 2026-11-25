@@ -447,10 +447,16 @@ document.addEventListener('DOMContentLoaded',()=>{
         'Request':'Please arrange the reservation and send the secure 3D payment link.'
       };
 
-      fetch('https://formsubmit.co/ajax/conciergeserviceturkiye@gmail.com',{
+      fetch('/api/request',{
         method:'POST',
-        headers:{'Content-Type':'application/json',Accept:'application/json'},
-        body:JSON.stringify(emailPayload)
+        headers:{'Content-Type':'application/json','Idempotency-Key':crypto.randomUUID()},
+        body:JSON.stringify({
+          formType:'Portable Wi-Fi request',
+          subject:emailPayload._subject,
+          customer:{name:String(data.get('name')||''),email:String(data.get('email')||'')},
+          preferredMethod:method,
+          fields:Object.fromEntries(Object.entries(emailPayload).filter(([key])=>!key.startsWith('_')))
+        })
       })
       .then(async response=>{
         const result=await response.json().catch(()=>({}));
