@@ -431,16 +431,16 @@ document.addEventListener("click", e => {
         fields
       };
       const whatsappLines = [
-        "🍽️ *RESTAURANT RESERVATION REQUEST*",
+        "*RESTAURANT RESERVATION REQUEST*",
         "",
-        `📍 *Restaurant:* ${data.get("restaurant")}`,
+        `Restaurant: ${data.get("restaurant")}`,
         "",
-        "👤 *GUEST DETAILS*",
+        "*GUEST DETAILS*",
         `Name: ${data.get("name")}`,
         `Email: ${data.get("email")}`,
         `Phone: ${data.get("phone")}`,
         "",
-        "📅 *RESERVATION DETAILS*",
+        "*RESERVATION DETAILS*",
         `Date: ${data.get("date")}`,
         `Time: ${data.get("time")}`,
         `Guests: ${data.get("guests")}`,
@@ -448,11 +448,11 @@ document.addEventListener("click", e => {
         `Allergies: ${data.get("allergy") || "None"}`,
         `Special requests: ${data.get("notes") || "None"}`,
         "",
-        `📲 *Preferred contact method:* ${preferredMethod.value}`,
+        `Preferred contact method: ${preferredMethod.value}`,
         "",
         "_This request has already been submitted through the Concierge Service Türkiye website._"
       ];
-      const whatsappMessage = whatsappLines.join("\\n");
+      const whatsappMessage = whatsappLines.join("\n");
 
       const requestId = crypto.randomUUID();
 
