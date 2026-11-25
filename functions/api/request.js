@@ -29,7 +29,7 @@ function rowsFrom(input) {
   const source = input.fields && typeof input.fields === "object" ? input.fields : {};
   return Object.entries(source).slice(0, 80).map(([label, value]) => ({
     label: clean(label, 120),
-    value: clean(Array.isArray(value) ? value.join(", ") : value, 3000) || "—"
+    value: clean(Array.isArray(value) ? value.map(item => item && typeof item === "object" ? JSON.stringify(item) : item).join(", ") : value && typeof value === "object" ? JSON.stringify(value) : value, 3000) || "—"
   })).filter(row => row.label);
 }
 function emailHtml(title, intro, rows, footer) {
