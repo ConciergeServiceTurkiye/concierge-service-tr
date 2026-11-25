@@ -1108,8 +1108,8 @@ if (form) {
         const result = await res.json().catch(() => ({}));
         if (!res.ok || result.success !== true) throw new Error(result.message || "The request could not be submitted.");
         if (preferredMethod === "WhatsApp") {
-          const message = Object.entries(payload).map(([key, value]) => key + ": " + (typeof value === "object" ? JSON.stringify(value) : value)).join("\\n");
-          window.open("https://wa.me/905344888624?text=" + encodeURIComponent("PRIVATE GUIDE TOUR REQUEST\\n\\n" + message), "_blank");
+          const message = Object.entries(payload).map(([key, value]) => key + ": " + (typeof value === "object" ? JSON.stringify(value) : value)).join("\n");
+          window.open("https://wa.me/905344888624?text=" + encodeURIComponent("PRIVATE GUIDE TOUR REQUEST\n\n" + message), "_blank");
         }
 
         form.style.display = "none";
