@@ -101,7 +101,7 @@ export async function onRequestPost({ request, env }) {
   ].join("\n");
 
   try {
-    await Promise.all([
+    const [teamResult, customerResult] = await Promise.allSettled([
       sendEmail(env.RESEND_API_KEY, {
         from:SENDER, to:[TEAM_EMAIL], reply_to:customerEmail, subject,
         text:teamText,
@@ -110,10 +110,14 @@ export async function onRequestPost({ request, env }) {
       sendEmail(env.RESEND_API_KEY, {
         from:SENDER, to:[customerEmail], subject:`We have received your request – Concierge Service Türkiye`,
         text:customerText,
-        html:emailHtml("Your request has been received", `Dear ${escapeHtml(customerName)},<br><br>Thank you for contacting Concierge Service Türkiye. We have received your request and our team will review the details. We will contact you using your preferred contact method.<br><br><strong>Please note:</strong> this acknowledgement is not a booking confirmation.`, [])
+        html:emailHtml("Your request has been received", `Dear ${escapeHtml(customerName)},<br><br>Thank you for contacting Concierge Service Türkiye. We have received the details and our team will review them. We will contact you using your preferred contact method.<br><br><strong>Please note:</strong> this acknowledgement is not a booking confirmation.`, [])
       }, `${requestId}-customer`)
     ]);
-    return json({ success:true });
+    if (teamResult.status === "rejected") throw teamResult.reason;
+    if (customerResult.status === "rejected") {
+      console.error("Customer acknowledgement email failed:", customerResult.reason?.message || "Unknown error");
+    }
+    return json({ success:true, acknowledgementSent: customerResult.status === "fulfilled" });
   } catch (error) {
     console.error("Resend request email failed:", error.message);
     return json({ success:false, message:"We could not submit your request just now. Your details are still in the form; please try again." }, 502);
