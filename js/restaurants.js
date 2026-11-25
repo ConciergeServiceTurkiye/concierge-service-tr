@@ -417,44 +417,43 @@ document.addEventListener("click", e => {
       data.set("restaurant", restaurantName);
       data.set("_subject", `New ${restaurantName} Reservation Request`);
 
-      if (preferredMethod.value === "WhatsApp") {
-        const optionalDetails = [];
-        if (data.get("age_0_3")) optionalDetails.push(`• Ages 0–3: ${data.get("age_0_3")}`);
-        if (data.get("age_4_13")) optionalDetails.push(`• Ages 4–13: ${data.get("age_4_13")}`);
-        if (data.get("age_14_17")) optionalDetails.push(`• Ages 14–17: ${data.get("age_14_17")}`);
+      const fields = Object.fromEntries(data.entries());
+      delete fields.name;
+      delete fields.email;
+      delete fields.preferred_method;
+      delete fields._subject;
+      delete fields._template;
+      const payload = {
+        formType: "Restaurant reservation",
+        subject: `New ${restaurantName} Reservation Request`,
+        customer: { name: data.get("name"), email: data.get("email") },
+        preferredMethod: preferredMethod.value,
+        fields
+      };
+      const whatsappLines = [
+        "🍽️ *RESTAURANT RESERVATION REQUEST*",
+        "",
+        `📍 *Restaurant:* ${data.get("restaurant")}`,
+        "",
+        "👤 *GUEST DETAILS*",
+        `Name: ${data.get("name")}`,
+        `Email: ${data.get("email")}`,
+        `Phone: ${data.get("phone")}`,
+        "",
+        "📅 *RESERVATION DETAILS*",
+        `Date: ${data.get("date")}`,
+        `Time: ${data.get("time")}`,
+        `Guests: ${data.get("guests")}`,
+        `Pets: ${data.get("pets") || "No"}`,
+        `Allergies: ${data.get("allergy") || "None"}`,
+        `Special requests: ${data.get("notes") || "None"}`,
+        "",
+        `📲 *Preferred contact method:* ${preferredMethod.value}`,
+        "",
+        "_This request has already been submitted through the Concierge Service Türkiye website._"
+      ];
+      const whatsappMessage = whatsappLines.join("\\n");
 
-        const lines = [
-          "🍽️ *RESTAURANT RESERVATION REQUEST*",
-          "",
-          `📍 *Restaurant:* ${data.get("restaurant")}`,
-          "",
-          "👤 *GUEST DETAILS*",
-          `Name: ${data.get("name")}`,
-          `Email: ${data.get("email")}`,
-          `Phone: ${data.get("phone")}`,
-          "",
-          "📅 *RESERVATION DETAILS*",
-          `Date: ${data.get("date")}`,
-          `Time: ${data.get("time")}`,
-          `Guests: ${data.get("guests")}`,
-          ...(optionalDetails.length ? ["", "👨‍👩‍👧 *CHILDREN*", ...optionalDetails] : []),
-          "",
-          "📝 *ADDITIONAL INFORMATION*",
-          `Pets: ${data.get("pets") || "No"}`,
-          `Allergies: ${data.get("allergy") || "None"}`,
-          `Special requests: ${data.get("notes") || "None"}`,
-          "",
-          "📲 *Preferred contact method:* WhatsApp",
-          "",
-          "_New request submitted via Concierge Service Türkiye website._"
-        ];
-
-        submitBtn.textContent = "Opening WhatsApp...";
-        window.location.href = "https://wa.me/905344888624?text=" + encodeURIComponent(lines.join("\n"));
-        return;
-      }
-
-      const payload = Object.fromEntries(data.entries());
       const requestId = crypto.randomUUID();
 
       // Keep the form locked while the server submits both emails.
@@ -466,7 +465,7 @@ document.addEventListener("click", e => {
       let response;
       let result;
       try {
-        response = await fetch("/api/reservation", {
+        response = await fetch("/api/request", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -483,7 +482,13 @@ document.addEventListener("click", e => {
         throw new Error(result.message || `Reservation service returned HTTP ${response.status}.`);
       }
 
-      showInlineAlert("Your reservation request has been emailed to our concierge team. We will contact you shortly.");
+      if (preferredMethod.value === "WhatsApp") {
+        const whatsappUrl = "https://wa.me/905344888624?text=" + encodeURIComponent(whatsappMessage);
+        window.open(whatsappUrl, "_blank");
+        showInlineAlert("Your request has been sent to our concierge team. WhatsApp is ready if you would also like to message us.", true);
+      } else {
+        showInlineAlert("Your request has been sent to our concierge team. We will contact you shortly.", true);
+      }
       form.reset();
       iti.destroy();
       phone.value = "";
