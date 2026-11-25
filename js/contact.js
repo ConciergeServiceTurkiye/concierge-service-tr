@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!subjectSelect.value.trim()) return fail(subjectSelect, "Please select a subject.");
     return true;
   }
-  form.addEventListener("submit", e => {
+  form.addEventListener("submit", async e => {
     e.preventDefault();
     if (!validateWithNativeTooltip()) return;
 
@@ -86,53 +86,48 @@ document.addEventListener("DOMContentLoaded", () => {
       "Subject: " + subjectHidden.value.trim(),
       "Preferred contact method: " + method, "",
       "Request details:", messageField.value.trim()
-    ].join("\n");
+    ].join("\\n");
     const originalButtonText = submitButton.textContent.trim();
     submitButton.disabled = true;
-    submitButton.textContent = method === "Email" ? "Sending Request..." : "Opening WhatsApp...";
+    submitButton.textContent = "Sending Request...";
 
-    if (method === "WhatsApp") {
-      const whatsappUrl = "https://wa.me/905344888624?text=" + encodeURIComponent(requestMessage);
-      const whatsappWindow = window.open(whatsappUrl, "_blank");
+    const payload = {
+      formType: "Contact enquiry",
+      subject: "Concierge Contact Request — " + nameField.value.trim(),
+      customer: { name: nameField.value.trim(), email: emailField.value.trim() },
+      preferredMethod: method,
+      fields: {
+        "Phone / WhatsApp": fullPhone,
+        "Subject": subjectHidden.value.trim(),
+        "Request details": messageField.value.trim(),
+        "Source": "Contact page"
+      }
+    };
+
+    try {
+      const response = await fetch("/api/request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Idempotency-Key": crypto.randomUUID() },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success !== true) throw new Error(result.message || "The request could not be submitted.");
+
+      if (method === "WhatsApp") {
+        window.open("https://wa.me/905344888624?text=" + encodeURIComponent(requestMessage), "_blank");
+        showInlineAlert("Your request has been sent to our concierge team. WhatsApp is ready if you would also like to message us.", true);
+      } else {
+        showInlineAlert("Your request has been sent to our concierge team. We will contact you shortly.", true);
+      }
+      form.reset();
+      subjectSelect.value = "";
+      phoneField.value = "+";
+    } catch (error) {
+      console.error("Contact form submission failed:", error);
+      showInlineAlert(error.message || "We could not send your request just now. Your details are still in the form.");
+    } finally {
       submitButton.disabled = false;
       submitButton.textContent = originalButtonText;
-      if (!whatsappWindow) return showInlineAlert("WhatsApp could not be opened. Please allow pop-ups or contact us directly.");
-      showInlineAlert("Your request is ready in WhatsApp. Please press Send there to complete your request.", true);
-      return;
     }
-
-    const emailPayload = {
-      _subject: "Concierge Contact Request — " + nameField.value.trim(),
-      _template: "table",
-      _captcha: "false",
-      "Contact Method": "Email",
-      "Guest Name": nameField.value.trim(),
-      "Guest Email": emailField.value.trim(),
-      "Phone Number": fullPhone,
-      "Subject": subjectHidden.value.trim(),
-      "Request Details": messageField.value.trim(),
-      "Source": "contact-page"
-    };
-    fetch("https://formsubmit.co/ajax/conciergeserviceturkiye@gmail.com", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify(emailPayload)
-    })
-      .then(async response => {
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok || result.success === false) throw new Error(result.message || "The email service could not accept the request.");
-        showInlineAlert("Your request has been submitted successfully. We will contact you after reviewing it.", true);
-        form.reset();
-        subjectSelect.value = "";
-        phoneField.value = "+";
-      })
-      .catch(error => {
-        console.error("Contact form email request failed:", error);
-        showInlineAlert("We could not send your request just now. Please try again or contact us directly.");
-      })
-      .finally(() => {
-        submitButton.disabled = false;
-        submitButton.textContent = originalButtonText;
-      });
   });
 });
