@@ -200,6 +200,9 @@
       <form class="yacht-form" id="yachtEnquiryForm">
         <label for="yachtName">Your name</label>
         <input id="yachtName" name="name" autocomplete="name" required placeholder="Full name">
+        <label for="yachtEmail">Email address</label>
+        <input id="yachtEmail" name="email" type="email" autocomplete="email" required placeholder="your@email.com">
+        <fieldset class="yacht-extras-fieldset"><legend>Preferred contact method</legend><label class="yacht-check"><input type="radio" name="preferredMethod" value="WhatsApp" required> <span>WhatsApp</span></label><label class="yacht-check"><input type="radio" name="preferredMethod" value="Email" required> <span>Email</span></label></fieldset>
         <div class="yacht-form-row">
           <div><label for="yachtDate">Preferred date</label><input id="yachtDate" name="date" type="date" required></div>
           <div><label for="yachtTime">Start time</label><input id="yachtTime" name="time" type="time" required></div>
@@ -224,8 +227,8 @@
         </fieldset>
         <label for="yachtOccasion">Occasion or special requests</label>
         <textarea id="yachtOccasion" name="occasion" rows="3" placeholder="Birthday, proposal, family outing, preferred route or any details…"></textarea>
-        <button type="submit" class="yacht-btn yacht-btn-gold yacht-form-submit">Continue via WhatsApp <span aria-hidden="true">↗</span></button>
-        <p class="yacht-form-note">WhatsApp will open with your request prepared. Please review and press Send to submit it to our team.</p>
+        <button type="submit" class="yacht-btn yacht-btn-gold yacht-form-submit">Submit Enquiry <span aria-hidden="true">↗</span></button>
+        <p class="yacht-form-note">Your request will be sent to our concierge team. We will contact you using your preferred method.</p>
         <p class="yacht-form-error" id="yachtFormError" role="alert" hidden></p>
       </form>
     </section>
