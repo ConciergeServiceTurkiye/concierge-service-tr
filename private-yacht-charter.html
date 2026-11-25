@@ -14,7 +14,8 @@
   <meta property="og:site_name" content="Concierge Service Türkiye">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/private-yacht-charter.css">
+  <link rel="stylesheet" href="css/private-yacht-charter.css?v=2026112601">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -77,7 +78,7 @@
           <div class="yacht-card-copy">
             <div class="yacht-card-top"><h3>Luxury 2</h3><span>18 metres</span></div>
             <p class="yacht-capacity">Up to <strong>12 guests</strong></p>
-            <div class="yacht-card-price"><span>€150 <small>/ hour</small></span><b>Minimum 2 hours · €300</b></div>
+            <div class="yacht-card-price"><span>€90 <small>/ hour</small></span><b>Minimum 2 hours · €180</b></div>
             <p>A relaxed private setting for couples, families and smaller groups who want to enjoy the city from the water.</p>
             <a class="yacht-card-link" href="#yacht-request" data-yacht-choice="Luxury 2">Enquire about Luxury 2 <span aria-hidden="true">↗</span></a>
           </div>
@@ -94,7 +95,7 @@
           <div class="yacht-card-copy">
             <div class="yacht-card-top"><h3>Luxury 3</h3><span>22 metres</span></div>
             <p class="yacht-capacity">Up to <strong>15 guests</strong></p>
-            <div class="yacht-card-price"><span>€200 <small>/ hour</small></span><b>Minimum 2 hours · €400</b></div>
+            <div class="yacht-card-price"><span>€110 <small>/ hour</small></span><b>Minimum 2 hours · €220</b></div>
             <p>More room to gather, raise a glass and celebrate a special day with your favourite people.</p>
             <a class="yacht-card-link" href="#yacht-request" data-yacht-choice="Luxury 3">Enquire about Luxury 3 <span aria-hidden="true">↗</span></a>
           </div>
@@ -112,9 +113,9 @@
             <div class="yacht-card-top"><h3>Luxury 5</h3><span>26 metres</span></div>
             <p class="yacht-capacity">Up to <strong>30 guests</strong></p>
             <div class="yacht-card-price yacht-tier-prices">
-              <div><span>1–12 guests</span><b>€250 <small>/ hour</small></b><em>2-hour minimum: €500</em></div>
-              <div><span>13–20 guests</span><b>€275 <small>/ hour</small></b><em>2-hour minimum: €550</em></div>
-              <div><span>21–30 guests</span><b>€300 <small>/ hour</small></b><em>2-hour minimum: €600</em></div>
+              <div><span>1–12 guests</span><b>€150 <small>/ hour</small></b><em>2-hour minimum: €300</em></div>
+              <div><span>13–20 guests</span><b>€175 <small>/ hour</small></b><em>2-hour minimum: €350</em></div>
+              <div><span>21–30 guests</span><b>€200 <small>/ hour</small></b><em>2-hour minimum: €400</em></div>
             </div>
             <p>A spacious choice for birthdays, group occasions and private events on the Bosphorus.</p>
             <a class="yacht-card-link" href="#yacht-request" data-yacht-choice="Luxury 5">Enquire about Luxury 5 <span aria-hidden="true">↗</span></a>
@@ -204,8 +205,8 @@
         <input id="yachtEmail" name="email" type="email" autocomplete="email" required placeholder="your@email.com">
         <fieldset class="yacht-extras-fieldset"><legend>Preferred contact method</legend><label class="yacht-check"><input type="radio" name="preferredMethod" value="WhatsApp" required> <span>WhatsApp</span></label><label class="yacht-check"><input type="radio" name="preferredMethod" value="Email" required> <span>Email</span></label></fieldset>
         <div class="yacht-form-row">
-          <div><label for="yachtDate">Preferred date</label><input id="yachtDate" name="date" type="date" required></div>
-          <div><label for="yachtTime">Start time</label><input id="yachtTime" name="time" type="time" required></div>
+          <div><label for="yachtDate">Preferred date</label><input id="yachtDate" name="date" type="text" placeholder="DD.MM.YYYY" autocomplete="off" required readonly></div>
+          <div><label for="yachtTime">Start time</label><select id="yachtTime" name="time" required><option value="">Select start time</option></select></div>
         </div>
         <div class="yacht-form-row">
           <div><label for="yachtGuests">Number of guests</label><input id="yachtGuests" name="guests" type="number" min="1" max="30" required placeholder="e.g. 8"></div>
@@ -216,15 +217,16 @@
         <label for="yachtPickup">Preferred pickup point</label>
         <select id="yachtPickup" name="pickup"><option>Unkapanı</option><option>Karaköy</option><option>Other location (please discuss)</option></select>
         <fieldset class="yacht-extras-fieldset"><legend>Interested in any extras?</legend>
-          <label class="yacht-check"><input type="checkbox" name="extras" value="Set menu"> <span>Set menu — €50 per person</span></label>
+          <label class="yacht-check"><input type="checkbox" name="extras" value="Set menu"> <span>Set menu — €35 per person</span></label>
           <label class="yacht-check"><input type="checkbox" name="extras" value="Aperitif selection"> <span>Aperitif selection — €35 per person</span></label>
           <label class="yacht-check"><input type="checkbox" name="extras" value="Bringing outside food or drinks"> <span>Bring outside food or drinks — service fee applies (Luxury 2/3: €50 per booking; Luxury 5 over 10 guests: €5 per person)</span></label>
-          <label class="yacht-check"><input type="checkbox" name="extras" value="Bridge laser message"> <span>Bridge laser message</span></label>
-          <label class="yacht-check"><input type="checkbox" name="extras" value="Balloon decoration"> <span>Balloon decoration</span></label>
-          <label class="yacht-check"><input type="checkbox" name="extras" value="Photo and mini-video"> <span>Photo &amp; mini-video</span></label>
-          <label class="yacht-check"><input type="checkbox" name="extras" value="Fasıl live music"> <span>Fasıl live music</span></label>
-          <label class="yacht-check"><input type="checkbox" name="extras" value="Oriental dance performance"> <span>Oriental dance performance</span></label>
+          <label class="yacht-check"><input type="checkbox" name="extras" value="Bridge laser message"> <span>Bridge laser message — €100</span></label>
+          <label class="yacht-check"><input type="checkbox" name="extras" value="Balloon decoration"> <span>Balloon decoration — €80</span></label>
+          <label class="yacht-check"><input type="checkbox" name="extras" value="Photo and mini-video"> <span>Photo &amp; mini-video — €150 (2-hour session)</span></label>
+          <label class="yacht-check"><input type="checkbox" name="extras" value="Fasıl live music"> <span>Fasıl live music — €300</span></label>
+          <label class="yacht-check"><input type="checkbox" name="extras" value="Oriental dance performance"> <span>Oriental dance performance — €200</span></label>
         </fieldset>
+        <div class="yacht-price-summary" id="yachtPriceSummary" aria-live="polite"><div class="yacht-price-summary-head"><span>ESTIMATED TOTAL</span><strong id="yachtTotalPrice">Select a yacht to calculate</strong></div><div id="yachtPriceBreakdown"></div><p>Indicative estimate based on the selected yacht, duration and extras. Final availability, price and terms will be confirmed by our team.</p></div>
         <label for="yachtOccasion">Occasion or special requests</label>
         <textarea id="yachtOccasion" name="occasion" rows="3" placeholder="Birthday, proposal, family outing, preferred route or any details…"></textarea>
         <button type="submit" class="yacht-btn yacht-btn-gold yacht-form-submit">Submit Enquiry <span aria-hidden="true">↗</span></button>
@@ -247,6 +249,7 @@
   <div id="footerInclude"></div>
   <a href="https://wa.me/905344888624" class="whatsapp-fixed" target="_blank" rel="noopener noreferrer" aria-label="Chat with Concierge Service Türkiye on WhatsApp"><img src="assets/whatsapp.png" alt=""></a>
   <script src="js/common.js" defer></script>
-  <script src="js/private-yacht-charter.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
+  <script src="js/private-yacht-charter.js?v=2026112601" defer></script>
 </body>
 </html>
