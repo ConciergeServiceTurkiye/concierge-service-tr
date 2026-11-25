@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "Subject: " + subjectHidden.value.trim(),
       "Preferred contact method: " + method, "",
       "Request details:", messageField.value.trim()
-    ].join("\\n");
+    ].join("\n");
     const originalButtonText = submitButton.textContent.trim();
     submitButton.disabled = true;
     submitButton.textContent = "Sending Request...";
