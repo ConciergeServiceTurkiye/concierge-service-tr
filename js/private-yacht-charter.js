@@ -148,7 +148,7 @@
       '',
       'Please confirm availability, final price and booking terms. This is an enquiry, not a confirmed booking.'
     ];
-    const whatsappUrl = 'https://wa.me/905344888624?text=' + encodeURIComponent(lines.join('\\n'));
+    const whatsappUrl = 'https://wa.me/905344888624?text=' + encodeURIComponent(lines.join('\n'));
     const whatsappWindow = preferredMethod === 'WhatsApp' ? window.open('about:blank', '_blank') : null;
     const submitButton = form.querySelector('[type="submit"]');
     const originalText = submitButton?.textContent || 'Submit Enquiry';
