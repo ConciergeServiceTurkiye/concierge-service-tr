@@ -22,7 +22,12 @@ document.addEventListener('DOMContentLoaded',()=>{
     payload.set('reservationType','Turkish Bath');
     payload.set('name',name.value.trim());payload.set('fullName',name.value.trim());payload.set('email',email.value.trim());payload.set('phone',iti?iti.getNumber():phone.value.trim());
     payload.set('subject','Turkish Bath Reservation');payload.set('experience',experience.value);payload.set('travelDate',date.value);payload.set('preferredTime',time.value);payload.set('femaleGuests',String(f));payload.set('maleGuests',String(m));payload.set('requestDetails',details.value.trim());payload.set('partner','Hürrem Sultan Hamamı');payload.set('status','New');payload.set('availability','Pending');payload.set('referrer','turkish-bath-form');
-    payload.set('message',`Experience: ${experience.value}\nPreferred Date: ${date.value}\nPreferred Time: ${time.value}\nFemale Guests: ${f}\nMale Guests: ${m}\nPartner: Hürrem Sultan Hamamı\nRequest Details: ${details.value.trim()}`);
+    payload.set('message', [
+  'TURKISH BATH REQUEST — HÜRREM SULTAN HAMAMI', '',
+  'GUEST DETAILS', 'Name: '+name.value.trim(), 'Email: '+email.value.trim(), 'Phone: '+(iti?iti.getNumber():phone.value.trim()), 'Preferred contact method: '+preferredMethod, '',
+  'EXPERIENCE DETAILS', 'Experience: '+experience.value, 'Preferred date: '+date.value, 'Preferred time: '+time.value, 'Female guests: '+f, 'Male guests: '+m, 'Additional requests: '+(details.value.trim()||'None'), '',
+  'This is a reservation request, not a confirmed booking. Please confirm availability and final details.'
+].join('\\n'));
     payload.set('preferredMethod',preferredMethod);
     const submit=form.querySelector('button[type="submit"]');if(submit){submit.disabled=true;submit.dataset.originalText=submit.textContent;submit.textContent='Sending Request...';}
     const fields={};
