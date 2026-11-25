@@ -421,29 +421,9 @@ document.addEventListener('DOMContentLoaded',()=>{
       submitStatus.classList.remove('is-success','is-error');
     }
 
-    if(method==='WhatsApp'){
-      const whatsappUrl='https://wa.me/905344888624?text='+encodeURIComponent(message);
-      const opened=window.open(whatsappUrl,'_blank');
-
-      if(!opened){
-        if(submitStatus){
-          submitStatus.textContent='WhatsApp could not be opened. Your details are still here; please allow pop-ups and try again.';
-          submitStatus.classList.add('is-error');
-        }
-        return;
-      }
-
-      resetRequestFields();
-      if(submitStatus){
-        submitStatus.textContent='Your request details have been cleared. Please send the prepared message in WhatsApp to complete your request.';
-        submitStatus.classList.add('is-success');
-      }
-      return;
-    }
-
-    if(method==='Email'){
+    {
       if(submitButton)submitButton.disabled=true;
-      if(submitStatus)submitStatus.textContent='Sending your request by email…';
+      if(submitStatus)submitStatus.textContent='Sending your request…';
 
       const emailPayload={
         _subject:'STAYINWIFI PORTABLE WI-FI REQUEST — '+String(data.get('name')||'Guest'),
@@ -477,9 +457,14 @@ document.addEventListener('DOMContentLoaded',()=>{
         if(!response.ok || result.success===false){
           throw new Error(result.message||'The email service could not accept the request.');
         }
+        if(method==='WhatsApp'){
+          window.open('https://wa.me/905344888624?text='+encodeURIComponent(message),'_blank');
+        }
         resetRequestFields();
         if(submitStatus){
-          submitStatus.textContent='Your request has been submitted. We will contact you by email after reviewing the details.';
+          submitStatus.textContent=method==='WhatsApp'
+            ? 'Your request has been sent to our concierge team. WhatsApp is ready if you would also like to message us.'
+            : 'Your request has been sent. We will contact you by email after reviewing the details.';
           submitStatus.classList.add('is-success');
         }
       })
