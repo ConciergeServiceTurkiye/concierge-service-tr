@@ -48,15 +48,17 @@ document.addEventListener('DOMContentLoaded',function(){
   }
   function passengersForVehicle(){var o=vehicle.options[vehicle.selectedIndex],max=o&&o.dataset.capacity?+o.dataset.capacity:(caps[o?o.textContent:'']||0);var placeholder=max?'Select Number of Passenger (1-'+max+')':'Select number of passengers';passengers.innerHTML='<option value="">'+placeholder+'</option>';for(var i=1;i<=max;i++)passengers.add(new Option(String(i),String(i)));passengerUI.rebuild();passengerUI.refresh();renderPassengerDetails()}
   vehicle.addEventListener('change',passengersForVehicle);passengers.addEventListener('change',renderPassengerDetails);passengersForVehicle();
+  function syncNameFromFirstPassenger(){var first=passengerDetails&&passengerDetails.querySelector('input[name="passengerName_1"]');var customerName=document.getElementById('name');if(first&&first.value.trim()&&customerName)customerName.value=first.value.trim()}
+  if(passengerDetails)passengerDetails.addEventListener('input',function(e){if(e.target&&e.target.name==='passengerName_1')syncNameFromFirstPassenger()});
   document.addEventListener('click',function(){closeAllSelects()});
 
   function timeSelect(input){
     var wrap=document.createElement('div'),grid=document.createElement('div');wrap.className='time-picker-inline';grid.className='time-picker-grid';wrap.appendChild(grid);
-    var hs=document.createElement('select'),ms=document.createElement('select');hs.className='time-part-select';ms.className='time-part-select';for(var h=0;h<24;h++)hs.add(new Option(String(h).padStart(2,'0'),String(h).padStart(2,'0')));for(var q=0;q<60;q++)ms.add(new Option(String(q).padStart(2,'0'),String(q).padStart(2,'0')));
+    var hs=document.createElement('select'),ms=document.createElement('select');hs.className='time-part-select';ms.className='time-part-select';hs.add(new Option('HH',''));ms.add(new Option('MM',''));for(var h=0;h<24;h++)hs.add(new Option(String(h).padStart(2,'0'),String(h).padStart(2,'0')));for(var q=0;q<60;q++)ms.add(new Option(String(q).padStart(2,'0'),String(q).padStart(2,'0')));
     var hb=document.createElement('div'),mb=document.createElement('div'),hl=document.createElement('label'),ml=document.createElement('label');hb.className=mb.className='time-picker-part';hl.textContent='Hour';ml.textContent='Minute';hb.append(hl,hs);mb.append(ml,ms);grid.append(hb,mb);input.parentNode.insertBefore(wrap,input);input.style.display='none';input.required=true;
     var hu=customSelect(hs),mu=customSelect(ms);
-    function sync(){input.value=hs.value+':'+ms.value;hu.refresh();mu.refresh();hu.trigger.classList.toggle('time-zero',hs.value==='00');mu.trigger.classList.toggle('time-zero',ms.value==='00');clearFieldError(hu.trigger);clearFieldError(mu.trigger);clearFieldError(input)}
-    hs.onchange=ms.onchange=sync;sync();input._timeTriggers=[hu.trigger,mu.trigger]
+    function sync(){input.value=hs.value&&ms.value?hs.value+':'+ms.value:'';hu.refresh();mu.refresh();hu.trigger.classList.toggle('time-zero',hs.value==='00');mu.trigger.classList.toggle('time-zero',ms.value==='00');clearFieldError(hu.trigger);clearFieldError(mu.trigger);clearFieldError(input)}
+    hs.onchange=ms.onchange=sync;sync();input._timeTriggers=[hu.trigger,mu.trigger];input._timeParts={hours:hs,minutes:ms,sync:sync}
   }
   timeSelect(startTime);timeSelect(endTime);
 
@@ -135,7 +137,11 @@ document.addEventListener('DOMContentLoaded',function(){
 
       showInlineAlert('Your chauffeur request has been sent to our concierge team. We will contact you using your preferred method.',true);
       form.reset();
+      fpStart.clear();fpEnd.clear();
+      if(iti){iti.setCountry('us');phone.value='';}
+      [startTime,endTime].forEach(function(input){if(input._timeParts){input._timeParts.hours.value='';input._timeParts.minutes.value='';input._timeParts.sync()}});
       passengersForVehicle();
+      serviceUI.refresh();vehicleUI.refresh();passengerUI.refresh();
       renderPassengerDetails();
       rows=[];
       destinations.innerHTML='';

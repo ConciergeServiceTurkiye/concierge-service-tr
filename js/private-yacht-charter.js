@@ -90,17 +90,76 @@
   if (!form) return;
 
   const dateInput = document.getElementById('yachtDate');
+  const timeInput = document.getElementById('yachtTime');
   const guestsInput = document.getElementById('yachtGuests');
   const yachtSelect = document.getElementById('yachtChoice');
   const error = document.getElementById('yachtFormError');
   const today = new Date();
   const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-  dateInput.min = localToday;
+  const datePicker = window.flatpickr ? flatpickr(dateInput, {dateFormat:'d.m.Y', minDate:'today', disableMobile:true, allowInput:false}) : null;
+  if(timeInput){
+    for(let minutes=6*60;minutes<=23*60+30;minutes+=15){
+      const hour=String(Math.floor(minutes/60)).padStart(2,'0');
+      const minute=String(minutes%60).padStart(2,'0');
+      timeInput.add(new Option(hour+':'+minute,hour+':'+minute));
+    }
+  }
+
+  const durationInput = document.getElementById('yachtDuration');
+  const priceTotal = document.getElementById('yachtTotalPrice');
+  const priceBreakdown = document.getElementById('yachtPriceBreakdown');
+  const extrasPrice = {
+    'Set menu': {type:'perGuest', price:35},
+    'Aperitif selection': {type:'perGuest', price:35},
+    'Bringing outside food or drinks': {type:'outside'},
+    'Bridge laser message': {type:'fixed', price:100},
+    'Balloon decoration': {type:'fixed', price:80},
+    'Photo and mini-video': {type:'fixed', price:150},
+    'Fasıl live music': {type:'fixed', price:300},
+    'Oriental dance performance': {type:'fixed', price:200}
+  };
+  function calculateYachtEstimate(){
+    const yacht=yachtSelect.value, guests=Number(guestsInput.value||0);
+    const hoursText=durationInput.value||'2 hours';
+    const hours=hoursText==='5+ hours'?5:Number.parseInt(hoursText,10)||2;
+    let hourlyRate=0;
+    if(yacht==='Luxury 2')hourlyRate=90;
+    if(yacht==='Luxury 3')hourlyRate=110;
+    if(yacht==='Luxury 5')hourlyRate=guests<=12?150:guests<=20?175:200;
+    if(!hourlyRate||guests<1){
+      priceTotal.textContent='Select yacht and guest count';
+      priceBreakdown.innerHTML='';
+      return null;
+    }
+    const lines=[];
+    const base=hourlyRate*hours;
+    lines.push(['Yacht charter ('+hoursText+')',base]);
+    let total=base;
+    const selected=Array.from(form.querySelectorAll('input[name="extras"]:checked')).map(input=>input.value);
+    selected.forEach(item=>{
+      const rule=extrasPrice[item];if(!rule)return;
+      let amount=0,description=item;
+      if(rule.type==='perGuest'){amount=rule.price*guests;description+=' (€'+rule.price+' × '+guests+' guests)';}
+      else if(rule.type==='fixed'){amount=rule.price;}
+      else if(rule.type==='outside'){
+        amount=yacht==='Luxury 5'?(guests>10?5*guests:0):50;
+        description=amount?('Outside food/drinks service fee'+(yacht==='Luxury 5'?' (€5 × '+guests+' guests)':'')):'Outside food/drinks service fee (no fee for this group size)';
+      }
+      total+=amount;lines.push([description,amount]);
+    });
+    priceTotal.textContent=(hoursText==='5+ hours'?'From ':'')+'€'+total.toLocaleString('en-US');
+    priceBreakdown.innerHTML=lines.map(([label,amount])=>'<div class="yacht-price-line"><span>'+label.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))+'</span><strong>€'+amount.toLocaleString('en-US')+'</strong></div>').join('');
+    return {total,lines,hoursText,hourlyRate};
+  }
+  [yachtSelect,guestsInput,durationInput].forEach(el=>el.addEventListener('input',calculateYachtEstimate));
+  [yachtSelect,guestsInput,durationInput].forEach(el=>el.addEventListener('change',calculateYachtEstimate));
+  form.querySelectorAll('input[name="extras"]').forEach(el=>el.addEventListener('change',calculateYachtEstimate));
+  calculateYachtEstimate();
 
   document.querySelectorAll('[data-yacht-choice]').forEach((link) => {
     link.addEventListener('click', () => {
       const choice = link.getAttribute('data-yacht-choice');
-      if (choice && yachtSelect) yachtSelect.value = choice;
+      if (choice && yachtSelect) { yachtSelect.value = choice; calculateYachtEstimate(); }
     });
   });
 
@@ -137,7 +196,8 @@
       'Pickup point': data.get('pickup'),
       'Extras': extras.length ? extras.join(', ') : 'Not selected',
       'Occasion / special requests': data.get('occasion') || 'None provided',
-      'Request status': 'Enquiry only — availability, final price and terms require confirmation'
+      'Request status': 'Enquiry only — availability, final price and terms require confirmation',
+      'Estimated total': calculateYachtEstimate() ? '€'+calculateYachtEstimate().total : 'To be quoted'
     };
     const lines = [
       'PRIVATE YACHT CHARTER ENQUIRY — Concierge Service Türkiye',
@@ -174,6 +234,8 @@
         else window.location.href = whatsappUrl;
       }
       form.reset();
+      if(datePicker)datePicker.clear();
+      calculateYachtEstimate();
       if (submitButton) { submitButton.disabled = false; submitButton.textContent = originalText; }
       error.textContent = 'Your enquiry has been sent to our concierge team. We will contact you using your preferred method.';
       error.hidden = false;

@@ -950,7 +950,6 @@ document.querySelectorAll(".custom-select").forEach(select => {
   
   /* ============================== FIELD REFERENCES ============================== */
 
-  const fullName = document.querySelector('[name="name"]');
   const email = document.querySelector('[name="email"]');
   const date = document.getElementById("date");
   const hotel = document.querySelector('[name="hotel_name"]');
@@ -1079,7 +1078,7 @@ if (form) {
     const payload = {
       tour_name: tourName,
       preferred_method: preferredMethod,
-      full_name: document.querySelector('[name="name"]')?.value || "",
+      full_name: (participants[0]?.name || nameInput.value || "").trim(),
       email: document.querySelector('[name="email"]')?.value || "",
       phone: iti ? iti.getNumber() : "",
       tour_date: document.querySelector('[name="date"]')?.value || "",
@@ -1091,7 +1090,7 @@ if (form) {
     };
 
     // VERİ GÖNDERME (FETCH)
-    console.log("Gönderim başlıyor...", payload); // TEST 1
+    
 
     try {
         const res = await fetch("/api/request", {
@@ -1123,7 +1122,7 @@ if (form) {
         participants.length = 0;
         renderParticipants();
     } catch (err) {
-        console.error("KRİTİK HATA:", err); // TEST 3
+        console.error("Guide tour submission failed:", err);
         showInlineAlert(err.message || "A connection error occurred. Your details are still in the form.");
         if (submitBtn) submitBtn.disabled = false;
     }
