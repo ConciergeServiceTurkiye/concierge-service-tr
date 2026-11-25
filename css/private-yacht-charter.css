@@ -411,11 +411,11 @@
 .yacht-form input[type="radio"]{appearance:auto!important;-webkit-appearance:radio!important;width:15px!important;height:15px!important;min-width:15px!important;min-height:15px!important;margin:0!important;padding:0!important;border:0!important;border-radius:50%!important;background:transparent!important;box-shadow:none!important;accent-color:#d4af55;transform:none!important}
 
 /* Dark, legible yacht date picker. */
-.yacht-form .flatpickr-calendar{background:#111;border:1px solid rgba(212,175,85,.65);border-radius:8px;box-shadow:0 14px 35px rgba(0,0,0,.6);color:#f4f0e6}
-.yacht-form .flatpickr-months,.yacht-form .flatpickr-weekdays,.yacht-form .flatpickr-days,.yacht-form .dayContainer{background:#111}
-.yacht-form .flatpickr-current-month,.yacht-form .flatpickr-weekday{color:#d4af55}
-.yacht-form .flatpickr-day{color:rgba(244,240,230,.8);border-radius:4px}
-.yacht-form .flatpickr-day:hover{background:rgba(212,175,85,.18);border-color:transparent;color:#f4f0e6}
-.yacht-form .flatpickr-day.today{border-color:#d4af55}
-.yacht-form .flatpickr-day.selected{background:#d4af55;border-color:#d4af55;color:#111}
-.yacht-form .flatpickr-prev-month svg,.yacht-form .flatpickr-next-month svg{fill:#d4af55}
+.flatpickr-calendar{background:#111;border:1px solid rgba(212,175,85,.65);border-radius:8px;box-shadow:0 14px 35px rgba(0,0,0,.6);color:#f4f0e6}
+.flatpickr-months,.flatpickr-weekdays,.flatpickr-days,.dayContainer{background:#111}
+.flatpickr-current-month,.flatpickr-weekday{color:#d4af55}
+.flatpickr-day{color:rgba(244,240,230,.8);border-radius:4px}
+.flatpickr-day:hover{background:rgba(212,175,85,.18);border-color:transparent;color:#f4f0e6}
+.flatpickr-day.today{border-color:#d4af55}
+.flatpickr-day.selected{background:#d4af55;border-color:#d4af55;color:#111}
+.flatpickr-prev-month svg,.flatpickr-next-month svg{fill:#d4af55}
