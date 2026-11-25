@@ -111,7 +111,7 @@
     else guestsInput.setCustomValidity('');
   });
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     error.hidden = true;
     if (!form.reportValidity()) return;
@@ -125,24 +125,65 @@
       return;
     }
 
+    const preferredMethod = data.get('preferredMethod');
+    const customerName = String(data.get('name') || '').trim();
+    const customerEmail = String(data.get('email') || '').trim();
+    const fields = {
+      'Preferred date': data.get('date'),
+      'Start time': data.get('time'),
+      'Guests': data.get('guests'),
+      'Duration': data.get('duration'),
+      'Preferred yacht': data.get('yacht'),
+      'Pickup point': data.get('pickup'),
+      'Extras': extras.length ? extras.join(', ') : 'Not selected',
+      'Occasion / special requests': data.get('occasion') || 'None provided',
+      'Request status': 'Enquiry only — availability, final price and terms require confirmation'
+    };
     const lines = [
-      'Hello Concierge Service Türkiye, I would like to enquire about a private yacht charter in Istanbul.',
+      'PRIVATE YACHT CHARTER ENQUIRY — Concierge Service Türkiye',
       '',
-      'Name: ' + data.get('name'),
-      'Preferred date: ' + data.get('date'),
-      'Start time: ' + data.get('time'),
-      'Guests: ' + data.get('guests'),
-      'Duration: ' + data.get('duration'),
-      'Preferred yacht: ' + data.get('yacht'),
-      'Pickup point: ' + data.get('pickup'),
-      'Extras: ' + (extras.length ? extras.join(', ') : 'Not selected'),
-      'Occasion / special requests: ' + (data.get('occasion') || 'None provided'),
+      'Name: ' + customerName,
+      'Email: ' + customerEmail,
+      ...Object.entries(fields).map(([key, value]) => key + ': ' + value),
       '',
-      'Please confirm availability, final price and booking terms. I understand this is an enquiry and not a confirmed booking.'
+      'Please confirm availability, final price and booking terms. This is an enquiry, not a confirmed booking.'
     ];
-    const url = 'https://wa.me/905344888624?text=' + encodeURIComponent(lines.join('\n'));
-    const popup = window.open(url, '_blank');
-    if (popup) popup.opener = null;
-    else window.location.href = url;
-  });
+    const whatsappUrl = 'https://wa.me/905344888624?text=' + encodeURIComponent(lines.join('\\n'));
+    const whatsappWindow = preferredMethod === 'WhatsApp' ? window.open('about:blank', '_blank') : null;
+    const submitButton = form.querySelector('[type="submit"]');
+    const originalText = submitButton?.textContent || 'Submit Enquiry';
+    if (submitButton) { submitButton.disabled = true; submitButton.textContent = 'Sending Request...'; }
+
+    try {
+      const response = await fetch('/api/request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Idempotency-Key': crypto.randomUUID() },
+        body: JSON.stringify({
+          formType: 'Private yacht charter enquiry',
+          subject: 'New Private Yacht Charter Enquiry — ' + customerName,
+          customer: { name: customerName, email: customerEmail },
+          preferredMethod,
+          fields
+        })
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || result.success !== true) throw new Error(result.message || 'The request could not be submitted.');
+
+      if (preferredMethod === 'WhatsApp') {
+        if (whatsappWindow) { whatsappWindow.location.href = whatsappUrl; whatsappWindow.opener = null; }
+        else window.location.href = whatsappUrl;
+      }
+      form.reset();
+      if (submitButton) { submitButton.disabled = false; submitButton.textContent = originalText; }
+      error.textContent = 'Your enquiry has been sent to our concierge team. We will contact you using your preferred method.';
+      error.hidden = false;
+      error.classList.add('is-success');
+    } catch (err) {
+      if (whatsappWindow && !whatsappWindow.closed) whatsappWindow.close();
+      console.error('Yacht enquiry submission failed:', err);
+      error.textContent = err.message || 'We could not submit your enquiry. Your details are still in the form; please try again.';
+      error.hidden = false;
+      if (submitButton) { submitButton.disabled = false; submitButton.textContent = originalText; }
+    }
+  });;
 })();
