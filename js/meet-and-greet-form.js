@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', function(){
   const serviceRadios=[...document.querySelectorAll('input[name="serviceType"]')];
   const serviceCards=[...document.querySelectorAll('.mg-service-option')];
   const onwardRadios=[...document.querySelectorAll('input[name="onwardService"]')];
-  const onwardCards=[...document.querySelectorAll('.mg-continue-option')];
+  const onwardCards=[...document.querySelectorAll('[aria-label="Continue your journey"] .mg-continue-option')];
+  const contactCards=[...document.querySelectorAll('.mg-contact-option')];
+  const contactRadios=[...form.querySelectorAll('input[name="preferredMethod"]')];
   const adults=document.getElementById('adults'), children=document.getElementById('children'), babies=document.getElementById('babies');
   const passengerNames=document.getElementById('passengerNames');
   const alertBox=document.getElementById('formInlineAlert');
@@ -41,12 +43,27 @@ document.addEventListener('DOMContentLoaded', function(){
     const old=[...passengerNames.querySelectorAll('input')].map(x=>x.value); passengerNames.innerHTML='';
     const groups=[{title:'Adults 12+',count:Number(adults.value||0)},{title:'Children 7–12',count:Number(children.value||0)},{title:'Babies 0–6',count:Number(babies.value||0)}];
     let globalIndex=0;
-    groups.forEach(group=>{const column=document.createElement('div');column.className='mg-passenger-column';const heading=document.createElement('div');heading.className='mg-passenger-column-title';heading.textContent=group.title;column.appendChild(heading);for(let i=1;i<=group.count;i++){const wrap=document.createElement('div');wrap.className='mg-passenger-field';const badge=document.createElement('span');badge.textContent=String(i).padStart(2,'0');const input=document.createElement('input');globalIndex++;input.type='text';input.name='passenger'+globalIndex;input.placeholder='Passenger '+i+' Full Name';input.autocomplete='name';input.required=true;if(old[globalIndex-1])input.value=old[globalIndex-1];wrap.append(badge,input);column.appendChild(wrap)}passengerNames.appendChild(column)});
+    groups.forEach(group=>{const column=document.createElement('div');column.className='mg-passenger-column';const heading=document.createElement('div');heading.className='mg-passenger-column-title';heading.textContent=group.title;column.appendChild(heading);for(let i=1;i<=group.count;i++){const wrap=document.createElement('div');wrap.className='mg-passenger-field';const badge=document.createElement('span');badge.textContent=String(i).padStart(2,'0');const input=document.createElement('input');globalIndex++;input.type='text';input.name='passenger'+globalIndex;input.placeholder='Passenger '+i+' Full Name';input.autocomplete='name';input.required=true;if(old[globalIndex-1])input.value=old[globalIndex-1];input.addEventListener('input',syncFullNameFromFirstPassenger);wrap.append(badge,input);column.appendChild(wrap)}passengerNames.appendChild(column)});
   }
-  [adults,children,babies].forEach(el=>el.addEventListener('change',renderPassengerNames)); renderPassengerNames();
+  const fullNameInput=document.getElementById('fullName');
+  function syncFullNameFromFirstPassenger(){const first=passengerNames.querySelector('input');if(first&&first.value.trim())fullNameInput.value=first.value.trim();}
+  [adults,children,babies].forEach(el=>el.addEventListener('change',()=>{renderPassengerNames();syncFullNameFromFirstPassenger()})); renderPassengerNames();
 
   if(window.flatpickr){['arrivalDate','departureDate','transferArrivalDate','transferDepartureDate'].forEach(id=>{const input=document.getElementById(id),button=document.getElementById(id+'Button');if(!input)return;const picker=flatpickr(input,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true,allowInput:false});if(button)button.addEventListener('click',()=>picker.open())})}
-  if(window.intlTelInput){const phone=document.getElementById('phone');window.mgPhoneIti=intlTelInput(phone,{initialCountry:'us',separateDialCode:true,preferredCountries:['us','gb','tr','id'],utilsScript:'https://cdn.jsdelivr.net/npm/intl-tel-input@19.5.4/build/js/utils.js'});phone.addEventListener('input',()=>phone.value=phone.value.replace(/\D/g,''))}
+  const phone=document.getElementById('phone');
+  phone.value='+';
+  phone.addEventListener('keydown',e=>{
+    const start=phone.selectionStart??0,end=phone.selectionEnd??0;
+    if(['Tab','ArrowLeft','ArrowRight','End'].includes(e.key))return;
+    if(e.key==='Home'){e.preventDefault();phone.setSelectionRange(1,1);return}
+    if(e.key==='Backspace'&&start<=1){e.preventDefault();phone.setSelectionRange(1,1);return}
+    if(e.key==='Delete'&&(start===0||(start===1&&end>1))){e.preventDefault();phone.setSelectionRange(1,1);return}
+    if(e.ctrlKey||e.metaKey||['Backspace','Delete'].includes(e.key))return;
+    if(!/^\d$/.test(e.key)){e.preventDefault();return}
+    if(start===0){e.preventDefault();phone.setSelectionRange(1,1)}
+  });
+  phone.addEventListener('input',()=>{phone.value='+'+phone.value.replace(/\D/g,'')});
+  phone.addEventListener('paste',()=>setTimeout(()=>phone.value='+'+phone.value.replace(/\D/g,''),0));
   const message=document.getElementById('message'),count=document.getElementById('charCount');message.addEventListener('input',()=>count.textContent=message.value.length+' / 2000');
 
   function showAlert(text,type){alertBox.innerHTML='<div class="form-alert '+(type||'error')+'">'+text+'</div>';alertBox.scrollIntoView({behavior:'smooth',block:'center'})}
@@ -55,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const type=document.querySelector('input[name="serviceType"]:checked').value;
     const names=[...passengerNames.querySelectorAll('input')].map(x=>x.value.trim()).filter(Boolean);
     const special=[...document.querySelectorAll('input[name="specialRequirements"]:checked')].map(x=>x.value);
-    const data={serviceType:type,airport:document.getElementById('airport').value,adults:adults.value,children:children.value,babies:babies.value,passengerNames:names,fullName:document.getElementById('fullName').value.trim(),email:document.getElementById('email').value.trim(),phone:window.mgPhoneIti?window.mgPhoneIti.getNumber():document.getElementById('phone').value,preferredMethod:form.querySelector('input[name="preferredMethod"]:checked')?.value||'',checkedBags:document.getElementById('checkedBags').value,carryOnBags:document.getElementById('carryOnBags').value,specialRequirements:special.join(', '),specialDetails:document.getElementById('specialDetails').value.trim(),requestDetails:message.value.trim(),createdAt:Date.now()};
+    const data={serviceType:type,airport:document.getElementById('airport').value,adults:adults.value,children:children.value,babies:babies.value,passengerNames:names,fullName:document.getElementById('fullName').value.trim(),email:document.getElementById('email').value.trim(),phone:phone.value,preferredMethod:form.querySelector('input[name="preferredMethod"]:checked')?.value||'',checkedBags:document.getElementById('checkedBags').value,carryOnBags:document.getElementById('carryOnBags').value,specialRequirements:special.join(', '),specialDetails:document.getElementById('specialDetails').value.trim(),requestDetails:message.value.trim(),createdAt:Date.now()};
     if(type==='Arrival'){data.travelDate=document.getElementById('arrivalDate').value;data.travelTime=document.getElementById('arrivalTime').value;data.flightNumber=document.getElementById('arrivalFlight').value.trim();data.pickup='Istanbul Airport (IST)';data.dropoff=''}
     if(type==='Departure'){data.travelDate=document.getElementById('departureDate').value;data.travelTime=document.getElementById('departureTime').value;data.flightNumber=document.getElementById('departureFlight').value.trim();data.pickup='';data.dropoff='Istanbul Airport (IST)'}
     if(type==='Transfer'){data.travelDate=document.getElementById('transferArrivalDate').value;data.travelTime=document.getElementById('transferArrivalTime').value;data.flightNumber=document.getElementById('transferArrivalFlight').value.trim();data.transferDepartureDate=document.getElementById('transferDepartureDate').value;data.transferDepartureTime=document.getElementById('transferDepartureTime').value;data.transferDepartureFlight=document.getElementById('transferDepartureFlight').value.trim();data.pickup='Istanbul Airport (IST)';data.dropoff=''}
@@ -69,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const url=target+'?from=meet-and-greet&prefill='+encodeURIComponent(token);
     window.open(url,'_blank','noopener');
   }
+  contactRadios.forEach(r=>r.addEventListener('change',()=>updateCards(contactRadios,contactCards)));
   function syncOnwardActions(){
     const value=document.querySelector('input[name="onwardService"]:checked').value;
     updateCards(onwardRadios,onwardCards);
@@ -84,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function(){
   form.addEventListener('submit',async function(e){
     e.preventDefault();
     if(!form.checkValidity()){form.reportValidity();showAlert('Please complete the required fields before sending your request.','error');return}
-    if(window.mgPhoneIti&&!window.mgPhoneIti.isValidNumber()){showAlert('Please enter a valid phone number.','error');document.getElementById('phone').focus();return}
+    if(phone.value.replace(/\D/g,'').length<7){showAlert('Please enter a valid phone number, including country code.','error');phone.focus();return}
     const data=collectHandoff();
     if(!data.preferredMethod){showAlert('Please select your preferred contact method.','error');return}
     const {fullName,email,preferredMethod,...fields}=data;
