@@ -141,6 +141,7 @@ document.addEventListener('DOMContentLoaded',function(){
       if(iti){iti.setCountry('us');phone.value='';}
       [startTime,endTime].forEach(function(input){if(input._timeParts){input._timeParts.hours.value='';input._timeParts.minutes.value='';input._timeParts.sync()}});
       passengersForVehicle();
+      serviceUI.refresh();vehicleUI.refresh();passengerUI.refresh();
       renderPassengerDetails();
       rows=[];
       destinations.innerHTML='';
