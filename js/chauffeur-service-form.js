@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded',function(){
     })
     .then(function(result){
       if(result.success!==true){throw new Error(result.message||'The request could not be submitted.');}
-      if(preferredMethod==='WhatsApp'){var whatsappText=Object.entries(requestFields).map(function(entry){return entry[0]+': '+entry[1]}).join('\\n');window.open('https://wa.me/905344888624?text='+encodeURIComponent('PRIVATE CHAUFFEUR REQUEST\\n\\n'+whatsappText),'_blank');}
+      if(preferredMethod==='WhatsApp'){var whatsappText=Object.entries(requestFields).map(function(entry){return entry[0]+': '+entry[1]}).join('\n');window.open('https://wa.me/905344888624?text='+encodeURIComponent('PRIVATE CHAUFFEUR REQUEST\n\n'+whatsappText),'_blank');}
 
       showInlineAlert('Your chauffeur request has been sent to our concierge team. We will contact you using your preferred method.',true);
       form.reset();
