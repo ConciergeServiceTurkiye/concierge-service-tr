@@ -34,3 +34,5 @@
 .chauffeur-form-page .chauffeur-validation-bubble:before{content:'';position:absolute;top:-5px;left:14px;width:8px;height:8px;transform:rotate(45deg);background:#2b1717;border-left:1px solid rgba(218,87,87,.58);border-top:1px solid rgba(218,87,87,.58)}
 .chauffeur-form-page .chauffeur-validation-bubble + .chauffeur-validation-bubble{margin-top:5px}
 .chauffeur-form-page .chauffeur-contact-top .chauffeur-validation-bubble{margin-left:auto;margin-right:auto}
+
+.chauffeur-form-page .chauffeur-contact-options>.chauffeur-validation-bubble{flex-basis:100%;margin-left:auto;margin-right:auto;text-align:center}
