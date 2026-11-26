@@ -419,3 +419,16 @@
 .flatpickr-day.today{border-color:#d4af55}
 .flatpickr-day.selected{background:#d4af55;border-color:#d4af55;color:#111}
 .flatpickr-prev-month svg,.flatpickr-next-month svg{fill:#d4af55}
+
+/* High-contrast gold-on-charcoal yacht calendar, matching the Meet & Greet picker. */
+.flatpickr-calendar{background:#101010!important;border:1px solid #d4af37!important;color:#f4eee2!important;box-shadow:0 14px 35px rgba(0,0,0,.65)!important}
+.flatpickr-months,.flatpickr-month,.flatpickr-weekdays,.flatpickr-days,.dayContainer{background:#101010!important}
+.flatpickr-current-month,.flatpickr-current-month input.cur-year,.flatpickr-weekday{color:#f1d16b!important;fill:#f1d16b!important}
+.flatpickr-monthDropdown-months{background:#101010!important;color:#f4eee2!important}
+.flatpickr-day{color:#f4eee2!important;border-color:transparent!important}
+.flatpickr-day.prevMonthDay,.flatpickr-day.nextMonthDay{color:#777!important}
+.flatpickr-day:hover,.flatpickr-day:focus{background:rgba(212,175,55,.22)!important;color:#fff!important}
+.flatpickr-day.today{border:1px solid #d4af37!important}
+.flatpickr-day.selected,.flatpickr-day.startRange,.flatpickr-day.endRange{background:#d4af37!important;border-color:#d4af37!important;color:#111!important}
+.flatpickr-prev-month svg,.flatpickr-next-month svg{fill:#f1d16b!important}
+.flatpickr-time input,.flatpickr-time .flatpickr-am-pm{color:#f4eee2!important}
