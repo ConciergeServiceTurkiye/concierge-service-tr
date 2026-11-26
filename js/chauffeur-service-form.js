@@ -92,7 +92,8 @@ document.addEventListener('DOMContentLoaded',function(){
     if(field.classList&&field.classList.contains('time-part-select'))return field.closest('.time-picker-inline');
     if(field.closest&&field.closest('.time-picker-inline'))return field.closest('.time-picker-inline');
     if(field.closest&&field.closest('.date-input-wrap'))return field.closest('.date-input-wrap');
-    if(field.closest&&field.closest('.destination-row'))return field.closest('.destination-row');
+    if(field.closest&&field.closest('.destination-row'))return field.closest('.destination-row').querySelector('.form-group')||field.closest('.destination-row');
+    if(field.name&&field.name.indexOf('passengerName_')===0&&field.closest('.passenger-detail-row'))return field.closest('.passenger-detail-row');
     return field.closest&&field.closest('.form-group')||field.parentElement;
   }
   function clearFieldError(field){
@@ -131,7 +132,6 @@ document.addEventListener('DOMContentLoaded',function(){
     var anchors=[];
     fields.forEach(function(field){var anchor=markFieldError(field,validationMessage(field));if(anchor&&anchors.indexOf(anchor)===-1)anchors.push(anchor)});
     if(anchors.length)anchors[0].scrollIntoView({behavior:'smooth',block:'center'});
-    showInlineAlert('Please review the notes beside the fields that need your attention.',false);
   }
   function validEmail(v){return/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())}
   function validDate(v){var m=v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!m)return false;var d=new Date(+m[3],+m[2]-1,+m[1]);return d.getFullYear()===+m[3]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[1]}
