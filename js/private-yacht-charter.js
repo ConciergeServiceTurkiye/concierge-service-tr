@@ -96,12 +96,11 @@
   const error = document.getElementById('yachtFormError');
   const today = new Date();
   const localToday = new Date(today.getTime() - today.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-  const datePicker = window.flatpickr ? flatpickr(dateInput, {dateFormat:'d.m.Y', minDate:'today', disableMobile:true, allowInput:false}) : null;
+  const datePicker = window.flatpickr ? flatpickr(dateInput, {dateFormat:'d/m/Y', minDate:'today', disableMobile:true, allowInput:false}) : null;
   if(timeInput){
-    for(let minutes=6*60;minutes<=23*60+30;minutes+=15){
-      const hour=String(Math.floor(minutes/60)).padStart(2,'0');
-      const minute=String(minutes%60).padStart(2,'0');
-      timeInput.add(new Option(hour+':'+minute,hour+':'+minute));
+    for(let hour=0;hour<24;hour++){
+      const value=String(hour).padStart(2,'0')+':00';
+      timeInput.add(new Option(value,value));
     }
   }
 
