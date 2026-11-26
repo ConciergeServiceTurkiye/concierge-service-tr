@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(f+m<1)return show('Please enter the number of guests.');
     if(!name.value.trim())return show('Please enter your full name.');
     if(!email.value.trim()||!email.checkValidity())return show('Please enter a valid email address.');
-    const phoneValue=iti?iti.getNumber():phone.value;const phoneDigits=phoneValue.replace(/\\D/g,'');if(iti?!iti.isValidNumber():phoneDigits.length<7||phoneDigits.length>15)return show('Please enter a valid phone number.');
+    const phoneValue=iti?iti.getNumber():phone.value;const phoneDigits=phoneValue.replace(/\D/g,'');if(iti?!iti.isValidNumber():phoneDigits.length<7||phoneDigits.length>15)return show('Please enter a valid phone number.');
     const preferredMethod=form.querySelector('input[name="preferredMethod"]:checked')?.value;
     if(!preferredMethod)return show('Please select your preferred contact method.');
     const payload=new FormData();
