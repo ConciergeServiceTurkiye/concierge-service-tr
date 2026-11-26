@@ -69,6 +69,80 @@ document.addEventListener('DOMContentLoaded', function(){
 
   function showAlert(text,type){alertBox.innerHTML='<div class="form-alert '+(type||'error')+'">'+text+'</div>';if(type==='success')alertBox.scrollIntoView({behavior:'smooth',block:'center'})}
 
+
+  function validationAnchor(field){
+    if(field.name==='preferredMethod')return form.querySelector('.mg-contact-method-options');
+    if(field.name==='serviceType')return form.querySelector('.mg-service-types');
+    return field.closest('.form-group')||field.parentElement;
+  }
+  function clearValidation(field){
+    const anchor=validationAnchor(field),bubble=anchor&&anchor.querySelector(':scope > .mg-validation-bubble');
+    if(bubble)bubble.remove();
+  }
+  function validationMessage(field){
+    const messages={
+      preferredMethod:'Please select WhatsApp or Email.',
+      serviceType:'Please select a Meet & Greet service.',
+      fullName:'Please enter your full name.',
+      email:'Please enter a valid email address.',
+      phone:'Please enter a valid phone number, including country code.',
+      arrivalDate:'Please select your arrival date.',
+      arrivalTime:'Please select your arrival time.',
+      arrivalFlight:'Please enter your arrival flight number.',
+      departureDate:'Please select your departure date.',
+      departureTime:'Please select your departure time.',
+      departureFlight:'Please enter your departure flight number.',
+      transferArrivalDate:'Please select your incoming flight date.',
+      transferArrivalTime:'Please select your incoming flight time.',
+      transferArrivalFlight:'Please enter your incoming flight number.',
+      transferDepartureDate:'Please select your connecting flight date.',
+      transferDepartureTime:'Please select your connecting flight time.',
+      transferDepartureFlight:'Please enter your connecting flight number.'
+    };
+    return messages[field.id]||messages[field.name]||(field.name&&field.name.startsWith('passenger')?'Please enter this passenger’s full name.':'Please complete this required field.');
+  }
+  function showValidationBubble(field,message){
+    const anchor=validationAnchor(field);if(!anchor)return;
+    let bubble=anchor.querySelector(':scope > .mg-validation-bubble');
+    if(!bubble){bubble=document.createElement('div');bubble.className='mg-validation-bubble';bubble.setAttribute('role','alert');anchor.appendChild(bubble)}
+    bubble.textContent=message;
+  }
+  function validateForm(){
+    form.querySelectorAll('.mg-validation-bubble').forEach(b=>b.remove());
+    const invalid=[],seenRadioGroups=new Set();
+    for(const field of form.querySelectorAll('input,select,textarea')){
+      if(field.disabled||!field.required||field.closest('.mg-flight-block.hidden'))continue;
+      if(field.type==='radio'){
+        if(seenRadioGroups.has(field.name))continue;
+        seenRadioGroups.add(field.name);
+        const checked=[...form.querySelectorAll('input[type="radio"]')].some(r=>r.name===field.name&&r.checked);
+        if(!checked)invalid.push(field);
+        continue;
+      }
+      if(field.id==='phone'){
+        const digits=[...field.value].filter(ch=>ch>='0'&&ch<='9').length;
+        if(digits<7)invalid.push(field);
+        continue;
+      }
+      if(field.type==='email'){if(!field.value.trim()||!field.validity.valid)invalid.push(field);continue}
+      if(field.id.endsWith('Date')){
+        const parts=field.value.trim().split('/');
+        const valid=parts.length===3&&parts.every(part=>part.length===2||part.length===4)&&parts.every(part=>part!==''&&!Number.isNaN(Number(part)));
+        if(!valid)invalid.push(field);
+        continue;
+      }
+      if(!field.value.trim())invalid.push(field);
+    }
+    if(invalid.length){
+      invalid.forEach(field=>showValidationBubble(field,validationMessage(field)));
+      const first=validationAnchor(invalid[0]);if(first)first.scrollIntoView({behavior:'smooth',block:'center'});
+      return false;
+    }
+    return true;
+  }
+  form.addEventListener('input',event=>clearValidation(event.target));
+  form.addEventListener('change',event=>clearValidation(event.target));
+
   function collectHandoff(){
     const type=document.querySelector('input[name="serviceType"]:checked').value;
     const names=[...passengerNames.querySelectorAll('input')].map(x=>x.value.trim()).filter(Boolean);
@@ -102,22 +176,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   form.addEventListener('submit',async function(e){
     e.preventDefault();
-    if(!form.checkValidity()){
-      const firstInvalid=form.querySelector(':invalid');
-      if(firstInvalid){
-        firstInvalid.focus({preventScroll:true});
-        firstInvalid.scrollIntoView({behavior:'smooth',block:'center'});
-        firstInvalid.reportValidity();
-      }
-      return;
-    }
-    if(phone.value.replace(/\D/g,'').length<7){
-      phone.setCustomValidity('Please enter a valid phone number, including country code.');
-      phone.focus({preventScroll:true});
-      phone.scrollIntoView({behavior:'smooth',block:'center'});
-      phone.reportValidity();
-      return;
-    }
+    if(!validateForm())return;
     const data=collectHandoff();
     if(!data.preferredMethod){showAlert('Please select your preferred contact method.','error');return}
     const {fullName,email,preferredMethod,...fields}=data;

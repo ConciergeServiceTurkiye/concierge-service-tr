@@ -28,3 +28,8 @@
 .mg-contact-method-top .mg-form-section-heading{justify-content:center!important;text-align:center!important}
 .mg-contact-method-top .mg-form-section-heading>div{text-align:center!important}
 .mg-contact-method-top .mg-contact-method-options{justify-content:center!important;align-items:center!important;width:100%!important}
+
+/* English inline validation guidance for Meet & Greet. */
+.mg-validation-bubble{display:block;position:relative;width:fit-content;max-width:100%;margin:8px 0 0;padding:8px 11px;border:1px solid rgba(218,87,87,.62);border-radius:7px;background:#2b1717;color:#ffd0d0;font-size:12px;line-height:1.45;box-shadow:0 3px 12px rgba(0,0,0,.2)}
+.mg-validation-bubble:before{content:'';position:absolute;top:-5px;left:14px;width:8px;height:8px;transform:rotate(45deg);background:#2b1717;border-left:1px solid rgba(218,87,87,.62);border-top:1px solid rgba(218,87,87,.62)}
+.mg-contact-method-options>.mg-validation-bubble,.mg-service-types>.mg-validation-bubble{flex-basis:100%;margin-left:auto;margin-right:auto;text-align:center}
