@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const experience=document.getElementById('experience'),date=document.getElementById('travelDate'),time=document.getElementById('preferredTime');
   const female=document.getElementById('femaleGuests'),male=document.getElementById('maleGuests'),name=document.getElementById('fullName'),email=document.getElementById('email'),phone=document.getElementById('phone'),details=document.getElementById('requestDetails');
   const iti=window.intlTelInputGlobals?.getInstance(phone);
-  const validFutureDate=value=>{const match=/^(\\d{2})\\/(\\d{2})\\/(\\d{4})$/.exec(value.trim());if(!match)return false;const chosen=new Date(Number(match[3]),Number(match[2])-1,Number(match[1]));const today=new Date();today.setHours(0,0,0,0);return chosen.getFullYear()===Number(match[3])&&chosen.getMonth()===Number(match[2])-1&&chosen.getDate()===Number(match[1])&&chosen>=today;};
+  const validFutureDate=value=>{const match=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(value.trim());if(!match)return false;const chosen=new Date(Number(match[3]),Number(match[2])-1,Number(match[1]));const today=new Date();today.setHours(0,0,0,0);return chosen.getFullYear()===Number(match[3])&&chosen.getMonth()===Number(match[2])-1&&chosen.getDate()===Number(match[1])&&chosen>=today;};
   const show=(text,success=false)=>{alertBox.textContent=text;alertBox.style.display='block';alertBox.dataset.state=success?'success':'error';alertBox.scrollIntoView({behavior:'smooth',block:'nearest'});};
   form.addEventListener('submit',async e=>{
     e.preventDefault();e.stopImmediatePropagation();alertBox.style.display='none';
