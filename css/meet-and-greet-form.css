@@ -12,3 +12,13 @@
 .mg-contact-method-options .mg-contact-option input{position:static!important;opacity:1!important;pointer-events:auto!important;width:15px!important;height:15px!important;min-width:15px!important;min-height:15px!important;margin:0!important;accent-color:#d4af37}
 .mg-contact-method-options .mg-contact-option strong{margin:0!important;font-size:14px!important}
 .mg-contact-method-options .mg-contact-option span{display:none!important}
+
+/* Contact preference is the first form step, before Service Type. */
+.mg-contact-method-top{padding-top:20px!important;padding-bottom:22px!important}
+.mg-contact-method-top .mg-form-section-heading{margin-bottom:14px!important}
+.mg-contact-method-top .mg-contact-method-options{display:flex!important;justify-content:flex-start!important;align-items:center!important;gap:14px!important;flex-wrap:wrap!important}
+.mg-contact-method-top .mg-contact-option{display:inline-flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;width:auto!important;min-width:150px!important;min-height:48px!important;padding:10px 16px!important;border:1px solid rgba(212,175,55,.42)!important;border-radius:9px!important;background:rgba(255,255,255,.015)!important;box-shadow:none!important}
+.mg-contact-method-top .mg-contact-option input{position:static!important;opacity:1!important;pointer-events:auto!important;appearance:auto!important;-webkit-appearance:radio!important;width:15px!important;height:15px!important;min-width:15px!important;min-height:15px!important;margin:0!important;accent-color:#d4af37}
+.mg-contact-method-top .mg-contact-option strong{font-size:14px!important;font-weight:500!important;margin:0!important}
+.mg-contact-method-top .mg-contact-option span{display:none!important}
+.mg-contact-method-top .mg-contact-option:has(input:checked){border-color:#d4af37!important;background:rgba(212,175,55,.08)!important}

@@ -956,6 +956,8 @@ document.querySelectorAll(".custom-select").forEach(select => {
 
  /* ============================== FORM SUBMISSION ============================== */
 const form = document.getElementById("guideTourForm");
+const successBackButton = document.getElementById("guideSuccessBack");
+if (successBackButton) successBackButton.addEventListener("click", () => window.history.back());
 
 if (form) {
   bindLiveValidation(form);
@@ -1116,8 +1118,7 @@ if (form) {
         if (successScreen) {
           successScreen.style.display = "block";
           successScreen.scrollIntoView({ behavior: "smooth", block: "center" });
-          const resId = document.querySelector(".reservation-id");
-          if (resId) resId.textContent = "Your request has been received and our concierge team will contact you using your preferred method.";
+
         }
         form.reset();
         participants.length = 0;

@@ -546,3 +546,9 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 .guide-contact-options input[type="radio"]{appearance:auto!important;-webkit-appearance:radio!important;width:15px!important;height:15px!important;margin:0!important;padding:0!important;accent-color:#d4af37;box-shadow:none!important;transform:none!important}
 .success-screen{background:rgba(10,10,10,.92);border:1px solid #d4af37;border-radius:14px;margin-top:22px;padding:48px 32px!important;min-height:220px;display:none}
 @media(max-width:520px){.guide-contact-options{gap:18px!important}}
+
+/* Return navigation for the Guide Tour request confirmation. */
+.success-screen{position:relative;padding-top:66px!important}
+.guide-success-back{position:absolute;top:18px;left:20px;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(212,175,55,.55);border-radius:8px;background:transparent;color:#d4af37;font:inherit;font-size:13px;cursor:pointer;transition:background .18s ease,border-color .18s ease}
+.guide-success-back:hover{background:rgba(212,175,55,.1);border-color:#d4af37}
+.guide-success-back span{font-size:19px;line-height:1}

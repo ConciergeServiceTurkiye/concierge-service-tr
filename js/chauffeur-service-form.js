@@ -7,9 +7,12 @@ document.addEventListener('DOMContentLoaded',function(){
 
   function showInlineAlert(text,success){
     if(!alertBox){alert(text);return}
-    alertBox.textContent=text;alertBox.style.visibility='visible';alertBox.style.opacity='1';alertBox.style.borderColor=success?'#d4af37':'#c9a24d';clearTimeout(alertBox._timer);
-    requestAnimationFrame(function(){alertBox.scrollIntoView({behavior:'smooth',block:'start'})});
-    alertBox._timer=setTimeout(function(){alertBox.style.opacity='0';alertBox.style.visibility='hidden'},3500)
+    clearTimeout(alertBox._timer);
+    alertBox.textContent=text;
+    alertBox.style.visibility='visible';
+    alertBox.style.opacity='1';
+    alertBox.style.borderColor=success?'#d4af37':'#c9a24d';
+    alertBox.dataset.state=success?'success':'error';
   }
 
   function closeAllSelects(except){document.querySelectorAll('.luxury-select').forEach(function(w){if(w!==except){w.classList.remove('is-open');var menu=w.querySelector('.luxury-select-menu');if(menu)menu.hidden=true}})}
@@ -71,9 +74,9 @@ document.addEventListener('DOMContentLoaded',function(){
   if(endCalendarButton)endCalendarButton.addEventListener('click',function(e){toggleCalendar(fpEnd,e)});
 
   var rows=[];
-  function bindDestinationInput(input){input.addEventListener('input',function(){clearFieldError(input)})}
+  function bindDestinationInput(input){input.addEventListener('input',function(){clearFieldError(input);airport()})}
   function renumber(){rows.forEach(function(r,i){r.querySelector('.stop-no').textContent=i+1;r.querySelector('label').textContent=i?'Destination':'Pickup';r.querySelector('input').name='destination_'+(i+1);r.querySelector('input').placeholder='Airport / Hotel / Address';if(i===0){var x=r.querySelector('.remove-stop');if(x)x.remove()}})}
-  function addDestination(){var i=rows.length+1,r=document.createElement('div');r.className='destination-row';r.innerHTML='<div class="stop-no">'+i+'</div><div class="form-group"><label>'+(i===1?'Pickup':'Destination')+'</label><input type="text" name="destination_'+i+'" placeholder="Airport / Hotel / Address" required></div>'+(i>1?'<button type="button" class="remove-stop">×</button>':'');destinations.appendChild(r);rows.push(r);bindDestinationInput(r.querySelector('input'));if(i>1)r.querySelector('.remove-stop').onclick=function(){r.remove();rows=rows.filter(function(x){return x!==r});renumber()};renumber()}
+  function addDestination(){var i=rows.length+1,r=document.createElement('div');r.className='destination-row';r.innerHTML='<div class="stop-no">'+i+'</div><div class="form-group"><label>'+(i===1?'Pickup':'Destination')+'</label><input type="text" name="destination_'+i+'" placeholder="Airport / Hotel / Address" required></div>'+(i>1?'<button type="button" class="remove-stop">×</button>':'');destinations.appendChild(r);rows.push(r);bindDestinationInput(r.querySelector('input'));if(i>1)r.querySelector('.remove-stop').onclick=function(){r.remove();rows=rows.filter(function(x){return x!==r});renumber();airport()};renumber()}
   addDestination();addBtn.onclick=addDestination;
 
   phone.value=phone.value&&phone.value.charAt(0)==='+'?phone.value:'+';phone.setAttribute('autocomplete','tel');phone.setAttribute('placeholder','+ phone number');
@@ -81,7 +84,7 @@ document.addEventListener('DOMContentLoaded',function(){
   phone.addEventListener('input',function(){this.value='+'+this.value.replace(/\D/g,'');clearFieldError(phone)});phone.addEventListener('paste',function(e){e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'');phone.value='+'+t;clearFieldError(phone)});
   
   message.addEventListener('input',function(){count.textContent=this.value.length+' / 2000'});
-  function airport(){var v=(rows[0]&&rows[0].querySelector('input').value||'').toLowerCase(),a=/airport|havaliman|istanbul airport|sabiha|\bist\b|\bsaw\b/.test(v);flight.required=a;flight.placeholder=a?'Required for airport pickup':'Optional';flightNote.classList.toggle('show',a);if(!a)clearFieldError(flight)}rows[0].querySelector('input').addEventListener('input',airport);airport();
+  function airport(){var a=rows.some(function(r){var input=r.querySelector('input');return /airport|havaliman|istanbul airport|sabiha|\bist\b|\bsaw\b/i.test(input.value)});flight.required=a;flight.placeholder=a?'Required for airport pickup':'Optional';flightNote.classList.toggle('show',a);if(!a)clearFieldError(flight)}airport();
   function clearFieldError(field){if(field)field.classList.remove('field-error')}
   function markFieldError(field){if(field)field.classList.add('field-error')}
   function validEmail(v){return/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())}
@@ -105,6 +108,7 @@ document.addEventListener('DOMContentLoaded',function(){
       submitButton.textContent='Sending Request...';
     }
 
+    if(alertBox){alertBox.textContent='';alertBox.style.visibility='hidden';alertBox.style.opacity='0';delete alertBox.dataset.state;}
     var formData=new FormData(form);
     var preferredMethod=formData.get('preferredMethod');
     var requestFields=Object.fromEntries(formData.entries());delete requestFields.name;delete requestFields.email;
