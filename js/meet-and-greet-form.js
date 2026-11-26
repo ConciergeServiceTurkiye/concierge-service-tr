@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   function validationAnchor(field){
     if(field.name==='preferredMethod')return form.querySelector('.mg-contact-method-options');
+    if(field.name&&field.name.startsWith('passenger'))return field.closest('.mg-passenger-field');
     if(field.name==='serviceType')return form.querySelector('.mg-service-types');
     return field.closest('.form-group')||field.parentElement;
   }
@@ -142,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function(){
   }
   form.addEventListener('input',event=>clearValidation(event.target));
   form.addEventListener('change',event=>clearValidation(event.target));
+  form.querySelectorAll('input[name="preferredMethod"]').forEach(radio=>radio.addEventListener('change',()=>clearValidation(radio)));
 
   function collectHandoff(){
     const type=document.querySelector('input[name="serviceType"]:checked').value;

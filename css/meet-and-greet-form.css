@@ -33,3 +33,8 @@
 .mg-validation-bubble{display:block;position:relative;width:fit-content;max-width:100%;margin:8px 0 0;padding:8px 11px;border:1px solid rgba(218,87,87,.62);border-radius:7px;background:#2b1717;color:#ffd0d0;font-size:12px;line-height:1.45;box-shadow:0 3px 12px rgba(0,0,0,.2)}
 .mg-validation-bubble:before{content:'';position:absolute;top:-5px;left:14px;width:8px;height:8px;transform:rotate(45deg);background:#2b1717;border-left:1px solid rgba(218,87,87,.62);border-top:1px solid rgba(218,87,87,.62)}
 .mg-contact-method-options>.mg-validation-bubble,.mg-service-types>.mg-validation-bubble{flex-basis:100%;margin-left:auto;margin-right:auto;text-align:center}
+
+/* Keep passenger name inputs full-width when their guidance bubble is shown. */
+.mg-passenger-field{flex-wrap:wrap!important}
+.mg-passenger-field>input{flex:1 1 0!important;min-width:180px!important}
+.mg-passenger-field>.mg-validation-bubble{flex:0 0 auto!important;width:fit-content!important;max-width:calc(100% - 44px)!important;margin:0 0 0 44px!important}
