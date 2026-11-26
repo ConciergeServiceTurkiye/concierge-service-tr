@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded',function(){
   function validEmail(v){return/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())}
   function validDate(v){var m=v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!m)return false;var d=new Date(+m[3],+m[2]-1,+m[1]);return d.getFullYear()===+m[3]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[1]}
   function clearTimeErrors(input){if(input&&input._timeTriggers)input._timeTriggers.forEach(clearFieldError);clearFieldError(input)}
-  function showValidation(fields){fields.forEach(markFieldError);showInlineAlert('Please complete the highlighted fields so we can submit your request.',false)}
+  // Use the message-aware showValidation defined above; do not replace it with the legacy index-based callback.
   service.addEventListener('change',function(){clearFieldError(serviceUI.trigger)});vehicle.addEventListener('change',function(){clearFieldError(vehicleUI.trigger)});passengers.addEventListener('change',function(){clearFieldError(passengerUI.trigger)});
   [startDate,endDate].forEach(function(f){f.addEventListener('input',function(){clearFieldError(f)});f.addEventListener('change',function(){clearFieldError(f)})});
   [document.getElementById('name'),document.getElementById('email'),flight].forEach(function(f){if(f)f.addEventListener('input',function(){clearFieldError(f)})});
