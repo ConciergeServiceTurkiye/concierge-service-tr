@@ -539,3 +539,10 @@ body.modal-open {position: fixed;width: 100%;overflow: hidden;}
 .select-options li {
     user-select: none;
 }
+
+/* Preferred contact options: single horizontal row with compact native radios. */
+.guide-contact-options{display:flex!important;align-items:center;gap:26px!important;flex-wrap:nowrap}
+.guide-contact-options label{display:inline-flex!important;align-items:center;gap:7px;white-space:nowrap;margin:0!important}
+.guide-contact-options input[type="radio"]{appearance:auto!important;-webkit-appearance:radio!important;width:15px!important;height:15px!important;margin:0!important;padding:0!important;accent-color:#d4af37;box-shadow:none!important;transform:none!important}
+.success-screen{background:rgba(10,10,10,.92);border:1px solid #d4af37;border-radius:14px;margin-top:22px;padding:48px 32px!important;min-height:220px;display:none}
+@media(max-width:520px){.guide-contact-options{gap:18px!important}}

@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/guidetourform.css">
+<link rel="stylesheet" href="css/guidetourform.css?v=2026112602">
 </head>
 <body class="tour-form-page">
 
@@ -89,9 +89,13 @@
       
       <div class="form-group">
   <label>Phone / WhatsApp</label>
-  <div class="field-wrapper phone-wrapper">
-    <input type="tel" id="phone" name="phone" required>
-  <div class="form-group"><label>Preferred Contact Method</label><div class="field-wrapper"><label><input type="radio" name="preferredMethod" value="WhatsApp" required> WhatsApp</label><label style="margin-left:16px"><input type="radio" name="preferredMethod" value="Email" required> Email</label></div></div>
+  <div class="field-wrapper phone-wrapper"><input type="tel" id="phone" name="phone" required></div>
+</div>
+<div class="form-group guide-contact-group">
+  <label>Preferred Contact Method</label>
+  <div class="field-wrapper guide-contact-options" role="radiogroup" aria-label="Preferred contact method">
+    <label><input type="radio" name="preferredMethod" value="WhatsApp" required> WhatsApp</label>
+    <label><input type="radio" name="preferredMethod" value="Email" required> Email</label>
   </div>
 </div>
 
@@ -165,17 +169,12 @@
       </div>
 
       <button type="submit" class="submit-btn">Send Tour Request</button>
-      <div id="successScreen" class="success-screen">
-  <h2>Request Received</h2>
-  <p>
-    Your private guide tour request has been successfully submitted.<br>
-    Our concierge team will contact you shortly.
-  </p>
-  <span class="reservation-id"></span>
-</div>
-
-
     </form>
+    <div id="successScreen" class="success-screen">
+      <h2>Request Received</h2>
+      <p>Your private guide tour request has been successfully submitted. Our concierge team will contact you using your preferred method.</p>
+      <span class="reservation-id"></span>
+    </div>
   </div>
 </section>
 
