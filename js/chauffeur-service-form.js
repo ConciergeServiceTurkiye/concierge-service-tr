@@ -85,8 +85,54 @@ document.addEventListener('DOMContentLoaded',function(){
   
   message.addEventListener('input',function(){count.textContent=this.value.length+' / 2000'});
   function airport(){var a=rows.some(function(r){var input=r.querySelector('input');return /airport|havaliman|istanbul airport|sabiha|\bist\b|\bsaw\b/i.test(input.value)});flight.required=a;flight.placeholder=a?'Required for airport pickup':'Optional';flightNote.classList.toggle('show',a);if(!a)clearFieldError(flight)}airport();
-  function clearFieldError(field){if(field)field.classList.remove('field-error')}
-  function markFieldError(field){if(field)field.classList.add('field-error')}
+  function validationAnchor(field){
+    if(!field)return null;
+    if(field.name==='preferredMethod')return document.getElementById('chauffeurContactOptions');
+    if(field.classList&&field.classList.contains('luxury-select-trigger'))return field.closest('.luxury-select');
+    if(field.classList&&field.classList.contains('time-part-select'))return field.closest('.time-picker-inline');
+    if(field.closest&&field.closest('.time-picker-inline'))return field.closest('.time-picker-inline');
+    if(field.closest&&field.closest('.date-input-wrap'))return field.closest('.date-input-wrap');
+    if(field.closest&&field.closest('.destination-row'))return field.closest('.destination-row').querySelector('.form-group')||field.closest('.destination-row');
+    if(field.name&&field.name.indexOf('passengerName_')===0&&field.closest('.passenger-detail-row'))return field.closest('.passenger-detail-row');
+    return field.closest&&field.closest('.form-group')||field.parentElement;
+  }
+  function clearFieldError(field){
+    if(!field)return;
+    field.classList&&field.classList.remove('field-error');
+    var anchor=validationAnchor(field);
+    if(anchor){var bubble=anchor.querySelector(':scope > .chauffeur-validation-bubble');if(bubble)bubble.remove()}
+  }
+  function markFieldError(field,message){
+    var anchor=validationAnchor(field);if(!anchor)return null;
+    var bubble=anchor.querySelector(':scope > .chauffeur-validation-bubble');
+    if(!bubble){bubble=document.createElement('div');bubble.className='chauffeur-validation-bubble';bubble.setAttribute('role','alert');anchor.appendChild(bubble)}
+    bubble.textContent=message;return anchor;
+  }
+  function validationMessage(field){
+    if(!field)return 'Please complete this field.';
+    if(field.name==='preferredMethod')return 'Please choose WhatsApp or Email.';
+    if(field.id==='service')return 'Please select a chauffeur service.';
+    if(field.id==='vehicle')return 'Please select your preferred vehicle.';
+    if(field.id==='passengers')return 'Please select the number of passengers.';
+    if(field.name&&field.name.indexOf('passengerName_')===0)return 'Please enter this passenger’s full name.';
+    if(field.id==='startDate')return 'Please select a start date.';
+    if(field.id==='endDate')return 'Please select a valid end date.';
+    if(field.id==='startTime')return 'Please select a start time.';
+    if(field.id==='endTime')return 'Please select an end time.';
+    if(field.name&&field.name.indexOf('destination_')===0)return 'Please enter this pickup or destination address.';
+    if(field.id==='name')return 'Please enter your full name.';
+    if(field.id==='email')return 'Please enter a valid email address.';
+    if(field.id==='phone')return 'Please enter a valid phone number, including country code.';
+    if(field.id==='flightNumber')return 'Please enter your flight number for airport pickup.';
+    return 'Please complete this field.';
+  }
+  function clearAllValidationBubbles(){form.querySelectorAll('.chauffeur-validation-bubble').forEach(function(b){b.remove()})}
+  function showValidation(fields){
+    clearAllValidationBubbles();
+    var anchors=[];
+    fields.forEach(function(field){var anchor=markFieldError(field,validationMessage(field));if(anchor&&anchors.indexOf(anchor)===-1)anchors.push(anchor)});
+    if(anchors.length)anchors[0].scrollIntoView({behavior:'smooth',block:'center'});
+  }
   function validEmail(v){return/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())}
   function validDate(v){var m=v.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);if(!m)return false;var d=new Date(+m[3],+m[2]-1,+m[1]);return d.getFullYear()===+m[3]&&d.getMonth()===+m[2]-1&&d.getDate()===+m[1]}
   function clearTimeErrors(input){if(input&&input._timeTriggers)input._timeTriggers.forEach(clearFieldError);clearFieldError(input)}

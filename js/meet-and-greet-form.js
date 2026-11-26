@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   if(window.flatpickr){['arrivalDate','departureDate','transferArrivalDate','transferDepartureDate'].forEach(id=>{const input=document.getElementById(id),button=document.getElementById(id+'Button');if(!input)return;const picker=flatpickr(input,{dateFormat:'d/m/Y',minDate:'today',disableMobile:true,allowInput:false});if(button)button.addEventListener('click',()=>picker.open())})}
   const phone=document.getElementById('phone');
+  phone.addEventListener('input',()=>phone.setCustomValidity(''));
   phone.value='+';
   phone.addEventListener('keydown',e=>{
     const start=phone.selectionStart??0,end=phone.selectionEnd??0;
@@ -66,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function(){
   phone.addEventListener('paste',()=>setTimeout(()=>phone.value='+'+phone.value.replace(/\D/g,''),0));
   const message=document.getElementById('message'),count=document.getElementById('charCount');message.addEventListener('input',()=>count.textContent=message.value.length+' / 2000');
 
-  function showAlert(text,type){alertBox.innerHTML='<div class="form-alert '+(type||'error')+'">'+text+'</div>';alertBox.scrollIntoView({behavior:'smooth',block:'center'})}
+  function showAlert(text,type){alertBox.innerHTML='<div class="form-alert '+(type||'error')+'">'+text+'</div>';if(type==='success')alertBox.scrollIntoView({behavior:'smooth',block:'center'})}
 
   function collectHandoff(){
     const type=document.querySelector('input[name="serviceType"]:checked').value;
@@ -101,8 +102,22 @@ document.addEventListener('DOMContentLoaded', function(){
 
   form.addEventListener('submit',async function(e){
     e.preventDefault();
-    if(!form.checkValidity()){form.reportValidity();showAlert('Please complete the required fields before sending your request.','error');return}
-    if(phone.value.replace(/\D/g,'').length<7){showAlert('Please enter a valid phone number, including country code.','error');phone.focus();return}
+    if(!form.checkValidity()){
+      const firstInvalid=form.querySelector(':invalid');
+      if(firstInvalid){
+        firstInvalid.focus({preventScroll:true});
+        firstInvalid.scrollIntoView({behavior:'smooth',block:'center'});
+        firstInvalid.reportValidity();
+      }
+      return;
+    }
+    if(phone.value.replace(/\D/g,'').length<7){
+      phone.setCustomValidity('Please enter a valid phone number, including country code.');
+      phone.focus({preventScroll:true});
+      phone.scrollIntoView({behavior:'smooth',block:'center'});
+      phone.reportValidity();
+      return;
+    }
     const data=collectHandoff();
     if(!data.preferredMethod){showAlert('Please select your preferred contact method.','error');return}
     const {fullName,email,preferredMethod,...fields}=data;
