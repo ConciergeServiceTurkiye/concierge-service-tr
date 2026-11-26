@@ -22,3 +22,9 @@
 .mg-contact-method-top .mg-contact-option strong{font-size:14px!important;font-weight:500!important;margin:0!important}
 .mg-contact-method-top .mg-contact-option span{display:none!important}
 .mg-contact-method-top .mg-contact-option:has(input:checked){border-color:#d4af37!important;background:rgba(212,175,55,.08)!important}
+
+/* Center the top-level WhatsApp / Email choices. */
+.mg-contact-method-top{text-align:center!important}
+.mg-contact-method-top .mg-form-section-heading{justify-content:center!important;text-align:center!important}
+.mg-contact-method-top .mg-form-section-heading>div{text-align:center!important}
+.mg-contact-method-top .mg-contact-method-options{justify-content:center!important;align-items:center!important;width:100%!important}
