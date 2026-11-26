@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded',function(){
   phone.addEventListener('input',function(){this.value='+'+this.value.replace(/\D/g,'');clearFieldError(phone)});phone.addEventListener('paste',function(e){e.preventDefault();var t=(e.clipboardData||window.clipboardData).getData('text').replace(/\D/g,'');phone.value='+'+t;clearFieldError(phone)});
   
   message.addEventListener('input',function(){count.textContent=this.value.length+' / 2000'});
-  function airport(){var a=rows.some(function(r){var input=r.querySelector('input');return /airport|havaliman|istanbul airport|sabiha|\\bist\\b|\\bsaw\\b/i.test(input.value)});flight.required=a;flight.placeholder=a?'Required for airport pickup':'Optional';flightNote.classList.toggle('show',a);if(!a)clearFieldError(flight)}airport();
+  function airport(){var a=rows.some(function(r){var input=r.querySelector('input');return /airport|havaliman|istanbul airport|sabiha|\bist\b|\bsaw\b/i.test(input.value)});flight.required=a;flight.placeholder=a?'Required for airport pickup':'Optional';flightNote.classList.toggle('show',a);if(!a)clearFieldError(flight)}airport();
   function clearFieldError(field){if(field)field.classList.remove('field-error')}
   function markFieldError(field){if(field)field.classList.add('field-error')}
   function validEmail(v){return/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())}
