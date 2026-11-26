@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('arrivalFields').classList.toggle('hidden',type!=='Arrival');
     document.getElementById('departureFields').classList.toggle('hidden',type!=='Departure');
     document.getElementById('transferFields').classList.toggle('hidden',type!=='Transfer');
-    ['arrivalDate','arrivalFlight','departureDate','departureFlight','transferArrivalDate','transferArrivalFlight','transferDepartureDate','transferDepartureFlight'].forEach(id=>setRequired(id,false));
-    if(type==='Arrival'){setRequired('arrivalDate',true);setRequired('arrivalFlight',true)}
-    if(type==='Departure'){setRequired('departureDate',true);setRequired('departureFlight',true)}
-    if(type==='Transfer'){['transferArrivalDate','transferArrivalFlight','transferDepartureDate','transferDepartureFlight'].forEach(id=>setRequired(id,true))}
+    ['arrivalDate','arrivalTime','arrivalFlight','departureDate','departureTime','departureFlight','transferArrivalDate','transferArrivalTime','transferArrivalFlight','transferDepartureDate','transferDepartureTime','transferDepartureFlight'].forEach(id=>setRequired(id,false));
+    if(type==='Arrival'){['arrivalDate','arrivalTime','arrivalFlight'].forEach(id=>setRequired(id,true))}
+    if(type==='Departure'){['departureDate','departureTime','departureFlight'].forEach(id=>setRequired(id,true))}
+    if(type==='Transfer'){['transferArrivalDate','transferArrivalTime','transferArrivalFlight','transferDepartureDate','transferDepartureTime','transferDepartureFlight'].forEach(id=>setRequired(id,true))}
   }
   serviceRadios.forEach(r=>r.addEventListener('change',()=>{updateCards(serviceRadios,serviceCards);syncFlightBlocks()}));
 
