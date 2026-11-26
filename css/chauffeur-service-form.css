@@ -23,3 +23,14 @@
 .chauffeur-form-page .chauffeur-submit-alert[data-state="success"]{background:rgba(212,175,55,.09);color:#f3df9b}
 .chauffeur-form-page .chauffeur-submit-alert[data-state="error"]{background:rgba(201,162,77,.08);color:#f1d8a0}
 .chauffeur-form-page .flight-note.show{display:block!important;margin-top:8px;padding:8px 10px;border-left:2px solid var(--chauffeur-form-gold);background:rgba(212,175,55,.06);color:rgba(255,255,255,.78)!important}
+
+/* Top-level preferred contact choice. */
+.chauffeur-form-page .chauffeur-contact-top{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;margin:0 0 22px;padding:18px 14px 20px;border:1px solid rgba(212,175,55,.32);border-radius:10px;background:rgba(212,175,55,.035)}
+.chauffeur-form-page .chauffeur-contact-title{color:#d4af37;font-size:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase}
+.chauffeur-form-page .chauffeur-contact-options{display:flex;align-items:center;justify-content:center;gap:30px;flex-wrap:wrap;width:100%}
+.chauffeur-form-page .chauffeur-contact-options label{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin:0;padding:8px 15px;border:1px solid rgba(212,175,55,.38);border-radius:8px;color:#f2d37b;font-size:13px;cursor:pointer;min-width:125px}
+.chauffeur-form-page .chauffeur-contact-options input{width:15px;height:15px;margin:0;accent-color:#d4af37;cursor:pointer}
+.chauffeur-form-page .chauffeur-validation-bubble{position:relative;display:block;width:fit-content;max-width:100%;margin:7px 0 0;padding:7px 10px;border:1px solid rgba(218,87,87,.58);border-radius:7px;background:#2b1717;color:#ffd0d0;font-size:11px;line-height:1.4;box-shadow:0 3px 12px rgba(0,0,0,.22)}
+.chauffeur-form-page .chauffeur-validation-bubble:before{content:'';position:absolute;top:-5px;left:14px;width:8px;height:8px;transform:rotate(45deg);background:#2b1717;border-left:1px solid rgba(218,87,87,.58);border-top:1px solid rgba(218,87,87,.58)}
+.chauffeur-form-page .chauffeur-validation-bubble + .chauffeur-validation-bubble{margin-top:5px}
+.chauffeur-form-page .chauffeur-contact-top .chauffeur-validation-bubble{margin-left:auto;margin-right:auto}
