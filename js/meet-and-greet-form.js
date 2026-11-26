@@ -115,12 +115,22 @@ document.addEventListener('DOMContentLoaded', function(){
       if(field.type==='radio'){
         if(seenRadioGroups.has(field.name))continue;
         seenRadioGroups.add(field.name);
-        if(!form.querySelector('input[name="'+CSS.escape(field.name)+'"]:checked'))invalid.push(field);
+        const checked=[...form.querySelectorAll('input[type="radio"]')].some(r=>r.name===field.name&&r.checked);
+        if(!checked)invalid.push(field);
         continue;
       }
-      if(field.id==='phone'){if(field.value.replace(/\\D/g,'').length<7)invalid.push(field);continue}
-      if(field.type==='email'){if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(field.value.trim()))invalid.push(field);continue}
-      if(field.id.endsWith('Date')){if(!field.value.trim()||!/^\\d{2}\\/\\d{2}\\/\\d{4}$/.test(field.value.trim()))invalid.push(field);continue}
+      if(field.id==='phone'){
+        const digits=[...field.value].filter(ch=>ch>='0'&&ch<='9').length;
+        if(digits<7)invalid.push(field);
+        continue;
+      }
+      if(field.type==='email'){if(!field.value.trim()||!field.validity.valid)invalid.push(field);continue}
+      if(field.id.endsWith('Date')){
+        const parts=field.value.trim().split('/');
+        const valid=parts.length===3&&parts.every(part=>part.length===2||part.length===4)&&parts.every(part=>part!==''&&!Number.isNaN(Number(part)));
+        if(!valid)invalid.push(field);
+        continue;
+      }
       if(!field.value.trim())invalid.push(field);
     }
     if(invalid.length){
