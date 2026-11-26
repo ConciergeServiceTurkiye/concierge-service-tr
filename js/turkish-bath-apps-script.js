@@ -5,17 +5,18 @@ document.addEventListener('DOMContentLoaded',()=>{
   const experience=document.getElementById('experience'),date=document.getElementById('travelDate'),time=document.getElementById('preferredTime');
   const female=document.getElementById('femaleGuests'),male=document.getElementById('maleGuests'),name=document.getElementById('fullName'),email=document.getElementById('email'),phone=document.getElementById('phone'),details=document.getElementById('requestDetails');
   const iti=window.intlTelInputGlobals?.getInstance(phone);
+  const validFutureDate=value=>{const match=/^(\\d{2})\\/(\\d{2})\\/(\\d{4})$/.exec(value.trim());if(!match)return false;const chosen=new Date(Number(match[3]),Number(match[2])-1,Number(match[1]));const today=new Date();today.setHours(0,0,0,0);return chosen.getFullYear()===Number(match[3])&&chosen.getMonth()===Number(match[2])-1&&chosen.getDate()===Number(match[1])&&chosen>=today;};
   const show=(text,success=false)=>{alertBox.textContent=text;alertBox.style.display='block';alertBox.dataset.state=success?'success':'error';alertBox.scrollIntoView({behavior:'smooth',block:'nearest'});};
   form.addEventListener('submit',async e=>{
     e.preventDefault();e.stopImmediatePropagation();alertBox.style.display='none';
     if(!experience.value)return show('Please select your hammam experience.');
-    if(!date.value)return show('Please select your preferred date.');
+    if(!validFutureDate(date.value))return show('Please select a valid date today or later.');
     if(!time.value)return show('Please select your preferred time.');
     const f=Number(female.value||0),m=Number(male.value||0);
     if(f+m<1)return show('Please enter the number of guests.');
     if(!name.value.trim())return show('Please enter your full name.');
     if(!email.value.trim()||!email.checkValidity())return show('Please enter a valid email address.');
-    if(iti&&!iti.isValidNumber())return show('Please enter a valid phone number.');
+    const phoneValue=iti?iti.getNumber():phone.value;const phoneDigits=phoneValue.replace(/\\D/g,'');if(iti?!iti.isValidNumber():phoneDigits.length<7||phoneDigits.length>15)return show('Please enter a valid phone number.');
     const preferredMethod=form.querySelector('input[name="preferredMethod"]:checked')?.value;
     if(!preferredMethod)return show('Please select your preferred contact method.');
     const payload=new FormData();
