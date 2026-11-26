@@ -1115,6 +1115,7 @@ if (form) {
         const successScreen = document.getElementById("successScreen");
         if (successScreen) {
           successScreen.style.display = "block";
+          successScreen.scrollIntoView({ behavior: "smooth", block: "center" });
           const resId = document.querySelector(".reservation-id");
           if (resId) resId.textContent = "Your request has been received and our concierge team will contact you using your preferred method.";
         }
